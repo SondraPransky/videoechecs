@@ -128,7 +128,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .mv .n { color: var(--muted); width: 50px; font-size: 30px; }
 .mv .w, .mv .b { width: 180px; }
 .mv .nag { color: var(--yellow); }
-.mv .fig { width: 1.15em; height: 1.15em; vertical-align: -.22em; margin-right: .04em; }
+.fig { width: 1.15em; height: 1.15em; vertical-align: -.22em; margin-right: .04em; }
+.opt .fig { width: 1.25em; height: 1.25em; vertical-align: -.3em; }
 .evalbar { position: absolute; left: 980px; top: 260px; width: 26px; height: 560px; border-radius: 13px; overflow: hidden; background: #1b2430; }
 .evalbar .wfill { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: var(--ink); }
 
@@ -260,7 +261,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="lhead"><span class="lchip" style="background:#6bdc7d">Objectif 1400</span><span class="ltype">Exercice</span></div>
       <div class="ltitle">Les Blancs jouent et matent en 1</div>
       <div id="b6" class="board" style="position:relative;width:420px;height:420px;margin-top:22px;border-radius:14px;box-shadow:none"></div>
-      <div class="lres" id="res6"><svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#6bdc7d"/><path d="M6.5 12.5l3.6 3.6L17.5 8.5" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Td8# — le mat du couloir !</div>
+      <div class="lres" id="res6"><svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#6bdc7d"/><path d="M6.5 12.5l3.6 3.6L17.5 8.5" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><img class="fig" src="../assets/pieces/wR.png">d8# — le mat du couloir !</span></div>
     </div>
     <div class="lcard" id="qz1600" style="left:1410px;top:250px;width:440px">
       <div class="lhead"><span class="lchip" style="background:#fae361">Objectif 1600</span><span class="ltype">Quiz</span></div>
@@ -419,7 +420,7 @@ const cards = [
   { t: "Exercices", p: "Mets chaque notion en pratique.", ic: "target", c: "var(--green)",
     vis: `<div class="board ex-board" style="left:50%;top:0;margin-left:-75px;width:150px;height:150px;border-radius:10px;box-shadow:none"></div>` },
   { t: "Quiz", p: "Vérifie tes acquis en un clin d'œil.", ic: "quiz", c: "var(--yellow)",
-    vis: `<div class="opt">A · Cf3</div><div class="opt quiz-ok" style="position:relative">B · Fb5<svg class="qcheck" width="26" height="26" viewBox="0 0 24 24" style="position:absolute;right:12px;top:7px"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#6bdc7d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div><div class="opt">C · d4</div>` },
+    vis: `<div class="opt">A · <img class="fig" src="${P}wN.png">f3</div><div class="opt quiz-ok" style="position:relative">B · <img class="fig" src="${P}wB.png">b5<svg class="qcheck" width="26" height="26" viewBox="0 0 24 24" style="position:absolute;right:12px;top:7px"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#6bdc7d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div><div class="opt">C · d4</div>` },
 ];
 cards.forEach((c, i) => {
   const d = document.createElement("div");

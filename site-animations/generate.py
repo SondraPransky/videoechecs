@@ -24,6 +24,17 @@ EASE_BACK = "cubic-bezier(.34,1.56,.64,1)"
 EASE_OUT = "cubic-bezier(.16,1,.3,1)"
 EASE_IN = "cubic-bezier(.7,0,.84,0)"
 EASE_IO = "cubic-bezier(.65,0,.35,1)"
+UP, DOWN, SOFT = "cubic-bezier(.33,1,.68,1)", "cubic-bezier(.32,0,.67,0)", "cubic-bezier(.45,0,.55,1)"
+
+
+def jump(h, sq=1.07):
+    """Keyframes d'un saut qui boucle sans à-coup (à utiliser avec un timing linéaire)."""
+    return (f"0%{{transform:translateY(0) scale(1,1);animation-timing-function:{SOFT}}} "
+            f"16%{{transform:translateY(0) scale({sq},{2 - sq - .04:.2f});animation-timing-function:{UP}}} "
+            f"42%{{transform:translateY(-{h}px) scale(.97,1.04);animation-timing-function:{DOWN}}} "
+            f"62%{{transform:translateY(0) scale({sq + .01:.2f},{2 - sq - .05:.2f});animation-timing-function:{UP}}} "
+            f"76%{{transform:translateY(0) scale(.98,1.02);animation-timing-function:{SOFT}}} "
+            f"90%,100%{{transform:translateY(0) scale(1,1)}}")
 
 
 # ---------------------------------------------------------------- géométrie
@@ -146,18 +157,21 @@ n = "lecon-terminee"
 body = mascot(head_inner=g((10, -20), "cap", CAP)) + \
     "".join(g(p, f"sp sp{i}", sparkle(s)) for i, (p, s) in enumerate([((380, 120), 1.1), ((1010, 180), .8), ((320, 420), .7), ((1060, 470), 1)]))
 A[n] = ("Leçon terminée", "Fin d'une leçon", svg(n, "Leçon terminée", css(n, [
-    (".rig", f"{n}-jump 2.8s {EASE_OUT} infinite", {f"{n}-jump":
-        "0%{transform:scale(1,1)} 8%{transform:scale(1.08,.88)} 20%{transform:translateY(-150px) scale(.95,1.07)} "
-        "34%{transform:translateY(0) scale(1.1,.86)} 44%{transform:scale(.97,1.03)} 52%,100%{transform:scale(1,1)}"}),
-    (".arm", f"{n}-arm 2.8s {EASE_OUT} infinite", {f"{n}-arm":
-        "0%,8%{transform:rotate(-20deg)} 20%{transform:rotate(22deg)} 34%{transform:rotate(-6deg)} 46%{transform:rotate(8deg)} "
-        "60%{transform:rotate(0)} 72%{transform:rotate(-13deg)} 84%{transform:rotate(0)} 100%{transform:rotate(-20deg)}"}),
-    (".cap", f"{n}-cap 2.8s {EASE_OUT} infinite", {f"{n}-cap":
-        "0%,16%{transform:translateY(-420px) rotate(-40deg);opacity:0} 18%{opacity:1} 34%{transform:translateY(0) rotate(-14deg)} "
-        "42%{transform:translateY(-40px) rotate(-8deg)} 50%,88%{transform:translateY(0) rotate(-12deg);opacity:1} 96%,100%{transform:translateY(-60px) rotate(-12deg);opacity:0}"}),
-    (".sp", f"{n}-sp 2.8s {EASE_BACK} infinite", {f"{n}-sp":
-        "0%,33%{transform:scale(0) rotate(-90deg)} 45%{transform:scale(1.15) rotate(0)} 60%{transform:scale(1) rotate(15deg)} 75%,100%{transform:scale(0) rotate(90deg)}"}),
-]) + "\n" + "\n".join(f".mascotte-{n} .sp{i} {{ animation-delay: {i * .06:.2f}s; }}" for i in range(4)), body))
+    (".rig", f"{n}-jump 1.3s linear both, {n}-bob 2.4s ease-in-out 1.3s infinite", {
+        f"{n}-jump": jump(150),
+        f"{n}-bob": "0%,100%{transform:scale(1,1)} 50%{transform:translateY(-8px) scale(.99,1.01)}"}),
+    (".arm", f"{n}-pump 1.3s {SOFT} both, {n}-wave .7s ease-in-out 1.3s infinite alternate", {
+        f"{n}-pump": "0%{transform:rotate(-10deg)} 20%{transform:rotate(-24deg)} 45%{transform:rotate(22deg)} 70%{transform:rotate(-4deg)} 100%{transform:rotate(0)}",
+        f"{n}-wave": "from{transform:rotate(0)} to{transform:rotate(-13deg)}"}),
+    (".cap", f"{n}-cap 1.3s linear both, {n}-tilt 2.4s ease-in-out 1.3s infinite", {
+        f"{n}-cap": (f"0%,30%{{transform:translateY(-420px) rotate(-40deg);opacity:0;animation-timing-function:{DOWN}}} "
+                     f"34%{{opacity:1}} 62%{{transform:translateY(0) rotate(-14deg);animation-timing-function:{UP}}} "
+                     f"74%{{transform:translateY(-36px) rotate(-8deg);animation-timing-function:{DOWN}}} "
+                     f"86%,100%{{transform:translateY(0) rotate(-12deg);opacity:1}}"),
+        f"{n}-tilt": "0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(-8deg)}"}),
+    (".sp", f"{n}-sp 2.4s {SOFT} .8s infinite backwards", {f"{n}-sp":
+        "0%{transform:scale(0) rotate(-90deg)} 18%{transform:scale(1.1) rotate(0)} 36%{transform:scale(1) rotate(20deg)} 54%,100%{transform:scale(0) rotate(90deg)}"}),
+]) + "\n" + "\n".join(f".mascotte-{n} .sp{i} {{ animation-delay: {.8 + i * .45:.2f}s; }}" for i in range(4)), body))
 
 # 2. Série réussie : trois étoiles apparaissent, poing levé, confettis ----------------
 n = "serie-reussie"
@@ -165,9 +179,9 @@ stars = "".join(g(p, f"st st{i}", star(r, YELLOW)) for i, (p, r) in enumerate([(
 conf = "".join(g((150 + (k * 97) % 900, -300), f"cf cf{k}", f'<rect x="-10" y="-16" width="20" height="32" rx="4" fill="{[YELLOW, BLUE, GREEN, PINK][k % 4]}"/>') for k in range(10))
 body = conf + mascot() + stars
 A[n] = ("Série réussie", "Série d'exercices réussie", svg(n, "Série réussie", css(n, [
-    (".rig", f"{n}-hop 1.6s {EASE_OUT} infinite", {f"{n}-hop":
-        "0%{transform:scale(1.06,.9)} 25%{transform:translateY(-90px) scale(.96,1.05)} 50%{transform:translateY(0) scale(1.08,.9)} 62%{transform:scale(.98,1.02)} 75%,100%{transform:scale(1.06,.9)}"}),
-    (".arm", f"{n}-arm .8s {EASE_IO} infinite alternate", {f"{n}-arm": "from{transform:rotate(-8deg)} to{transform:rotate(24deg)}"}),
+    (".rig", f"{n}-hop 1.6s linear infinite", {f"{n}-hop": jump(90)}),
+    (".arm", f"{n}-arm 1.6s {SOFT} infinite", {f"{n}-arm":
+        "0%,100%{transform:rotate(-6deg)} 16%{transform:rotate(-14deg)} 42%{transform:rotate(24deg)} 62%{transform:rotate(4deg)}"}),
     (".st", f"{n}-star .6s {EASE_BACK} both, {n}-tw 1.6s ease-in-out .9s infinite", {
         f"{n}-star": "from{transform:scale(0) rotate(-180deg)} to{transform:scale(1) rotate(0)}",
         f"{n}-tw": "0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(1.1) rotate(8deg)}"}),
@@ -180,10 +194,10 @@ A[n] = ("Série réussie", "Série d'exercices réussie", svg(n, "Série réussi
 n = "bonne-reponse"
 body = mascot() + g((300, 30), "badge", CHECK)
 A[n] = ("Bonne réponse", "Exercice réussi", svg(n, "Bonne réponse", css(n, [
-    (".rig", f"{n}-hop .7s {EASE_OUT} both, {n}-idle 2.4s ease-in-out .7s infinite", {
-        f"{n}-hop": "0%{transform:scale(1.08,.88)} 45%{transform:translateY(-80px) scale(.96,1.05)} 80%{transform:translateY(0) scale(1.05,.93)} 100%{transform:scale(1)}",
+    (".rig", f"{n}-hop .9s linear both, {n}-idle 2.4s ease-in-out .9s infinite", {
+        f"{n}-hop": jump(80),
         f"{n}-idle": "0%,100%{transform:scale(1)} 50%{transform:scale(1.015,.985)}"}),
-    (".arm", f"{n}-arm .7s {EASE_OUT} both, {n}-wave 1.2s ease-in-out .7s infinite alternate", {
+    (".arm", f"{n}-arm .7s {UP} both, {n}-wave 1.2s ease-in-out .7s infinite alternate", {
         f"{n}-arm": "from{transform:rotate(-30deg)} to{transform:rotate(12deg)}",
         f"{n}-wave": "from{transform:rotate(12deg)} to{transform:rotate(0)}"}),
     (".badge", f"{n}-pop .5s {EASE_BACK} .15s both, {n}-pulse 2.4s ease-in-out .8s infinite", {
@@ -206,7 +220,7 @@ A[n] = ("Mauvaise réponse", "Exercice raté", svg(n, "Mauvaise réponse", css(n
     (".badge", f"{n}-pop .4s {EASE_BACK} both, {n}-shake 2.4s ease-in-out .5s infinite", {
         f"{n}-pop": "from{transform:scale(0)} to{transform:scale(1)}",
         f"{n}-shake": "0%,40%,100%{transform:rotate(0)} 5%{transform:rotate(-14deg)} 10%{transform:rotate(12deg)} 15%{transform:rotate(-8deg)} 20%{transform:rotate(5deg)} 25%{transform:rotate(0)}"}),
-    (".q", f"{n}-q 1.6s ease-in-out infinite", {f"{n}-q":
+    (".q", f"{n}-q 1.6s ease-in-out infinite backwards", {f"{n}-q":
         "0%{transform:translateY(20px) scale(.6);opacity:0} 30%{transform:translateY(0) scale(1);opacity:1} 70%{opacity:1} 100%{transform:translateY(-60px) scale(1.05);opacity:0}"}),
 ]) + f"\n.mascotte-{n} .q1 {{ animation-delay: .6s; }}", body))
 
@@ -224,7 +238,7 @@ A[n] = ("Série ratée", "Série d'exercices échouée", svg(n, "Série ratée",
     (".cloud", f"{n}-cloud .6s {EASE_BACK} .3s both, {n}-float 3s ease-in-out .9s infinite", {
         f"{n}-cloud": "from{transform:translateY(-80px) scale(.3);opacity:0} to{transform:translateY(0) scale(1);opacity:1}",
         f"{n}-float": "0%,100%{transform:translateX(0)} 50%{transform:translateX(18px)}"}),
-    (".dr", f"{n}-rain .9s {EASE_IN} infinite", {f"{n}-rain":
+    (".dr", f"{n}-rain .9s {EASE_IN} infinite backwards", {f"{n}-rain":
         "0%{transform:translateY(0);opacity:0} 15%{opacity:1} 100%{transform:translateY(190px);opacity:0}"}),
 ]) + "\n" + "\n".join(f".mascotte-{n} .dr{i} {{ animation-delay: {.9 + i * .23:.2f}s; }}" for i in range(4)), body))
 
@@ -251,7 +265,7 @@ A[n] = ("Réflexion", "Chargement, réflexion", svg(n, "Réflexion", css(n, [
         f"{n}-arm": "from{transform:rotate(0)} to{transform:rotate(38deg)}",
         f"{n}-tap": "0%,100%{transform:rotate(38deg)} 50%{transform:rotate(33deg)}"}),
     (".bub", f"{n}-bub .5s {EASE_BACK} .3s both", {f"{n}-bub": "from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1}"}),
-    (".dt", f"{n}-dot 1.2s ease-in-out infinite", {f"{n}-dot": "0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-34px)}"}),
+    (".dt", f"{n}-dot 1.2s ease-in-out infinite backwards", {f"{n}-dot": "0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-34px)}"}),
 ]) + "\n" + "\n".join(f".mascotte-{n} .dt{i} {{ animation-delay: {.8 + i * .18:.2f}s; }}" for i in range(3)), body))
 
 # 8. Série de jours : flamme qui danse, la mascotte bat la mesure -------------------
@@ -272,9 +286,9 @@ trophy = g((FIST[0] + 10, FIST[1] - 60), "trophy", TROPHY)
 conf = "".join(g((150 + (k * 113) % 950, -300), f"cf cf{k}", f'<rect x="-10" y="-16" width="20" height="32" rx="4" fill="{[YELLOW, BLUE, GREEN, PINK][k % 4]}"/>') for k in range(12))
 body = conf + mascot(arm_inner=trophy)
 A[n] = ("Victoire en tournoi", "Tournoi gagné, podium", svg(n, "Victoire en tournoi", css(n, [
-    (".rig", f"{n}-hop .9s {EASE_OUT} infinite", {f"{n}-hop":
-        "0%{transform:scale(1.07,.9)} 40%{transform:translateY(-70px) scale(.97,1.04)} 75%{transform:translateY(0) scale(1.05,.92)} 100%{transform:scale(1.07,.9)}"}),
-    (".arm", f"{n}-arm .45s ease-in-out infinite alternate", {f"{n}-arm": "from{transform:rotate(4deg)} to{transform:rotate(20deg)}"}),
+    (".rig", f"{n}-hop 1.2s linear infinite", {f"{n}-hop": jump(70)}),
+    (".arm", f"{n}-arm 1.2s {SOFT} infinite", {f"{n}-arm":
+        "0%,100%{transform:rotate(6deg)} 16%{transform:rotate(2deg)} 42%{transform:rotate(22deg)} 62%{transform:rotate(8deg)}"}),
     (".trophy", f"{n}-trophy .6s {EASE_BACK} both", {f"{n}-trophy": "from{transform:scale(0) rotate(-40deg)} to{transform:scale(1) rotate(0)}"}),
     (".shine", f"{n}-shine 1.8s ease-in-out .6s infinite", {f"{n}-shine": "0%{transform:translateX(0)} 40%,100%{transform:translateX(300px)}"}),
     (".cf", f"{n}-fall 2.4s linear infinite", {f"{n}-fall": "from{transform:translateY(0) rotate(0)} to{transform:translateY(1400px) rotate(720deg)}"}),

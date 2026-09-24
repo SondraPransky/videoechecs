@@ -13,7 +13,7 @@
 .mascotte-serie-ratee .cloud { animation: serie-ratee-cloud .6s cubic-bezier(.34,1.56,.64,1) .3s both, serie-ratee-float 3s ease-in-out .9s infinite; }
 @keyframes serie-ratee-cloud { from{transform:translateY(-80px) scale(.3);opacity:0} to{transform:translateY(0) scale(1);opacity:1} }
 @keyframes serie-ratee-float { 0%,100%{transform:translateX(0)} 50%{transform:translateX(18px)} }
-.mascotte-serie-ratee .dr { animation: serie-ratee-rain .9s cubic-bezier(.7,0,.84,0) infinite; }
+.mascotte-serie-ratee .dr { animation: serie-ratee-rain .9s cubic-bezier(.7,0,.84,0) infinite backwards; }
 @keyframes serie-ratee-rain { 0%{transform:translateY(0);opacity:0} 15%{opacity:1} 100%{transform:translateY(190px);opacity:0} }
 .mascotte-serie-ratee .dr0 { animation-delay: 0.90s; }
 .mascotte-serie-ratee .dr1 { animation-delay: 1.13s; }

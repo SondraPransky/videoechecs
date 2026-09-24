@@ -11,7 +11,7 @@
 @keyframes reflexion-tap { 0%,100%{transform:rotate(38deg)} 50%{transform:rotate(33deg)} }
 .mascotte-reflexion .bub { animation: reflexion-bub .5s cubic-bezier(.34,1.56,.64,1) .3s both; }
 @keyframes reflexion-bub { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-.mascotte-reflexion .dt { animation: reflexion-dot 1.2s ease-in-out infinite; }
+.mascotte-reflexion .dt { animation: reflexion-dot 1.2s ease-in-out infinite backwards; }
 @keyframes reflexion-dot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-34px)} }
 .mascotte-reflexion .dt0 { animation-delay: 0.80s; }
 .mascotte-reflexion .dt1 { animation-delay: 0.98s; }
