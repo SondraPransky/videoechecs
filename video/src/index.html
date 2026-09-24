@@ -153,6 +153,18 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .prow .rw { height: 60px; font: 700 20px/1 "Manrope"; }
 .prow .rw em { font-style: normal; font-weight: 600; color: #6b6b66; font-size: 17px; }
 
+.share { position: absolute; width: 440px; padding: 24px; border-radius: 24px; background: #f1f0ea; color: #1b1b1b; box-shadow: 0 40px 90px rgba(0,0,0,.6); font-family: "Manrope"; }
+.share h5 { margin: 0 0 16px; font: 800 24px/1 "Manrope"; display: flex; align-items: center; gap: 10px; }
+.share .who { display: flex; align-items: center; gap: 14px; height: 58px; padding: 0 12px; border-radius: 14px; font: 700 20px/1 "Manrope"; }
+.share .who i { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font: 800 16px/1 "Manrope"; font-style: normal; }
+.share .who .ok { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #c9c6ba; }
+.share .send { margin-top: 14px; height: 54px; border-radius: 14px; background: #fae361; display: grid; place-items: center; font: 800 20px/1 "Manrope"; }
+
+.ptile { position: absolute; width: 290px; height: 74px; border-radius: 20px; display: flex; align-items: center; gap: 14px; padding: 0 18px; color: #111; box-shadow: 0 24px 50px rgba(0,0,0,.45); overflow: hidden; }
+.ptile .ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.55); display: grid; place-items: center; flex: none; }
+.ptile b { display: block; font: 800 21px/1.1 "Manrope"; }
+.ptile span { display: block; font: 600 15px/1.2 "Manrope"; color: rgba(17,17,17,.7); margin-top: 3px; }
+
 /* Scène 4 : live */
 .live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
@@ -313,7 +325,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div id="s5b" class="layer">
       <div style="position:absolute;left:150px;top:112px">
         <div class="kicker s5b-k">Ton espace de parties</div>
-        <div class="h2" style="margin-top:26px;font-size:78px"><span class="line"><span class="s5b-w">Importe tes PGN,</span></span><span class="line"><span class="s5b-w em">analyse-les.</span></span></div>
+        <div class="h2" style="margin-top:26px;font-size:66px"><span class="line"><span class="s5b-w">Importe, analyse,</span></span><span class="line"><span class="s5b-w em">partage.</span></span></div>
       </div>
       <div class="imp s5b-imp" style="left:150px;top:400px">
         <div class="imp-tabs"><span class="on">Importer des parties</span><span class="btn-o" style="margin-bottom:10px">＋ Créer une partie</span></div>
@@ -322,12 +334,13 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
       <div class="prow s5b-row" style="left:150px;top:722px"><div class="hd"><span>BLANCS</span><span>NOIRS</span><span>ÉVÉNEMENT</span><span></span></div>
         <div class="rw" id="prow-rw"><span>Toi</span><span>Adversaire</span><em>Tournoi du club</em><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-mes-parties.png" style="left:150px;top:856px;height:58px;width:auto;border-radius:12px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-favoris.png" style="left:410px;top:856px;height:58px;width:auto;border-radius:12px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-repertoires.png" style="left:150px;top:928px;height:58px;width:auto;border-radius:12px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-bases.png" style="left:410px;top:928px;height:58px;width:auto;border-radius:12px">
-      <div class="uitile s5b-win" style="left:840px;top:140px;width:960px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
+      <div class="ptile s5b-t" style="left:150px;top:856px;background:#93b9e2"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div><b>Mes parties</b><span>Tous tes fichiers</span></div></div>
+      <div class="ptile s5b-t" style="left:460px;top:856px;background:#fae361"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></div><div><b>Favoris</b><span>Parties marquées</span></div></div>
+      <div class="ptile s5b-t" style="left:150px;top:944px;background:#6bdc7d"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></div><div><b>Répertoires</b><span>Systèmes et analyses</span></div></div>
+      <div class="ptile s5b-t" style="left:460px;top:944px;background:#f06b8a"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><div><b>Bases</b><span>Bases de parties</span></div></div>
+            <div class="uitile s5b-win" style="left:840px;top:140px;width:960px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
         <div class="s5b-focus" style="position:absolute;left:64.6%;top:6.6%;width:34.8%;height:88%;border-radius:16px;box-shadow:inset 0 0 0 5px #fae361, 0 0 40px rgba(250,227,97,.45)"></div></div>
+      <div class="share s5b-share" style="left:1300px;top:420px"><h5><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg>Partager la partie</h5><div class="who sh-who" id="sh0"><i style="background:#93b9e2">CR</i>Camille R.<span class="ok"></span></div><div class="who sh-who" id="sh1"><i style="background:#fae361">HM</i>Hugo M.<span class="ok"></span></div><div class="who sh-who" id="sh2"><i style="background:#ff8fa0">IB</i>Inès B.<span class="ok"></span></div><div class="send" id="sh-send">Envoyer</div></div>
     </div>
   </section>
 
@@ -817,6 +830,19 @@ scene("s5", ({ st, from, at, lines, dur }) => {
   from(".s5b-win", T + 2.35, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .6 });
   at(".s5b-win", T + 2.95, { rotateY: -2, duration: Math.max(.2, dur - T - 2.95), ease: "sine.inOut" });
   from(".s5b-focus", T + 3.0, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: .3 });
+  // Partage avec d'autres membres
+  const TS = T + 3.45;
+  at(".s5b-focus", TS - .1, { opacity: 0, duration: .2 });
+  from(".s5b-share", TS, { opacity: 0, y: 60, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(1.6)" });
+  from(".sh-who", TS + .2, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .3, stagger: .08 });
+  ["#sh0", "#sh2"].forEach((id, k) => {
+    at(id, TS + .6 + k * .2, { backgroundColor: "rgba(147,185,226,.35)", duration: .15 });
+    at(id + " .ok", TS + .6 + k * .2, { backgroundColor: "#2c9a45", borderColor: "#2c9a45", duration: .15 });
+  });
+  at("#sh-send", TS + 1.1, { scale: .94, duration: .08 });
+  at("#sh-send", TS + 1.18, { scale: 1, backgroundColor: "#6bdc7d", duration: .2, onStart: () => {}, onUpdate: () => {} });
+  st.call(() => { $("#sh-send").textContent = "Envoyer"; }, null, TS + 1.19);
+  st.call(() => { $("#sh-send").textContent = "Partagée ✓"; }, null, TS + 1.2);
   exitZoom(st, "s5", dur, { scale: 1, y: 60 });
 });
 
