@@ -11,7 +11,7 @@ Fichiers produits :
 | # | Scène | Contenu | Mascotte |
 |---|---|---|---|
 | 1 | Pas à pas | L'échiquier se met en place, 1.e4 e5 | « hello » (animation du designer) |
-| 2 | Progression | Débutant → Club, promotion en dame | Niveau supérieur (escalier) |
+| 2 | Progression | Initiation → Objectif 1400, 1600, 1800 → 2000 et +, promotion en dame | Niveau supérieur (escalier) |
 | 3 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
 | 4 | Revue Europe Échecs | Numéro du mois en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
 | 5 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
