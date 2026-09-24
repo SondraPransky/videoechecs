@@ -108,6 +108,18 @@ FLAME = f'''<g><path d="M0,40 C-80,40 -110,-30 -80,-90 C-70,-60 -50,-50 -40,-60 
 <path d="M0,30 C-40,30 -55,-10 -40,-45 C-25,-30 -10,-30 -5,-45 C0,-80 20,-100 30,-120 C45,-80 70,-50 60,-10 C55,15 35,30 0,30 Z" fill="{YELLOW}"/></g>'''
 
 
+BOOK = f'''<g><path d="M-125,-72 L0,-56 L125,-72 L125,82 L0,98 L-125,82 Z" fill="{BLUE}" stroke="{LINE}" stroke-width="10" stroke-linejoin="round"/>
+<path d="M-112,-62 L-4,-47 L-4,86 L-112,71 Z" fill="#fff" stroke="{LINE}" stroke-width="7" stroke-linejoin="round"/>
+<path d="M112,-62 L4,-47 L4,86 L112,71 Z" fill="#fff" stroke="{LINE}" stroke-width="7" stroke-linejoin="round"/>
+<path d="M-92,-30 L-24,-21 M-92,-2 L-24,7 M-92,26 L-40,33 M24,-21 L92,-30 M24,7 L92,-2 M24,33 L76,26" stroke="#b9c3cf" stroke-width="8" stroke-linecap="round"/>
+<g class="pg"><path d="M4,-47 L112,-62 L112,71 L4,86 Z" fill="#f4f1ea" stroke="{LINE}" stroke-width="7" stroke-linejoin="round"/></g></g>'''
+
+BULB = f'''<g><g class="rays">{"".join(f'<path d="M0,-150 L0,-190" transform="rotate({a})" stroke="{YELLOW}" stroke-width="16" stroke-linecap="round"/>' for a in range(-90, 91, 30))}</g>
+<circle cy="-20" r="88" fill="{YELLOW}" stroke="{LINE}" stroke-width="12"/>
+<path d="M-26,10 C-26,-30 26,-30 26,10 M0,-10 L0,62" fill="none" stroke="{LINE}" stroke-width="9" stroke-linecap="round"/>
+<rect x="-44" y="60" width="88" height="56" rx="12" fill="{LINE}"/></g>'''
+
+
 def g(origin, cls, inner):
     """Groupe animé dont l'origine de transformation est `origin` (repère du SVG)."""
     ox, oy = origin
@@ -190,33 +202,34 @@ A[n] = ("Série réussie", "Série d'exercices réussie", svg(n, "Série réussi
 ]) + "\n" + "\n".join(f".mascotte-{n} .st{i} {{ animation-delay: {.15 + i * .18:.2f}s, {.9 + i * .2:.2f}s; }}" for i in range(3))
   + "\n" + "\n".join(f".mascotte-{n} .cf{k} {{ animation-delay: -{(k * .37) % 2.4:.2f}s; animation-duration: {2.0 + (k % 3) * .35:.2f}s; }}" for k in range(10)), body))
 
-# 3. Bonne réponse : petit saut, pastille verte cochée -----------------------------
+# 3. Bonne réponse : geste « Yes ! », le poing ramené vers le bas, pastille cochée ----
 n = "bonne-reponse"
 body = mascot() + g((300, 30), "badge", CHECK)
 A[n] = ("Bonne réponse", "Exercice réussi", svg(n, "Bonne réponse", css(n, [
-    (".rig", f"{n}-hop .9s linear both, {n}-idle 2.4s ease-in-out .9s infinite", {
-        f"{n}-hop": jump(80),
-        f"{n}-idle": "0%,100%{transform:scale(1)} 50%{transform:scale(1.015,.985)}"}),
-    (".arm", f"{n}-arm .7s {UP} both, {n}-wave 1.2s ease-in-out .7s infinite alternate", {
-        f"{n}-arm": "from{transform:rotate(-30deg)} to{transform:rotate(12deg)}",
-        f"{n}-wave": "from{transform:rotate(12deg)} to{transform:rotate(0)}"}),
-    (".badge", f"{n}-pop .5s {EASE_BACK} .15s both, {n}-pulse 2.4s ease-in-out .8s infinite", {
+    (".rig", f"{n}-spin 1.1s {SOFT} both, {n}-idle 2.4s ease-in-out 1.1s infinite", {
+        f"{n}-spin": ("0%{transform:scale(1,1)} 12%{transform:scale(1.06,.92)} 28%{transform:translateY(-90px) scale(-1,1.04)} "
+                      "44%{transform:translateY(-90px) scale(1,1.04)} 60%{transform:translateY(0) scale(1.07,.92)} 74%{transform:scale(.98,1.02)} 88%,100%{transform:scale(1,1)}"),
+        f"{n}-idle": "0%,100%{transform:scale(1)} 50%{transform:translateY(-6px) scale(.99,1.01)}"}),
+    (".arm", f"{n}-arm 1.1s {SOFT} both, {n}-wave .7s ease-in-out 1.1s infinite alternate", {
+        f"{n}-arm": "0%{transform:rotate(-20deg)} 30%{transform:rotate(18deg)} 60%{transform:rotate(-8deg)} 100%{transform:rotate(0)}",
+        f"{n}-wave": "from{transform:rotate(0)} to{transform:rotate(-13deg)}"}),
+    (".badge", f"{n}-pop .5s {EASE_BACK} .35s both, {n}-pulse 2.4s ease-in-out 1s infinite", {
         f"{n}-pop": "from{transform:scale(0) rotate(-30deg)} to{transform:scale(1) rotate(0)}",
         f"{n}-pulse": "0%,100%{transform:scale(1)} 50%{transform:scale(1.06)}"}),
-    (".tick", f"{n}-tick .4s ease-out .45s both", {f"{n}-tick": "to{stroke-dashoffset:0}"}),
+    (".tick", f"{n}-tick .4s ease-out .65s both", {f"{n}-tick": "to{stroke-dashoffset:0}"}),
 ]), body))
 
-# 4. Mauvaise réponse : sursaut, main sur la tête, pastille rouge qui secoue --------
+# 4. Mauvaise réponse : sursaut, le bras retombe, la mascotte secoue la tête ------------
 n = "mauvaise-reponse"
 qm = "".join(g(p, f"q q{i}", f'<text x="0" y="0" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="{s}" text-anchor="middle" fill="{LINE}">?</text>') for i, (p, s) in enumerate([((900, -40), 150), ((1030, 60), 110)]))
 body = mascot() + g((300, 40), "badge", CROSS) + qm
 A[n] = ("Mauvaise réponse", "Exercice raté", svg(n, "Mauvaise réponse", css(n, [
-    (".rig", f"{n}-flinch .6s {EASE_OUT} both, {n}-idle 2.4s ease-in-out .6s infinite", {
-        f"{n}-flinch": "0%{transform:scale(1)} 25%{transform:rotate(-5deg) scale(1.06,.9)} 60%{transform:rotate(2deg) scale(.98,1.02)} 100%{transform:rotate(0) scale(1)}",
-        f"{n}-idle": "0%,100%{transform:rotate(0)} 50%{transform:rotate(-1.5deg)}"}),
-    (".arm", f"{n}-arm .5s {EASE_OUT} both, {n}-scratch .5s ease-in-out .5s infinite alternate", {
-        f"{n}-arm": "from{transform:rotate(0)} to{transform:rotate(42deg)}",
-        f"{n}-scratch": "from{transform:rotate(42deg)} to{transform:rotate(50deg)}"}),
+    (".rig", f"{n}-flinch .5s {UP} both, {n}-no 2.4s ease-in-out .5s infinite", {
+        f"{n}-flinch": "0%{transform:scale(1)} 30%{transform:rotate(-6deg) scale(1.06,.9)} 70%{transform:rotate(2deg) scale(.98,1.02)} 100%{transform:rotate(0) scale(1)}",
+        f"{n}-no": "0%,30%,100%{transform:rotate(0)} 5%{transform:rotate(-3deg)} 10%{transform:rotate(3deg)} 15%{transform:rotate(-2deg)} 20%{transform:rotate(1.5deg)} 25%{transform:rotate(0)}"}),
+    (".arm", f"{n}-drop .5s {EASE_BACK} both, {n}-swing 1.2s ease-in-out .5s infinite alternate", {
+        f"{n}-drop": "from{transform:rotate(0)} to{transform:rotate(-100deg)}",
+        f"{n}-swing": "from{transform:rotate(-100deg)} to{transform:rotate(-90deg)}"}),
     (".badge", f"{n}-pop .4s {EASE_BACK} both, {n}-shake 2.4s ease-in-out .5s infinite", {
         f"{n}-pop": "from{transform:scale(0)} to{transform:scale(1)}",
         f"{n}-shake": "0%,40%,100%{transform:rotate(0)} 5%{transform:rotate(-14deg)} 10%{transform:rotate(12deg)} 15%{transform:rotate(-8deg)} 20%{transform:rotate(5deg)} 25%{transform:rotate(0)}"}),
@@ -242,18 +255,6 @@ A[n] = ("Série ratée", "Série d'exercices échouée", svg(n, "Série ratée",
         "0%{transform:translateY(0);opacity:0} 15%{opacity:1} 100%{transform:translateY(190px);opacity:0}"}),
 ]) + "\n" + "\n".join(f".mascotte-{n} .dr{i} {{ animation-delay: {.9 + i * .23:.2f}s; }}" for i in range(4)), body))
 
-# 6. On réessaie : le poing motive, flèche de relance qui tourne ------------------
-n = "on-reessaie"
-body = mascot() + g((1000, -60), "retry", RETRY)
-A[n] = ("On réessaie !", "Encouragement après un échec", svg(n, "On réessaie", css(n, [
-    (".rig", f"{n}-bounce .5s ease-in-out infinite alternate", {f"{n}-bounce":
-        "from{transform:scale(1.04,.94)} to{transform:translateY(-30px) scale(.98,1.03)}"}),
-    (".arm", f"{n}-pump .25s ease-in-out infinite alternate", {f"{n}-pump": "from{transform:rotate(-14deg)} to{transform:rotate(14deg)}"}),
-    (".retry", f"{n}-pop .5s {EASE_BACK} both, {n}-spin 1.2s {EASE_IO} .5s infinite", {
-        f"{n}-pop": "from{transform:scale(0)} to{transform:scale(1)}",
-        f"{n}-spin": "from{transform:rotate(0)} to{transform:rotate(360deg)}"}),
-]), body))
-
 # 7. Réflexion / chargement : main sur la tête, bulles de pensée --------------------
 n = "reflexion"
 dots = "".join(g((x, 0), f"dt dt{i}", f'<circle r="26" fill="{INK}"/>') for i, x in enumerate([-70, 0, 70]))
@@ -268,14 +269,16 @@ A[n] = ("Réflexion", "Chargement, réflexion", svg(n, "Réflexion", css(n, [
     (".dt", f"{n}-dot 1.2s ease-in-out infinite backwards", {f"{n}-dot": "0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-34px)}"}),
 ]) + "\n" + "\n".join(f".mascotte-{n} .dt{i} {{ animation-delay: {.8 + i * .18:.2f}s; }}" for i in range(3)), body))
 
-# 8. Série de jours : flamme qui danse, la mascotte bat la mesure -------------------
+# 8. Série de jours : la mascotte danse à côté de la flamme, le bras balance --------
 n = "serie-de-jours"
 body = g((960, 1020), "flame", FLAME) + mascot()
 A[n] = ("Série de jours", "Série quotidienne, assiduité", svg(n, "Série de jours", css(n, [
-    (".rig", f"{n}-groove .6s ease-in-out infinite alternate", {f"{n}-groove":
-        "from{transform:rotate(-2deg) scale(1.03,.96)} to{transform:rotate(2deg) translateY(-18px) scale(.99,1.02)}"}),
-    (".arm", f"{n}-arm .6s ease-in-out infinite alternate", {f"{n}-arm": "from{transform:rotate(-10deg)} to{transform:rotate(18deg)}"}),
-    (".flame", f"{n}-pop .5s {EASE_BACK} both, {n}-flicker .35s ease-in-out .5s infinite alternate", {
+    (".rig", f"{n}-dance 1.2s ease-in-out infinite", {f"{n}-dance":
+        "0%,100%{transform:rotate(-4deg) scale(1.03,.96)} 25%{transform:translateY(-24px) rotate(0) scale(.99,1.02)} "
+        "50%{transform:rotate(4deg) scale(1.03,.96)} 75%{transform:translateY(-24px) rotate(0) scale(.99,1.02)}"}),
+    (".arm", f"{n}-swing 1.2s ease-in-out infinite", {f"{n}-swing":
+        "0%,100%{transform:rotate(-104deg)} 50%{transform:rotate(-34deg)}"}),
+    (".flame", f"{n}-pop .5s {EASE_BACK} both, {n}-flicker .3s ease-in-out .5s infinite alternate", {
         f"{n}-pop": "from{transform:scale(0)} to{transform:scale(1.2)}",
         f"{n}-flicker": "from{transform:scale(1.2,1.2) skewX(-4deg)} to{transform:scale(1.14,1.3) skewX(5deg)}"}),
 ]), body))
@@ -305,6 +308,73 @@ A[n] = ("Regarde !", "Onboarding, attirer l'attention", svg(n, "Regarde", css(n,
         f"{n}-point": "from{transform:rotate(0)} to{transform:rotate(-68deg)}",
         f"{n}-jab": "0%,100%{transform:rotate(-68deg)} 50%{transform:rotate(-62deg)}"}),
 ]), body))
+
+
+# 11. Lecture : la mascotte lit un livre, les pages tournent -------------------------
+n = "lecture"
+body = mascot(arm_inner=g(FIST, "book", f'<g transform="rotate(22) scale(1.35)">{BOOK}</g>'))
+A[n] = ("Lecture", "Leçon en cours, cours écrit", svg(n, "Lecture", css(n, [
+    (".rig", f"{n}-read 2.4s ease-in-out infinite", {f"{n}-read":
+        "0%,100%{transform:rotate(0) scale(1)} 50%{transform:rotate(-1.5deg) translateY(-6px) scale(.995,1.005)}"}),
+    (".arm", f"{n}-hold .6s {EASE_BACK} both, {n}-bob 2.4s ease-in-out .6s infinite", {
+        f"{n}-hold": "from{transform:rotate(-90deg)} to{transform:rotate(-22deg)}",
+        f"{n}-bob": "0%,100%{transform:rotate(-22deg)} 50%{transform:rotate(-18deg)}"}),
+    (".book", f"{n}-open .5s {EASE_BACK} .3s both", {f"{n}-open": "from{transform:scale(0)} to{transform:scale(1)}"}),
+    (".pg", f"{n}-flip 2.4s {SOFT} .9s infinite backwards", {f"{n}-flip":
+        "0%,45%{transform:scaleX(1)} 75%,100%{transform:scaleX(-1)}"}),
+]), body))
+
+# 12. Idée : une ampoule s'allume au-dessus de la tête ---------------------------------
+n = "idee"
+body = mascot() + g((720, -170), "bulb", f'<g transform="scale(1.35)">{BULB}</g>')
+A[n] = ("Idée !", "Indice, astuce", svg(n, "Idée", css(n, [
+    (".rig", f"{n}-hop .8s linear .15s both, {n}-idle 2.4s ease-in-out .95s infinite", {
+        f"{n}-hop": jump(50),
+        f"{n}-idle": "0%,100%{transform:scale(1)} 50%{transform:translateY(-6px) scale(.99,1.01)}"}),
+    (".arm", f"{n}-arm 1.2s ease-in-out infinite alternate", {f"{n}-arm": "from{transform:rotate(-84deg)} to{transform:rotate(-76deg)}"}),
+    (".bulb", f"{n}-pop .5s {EASE_BACK} .3s both, {n}-float 2.4s ease-in-out .8s infinite", {
+        f"{n}-pop": "from{transform:scale(0) rotate(-20deg)} to{transform:scale(1) rotate(0)}",
+        f"{n}-float": "0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)}"}),
+    (".rays", f"{n}-glow .6s ease-in-out .8s infinite alternate backwards", {f"{n}-glow":
+        "from{transform:scale(.85);opacity:.4} to{transform:scale(1.08);opacity:1}"}),
+]), body))
+
+# 13. Dodo : avachie, « Z z z » -------------------------------------------------------
+n = "dodo"
+zs = "".join(g(p, f"z z{i}", f'<text font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="{sz}" text-anchor="middle" fill="{LINE}">Z</text>') for i, (p, sz) in enumerate([((850, 0), 130), ((960, -120), 170), ((1060, -250), 210)]))
+body = mascot() + zs
+A[n] = ("Dodo", "Inactivité, « reviens vite »", svg(n, "Dodo", css(n, [
+    (".rig", f"{n}-slump .8s {EASE_OUT} both, {n}-breathe 3s ease-in-out .8s infinite", {
+        f"{n}-slump": "from{transform:rotate(0) scale(1)} to{transform:rotate(5deg) scale(1.03,.95)}",
+        f"{n}-breathe": "0%,100%{transform:rotate(5deg) scale(1.03,.95)} 50%{transform:rotate(4deg) scale(1.01,.98)}"}),
+    (".arm", f"{n}-drop .8s {EASE_OUT} both, {n}-sway 3s ease-in-out .8s infinite", {
+        f"{n}-drop": "from{transform:rotate(0)} to{transform:rotate(-120deg)}",
+        f"{n}-sway": "0%,100%{transform:rotate(-120deg)} 50%{transform:rotate(-116deg)}"}),
+    (".z", f"{n}-z 2.4s ease-in-out infinite backwards", {f"{n}-z":
+        "0%{transform:translate(0,30px) scale(.5);opacity:0} 25%{opacity:1} 100%{transform:translate(50px,-90px) scale(1);opacity:0}"}),
+]) + "\n" + "\n".join(f".mascotte-{n} .z{i} {{ animation-delay: {.8 + i * .8:.1f}s; }}" for i in range(3)), body))
+
+# 14. Niveau supérieur : la mascotte gravit un escalier sans fin -----------------------
+n = "niveau-superieur"
+W_, H_ = 380, 150
+pts = []
+for k in range(4, -4, -1):
+    x0, y0 = 400 - W_ * k, 1038 - H_ * k
+    pts += [(x0, y0), (x0 + W_, y0)]
+stair = "M" + " L".join(f"{x},{y}" for x, y in pts)
+stairs = g((0, 0), "stairs", f'<path d="{stair}" fill="none" stroke="{LINE}" stroke-width="20" stroke-linejoin="round" stroke-linecap="round"/>'
+           + "".join(f'<path d="M{400 - W_ * k + W_},{1038 - H_ * k} L{400 - W_ * k + W_},{1038 - H_ * k + H_}" stroke="{LINE}" stroke-width="16"/>' for k in range(0)))
+arrows = "".join(g((1010, 300 + i * 150), f"up up{i}", f'<path d="M-40,20 L0,-20 L40,20" fill="none" stroke="{GREEN}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>') for i in range(3))
+body = f'<g transform="translate(0 -250)">{stairs}{mascot()}</g>' + arrows
+A[n] = ("Niveau supérieur", "Progression, nouveau niveau", svg(n, "Niveau supérieur", css(n, [
+    (".rig", f"{n}-hop 1.4s linear infinite", {f"{n}-hop": jump(170)}),
+    (".stairs", f"{n}-steps 1.4s linear infinite", {f"{n}-steps":
+        f"0%,16%{{transform:translate(0,0);animation-timing-function:{SOFT}}} 62%,100%{{transform:translate({W_}px,{H_}px)}}"}),
+    (".arm", f"{n}-bal 1.4s {SOFT} infinite", {f"{n}-bal":
+        "0%,100%{transform:rotate(-40deg)} 16%{transform:rotate(-58deg)} 42%{transform:rotate(-12deg)} 62%{transform:rotate(-50deg)}"}),
+    (".up", f"{n}-up 1.4s linear infinite backwards", {f"{n}-up":
+        "0%{transform:translateY(60px);opacity:0} 30%{opacity:1} 100%{transform:translateY(-120px);opacity:0}"}),
+]) + "\n" + "\n".join(f".mascotte-{n} .up{i} {{ animation-delay: {i * .45:.2f}s; }}" for i in range(3)), body, shadow=False))
 
 
 # ---------------------------------------------------------------- sorties
@@ -342,7 +412,7 @@ figure {{ margin:0; border-radius:20px; padding:12px; }} .art svg {{ width:100%;
 figure code {{ display:block; font-size:11px; color:#777; word-break:break-all; margin-top:6px; }}
 @media (max-width:640px) {{ .row {{ grid-template-columns:1fr; }} }}
 </style></head><body>
-<header><h1>Mascotte echecs.com — animations</h1><p>10 animations × 3 couleurs (noir, blanc, jaune). SVG animés en CSS, sans script.</p>
+<header><h1>Mascotte echecs.com — animations</h1><p>13 animations × 3 couleurs (noir, blanc, jaune). SVG animés en CSS, sans script.</p>
 <button onclick="document.querySelectorAll('.art').forEach(a=>a.innerHTML=a.innerHTML)">Rejouer les intros</button></header>
 <main>{"".join(rows)}</main></body></html>'''
 open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(html)

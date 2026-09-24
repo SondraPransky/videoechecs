@@ -4,12 +4,12 @@
 .mascotte-mauvaise-reponse .m { fill: var(--mascot); }
 .mascotte-mauvaise-reponse .shadow { fill: var(--mascot); opacity: .12; }
 .mascotte-mauvaise-reponse g { transform-box: view-box; transform-origin: 0 0; }
-.mascotte-mauvaise-reponse .rig { animation: mauvaise-reponse-flinch .6s cubic-bezier(.16,1,.3,1) both, mauvaise-reponse-idle 2.4s ease-in-out .6s infinite; }
-@keyframes mauvaise-reponse-flinch { 0%{transform:scale(1)} 25%{transform:rotate(-5deg) scale(1.06,.9)} 60%{transform:rotate(2deg) scale(.98,1.02)} 100%{transform:rotate(0) scale(1)} }
-@keyframes mauvaise-reponse-idle { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-1.5deg)} }
-.mascotte-mauvaise-reponse .arm { animation: mauvaise-reponse-arm .5s cubic-bezier(.16,1,.3,1) both, mauvaise-reponse-scratch .5s ease-in-out .5s infinite alternate; }
-@keyframes mauvaise-reponse-arm { from{transform:rotate(0)} to{transform:rotate(42deg)} }
-@keyframes mauvaise-reponse-scratch { from{transform:rotate(42deg)} to{transform:rotate(50deg)} }
+.mascotte-mauvaise-reponse .rig { animation: mauvaise-reponse-flinch .5s cubic-bezier(.33,1,.68,1) both, mauvaise-reponse-no 2.4s ease-in-out .5s infinite; }
+@keyframes mauvaise-reponse-flinch { 0%{transform:scale(1)} 30%{transform:rotate(-6deg) scale(1.06,.9)} 70%{transform:rotate(2deg) scale(.98,1.02)} 100%{transform:rotate(0) scale(1)} }
+@keyframes mauvaise-reponse-no { 0%,30%,100%{transform:rotate(0)} 5%{transform:rotate(-3deg)} 10%{transform:rotate(3deg)} 15%{transform:rotate(-2deg)} 20%{transform:rotate(1.5deg)} 25%{transform:rotate(0)} }
+.mascotte-mauvaise-reponse .arm { animation: mauvaise-reponse-drop .5s cubic-bezier(.34,1.56,.64,1) both, mauvaise-reponse-swing 1.2s ease-in-out .5s infinite alternate; }
+@keyframes mauvaise-reponse-drop { from{transform:rotate(0)} to{transform:rotate(-100deg)} }
+@keyframes mauvaise-reponse-swing { from{transform:rotate(-100deg)} to{transform:rotate(-90deg)} }
 .mascotte-mauvaise-reponse .badge { animation: mauvaise-reponse-pop .4s cubic-bezier(.34,1.56,.64,1) both, mauvaise-reponse-shake 2.4s ease-in-out .5s infinite; }
 @keyframes mauvaise-reponse-pop { from{transform:scale(0)} to{transform:scale(1)} }
 @keyframes mauvaise-reponse-shake { 0%,40%,100%{transform:rotate(0)} 5%{transform:rotate(-14deg)} 10%{transform:rotate(12deg)} 15%{transform:rotate(-8deg)} 20%{transform:rotate(5deg)} 25%{transform:rotate(0)} }

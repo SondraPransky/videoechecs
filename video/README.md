@@ -1,26 +1,27 @@
 # Vidéo de présentation — echecs.com Académie
 
-Vidéo en motion design d'environ 40 s (1920×1080, 30 i/s), avec voix off masculine au tutoiement, musique électro-pop originale à 120 BPM et la mascotte du site.
+Vidéo en motion design de 45 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
 
 Fichiers produits :
 - `build/echecs-academie-presentation.mp4` : la vidéo finale ;
-- `build/poster.jpg` : l'image d'affiche ;
-- `build/sous-titres.vtt` : les sous-titres.
+- `build/poster.jpg` : l'image d'affiche.
 
 ## Scénario
 
-La durée de chaque scène est **calculée à partir de la voix off** (`scripts/timing.py`). Les coupes tombent sur les temps de la musique.
-
-| # | Scène | Voix off | Mascotte |
+| # | Scène | Contenu | Mascotte |
 |---|---|---|---|
-| 1 | L'échiquier se met en place, 1.e4 e5 | « Les échecs, ça s'apprend. Pas à pas. » | « hello » (animation du designer) |
-| 2 | Parcours Débutant → Club, promotion en dame | « Du premier coup jusqu'au niveau club… » | — |
-| 3 | +200 leçons, 4 formats, captures réelles | « Plus de deux cents leçons interactives… » | Leçon terminée |
-| 4 | Cours en direct, MI & GMI | « Des cours en direct avec des Maîtres Internationaux… » | — |
-| 5 | Partie rejouée et annotée | « Enregistre tes parties. Analyse chaque coup. » | Réflexion |
-| 6 | +2 000 exercices, problème du jour | « Plus de deux mille exercices pour progresser. » | Bonne réponse |
-| 7 | Tournoi 10'+5", « Toi » passe premier | « Et des tournois en ligne pour te mesurer aux autres. » | Victoire en tournoi |
-| 8 | Logo, « Commencer maintenant », echecs.com/academie | « echecs.com. L'académie d'échecs. Commence maintenant ! » | Regarde ! (montre le bouton) |
+| 1 | Pas à pas | L'échiquier se met en place, 1.e4 e5 | « hello » (animation du designer) |
+| 2 | Progression | Débutant → Club, promotion en dame | Niveau supérieur (escalier) |
+| 3 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Lecture |
+| 4 | Revue Europe Échecs | Numéro du mois en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Leçon terminée |
+| 5 | Vidéos Europe Échecs | Lecteur (Marc Quenehen), auteurs Nataf, De Labaca, Quenehen, Ravot, extraits du catalogue | — |
+| 6 | Cours en direct | MI & GMI | — |
+| 7 | Analyse | Partie rejouée en notation figurine | Réflexion |
+| 8 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
+| 9 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
+| 10 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
+
+Pour la version musique seule, les durées de scène sont fixées dans `scripts/timing.py` (`MUSIC_ONLY`). Avec une voix off, elles sont calculées à partir des répliques.
 
 ## Générer la vidéo
 
@@ -34,7 +35,8 @@ pip install piper-tts imageio-ffmpeg numpy scipy
 La commande suivante enchaîne voix off, découpage, musique, rendu et mixage :
 
 ```bash
-bash build.sh
+bash build.sh --music-only   # version actuelle, sans voix off
+bash build.sh                # avec voix off
 ```
 
 ### Voix ElevenLabs

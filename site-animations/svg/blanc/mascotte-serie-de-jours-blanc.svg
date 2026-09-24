@@ -4,11 +4,11 @@
 .mascotte-serie-de-jours .m { fill: var(--mascot); }
 .mascotte-serie-de-jours .shadow { fill: var(--mascot); opacity: .12; }
 .mascotte-serie-de-jours g { transform-box: view-box; transform-origin: 0 0; }
-.mascotte-serie-de-jours .rig { animation: serie-de-jours-groove .6s ease-in-out infinite alternate; }
-@keyframes serie-de-jours-groove { from{transform:rotate(-2deg) scale(1.03,.96)} to{transform:rotate(2deg) translateY(-18px) scale(.99,1.02)} }
-.mascotte-serie-de-jours .arm { animation: serie-de-jours-arm .6s ease-in-out infinite alternate; }
-@keyframes serie-de-jours-arm { from{transform:rotate(-10deg)} to{transform:rotate(18deg)} }
-.mascotte-serie-de-jours .flame { animation: serie-de-jours-pop .5s cubic-bezier(.34,1.56,.64,1) both, serie-de-jours-flicker .35s ease-in-out .5s infinite alternate; }
+.mascotte-serie-de-jours .rig { animation: serie-de-jours-dance 1.2s ease-in-out infinite; }
+@keyframes serie-de-jours-dance { 0%,100%{transform:rotate(-4deg) scale(1.03,.96)} 25%{transform:translateY(-24px) rotate(0) scale(.99,1.02)} 50%{transform:rotate(4deg) scale(1.03,.96)} 75%{transform:translateY(-24px) rotate(0) scale(.99,1.02)} }
+.mascotte-serie-de-jours .arm { animation: serie-de-jours-swing 1.2s ease-in-out infinite; }
+@keyframes serie-de-jours-swing { 0%,100%{transform:rotate(-104deg)} 50%{transform:rotate(-34deg)} }
+.mascotte-serie-de-jours .flame { animation: serie-de-jours-pop .5s cubic-bezier(.34,1.56,.64,1) both, serie-de-jours-flicker .3s ease-in-out .5s infinite alternate; }
 @keyframes serie-de-jours-pop { from{transform:scale(0)} to{transform:scale(1.2)} }
 @keyframes serie-de-jours-flicker { from{transform:scale(1.2,1.2) skewX(-4deg)} to{transform:scale(1.14,1.3) skewX(5deg)} }
 @media (prefers-reduced-motion: reduce) { .mascotte-serie-de-jours * { animation: none !important; } }

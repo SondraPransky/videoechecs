@@ -4,16 +4,16 @@
 .mascotte-bonne-reponse .m { fill: var(--mascot); }
 .mascotte-bonne-reponse .shadow { fill: var(--mascot); opacity: .12; }
 .mascotte-bonne-reponse g { transform-box: view-box; transform-origin: 0 0; }
-.mascotte-bonne-reponse .rig { animation: bonne-reponse-hop .9s linear both, bonne-reponse-idle 2.4s ease-in-out .9s infinite; }
-@keyframes bonne-reponse-hop { 0%{transform:translateY(0) scale(1,1);animation-timing-function:cubic-bezier(.45,0,.55,1)} 16%{transform:translateY(0) scale(1.07,0.89);animation-timing-function:cubic-bezier(.33,1,.68,1)} 42%{transform:translateY(-80px) scale(.97,1.04);animation-timing-function:cubic-bezier(.32,0,.67,0)} 62%{transform:translateY(0) scale(1.08,0.88);animation-timing-function:cubic-bezier(.33,1,.68,1)} 76%{transform:translateY(0) scale(.98,1.02);animation-timing-function:cubic-bezier(.45,0,.55,1)} 90%,100%{transform:translateY(0) scale(1,1)} }
-@keyframes bonne-reponse-idle { 0%,100%{transform:scale(1)} 50%{transform:scale(1.015,.985)} }
-.mascotte-bonne-reponse .arm { animation: bonne-reponse-arm .7s cubic-bezier(.33,1,.68,1) both, bonne-reponse-wave 1.2s ease-in-out .7s infinite alternate; }
-@keyframes bonne-reponse-arm { from{transform:rotate(-30deg)} to{transform:rotate(12deg)} }
-@keyframes bonne-reponse-wave { from{transform:rotate(12deg)} to{transform:rotate(0)} }
-.mascotte-bonne-reponse .badge { animation: bonne-reponse-pop .5s cubic-bezier(.34,1.56,.64,1) .15s both, bonne-reponse-pulse 2.4s ease-in-out .8s infinite; }
+.mascotte-bonne-reponse .rig { animation: bonne-reponse-spin 1.1s cubic-bezier(.45,0,.55,1) both, bonne-reponse-idle 2.4s ease-in-out 1.1s infinite; }
+@keyframes bonne-reponse-spin { 0%{transform:scale(1,1)} 12%{transform:scale(1.06,.92)} 28%{transform:translateY(-90px) scale(-1,1.04)} 44%{transform:translateY(-90px) scale(1,1.04)} 60%{transform:translateY(0) scale(1.07,.92)} 74%{transform:scale(.98,1.02)} 88%,100%{transform:scale(1,1)} }
+@keyframes bonne-reponse-idle { 0%,100%{transform:scale(1)} 50%{transform:translateY(-6px) scale(.99,1.01)} }
+.mascotte-bonne-reponse .arm { animation: bonne-reponse-arm 1.1s cubic-bezier(.45,0,.55,1) both, bonne-reponse-wave .7s ease-in-out 1.1s infinite alternate; }
+@keyframes bonne-reponse-arm { 0%{transform:rotate(-20deg)} 30%{transform:rotate(18deg)} 60%{transform:rotate(-8deg)} 100%{transform:rotate(0)} }
+@keyframes bonne-reponse-wave { from{transform:rotate(0)} to{transform:rotate(-13deg)} }
+.mascotte-bonne-reponse .badge { animation: bonne-reponse-pop .5s cubic-bezier(.34,1.56,.64,1) .35s both, bonne-reponse-pulse 2.4s ease-in-out 1s infinite; }
 @keyframes bonne-reponse-pop { from{transform:scale(0) rotate(-30deg)} to{transform:scale(1) rotate(0)} }
 @keyframes bonne-reponse-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
-.mascotte-bonne-reponse .tick { animation: bonne-reponse-tick .4s ease-out .45s both; }
+.mascotte-bonne-reponse .tick { animation: bonne-reponse-tick .4s ease-out .65s both; }
 @keyframes bonne-reponse-tick { to{stroke-dashoffset:0} }
 @media (prefers-reduced-motion: reduce) { .mascotte-bonne-reponse * { animation: none !important; } }
 </style>
