@@ -21,7 +21,7 @@ for id in 01 02 03 04 05 06 07 08; do
   i=$((i+1))
 done
 filters+="${labels}amix=inputs=8:normalize=0,apad=whole_dur=62,highpass=f=80,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,volume=1.6,pan=stereo|c0=c0|c1=c0,asplit=2[vo][sc];"
-filters+="[8:a]volume=0.55[mu];[mu][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=400[duck];"
+filters+="[8:a]volume=0.42[mu];[mu][sc]sidechaincompress=threshold=0.03:ratio=6:attack=20:release=400[duck];"
 filters+="[duck][vo]amix=inputs=2:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11[out]"
 "$FFMPEG" -y -loglevel error "${inputs[@]}" -i audio/music.wav -filter_complex "$filters" -map "[out]" -ar 48000 -t 62 build/mix.wav
 
