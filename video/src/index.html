@@ -136,6 +136,23 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .reel { position: absolute; left: 150px; top: 836px; display: flex; gap: 22px; }
 .reel img { width: 272px; height: 153px; border-radius: 18px; object-fit: cover; box-shadow: 0 24px 50px rgba(0,0,0,.5); display: block; }
 
+.pose.white .mascotte { --mascot: #ffffff; --line: #fae361; }
+.imp { position: absolute; width: 610px; border-radius: 22px; background: #f1f0ea; color: #1b1b1b; box-shadow: 0 40px 90px rgba(0,0,0,.55); overflow: hidden; font-family: "Manrope"; }
+.imp-tabs { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 0; border-bottom: 1px solid #dcd9cd; }
+.imp-tabs .on { font: 700 20px/1 "Manrope"; padding-bottom: 14px; border-bottom: 3px solid #fae361; }
+.btn-o { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; border: 2px solid #fae361; font: 700 17px/1 "Manrope"; background: #fbfaf5; }
+.btn-y { display: inline-flex; align-items: center; padding: 11px 18px; border-radius: 10px; background: #fae361; font: 800 17px/1 "Manrope"; }
+.imp-area { position: relative; margin: 16px 20px 0; min-height: 132px; padding: 14px 16px 14px 48px; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 2px #e2e0d6; }
+.imp-area svg { position: absolute; left: 14px; top: 14px; }
+.imp-area pre { margin: 0; font: 600 16px/1.45 "Manrope"; white-space: pre-wrap; color: #1b1b1b; }
+.imp-area .ph { position: absolute; left: 48px; top: 16px; font: 500 17px/1 "Manrope"; color: #8b8f94; }
+.imp-actions { display: flex; justify-content: space-between; padding: 14px 20px 18px; }
+.prow { position: absolute; width: 610px; border-radius: 16px; background: #f1f0ea; color: #1b1b1b; box-shadow: 0 24px 60px rgba(0,0,0,.45); overflow: hidden; }
+.prow .hd, .prow .rw { display: grid; grid-template-columns: 1.1fr 1.3fr 1.6fr 40px; align-items: center; padding: 0 18px; }
+.prow .hd { height: 38px; font: 800 13px/1 "Manrope"; letter-spacing: .1em; color: #6b6b66; background: #e9e7de; }
+.prow .rw { height: 60px; font: 700 20px/1 "Manrope"; }
+.prow .rw em { font-style: normal; font-weight: 600; color: #6b6b66; font-size: 17px; }
+
 /* Scène 4 : live */
 .live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
@@ -150,8 +167,6 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .mv .nag { color: var(--yellow); }
 .fig { width: 1.15em; height: 1.15em; vertical-align: -.22em; margin-right: .04em; }
 .opt .fig { width: 1.25em; height: 1.25em; vertical-align: -.3em; }
-.evalbar { position: absolute; left: 980px; top: 260px; width: 26px; height: 560px; border-radius: 13px; overflow: hidden; background: #1b2430; }
-.evalbar .wfill { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: var(--ink); }
 
 /* Scène 7 : tournois */
 .clock { position: absolute; display: flex; gap: 22px; }
@@ -213,7 +228,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
     </div>
     <div class="path" id="path"><div class="fill"></div></div>
-    <div class="pose" id="p2" data-pose="niveau-superieur" style="left:1500px;top:780px;width:260px;height:318px"></div>
+    <div class="pose white" id="p2" data-pose="niveau-superieur" style="left:1500px;top:780px;width:260px;height:318px"></div>
     <div class="traveler" id="trav"><div id="trav-p"></div><div id="trav-q" style="opacity:0"></div><div id="sparks2"></div></div>
   </section>
 
@@ -227,7 +242,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
     </div>
     <div id="cards"></div>
-    <div class="pose" id="p3" data-pose="lecture" style="left:1440px;top:40px;width:392px;height:480px"></div>
+    <div class="pose" id="p3" data-pose="idee" style="left:1440px;top:40px;width:392px;height:480px"></div>
   </section>
 
   <!-- Revue Europe Échecs en PGN -->
@@ -244,14 +259,14 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="uitile rv-t" style="left:1010px;top:470px;width:220px"><img src="../assets/captures/tiles/theme-ouvertures.png"></div>
     <div class="uitile rv-t" style="left:1250px;top:525px;width:220px"><img src="../assets/captures/tiles/theme-strategie.png"></div>
     <div class="uitile rv-t" style="left:1490px;top:470px;width:220px"><img src="../assets/captures/tiles/theme-finales.png"></div>
-    <div class="pose" id="prv" data-pose="lecon-terminee" style="left:1600px;top:690px;width:290px;height:355px"></div>
+    <div class="pose white" id="prv" data-pose="lecture" style="left:1540px;top:640px;width:340px;height:416px"></div>
   </section>
 
   <!-- Catalogue vidéo Europe Échecs -->
   <section class="scene" id="videos">
     <div style="position:absolute;left:150px;top:64px">
       <div class="kicker vd-k">Europe Échecs · Vidéos</div>
-      <div class="h2" style="margin-top:20px;font-size:74px"><span class="line"><span class="vd-w">Tout le catalogue</span></span><span class="line"><span class="vd-w"><span class="em">vidéo</span> inclus.</span></span></div>
+      <div class="h2" style="margin-top:20px;font-size:74px"><span class="line"><span class="vd-w">Tout le catalogue</span></span><span class="line"><span class="vd-w">de <span class="em">vidéos</span> inclus.</span></span></div>
     </div>
     <div class="kicker vd-k2" style="position:absolute;left:1080px;top:244px">Nos auteurs</div>
     <div class="hero vd-player" style="left:150px;top:316px;width:860px"><img src="../assets/captures/ee/hd/player.jpg">
@@ -288,27 +303,31 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <!-- S5 — Analyse -->
   <section class="scene" id="s5">
     <div id="s5a" class="layer">
-    <div style="position:absolute;left:150px;top:110px">
-      <div class="kicker s5-k">Tes parties</div>
-    </div>
-    <div id="b5" class="board" style="left:150px;top:200px;width:760px;height:760px"></div>
-    <div class="evalbar" id="evalbar"><div class="wfill" id="wfill"></div></div>
-    <div style="position:absolute;left:1090px;top:130px" class="h2"><span class="line"><span class="s5-w">Enregistre.</span></span></div>
-    <div class="moves" id="moves" style="top:320px"></div>
-    <div style="position:absolute;left:1090px;top:800px" class="h2"><span class="line"><span class="s5-w em">Analyse.</span></span></div>
-    <div class="pose" id="p5" data-pose="reflexion" style="left:1480px;top:560px;width:343px;height:420px"></div>
+      <div style="position:absolute;left:150px;top:110px"><div class="kicker s5-k">Tes parties</div></div>
+      <div id="b5" class="board" style="left:150px;top:200px;width:760px;height:760px"></div>
+      <div style="position:absolute;left:1090px;top:120px" class="h2"><span class="line"><span class="s5-w">Saisis</span></span><span class="line"><span class="s5-w em">ta partie.</span></span></div>
+      <div class="moves" id="moves" style="top:380px"></div>
+      <div class="lead s5-l" style="position:absolute;left:1090px;top:760px;width:420px">Coup par coup, en notation figurine, avec tes annotations.</div>
+      <div class="pose" id="p5" data-pose="reflexion" style="left:1540px;top:600px;width:300px;height:367px"></div>
     </div>
     <div id="s5b" class="layer">
-      <div style="position:absolute;left:150px;top:150px">
+      <div style="position:absolute;left:150px;top:112px">
         <div class="kicker s5b-k">Ton espace de parties</div>
-        <div class="h2" style="margin-top:28px;font-size:84px"><span class="line"><span class="s5b-w">Importe,</span></span><span class="line"><span class="s5b-w">enregistre,</span></span><span class="line"><span class="s5b-w em">analyse.</span></span></div>
+        <div class="h2" style="margin-top:26px;font-size:78px"><span class="line"><span class="s5b-w">Importe tes PGN,</span></span><span class="line"><span class="s5b-w em">analyse-les.</span></span></div>
       </div>
-      <div class="uitile s5b-win" style="left:800px;top:150px;width:1000px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
+      <div class="imp s5b-imp" style="left:150px;top:400px">
+        <div class="imp-tabs"><span class="on">Importer des parties</span><span class="btn-o" style="margin-bottom:10px">＋ Créer une partie</span></div>
+        <div class="imp-area"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="#fae361" stroke="#1b1b1b" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 11v6m-3-3l3 3 3-3" fill="none" stroke="#1b1b1b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ph" id="imp-ph">Collez ici un PGN ou une position FEN</span><pre id="imp-text"></pre></div>
+        <div class="imp-actions"><span class="btn-o">Choisir un fichier PGN</span><span class="btn-y" id="imp-go">Importer des parties</span></div>
+      </div>
+      <div class="prow s5b-row" style="left:150px;top:722px"><div class="hd"><span>BLANCS</span><span>NOIRS</span><span>ÉVÉNEMENT</span><span></span></div>
+        <div class="rw" id="prow-rw"><span>Toi</span><span>Adversaire</span><em>Tournoi du club</em><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-mes-parties.png" style="left:150px;top:856px;height:58px;width:auto;border-radius:12px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-favoris.png" style="left:410px;top:856px;height:58px;width:auto;border-radius:12px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-repertoires.png" style="left:150px;top:928px;height:58px;width:auto;border-radius:12px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-bases.png" style="left:410px;top:928px;height:58px;width:auto;border-radius:12px">
+      <div class="uitile s5b-win" style="left:840px;top:140px;width:960px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
         <div class="s5b-focus" style="position:absolute;left:64.6%;top:6.6%;width:34.8%;height:88%;border-radius:16px;box-shadow:inset 0 0 0 5px #fae361, 0 0 40px rgba(250,227,97,.45)"></div></div>
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-mes-parties.png" style="left:150px;top:620px;height:70px;width:auto;border-radius:14px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-favoris.png" style="left:440px;top:620px;height:70px;width:auto;border-radius:14px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-repertoires.png" style="left:150px;top:708px;height:70px;width:auto;border-radius:14px">
-      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-bases.png" style="left:440px;top:708px;height:70px;width:auto;border-radius:14px">
     </div>
   </section>
 
@@ -349,7 +368,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="face" style="background:#1b2430;color:var(--muted)" id="c2">10:00</div>
     </div>
     <div class="lb" id="lb"></div>
-    <div class="pose" id="p7" data-pose="victoire-tournoi" style="left:1545px;top:775px;width:250px;height:306px"></div>
+    <div class="pose white" id="p7" data-pose="victoire-tournoi" style="left:1545px;top:775px;width:250px;height:306px"></div>
     <div class="confetti" id="conf7" style="left:1100px;top:290px"></div>
   </section>
 
@@ -760,39 +779,44 @@ scene("s4", ({ st, from, at, lines, dur }) => {
   exitZoom(st, "s4", dur, { scale: 1, x: -80 });
 });
 
-// ===== S5 : Analyse
+// ===== S5 : Tes parties — saisie, puis import et analyse
+const PGN_TXT = '[Event "Tournoi du club"]\n[White "Toi"]\n[Black "Adversaire"]\n\n1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Bd2 Bxd2+ …';
 scene("s5", ({ st, from, at, lines, dur }) => {
+  // A. Saisie de la partie
   from("#b5", 0, { opacity: 0, scale: .85, rotateX: 30, transformPerspective: 1600 }, { opacity: 1, scale: 1, rotateX: 0, duration: .7 });
-  from("#evalbar", .2, { opacity: 0 }, { opacity: 1, duration: .3 });
   from(".s5-k", .1, { opacity: 0 }, { opacity: 1, duration: .3 });
-  lines($$(".s5-w")[0], .1);
+  lines(".s5-w", .1, .1);
   const mvRows = $$(".mv");
   GAME.forEach(([f, t], i) => {
-    const ti = .45 + i * .24;
-    at(b5[f], ti, { left: sqPos(t).left, top: sqPos(t).top, duration: .22, ease: "power2.inOut" });
+    const ti = .45 + i * .22;
+    at(b5[f], ti, { left: sqPos(t).left, top: sqPos(t).top, duration: .2, ease: "power2.inOut" });
     if (i % 2 === 0) from(mvRows[i / 2], ti, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .3 });
   });
-  at("#wfill", .5, { height: "56%", duration: .4 });
-  at("#wfill", 1.0, { height: "48%", duration: .4 });
-  at("#wfill", 1.6, { height: "63%", duration: .4 });
-  at([h5, h5b], 1.5, { opacity: 1, duration: .2 });
-  from(".mv:nth-child(3) .nag", 1.55, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .3, ease: "back.out(3)" });
-  lines($$(".s5-w")[1], 1.3);
-  at(a5.line, 2.1, { strokeDashoffset: 0, duration: .4 });
-  from(a5.head, 2.45, { opacity: 0 }, { opacity: 1, duration: .12 });
-  from("#p5", 1.2, { y: 480 }, { y: 0, duration: .55, ease: "back.out(1.3)" });
-  playPose(st, "#p5", 1.2);
-  // Phase 2 : le vrai outil (import, bases, analyse) aux couleurs de l'académie
-  const T2 = Math.max(2.7, dur - 3.3);
-  at("#s5a", T2, { x: -160, opacity: 0, duration: .35, ease: "power2.in" });
-  from("#s5b", T2, { opacity: 0 }, { opacity: 1, duration: .01 });
-  from(".s5b-k", T2 + .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
-  st.fromTo(".s5b-w", { yPercent: 110 }, { yPercent: 0, duration: .6, stagger: .09 }, T2 + .15);
-  from(".s5b-win", T2 + .2, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .7 });
-  at(".s5b-win", T2 + .9, { rotateY: -2, duration: dur - T2 - .9, ease: "sine.inOut" });
-  from(".s5b-t", T2 + .5, { opacity: 0, y: 40, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, stagger: .08, ease: "back.out(1.8)" });
-  from(".s5b-focus", T2 + 1.2, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: .35 });
-  at(".s5b-focus", T2 + 1.6, { opacity: .55, duration: .4, ease: "sine.inOut", yoyo: true, repeat: 2 });
+  at([h5, h5b], 1.35, { opacity: 1, duration: .2 });
+  from(".mv:nth-child(3) .nag", 1.4, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .3, ease: "back.out(3)" });
+  at(a5.line, 1.9, { strokeDashoffset: 0, duration: .35 });
+  from(a5.head, 2.2, { opacity: 0 }, { opacity: 1, duration: .12 });
+  from(".s5-l", 1.0, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
+  from("#p5", 1.3, { y: 460 }, { y: 0, duration: .5, ease: "back.out(1.3)" });
+  playPose(st, "#p5", 1.3);
+  // B. Import d'un PGN, rangement dans les bases, analyse
+  const T = 2.8;
+  at("#s5a", T, { x: -160, opacity: 0, duration: .35, ease: "power2.in" });
+  from("#s5b", T, { opacity: 0 }, { opacity: 1, duration: .01 });
+  from(".s5b-k", T + .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  st.fromTo(".s5b-w", { yPercent: 110 }, { yPercent: 0, duration: .6, stagger: .09 }, T + .15);
+  from(".s5b-imp", T + .25, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .5 });
+  from(".s5b-t", T + .45, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .4, stagger: .07, ease: "back.out(1.8)" });
+  st.set("#imp-ph", { opacity: 1 }, 0); st.set("#imp-ph", { opacity: 0 }, T + .6);
+  const typ = { n: 0 };
+  st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: 1.05, ease: "none", onUpdate: () => { $("#imp-text").textContent = PGN_TXT.slice(0, Math.round(typ.n)); } }, T + .6);
+  at("#imp-go", T + 1.75, { scale: .9, duration: .08, ease: "power2.in" });
+  at("#imp-go", T + 1.83, { scale: 1, boxShadow: "0 0 0 8px rgba(250,227,97,.45)", duration: .2 });
+  from(".s5b-row", T + 1.95, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .35, ease: "back.out(2)" });
+  at("#prow-rw", T + 2.25, { backgroundColor: "rgba(250,227,97,.55)", duration: .15 });
+  from(".s5b-win", T + 2.35, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .6 });
+  at(".s5b-win", T + 2.95, { rotateY: -2, duration: Math.max(.2, dur - T - 2.95), ease: "sine.inOut" });
+  from(".s5b-focus", T + 3.0, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: .3 });
   exitZoom(st, "s5", dur, { scale: 1, y: 60 });
 });
 

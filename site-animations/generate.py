@@ -211,8 +211,8 @@ A[n] = ("Bonne réponse", "Exercice réussi", svg(n, "Bonne réponse", css(n, [
                       "44%{transform:translateY(-90px) scale(1,1.04)} 60%{transform:translateY(0) scale(1.07,.92)} 74%{transform:scale(.98,1.02)} 88%,100%{transform:scale(1,1)}"),
         f"{n}-idle": "0%,100%{transform:scale(1)} 50%{transform:translateY(-6px) scale(.99,1.01)}"}),
     (".arm", f"{n}-arm 1.1s {SOFT} both, {n}-wave .7s ease-in-out 1.1s infinite alternate", {
-        f"{n}-arm": "0%{transform:rotate(-20deg)} 30%{transform:rotate(18deg)} 60%{transform:rotate(-8deg)} 100%{transform:rotate(0)}",
-        f"{n}-wave": "from{transform:rotate(0)} to{transform:rotate(-13deg)}"}),
+        f"{n}-arm": "0%{transform:rotate(-20deg)} 30%{transform:rotate(18deg)} 60%{transform:rotate(-50deg)} 100%{transform:rotate(-36deg)}",
+        f"{n}-wave": "from{transform:rotate(-36deg)} to{transform:rotate(-26deg)}"}),
     (".badge", f"{n}-pop .5s {EASE_BACK} .35s both, {n}-pulse 2.4s ease-in-out 1s infinite", {
         f"{n}-pop": "from{transform:scale(0) rotate(-30deg)} to{transform:scale(1) rotate(0)}",
         f"{n}-pulse": "0%,100%{transform:scale(1)} 50%{transform:scale(1.06)}"}),
