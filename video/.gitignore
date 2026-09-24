@@ -1,0 +1,7 @@
+node_modules/
+voice/models/
+build/*
+!build/echecs-academie-presentation.mp4
+!build/poster.jpg
+!build/sous-titres.vtt
+audio/music.wav

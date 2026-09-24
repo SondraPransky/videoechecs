@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>echecs.com — Académie</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 700; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+
+:root {
+  --bg: #06080c;
+  --bg2: #0c1118;
+  --ink: #f4f1ea;
+  --muted: #8b95a5;
+  --blue: #93b9e2;
+  --blue-deep: #2c4a6e;
+  --yellow: #fae361;
+  --sq-light: #e4ecf6;
+  --sq-dark: #93b9e2;
+  --green: #6bdc7d;
+  --red: #ff5a6a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--bg); }
+.layer { position: absolute; inset: 0; }
+.scene { position: absolute; inset: 0; opacity: 0; }
+
+/* Fond */
+#glow1, #glow2 { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; filter: blur(40px); }
+#glow1 { background: radial-gradient(circle, rgba(147,185,226,.22), rgba(147,185,226,0) 62%); left: -300px; top: -500px; }
+#glow2 { background: radial-gradient(circle, rgba(250,227,97,.09), rgba(250,227,97,0) 60%); right: -500px; bottom: -700px; }
+#grid { position: absolute; left: 50%; top: 58%; width: 2600px; height: 2600px; margin-left: -1300px;
+  background:
+    linear-gradient(rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px,
+    linear-gradient(90deg, rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px;
+  transform: perspective(900px) rotateX(68deg); transform-origin: 50% 0;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 60%); }
+#grain { position: absolute; inset: 0; opacity: .06; mix-blend-mode: overlay; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); pointer-events: none; }
+#progress { position: absolute; left: 0; bottom: 0; height: 4px; width: 1920px; background: linear-gradient(90deg, var(--blue), var(--yellow)); transform-origin: 0 50%; transform: scaleX(0); opacity: .85; }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+
+/* Typo */
+.kicker { font: 800 22px/1 "Manrope"; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 18px; }
+.kicker::before { content: ""; width: 56px; height: 2px; background: currentColor; }
+.h1 { font: 900 128px/0.98 "Fraunces", serif; letter-spacing: -.02em; }
+.h2 { font: 900 96px/1 "Fraunces", serif; letter-spacing: -.015em; }
+.h3 { font: 700 54px/1.1 "Fraunces", serif; }
+.em { font-family: "Fraunces"; font-style: italic; font-weight: 400; color: var(--yellow); }
+.blue { color: var(--blue); }
+.lead { font: 500 34px/1.4 "Manrope"; color: #c9d1dc; }
+.line { display: block; overflow: hidden; padding-bottom: .08em; }
+.line > span { display: inline-block; }
+.chip { display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px; font: 800 24px/1 "Manrope"; letter-spacing: .04em; }
+
+/* Échiquier */
+.board { position: absolute; border-radius: 18px; overflow: hidden;
+  background: repeating-conic-gradient(var(--sq-dark) 0 25%, var(--sq-light) 0 50%) 0 0 / 25% 25%;
+  box-shadow: 0 60px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
+.board .sq { position: absolute; width: 12.5%; height: 12.5%; }
+.board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; will-change: transform; }
+.board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.55); opacity: 0; }
+.board svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* Fenêtre navigateur */
+.window { position: absolute; border-radius: 22px; overflow: hidden; background: #f1f0ea;
+  box-shadow: 0 50px 120px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); }
+.window .bar { height: 46px; background: #1a212c; display: flex; align-items: center; gap: 10px; padding: 0 20px; }
+.window .bar i { width: 13px; height: 13px; border-radius: 50%; background: #3a4453; display: block; }
+.window .bar .url { margin-left: 22px; height: 28px; flex: 0 0 420px; border-radius: 8px; background: #0f141b; color: var(--muted); font: 600 15px/28px "Manrope"; padding: 0 14px; }
+.window .shot { position: relative; overflow: hidden; }
+.window .shot img { display: block; width: 100%; }
+
+/* Scène 2 : parcours */
+.path { position: absolute; left: 180px; right: 180px; top: 650px; height: 4px; background: rgba(147,185,226,.18); border-radius: 4px; }
+.path .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: linear-gradient(90deg, var(--blue), var(--yellow)); transform-origin: 0 50%; transform: scaleX(0); border-radius: 4px; }
+.stop { position: absolute; top: -13px; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; background: var(--bg); border: 3px solid rgba(147,185,226,.4); }
+.stop b { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 800 26px/1 "Manrope"; color: var(--muted); }
+.stop.on { border-color: var(--yellow); background: var(--yellow); }
+.traveler { position: absolute; top: 470px; width: 170px; height: 170px; margin-left: -85px; }
+.traveler div { position: absolute; inset: 0; background-size: 100% 100%; }
+
+/* Scène 3 : leçons */
+.counter { font: 900 300px/0.85 "Fraunces"; letter-spacing: -.04em; }
+.card { position: absolute; width: 360px; height: 430px; border-radius: 28px; padding: 34px; background: linear-gradient(160deg, #131b26, #0b1017);
+  box-shadow: 0 40px 80px rgba(0,0,0,.5), inset 0 0 0 1px rgba(147,185,226,.16); }
+.card .ic { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 26px; }
+.card h4 { font: 800 36px/1.1 "Manrope"; margin-bottom: 8px; }
+.card p { font: 500 22px/1.35 "Manrope"; color: var(--muted); }
+.card .vis { position: absolute; left: 34px; right: 34px; bottom: 34px; height: 150px; border-radius: 16px; overflow: hidden; }
+.tl { height: 12px; border-radius: 6px; background: rgba(147,185,226,.22); margin-bottom: 14px; }
+.opt { height: 40px; border-radius: 10px; margin-bottom: 10px; background: rgba(147,185,226,.12); font: 700 18px/40px "Manrope"; padding: 0 16px; color: #c9d1dc; }
+
+/* Scène 4 : live */
+.live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
+.dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
+.tile { position: absolute; width: 170px; height: 120px; border-radius: 16px; background: #182230; display: grid; place-items: center; font: 800 34px/1 "Manrope"; color: var(--blue); box-shadow: inset 0 0 0 1px rgba(147,185,226,.14); }
+.title-badge { font: 900 190px/0.9 "Fraunces"; letter-spacing: -.03em; }
+
+/* Scène 5 : analyse */
+.moves { position: absolute; left: 1090px; top: 300px; width: 640px; }
+.mv { display: flex; align-items: baseline; gap: 26px; font: 700 40px/1 "Manrope"; padding: 16px 0; border-bottom: 1px solid rgba(147,185,226,.14); }
+.mv .n { color: var(--muted); width: 50px; font-size: 30px; }
+.mv .w, .mv .b { width: 180px; }
+.mv .nag { color: var(--yellow); }
+.evalbar { position: absolute; left: 980px; top: 260px; width: 26px; height: 560px; border-radius: 13px; overflow: hidden; background: #1b2430; }
+.evalbar .wfill { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: var(--ink); }
+
+/* Scène 7 : tournois */
+.clock { position: absolute; display: flex; gap: 22px; }
+.clock .face { width: 300px; height: 170px; border-radius: 24px; display: grid; place-items: center; font: 800 88px/1 "Manrope"; font-variant-numeric: tabular-nums; }
+.lb { position: absolute; left: 1010px; top: 250px; width: 760px; }
+.row { display: flex; align-items: center; gap: 22px; height: 96px; padding: 0 28px; margin-bottom: 14px; border-radius: 20px; background: rgba(147,185,226,.08); box-shadow: inset 0 0 0 1px rgba(147,185,226,.12); font: 700 32px/1 "Manrope"; }
+.row .rk { width: 44px; font: 900 40px/1 "Fraunces"; color: var(--blue); }
+.row .av { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; font: 800 22px/1 "Manrope"; color: var(--bg); }
+.row .nm { flex: 1; }
+.row .pt { font: 800 32px/1 "Manrope"; color: var(--yellow); }
+.row.me { background: rgba(250,227,97,.14); box-shadow: inset 0 0 0 2px rgba(250,227,97,.6); }
+
+/* Scène 8 : fin */
+.cta { display: inline-flex; align-items: center; gap: 20px; padding: 30px 56px; border-radius: 999px; background: var(--yellow); color: #111; font: 800 40px/1 "Manrope"; box-shadow: 0 20px 60px rgba(250,227,97,.25); }
+.url { font: 700 34px/1 "Manrope"; color: var(--blue); letter-spacing: .02em; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bg">
+    <div id="glow1"></div><div id="glow2"></div>
+    <div id="grid"></div>
+    <svg id="grain" width="1920" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+  </div>
+
+  <!-- S1 — Pas à pas -->
+  <section class="scene" id="s1">
+    <div style="position:absolute;left:150px;top:300px;width:900px">
+      <div class="kicker s1-k">echecs.com — Académie</div>
+      <div class="h1" style="margin-top:40px">
+        <span class="line"><span class="s1-w">Les échecs,</span></span>
+        <span class="line"><span class="s1-w">ça s'apprend.</span></span>
+        <span class="line"><span class="s1-w em" style="font-size:150px">Pas à pas.</span></span>
+      </div>
+    </div>
+    <div id="b1" class="board" style="left:1120px;top:190px;width:700px;height:700px"></div>
+  </section>
+
+  <!-- S2 — Parcours -->
+  <section class="scene" id="s2">
+    <div style="position:absolute;left:0;right:0;top:170px;text-align:center">
+      <div class="kicker s2-k" style="justify-content:center">Votre progression</div>
+      <div class="h2" style="margin-top:34px">
+        <span class="line"><span class="s2-w">Du premier coup</span></span>
+        <span class="line"><span class="s2-w">au <span class="em">niveau club.</span></span></span>
+      </div>
+    </div>
+    <div class="path" id="path"><div class="fill"></div></div>
+    <div class="traveler" id="trav"><div id="trav-p"></div><div id="trav-q" style="opacity:0"></div></div>
+  </section>
+
+  <!-- S3 — Leçons -->
+  <section class="scene" id="s3">
+    <div id="s3-count" style="position:absolute;left:150px;top:180px">
+      <div class="kicker">Leçons interactives</div>
+      <div style="display:flex;align-items:flex-end;gap:30px;margin-top:40px">
+        <div class="counter"><span class="blue">+</span><span id="n200">0</span></div>
+        <div class="h3" style="padding-bottom:30px">leçons<br><span class="em">interactives</span></div>
+      </div>
+    </div>
+    <div id="cards"></div>
+    <div id="s3-win"></div>
+  </section>
+
+  <!-- S4 — Live -->
+  <section class="scene" id="s4">
+    <div class="live" id="live">
+      <div id="b4" class="board" style="left:40px;top:40px;width:560px;height:560px;border-radius:14px;box-shadow:none"></div>
+      <div style="position:absolute;left:640px;top:40px;display:flex;align-items:center;gap:14px" class="chip s4-live"><div class="dot" id="livedot"></div><span style="color:var(--red)">EN DIRECT</span></div>
+      <div style="position:absolute;left:640px;top:130px;width:380px">
+        <div style="font:800 34px/1.2 Manrope">Cours #3</div>
+        <div style="font:600 24px/1.4 Manrope;color:var(--muted);margin-top:8px">Les plans typiques<br>du milieu de partie</div>
+      </div>
+      <div class="tile s4-t" style="left:640px;top:300px;background:#233246">MI</div>
+      <div class="tile s4-t" style="left:830px;top:300px">JD</div>
+      <div class="tile s4-t" style="left:640px;top:440px">LM</div>
+      <div class="tile s4-t" style="left:830px;top:440px">+24</div>
+    </div>
+    <div style="position:absolute;left:1290px;top:220px;width:540px">
+      <div class="kicker s4-k">Cours en direct</div>
+      <div class="title-badge" style="margin-top:40px"><span class="line"><span class="s4-b blue">MI</span></span><span class="line"><span class="s4-b">&amp; <span class="em">GMI</span></span></span></div>
+      <div class="lead s4-l" style="margin-top:34px">Maîtres Internationaux<br>et Grands Maîtres<br>en live, chaque semaine.</div>
+    </div>
+  </section>
+
+  <!-- S5 — Analyse -->
+  <section class="scene" id="s5">
+    <div style="position:absolute;left:150px;top:110px">
+      <div class="kicker s5-k">Vos parties</div>
+    </div>
+    <div id="b5" class="board" style="left:150px;top:200px;width:760px;height:760px"></div>
+    <div class="evalbar" id="evalbar"><div class="wfill" id="wfill"></div></div>
+    <div style="position:absolute;left:1090px;top:130px" class="h2"><span class="line"><span class="s5-w">Enregistrez.</span></span></div>
+    <div class="moves" id="moves" style="top:320px"></div>
+    <div style="position:absolute;left:1090px;top:800px" class="h2"><span class="line"><span class="s5-w em">Analysez.</span></span></div>
+  </section>
+
+  <!-- S6 — Exercices -->
+  <section class="scene" id="s6">
+    <div id="minis" class="layer"></div>
+    <div id="s6-win"></div>
+    <div style="position:absolute;left:150px;top:300px">
+      <div class="kicker s6-k">Entraînement</div>
+      <div class="counter" style="margin-top:40px;font-size:230px"><span class="blue">+</span><span id="n2000">0</span></div>
+      <div class="h3" style="margin-top:20px">exercices <span class="em">pour progresser</span></div>
+    </div>
+  </section>
+
+  <!-- S7 — Tournois -->
+  <section class="scene" id="s7">
+    <div style="position:absolute;left:150px;top:230px;width:760px">
+      <div class="kicker s7-k">Tournois en ligne</div>
+      <div class="h2" style="margin-top:36px"><span class="line"><span class="s7-w">Mesurez-vous</span></span><span class="line"><span class="s7-w">aux <span class="em">autres joueurs.</span></span></span></div>
+      <div class="chip s7-c" style="margin-top:44px;background:rgba(147,185,226,.12);color:var(--blue)">Cadence 10' + 5"</div>
+    </div>
+    <div class="clock" id="clock" style="left:150px;top:720px">
+      <div class="face" style="background:var(--ink);color:#111" id="c1">10:00</div>
+      <div class="face" style="background:#1b2430;color:var(--muted)" id="c2">10:00</div>
+    </div>
+    <div class="lb" id="lb"></div>
+  </section>
+
+  <!-- S8 — Final -->
+  <section class="scene" id="s8">
+    <div style="position:absolute;left:0;right:0;top:300px;display:flex;flex-direction:column;align-items:center">
+      <div id="logo-wrap" style="position:relative;width:940px;height:220px;overflow:hidden">
+        <img id="logo" src="../../assets/brand/logo-echecs-com.png" style="position:absolute;left:0;top:0;width:940px">
+      </div>
+      <div class="h3 s8-t" style="margin-top:44px;font-weight:400;font-style:italic;color:#d9dee6">L'académie d'échecs.</div>
+      <div class="cta s8-c" style="margin-top:60px">Commencer maintenant
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="url s8-u" style="margin-top:36px">echecs.com/academie</div>
+    </div>
+  </section>
+
+  <div id="vignette"></div>
+  <div id="progress"></div>
+  <div id="flash"></div>
+</div>
+
+<script src="../node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+const P = "../assets/pieces/";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const FILES = "abcdefgh";
+
+// ---------- Échiquier ----------
+function sqPos(sq) { return { left: FILES.indexOf(sq[0]) * 12.5 + "%", top: (8 - +sq[1]) * 12.5 + "%" }; }
+function makeBoard(el, placement) {
+  const pieces = {};
+  for (const [sq, code] of Object.entries(placement)) {
+    const d = document.createElement("div");
+    d.className = "pc";
+    d.style.backgroundImage = `url(${P}${code}.png)`;
+    Object.assign(d.style, sqPos(sq));
+    el.appendChild(d);
+    pieces[sq] = d;
+  }
+  return pieces;
+}
+function highlight(el, sq) {
+  const h = document.createElement("div");
+  h.className = "hl";
+  Object.assign(h.style, sqPos(sq));
+  el.insertBefore(h, el.firstChild);
+  return h;
+}
+function arrow(el, from, to, color = "#fae361") {
+  const c = s => [FILES.indexOf(s[0]) * 12.5 + 6.25, (8 - +s[1]) * 12.5 + 6.25];
+  const [x1, y1] = c(from), [x2, y2] = c(to);
+  const ns = "http://www.w3.org/2000/svg";
+  let svg = el.querySelector("svg");
+  if (!svg) { svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 100 100"); el.appendChild(svg); }
+  const ang = Math.atan2(y2 - y1, x2 - x1), len = Math.hypot(x2 - x1, y2 - y1) - 3.2;
+  const ex = x1 + Math.cos(ang) * len, ey = y1 + Math.sin(ang) * len;
+  const g = document.createElementNS(ns, "g");
+  const line = document.createElementNS(ns, "line");
+  Object.entries({ x1, y1, x2: ex, y2: ey, stroke: color, "stroke-width": 2.2, "stroke-linecap": "round", opacity: .92 }).forEach(([k, v]) => line.setAttribute(k, v));
+  const head = document.createElementNS(ns, "polygon");
+  const hx = x1 + Math.cos(ang) * (len + 3.2), hy = y1 + Math.sin(ang) * (len + 3.2);
+  const p = [[hx, hy], [ex + Math.cos(ang + 1.9) * 3.4, ey + Math.sin(ang + 1.9) * 3.4], [ex + Math.cos(ang - 1.9) * 3.4, ey + Math.sin(ang - 1.9) * 3.4]];
+  head.setAttribute("points", p.map(q => q.join(",")).join(" "));
+  head.setAttribute("fill", color);
+  g.append(line, head);
+  svg.appendChild(g);
+  line.style.strokeDasharray = len;
+  line.style.strokeDashoffset = len;
+  return { g, line, head, len };
+}
+const START = {
+  a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: "wN", h1: "wR",
+  a8: "bR", b8: "bN", c8: "bB", d8: "bQ", e8: "bK", f8: "bB", g8: "bN", h8: "bR",
+};
+for (const f of FILES) { START[f + "2"] = "wP"; START[f + "7"] = "bP"; }
+
+function splitChars(el) {
+  const out = [];
+  el.childNodes.forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      for (const ch of n.textContent) { const s = document.createElement("span"); s.textContent = ch; s.style.display = "inline-block"; if (ch === " ") s.style.width = ".28em"; frag.appendChild(s); out.push(s); }
+      n.replaceWith(frag);
+    } else if (n.nodeType === 1) out.push(...splitChars(n));
+  });
+  return out;
+}
+
+function browser(url, img, w) {
+  const d = document.createElement("div");
+  d.className = "window";
+  d.style.width = w + "px";
+  d.innerHTML = `<div class="bar"><i></i><i></i><i></i><div class="url">${url}</div></div><div class="shot"><img src="../assets/captures/${img}"></div>`;
+  return d;
+}
+
+// ---------- Construction des scènes ----------
+const b1 = makeBoard($("#b1"), START);
+
+// S2
+const stops = ["Débutant", "Initiation", "Objectif 1400", "Objectif 1600", "Club"];
+stops.forEach((s, i) => {
+  const d = document.createElement("div");
+  d.className = "stop";
+  d.style.left = (i / (stops.length - 1)) * 100 + "%";
+  d.innerHTML = `<b>${s}</b>`;
+  $("#path").appendChild(d);
+});
+$("#trav-p").style.backgroundImage = `url(${P}wP.png)`;
+$("#trav-q").style.backgroundImage = `url(${P}wQ.png)`;
+
+// S3 cartes
+const ICON = {
+  play: '<svg width="30" height="30" viewBox="0 0 24 24" fill="#111"><path d="M7 4l13 8-13 8z"/></svg>',
+  book: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg>',
+  target: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>',
+  quiz: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round"><path d="M9 9a3 3 0 1 1 4 2.8c-.8.3-1 1-1 1.7V14M12 18h.01"/></svg>',
+};
+const cards = [
+  { t: "Vidéos", p: "Les idées clés expliquées par nos maîtres.", ic: "play", c: "var(--blue)",
+    vis: `<div style="position:absolute;inset:0;background:#1d2a3a"></div><div class="board" style="left:18px;top:15px;width:120px;height:120px;border-radius:8px;box-shadow:none"></div><div style="position:absolute;left:160px;right:18px;bottom:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.15)"><div class="vbar" style="width:100%;height:100%;background:var(--yellow);border-radius:3px;transform-origin:0 50%;transform:scaleX(.1)"></div></div><div style="position:absolute;left:160px;top:24px;width:52px;height:52px;border-radius:50%;background:var(--yellow);display:grid;place-items:center">${ICON.play}</div>` },
+  { t: "Cours écrits", p: "À lire à votre rythme, schémas à l'appui.", ic: "book", c: "var(--ink)",
+    vis: `<div style="padding:10px 4px">${[92, 100, 76, 88, 60].map(w => `<div class="tl" style="width:${w}%"></div>`).join("")}</div>` },
+  { t: "Exercices", p: "Mettez chaque notion en pratique.", ic: "target", c: "var(--green)",
+    vis: `<div class="board ex-board" style="left:50%;top:0;margin-left:-75px;width:150px;height:150px;border-radius:10px;box-shadow:none"></div>` },
+  { t: "Quiz", p: "Vérifiez vos acquis en un clin d'œil.", ic: "quiz", c: "var(--yellow)",
+    vis: `<div class="opt">A · Cf3</div><div class="opt quiz-ok">B · Fb5</div><div class="opt">C · d4</div>` },
+];
+cards.forEach((c, i) => {
+  const d = document.createElement("div");
+  d.className = "card";
+  d.style.left = 150 + i * 412 + "px";
+  d.style.top = "520px";
+  d.innerHTML = `<div class="ic" style="background:${c.c}">${ICON[c.ic]}</div><h4>${c.t}</h4><p>${c.p}</p><div class="vis">${c.vis}</div>`;
+  $("#cards").appendChild(d);
+});
+makeBoard($$(".card .board")[0], { e1: "wK", d1: "wQ", e8: "bK", d8: "bQ", e4: "wP", e5: "bP", f3: "wN", c6: "bN" });
+makeBoard($(".ex-board"), { g1: "wK", h7: "bK", g6: "wQ", f6: "wN", h8: "bR" });
+const exArrow = arrow($(".ex-board"), "g6", "h7");
+
+const winDash = browser("echecs.com/academie", "dashboard.png", 1040);
+Object.assign(winDash.style, { left: "150px", top: "140px" });
+const winList = browser("echecs.com/academie/lecons", "lesson-list.png", 1000);
+Object.assign(winList.style, { left: "820px", top: "260px" });
+$("#s3-win").append(winDash, winList);
+winList.querySelector(".shot").style.height = "620px";
+
+// S4
+const b4 = makeBoard($("#b4"), { g1: "wK", f1: "wR", a1: "wR", d2: "wQ", c3: "wN", e4: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
+  g8: "bK", f8: "bR", a8: "bR", d7: "bQ", c6: "bN", e6: "bP", d5: "bP", f7: "bP", g7: "bP", h7: "bP", a7: "bP", b7: "bP" });
+const a4a = arrow($("#b4"), "e4", "e5");
+const a4b = arrow($("#b4"), "c3", "b5", "#93b9e2");
+const h4 = highlight($("#b4"), "e5");
+
+// S5 : partie italienne
+const b5el = $("#b5");
+const b5 = makeBoard(b5el, START);
+const GAME = [["e2", "e4"], ["e7", "e5"], ["g1", "f3"], ["b8", "c6"], ["f1", "c4"], ["f8", "c5"], ["c2", "c3"], ["g8", "f6"]];
+const SAN = [["1.", "e4", "e5"], ["2.", "Cf3", "Cc6"], ["3.", "Fc4", "Fc5"], ["4.", "c3", "Cf6"]];
+SAN.forEach(([n, w, b], i) => {
+  const d = document.createElement("div");
+  d.className = "mv";
+  d.innerHTML = `<span class="n">${n}</span><span class="w">${w}${i === 2 ? '<span class="nag"> !</span>' : ""}</span><span class="b">${b}</span>`;
+  $("#moves").appendChild(d);
+});
+
+// S6 : mur de mini-échiquiers + capture réelle
+const MINI = ["wK", "bK", "wQ", "bQ", "wR", "bR", "wN", "bN", "wB", "bB", "wP", "bP"];
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < 42; i++) {
+  const d = document.createElement("div");
+  d.className = "board mini";
+  const col = i % 7, row = Math.floor(i / 7);
+  Object.assign(d.style, { width: "230px", height: "230px", left: 80 + col * 270 + (row % 2) * 135 + "px", top: -200 + row * 270 + "px", borderRadius: "12px", opacity: .16 });
+  const pl = {};
+  for (let k = 0; k < 5; k++) pl[FILES[Math.floor(rnd() * 8)] + (1 + Math.floor(rnd() * 8))] = MINI[Math.floor(rnd() * 12)];
+  makeBoard(d, pl);
+  $("#minis").appendChild(d);
+}
+const winEx = browser("echecs.com/exercices", "exercise.png", 860);
+Object.assign(winEx.style, { left: "960px", top: "250px" });
+$("#s6-win").appendChild(winEx);
+
+// S7 : classement
+const LB = [["1", "Camille R.", "#93b9e2", "5"], ["2", "Hugo M.", "#fae361", "4½"], ["3", "Vous", "#6bdc7d", "4½", 1], ["4", "Inès B.", "#ff8fa0", "4"], ["5", "Théo L.", "#c9d1dc", "3½"]];
+LB.forEach(([rk, nm, c, pt, me]) => {
+  const d = document.createElement("div");
+  d.className = "row" + (me ? " me" : "");
+  d.innerHTML = `<span class="rk">${rk}</span><span class="av" style="background:${c}">${nm.split(" ").map(s => s[0]).join("")}</span><span class="nm">${nm}</span><span class="pt">${pt} pts</span>`;
+  $("#lb").appendChild(d);
+});
+
+// ---------- Timeline ----------
+gsap.defaults({ ease: "power3.out" });
+const tl = gsap.timeline({ paused: true });
+const TOTAL = 62;
+const show = (sel, t, d = .5) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "none" }, t);
+const hide = (sel, t, d = .5) => tl.to(sel, { opacity: 0, duration: d, ease: "none" }, t);
+const lines = (sel, t, st = .12) => tl.fromTo(sel, { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: st, ease: "expo.out" }, t);
+
+// Fond : dérive permanente
+tl.fromTo("#glow1", { x: 0, y: 0 }, { x: 900, y: 300, duration: TOTAL, ease: "sine.inOut" }, 0);
+tl.fromTo("#glow2", { x: 0, y: 0 }, { x: -700, y: -200, duration: TOTAL, ease: "sine.inOut" }, 0);
+tl.fromTo("#grid", { backgroundPosition: "0px 0px, 0px 0px" }, { backgroundPosition: "0px 1300px, 0px 0px", duration: TOTAL, ease: "none" }, 0);
+tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: 52.5, ease: "none" }, 0);
+tl.to("#progress", { opacity: 0, duration: .4 }, 52.5);
+
+// ===== S1 : 0 → 7
+show("#s1", 0, .01);
+tl.fromTo("#b1", { rotateX: 55, rotateZ: -18, scale: .6, opacity: 0, transformPerspective: 1600 }, { rotateX: 0, rotateZ: 0, scale: 1, opacity: 1, duration: 2.2, ease: "expo.out" }, 0.2);
+const s1Pieces = Object.values(b1);
+tl.fromTo(s1Pieces, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: { each: .03, from: "random" }, ease: "back.out(2)" }, 0.8);
+tl.fromTo(".s1-k", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .8 }, 0.5);
+lines(".s1-w", 0.9, .5);
+// e4 en ouverture
+tl.to(b1.e2, { top: "50%", duration: .6, ease: "power2.inOut" }, 3.4);
+tl.to(b1.e7, { top: "37.5%", duration: .6, ease: "power2.inOut" }, 4.3);
+tl.to("#b1", { rotateY: -12, rotateX: 8, scale: 1.04, transformPerspective: 1600, duration: 3.5, ease: "sine.inOut" }, 3);
+tl.to("#s1", { opacity: 0, scale: 1.08, filter: "blur(10px)", duration: .6, ease: "power2.in" }, 6.4);
+
+// ===== S2 : 7 → 14.5
+show("#s2", 7, .3);
+tl.fromTo(".s2-k", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, 7.1);
+lines(".s2-w", 7.2, .15);
+tl.fromTo("#path", { scaleX: 0 }, { scaleX: 1, duration: 1, ease: "expo.out", transformOrigin: "0 50%" }, 7.4);
+tl.fromTo(".stop", { scale: 0 }, { scale: 1, duration: .5, stagger: .08, ease: "back.out(3)" }, 7.8);
+tl.fromTo(".stop b", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .5, stagger: .08 }, 8);
+tl.fromTo("#trav", { left: 180, opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5 }, 8.2);
+tl.to("#trav", { left: 1740, duration: 4.4, ease: "power1.inOut" }, 8.6);
+tl.to("#path .fill", { scaleX: 1, duration: 4.4, ease: "power1.inOut" }, 8.6);
+$$(".stop").forEach((s, i) => { tl.set(s, { backgroundColor: "#fae361", borderColor: "#fae361" }, 8.6 + i * 1.1); tl.fromTo(s, { scale: 1.6 }, { scale: 1, duration: .5 }, 8.6 + i * 1.1); });
+$$(".stop b").forEach((s, i) => tl.to(s, { color: "#f4f1ea", duration: .3 }, 8.6 + i * 1.1));
+// Promotion en dame
+tl.to("#trav", { y: -40, duration: .3, ease: "power2.out" }, 13.0);
+tl.to("#trav-p", { opacity: 0, scale: .5, duration: .25 }, 13.1);
+tl.fromTo("#trav-q", { opacity: 0, scale: 1.8, filter: "drop-shadow(0 0 0 rgba(250,227,97,0))" }, { opacity: 1, scale: 1, filter: "drop-shadow(0 0 40px rgba(250,227,97,.9))", duration: .6, ease: "back.out(2)" }, 13.15);
+tl.to("#flash", { opacity: .18, duration: .08 }, 13.15).to("#flash", { opacity: 0, duration: .5 }, 13.23);
+tl.to("#s2", { opacity: 0, y: -60, duration: .5, ease: "power2.in" }, 14.1);
+
+// ===== S3 : 14.5 → 25
+show("#s3", 14.5, .01);
+tl.fromTo("#s3-count", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8 }, 14.6);
+const c200 = { v: 0 };
+tl.to(c200, { v: 200, duration: 2.2, ease: "power2.out", onUpdate: () => $("#n200").textContent = Math.round(c200.v) }, 14.8);
+tl.fromTo(".card", { opacity: 0, y: 120, rotateX: -25, transformPerspective: 1200 }, { opacity: 1, y: 0, rotateX: 0, duration: .9, stagger: 1.0, ease: "expo.out" }, 17.6);
+tl.fromTo(".vbar", { scaleX: .1 }, { scaleX: .85, duration: 4, ease: "none" }, 17.8);
+tl.to(exArrow.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 19.9);
+tl.fromTo(exArrow.head, { opacity: 0 }, { opacity: 1, duration: .2 }, 20.4);
+tl.to(".quiz-ok", { backgroundColor: "rgba(107,220,125,.25)", color: "#6bdc7d", boxShadow: "inset 0 0 0 2px #6bdc7d", duration: .3 }, 21.4);
+tl.to(".card", { y: 80, opacity: 0, duration: .6, stagger: .06, ease: "power2.in" }, 22.2);
+tl.to("#s3-count", { opacity: 0, y: -40, duration: .5, ease: "power2.in" }, 22.2);
+tl.fromTo(winDash, { opacity: 0, y: 200, rotateY: 18, rotateX: 6, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateY: 10, rotateX: 4, duration: 1.2, ease: "expo.out" }, 22.6);
+tl.fromTo(winList, { opacity: 0, y: 300, rotateY: -14, rotateX: 6, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateY: -8, rotateX: 4, duration: 1.2, ease: "expo.out" }, 22.8);
+tl.fromTo(winList.querySelector("img"), { y: 0 }, { y: -280, duration: 2.2, ease: "power1.inOut" }, 23.0);
+tl.to("#s3", { opacity: 0, scale: .96, duration: .5, ease: "power2.in" }, 24.6);
+
+// ===== S4 : 25 → 32
+show("#s4", 25, .01);
+tl.fromTo("#live", { opacity: 0, x: -120, rotateY: 14, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: 6, duration: 1.2, ease: "expo.out" }, 25.0);
+tl.fromTo(".s4-t", { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .5, stagger: .12, ease: "back.out(2)" }, 25.6);
+tl.fromTo(".s4-live", { opacity: 0 }, { opacity: 1, duration: .3 }, 25.4);
+for (let k = 0; k < 7; k++) tl.fromTo("#livedot", { opacity: 1 }, { opacity: .25, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 25.4 + k);
+tl.fromTo(".s4-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 25.5);
+lines(".s4-b", 25.8, .25);
+tl.fromTo(".s4-l", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, 27.4);
+tl.to(a4a.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 27.0);
+tl.fromTo(a4a.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 27.5);
+tl.to(h4, { opacity: 1, duration: .3 }, 27.5);
+tl.to(a4b.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 28.4);
+tl.fromTo(a4b.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 28.9);
+tl.to("#live", { rotateY: -2, duration: 5, ease: "sine.inOut" }, 26.2);
+tl.to("#s4", { opacity: 0, x: -80, duration: .5, ease: "power2.in" }, 31.5);
+
+// ===== S5 : 32 → 39
+show("#s5", 32, .01);
+tl.fromTo("#b5", { opacity: 0, scale: .85, rotateX: 30, transformPerspective: 1600 }, { opacity: 1, scale: 1, rotateX: 0, duration: 1, ease: "expo.out" }, 32.0);
+tl.fromTo("#evalbar", { opacity: 0 }, { opacity: 1, duration: .5 }, 32.4);
+tl.fromTo(".s5-k", { opacity: 0 }, { opacity: 1, duration: .5 }, 32.2);
+lines($$(".s5-w")[0], 32.3);
+const mvRows = $$(".mv");
+GAME.forEach(([f, t], i) => {
+  const at = 33.0 + i * .5;
+  const pc = b5[f];
+  tl.to(pc, { left: sqPos(t).left, top: sqPos(t).top, duration: .35, ease: "power2.inOut" }, at);
+  if (i % 2 === 0) tl.fromTo(mvRows[i / 2], { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .4 }, at);
+});
+tl.to("#wfill", { height: "56%", duration: .6 }, 33.2).to("#wfill", { height: "48%", duration: .6 }, 34.0).to("#wfill", { height: "63%", duration: .6 }, 35.1);
+const h5 = highlight(b5el, "c4"), h5b = highlight(b5el, "f1");
+tl.to([h5, h5b], { opacity: 1, duration: .3 }, 35.2);
+tl.fromTo(".mv:nth-child(3) .nag", { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(3)" }, 35.3);
+const a5 = arrow(b5el, "c4", "f7");
+tl.to(a5.line, { strokeDashoffset: 0, duration: .6 }, 36.4);
+tl.fromTo(a5.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 36.9);
+lines($$(".s5-w")[1], 35.9);
+tl.to("#s5", { opacity: 0, y: 60, duration: .5, ease: "power2.in" }, 38.5);
+
+// ===== S6 : 39 → 45.5
+show("#s6", 39, .01);
+tl.fromTo("#minis", { y: 0 }, { y: -500, duration: 7, ease: "none" }, 39);
+tl.fromTo(".mini", { scale: .7, opacity: 0 }, { scale: 1, opacity: .16, duration: .6, stagger: { each: .015, from: "random" } }, 39);
+tl.fromTo(".s6-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 39.2);
+const c2000 = { v: 0 };
+tl.to(c2000, { v: 2000, duration: 2.4, ease: "power2.out", onUpdate: () => $("#n2000").textContent = Math.round(c2000.v).toLocaleString("fr-FR").replace(/ | /g, " ") }, 39.4);
+tl.fromTo("#s6 .h3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6 }, 40.4);
+tl.fromTo(winEx, { opacity: 0, x: 200, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -10, duration: 1.2, ease: "expo.out" }, 39.8);
+tl.to(winEx, { rotateY: -4, scale: 1.04, duration: 4.5, ease: "sine.inOut" }, 41);
+tl.to("#s6", { opacity: 0, scale: 1.05, duration: .5, ease: "power2.in" }, 45.0);
+
+// ===== S7 : 45.5 → 52.5
+show("#s7", 45.5, .01);
+tl.fromTo(".s7-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 45.6);
+lines(".s7-w", 45.7, .15);
+tl.fromTo(".s7-c", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 }, 46.6);
+tl.fromTo("#clock", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8 }, 46.4);
+const clk = { a: 600, b: 600 };
+const fmt = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+tl.to(clk, { a: 571, duration: 5.5, ease: "none", onUpdate: () => { $("#c1").textContent = fmt(clk.a); } }, 46.8);
+tl.to(clk, { b: 548, duration: 5.5, ease: "none", onUpdate: () => { $("#c2").textContent = fmt(clk.b); } }, 46.8);
+tl.fromTo(".row", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: .7, stagger: .12, ease: "expo.out" }, 46.2);
+// Remontée du joueur « Vous » à la 1re place
+const rows = $$(".row");
+tl.to(rows[2], { y: -220, duration: .8, ease: "power3.inOut" }, 49.6);
+tl.to([rows[0], rows[1]], { y: 110, duration: .8, ease: "power3.inOut" }, 49.6);
+tl.call(() => { rows[2].querySelector(".rk").textContent = "1"; rows[2].querySelector(".pt").textContent = "5½ pts"; rows[0].querySelector(".rk").textContent = "2"; rows[1].querySelector(".rk").textContent = "3"; }, null, 50.0);
+tl.call(() => { rows[2].querySelector(".rk").textContent = "3"; rows[2].querySelector(".pt").textContent = "4½ pts"; rows[0].querySelector(".rk").textContent = "1"; rows[1].querySelector(".rk").textContent = "2"; }, null, 49.99);
+tl.fromTo(rows[2], { scale: 1 }, { scale: 1.05, duration: .3, yoyo: true, repeat: 1 }, 50.3);
+tl.to("#s7", { opacity: 0, duration: .45, ease: "power2.in" }, 52.0);
+
+// ===== S8 : 52.5 → 62
+show("#s8", 52.5, .01);
+tl.to("#flash", { opacity: .5, duration: .06 }, 52.5).to("#flash", { opacity: 0, duration: .9, ease: "power2.out" }, 52.56);
+tl.fromTo("#logo-wrap", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "expo.inOut" }, 52.55);
+tl.fromTo("#logo", { scale: 1.15, filter: "blur(12px)" }, { scale: 1, filter: "blur(0px)", duration: 1.6, ease: "expo.out" }, 52.55);
+tl.fromTo(".s8-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .9 }, 54.0);
+tl.fromTo(".s8-c", { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .9, ease: "back.out(1.6)" }, 55.6);
+tl.fromTo(".s8-u", { opacity: 0 }, { opacity: 1, duration: .8 }, 56.4);
+tl.to(".s8-c", { scale: 1.04, duration: .6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 57.2);
+tl.to("#glow2", { opacity: 1.8, duration: 3 }, 52.5);
+tl.set({}, {}, TOTAL);
+
+window.TOTAL = TOTAL;
+window.seekTo = t => { tl.seek(t, false); };
+window.ready = document.fonts.ready.then(() => Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+</script>
+</body>
+</html>
