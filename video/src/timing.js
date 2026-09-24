@@ -1,0 +1,2 @@
+// Généré par scripts/timing.py — ne pas modifier à la main.
+window.TIMING = {"total": 36.0, "bpm": 120, "scenes": [{"id": "s1", "start": 0.0, "dur": 3.5}, {"id": "s2", "start": 3.5, "dur": 4.0}, {"id": "s3", "start": 7.5, "dur": 6.0}, {"id": "s4", "start": 13.5, "dur": 4.0}, {"id": "s5", "start": 17.5, "dur": 4.0}, {"id": "s6", "start": 21.5, "dur": 5.0}, {"id": "s7", "start": 26.5, "dur": 4.0}, {"id": "s8", "start": 30.5, "dur": 5.5}], "vo": []};

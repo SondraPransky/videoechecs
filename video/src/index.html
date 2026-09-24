@@ -98,6 +98,24 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .tl { height: 12px; border-radius: 6px; background: rgba(147,185,226,.22); margin-bottom: 14px; }
 .opt { height: 40px; border-radius: 10px; margin-bottom: 10px; background: rgba(147,185,226,.12); font: 700 18px/40px "Manrope"; padding: 0 16px; color: #c9d1dc; }
 
+/* Tuiles d'interface réelles et cartes de leçon */
+.uitile { position: absolute; border-radius: 26px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.55); }
+.uitile img { display: block; width: 100%; }
+.pill { position: absolute; display: flex; align-items: center; gap: 26px; padding: 16px 34px 16px 20px; border-radius: 28px; background: #f1f0ea; box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.pill img { display: block; height: 96px; }
+.pill .chev { font: 800 44px/1 "Manrope"; color: #1b1b1b; }
+.lcard { position: absolute; padding: 30px; border-radius: 30px; background: #f1f0ea; color: #1b1b1b; box-shadow: 0 50px 110px rgba(0,0,0,.6); }
+.lhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.lchip { display: inline-flex; padding: 9px 18px; border-radius: 999px; font: 800 21px/1 "Manrope"; }
+.ltype { font: 800 20px/1 "Manrope"; letter-spacing: .14em; text-transform: uppercase; color: #6b6b66; }
+.ltitle { font: 800 30px/1.2 "Manrope"; }
+.lres { display: flex; align-items: center; gap: 12px; margin-top: 18px; font: 800 26px/1 "Manrope"; color: #2c9a45; }
+.lprog { height: 10px; border-radius: 5px; background: #dedcd2; overflow: hidden; margin: 6px 0 10px; }
+.lprog i { display: block; height: 100%; width: 100%; background: #fae361; transform-origin: 0 50%; transform: scaleX(.4); }
+.lstep { font: 700 18px/1 "Manrope"; color: #6b6b66; margin-bottom: 18px; }
+.lq { position: relative; height: 72px; margin-top: 14px; padding: 0 60px 0 22px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 2px #e2e0d6; font: 700 23px/72px "Manrope"; white-space: nowrap; }
+.lq svg { position: absolute; right: 20px; top: 21px; }
+
 /* Scène 4 : live */
 .live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
@@ -110,6 +128,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .mv .n { color: var(--muted); width: 50px; font-size: 30px; }
 .mv .w, .mv .b { width: 180px; }
 .mv .nag { color: var(--yellow); }
+.mv .fig { width: 1.15em; height: 1.15em; vertical-align: -.22em; margin-right: .04em; }
 .evalbar { position: absolute; left: 980px; top: 260px; width: 26px; height: 560px; border-radius: 13px; overflow: hidden; background: #1b2430; }
 .evalbar .wfill { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: var(--ink); }
 
@@ -123,6 +142,18 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .row .nm { flex: 1; }
 .row .pt { font: 800 32px/1 "Manrope"; color: var(--yellow); }
 .row.me { background: rgba(250,227,97,.14); box-shadow: inset 0 0 0 2px rgba(250,227,97,.6); }
+
+/* Mascotte et petits éléments animés */
+.mascot { position: absolute; }
+.mascot svg path { fill: var(--c, #fae361) !important; }
+.confetti { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.confetti i { position: absolute; display: block; width: 14px; height: 22px; border-radius: 3px; }
+.spark { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+.pose { position: absolute; }
+.pose svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
+.pose .shadow { display: none; }
+.ripple { position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--red); }
 
 /* Scène 8 : fin */
 .cta { display: inline-flex; align-items: center; gap: 20px; padding: 30px 56px; border-radius: 999px; background: var(--yellow); color: #111; font: 800 40px/1 "Manrope"; box-shadow: 0 20px 60px rgba(250,227,97,.25); }
@@ -148,19 +179,20 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
     </div>
     <div id="b1" class="board" style="left:1120px;top:190px;width:700px;height:700px"></div>
+    <div class="mascot" id="m1" style="left:820px;top:640px;width:400px;height:400px"></div>
   </section>
 
   <!-- S2 — Parcours -->
   <section class="scene" id="s2">
     <div style="position:absolute;left:0;right:0;top:170px;text-align:center">
-      <div class="kicker s2-k" style="justify-content:center">Votre progression</div>
+      <div class="kicker s2-k" style="justify-content:center">Ta progression</div>
       <div class="h2" style="margin-top:34px">
         <span class="line"><span class="s2-w">Du premier coup</span></span>
         <span class="line"><span class="s2-w">au <span class="em">niveau club.</span></span></span>
       </div>
     </div>
     <div class="path" id="path"><div class="fill"></div></div>
-    <div class="traveler" id="trav"><div id="trav-p"></div><div id="trav-q" style="opacity:0"></div></div>
+    <div class="traveler" id="trav"><div id="trav-p"></div><div id="trav-q" style="opacity:0"></div><div id="sparks2"></div></div>
   </section>
 
   <!-- S3 — Leçons -->
@@ -173,14 +205,25 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
     </div>
     <div id="cards"></div>
-    <div id="s3-win"></div>
+    <div class="pose" id="p3" data-pose="lecon-terminee" style="left:1440px;top:40px;width:392px;height:480px"></div>
+    <div id="s3-bento" class="layer">
+      <div style="position:absolute;left:150px;top:150px">
+        <div class="kicker b3-k">Ouvertures · Stratégie · Finales</div>
+        <div class="h2" style="margin-top:30px;font-size:88px"><span class="line"><span class="b3-w">Des leçons</span></span><span class="line"><span class="b3-w">pour <span class="em">chaque niveau.</span></span></span></div>
+      </div>
+      <div class="pill b3-row" style="left:150px;top:560px"><img src="../assets/captures/tiles/row-elephant.png"><span class="chev">›</span></div>
+      <div class="pill b3-row" style="left:240px;top:720px"><img src="../assets/captures/tiles/row-herisson.png"><span class="chev">›</span></div>
+      <div class="uitile b3-t" style="left:1190px;top:130px;width:270px"><img src="../assets/captures/tiles/theme-ouvertures.png"></div>
+      <div class="uitile b3-t" style="left:1490px;top:215px;width:270px"><img src="../assets/captures/tiles/theme-strategie.png"></div>
+      <div class="uitile b3-t" style="left:1260px;top:455px;width:270px"><img src="../assets/captures/tiles/theme-finales.png"></div>
+    </div>
   </section>
 
   <!-- S4 — Live -->
   <section class="scene" id="s4">
     <div class="live" id="live">
       <div id="b4" class="board" style="left:40px;top:40px;width:560px;height:560px;border-radius:14px;box-shadow:none"></div>
-      <div style="position:absolute;left:640px;top:40px;display:flex;align-items:center;gap:14px" class="chip s4-live"><div class="dot" id="livedot"></div><span style="color:var(--red)">EN DIRECT</span></div>
+      <div style="position:absolute;left:640px;top:40px;display:flex;align-items:center;gap:14px" class="chip s4-live"><div style="position:relative;width:16px;height:16px"><div class="ripple"></div><div class="ripple"></div><div class="dot" id="livedot" style="position:absolute;left:0;top:0"></div></div><span style="color:var(--red)">EN DIRECT</span></div>
       <div style="position:absolute;left:640px;top:130px;width:380px">
         <div style="font:800 34px/1.2 Manrope">Cours #3</div>
         <div style="font:600 24px/1.4 Manrope;color:var(--muted);margin-top:8px">Les plans typiques<br>du milieu de partie</div>
@@ -200,23 +243,38 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <!-- S5 — Analyse -->
   <section class="scene" id="s5">
     <div style="position:absolute;left:150px;top:110px">
-      <div class="kicker s5-k">Vos parties</div>
+      <div class="kicker s5-k">Tes parties</div>
     </div>
     <div id="b5" class="board" style="left:150px;top:200px;width:760px;height:760px"></div>
     <div class="evalbar" id="evalbar"><div class="wfill" id="wfill"></div></div>
-    <div style="position:absolute;left:1090px;top:130px" class="h2"><span class="line"><span class="s5-w">Enregistrez.</span></span></div>
+    <div style="position:absolute;left:1090px;top:130px" class="h2"><span class="line"><span class="s5-w">Enregistre.</span></span></div>
     <div class="moves" id="moves" style="top:320px"></div>
-    <div style="position:absolute;left:1090px;top:800px" class="h2"><span class="line"><span class="s5-w em">Analysez.</span></span></div>
+    <div style="position:absolute;left:1090px;top:800px" class="h2"><span class="line"><span class="s5-w em">Analyse.</span></span></div>
+    <div class="pose" id="p5" data-pose="reflexion" style="left:1480px;top:560px;width:343px;height:420px"></div>
   </section>
 
   <!-- S6 — Exercices -->
   <section class="scene" id="s6">
     <div id="minis" class="layer"></div>
-    <div id="s6-win"></div>
+    <div class="lcard" id="ex1400" style="left:880px;top:130px;width:480px">
+      <div class="lhead"><span class="lchip" style="background:#6bdc7d">Objectif 1400</span><span class="ltype">Exercice</span></div>
+      <div class="ltitle">Les Blancs jouent et matent en 1</div>
+      <div id="b6" class="board" style="position:relative;width:420px;height:420px;margin-top:22px;border-radius:14px;box-shadow:none"></div>
+      <div class="lres" id="res6"><svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#6bdc7d"/><path d="M6.5 12.5l3.6 3.6L17.5 8.5" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Td8# — le mat du couloir !</div>
+    </div>
+    <div class="lcard" id="qz1600" style="left:1410px;top:250px;width:440px">
+      <div class="lhead"><span class="lchip" style="background:#fae361">Objectif 1600</span><span class="ltype">Quiz</span></div>
+      <div class="lprog"><i id="qprog"></i></div><div class="lstep">Question 3 / 5</div>
+      <div class="ltitle" style="font-size:26px">Structure Carlsbad : quel est le plan typique des Blancs ?</div>
+      <div class="lq" id="qa">A · L'attaque de minorité<svg width="30" height="30" viewBox="0 0 24 24"><path class="qa-ck" d="M4 12.5l5 5L20 6.5" fill="none" stroke="#2c9a45" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div>
+      <div class="lq qx">B · Échanger toutes les pièces</div>
+      <div class="lq qx">C · Pousser h4-h5 au plus vite</div>
+    </div>
+    <div class="pose" id="p6" data-pose="bonne-reponse" style="left:520px;top:680px;width:300px;height:367px"></div>
     <div style="position:absolute;left:150px;top:300px">
       <div class="kicker s6-k">Entraînement</div>
-      <div class="counter" style="margin-top:40px;font-size:230px"><span class="blue">+</span><span id="n2000">0</span></div>
-      <div class="h3" style="margin-top:20px">exercices <span class="em">pour progresser</span></div>
+      <div class="counter" style="margin-top:40px;font-size:180px"><span class="blue">+</span><span id="n2000">0</span></div>
+      <div class="h3" style="margin-top:20px">exercices et quiz,<br><span class="em">à ton niveau</span></div>
     </div>
   </section>
 
@@ -224,7 +282,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <section class="scene" id="s7">
     <div style="position:absolute;left:150px;top:230px;width:760px">
       <div class="kicker s7-k">Tournois en ligne</div>
-      <div class="h2" style="margin-top:36px"><span class="line"><span class="s7-w">Mesurez-vous</span></span><span class="line"><span class="s7-w">aux <span class="em">autres joueurs.</span></span></span></div>
+      <div class="h2" style="margin-top:36px"><span class="line"><span class="s7-w">Mesure-toi</span></span><span class="line"><span class="s7-w">aux <span class="em">autres joueurs.</span></span></span></div>
       <div class="chip s7-c" style="margin-top:44px;background:rgba(147,185,226,.12);color:var(--blue)">Cadence 10' + 5"</div>
     </div>
     <div class="clock" id="clock" style="left:150px;top:720px">
@@ -232,6 +290,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="face" style="background:#1b2430;color:var(--muted)" id="c2">10:00</div>
     </div>
     <div class="lb" id="lb"></div>
+    <div class="pose" id="p7" data-pose="victoire-tournoi" style="left:1545px;top:775px;width:250px;height:306px"></div>
+    <div class="confetti" id="conf7" style="left:1100px;top:290px"></div>
   </section>
 
   <!-- S8 — Final -->
@@ -246,6 +306,9 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
       <div class="url s8-u" style="margin-top:36px">echecs.com/academie</div>
     </div>
+    <div class="pose" id="p8" data-pose="regarde" style="left:1300px;top:560px;width:343px;height:420px"></div>
+    <div id="sparks8" style="position:absolute;left:960px;top:735px"></div>
+    <div class="confetti" id="conf8" style="left:960px;top:410px"></div>
   </section>
 
   <div id="vignette"></div>
@@ -253,6 +316,10 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <div id="flash"></div>
 </div>
 
+<script src="timing.js"></script>
+<script src="../assets/mascot/hello.js"></script>
+<script src="../assets/mascot/poses.js"></script>
+<script src="../node_modules/lottie-web/build/player/lottie_svg.min.js"></script>
 <script src="../node_modules/gsap/dist/gsap.min.js"></script>
 <script>
 const P = "../assets/pieces/";
@@ -321,13 +388,6 @@ function splitChars(el) {
   return out;
 }
 
-function browser(url, img, w) {
-  const d = document.createElement("div");
-  d.className = "window";
-  d.style.width = w + "px";
-  d.innerHTML = `<div class="bar"><i></i><i></i><i></i><div class="url">${url}</div></div><div class="shot"><img src="../assets/captures/${img}"></div>`;
-  return d;
-}
 
 // ---------- Construction des scènes ----------
 const b1 = makeBoard($("#b1"), START);
@@ -354,12 +414,12 @@ const ICON = {
 const cards = [
   { t: "Vidéos", p: "Les idées clés expliquées par nos maîtres.", ic: "play", c: "var(--blue)",
     vis: `<div style="position:absolute;inset:0;background:#1d2a3a"></div><div class="board" style="left:18px;top:15px;width:120px;height:120px;border-radius:8px;box-shadow:none"></div><div style="position:absolute;left:160px;right:18px;bottom:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.15)"><div class="vbar" style="width:100%;height:100%;background:var(--yellow);border-radius:3px;transform-origin:0 50%;transform:scaleX(.1)"></div></div><div style="position:absolute;left:160px;top:24px;width:52px;height:52px;border-radius:50%;background:var(--yellow);display:grid;place-items:center">${ICON.play}</div>` },
-  { t: "Cours écrits", p: "À lire à votre rythme, schémas à l'appui.", ic: "book", c: "var(--ink)",
+  { t: "Cours écrits", p: "À lire à ton rythme, schémas à l'appui.", ic: "book", c: "var(--ink)",
     vis: `<div style="padding:10px 4px">${[92, 100, 76, 88, 60].map(w => `<div class="tl" style="width:${w}%"></div>`).join("")}</div>` },
-  { t: "Exercices", p: "Mettez chaque notion en pratique.", ic: "target", c: "var(--green)",
+  { t: "Exercices", p: "Mets chaque notion en pratique.", ic: "target", c: "var(--green)",
     vis: `<div class="board ex-board" style="left:50%;top:0;margin-left:-75px;width:150px;height:150px;border-radius:10px;box-shadow:none"></div>` },
-  { t: "Quiz", p: "Vérifiez vos acquis en un clin d'œil.", ic: "quiz", c: "var(--yellow)",
-    vis: `<div class="opt">A · Cf3</div><div class="opt quiz-ok">B · Fb5</div><div class="opt">C · d4</div>` },
+  { t: "Quiz", p: "Vérifie tes acquis en un clin d'œil.", ic: "quiz", c: "var(--yellow)",
+    vis: `<div class="opt">A · Cf3</div><div class="opt quiz-ok" style="position:relative">B · Fb5<svg class="qcheck" width="26" height="26" viewBox="0 0 24 24" style="position:absolute;right:12px;top:7px"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#6bdc7d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div><div class="opt">C · d4</div>` },
 ];
 cards.forEach((c, i) => {
   const d = document.createElement("div");
@@ -373,12 +433,6 @@ makeBoard($$(".card .board")[0], { e1: "wK", d1: "wQ", e8: "bK", d8: "bQ", e4: "
 makeBoard($(".ex-board"), { g1: "wK", h7: "bK", g6: "wQ", f6: "wN", h8: "bR" });
 const exArrow = arrow($(".ex-board"), "g6", "h7");
 
-const winDash = browser("echecs.com/academie", "dashboard.png", 1040);
-Object.assign(winDash.style, { left: "150px", top: "140px" });
-const winList = browser("echecs.com/academie/lecons", "lesson-list.png", 1000);
-Object.assign(winList.style, { left: "820px", top: "260px" });
-$("#s3-win").append(winDash, winList);
-winList.querySelector(".shot").style.height = "620px";
 
 // S4
 const b4 = makeBoard($("#b4"), { g1: "wK", f1: "wR", a1: "wR", d2: "wQ", c3: "wN", e4: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
@@ -391,13 +445,19 @@ const h4 = highlight($("#b4"), "e5");
 const b5el = $("#b5");
 const b5 = makeBoard(b5el, START);
 const GAME = [["e2", "e4"], ["e7", "e5"], ["g1", "f3"], ["b8", "c6"], ["f1", "c4"], ["f8", "c5"], ["c2", "c3"], ["g8", "f6"]];
+// Notation figurine : l'initiale de la pièce est remplacée par son icône
+const FIG = { R: "K", D: "Q", T: "R", F: "B", C: "N" };
+const fig = san => FIG[san[0]] ? `<img class="fig" src="${P}w${FIG[san[0]]}.png">${san.slice(1)}` : san;
 const SAN = [["1.", "e4", "e5"], ["2.", "Cf3", "Cc6"], ["3.", "Fc4", "Fc5"], ["4.", "c3", "Cf6"]];
 SAN.forEach(([n, w, b], i) => {
   const d = document.createElement("div");
   d.className = "mv";
-  d.innerHTML = `<span class="n">${n}</span><span class="w">${w}${i === 2 ? '<span class="nag"> !</span>' : ""}</span><span class="b">${b}</span>`;
+  d.innerHTML = `<span class="n">${n}</span><span class="w">${fig(w)}${i === 2 ? '<span class="nag"> !</span>' : ""}</span><span class="b">${fig(b)}</span>`;
   $("#moves").appendChild(d);
 });
+
+const h5 = highlight(b5el, "c4"), h5b = highlight(b5el, "f1");
+const a5 = arrow(b5el, "c4", "f7");
 
 // S6 : mur de mini-échiquiers + capture réelle
 const MINI = ["wK", "bK", "wQ", "bQ", "wR", "bR", "wN", "bN", "wB", "bB", "wP", "bP"];
@@ -413,12 +473,12 @@ for (let i = 0; i < 42; i++) {
   makeBoard(d, pl);
   $("#minis").appendChild(d);
 }
-const winEx = browser("echecs.com/exercices", "exercise.png", 860);
-Object.assign(winEx.style, { left: "960px", top: "250px" });
-$("#s6-win").appendChild(winEx);
+const b6 = makeBoard($("#b6"), { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
+const a6 = arrow($("#b6"), "d1", "d8");
+const h6 = highlight($("#b6"), "d8");
 
 // S7 : classement
-const LB = [["1", "Camille R.", "#93b9e2", "5"], ["2", "Hugo M.", "#fae361", "4½"], ["3", "Vous", "#6bdc7d", "4½", 1], ["4", "Inès B.", "#ff8fa0", "4"], ["5", "Théo L.", "#c9d1dc", "3½"]];
+const LB = [["1", "Camille R.", "#93b9e2", "5"], ["2", "Hugo M.", "#fae361", "4½"], ["3", "Toi", "#6bdc7d", "4½", 1], ["4", "Inès B.", "#ff8fa0", "4"], ["5", "Théo L.", "#c9d1dc", "3½"]];
 LB.forEach(([rk, nm, c, pt, me]) => {
   const d = document.createElement("div");
   d.className = "row" + (me ? " me" : "");
@@ -426,156 +486,299 @@ LB.forEach(([rk, nm, c, pt, me]) => {
   $("#lb").appendChild(d);
 });
 
+// Mascotte (Lottie pilotée image par image)
+const mascots = {};
+for (const id of ["m1"]) {
+  mascots[id] = lottie.loadAnimation({ container: $("#" + id), renderer: "svg", loop: false, autoplay: false,
+    animationData: JSON.parse(JSON.stringify(window.MASCOT_HELLO)) });
+}
+const MFRAMES = window.MASCOT_HELLO.op, MFPS = window.MASCOT_HELLO.fr;
+// Joue l'animation « hello » en boucle de t0 à t1 (secondes, temps local de la scène)
+function playMascot(st, id, t0, t1) {
+  const o = { f: 0 };
+  st.fromTo(o, { f: 0 }, { f: (t1 - t0) * MFPS, duration: t1 - t0, ease: "none",
+    onUpdate: () => mascots[id].goToAndStop(o.f % (MFRAMES - 1), true) }, t0);
+}
+
+// Poses animées en CSS (site-animations) : leurs animations sont figées puis
+// positionnées à chaque image depuis seekTo.
+const poses = [];
+$$(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
+function playPose(st, el, t) { poses.push({ el: $(el), t, st }); }
+
+// Confettis déterministes
+const CONF_COLORS = ["#fae361", "#93b9e2", "#6bdc7d", "#ff8fa0", "#f4f1ea"];
+function confetti(el, n, seed0) {
+  let sd = seed0;
+  const r = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  const parts = [];
+  for (let i = 0; i < n; i++) {
+    const c = document.createElement("i");
+    c.style.background = CONF_COLORS[i % CONF_COLORS.length];
+    if (r() < .35) { c.style.width = c.style.height = "14px"; c.style.borderRadius = "50%"; }
+    el.appendChild(c);
+    const a = r() * Math.PI * 2, v = 250 + r() * 520;
+    parts.push({ c, x: Math.cos(a) * v, y: Math.sin(a) * v * .75 - 180, rot: (r() - .5) * 900, fall: 380 + r() * 380 });
+  }
+  return parts;
+}
+function burst(st, parts, t, life = 1.8) {
+  parts.forEach(p => {
+    st.fromTo(p.c, { x: 0, y: 0, rotation: 0, opacity: 1, scale: 0 }, { x: p.x, y: p.y, rotation: p.rot * .4, scale: 1, duration: .55, ease: "expo.out" }, t);
+    st.to(p.c, { y: p.y + p.fall, rotation: p.rot, duration: life - .55, ease: "power1.in" }, t + .55);
+    st.to(p.c, { opacity: 0, duration: .4, ease: "none" }, t + life - .4);
+  });
+}
+
+// Étincelles (étoiles à 4 branches)
+function sparks(el, pts, color = "#fae361") {
+  return pts.map(([x, y, s]) => {
+    const d = document.createElement("div");
+    d.className = "spark";
+    d.style.left = x + "px"; d.style.top = y + "px";
+    d.innerHTML = `<svg viewBox="-12 -12 24 24" width="${60 * s}" height="${60 * s}" style="margin:${30 - 30 * s}px"><path d="M0,-11 C1,-3 3,-1 11,0 C3,1 1,3 0,11 C-1,3 -3,1 -11,0 C-3,-1 -1,-3 0,-11Z" fill="${color}"/></svg>`;
+    el.appendChild(d);
+    return d;
+  });
+}
+function twinkle(st, list, t, stg = .07) {
+  st.fromTo(list, { scale: 0, rotation: -45, opacity: 1 }, { scale: 1, rotation: 0, duration: .35, stagger: stg, ease: "back.out(3)" }, t);
+  st.to(list, { scale: 0, rotation: 45, duration: .35, stagger: stg, ease: "power2.in" }, t + .45);
+}
+const spk2 = sparks($("#sparks2"), [[-10, 10, .8], [175, 20, 1], [150, 150, .6], [0, 160, .7], [85, -40, .9]]);
+const spk8 = sparks($("#sparks8"), [[-380, -70, .7], [370, -60, .9], [-350, 60, .5], [390, 55, .6]]);
+const conf7 = confetti($("#conf7"), 46, 11);
+const conf8 = confetti($("#conf8"), 70, 23);
+
 // ---------- Timeline ----------
-gsap.defaults({ ease: "power3.out" });
+// Chaque scène est construite en temps local (0 = début de la scène) puis placée
+// sur la timeline principale selon window.TIMING (généré par scripts/timing.py).
+gsap.defaults({ ease: "expo.out" });
 const tl = gsap.timeline({ paused: true });
-const TOTAL = 62;
-const show = (sel, t, d = .5) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "none" }, t);
-const hide = (sel, t, d = .5) => tl.to(sel, { opacity: 0, duration: d, ease: "none" }, t);
-const lines = (sel, t, st = .12) => tl.fromTo(sel, { yPercent: 110 }, { yPercent: 0, duration: 1, stagger: st, ease: "expo.out" }, t);
+const T = window.TIMING;
+const TOTAL = T.total;
+const S = Object.fromEntries(T.scenes.map(s => [s.id, s]));
+const EXIT = .32;
+
+function scene(id, build) {
+  const { start, dur } = S[id];
+  const st = gsap.timeline();
+  const at = (sel, t, vars) => st.to(sel, vars, t);
+  const from = (sel, t, a, b) => st.fromTo(sel, a, b, t);
+  const lines = (sel, t, stg = .09) => st.fromTo(sel, { yPercent: 110 }, { yPercent: 0, duration: .7, stagger: stg }, t);
+  // Entrée « whip zoom » : léger dézoom + flou qui se résorbe
+  st.fromTo("#" + id, { opacity: 0, scale: 1.06, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: .38, ease: "power3.out" }, 0);
+  build({ st, at, from, lines, dur });
+  st.set({}, {}, dur);
+  tl.add(st, start);
+}
+const exitZoom = (st, id, dur, vars = {}) => st.to("#" + id, { opacity: 0, scale: 1.08, filter: "blur(12px)", duration: EXIT, ease: "power2.in", ...vars }, dur - EXIT);
 
 // Fond : dérive permanente
 tl.fromTo("#glow1", { x: 0, y: 0 }, { x: 900, y: 300, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#glow2", { x: 0, y: 0 }, { x: -700, y: -200, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#grid", { backgroundPosition: "0px 0px, 0px 0px" }, { backgroundPosition: "0px 1300px, 0px 0px", duration: TOTAL, ease: "none" }, 0);
-tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: 52.5, ease: "none" }, 0);
-tl.to("#progress", { opacity: 0, duration: .4 }, 52.5);
+tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: S.s8.start, ease: "none" }, 0);
+tl.to("#progress", { opacity: 0, duration: .3 }, S.s8.start);
 
-// ===== S1 : 0 → 7
-show("#s1", 0, .01);
-tl.fromTo("#b1", { rotateX: 55, rotateZ: -18, scale: .6, opacity: 0, transformPerspective: 1600 }, { rotateX: 0, rotateZ: 0, scale: 1, opacity: 1, duration: 2.2, ease: "expo.out" }, 0.2);
-const s1Pieces = Object.values(b1);
-tl.fromTo(s1Pieces, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: { each: .03, from: "random" }, ease: "back.out(2)" }, 0.8);
-tl.fromTo(".s1-k", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .8 }, 0.5);
-lines(".s1-w", 0.9, .5);
-// e4 en ouverture
-tl.to(b1.e2, { top: "50%", duration: .6, ease: "power2.inOut" }, 3.4);
-tl.to(b1.e7, { top: "37.5%", duration: .6, ease: "power2.inOut" }, 4.3);
-tl.to("#b1", { rotateY: -12, rotateX: 8, scale: 1.04, transformPerspective: 1600, duration: 3.5, ease: "sine.inOut" }, 3);
-tl.to("#s1", { opacity: 0, scale: 1.08, filter: "blur(10px)", duration: .6, ease: "power2.in" }, 6.4);
-
-// ===== S2 : 7 → 14.5
-show("#s2", 7, .3);
-tl.fromTo(".s2-k", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, 7.1);
-lines(".s2-w", 7.2, .15);
-tl.fromTo("#path", { scaleX: 0 }, { scaleX: 1, duration: 1, ease: "expo.out", transformOrigin: "0 50%" }, 7.4);
-tl.fromTo(".stop", { scale: 0 }, { scale: 1, duration: .5, stagger: .08, ease: "back.out(3)" }, 7.8);
-tl.fromTo(".stop b", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .5, stagger: .08 }, 8);
-tl.fromTo("#trav", { left: 180, opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5 }, 8.2);
-tl.to("#trav", { left: 1740, duration: 4.4, ease: "power1.inOut" }, 8.6);
-tl.to("#path .fill", { scaleX: 1, duration: 4.4, ease: "power1.inOut" }, 8.6);
-$$(".stop").forEach((s, i) => { tl.set(s, { backgroundColor: "#fae361", borderColor: "#fae361" }, 8.6 + i * 1.1); tl.fromTo(s, { scale: 1.6 }, { scale: 1, duration: .5 }, 8.6 + i * 1.1); });
-$$(".stop b").forEach((s, i) => tl.to(s, { color: "#f4f1ea", duration: .3 }, 8.6 + i * 1.1));
-// Promotion en dame
-tl.to("#trav", { y: -40, duration: .3, ease: "power2.out" }, 13.0);
-tl.to("#trav-p", { opacity: 0, scale: .5, duration: .25 }, 13.1);
-tl.fromTo("#trav-q", { opacity: 0, scale: 1.8, filter: "drop-shadow(0 0 0 rgba(250,227,97,0))" }, { opacity: 1, scale: 1, filter: "drop-shadow(0 0 40px rgba(250,227,97,.9))", duration: .6, ease: "back.out(2)" }, 13.15);
-tl.to("#flash", { opacity: .18, duration: .08 }, 13.15).to("#flash", { opacity: 0, duration: .5 }, 13.23);
-tl.to("#s2", { opacity: 0, y: -60, duration: .5, ease: "power2.in" }, 14.1);
-
-// ===== S3 : 14.5 → 25
-show("#s3", 14.5, .01);
-tl.fromTo("#s3-count", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8 }, 14.6);
-const c200 = { v: 0 };
-tl.to(c200, { v: 200, duration: 2.2, ease: "power2.out", onUpdate: () => $("#n200").textContent = Math.round(c200.v) }, 14.8);
-tl.fromTo(".card", { opacity: 0, y: 120, rotateX: -25, transformPerspective: 1200 }, { opacity: 1, y: 0, rotateX: 0, duration: .9, stagger: 1.0, ease: "expo.out" }, 17.6);
-tl.fromTo(".vbar", { scaleX: .1 }, { scaleX: .85, duration: 4, ease: "none" }, 17.8);
-tl.to(exArrow.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 19.9);
-tl.fromTo(exArrow.head, { opacity: 0 }, { opacity: 1, duration: .2 }, 20.4);
-tl.to(".quiz-ok", { backgroundColor: "rgba(107,220,125,.25)", color: "#6bdc7d", boxShadow: "inset 0 0 0 2px #6bdc7d", duration: .3 }, 21.4);
-tl.to(".card", { y: 80, opacity: 0, duration: .6, stagger: .06, ease: "power2.in" }, 22.2);
-tl.to("#s3-count", { opacity: 0, y: -40, duration: .5, ease: "power2.in" }, 22.2);
-tl.fromTo(winDash, { opacity: 0, y: 200, rotateY: 18, rotateX: 6, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateY: 10, rotateX: 4, duration: 1.2, ease: "expo.out" }, 22.6);
-tl.fromTo(winList, { opacity: 0, y: 300, rotateY: -14, rotateX: 6, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateY: -8, rotateX: 4, duration: 1.2, ease: "expo.out" }, 22.8);
-tl.fromTo(winList.querySelector("img"), { y: 0 }, { y: -280, duration: 2.2, ease: "power1.inOut" }, 23.0);
-tl.to("#s3", { opacity: 0, scale: .96, duration: .5, ease: "power2.in" }, 24.6);
-
-// ===== S4 : 25 → 32
-show("#s4", 25, .01);
-tl.fromTo("#live", { opacity: 0, x: -120, rotateY: 14, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: 6, duration: 1.2, ease: "expo.out" }, 25.0);
-tl.fromTo(".s4-t", { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .5, stagger: .12, ease: "back.out(2)" }, 25.6);
-tl.fromTo(".s4-live", { opacity: 0 }, { opacity: 1, duration: .3 }, 25.4);
-for (let k = 0; k < 7; k++) tl.fromTo("#livedot", { opacity: 1 }, { opacity: .25, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 25.4 + k);
-tl.fromTo(".s4-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 25.5);
-lines(".s4-b", 25.8, .25);
-tl.fromTo(".s4-l", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, 27.4);
-tl.to(a4a.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 27.0);
-tl.fromTo(a4a.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 27.5);
-tl.to(h4, { opacity: 1, duration: .3 }, 27.5);
-tl.to(a4b.line, { strokeDashoffset: 0, duration: .6, ease: "power2.out" }, 28.4);
-tl.fromTo(a4b.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 28.9);
-tl.to("#live", { rotateY: -2, duration: 5, ease: "sine.inOut" }, 26.2);
-tl.to("#s4", { opacity: 0, x: -80, duration: .5, ease: "power2.in" }, 31.5);
-
-// ===== S5 : 32 → 39
-show("#s5", 32, .01);
-tl.fromTo("#b5", { opacity: 0, scale: .85, rotateX: 30, transformPerspective: 1600 }, { opacity: 1, scale: 1, rotateX: 0, duration: 1, ease: "expo.out" }, 32.0);
-tl.fromTo("#evalbar", { opacity: 0 }, { opacity: 1, duration: .5 }, 32.4);
-tl.fromTo(".s5-k", { opacity: 0 }, { opacity: 1, duration: .5 }, 32.2);
-lines($$(".s5-w")[0], 32.3);
-const mvRows = $$(".mv");
-GAME.forEach(([f, t], i) => {
-  const at = 33.0 + i * .5;
-  const pc = b5[f];
-  tl.to(pc, { left: sqPos(t).left, top: sqPos(t).top, duration: .35, ease: "power2.inOut" }, at);
-  if (i % 2 === 0) tl.fromTo(mvRows[i / 2], { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .4 }, at);
+// ===== S1 : Pas à pas
+scene("s1", ({ st, from, at, lines, dur }) => {
+  from("#b1", 0, { rotateX: 55, rotateZ: -18, scale: .6, opacity: 0, transformPerspective: 1600 }, { rotateX: 0, rotateZ: 0, scale: 1, opacity: 1, duration: 1.2 });
+  from(Object.values(b1), .25, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: .4, stagger: { each: .012, from: "random" }, ease: "back.out(2.2)" });
+  from(".s1-k", .1, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .6 });
+  lines(".s1-w", .2, .32);
+  at(b1.e2, 1.9, { top: "50%", duration: .4, ease: "power3.inOut" });
+  at(b1.e7, 2.4, { top: "37.5%", duration: .4, ease: "power3.inOut" });
+  from("#b1", 1.2, { rotateY: 0, rotateX: 0, scale: 1, transformPerspective: 1600 }, { rotateY: -12, rotateX: 8, scale: 1.05, duration: dur - 1.2, ease: "sine.inOut" });
+  from("#m1", .9, { y: 420 }, { y: 0, duration: .7, ease: "back.out(1.4)" });
+  playMascot(st, "m1", .9, dur);
+  exitZoom(st, "s1", dur);
 });
-tl.to("#wfill", { height: "56%", duration: .6 }, 33.2).to("#wfill", { height: "48%", duration: .6 }, 34.0).to("#wfill", { height: "63%", duration: .6 }, 35.1);
-const h5 = highlight(b5el, "c4"), h5b = highlight(b5el, "f1");
-tl.to([h5, h5b], { opacity: 1, duration: .3 }, 35.2);
-tl.fromTo(".mv:nth-child(3) .nag", { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(3)" }, 35.3);
-const a5 = arrow(b5el, "c4", "f7");
-tl.to(a5.line, { strokeDashoffset: 0, duration: .6 }, 36.4);
-tl.fromTo(a5.head, { opacity: 0 }, { opacity: 1, duration: .15 }, 36.9);
-lines($$(".s5-w")[1], 35.9);
-tl.to("#s5", { opacity: 0, y: 60, duration: .5, ease: "power2.in" }, 38.5);
 
-// ===== S6 : 39 → 45.5
-show("#s6", 39, .01);
-tl.fromTo("#minis", { y: 0 }, { y: -500, duration: 7, ease: "none" }, 39);
-tl.fromTo(".mini", { scale: .7, opacity: 0 }, { scale: 1, opacity: .16, duration: .6, stagger: { each: .015, from: "random" } }, 39);
-tl.fromTo(".s6-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 39.2);
-const c2000 = { v: 0 };
-tl.to(c2000, { v: 2000, duration: 2.4, ease: "power2.out", onUpdate: () => $("#n2000").textContent = Math.round(c2000.v).toLocaleString("fr-FR").replace(/ | /g, " ") }, 39.4);
-tl.fromTo("#s6 .h3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6 }, 40.4);
-tl.fromTo(winEx, { opacity: 0, x: 200, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -10, duration: 1.2, ease: "expo.out" }, 39.8);
-tl.to(winEx, { rotateY: -4, scale: 1.04, duration: 4.5, ease: "sine.inOut" }, 41);
-tl.to("#s6", { opacity: 0, scale: 1.05, duration: .5, ease: "power2.in" }, 45.0);
+// ===== S2 : Parcours
+scene("s2", ({ st, from, at, lines, dur }) => {
+  from(".s2-k", 0, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 });
+  lines(".s2-w", .05, .1);
+  from("#path", .15, { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: .7 });
+  from(".stop", .3, { scale: 0 }, { scale: 1, duration: .4, stagger: .05, ease: "back.out(3)" });
+  from(".stop b", .4, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .4, stagger: .05 });
+  from("#trav", .45, { left: 180, opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .35 });
+  const t0 = .7, travel = Math.max(2.2, dur - 1.9);
+  at("#trav", t0, { left: 1740, duration: travel, ease: "power2.inOut" });
+  at("#path .fill", t0, { scaleX: 1, duration: travel, ease: "power2.inOut" });
+  $$(".stop").forEach((s, i) => {
+    const ti = t0 + travel * [0, .3, .5, .7, 1][i];
+    st.set(s, { backgroundColor: "#fae361", borderColor: "#fae361" }, ti);
+    from(s, ti, { scale: 1.7 }, { scale: 1, duration: .4 });
+    at($$(".stop b")[i], ti, { color: "#f4f1ea", duration: .2 });
+  });
+  const tp = t0 + travel;
+  at("#trav", tp, { y: -40, duration: .25, ease: "power2.out" });
+  at("#trav-p", tp, { opacity: 0, scale: .5, duration: .2 });
+  from("#trav-q", tp + .05, { opacity: 0, scale: 1.8, filter: "drop-shadow(0 0 0 rgba(250,227,97,0))" }, { opacity: 1, scale: 1, filter: "drop-shadow(0 0 40px rgba(250,227,97,.9))", duration: .5, ease: "back.out(2)" });
+  twinkle(st, spk2, tp + .1, .05);
+  exitZoom(st, "s2", dur, { scale: 1, y: -60 });
+});
+tl.fromTo("#flash", { opacity: 0 }, { opacity: .2, duration: .06, ease: "none" }, S.s2.start + .7 + Math.max(2.2, S.s2.dur - 1.9) + .05)
+  .to("#flash", { opacity: 0, duration: .4, ease: "power2.out" }, ">");
 
-// ===== S7 : 45.5 → 52.5
-show("#s7", 45.5, .01);
-tl.fromTo(".s7-k", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .6 }, 45.6);
-lines(".s7-w", 45.7, .15);
-tl.fromTo(".s7-c", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 }, 46.6);
-tl.fromTo("#clock", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8 }, 46.4);
-const clk = { a: 600, b: 600 };
-const fmt = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
-tl.to(clk, { a: 571, duration: 5.5, ease: "none", onUpdate: () => { $("#c1").textContent = fmt(clk.a); } }, 46.8);
-tl.to(clk, { b: 548, duration: 5.5, ease: "none", onUpdate: () => { $("#c2").textContent = fmt(clk.b); } }, 46.8);
-tl.fromTo(".row", { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: .7, stagger: .12, ease: "expo.out" }, 46.2);
-// Remontée du joueur « Vous » à la 1re place
-const rows = $$(".row");
-tl.to(rows[2], { y: -220, duration: .8, ease: "power3.inOut" }, 49.6);
-tl.to([rows[0], rows[1]], { y: 110, duration: .8, ease: "power3.inOut" }, 49.6);
-tl.call(() => { rows[2].querySelector(".rk").textContent = "1"; rows[2].querySelector(".pt").textContent = "5½ pts"; rows[0].querySelector(".rk").textContent = "2"; rows[1].querySelector(".rk").textContent = "3"; }, null, 50.0);
-tl.call(() => { rows[2].querySelector(".rk").textContent = "3"; rows[2].querySelector(".pt").textContent = "4½ pts"; rows[0].querySelector(".rk").textContent = "1"; rows[1].querySelector(".rk").textContent = "2"; }, null, 49.99);
-tl.fromTo(rows[2], { scale: 1 }, { scale: 1.05, duration: .3, yoyo: true, repeat: 1 }, 50.3);
-tl.to("#s7", { opacity: 0, duration: .45, ease: "power2.in" }, 52.0);
+// ===== S3 : Leçons
+scene("s3", ({ st, from, at, dur }) => {
+  from("#s3-count", 0, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });
+  const c200 = { v: 0 };
+  at(c200, .1, { v: 200, duration: 1.3, ease: "power2.out", onUpdate: () => $("#n200").textContent = Math.round(c200.v) });
+  from(".card", .9, { opacity: 0, y: 120, rotateX: -25, transformPerspective: 1200 }, { opacity: 1, y: 0, rotateX: 0, duration: .55, stagger: .3 });
+  from(".vbar", 1.0, { scaleX: .1 }, { scaleX: .85, duration: 2.5, ease: "none" });
+  at(exArrow.line, 1.75, { strokeDashoffset: 0, duration: .35, ease: "power2.out" });
+  from(exArrow.head, 2.05, { opacity: 0 }, { opacity: 1, duration: .12 });
+  at(".quiz-ok", 2.2, { backgroundColor: "rgba(107,220,125,.25)", color: "#6bdc7d", boxShadow: "inset 0 0 0 2px #6bdc7d", duration: .2 });
+  at(".qcheck path", 2.25, { strokeDashoffset: 0, duration: .25, ease: "power2.out" });
+  from("#p3", .3, { y: 500 }, { y: 0, duration: .6, ease: "back.out(1.3)" });
+  playPose(st, "#p3", .3);
+  // Vitrine : vraies tuiles de la plateforme
+  const tw = Math.max(2.7, dur - 2.5);
+  at(".card", tw, { y: 80, opacity: 0, duration: .3, stagger: .03, ease: "power2.in" });
+  at("#s3-count", tw, { opacity: 0, y: -40, duration: .3, ease: "power2.in" });
+  at("#p3", tw, { y: 500, duration: .3, ease: "power2.in" });
+  st.set("#p3", { left: 1560, top: 560, width: 330, height: 404 }, tw + .31);
+  from("#p3", tw + .8, { y: 460 }, { y: 0, duration: .5, ease: "back.out(1.4)" });
+  from(".b3-k", tw + .15, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  st.fromTo(".b3-w", { yPercent: 110 }, { yPercent: 0, duration: .6, stagger: .08 }, tw + .2);
+  $$(".b3-t").forEach((el, i) => {
+    from(el, tw + .3 + i * .1, { opacity: 0, scale: .6, y: 80, rotation: [-14, 12, -10][i] }, { opacity: 1, scale: 1, y: 0, rotation: [-4, 3, -2][i], duration: .6, ease: "back.out(1.5)" });
+    at(el, tw + .9 + i * .1, { y: -24 + i * 8, duration: dur - tw - 1, ease: "sine.inOut" });
+  });
+  $$(".b3-row").forEach((el, i) => {
+    from(el, tw + .45 + i * .14, { opacity: 0, x: -260 }, { opacity: 1, x: 0, duration: .55 });
+    at(el, tw + 1 + i * .14, { x: 18 - i * 10, duration: dur - tw - 1.1, ease: "sine.inOut" });
+  });
+  exitZoom(st, "s3", dur, { scale: .96 });
+});
 
-// ===== S8 : 52.5 → 62
-show("#s8", 52.5, .01);
-tl.to("#flash", { opacity: .5, duration: .06 }, 52.5).to("#flash", { opacity: 0, duration: .9, ease: "power2.out" }, 52.56);
-tl.fromTo("#logo-wrap", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.2, ease: "expo.inOut" }, 52.55);
-tl.fromTo("#logo", { scale: 1.15, filter: "blur(12px)" }, { scale: 1, filter: "blur(0px)", duration: 1.6, ease: "expo.out" }, 52.55);
-tl.fromTo(".s8-t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .9 }, 54.0);
-tl.fromTo(".s8-c", { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .9, ease: "back.out(1.6)" }, 55.6);
-tl.fromTo(".s8-u", { opacity: 0 }, { opacity: 1, duration: .8 }, 56.4);
-tl.to(".s8-c", { scale: 1.04, duration: .6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 57.2);
-tl.to("#glow2", { opacity: 1.8, duration: 3 }, 52.5);
+// ===== S4 : Live
+scene("s4", ({ st, from, at, lines, dur }) => {
+  from("#live", 0, { opacity: 0, x: -120, rotateY: 14, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: 6, duration: .8 });
+  from(".s4-t", .3, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .4, stagger: .07, ease: "back.out(2)" });
+  from(".s4-live", .2, { opacity: 0 }, { opacity: 1, duration: .2 });
+  for (let k = 0; k < Math.ceil(dur); k++) from("#livedot", .2 + k, { opacity: 1 }, { opacity: .25, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 1 });
+  $$(".ripple").forEach((r, i) => { for (let k = 0; k < Math.ceil(dur); k++) from(r, .2 + k + i * .5, { scale: 1, opacity: .8 }, { scale: 3.2, opacity: 0, duration: 1, ease: "power1.out" }); });
+  from(".s4-k", .15, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .5 });
+  lines(".s4-b", .25, .18);
+  from(".s4-l", 1.0, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6 });
+  at(a4a.line, .9, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
+  from(a4a.head, 1.25, { opacity: 0 }, { opacity: 1, duration: .12 });
+  at(h4, 1.25, { opacity: 1, duration: .2 });
+  at(a4b.line, 1.6, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
+  from(a4b.head, 1.95, { opacity: 0 }, { opacity: 1, duration: .12 });
+  at("#live", .8, { rotateY: -2, duration: dur - .8, ease: "sine.inOut" });
+  exitZoom(st, "s4", dur, { scale: 1, x: -80 });
+});
+
+// ===== S5 : Analyse
+scene("s5", ({ st, from, at, lines, dur }) => {
+  from("#b5", 0, { opacity: 0, scale: .85, rotateX: 30, transformPerspective: 1600 }, { opacity: 1, scale: 1, rotateX: 0, duration: .7 });
+  from("#evalbar", .2, { opacity: 0 }, { opacity: 1, duration: .3 });
+  from(".s5-k", .1, { opacity: 0 }, { opacity: 1, duration: .3 });
+  lines($$(".s5-w")[0], .1);
+  const mvRows = $$(".mv");
+  GAME.forEach(([f, t], i) => {
+    const ti = .45 + i * .24;
+    at(b5[f], ti, { left: sqPos(t).left, top: sqPos(t).top, duration: .22, ease: "power2.inOut" });
+    if (i % 2 === 0) from(mvRows[i / 2], ti, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .3 });
+  });
+  at("#wfill", .5, { height: "56%", duration: .4 });
+  at("#wfill", 1.0, { height: "48%", duration: .4 });
+  at("#wfill", 1.6, { height: "63%", duration: .4 });
+  at([h5, h5b], 1.5, { opacity: 1, duration: .2 });
+  from(".mv:nth-child(3) .nag", 1.55, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .3, ease: "back.out(3)" });
+  lines($$(".s5-w")[1], 1.3);
+  at(a5.line, 2.1, { strokeDashoffset: 0, duration: .4 });
+  from(a5.head, 2.45, { opacity: 0 }, { opacity: 1, duration: .12 });
+  from("#p5", 1.2, { y: 480 }, { y: 0, duration: .55, ease: "back.out(1.3)" });
+  playPose(st, "#p5", 1.2);
+  exitZoom(st, "s5", dur, { scale: 1, y: 60 });
+});
+
+// ===== S6 : Exercices
+scene("s6", ({ st, from, at, dur }) => {
+  from("#minis", 0, { y: 0 }, { y: -400, duration: dur, ease: "none" });
+  from(".mini", 0, { scale: .7, opacity: 0 }, { scale: 1, opacity: .16, duration: .45, stagger: { each: .008, from: "random" } });
+  from(".s6-k", .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  const c2000 = { v: 0 };
+  at(c2000, .15, { v: 2000, duration: 1.5, ease: "power2.out", onUpdate: () => $("#n2000").textContent = Math.round(c2000.v).toLocaleString("fr-FR").replace(/ | /g, " ") });
+  from("#s6 .h3", .6, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 });
+  from("#ex1400", .2, { opacity: 0, x: 220, rotateY: -24, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -8, duration: .7 });
+  from("#qz1600", .4, { opacity: 0, x: 260, rotateY: -24, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -8, duration: .7 });
+  at(["#ex1400", "#qz1600"], .9, { rotateY: -2, duration: dur - .9, ease: "sine.inOut" });
+  at(a6.line, 1.0, { strokeDashoffset: 0, duration: .35, ease: "power2.out" });
+  from(a6.head, 1.3, { opacity: 0 }, { opacity: 1, duration: .1 });
+  at(b6.d1, 1.45, { top: "0%", duration: .3, ease: "power3.inOut" });
+  at(a6.g, 1.5, { opacity: 0, duration: .2 });
+  at(h6, 1.7, { opacity: 1, duration: .2 });
+  from("#res6", 1.75, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .35, ease: "back.out(2)" });
+  from("#qprog", .6, { scaleX: .4 }, { scaleX: .6, duration: .6 });
+  at("#qa", 2.1, { backgroundColor: "#e3f7e7", boxShadow: "inset 0 0 0 3px #2c9a45", duration: .2 });
+  at(".qa-ck", 2.2, { strokeDashoffset: 0, duration: .25, ease: "power2.out" });
+  at(".qx", 2.2, { opacity: .45, duration: .25 });
+  from("#p6", 1.8, { y: 420, opacity: 1 }, { y: 0, duration: .5, ease: "back.out(1.3)" });
+  playPose(st, "#p6", 1.8);
+  exitZoom(st, "s6", dur);
+});
+
+// ===== S7 : Tournois
+scene("s7", ({ st, from, at, lines, dur }) => {
+  from(".s7-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  lines(".s7-w", .1, .1);
+  from(".s7-c", .6, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .4 });
+  from("#clock", .45, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });
+  const clk = { a: 600, b: 600 };
+  const fmt = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  at(clk, .6, { a: 600 - 6 * (dur - .6), duration: dur - .6, ease: "none", onUpdate: () => { $("#c1").textContent = fmt(clk.a); } });
+  at(clk, .6, { b: 600 - 10 * (dur - .6), duration: dur - .6, ease: "none", onUpdate: () => { $("#c2").textContent = fmt(clk.b); } });
+  from(".row", .25, { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: .5, stagger: .07 });
+  // Remontée de « Toi » à la 1re place
+  const rows = $$(".row"), ts = Math.max(1.6, dur - 2.2);
+  at(rows[2], ts, { y: -220, duration: .55, ease: "power3.inOut" });
+  at([rows[0], rows[1]], ts, { y: 110, duration: .55, ease: "power3.inOut" });
+  const setRank = up => {
+    rows[2].querySelector(".rk").textContent = up ? "1" : "3";
+    rows[2].querySelector(".pt").textContent = up ? "5½ pts" : "4½ pts";
+    rows[0].querySelector(".rk").textContent = up ? "2" : "1";
+    rows[1].querySelector(".rk").textContent = up ? "3" : "2";
+  };
+  st.call(setRank, [false], ts + .27 - .01);
+  st.call(setRank, [true], ts + .27);
+  from(rows[2], ts + .5, { scale: 1 }, { scale: 1.05, duration: .2, yoyo: true, repeat: 1 });
+  burst(st, conf7, ts + .45, Math.min(1.8, dur - ts - .5));
+  from("#p7", ts - .2, { y: 420 }, { y: 0, duration: .5, ease: "back.out(1.6)" });
+  playPose(st, "#p7", ts - .2);
+  exitZoom(st, "s7", dur, { scale: 1 });
+});
+
+// ===== S8 : Final
+tl.fromTo("#flash", { opacity: 0 }, { opacity: .5, duration: .05, ease: "none" }, S.s8.start).to("#flash", { opacity: 0, duration: .7, ease: "power2.out" }, ">");
+scene("s8", ({ st, from, at, dur }) => {
+  from("#logo-wrap", 0, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: .9, ease: "expo.inOut" });
+  from("#logo", 0, { scale: 1.15, filter: "blur(12px)" }, { scale: 1, filter: "blur(0px)", duration: 1.2 });
+  from(".s8-t", .9, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7 });
+  from(".s8-c", 1.6, { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: "back.out(1.6)" });
+  from(".s8-u", 2.1, { opacity: 0 }, { opacity: 1, duration: .6 });
+  at(".s8-c", 2.6, { scale: 1.04, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 5 });
+  at("#glow2", 0, { opacity: 1.8, duration: 2 });
+  burst(st, conf8, .15, 2.2);
+  from("#p8", 1.9, { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: .5, ease: "back.out(1.5)" });
+  playPose(st, "#p8", 2.0);
+  twinkle(st, spk8, 1.9, .08);
+  twinkle(st, spk8, 3.4, .08);
+});
 tl.set({}, {}, TOTAL);
 
 window.TOTAL = TOTAL;
-window.seekTo = t => { tl.seek(t, false); };
+poses.forEach(p => { p.start = p.st.startTime() + p.t; p.anims = p.el.getAnimations({ subtree: true }); p.anims.forEach(a => a.pause()); });
+window.seekTo = t => {
+  tl.seek(t, false);
+  for (const p of poses) { const ms = Math.max(0, t - p.start) * 1000; p.anims.forEach(a => { a.currentTime = ms; }); }
+};
 window.ready = document.fonts.ready.then(() => Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
 </script>
 </body>

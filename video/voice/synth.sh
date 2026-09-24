@@ -9,6 +9,6 @@ for f in fr_FR-tom-medium.onnx fr_FR-tom-medium.onnx.json; do
 done
 while IFS='|' read -r id text; do
   [ -z "$id" ] && continue
-  echo "$text" | python3 -m piper -m models/fr_FR-tom-medium.onnx --length-scale 1.08 --sentence-silence 0.35 -f "out/$id.wav" >/dev/null 2>&1
+  echo "$text" | python3 -m piper -m models/fr_FR-tom-medium.onnx --length-scale 0.86 --sentence-silence 0.15 -f "out/$id.wav" >/dev/null 2>&1
   printf '%s %s\n' "$id" "$(python3 -c "import wave,sys;w=wave.open('out/$id.wav');print(round(w.getnframes()/w.getframerate(),2))")"
 done < script.txt

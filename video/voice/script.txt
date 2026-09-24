@@ -1,8 +1,8 @@
 01|Les échecs, ça s'apprend. Pas à pas.
-02|Du tout premier coup jusqu'au niveau club, échecs point com vous accompagne à chaque étape.
-03|Plus de deux cents leçons interactives : des vidéos, des cours écrits, des exercices et des quiz.
-04|Des cours en direct, avec des Maîtres Internationaux et des Grands Maîtres.
-05|Enregistrez vos parties, et analysez-les coup par coup.
-06|Entraînez-vous avec plus de deux mille exercices.
-07|Et mesurez-vous aux autres joueurs, lors de tournois en ligne.
-08|Échecs point com. L'académie d'échecs. Commencez maintenant.
+02|Du premier coup jusqu'au niveau club, échecs point com t'accompagne à chaque étape.
+03|Plus de deux cents leçons interactives : vidéos, cours, exercices et quiz.
+04|Des cours en direct avec des Maîtres Internationaux et des Grands Maîtres.
+05|Enregistre tes parties. Analyse chaque coup.
+06|Plus de deux mille exercices pour progresser.
+07|Et des tournois en ligne pour te mesurer aux autres.
+08|Échecs point com. L'académie d'échecs. Commence maintenant !

@@ -1,213 +1,262 @@
-"""Musique originale générée par code (donc libre de droits) pour la vidéo echecs.com.
+"""Musique originale générée par code (libre de droits) pour la vidéo echecs.com.
 
-Électro douce / piano moderne, 100 BPM, ré mineur. Les repères de structure
-suivent le découpage des scènes de src/index.html (voir TIMELINE dans ce fichier).
+Électro-pop énergique à 120 BPM (la mineur : Am – F – C – G). La structure suit
+build/timing.json (généré par scripts/timing.py) : chaque changement de scène
+tombe sur un temps et reçoit un impact, la montée finale mène au logo.
 Sortie : audio/music.wav (stéréo, 48 kHz).
 """
+import json
 import os
 import wave
 
 import numpy as np
+from scipy.signal import butter, sosfilt
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
 SR = 48000
-BPM = 100
+BPM = 120
 BEAT = 60 / BPM
-DURATION = 62.0
-OUT = os.path.join(os.path.dirname(__file__), "music.wav")
+BAR = 4 * BEAT
+OUT = os.path.join(HERE, "music.wav")
 
-# Repères (secondes)
-T_ARP = 3.0       # arpèges de piano
-T_BEAT = 14.5     # kick doux
-T_HATS = 25.0     # charleston
-T_BREAK = 50.6    # montée avant le plan final
-T_DROP = 52.5     # impact sur le logo
-T_END = 60.0      # extinction
-
-rng = np.random.default_rng(1959)
-n_total = int(SR * DURATION)
-L = np.zeros(n_total)
-R = np.zeros(n_total)
+timing = json.load(open(os.path.join(ROOT, "build", "timing.json")))
+DURATION = timing["total"]
+CUTS = [s["start"] for s in timing["scenes"]][1:]
+T_DROP = timing["scenes"][1]["start"]      # le beat complet démarre à la scène 2
+T_FINAL = timing["scenes"][-1]["start"]     # logo
+T_RISE = T_FINAL - 2 * BAR / 2              # montée sur la mesure qui précède
+N = int(SR * (DURATION + 0.5))
+L = np.zeros(N)
+R = np.zeros(N)
+rng = np.random.default_rng(2026)
 
 
 def midi(n):
     return 440.0 * 2 ** ((n - 69) / 12)
 
 
-def add(buf, start, sig, gain=1.0):
-    i = int(start * SR)
-    if i >= len(buf):
+def add(buf, t, sig, g=1.0):
+    i = int(t * SR)
+    if i >= len(buf) or i + len(sig) <= 0:
         return
     j = min(len(buf), i + len(sig))
-    buf[i:j] += sig[: j - i] * gain
+    buf[i:j] += sig[: j - i] * g
 
 
-def lowpass(x, cutoff):
-    a = np.broadcast_to(np.exp(-2 * np.pi * np.asarray(cutoff, dtype=float) / SR), x.shape)
-    y = np.empty_like(x)
-    acc = 0.0
-    for k in range(len(x)):
-        acc = (1 - a[k]) * x[k] + a[k] * acc
-        y[k] = acc
-    return y
+def st(t, sig, g=1.0, pan=0.0):
+    add(L, t, sig, g * (1 - max(0, pan)))
+    add(R, t, sig, g * (1 + min(0, pan)))
 
 
-def env_adsr(n, a, d, s, r):
+def filt(x, kind, f, order=2):
+    return sosfilt(butter(order, f, kind, fs=SR, output="sos"), x)
+
+
+def saw(freq, n, phase=0.0):
+    t = np.arange(n) / SR
+    return 2 * ((freq * t + phase) % 1.0) - 1
+
+
+def env(n, a, d, s, r):
     t = np.arange(n) / SR
     dur = n / SR
-    e = np.where(t < a, t / max(a, 1e-4), 1.0)
-    e = np.where((t >= a) & (t < a + d), 1 - (1 - s) * (t - a) / max(d, 1e-4), e)
-    e = np.where(t >= a + d, s, e)
-    e = e * np.clip((dur - t) / max(r, 1e-4), 0, 1)
+    e = np.interp(t, [0, a, a + d, max(a + d, dur - r), dur], [0, 1, s, s, 0])
     return e
 
 
-def pad_voice(freq, dur):
-    n = int(dur * SR)
-    t = np.arange(n) / SR
-    sig = np.zeros(n)
-    for det in (-0.12, 0.0, 0.11):
-        f = freq * 2 ** (det / 12)
-        for h in range(1, 7):
-            sig += np.sin(2 * np.pi * f * h * t + rng.uniform(0, 6.28)) / (h ** 1.6)
-    return sig * env_adsr(n, 1.2, 0.5, 0.8, 1.4)
-
-
-def piano(freq, dur=1.6):
-    n = int(dur * SR)
-    t = np.arange(n) / SR
-    sig = np.zeros(n)
-    for h, amp in enumerate((1.0, 0.45, 0.22, 0.12, 0.06), start=1):
-        sig += amp * np.sin(2 * np.pi * freq * h * t * (1 + 0.0004 * h * h)) * np.exp(-t * (2.2 + h * 0.9))
-    sig *= np.minimum(1, t / 0.004)
-    return sig
-
-
+# ------------------------------------------------------------------ instruments
 def kick():
-    n = int(0.45 * SR)
+    n = int(.35 * SR)
     t = np.arange(n) / SR
-    f = 42 + 90 * np.exp(-t * 28)
-    ph = 2 * np.pi * np.cumsum(f) / SR
-    return np.sin(ph) * np.exp(-t * 7.5)
+    f = 48 + 160 * np.exp(-t * 35)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9)
+    click = filt(rng.standard_normal(n), "highpass", 3000) * np.exp(-t * 400) * .3
+    return np.tanh((body + click) * 1.6)
 
 
-def hat():
-    n = int(0.08 * SR)
+def clap():
+    n = int(.25 * SR)
     t = np.arange(n) / SR
+    x = filt(rng.standard_normal(n), "bandpass", [900, 3500])
+    e = np.zeros(n)
+    for k, dt in enumerate((0, .011, .022)):
+        e += np.where(t >= dt, np.exp(-(t - dt) * (60 if k < 2 else 18)), 0)
+    return x * e * .9
+
+
+def hat(open_=False):
+    n = int((.22 if open_ else .05) * SR)
+    t = np.arange(n) / SR
+    return filt(rng.standard_normal(n), "highpass", 8000) * np.exp(-t * (14 if open_ else 90))
+
+
+def supersaw(notes, dur):
+    n = int(dur * SR)
+    x = np.zeros(n)
+    for nn in notes:
+        for det in (-.18, -.07, 0, .07, .18):
+            x += saw(midi(nn) * 2 ** (det / 12), n, rng.random())
+    x = filt(x, "lowpass", 3200) / (len(notes) * 5)
+    return x * env(n, .01, .1, .8, .08)
+
+
+def pluck(freq, dur=.25):
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    x = saw(freq, n) * .6 + np.sin(2 * np.pi * freq * t)
+    x = filt(x, "lowpass", 2500) * np.exp(-t * 14)
+    return x
+
+
+def bass(freq, dur):
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    x = np.sin(2 * np.pi * freq * t) + .35 * saw(freq, n)
+    return filt(x, "lowpass", 700) * env(n, .005, .05, .85, .03)
+
+
+def impact():
+    n = int(1.6 * SR)
+    t = np.arange(n) / SR
+    boom = np.sin(2 * np.pi * np.cumsum(38 + 60 * np.exp(-t * 12)) / SR) * np.exp(-t * 3.5)
+    noise = filt(rng.standard_normal(n), "lowpass", 5000) * np.exp(-t * 6) * .35
+    return np.tanh((boom + noise) * 1.4)
+
+
+def whoosh(dur=.5):
+    n = int(dur * SR)
     x = rng.standard_normal(n)
-    x = x - lowpass(x, 7000)
-    return x * np.exp(-t * 60)
+    t = np.linspace(0, 1, n)
+    y = np.zeros(n)
+    step = 2048
+    for i in range(0, n, step):
+        fc = 500 + 7000 * t[i] ** 2
+        y[i:i + step] = filt(x[i:i + step], "bandpass", [fc * .6, min(fc * 1.6, 20000)], 1)
+    return y * t ** 2 * .5
 
 
-# Progression : Dm9 – Bbmaj7 – Fmaj7 – C6 (2 mesures chacun)
-CHORDS = [
-    (50, [62, 65, 69, 72, 76]),   # Dm9
-    (46, [58, 62, 65, 69, 74]),   # Bbmaj7
-    (41, [57, 60, 64, 65, 69]),   # Fmaj7
-    (48, [60, 64, 67, 69, 72]),   # C6
-]
-BAR = 4 * BEAT
-CHORD_LEN = 2 * BAR
+# ------------------------------------------------------------------ arrangement
+PROG = [(57, [69, 72, 76]), (53, [65, 69, 72]), (48, [67, 72, 76]), (55, [67, 71, 74])]  # Am F C G
+n_bars = int(np.ceil(DURATION / BAR)) + 1
 
-# Pad + basse
+# Sidechain : le kick « pompe » les accords et la basse
+pump = np.ones(N)
+for b in range(int(DURATION / BEAT) + 1):
+    t0 = b * BEAT
+    if t0 < T_DROP:
+        continue
+    i = int(t0 * SR)
+    k = np.arange(int(BEAT * SR))
+    seg = 1 - .75 * np.exp(-k / SR * 11)
+    j = min(N, i + len(seg))
+    pump[i:j] = np.minimum(pump[i:j], seg[: j - i])
+
+chords = np.zeros(N)
+bassline = np.zeros(N)
+for b in range(n_bars):
+    t0 = b * BAR
+    if t0 >= DURATION:
+        break
+    root, notes = PROG[b % 4]
+    add(chords, t0, supersaw([x - 12 for x in notes] + [notes[0]], BAR))
+    if t0 >= T_DROP - .01:
+        for e in range(8):   # basse en croches, octave sur les contretemps
+            f = midi(root - 12 + (12 if e % 2 else 0))
+            add(bassline, t0 + e * BEAT / 2, bass(f, BEAT / 2 * .9))
+
+# Intro : accords filtrés qui s'ouvrent
+intro_env = np.clip(np.arange(N) / SR / max(T_DROP, .1), 0, 1)
+cut = filt(chords, "lowpass", 900)
+chords_mix = np.where(np.arange(N) / SR < T_DROP, cut * (.4 + .6 * intro_env), chords * pump)
+st(0, chords_mix, .55, -.1)
+st(0, np.roll(chords_mix, int(.012 * SR)), .45, .1)
+st(0, bassline * pump, .55)
+
+# Arpège pluck en doubles-croches
 t = 0.0
-ci = 0
-while t < T_END:
-    root, notes = CHORDS[ci % 4]
-    dur = CHORD_LEN + 1.2
-    pad = sum(pad_voice(midi(nn - 12), dur) for nn in notes[:4]) * 0.035
-    add(L, t, pad * 1.0)
-    add(R, t, pad * 0.92)
-    if t >= T_BEAT - 0.01:
-        n = int(CHORD_LEN * SR)
-        tt = np.arange(n) / SR
-        bass = np.sin(2 * np.pi * midi(root - 12) * tt) * env_adsr(n, 0.02, 0.3, 0.7, 0.3) * 0.16
-        add(L, t, bass)
-        add(R, t, bass)
-    t += CHORD_LEN
-    ci += 1
-
-# Arpèges de piano (croches), motif montant/descendant
-pattern = [0, 2, 4, 3, 1, 3, 4, 2]
-step = BEAT / 2
 k = 0
-t = T_ARP
-while t < T_BREAK:
-    ci = int(t // CHORD_LEN) % 4
-    notes = CHORDS[ci][1]
-    nn = notes[pattern[k % 8]] + (12 if (k // 16) % 2 and t > T_BEAT else 0)
-    vel = 0.10 if k % 2 == 0 else 0.07
-    pan = 0.5 + 0.35 * np.sin(k * 0.7)
-    p = piano(midi(nn))
-    add(L, t, p, vel * (1.2 - pan))
-    add(R, t, p, vel * (0.2 + pan))
-    t += step
+pattern = [0, 1, 2, 1, 2, 3, 2, 1]
+while t < DURATION - .1:
+    b = int(t // BAR)
+    root, notes = PROG[b % 4]
+    tones = notes + [notes[0] + 12]
+    nn = tones[pattern[k % 8]] + (12 if t >= timing["scenes"][3]["start"] and (k // 8) % 2 else 0)
+    g = .14 if k % 4 == 0 else .09
+    if T_RISE <= t < T_FINAL:
+        g *= .5
+    st(t, pluck(midi(nn)), g, .45 * np.sin(k * .9))
+    t += BEAT / 4
     k += 1
 
-# Kick (temps 1 et 3), puis tous les temps après 25 s
-t = T_BEAT
-b = 0
-while t < T_BREAK:
-    if b % 2 == 0 or t >= T_HATS:
-        kk = kick() * 0.33
-        add(L, t, kk)
-        add(R, t, kk)
-    t += BEAT
-    b += 1
+# Batterie
+nb = int(DURATION / BEAT) + 1
+for b in range(nb):
+    t0 = b * BEAT
+    if t0 >= DURATION:
+        break
+    in_rise = T_RISE <= t0 < T_FINAL
+    if t0 < T_DROP:
+        if b % 2 == 0:
+            st(t0, filt(kick(), "lowpass", 300), .45)   # kick étouffé dans l'intro
+        continue
+    if not in_rise:
+        st(t0, kick(), .8)
+        if b % 2 == 1:
+            st(t0, clap(), .42)
+        st(t0 + BEAT / 2, hat(True), .10, .2)
+    st(t0, hat(), .07, -.3)
+    st(t0 + BEAT / 4, hat(), .045, .3)
+    st(t0 + BEAT * .75, hat(), .045, -.2)
 
-# Charleston sur les contretemps
-t = T_HATS + BEAT / 2
-while t < T_BREAK:
-    h = hat() * 0.05
-    add(L, t, h * 0.8)
-    add(R, t, h)
-    t += BEAT
+# Roulement de caisse claire + montée avant le logo
+n_roll = 16
+for k in range(n_roll):
+    tt = T_RISE + (T_FINAL - T_RISE) * k / n_roll
+    st(tt, clap(), .12 + .3 * k / n_roll)
+n = int((T_FINAL - T_RISE) * SR)
+if n > 0:
+    x = rng.standard_normal(n)
+    tt = np.linspace(0, 1, n)
+    riser = np.zeros(n)
+    step = 2048
+    for i in range(0, n, step):
+        riser[i:i + step] = filt(x[i:i + step], "highpass", 300 + 6000 * tt[i] ** 2, 1)
+    st(T_RISE, riser * tt ** 2, .35)
 
-# Montée (bruit filtré qui s'ouvre)
-n = int((T_DROP - T_BREAK) * SR)
-x = rng.standard_normal(n)
-tt = np.linspace(0, 1, n)
-riser = (x - lowpass(x, 400 + 6000 * tt ** 2)) * tt ** 2 * 0.06
-add(L, T_BREAK, riser)
-add(R, T_BREAK, riser)
-
-# Impact final : accord de Ré mineur large + grosse caisse + queue de piano
-imp = kick() * 0.5
-add(L, T_DROP, imp)
-add(R, T_DROP, imp)
-for nn in (38, 50, 57, 62, 65, 69, 74, 77):
-    p = piano(midi(nn), 7.0) * 0.08
-    add(L, T_DROP, p)
-    add(R, T_DROP + 0.004, p)
-final_pad = sum(pad_voice(midi(nn), 9.0) for nn in (50, 57, 62, 65, 69)) * 0.03
-add(L, T_DROP, final_pad)
-add(R, T_DROP, final_pad)
+# Impacts et whooshes sur les coupes
+for c in CUTS:
+    if c == T_FINAL:
+        continue
+    st(c - .45, whoosh(.45), .5)
+    st(c, impact(), .32)
+st(T_FINAL, impact(), .75)
+for nn in (45, 57, 64, 69, 72, 76):   # accord final tenu
+    s = supersaw([nn], 3.0) * .9
+    st(T_FINAL, filt(s, "lowpass", 5000) * np.exp(-np.arange(len(s)) / SR * .9), .5)
 
 
-def reverb(x):
+# ------------------------------------------------------------------ master
+def room(x):
     y = x.copy()
-    for d, g in ((0.0297, 0.5), (0.0371, 0.45), (0.0411, 0.42), (0.0437, 0.4), (0.113, 0.3), (0.171, 0.22), (0.263, 0.15)):
+    for d, g in ((.023, .35), (.031, .3), (.047, .25), (.089, .18), (.137, .12)):
         k = int(d * SR)
-        z = np.zeros_like(x)
-        z[k:] = x[:-k] * g
-        y += z
+        y[k:] += x[:-k] * g
     return y
 
 
-L = 0.7 * L + 0.3 * reverb(L)
-R = 0.7 * R + 0.3 * reverb(R)
-
-# Fondu d'entrée / sortie et normalisation
-fade_in = np.minimum(1, np.arange(n_total) / (SR * 1.5))
-fade_out = np.clip((DURATION - np.arange(n_total) / SR) / 3.0, 0, 1)
-L *= fade_in * fade_out
-R *= fade_in * fade_out
+L = .8 * L + .2 * room(L)
+R = .8 * R + .2 * room(R)
+L, R = np.tanh(L * 1.3), np.tanh(R * 1.3)
+nn = int(DURATION * SR)
+L, R = L[:nn], R[:nn]
+fade = np.clip((DURATION - np.arange(nn) / SR) / 1.2, 0, 1) * np.clip(np.arange(nn) / (SR * .05), 0, 1)
+L, R = L * fade, R * fade
 peak = max(np.abs(L).max(), np.abs(R).max())
-L, R = L / peak * 0.89, R / peak * 0.89
-
-data = (np.stack([L, R], axis=1) * 32767).astype(np.int16)
+data = (np.stack([L, R], 1) / peak * .9 * 32767).astype(np.int16)
 with wave.open(OUT, "wb") as w:
     w.setnchannels(2)
     w.setsampwidth(2)
     w.setframerate(SR)
     w.writeframes(data.tobytes())
-print("écrit", OUT, f"{DURATION:.1f}s")
+print("écrit", OUT, f"{DURATION:.1f}s, coupes :", CUTS)
