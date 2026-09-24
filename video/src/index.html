@@ -120,6 +120,22 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .vd-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: rgba(0,0,0,.35); }
 .vd-bar i { display: block; height: 100%; background: var(--yellow); transform-origin: 0 50%; transform: scaleX(0); }
 
+.hero { position: absolute; border-radius: 28px; overflow: hidden; box-shadow: 0 50px 110px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); }
+.hero > img { display: block; width: 100%; }
+.hero .shade { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; background: linear-gradient(transparent, rgba(6,8,12,.92)); }
+.hero .meta { position: absolute; left: 30px; bottom: 34px; display: flex; flex-direction: column; gap: 10px; }
+.hero .meta b { font: 800 40px/1 "Manrope"; color: #fff; }
+.hero .meta span { font: 700 24px/1 "Manrope"; color: #c9d1dc; }
+.hero .tag { position: absolute; left: 22px; top: 22px; padding: 10px 16px; border-radius: 12px; background: var(--yellow); color: #111; font: 800 20px/1 "Manrope"; letter-spacing: .08em; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+.acard { position: absolute; width: 335px; height: 228px; border-radius: 30px; padding: 24px; color: #111; box-shadow: 0 34px 70px rgba(0,0,0,.45); overflow: hidden; }
+.acard img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; border: 5px solid rgba(255,255,255,.9); display: block; }
+.acard .ttl { position: absolute; right: 22px; top: 24px; padding: 8px 14px; border-radius: 999px; background: #111; color: #fff; font: 800 20px/1 "Manrope"; letter-spacing: .06em; }
+.acard b { display: block; margin-top: 14px; font: 800 29px/1.05 "Manrope"; }
+.acard span { display: flex; align-items: center; gap: 8px; margin-top: 8px; font: 700 19px/1.2 "Manrope"; color: rgba(17,17,17,.75); }
+.acard::after { content: ""; position: absolute; right: -40px; bottom: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,.22); }
+.reel { position: absolute; left: 150px; top: 836px; display: flex; gap: 22px; }
+.reel img { width: 272px; height: 153px; border-radius: 18px; object-fit: cover; box-shadow: 0 24px 50px rgba(0,0,0,.5); display: block; }
+
 /* Scène 4 : live */
 .live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
@@ -233,19 +249,19 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 
   <!-- Catalogue vidéo Europe Échecs -->
   <section class="scene" id="videos">
-    <div style="position:absolute;left:150px;top:100px">
+    <div style="position:absolute;left:150px;top:64px">
       <div class="kicker vd-k">Europe Échecs · Vidéos</div>
-      <div class="h2" style="margin-top:26px;font-size:80px"><span class="line"><span class="vd-w">Tout le catalogue</span></span><span class="line"><span class="vd-w"><span class="em">vidéo</span> inclus.</span></span></div>
+      <div class="h2" style="margin-top:20px;font-size:74px"><span class="line"><span class="vd-w">Tout le catalogue</span></span><span class="line"><span class="vd-w"><span class="em">vidéo</span> inclus.</span></span></div>
     </div>
-    <div class="uitile vd-player" style="left:150px;top:390px;width:860px;border-radius:24px"><img src="../assets/captures/ee/player.jpg">
+    <div class="kicker vd-k2" style="position:absolute;left:1080px;top:244px">Nos auteurs</div>
+    <div class="hero vd-player" style="left:150px;top:316px;width:860px"><img src="../assets/captures/ee/hd/player.jpg">
+      <div class="tag vd-tag">MINUTE FINALE #116</div>
       <div class="vd-play"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg></div><div class="vd-bar"><i></i></div></div>
-    <div class="uitile vd-a" style="left:1090px;top:110px;width:680px;border-radius:18px"><img src="../assets/captures/ee/auteur-nataf.jpg"></div>
-    <div class="uitile vd-a" style="left:1090px;top:208px;width:680px;border-radius:18px"><img src="../assets/captures/ee/auteur-labaca.jpg"></div>
-    <div class="uitile vd-a" style="left:1090px;top:306px;width:680px;border-radius:18px"><img src="../assets/captures/ee/auteur-quenehen.jpg"></div>
-    <div class="uitile vd-a" style="left:1090px;top:404px;width:680px;border-radius:18px"><img src="../assets/captures/ee/auteur-ravot.jpg"></div>
-    <div class="uitile vd-r" style="left:1090px;top:530px;width:680px;border-radius:18px"><img src="../assets/captures/ee/resultat-ravot.jpg"></div>
-    <div class="uitile vd-r" style="left:1090px;top:676px;width:680px;border-radius:18px"><img src="../assets/captures/ee/resultat-labaca.jpg"></div>
-    <div class="uitile vd-r" style="left:1090px;top:822px;width:680px;border-radius:18px"><img src="../assets/captures/ee/resultat-quenehen.jpg"></div>
+    <div class="acard vd-a" style="left:1080px;top:300px;background:#93b9e2"><img src="../assets/captures/ee/hd/auth-nataf.jpg"><div class="ttl">GMI</div><b>Igor Nataf</b><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Masterclasses</span></div>
+    <div class="acard vd-a" style="left:1435px;top:300px;background:#fae361"><img src="../assets/captures/ee/hd/auth-labaca.jpg"><div class="ttl">MF</div><b>Romuald De Labaca</b><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Les ouvertures en vogue</span></div>
+    <div class="acard vd-a" style="left:1080px;top:550px;background:#6bdc7d"><img src="../assets/captures/ee/hd/auth-quenehen.jpg"><b>Marc Quenehen</b><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>La Minute Finale</span></div>
+    <div class="acard vd-a" style="left:1435px;top:550px;background:#f06b8a"><img src="../assets/captures/ee/hd/auth-ravot.jpg"><div class="ttl">MF</div><b>Sylvain Ravot</b><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Calcul Gagnant</span></div>
+    <div class="reel" id="reel"><img src="../assets/captures/ee/hd/p-calcul-gagnant.jpg"><img src="../assets/captures/ee/hd/p-masterclass.jpg"><img src="../assets/captures/ee/hd/p-minute-finale.jpg"><img src="../assets/captures/ee/hd/p-coup-de-legende.jpg"><img src="../assets/captures/ee/hd/p-ouvertures-vogue.jpg"><img src="../assets/captures/ee/hd/p-minute-strategie.jpg"><img src="../assets/captures/ee/hd/p-flashback.jpg"><img src="../assets/captures/ee/hd/p-defendez.jpg"><img src="../assets/captures/ee/hd/p-en-finale.jpg"><img src="../assets/captures/ee/hd/p-graines.jpg"><img src="../assets/captures/ee/hd/p-un-jour-une-partie.jpg"><img src="../assets/captures/ee/hd/p-kramnik-karpov.jpg"><img src="../assets/captures/ee/hd/p-recap.jpg"></div>
   </section>
 
   <!-- S4 — Live -->
@@ -271,6 +287,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 
   <!-- S5 — Analyse -->
   <section class="scene" id="s5">
+    <div id="s5a" class="layer">
     <div style="position:absolute;left:150px;top:110px">
       <div class="kicker s5-k">Tes parties</div>
     </div>
@@ -280,6 +297,19 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="moves" id="moves" style="top:320px"></div>
     <div style="position:absolute;left:1090px;top:800px" class="h2"><span class="line"><span class="s5-w em">Analyse.</span></span></div>
     <div class="pose" id="p5" data-pose="reflexion" style="left:1480px;top:560px;width:343px;height:420px"></div>
+    </div>
+    <div id="s5b" class="layer">
+      <div style="position:absolute;left:150px;top:150px">
+        <div class="kicker s5b-k">Ton espace de parties</div>
+        <div class="h2" style="margin-top:28px;font-size:84px"><span class="line"><span class="s5b-w">Importe,</span></span><span class="line"><span class="s5b-w">enregistre,</span></span><span class="line"><span class="s5b-w em">analyse.</span></span></div>
+      </div>
+      <div class="uitile s5b-win" style="left:800px;top:150px;width:1000px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
+        <div class="s5b-focus" style="position:absolute;left:64.6%;top:6.6%;width:34.8%;height:88%;border-radius:16px;box-shadow:inset 0 0 0 5px #fae361, 0 0 40px rgba(250,227,97,.45)"></div></div>
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-mes-parties.png" style="left:150px;top:620px;height:70px;width:auto;border-radius:14px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-favoris.png" style="left:440px;top:620px;height:70px;width:auto;border-radius:14px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-repertoires.png" style="left:150px;top:708px;height:70px;width:auto;border-radius:14px">
+      <img class="uitile s5b-t" src="../assets/captures/pgn/tile-bases.png" style="left:440px;top:708px;height:70px;width:auto;border-radius:14px">
+    </div>
   </section>
 
   <!-- S6 — Exercices -->
@@ -694,15 +724,20 @@ scene("revue", ({ st, from, at, lines, dur }) => {
 scene("videos", ({ st, from, at, lines, dur }) => {
   from(".vd-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   lines(".vd-w", .1, .1);
-  from(".vd-player", .2, { opacity: 0, y: 160, rotateX: 18, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateX: 0, duration: .7 });
+  from(".vd-player", .2, { opacity: 0, y: 160, rotateX: 16, transformPerspective: 1800 }, { opacity: 1, y: 0, rotateX: 0, duration: .7 });
+  from(".vd-tag", .7, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   from(".vd-play", .6, { scale: 0 }, { scale: 1, duration: .45, ease: "back.out(2.5)" });
   at(".vd-play", 1.3, { scale: .8, duration: .12, ease: "power2.in" });
   at(".vd-play", 1.42, { scale: 1.6, opacity: 0, duration: .35, ease: "power2.out" });
-  from(".vd-bar i", 1.5, { scaleX: 0 }, { scaleX: .55, duration: dur - 1.6, ease: "none" });
-  at(".vd-player", .9, { scale: 1.03, duration: dur - .9, ease: "sine.inOut" });
-  from(".vd-a", .35, { opacity: 0, x: 240 }, { opacity: 1, x: 0, duration: .5, stagger: .1 });
-  from(".vd-r", .85, { opacity: 0, x: 240 }, { opacity: 1, x: 0, duration: .55, stagger: .14 });
-  at([".vd-a", ".vd-r"], 1.6, { x: -14, duration: dur - 1.7, ease: "sine.inOut", stagger: .03 });
+  from(".vd-bar i", 1.5, { scaleX: 0 }, { scaleX: .5, duration: dur - 1.6, ease: "none" });
+  from(".vd-player > img", .2, { scale: 1.12 }, { scale: 1, duration: dur - .2, ease: "sine.out" });
+  from(".vd-k2", .35, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  $$(".vd-a").forEach((el, i) => {
+    from(el, .4 + i * .12, { opacity: 0, scale: .7, y: 60, rotation: [-8, 6, 7, -6][i] }, { opacity: 1, scale: 1, y: 0, rotation: [-2, 1.5, 1.5, -1.5][i], duration: .6, ease: "back.out(1.6)" });
+    at(el, 1.1 + i * .12, { y: [-10, 8, -6, 10][i], duration: dur - 1.2, ease: "sine.inOut" });
+  });
+  from("#reel", .6, { x: 700, opacity: 0 }, { x: 0, opacity: 1, duration: .8 });
+  at("#reel", 1.4, { x: -1400, duration: dur - 1.4, ease: "none" });
   exitZoom(st, "videos", dur, { scale: .96 });
 });
 
@@ -747,6 +782,17 @@ scene("s5", ({ st, from, at, lines, dur }) => {
   from(a5.head, 2.45, { opacity: 0 }, { opacity: 1, duration: .12 });
   from("#p5", 1.2, { y: 480 }, { y: 0, duration: .55, ease: "back.out(1.3)" });
   playPose(st, "#p5", 1.2);
+  // Phase 2 : le vrai outil (import, bases, analyse) aux couleurs de l'académie
+  const T2 = Math.max(2.7, dur - 3.3);
+  at("#s5a", T2, { x: -160, opacity: 0, duration: .35, ease: "power2.in" });
+  from("#s5b", T2, { opacity: 0 }, { opacity: 1, duration: .01 });
+  from(".s5b-k", T2 + .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  st.fromTo(".s5b-w", { yPercent: 110 }, { yPercent: 0, duration: .6, stagger: .09 }, T2 + .15);
+  from(".s5b-win", T2 + .2, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .7 });
+  at(".s5b-win", T2 + .9, { rotateY: -2, duration: dur - T2 - .9, ease: "sine.inOut" });
+  from(".s5b-t", T2 + .5, { opacity: 0, y: 40, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, stagger: .08, ease: "back.out(1.8)" });
+  from(".s5b-focus", T2 + 1.2, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: .35 });
+  at(".s5b-focus", T2 + 1.6, { opacity: .55, duration: .4, ease: "sine.inOut", yoyo: true, repeat: 2 });
   exitZoom(st, "s5", dur, { scale: 1, y: 60 });
 });
 
