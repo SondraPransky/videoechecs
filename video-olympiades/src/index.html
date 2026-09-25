@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Olympiades 2026 — Ronde 9</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 700; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+
+:root {
+  --bg: #06080c;
+  --ink: #f4f1ea;
+  --muted: #8b95a5;
+  --blue: #93b9e2;
+  --blue-deep: #2c4a6e;
+  --yellow: #fae361;
+  --sq-light: #e4ecf6;
+  --sq-dark: #93b9e2;
+  --green: #6bdc7d;
+  --red: #ff5a6a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--bg); }
+.scene { position: absolute; inset: 0; opacity: 0; }
+
+/* Fond */
+#glow1, #glow2 { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; filter: blur(40px); }
+#glow1 { background: radial-gradient(circle, rgba(147,185,226,.22), rgba(147,185,226,0) 62%); left: -300px; top: -500px; }
+#glow2 { background: radial-gradient(circle, rgba(250,227,97,.09), rgba(250,227,97,0) 60%); right: -500px; bottom: -700px; }
+#grid { position: absolute; left: 50%; top: 58%; width: 2600px; height: 2600px; margin-left: -1300px;
+  background:
+    linear-gradient(rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px,
+    linear-gradient(90deg, rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px;
+  transform: perspective(900px) rotateX(68deg); transform-origin: 50% 0;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 60%); }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); pointer-events: none; }
+#progress { position: absolute; left: 0; bottom: 0; height: 4px; width: 1920px; background: linear-gradient(90deg, var(--blue), var(--yellow)); transform-origin: 0 50%; transform: scaleX(0); opacity: .85; }
+
+/* Typo */
+.kicker { font: 800 22px/1 "Manrope"; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 18px; }
+.kicker::before { content: ""; width: 56px; height: 2px; background: currentColor; }
+.h1 { font: 900 122px/0.98 "Fraunces", serif; letter-spacing: -.02em; }
+.h2 { font: 900 84px/1 "Fraunces", serif; letter-spacing: -.015em; }
+.h3 { font: 700 50px/1.1 "Fraunces", serif; }
+.em { font-family: "Fraunces"; font-style: italic; font-weight: 400; color: var(--yellow); }
+.lead { font: 500 32px/1.4 "Manrope"; color: #c9d1dc; }
+.credit { font: 700 21px/1.4 "Manrope"; color: var(--muted); letter-spacing: .02em; }
+.line { display: block; overflow: hidden; padding-bottom: .08em; }
+.line > span { display: inline-block; }
+
+/* Échiquier */
+.board { position: absolute; border-radius: 18px; overflow: hidden;
+  background: repeating-conic-gradient(var(--sq-dark) 0 25%, var(--sq-light) 0 50%) 0 0 / 25% 25%;
+  box-shadow: 0 60px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
+.board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; will-change: transform; z-index: 2; }
+.board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.5); opacity: 0; z-index: 1; }
+.board .co { position: absolute; font: 800 15px/1 "Manrope"; color: rgba(11,17,24,.45); z-index: 3; }
+.board .co.f { bottom: 4px; }
+.board .co.r { left: 5px; }
+
+/* Bandeau de coups */
+.sanbar { position: absolute; display: flex; flex-wrap: wrap; gap: 0 16px; align-items: baseline; }
+.sanbar b { font: 700 25px/1.5 "Manrope"; color: #4d5866; }
+.sanbar b.on { color: var(--yellow); }
+.sanbar b.done { color: #9aa6b6; }
+
+/* Légendes de partie */
+.cap { position: absolute; opacity: 0; }
+.cap i { display: block; width: 46px; height: 3px; background: var(--yellow); margin-bottom: 16px; }
+.cap span { font: 700 30px/1.35 "Manrope"; color: var(--ink); }
+
+/* Cartes de résultat */
+.mrow { position: absolute; display: flex; align-items: center; width: 1180px; height: 118px; padding: 0 34px;
+  border-radius: 22px; background: linear-gradient(120deg, rgba(19,27,38,.95), rgba(11,16,23,.95));
+  box-shadow: 0 26px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(147,185,226,.16); }
+.mrow .tn { font: 800 36px/1 "Manrope"; width: 350px; }
+.mrow .tn.r { text-align: right; }
+.mrow .sc { font: 900 46px/1 "Fraunces"; width: 90px; text-align: center; color: var(--yellow); }
+.mrow .nt { flex: 1; text-align: right; font: 600 25px/1.3 "Manrope"; color: var(--muted); }
+.mrow.or { box-shadow: 0 26px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(250,227,97,.4); }
+
+/* Feuille de match */
+.scoreline { position: absolute; display: flex; align-items: center; gap: 38px; }
+.scoreline .team { font: 900 90px/1 "Fraunces"; }
+.scoreline .pts { font: 900 130px/1 "Fraunces"; color: var(--yellow); }
+.scoreline .dash { width: 44px; height: 8px; border-radius: 4px; background: rgba(250,227,97,.55); }
+.brow { position: absolute; display: flex; align-items: center; width: 1620px; height: 96px; padding: 0 30px;
+  border-radius: 18px; background: rgba(19,27,38,.85); box-shadow: inset 0 0 0 1px rgba(147,185,226,.14); }
+.brow .no { width: 62px; font: 900 30px/1 "Fraunces"; color: var(--blue); }
+.brow .na { width: 400px; font: 800 31px/1 "Manrope"; }
+.brow .el { width: 110px; font: 700 25px/1 "Manrope"; color: var(--muted); }
+.brow .rs { width: 120px; text-align: center; font: 900 34px/1 "Fraunces"; color: var(--yellow); }
+.brow .op { flex: 1; font: 600 23px/1 "Manrope"; color: var(--muted); white-space: nowrap; }
+.dot { display: inline-block; width: 15px; height: 15px; border-radius: 50%; margin-right: 14px; vertical-align: 1px; }
+.dot.w { background: #f1f0ea; }
+.dot.b { background: #2b3442; box-shadow: inset 0 0 0 2px #6d7a8c; }
+
+/* Cartes féminines */
+.fcard { position: absolute; width: 780px; padding: 30px 32px; border-radius: 24px;
+  background: linear-gradient(150deg, #131b26, #0b1017); box-shadow: 0 30px 70px rgba(0,0,0,.5), inset 0 0 0 1px rgba(147,185,226,.16); }
+.fcard b { display: block; font: 800 30px/1.2 "Manrope"; margin-bottom: 10px; }
+.fcard span { font: 600 23px/1.35 "Manrope"; color: var(--muted); }
+
+/* Classements */
+.tbl { position: absolute; width: 700px; }
+.tbl h4 { font: 800 26px/1 "Manrope"; letter-spacing: .2em; text-transform: uppercase; color: var(--blue); margin-bottom: 26px; }
+.trow { display: flex; align-items: center; height: 84px; padding: 0 26px; margin-bottom: 12px; border-radius: 16px;
+  background: rgba(19,27,38,.8); box-shadow: inset 0 0 0 1px rgba(147,185,226,.12); }
+.trow .rk { width: 72px; font: 900 32px/1 "Fraunces"; color: var(--muted); }
+.trow .tm { flex: 1; font: 800 32px/1 "Manrope"; }
+.trow .pt { font: 900 36px/1 "Fraunces"; color: var(--yellow); }
+.trow.fr { background: rgba(44,74,110,.55); box-shadow: inset 0 0 0 1px rgba(147,185,226,.45); }
+.trow.fr .rk { color: var(--blue); }
+
+.badge { position: absolute; display: inline-flex; align-items: center; gap: 14px; padding: 16px 30px; border-radius: 999px;
+  background: rgba(250,227,97,.14); box-shadow: inset 0 0 0 1px rgba(250,227,97,.4); font: 800 26px/1 "Manrope"; color: var(--yellow); }
+
+/* Marque Europe Échecs */
+#logo { position: absolute; left: 112px; top: 48px; height: 58px; opacity: 0; }
+#fi-logo { height: 168px; margin-bottom: 52px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow1"></div>
+  <div id="glow2"></div>
+  <div id="grid"></div>
+
+  <!-- 1 · Titre -->
+  <div class="scene" id="titre">
+    <div class="kicker" id="ti-k" style="position:absolute;left:150px;top:300px"></div>
+    <div style="position:absolute;left:150px;top:360px" id="ti-h"></div>
+    <div class="lead" id="ti-s" style="position:absolute;left:150px;top:672px"></div>
+    <div class="credit" id="ti-c" style="position:absolute;left:150px;top:742px"></div>
+    <div class="board" id="ti-b" style="right:130px;top:190px;width:700px;height:700px"></div>
+  </div>
+
+  <!-- 2 · En bref -->
+  <div class="scene" id="enbref">
+    <div class="kicker" id="eb-k" style="position:absolute;left:150px;top:150px"></div>
+    <div class="h2" id="eb-t" style="position:absolute;left:150px;top:200px"></div>
+    <div id="eb-l"></div>
+  </div>
+
+  <!-- 3 · Feuille de match -->
+  <div class="scene" id="match">
+    <div class="kicker" id="ma-k" style="position:absolute;left:150px;top:130px"></div>
+    <div class="scoreline" id="ma-s" style="left:150px;top:186px"></div>
+    <div id="ma-l"></div>
+    <div class="lead" id="ma-g" style="position:absolute;left:150px;top:900px"></div>
+  </div>
+
+  <!-- 4 · Lagarde, l'échange -->
+  <div class="scene" id="lagarde1">
+    <div class="kicker" id="l1-k" style="position:absolute;left:150px;top:130px"></div>
+    <div class="h3" id="l1-t" style="position:absolute;left:150px;top:180px"></div>
+    <div class="lead" id="l1-s" style="position:absolute;left:150px;top:258px;width:620px"></div>
+    <div class="sanbar" id="l1-sb" style="left:150px;top:400px;width:640px"></div>
+    <div class="cap" id="l1-c" style="left:150px;top:720px;width:660px"></div>
+    <div class="board" id="l1-b" style="right:150px;top:150px;width:780px;height:780px"></div>
+  </div>
+
+  <!-- 5 · Lagarde, le piège -->
+  <div class="scene" id="lagarde2">
+    <div class="kicker" id="l2-k" style="position:absolute;left:150px;top:130px"></div>
+    <div class="h3" id="l2-t" style="position:absolute;left:150px;top:180px"></div>
+    <div class="lead" id="l2-s" style="position:absolute;left:150px;top:258px;width:620px"></div>
+    <div class="sanbar" id="l2-sb" style="left:150px;top:400px;width:640px"></div>
+    <div class="cap" id="l2-c" style="left:150px;top:720px;width:660px"></div>
+    <div class="board" id="l2-b" style="right:150px;top:150px;width:780px;height:780px"></div>
+    <div class="board" id="l2-f" style="right:150px;top:150px;width:780px;height:780px;opacity:0"></div>
+    <div class="badge" id="l2-fb" style="right:150px;top:970px;opacity:0"></div>
+  </div>
+
+  <!-- 6 · Féminines -->
+  <div class="scene" id="feminines">
+    <div class="kicker" id="fe-k" style="position:absolute;left:150px;top:130px"></div>
+    <div class="scoreline" id="fe-s" style="left:150px;top:186px"></div>
+    <div class="cap" id="fe-c" style="left:170px;top:958px;width:660px"></div>
+    <div class="board" id="fe-b" style="left:170px;top:368px;width:556px;height:556px"></div>
+    <div id="fe-l"></div>
+  </div>
+
+  <!-- 7 · Gukesh -->
+  <div class="scene" id="gukesh">
+    <div class="kicker" id="gu-k" style="position:absolute;left:150px;top:130px"></div>
+    <div class="h3" id="gu-t" style="position:absolute;left:150px;top:180px"></div>
+    <div class="lead" id="gu-s" style="position:absolute;left:150px;top:262px;width:620px"></div>
+    <div class="sanbar" id="gu-sb" style="left:150px;top:420px;width:640px"></div>
+    <div class="cap" id="gu-c" style="left:150px;top:720px;width:660px"></div>
+    <div class="board" id="gu-b" style="right:150px;top:150px;width:780px;height:780px"></div>
+  </div>
+
+  <!-- 8 · Classements -->
+  <div class="scene" id="classement">
+    <div class="kicker" id="cl-k" style="position:absolute;left:150px;top:140px"></div>
+    <div class="tbl" id="cl-m" style="left:150px;top:250px"></div>
+    <div class="tbl" id="cl-f" style="left:1070px;top:250px"></div>
+    <div class="lead" id="cl-n" style="position:absolute;left:150px;top:860px"></div>
+  </div>
+
+  <!-- 9 · Final -->
+  <div class="scene" id="final">
+    <div style="position:absolute;left:0;right:0;top:300px;text-align:center">
+      <img id="fi-logo" src="../../assets/brand/logo-europe-echecs.png" alt="Europe Échecs">
+      <div class="h2" id="fi-h"></div>
+      <div class="lead" id="fi-s" style="margin-top:30px"></div>
+      <div class="credit" id="fi-c" style="margin-top:56px"></div>
+    </div>
+  </div>
+
+  <img id="logo" src="../../assets/brand/logo-europe-echecs.png" alt="Europe Échecs">
+  <div id="vignette"></div>
+  <div id="progress"></div>
+</div>
+
+<script src="timing.js"></script>
+<script src="contenu.js"></script>
+<script src="parties.js"></script>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+const P = "../../video/assets/pieces/";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const FILES = "abcdefgh";
+const C = window.CONTENU, PARTIES = window.PARTIES;
+
+// ---------- Échiquier ----------
+// flip = true : les Noirs en bas.
+function sqPos(sq, flip) {
+  const f = FILES.indexOf(sq[0]), r = +sq[1];
+  return flip
+    ? { left: (7 - f) * 12.5 + "%", top: (r - 1) * 12.5 + "%" }
+    : { left: f * 12.5 + "%", top: (8 - r) * 12.5 + "%" };
+}
+// « rnbq… » d'un FEN → { e4: "wP", … }
+function fenPlacement(fen) {
+  const rows = fen.split(" ")[0].split("/");
+  const out = {};
+  rows.forEach((row, i) => {
+    let f = 0;
+    for (const ch of row) {
+      if (/\d/.test(ch)) { f += +ch; continue; }
+      const code = (ch === ch.toUpperCase() ? "w" : "b") + ch.toUpperCase();
+      out[FILES[f] + (8 - i)] = code;
+      f++;
+    }
+  });
+  return out;
+}
+function makeBoard(el, placement, flip) {
+  const pieces = {};
+  for (const [sq, code] of Object.entries(placement)) {
+    const d = document.createElement("div");
+    d.className = "pc";
+    d.style.backgroundImage = `url(${P}${code}.png)`;
+    Object.assign(d.style, sqPos(sq, flip));
+    el.appendChild(d);
+    pieces[sq] = d;
+  }
+  return pieces;
+}
+function coords(el, flip) {
+  for (let i = 0; i < 8; i++) {
+    const f = document.createElement("div");
+    f.className = "co f";
+    f.textContent = FILES[flip ? 7 - i : i];
+    f.style.left = i * 12.5 + 1 + "%";
+    const r = document.createElement("div");
+    r.className = "co r";
+    r.textContent = flip ? i + 1 : 8 - i;
+    r.style.top = i * 12.5 + 1 + "%";
+    el.append(f, r);
+  }
+}
+function hl(el, sq, flip) {
+  const d = document.createElement("div");
+  d.className = "hl";
+  Object.assign(d.style, sqPos(sq, flip));
+  el.appendChild(d);
+  return d;
+}
+
+// Rejoue une fenêtre de demi-coups sur la timeline `st`, à partir de `t0`.
+// Renvoie { fin, temps } : instant de fin et instant de chaque demi-coup.
+function playGame(st, boardSel, conf, t0) {
+  const g = PARTIES[conf.partie];
+  const flip = conf.orientation === "noir";
+  const el = $(boardSel);
+  const win = g.moves.slice(conf.de, conf.a + 1);
+  const map = makeBoard(el, fenPlacement(win[0].before), flip);
+  coords(el, flip);
+
+  const temps = {};
+  win.forEach((m, i) => {
+    const t = t0 + i * conf.pas;
+    temps[conf.de + i] = t;
+    const mv = map[m.from];
+    if (!mv) throw new Error(`pièce absente en ${m.from} (${m.san})`);
+
+    // Case de départ et case d'arrivée mises en valeur
+    const a = hl(el, m.from, flip), b = hl(el, m.to, flip);
+    st.to([a, b], { opacity: 1, duration: .16 }, t);
+    st.to([a, b], { opacity: 0, duration: .3 }, t + conf.pas * .72);
+
+    // Prise : la pièce capturée s'effface (la prise en passant se fait ailleurs)
+    if (m.captured) {
+      const capSq = m.flags.includes("e") ? m.to[0] + m.from[1] : m.to;
+      const cap = map[capSq];
+      if (cap) {
+        st.to(cap, { opacity: 0, scale: .55, duration: .26, ease: "power2.in" }, t + .1);
+        delete map[capSq];
+      }
+    }
+
+    st.to(mv, { ...sqPos(m.to, flip), duration: .36, ease: "power2.inOut" }, t);
+    delete map[m.from];
+    map[m.to] = mv;
+
+    if (m.promotion) st.set(mv, { backgroundImage: `url(${P}${m.promotion}.png)` }, t + .3);
+
+    // Roque : la tour suit
+    if (m.flags.includes("k") || m.flags.includes("q")) {
+      const rank = m.color === "w" ? "1" : "8";
+      const rf = (m.flags.includes("k") ? "h" : "a") + rank;
+      const rt = (m.flags.includes("k") ? "f" : "d") + rank;
+      const rook = map[rf];
+      if (rook) {
+        st.to(rook, { ...sqPos(rt, flip), duration: .36, ease: "power2.inOut" }, t + .08);
+        delete map[rf];
+        map[rt] = rook;
+      }
+    }
+  });
+  return { fin: t0 + (win.length - 1) * conf.pas + .5, temps };
+}
+
+// Bandeau des coups joués : chaque demi-coup s'allume au moment où il est joué.
+function sanbar(st, sel, conf, temps) {
+  const g = PARTIES[conf.partie];
+  const box = $(sel);
+  for (let i = conf.de; i <= conf.a; i++) {
+    const m = g.moves[i];
+    const b = document.createElement("b");
+    const no = Math.floor(i / 2) + 1;
+    b.textContent = (m.color === "w" ? no + ". " : (i === conf.de ? no + "… " : "")) + m.san;
+    box.appendChild(b);
+    st.set(b, { className: "on" }, temps[i]);
+    if (i < conf.a) st.set(b, { className: "done" }, temps[i] + conf.pas);
+  }
+}
+
+// Légendes : chacune apparaît sur son demi-coup et cède la place à la suivante.
+function legendes(st, sel, conf, temps, fin) {
+  const box = $(sel);
+  const els = conf.legendes.map(l => {
+    const d = document.createElement("div");
+    d.innerHTML = '<i></i><span>' + l.texte + '</span>';
+    Object.assign(d.style, { position: "absolute", left: 0, top: 0, width: "100%" });
+    box.appendChild(d);
+    return d;
+  });
+  st.set(box, { opacity: 1 }, 0);
+  conf.legendes.forEach((l, i) => {
+    const t = (temps[l.ply] ?? 0) + .3;
+    const tf = i + 1 < conf.legendes.length ? (temps[conf.legendes[i + 1].ply] ?? fin) + .1 : fin;
+    st.fromTo(els[i], { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: .45 }, t);
+    st.to(els[i], { opacity: 0, y: -18, duration: .3 }, Math.max(t + .6, tf));
+  });
+}
+
+function splitLines(el, lignes, cls) {
+  el.innerHTML = lignes.map(l => `<span class="line"><span class="${cls}">${l}</span></span>`).join("");
+  return $$("." + cls, el);
+}
+
+// ---------- Timeline ----------
+gsap.defaults({ ease: "expo.out" });
+const tl = gsap.timeline({ paused: true });
+const T = window.TIMING;
+const TOTAL = T.total;
+const S = Object.fromEntries(T.scenes.map(s => [s.id, s]));
+const EXIT = .34;
+
+function scene(id, build) {
+  const { start, dur } = S[id];
+  const st = gsap.timeline();
+  const at = (sel, t, vars) => st.to(sel, vars, t);
+  const from = (sel, t, a, b) => st.fromTo(sel, a, b, t);
+  st.fromTo("#" + id, { opacity: 0, scale: 1.05, filter: "blur(12px)" },
+    { opacity: 1, scale: 1, filter: "blur(0px)", duration: .38, ease: "power3.out" }, 0);
+  build({ st, at, from, dur });
+  st.to("#" + id, { opacity: 0, scale: 1.06, filter: "blur(10px)", duration: EXIT, ease: "power2.in" }, dur - EXIT);
+  st.set({}, {}, dur);
+  tl.add(st, start);
+}
+
+// Fond : dérive permanente
+tl.fromTo("#glow1", { x: 0, y: 0 }, { x: 900, y: 300, duration: TOTAL, ease: "sine.inOut" }, 0);
+tl.fromTo("#glow2", { x: 0, y: 0 }, { x: -700, y: -200, duration: TOTAL, ease: "sine.inOut" }, 0);
+tl.fromTo("#grid", { backgroundPosition: "0px 0px, 0px 0px" }, { backgroundPosition: "0px 1300px, 0px 0px", duration: TOTAL, ease: "none" }, 0);
+tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: S.final.start, ease: "none" }, 0);
+tl.to("#progress", { opacity: 0, duration: .3 }, S.final.start);
+
+// Marque Europe Échecs : filigrane présent d'un bout à l'autre, sauf sur le plan
+// final où le logo passe en grand.
+tl.to("#logo", { opacity: .55, duration: .8 }, 1.2);
+tl.to("#logo", { opacity: 0, duration: .4 }, S.final.start - .4);
+
+// ===== 1 · Titre : la position finale de Wei Yi – Lagarde s'installe
+scene("titre", ({ st, from, at, dur }) => {
+  const c = C.titre;
+  $("#ti-k").textContent = c.kicker;
+  $("#ti-s").textContent = c.sub;
+  $("#ti-c").textContent = c.credit;
+  const lignes = splitLines($("#ti-h"), c.h1.map((l, i) => i ? `<span class="em">${l}</span>` : l), "ti-w");
+  $("#ti-h").className = "h1";
+
+  const lag = PARTIES.lagarde;
+  const pieces = makeBoard($("#ti-b"), fenPlacement(lag.moves[130].before), true);
+  coords($("#ti-b"), true);
+
+  from("#ti-k", .1, { opacity: 0, x: -28 }, { opacity: 1, x: 0, duration: .6 });
+  st.fromTo(lignes, { yPercent: 112 }, { yPercent: 0, duration: .8, stagger: .12 }, .2);
+  from("#ti-s", .7, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: .6 });
+  from("#ti-c", .9, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6 });
+  from("#ti-b", 0, { opacity: 0, scale: .82, rotateZ: -6 }, { opacity: 1, scale: 1, rotateZ: 0, duration: 1.1 });
+  from(Object.values(pieces), .3, { opacity: 0, y: -40 },
+    { opacity: 1, y: 0, duration: .45, stagger: { each: .02, from: "random" }, ease: "back.out(2)" });
+  at("#ti-b", 1.2, { rotateY: -9, rotateX: 5, scale: 1.03, transformPerspective: 1600, duration: dur - 1.2, ease: "sine.inOut" });
+});
+
+// ===== 2 · En bref : les quatre résultats de la journée
+scene("enbref", ({ st, from, dur }) => {
+  const c = C.enbref;
+  $("#eb-k").textContent = c.kicker;
+  $("#eb-t").textContent = c.titre;
+  const box = $("#eb-l");
+  const rows = c.matchs.map((m, i) => {
+    const d = document.createElement("div");
+    d.className = "mrow" + (m.ton === "or" ? " or" : "");
+    d.style.left = "150px";
+    d.style.top = 360 + i * 148 + "px";
+    d.innerHTML = `<div class="tn">${m.a}</div><div class="sc">${m.sa}</div>`
+      + `<div class="sc">${m.sb}</div><div class="tn r">${m.b}</div><div class="nt">${m.note}</div>`;
+    box.appendChild(d);
+    return d;
+  });
+  from("#eb-k", .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+  from("#eb-t", .12, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .6 });
+  st.fromTo(rows, { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: .6, stagger: .5 }, .5);
+  st.fromTo(rows.map(r => r.querySelectorAll(".sc")), { opacity: 0, scale: .6 },
+    { opacity: 1, scale: 1, duration: .4, stagger: .5, ease: "back.out(2.4)" }, .75);
+});
+
+// ===== 3 · Feuille de match France – Chine
+scene("match", ({ st, from, dur }) => {
+  const c = C.match;
+  $("#ma-k").textContent = c.kicker;
+  $("#ma-g").textContent = c.legende;
+  $("#ma-s").innerHTML = `<div class="team">${c.gauche}</div><div class="pts">${c.scoreG}</div>`
+    + `<div class="dash"></div><div class="pts">${c.scoreD}</div><div class="team">${c.droite}</div>`;
+  const box = $("#ma-l");
+  const rows = c.echiquiers.map((e, i) => {
+    const d = document.createElement("div");
+    d.className = "brow";
+    d.style.left = "150px";
+    d.style.top = 420 + i * 112 + "px";
+    const dFr = e.blancs === "fr" ? "w" : "b", dAd = e.blancs === "fr" ? "b" : "w";
+    d.innerHTML = `<div class="no">${e.n}</div>`
+      + `<div class="na"><span class="dot ${dFr}"></span>${e.fr}</div><div class="el">${e.eloFr}</div>`
+      + `<div class="rs">${e.res}</div>`
+      + `<div class="na"><span class="dot ${dAd}"></span>${e.adv}</div><div class="el">${e.eloAdv}</div>`
+      + `<div class="op">${e.ouv} · ${e.coups}</div>`;
+    box.appendChild(d);
+    return d;
+  });
+  from("#ma-k", .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+  from($$("#ma-s .team"), .15, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: .6, stagger: .12 });
+  from($$("#ma-s .pts"), .3, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .55, stagger: .1, ease: "back.out(2.6)" });
+  st.fromTo(rows, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .5, stagger: .3 }, .7);
+  from("#ma-g", 2.4, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .6 });
+});
+
+// ===== 4 et 5 et 7 · Scènes de partie
+function sceneP(id, conf, ids) {
+  scene(id, ({ st, from, dur }) => {
+    $(ids.k).textContent = conf.kicker;
+    $(ids.t).textContent = conf.titre;
+    if (ids.s) $(ids.s).textContent = conf.sub;
+    from(ids.k, .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+    from(ids.t, .12, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: .6 });
+    if (ids.s) from(ids.s, .25, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: .6 });
+    from(ids.b, 0, { opacity: 0, scale: .88 }, { opacity: 1, scale: 1, duration: .8 });
+
+    const t0 = 1.5;
+    const { fin, temps } = playGame(st, ids.b, conf, t0);
+    sanbar(st, ids.sb, conf, temps);
+    legendes(st, ids.c, conf, temps, dur - EXIT - .25);
+    st.fromTo($(ids.sb).children, { opacity: 0 }, { opacity: 1, duration: .3, stagger: .04 }, t0 - .5);
+    return fin;
+  });
+}
+sceneP("lagarde1", C.lagarde1, { k: "#l1-k", t: "#l1-t", s: "#l1-s", b: "#l1-b", sb: "#l1-sb", c: "#l1-c" });
+
+scene("lagarde2", ({ st, from, dur }) => {
+  const c = C.lagarde2;
+  $("#l2-k").textContent = c.kicker;
+  $("#l2-t").textContent = c.titre;
+  $("#l2-s").textContent = c.sub;
+  from("#l2-k", .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+  from("#l2-t", .12, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: .6 });
+  from("#l2-s", .25, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: .6 });
+  from("#l2-b", 0, { opacity: 0, scale: .88 }, { opacity: 1, scale: 1, duration: .8 });
+
+  const t0 = 1.4;
+  const { fin, temps } = playGame(st, "#l2-b", c, t0);
+  sanbar(st, "#l2-sb", c, temps);
+  st.fromTo($("#l2-sb").children, { opacity: 0 }, { opacity: 1, duration: .3, stagger: .04 }, t0 - .5);
+
+  // La finale : la position du 82e coup remplace l'échiquier courant
+  const tf = Math.min(fin + .4, dur - EXIT - 3.2);
+  const g = PARTIES.lagarde;
+  makeBoard($("#l2-f"), fenPlacement(g.moves[c.final.ply].before), true);
+  coords($("#l2-f"), true);
+  const mk = hl($("#l2-f"), g.moves[c.final.ply].from, true), mk2 = hl($("#l2-f"), g.moves[c.final.ply].to, true);
+  $("#l2-fb").innerHTML = `${c.final.san} — ${c.final.texte}`;
+  legendes(st, "#l2-c", c, temps, tf);
+  st.to("#l2-b", { opacity: 0, duration: .4 }, tf);
+  st.to("#l2-f", { opacity: 1, duration: .4 }, tf);
+  st.fromTo([mk, mk2], { opacity: 0 }, { opacity: 1, duration: .3, stagger: .12 }, tf + .4);
+  st.fromTo("#l2-fb", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: .5 }, tf + .5);
+});
+
+// ===== 6 · Féminines : France 2,5 - 1,5 Serbie
+scene("feminines", ({ st, from, dur }) => {
+  const c = C.feminines;
+  $("#fe-k").textContent = c.kicker;
+  $("#fe-s").innerHTML = `<div class="team">${c.gauche}</div><div class="pts">${c.scoreG}</div>`
+    + `<div class="dash"></div><div class="pts">${c.scoreD}</div><div class="team">${c.droite}</div>`;
+  const box = $("#fe-l");
+  const cartes = c.cartes.map((k, i) => {
+    const d = document.createElement("div");
+    d.className = "fcard";
+    d.style.left = "870px";
+    d.style.top = 380 + i * 196 + "px";
+    d.innerHTML = `<b>${k.haut}</b><span>${k.bas}</span>`;
+    box.appendChild(d);
+    return d;
+  });
+  from("#fe-k", .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+  from($$("#fe-s .team"), .12, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .55, stagger: .1 });
+  from($$("#fe-s .pts"), .25, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .5, stagger: .1, ease: "back.out(2.6)" });
+  from("#fe-b", .35, { opacity: 0, scale: .86 }, { opacity: 1, scale: 1, duration: .7 });
+
+  const t0 = 1.6;
+  const { fin, temps } = playGame(st, "#fe-b", c, t0);
+  legendes(st, "#fe-c", c, temps, dur - EXIT - .25);
+  st.fromTo(cartes, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: .5, stagger: .45 }, 1.0);
+  st.fromTo(cartes[0], { boxShadow: "0 30px 70px rgba(0,0,0,.5), inset 0 0 0 1px rgba(147,185,226,.16)" },
+    { boxShadow: "0 30px 70px rgba(0,0,0,.5), inset 0 0 0 2px rgba(250,227,97,.55)", duration: .5 }, fin);
+});
+
+sceneP("gukesh", C.gukesh, { k: "#gu-k", t: "#gu-t", s: "#gu-s", b: "#gu-b", sb: "#gu-sb", c: "#gu-c" });
+
+// ===== 8 · Classements
+scene("classement", ({ st, from, dur }) => {
+  const c = C.classement;
+  $("#cl-k").textContent = c.kicker;
+  $("#cl-n").textContent = c.note;
+  const tables = [["#cl-m", c.mixte], ["#cl-f", c.feminin]].map(([sel, t]) => {
+    const box = $(sel);
+    box.innerHTML = `<h4>${t.titre}</h4>`;
+    return t.lignes.map(l => {
+      const d = document.createElement("div");
+      d.className = "trow" + (l.fr ? " fr" : "");
+      d.innerHTML = `<div class="rk">${l.rang}</div><div class="tm">${l.equipe}</div><div class="pt">${l.pts}</div>`;
+      box.appendChild(d);
+      return d;
+    });
+  });
+  from("#cl-k", .05, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: .5 });
+  from($$(".tbl h4"), .15, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5, stagger: .12 });
+  st.fromTo(tables[0], { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: .5, stagger: .22 }, .35);
+  st.fromTo(tables[1], { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .5, stagger: .22 }, .6);
+  st.fromTo($$(".trow.fr"), { scale: 1 }, { scale: 1.04, duration: .5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 2.6);
+  from("#cl-n", 3.4, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .6 });
+});
+
+// ===== 9 · Final
+scene("final", ({ st, from, dur }) => {
+  const c = C.final;
+  $("#fi-h").textContent = c.h;
+  $("#fi-s").textContent = c.sub;
+  $("#fi-c").textContent = c.credit;
+  from("#fi-logo", 0, { opacity: 0, y: 30, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .9 });
+  from("#fi-h", .1, { opacity: 0, y: 40, scale: .94 }, { opacity: 1, y: 0, scale: 1, duration: .8 });
+  from("#fi-s", .4, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: .6 });
+  from("#fi-c", .7, { opacity: 0 }, { opacity: 1, duration: .7 });
+});
+
+tl.set({}, {}, TOTAL);
+
+window.TOTAL = TOTAL;
+window.seekTo = t => { tl.seek(t, false); };
+window.ready = document.fonts.ready.then(() =>
+  Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+node_modules/
+build/*
+!build/olympiades-2026-ronde-9.mp4
+!build/poster.jpg
+audio/music.wav
