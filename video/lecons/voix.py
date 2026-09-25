@@ -87,7 +87,7 @@ def eleven(text, dst, voice, model, prev, nxt):
     body = {"text": say, "model_id": model, "voice_settings": SETTINGS, "language_code": "fr"}
     if prev: body["previous_text"] = spoken(prev)
     if nxt: body["next_text"] = spoken(nxt)
-    r = eleven_call(f"/text-to-speech/{voice}/with-timestamps?output_format=mp3_44100_192", body)
+    r = eleven_call(f"/text-to-speech/{voice}/with-timestamps?output_format=mp3_44100_128", body)
     mp3 = dst + ".mp3"
     open(mp3, "wb").write(base64.b64decode(r["audio_base64"]))
     lead, dur = to_wav(mp3, dst)
@@ -105,7 +105,7 @@ def main():
     ap.add_argument("name", nargs="?")
     ap.add_argument("--eleven", action="store_true")
     ap.add_argument("--voice", default=os.environ.get("ELEVENLABS_VOICE_ID"))
-    ap.add_argument("--model", default="eleven_flash_v2_5")
+    ap.add_argument("--model", default="eleven_turbo_v2_5")
     ap.add_argument("--voices", action="store_true")
     a = ap.parse_args()
     if a.voices:

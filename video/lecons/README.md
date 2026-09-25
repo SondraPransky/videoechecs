@@ -45,7 +45,7 @@ node render.mjs build/lecons/<nom>/apercu --page "lecons/player.html?l=<nom>" --
 ## Voix off
 
 - **Piper**, voix `fr_FR-tom-medium` : gratuite et hors ligne. Elle sert de maquette.
-- **ElevenLabs** : nettement plus naturelle, avec le modèle `eleven_flash_v2_5`, qui coûte 0,5 crédit par caractère. Une leçon de 13 minutes compte environ 10 500 caractères, soit environ 5 300 crédits. Elle tient donc dans l'offre gratuite de 10 000 crédits par mois.
+- **ElevenLabs** : nettement plus naturelle, avec le modèle `eleven_turbo_v2_5`, qui coûte 0,5 crédit par caractère. Une leçon de 13 minutes compte environ 10 500 caractères, soit environ 5 300 crédits. Elle tient donc dans l'offre gratuite de 10 000 crédits par mois.
 - Pour lister les voix du compte : `python3 lecons/voix.py --voices`.
 - ElevenLabs renvoie l'instant de chaque caractère lu. Les coups tombent alors exactement sur le mot prononcé. Avec Piper, cet instant est estimé.
 - Avant la lecture, `e5` est transformé en `é5` pour éviter un « euh cinq ». Les autres corrections de prononciation se trouvent dans `SAY`, dans `voix.py`.

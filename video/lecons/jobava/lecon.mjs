@@ -18,6 +18,7 @@ export const meta = {
   title: 'Une petite idée contre le Jobava',
   kicker: 'Leçon d\'ouverture · Objectif 1600-1800',
   author: 'D\'après l\'analyse de Romuald De Labaca',
+  orientation: 'black',   // leçon pour les Noirs : échiquier vu de leur côté
 };
 
 const MAIN = 'Partie principale';
