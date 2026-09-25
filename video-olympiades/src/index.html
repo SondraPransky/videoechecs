@@ -342,6 +342,11 @@ function playGame(st, boardSel, conf, t0) {
   return { fin: t0 + (win.length - 1) * conf.pas + .5, temps };
 }
 
+// Notation française : R(oi), D(ame), T(our), F(ou), C(avalier). Les colonnes sont
+// en minuscules et le roque en O, donc seules les lettres de pièce changent.
+const FR = { K: "R", Q: "D", R: "T", B: "F", N: "C" };
+const sanFr = san => san.replace(/[KQRBN]/g, c => FR[c]);
+
 // Bandeau des coups joués : chaque demi-coup s'allume au moment où il est joué.
 function sanbar(st, sel, conf, temps) {
   const g = PARTIES[conf.partie];
@@ -350,7 +355,7 @@ function sanbar(st, sel, conf, temps) {
     const m = g.moves[i];
     const b = document.createElement("b");
     const no = Math.floor(i / 2) + 1;
-    b.textContent = (m.color === "w" ? no + ". " : (i === conf.de ? no + "… " : "")) + m.san;
+    b.textContent = (m.color === "w" ? no + ". " : (i === conf.de ? no + "… " : "")) + sanFr(m.san);
     box.appendChild(b);
     st.set(b, { className: "on" }, temps[i]);
     if (i < conf.a) st.set(b, { className: "done" }, temps[i] + conf.pas);
