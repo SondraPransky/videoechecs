@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Leçon vidéo — echecs.com Académie</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 700; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+
+:root {
+  --bg: #06080c; --ink: #f4f1ea; --muted: #8b95a5; --blue: #93b9e2; --yellow: #fae361;
+  --sq-light: #e4ecf6; --sq-dark: #93b9e2; --green: #6bdc7d; --red: #ff5a6a;
+  --panel: linear-gradient(160deg, #131b26, #0b1017);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; }
+#glow1, #glow2 { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; filter: blur(40px); }
+#glow1 { background: radial-gradient(circle, rgba(147,185,226,.18), rgba(147,185,226,0) 62%); left: -400px; top: -600px; }
+#glow2 { background: radial-gradient(circle, rgba(250,227,97,.07), rgba(250,227,97,0) 60%); right: -500px; bottom: -700px; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.5) 100%); }
+
+/* En-tête */
+#logo { position: absolute; left: 100px; top: 36px; height: 44px; }
+#brandline { position: absolute; left: 330px; top: 50px; font: 800 18px/1 "Manrope"; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+#brandline b { color: var(--yellow); }
+#lessonTitle { position: absolute; right: 80px; top: 44px; font: 400 30px/1 "Fraunces"; font-style: italic; color: #c9d1dc; }
+
+/* Échiquier */
+#boardWrap { position: absolute; left: 100px; top: 112px; width: 840px; height: 840px; }
+#board { position: absolute; inset: 0; border-radius: 14px; overflow: hidden;
+  background: repeating-conic-gradient(var(--sq-light) 0 25%, var(--sq-dark) 0 50%) 0 0 / 25% 25%;
+  box-shadow: 0 50px 110px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
+#board .c { position: absolute; font: 800 17px/1 "Manrope"; color: rgba(20,40,70,.55); }
+#board .hl, #board .mk { position: absolute; width: 12.5%; height: 12.5%; }
+#board .hl { background: rgba(250,227,97,.55); }
+#board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; }
+#arrows { position: absolute; inset: 0; width: 100%; height: 100%; }
+#quizRing { position: absolute; inset: -8px; border-radius: 20px; border: 6px solid var(--yellow); opacity: 0; box-shadow: 0 0 60px rgba(250,227,97,.45); }
+
+/* Panneau */
+#panel { position: absolute; left: 1010px; top: 112px; width: 830px; height: 840px; }
+#chapter { font: 800 20px/1 "Manrope"; letter-spacing: .24em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 16px; height: 24px; }
+#chapter::before { content: ""; width: 48px; height: 2px; background: currentColor; }
+#lineName { margin-top: 18px; font: 900 56px/1.05 "Fraunces"; letter-spacing: -.01em; height: 62px; white-space: nowrap; }
+#chips { margin-top: 20px; display: flex; gap: 14px; height: 48px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; height: 48px; border-radius: 999px; font: 800 21px/1 "Manrope"; white-space: nowrap; }
+.chip.main { background: var(--yellow); color: #14161a; }
+.chip.var { background: rgba(147,185,226,.16); color: var(--blue); box-shadow: inset 0 0 0 2px rgba(147,185,226,.35); }
+.chip.ev { background: #f4f1ea; color: #14161a; }
+.chip.ev b { font: 900 24px/1 "Fraunces"; }
+.chip.game { background: rgba(250,227,97,.14); color: var(--yellow); box-shadow: inset 0 0 0 2px rgba(250,227,97,.4); }
+.card { position: absolute; left: 0; right: 0; border-radius: 26px; background: var(--panel); box-shadow: 0 40px 80px rgba(0,0,0,.45), inset 0 0 0 1px rgba(147,185,226,.16); }
+.card h5 { font: 800 18px/1 "Manrope"; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+#movesCard { top: 212px; height: 300px; padding: 30px 34px; }
+#moves { font: 700 30px/1.55 "Manrope"; color: #c9d1dc; }
+#moves .n { color: var(--muted); font-weight: 500; margin-right: 6px; }
+#moves .ply { display: inline-block; white-space: nowrap; }
+#moves .m { display: inline-block; padding: 0 8px; border-radius: 10px; margin-right: 6px; }
+#moves .m.new { color: var(--ink); }
+#moves .m.cur { background: var(--yellow); color: #14161a; }
+#moves img { height: 1.05em; vertical-align: -0.18em; margin-right: 1px; }
+#moves .m.cur img { filter: brightness(0); }
+#moves .dots { color: var(--muted); margin-right: 8px; }
+#keyCard { top: 540px; height: 300px; padding: 34px 38px; background: linear-gradient(160deg, #1d2633, #0e141c); }
+#keyCard h5 { color: var(--yellow); display: flex; align-items: center; gap: 12px; }
+#keyText { font: 700 40px/1.25 "Fraunces"; color: var(--ink); }
+#keyMascot { position: absolute; right: 18px; bottom: 12px; width: 150px; height: 150px; }
+
+/* Quiz */
+#quiz { position: absolute; left: 0; right: 0; top: 212px; height: 628px; border-radius: 26px; background: var(--yellow); color: #14161a; padding: 50px 50px; opacity: 0; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+#quiz .k { font: 800 22px/1 "Manrope"; letter-spacing: .24em; text-transform: uppercase; opacity: .7; }
+#quiz .t { font: 900 84px/1 "Fraunces"; margin-top: 18px; }
+#quiz .q { font: 700 38px/1.25 "Manrope"; margin-top: 30px; max-width: 700px; }
+#quiz .p { position: absolute; left: 50px; bottom: 50px; font: 800 22px/1.3 "Manrope"; opacity: .7; }
+#quiz svg.ring { position: absolute; right: 50px; bottom: 44px; width: 170px; height: 170px; }
+#quiz .num { position: absolute; right: 50px; bottom: 44px; width: 170px; height: 170px; display: grid; place-items: center; font: 900 76px/1 "Fraunces"; }
+#quizMascot { position: absolute; right: 40px; top: 36px; width: 230px; height: 230px; }
+#quizMascot .mascotte { --mascot: #14161a; --line: #fae361; }
+
+/* Cartes plein écran */
+#cardOverlay { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 30% 40%, #121a26 0%, #06080c 70%); }
+#cardOverlay .inner { position: absolute; left: 160px; top: 0; bottom: 0; width: 1100px; display: flex; flex-direction: column; justify-content: center; }
+#cardOverlay .k { font: 800 26px/1 "Manrope"; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 18px; }
+#cardOverlay .k::before { content: ""; width: 64px; height: 2px; background: currentColor; }
+#cardOverlay .t { font: 900 118px/1.0 "Fraunces"; letter-spacing: -.02em; margin-top: 28px; }
+#cardOverlay .s { font: 400 50px/1.2 "Fraunces"; font-style: italic; color: var(--yellow); margin-top: 30px; }
+#cardOverlay .a { font: 700 26px/1.3 "Manrope"; color: var(--muted); margin-top: 40px; }
+#cardOverlay ul { list-style: none; margin-top: 44px; }
+#cardOverlay li { font: 700 36px/1.3 "Manrope"; margin-bottom: 24px; padding-left: 64px; position: relative; opacity: 0; }
+#cardOverlay li i { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); color: #14161a; font: 900 26px/44px "Fraunces"; text-align: center; font-style: normal; }
+#cardMascot { position: absolute; right: 140px; top: 50%; width: 520px; height: 520px; margin-top: -260px; }
+.pose svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
+.pose .shadow { display: none; }
+
+/* Sous-titres et progression */
+#subs { position: absolute; left: 100px; right: 80px; top: 974px; height: 80px; display: flex; justify-content: center; align-items: center; }
+#subs span { max-width: 1700px; text-align: center; font: 700 33px/1.3 "Manrope"; color: #fff; background: rgba(6,8,12,.72); padding: 10px 26px; border-radius: 14px; box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+#progress { position: absolute; left: 0; bottom: 0; height: 5px; width: 1920px; background: linear-gradient(90deg, var(--blue), var(--yellow)); transform-origin: 0 50%; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow1"></div><div id="glow2"></div><div id="vignette"></div>
+  <img id="logo" src="../../assets/brand/logo-echecs-com.png">
+  <div id="brandline"><b>Académie</b> · Leçon vidéo</div>
+  <div id="lessonTitle"></div>
+  <div id="boardWrap"><div id="quizRing"></div><div id="board"></div><svg id="arrows" viewBox="0 0 800 800"></svg></div>
+  <div id="panel">
+    <div id="chapter"></div>
+    <div id="lineName"></div>
+    <div id="chips"></div>
+    <div class="card" id="movesCard"><h5>Coups joués</h5><div id="moves"></div></div>
+    <div class="card" id="keyCard"><h5><svg width="26" height="26" viewBox="0 0 24 24"><path fill="#fae361" d="M9 21h6v-1.5H9V21Zm3-19a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2Z"/></svg>Idée clé</h5><div id="keyText"></div></div>
+    <div id="quiz"><div class="k">Quiz</div><div class="t">À toi de jouer !</div><div class="q"></div>
+      <div class="p">Mets la vidéo en pause<br>et cherche le coup.</div>
+      <svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="8"/><circle id="ringArc" cx="50" cy="50" r="44" fill="none" stroke="#14161a" stroke-width="8" stroke-linecap="round" transform="rotate(-90 50 50)" stroke-dasharray="276.5" stroke-dashoffset="0"/></svg>
+      <div class="num"></div>
+      <div id="quizMascot" class="pose" data-pose="reflexion"></div>
+    </div>
+  </div>
+  <div id="subs"><span></span></div>
+  <div id="cardOverlay"><div class="inner"><div class="k"></div><div class="t"></div><div class="s"></div><div class="a"></div><ul></ul></div><div id="cardMascot" class="pose"></div></div>
+  <div id="progress"></div>
+</div>
+<script src="../assets/mascot/poses.js"></script>
+<script>
+const lesson = new URLSearchParams(location.search).get('l') || 'jobava';
+document.write(`<script src="../build/lecons/${lesson}/data.js"><\/script>`);
+</script>
+<script>
+const L = window.LESSON, B = L.beats;
+const $ = s => document.querySelector(s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const out = x => 1 - Math.pow(1 - clamp(x), 3);
+const PIECE = '../assets/pieces/';
+$('#lessonTitle').textContent = L.meta.title;
+
+// ── Échiquier ─────────────────────────────────────────────
+function parseFen(fen) {
+  const res = []; const rows = fen.split(' ')[0].split('/');
+  rows.forEach((r, i) => { let f = 0; for (const c of r) { if (/\d/.test(c)) f += +c; else { res.push({ p: (c === c.toUpperCase() ? 'w' : 'b') + c.toUpperCase(), f, r: 7 - i }); f++; } } });
+  return res;
+}
+const sqXY = s => ({ f: s.charCodeAt(0) - 97, r: +s[1] - 1 });
+const pos = (f, r) => `left:${f * 12.5}%;top:${(7 - r) * 12.5}%`;
+const COLORS = { G: '#3fbf5a', R: '#ff4d5e', Y: '#f5c400', B: '#3d7fd1' };
+const FILL = { G: 'rgba(63,191,90,.55)', R: 'rgba(255,77,94,.5)', Y: 'rgba(250,227,97,.7)', B: 'rgba(61,127,209,.5)' };
+let coords = '';
+for (let i = 0; i < 8; i++) {
+  coords += `<div class="c" style="left:${i * 12.5 + 10.6}%;top:96.9%">${'abcdefgh'[i]}</div>`;
+  coords += `<div class="c" style="left:.6%;top:${(7 - i) * 12.5 + .8}%">${i + 1}</div>`;
+}
+
+// Interpolation entre deux positions quelconques (retour à la ligne principale, etc.)
+function morph(fa, fb, p) {
+  const A = parseFen(fa), Bp = parseFen(fb), used = new Set(), res = [];
+  const pending = [];
+  for (const b of Bp) { const k = A.findIndex((a, i) => !used.has(i) && a.p === b.p && a.f === b.f && a.r === b.r); if (k >= 0) { used.add(k); res.push({ ...b, o: 1 }); } else pending.push(b); }
+  for (const b of pending) {
+    let best = -1, bd = 1e9;
+    A.forEach((a, i) => { if (!used.has(i) && a.p === b.p) { const d = Math.hypot(a.f - b.f, a.r - b.r); if (d < bd) { bd = d; best = i; } } });
+    if (best >= 0) { used.add(best); const a = A[best], e = ease(p); res.push({ p: b.p, f: a.f + (b.f - a.f) * e, r: a.r + (b.r - a.r) * e, o: 1 }); }
+    else res.push({ ...b, o: ease(p) });
+  }
+  A.forEach((a, i) => { if (!used.has(i)) res.push({ ...a, o: 1 - ease(p) }); });
+  return res;
+}
+
+function boardAt(beat, t) {
+  // Pièces à l'instant t dans ce passage + dernier coup à surligner
+  let fen = beat.startFen, pieces = null, last = null;
+  if (beat.morph && t < beat.t0 + 0.7) pieces = morph(beat.morph, beat.startFen, (t - beat.t0) / 0.7);
+  for (const m of beat.moves) {
+    if (t < m.t) break;
+    const p = (t - m.t) / m.a;
+    if (p < 1) {
+      pieces = parseFen(fen).filter(x => !(x.f === sqXY(m.to).f && x.r === sqXY(m.to).r) || x.p[0] === m.color)
+        .map(x => ({ ...x, o: 1 }));
+      const a = sqXY(m.from), b = sqXY(m.to), e = ease(p);
+      const mover = pieces.find(x => x.f === a.f && x.r === a.r);
+      if (mover) { mover.f = a.f + (b.f - a.f) * e; mover.r = a.r + (b.r - a.r) * e; mover.z = 1; }
+      // prise : la pièce prise s'efface pendant l'arrivée
+      const cap = parseFen(fen).find(x => x.f === b.f && x.r === b.r && x.p[0] !== m.color);
+      if (cap) pieces.push({ ...cap, o: 1 - clamp((p - .6) / .4) });
+      if (m.ep) { const c = sqXY(m.ep); const pc = pieces.find(x => x.f === c.f && x.r === c.r); if (pc) pc.o = 1 - clamp((p - .6) / .4); }
+      if (m.rook) { const r0 = sqXY(m.rook[0]), r1 = sqXY(m.rook[1]); const rk = pieces.find(x => x.f === r0.f && x.r === r0.r);
+        if (rk) { rk.f = r0.f + (r1.f - r0.f) * e; } }
+      if (m.promo && p > .7 && mover) mover.p = m.color + m.promo.toUpperCase();
+      last = m; break;
+    }
+    fen = m.fen; last = m; pieces = null;
+  }
+  if (!pieces) pieces = parseFen(fen).map(x => ({ ...x, o: 1 }));
+  return { pieces, last };
+}
+
+function arrowSvg(code, p) {
+  const c = COLORS[code[0]] || COLORS.G, a = sqXY(code.slice(1, 3)), b = sqXY(code.slice(3, 5));
+  const P = s => [s.f * 100 + 50, (7 - s.r) * 100 + 50];
+  let pts = [P(a), P(b)];
+  const df = Math.abs(b.f - a.f), dr = Math.abs(b.r - a.r);
+  if ((df === 1 && dr === 2) || (df === 2 && dr === 1)) pts = dr > df ? [P(a), P({ f: a.f, r: b.r }), P(b)] : [P(a), P({ f: b.f, r: a.r }), P(b)];
+  // on part un peu du centre de la case de départ, on raccourcit pour la pointe
+  const len = pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]), 0);
+  let want = (len - 8) * out(p), acc = 0; const path = [pts[0]];
+  for (let i = 1; i < pts.length && want > acc; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], l = Math.hypot(x1 - x0, y1 - y0);
+    const k = Math.min(1, (want - acc) / l); path.push([x0 + (x1 - x0) * k, y0 + (y1 - y0) * k]); acc += l;
+  }
+  const [xe, ye] = path[path.length - 1], [xp, yp] = path[path.length - 2] || pts[0];
+  const ang = Math.atan2(ye - yp, xe - xp), H = 34, W = 26;
+  const base = [xe - Math.cos(ang) * H * 0.95, ye - Math.sin(ang) * H * 0.95];
+  path[path.length - 1] = base;
+  const head = [[xe, ye], [base[0] + Math.sin(ang) * W, base[1] - Math.cos(ang) * W], [base[0] - Math.sin(ang) * W, base[1] + Math.cos(ang) * W]];
+  return `<g opacity="${.82 * clamp(p * 3)}"><polyline points="${path.map(q => q.join(',')).join(' ')}" fill="none" stroke="${c}" stroke-width="17" stroke-linejoin="round"/>` +
+    `<polygon points="${head.map(q => q.join(',')).join(' ')}" fill="${c}"/></g>`;
+}
+
+// ── Notation ─────────────────────────────────────────────
+const FIG = { n: 'N', b: 'B', r: 'R', q: 'Q', k: 'K' };
+function moveHtml(m) {
+  let s = m.fr;
+  if (m.fig !== 'p' && !s.startsWith('O-')) s = `<img src="${PIECE}w${FIG[m.fig]}.png">` + s.slice(1);
+  return s;
+}
+function movesHtml(path, curIdx, newFrom) {
+  const MAX = 22; let start = Math.max(0, path.length - MAX);
+  if (start > 0 && path[start].color === 'b') start++;
+  let h = start > 0 ? '<span class="dots">…</span>' : '';
+  path.slice(start).forEach((m, k) => {
+    const i = start + k;
+    const n = m.color === 'w' ? `<span class="n">${m.num}.</span>` : i === start ? `<span class="n">${m.num}...</span>` : '';
+    h += `<span class="ply">${n}<span class="m${i === curIdx ? ' cur' : ''}${i >= newFrom ? ' new' : ''}">${moveHtml(m)}</span></span>`;
+  });
+  return h;
+}
+
+const EV = { '=+': 'Léger avantage noir', '−+': 'Avantage décisif noir', '+−': 'Avantage décisif blanc', '+=': 'Léger avantage blanc', '=': 'Égalité', '∞': 'Jeu dynamique' };
+
+// ── Mascottes (animations CSS figées puis positionnées) ───────────
+function setPose(el, name) {
+  if (el.dataset.cur === name) return;
+  el.dataset.cur = name; el.innerHTML = window.MASCOT_POSES[name] || '';
+  el._anims = el.getAnimations({ subtree: true }); el._anims.forEach(a => a.pause());
+}
+function poseAt(el, t) { (el._anims || []).forEach(a => { a.currentTime = Math.max(0, t) * 1000; }); }
+setPose($('#quizMascot'), 'reflexion');
+
+// ── Rendu d'une image ─────────────────────────────────────────────
+let lastBoard = '', lastMoves = '';
+function beatAt(t) { let i = 0; while (i < B.length - 1 && t >= B[i + 1].t0) i++; return i; }
+
+window.seekTo = t => {
+  const bi = beatAt(t), beat = B[bi];
+  // passage d'échiquier courant (les cartes gardent l'échiquier du passage précédent)
+  let gi = bi; while (gi > 0 && B[gi].card) gi--;
+  if (B[gi].card) gi = B.findIndex(b => !b.card);
+  const g = B[gi], gt = beat.card ? (g.t0 + g.dur - 0.001) : t;
+
+  // Échiquier
+  const { pieces, last } = boardAt(g, gt);
+  let h = coords;
+  if (last) for (const s of [last.from, last.to]) { const q = sqXY(s); h += `<div class="hl" style="${pos(q.f, q.r)}"></div>`; }
+  const ap = beat.card ? 1 : clamp((gt - g.arrowsAt) / 0.45);
+  if (ap > 0) for (const s of g.sq) { const q = sqXY(s.slice(1)); h += `<div class="mk" style="${pos(q.f, q.r)};background:${FILL[s[0]]};opacity:${clamp(ap * 2)}"></div>`; }
+  pieces.sort((a, b) => (a.z || 0) - (b.z || 0));
+  for (const x of pieces) h += `<div class="pc" style="left:${x.f * 12.5}%;top:${(7 - x.r) * 12.5}%;opacity:${x.o};background-image:url(${PIECE}${x.p}.png)"></div>`;
+  if (h !== lastBoard) { $('#board').innerHTML = h; lastBoard = h; }
+  $('#arrows').innerHTML = ap > 0 ? g.arrows.map((a, k) => arrowSvg(a, clamp(ap * 1.4 - k * 0.12))).join('') : '';
+
+  // Panneau
+  $('#chapter').textContent = g.ch;
+  const main = g.line === 'Partie principale';
+  $('#lineName').textContent = main ? 'Partie principale' : g.line.replace(/^Variante : /, 'Variante ');
+  let chips = `<span class="chip ${main ? 'main' : 'var'}">${main ? 'Ligne principale' : g.line.startsWith('Plan') ? 'Plan blanc' : g.line === 'Transposition' ? 'Transposition' : 'Variante'}</span>`;
+  if (g.game) chips += `<span class="chip game">${g.game}</span>`;
+  if (g.ev && gt >= g.keyAt) chips += `<span class="chip ev"><b>${g.ev}</b>${EV[g.ev] || ''}</span>`;
+  $('#chips').innerHTML = chips;
+
+  const played = g.moves.filter(m => gt >= m.t).length;
+  const pathNow = g.path.slice(0, g.path.length - g.moves.length + played);
+  const mh = movesHtml(pathNow, pathNow.length - 1, g.path.length - g.moves.length);
+  if (mh !== lastMoves) { $('#moves').innerHTML = mh; lastMoves = mh; }
+
+  // Idée clé : celle du passage, sinon la dernière de la même variante
+  let key = null, keyAt = 0;
+  for (let i = gi; i >= 0 && !B[i].card; i--) { if (B[i].key) { key = B[i].key; keyAt = B[i].keyAt; break; } if (B[i].line !== g.line || B[i].ch !== g.ch) break; }
+  const kp = key ? clamp((gt - keyAt) / 0.5) : 0;
+  $('#keyText').textContent = key || '';
+  $('#keyCard').style.opacity = 0.35 + 0.65 * out(kp);
+  $('#keyText').style.opacity = out(kp);
+  $('#keyText').style.transform = `translateY(${(1 - out(kp)) * 24}px)`;
+
+  // Quiz
+  let qo = 0;
+  if (g.quiz && !beat.card) {
+    qo = out((t - g.t0 - 0.2) / 0.4) * (1 - clamp((t - (g.t0 + g.dur - 0.35)) / 0.35));
+    $('#quiz .q').textContent = g.quiz;
+    const left = g.quizAt + g.pause - t, running = t >= g.quizAt;
+    $('#quiz .num').textContent = running ? Math.max(0, Math.ceil(left)) : '?';
+    $('#ringArc').setAttribute('stroke-dashoffset', running ? 276.5 * clamp(1 - left / g.pause) : 0);
+    poseAt($('#quizMascot'), t - g.t0);
+  }
+  $('#quiz').style.opacity = qo;
+  $('#quiz').style.transform = `translateY(${(1 - qo) * 30}px) scale(${0.97 + 0.03 * qo})`;
+  $('#quizRing').style.opacity = g.quiz && t >= (g.quizAt || 1e9) && !beat.card ? 0.6 + 0.4 * Math.sin((t - g.quizAt) * Math.PI * 2) : 0;
+
+  // Carte plein écran
+  let co = 0;
+  if (beat.card) {
+    const c = beat.card, lt = t - beat.t0;
+    co = out(lt / 0.35) * (1 - clamp((lt - beat.dur + 0.35) / 0.35));
+    $('#cardOverlay .k').textContent = c.k || '';
+    $('#cardOverlay .t').textContent = c.t || '';
+    $('#cardOverlay .s').textContent = c.s || '';
+    $('#cardOverlay .a').textContent = bi === 0 ? L.meta.author : '';
+    $('#cardOverlay ul').innerHTML = (c.bullets || []).map((x, k) => `<li style="opacity:${out((t - beat.bulletsAt[k]) / 0.4)};transform:translateX(${(1 - out((t - beat.bulletsAt[k]) / 0.4)) * 30}px)"><i>${k + 1}</i>${x}</li>`).join('');
+    $('#cardOverlay .t').style.fontSize = c.bullets ? '96px' : '';
+    $('#cardOverlay .t').style.transform = `translateY(${(1 - out(lt / 0.6)) * 40}px)`;
+    $('#cardOverlay .inner').style.opacity = out((lt - 0.1) / 0.5);
+    const m = $('#cardMascot'); setPose(m, c.pose || 'idee'); poseAt(m, lt);
+    m.style.width = m.style.height = c.bullets ? '380px' : '520px';
+    m.style.marginTop = c.bullets ? '-190px' : '-260px';
+  }
+  $('#cardOverlay').style.opacity = co;
+
+  // Sous-titres
+  const s = L.subs.find(s => t >= s.a && t < s.b);
+  $('#subs span').textContent = s ? s.text : '';
+  $('#subs span').style.opacity = s ? 1 : 0;
+  $('#subs').style.opacity = 1 - co * 0.0;
+  $('#progress').style.transform = `scaleX(${t / L.total})`;
+};
+window.TOTAL = L.total;
+window.ready = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))])
+  .then(() => Promise.all(['wK','wQ','wR','wB','wN','wP','bK','bQ','bR','bB','bN','bP'].map(p => new Promise(r => { const i = new Image(); i.onload = i.onerror = r; i.src = PIECE + p + '.png'; }))))
+  .then(() => { seekTo(0); });
+</script>
+</body>
+</html>

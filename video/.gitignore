@@ -5,3 +5,8 @@ build/*
 !build/poster.jpg
 !build/sous-titres.vtt
 audio/music.wav
+!build/lecons/
+build/lecons/*/*
+!build/lecons/*/lecon-*.mp4
+!build/lecons/*/sous-titres.vtt
+!build/lecons/*/affiche.jpg
