@@ -4,13 +4,15 @@
 #
 #   bash lecons/build.sh jobava                   # voix Piper (maquette gratuite)
 #   bash lecons/build.sh jobava --eleven ID       # voix ElevenLabs (ID de voix)
+#   bash lecons/build.sh jobava --clone ref.wav   # voix clonée (Chatterbox, voir voix.py)
 #   options : --skip-render (garde la vidéo muette), --workers n (rendu parallèle, 4 par défaut)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 NAME=${1:?nom de la leçon}; shift
 VOICE=(); SKIP_RENDER=0; WORKERS=4
 while [ $# -gt 0 ]; do case "$1" in
-  --eleven) VOICE=(--eleven --voice "$2"); shift;;
+  --eleven) VOICE+=(--eleven --voice "$2"); shift;;
+  --clone) VOICE+=(--clone "$2"); shift;;
   --skip-render) SKIP_RENDER=1;;
   --workers) WORKERS=$2; shift;;
 esac; shift; done

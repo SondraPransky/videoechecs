@@ -14,14 +14,16 @@ La vidéo montre :
 
 | Leçon | Source | Niveau | Durée |
 |---|---|---|---|
-| `jobava/` — Une petite idée contre le Jobava | PGN commenté de Romuald De Labaca (12/11/2024) | Objectif 1600-1800 | environ 13 min |
+| `jobava/` — Une petite idée contre le Jobava | PGN commenté de Romuald De Labaca (12/11/2024) | Objectif 1600-1800 | environ 14 min 30 s |
+| `gambit-du-centre/` — Le gambit du Centre | PGN commenté (09/08/2025) | Objectif 1600-1800 | environ 10 min |
 
 ## Fabriquer une leçon
 
 1. **Écrire `lecons/<nom>/lecon.mjs`.**
    - Chaque passage associe une réplique de la voix (`say`) et ce qui se passe sur l'échiquier : coups joués, flèches, cases, idée clé, quiz.
    - Le format est décrit en tête de `jobava/lecon.mjs`.
-   - Les coups s'écrivent en notation anglaise (`Nf3`, `Bxc5`). Ils sont affichés en français (`Cf3`, `Fxc5`).
+   - Les coups s'écrivent en notation anglaise (`Nf3`, `Bxc5`). À l'écran, ils sont affichés en notation figurine. Les textes affichés (idée clé, quiz, cartes) s'écrivent en notation française (`...Cxe4`) et sont eux aussi convertis en figurines, comme les sous-titres (« Cavalier f3 », « e prend d4 »).
+   - L'orientation de l'échiquier se règle avec `meta.orientation` : `white` ou `black`.
    - Dans le texte parlé, on écrit les coups comme on les dit : « Cavalier f3 », « Fou prend c5 ».
 2. **Vérifier et relire.** La commande suivante vérifie la légalité de chaque coup et régénère `lecons/<nom>/script.md`, le texte complet à relire :
    ```bash
@@ -47,6 +49,11 @@ node render.mjs build/lecons/<nom>/apercu --page "lecons/player.html?l=<nom>" --
 - **Piper**, voix `fr_FR-tom-medium` : gratuite et hors ligne. Elle sert de maquette.
 - **ElevenLabs** : nettement plus naturelle, avec le modèle `eleven_turbo_v2_5`, qui coûte 0,5 crédit par caractère. Une leçon de 13 minutes compte environ 10 500 caractères, soit environ 5 300 crédits. Elle tient donc dans l'offre gratuite de 10 000 crédits par mois.
 - Pour lister les voix du compte : `python3 lecons/voix.py --voices`.
+- **Voix clonée** (`--clone extrait.wav`) : Chatterbox (Resemble AI, licence MIT), gratuit et sans quota, sur processeur. Il faut compter environ 6 secondes de calcul par seconde de voix.
+  - Il faut un extrait de 10 à 15 s de voix seule. Si l'enregistrement contient de la musique, on isole d'abord la voix avec Demucs : `python -m demucs --two-stems=vocals`.
+  - Les extraits de voix restent hors du dépôt, dans `voice/references/`, qui est ignoré par git.
+  - Avec `--clone extrait.wav --eleven --voice ID`, la voix ElevenLabs est convertie vers le timbre de l'extrait : on garde la diction d'ElevenLabs avec le timbre de l'extrait.
+  - Chatterbox ajoute un filigrane audio inaudible (Perth) aux voix générées.
 - ElevenLabs renvoie l'instant de chaque caractère lu. Les coups tombent alors exactement sur le mot prononcé. Avec Piper, cet instant est estimé.
 - Avant la lecture, `e5` est transformé en `é5` pour éviter un « euh cinq ». Les autres corrections de prononciation se trouvent dans `SAY`, dans `voix.py`.
 
@@ -55,4 +62,5 @@ node render.mjs build/lecons/<nom>/apercu --page "lecons/player.html?l=<nom>" --
 - `build.mjs` : lit la leçon, vérifie les coups avec chess.js et calcule la chronologie calée sur la voix. Il produit aussi les sous-titres.
 - `voix.py` : synthèse vocale, avec Piper ou ElevenLabs.
 - `mix.py` : ajoute les bruitages synthétisés, libres de droits, et mixe le tout.
+- `voix_clone.py` : voix clonée, exécutée dans l'environnement Python où `chatterbox-tts` est installé (variable `CLONE_PYTHON`).
 - `player.html` : la page rendue image par image par `../render.mjs`, avec les options `--page` et `--workers` pour le rendu parallèle.

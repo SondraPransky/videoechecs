@@ -101,6 +101,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 
 /* Sous-titres et progression */
 #subs { position: absolute; left: 100px; right: 80px; top: 974px; height: 80px; display: flex; justify-content: center; align-items: center; }
+img.fig { height: .95em; vertical-align: -.13em; margin: 0 .02em 0 .04em; }
 #subs span { max-width: 1700px; text-align: center; font: 700 33px/1.3 "Manrope"; color: #fff; background: rgba(6,8,12,.72); padding: 10px 26px; border-radius: 14px; box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
 #progress { position: absolute; left: 0; bottom: 0; height: 5px; width: 1920px; background: linear-gradient(90deg, var(--blue), var(--yellow)); transform-origin: 0 50%; }
 </style>
@@ -246,7 +247,21 @@ function movesHtml(path, curIdx, newFrom) {
   return h;
 }
 
-const EV = { '=+': 'Léger avantage noir', '−+': 'Avantage décisif noir', '+−': 'Avantage décisif blanc', '+=': 'Léger avantage blanc', '=': 'Égalité', '∞': 'Jeu dynamique' };
+// Notation figurine dans tous les textes : « Cf3 », « ...Fxc5 », mais aussi les coups dits
+// en toutes lettres dans les sous-titres (« Cavalier f3 », « Fou prend c5 », « e prend d4 »).
+const FIGL = { C: 'N', F: 'B', T: 'R', D: 'Q', R: 'K' };
+const WORD = { Cavalier: 'N', Fou: 'B', Tour: 'R', Dame: 'Q', Roi: 'K' };
+const figImg = p => `<img class="fig" src="${PIECE}w${p}.png">`;
+function figText(str, spoken) {
+  let h = (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  if (spoken) {
+    h = h.replace(/\b(Cavalier|Fou|Tour|Dame|Roi)(?: ([a-h])(?= (?:prend )?[a-h][1-8]\b))?( prend)? ([a-h][1-8])\b( échec)?/g,
+      (_, w, f, x, sq, ch) => figImg(WORD[w]) + (f || '') + (x ? 'x' : '') + sq + (ch ? '+' : ''));
+    h = h.replace(/\b([a-h]) prend ([a-h][1-8])\b/g, '$1x$2');
+  }
+  return h.replace(/(^|[^A-Za-zÀ-ÿ])([CFTDR])([a-h]?[1-8]?)(x?)([a-h][1-8])/g, (_, pre, p, d, x, sq) => pre + figImg(FIGL[p]) + d + x + sq);
+}
+const EV = { '⩲': 'Léger avantage blanc', '∓': 'Net avantage noir', '±': 'Net avantage blanc', '=+': 'Léger avantage noir', '−+': 'Avantage décisif noir', '+−': 'Avantage décisif blanc', '+=': 'Léger avantage blanc', '=': 'Égalité', '∞': 'Jeu dynamique' };
 
 // ── Mascottes (animations CSS figées puis positionnées) ───────────
 function setPose(el, name) {
@@ -280,11 +295,11 @@ window.seekTo = t => {
   $('#arrows').innerHTML = ap > 0 ? g.arrows.map((a, k) => arrowSvg(a, clamp(ap * 1.4 - k * 0.12))).join('') : '';
 
   // Panneau
-  $('#chapter').textContent = g.ch;
+  $('#chapter').innerHTML = figText(g.ch);
   const main = g.line === 'Partie principale';
-  $('#lineName').textContent = main ? 'Partie principale' : g.line.replace(/^Variante : /, 'Variante ');
+  $('#lineName').innerHTML = figText(main ? 'Partie principale' : g.line.replace(/^Variante : /, 'Variante '));
   let chips = `<span class="chip ${main ? 'main' : 'var'}">${main ? 'Ligne principale' : g.line.startsWith('Plan') ? 'Plan blanc' : g.line === 'Transposition' ? 'Transposition' : 'Variante'}</span>`;
-  if (g.game) chips += `<span class="chip game">${g.game}</span>`;
+  if (g.game) chips += `<span class="chip game">${figText(g.game)}</span>`;
   if (g.ev && gt >= g.keyAt) chips += `<span class="chip ev"><b>${g.ev}</b>${EV[g.ev] || ''}</span>`;
   $('#chips').innerHTML = chips;
 
@@ -297,7 +312,7 @@ window.seekTo = t => {
   let key = null, keyAt = 0;
   for (let i = gi; i >= 0 && !B[i].card; i--) { if (B[i].key) { key = B[i].key; keyAt = B[i].keyAt; break; } if (B[i].line !== g.line || B[i].ch !== g.ch) break; }
   const kp = key ? clamp((gt - keyAt) / 0.5) : 0;
-  $('#keyText').textContent = key || '';
+  $('#keyText').innerHTML = figText(key);
   $('#keyCard').style.opacity = 0.35 + 0.65 * out(kp);
   $('#keyText').style.opacity = out(kp);
   $('#keyText').style.transform = `translateY(${(1 - out(kp)) * 24}px)`;
@@ -306,7 +321,7 @@ window.seekTo = t => {
   let qo = 0;
   if (g.quiz && !beat.card) {
     qo = out((t - g.t0 - 0.2) / 0.4) * (1 - clamp((t - (g.t0 + g.dur - 0.35)) / 0.35));
-    $('#quiz .q').textContent = g.quiz;
+    $('#quiz .q').innerHTML = figText(g.quiz);
     const left = g.quizAt + g.pause - t, running = t >= g.quizAt;
     $('#quiz .num').textContent = running ? Math.max(0, Math.ceil(left)) : '?';
     $('#ringArc').setAttribute('stroke-dashoffset', running ? 276.5 * clamp(1 - left / g.pause) : 0);
@@ -322,10 +337,10 @@ window.seekTo = t => {
     const c = beat.card, lt = t - beat.t0;
     co = out(lt / 0.35) * (1 - clamp((lt - beat.dur + 0.35) / 0.35));
     $('#cardOverlay .k').textContent = c.k || '';
-    $('#cardOverlay .t').textContent = c.t || '';
-    $('#cardOverlay .s').textContent = c.s || '';
-    $('#cardOverlay .a').textContent = bi === 0 ? L.meta.author : '';
-    $('#cardOverlay ul').innerHTML = (c.bullets || []).map((x, k) => `<li style="opacity:${out((t - beat.bulletsAt[k]) / 0.4)};transform:translateX(${(1 - out((t - beat.bulletsAt[k]) / 0.4)) * 30}px)"><i>${k + 1}</i>${x}</li>`).join('');
+    $('#cardOverlay .t').innerHTML = figText(c.t);
+    $('#cardOverlay .s').innerHTML = figText(c.s);
+    $('#cardOverlay .a').innerHTML = bi === 0 ? figText(L.meta.author) : '';
+    $('#cardOverlay ul').innerHTML = (c.bullets || []).map((x, k) => `<li style="opacity:${out((t - beat.bulletsAt[k]) / 0.4)};transform:translateX(${(1 - out((t - beat.bulletsAt[k]) / 0.4)) * 30}px)"><i>${k + 1}</i>${figText(x)}</li>`).join('');
     $('#cardOverlay .t').style.fontSize = c.bullets ? '96px' : '';
     $('#cardOverlay .t').style.transform = `translateY(${(1 - out(lt / 0.6)) * 40}px)`;
     $('#cardOverlay .inner').style.opacity = out((lt - 0.1) / 0.5);
@@ -337,7 +352,7 @@ window.seekTo = t => {
 
   // Sous-titres
   const s = L.subs.find(s => t >= s.a && t < s.b);
-  $('#subs span').textContent = s ? s.text : '';
+  $('#subs span').innerHTML = s ? figText(s.text, true) : '';
   $('#subs span').style.opacity = s ? 1 : 0;
   $('#subs').style.opacity = 1 - co * 0.0;
   $('#progress').style.transform = `scaleX(${t / L.total})`;

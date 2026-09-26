@@ -10,3 +10,4 @@ build/lecons/*/*
 !build/lecons/*/lecon-*.mp4
 !build/lecons/*/sous-titres.vtt
 !build/lecons/*/affiche.jpg
+voice/references/

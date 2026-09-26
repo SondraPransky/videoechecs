@@ -4,6 +4,11 @@ Usage :
   python3 lecons/voix.py <nom>                    # voix libre Piper (maquette)
   python3 lecons/voix.py <nom> --eleven [--voice ID] [--model eleven_flash_v2_5]
   python3 lecons/voix.py --voices                 # voix ElevenLabs disponibles sur le compte
+  python3 lecons/voix.py <nom> --clone ref.wav [--exaggeration 0.35 --cfg 0.3]
+                                                  # voix clonée (Chatterbox) à partir d'un extrait propre
+  python3 lecons/voix.py <nom> --clone ref.wav --eleven --voice ID
+                                                  # voix ElevenLabs convertie vers le timbre de ref.wav
+  Pour --clone, CLONE_PYTHON désigne le Python où chatterbox-tts est installé.
 
 Les pistes sont mises en cache par texte (build/lecons/<nom>/voix/<moteur>/<id>.wav) :
 modifier une réplique ne refait que celle-là. Écrit voix/durees.json, et pour ElevenLabs
@@ -100,6 +105,41 @@ def eleven(text, dst, voice, model, prev, nxt):
     return {"dur": round(dur, 3), "len": len(text), "chars": chars}
 
 
+def clone_batch(jobs, ref, a):
+    """Lance voix_clone.py une seule fois pour toutes les répliques manquantes."""
+    import tempfile
+    spec = {"ref": os.path.abspath(ref), "exaggeration": a.exaggeration, "cfg": a.cfg, "jobs": jobs}
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+        json.dump(spec, f)
+    py = os.environ.get("CLONE_PYTHON", sys.executable)
+    subprocess.run([py, os.path.join(HERE, "voix_clone.py"), f.name], check=True)
+    os.remove(f.name)
+
+
+def clone_result(text, raw, dst):
+    """Convertit la sortie de voix_clone.py et calcule l'instant de chaque caractère."""
+    lead, dur = to_wav(raw, dst)
+    spans = json.load(open(raw + ".json"))["spans"]
+    os.remove(raw); os.remove(raw + ".json")
+    if not spans:
+        return {"dur": round(dur, 3), "len": len(text)}
+    say = spoken(text)
+    chars, pos = [], 0
+    bounds = []
+    for s, t0, t1 in spans:
+        i = say.find(s, pos)
+        i = pos if i < 0 else i
+        bounds.append((i, i + len(s), t0 - lead, t1 - lead)); pos = i + len(s)
+    for k in range(len(text) + 1):
+        kk = int(k * len(say) / max(1, len(text)))
+        t = bounds[-1][3]
+        for i0, i1, t0, t1 in bounds:
+            if kk < i1:
+                t = t0 + (t1 - t0) * max(0, kk - i0) / max(1, i1 - i0); break
+        chars.append(round(max(0.0, t), 3))
+    return {"dur": round(dur, 3), "len": len(text), "chars": chars}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("name", nargs="?")
@@ -107,6 +147,9 @@ def main():
     ap.add_argument("--voice", default=os.environ.get("ELEVENLABS_VOICE_ID"))
     ap.add_argument("--model", default="eleven_turbo_v2_5")
     ap.add_argument("--voices", action="store_true")
+    ap.add_argument("--clone", help="extrait de voix de référence (wav propre, 10-15 s)")
+    ap.add_argument("--exaggeration", type=float, default=0.35)
+    ap.add_argument("--cfg", type=float, default=0.3)
     a = ap.parse_args()
     if a.voices:
         for v in eleven_call("/voices")["voices"]:
@@ -115,6 +158,10 @@ def main():
     base = os.path.join(ROOT, "build", "lecons", a.name)
     plan = json.load(open(os.path.join(base, "plan.json"), encoding="utf-8"))["beats"]
     engine = "eleven-" + a.voice if a.eleven else "piper"
+    if a.clone:
+        import hashlib
+        h = hashlib.sha1(open(a.clone, "rb").read()).hexdigest()[:8]
+        engine = f"clone-{h}-" + (f"vc-{a.voice}" if a.eleven else f"{a.exaggeration}-{a.cfg}")
     if a.eleven and not (os.environ.get("ELEVENLABS_API_KEY") and a.voice):
         sys.exit("ElevenLabs : il faut ELEVENLABS_API_KEY et --voice (ou ELEVENLABS_VOICE_ID).")
     cache = os.path.join(base, "voix", engine)
@@ -123,6 +170,26 @@ def main():
     index = json.load(open(index_path)) if os.path.exists(index_path) else {}
     lines = [b for b in plan if b["id"]]
     durs = {}
+    if a.clone:
+        todo = [b for b in lines if b["id"] not in index or not os.path.exists(os.path.join(cache, b["id"] + ".wav"))]
+        if todo:
+            src = {}
+            if a.eleven:  # voix source ElevenLabs, déjà en cache si la leçon a été lue avec cette voix
+                src_cache = os.path.join(base, "voix", "eleven-" + a.voice)
+                for b in todo:
+                    w = os.path.join(src_cache, b["id"] + ".wav")
+                    if not os.path.exists(w):
+                        sys.exit(f"Voix source absente : lancer d'abord voix.py {a.name} --eleven --voice {a.voice}")
+                    src[b["id"]] = w
+            print(f"voix clonée : {len(todo)} répliques à générer (compter ~6 s de calcul par seconde de voix)")
+            clone_batch([{"text": spoken(b["text"]), "out": os.path.join(cache, b["id"] + ".raw.wav"),
+                          **({"vc_source": src[b["id"]]} if a.eleven else {})} for b in todo], a.clone, a)
+            for b in todo:
+                index[b["id"]] = clone_result(b["text"], os.path.join(cache, b["id"] + ".raw.wav"), os.path.join(cache, b["id"] + ".wav"))
+                if a.eleven:  # la conversion garde le débit de la source : on reprend son alignement
+                    srcidx = json.load(open(os.path.join(base, "voix", "eleven-" + a.voice, "index.json")))
+                    index[b["id"]]["chars"] = srcidx[b["id"]].get("chars")
+            json.dump(index, open(index_path, "w"))
     for k, b in enumerate(lines):
         dst = os.path.join(cache, b["id"] + ".wav")
         if b["id"] not in index or not os.path.exists(dst):
