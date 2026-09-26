@@ -44,6 +44,19 @@ SAY = [
 ]
 
 
+LETTRE = dict(zip("abcdefgh", ["a", "bé", "cé", "dé", "é", "èf", "jé", "ache"]))
+CHIFFRE = dict(zip("12345678", ["un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit"]))
+
+
+def spoken_clone(text):
+    """Pour la voix clonée, qui avale les coordonnées : « c4 » → « cé quatre »."""
+    text = spoken(text).replace("é", "é")
+    text = re.sub(r"\b([a-hé])([1-8])\b", lambda m: LETTRE.get(m.group(1), m.group(1)) + " " + CHIFFRE[m.group(2)], text)
+    text = re.sub(r"\b([a-h]) prend\b", lambda m: LETTRE[m.group(1)] + " prend", text)
+    text = re.sub(r"\b(Tour|Cavalier|Fou|Dame|Roi) ([a-h]) ", lambda m: m.group(1) + " " + LETTRE[m.group(2)] + " ", text)
+    return re.sub(r"\bé prend\b", "é prend", text)
+
+
 def spoken(text):
     for a, b in SAY:
         text = re.sub(a, b, text)
@@ -123,7 +136,7 @@ def clone_result(text, raw, dst):
     os.remove(raw); os.remove(raw + ".json")
     if not spans:
         return {"dur": round(dur, 3), "len": len(text)}
-    say = spoken(text)
+    say = spoken_clone(text)
     chars, pos = [], 0
     bounds = []
     for s, t0, t1 in spans:
@@ -182,7 +195,7 @@ def main():
                         sys.exit(f"Voix source absente : lancer d'abord voix.py {a.name} --eleven --voice {a.voice}")
                     src[b["id"]] = w
             print(f"voix clonée : {len(todo)} répliques à générer (compter ~6 s de calcul par seconde de voix)")
-            clone_batch([{"text": spoken(b["text"]), "out": os.path.join(cache, b["id"] + ".raw.wav"),
+            clone_batch([{"text": spoken_clone(b["text"]), "out": os.path.join(cache, b["id"] + ".raw.wav"),
                           **({"vc_source": src[b["id"]]} if a.eleven else {})} for b in todo], a.clone, a)
             for b in todo:
                 index[b["id"]] = clone_result(b["text"], os.path.join(cache, b["id"] + ".raw.wav"), os.path.join(cache, b["id"] + ".wav"))
