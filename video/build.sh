@@ -21,7 +21,7 @@ fi
 # 2. Découpage des scènes calé sur la voix, puis musique calée sur le découpage
 if [ "$MUSIC_ONLY" = 1 ]; then python3 scripts/timing.py --music-only; else python3 scripts/timing.py; fi
 python3 audio/music.py
-[ "$MUSIC_ONLY" = 1 ] || python3 scripts/captions.py
+if [ "$MUSIC_ONLY" = 1 ]; then rm -f build/sous-titres.vtt; else python3 scripts/captions.py; fi
 
 # 3. Mixage : répliques placées selon build/timing.json, musique « pompée » par la voix
 TOTAL=$(python3 -c "import json;print(json.load(open('build/timing.json'))['total'])")
