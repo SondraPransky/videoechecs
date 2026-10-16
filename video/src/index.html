@@ -796,6 +796,13 @@ scene("s4", ({ st, from, at, lines, dur }) => {
 
 // ===== S5 : Tes parties — saisie, puis import et analyse
 const PGN_TXT = '[Event "Tournoi du club"]\n[White "Toi"]\n[Black "Adversaire"]\n\n1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4 Bb4+ 7. Bd2 Bxd2+ …';
+// Coups du PGN en notation figurine : la lettre anglaise de la pièce (K, Q, R, B, N) devient son icône
+const pgnFig = txt => {
+  const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const k = txt.indexOf("\n\n");
+  if (k < 0) return esc(txt);
+  return esc(txt.slice(0, k + 2)) + esc(txt.slice(k + 2)).replace(/([KQRBN])(\S*)/g, (_, c, rest) => `<span style="white-space:nowrap"><img class="fig" src="${P}w${c}.png">${rest}</span>`);
+};
 scene("s5", ({ st, from, at, lines, dur }) => {
   // A. Saisie de la partie
   from("#b5", 0, { opacity: 0, scale: .85, rotateX: 30, transformPerspective: 1600 }, { opacity: 1, scale: 1, rotateX: 0, duration: .7 });
@@ -824,7 +831,7 @@ scene("s5", ({ st, from, at, lines, dur }) => {
   from(".s5b-t", T + .45, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .4, stagger: .07, ease: "back.out(1.8)" });
   st.set("#imp-ph", { opacity: 1 }, 0); st.set("#imp-ph", { opacity: 0 }, T + .6);
   const typ = { n: 0 };
-  st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: 1.05, ease: "none", onUpdate: () => { $("#imp-text").textContent = PGN_TXT.slice(0, Math.round(typ.n)); } }, T + .6);
+  st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: 1.05, ease: "none", onUpdate: () => { $("#imp-text").innerHTML = pgnFig(PGN_TXT.slice(0, Math.round(typ.n))); } }, T + .6);
   at("#imp-go", T + 1.75, { scale: .9, duration: .08, ease: "power2.in" });
   at("#imp-go", T + 1.83, { scale: 1, boxShadow: "0 0 0 8px rgba(250,227,97,.45)", duration: .2 });
   from(".s5b-row", T + 1.95, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .35, ease: "back.out(2)" });
@@ -927,7 +934,9 @@ window.seekTo = t => {
   tl.seek(t, false);
   for (const p of poses) { const ms = Math.max(0, t - p.start) * 1000; p.anims.forEach(a => { a.currentTime = ms; }); }
 };
-window.ready = document.fonts.ready.then(() => Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+// Précharge les figurines insérées pendant la frappe du PGN
+const preload = "KQRBN".split("").map(c => { const i = new Image(); i.src = `${P}w${c}.png`; return i; });
+window.ready = document.fonts.ready.then(() => Promise.all([...$$("img"), ...preload].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
 </script>
 </body>
 </html>
