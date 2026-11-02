@@ -89,20 +89,20 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 
 /* Scène 3 : leçons */
 .counter { font: 900 300px/0.85 "Fraunces"; letter-spacing: -.04em; }
-.card { position: absolute; width: 360px; height: 370px; border-radius: 28px; padding: 34px; background: linear-gradient(160deg, #131b26, #0b1017);
+.card { position: absolute; width: 380px; height: 420px; border-radius: 28px; padding: 34px; background: linear-gradient(160deg, #131b26, #0b1017);
   box-shadow: 0 40px 80px rgba(0,0,0,.5), inset 0 0 0 1px rgba(147,185,226,.16); }
 .card .ic { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 26px; }
 .card h4 { font: 800 36px/1.1 "Manrope"; margin-bottom: 8px; }
-.card .vis { position: absolute; left: 34px; right: 34px; bottom: 34px; height: 150px; border-radius: 16px; overflow: hidden; }
+.card .vis { position: absolute; left: 26px; right: 26px; bottom: 26px; height: 210px; border-radius: 16px; overflow: hidden; }
 .tl { position: relative; height: 12px; border-radius: 6px; background: rgba(147,185,226,.22); margin-bottom: 14px; }
 .doc { position: absolute; inset: 0; padding: 14px; border-radius: 16px; background: #f1f0ea; display: flex; gap: 14px; }
-.doc-board { position: relative !important; flex: none; width: 122px; height: 122px; border-radius: 8px; box-shadow: none; }
+.doc-board { position: relative !important; flex: none; width: 182px; height: 182px; border-radius: 8px; box-shadow: none; }
 .doc-txt { flex: 1; padding-top: 2px; }
-.doc-txt .tl { height: 8px; margin-bottom: 9px; background: #d9d6cb; }
-.doc-h { font: 800 17px/1 "Manrope"; color: #1b1b1b; margin-bottom: 11px; }
+.doc-txt .tl { height: 9px; margin-bottom: 14px; background: #d9d6cb; }
+.doc-h { font: 800 19px/1.1 "Manrope"; color: #1b1b1b; margin-bottom: 14px; }
 .doc-mark { position: absolute; left: -3px; right: -3px; top: -4px; bottom: -4px; border-radius: 4px; background: rgba(250,227,97,.85); transform-origin: 0 50%; transform: scaleX(0); }
 .doc-mv { display: inline-flex; align-items: center; gap: 2px; margin-top: 2px; padding: 5px 9px; border-radius: 999px; background: #1b1b1b; color: #fae361; font: 800 15px/1 "Manrope"; }
-.opt { height: 40px; border-radius: 10px; margin-bottom: 10px; background: rgba(147,185,226,.12); font: 700 18px/40px "Manrope"; padding: 0 16px; color: #c9d1dc; }
+.opt { height: 58px; border-radius: 12px; margin-bottom: 12px; background: rgba(147,185,226,.12); font: 700 24px/58px "Manrope"; padding: 0 16px; color: #c9d1dc; }
 
 /* Tuiles d'interface réelles et cartes de leçon */
 .uitile { position: absolute; border-radius: 26px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.55); }
@@ -166,10 +166,6 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .share .who .ok { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #c9c6ba; }
 .share .send { margin-top: 14px; height: 54px; border-radius: 14px; background: #fae361; display: grid; place-items: center; font: 800 20px/1 "Manrope"; }
 
-.ptile { position: absolute; width: 290px; height: 74px; border-radius: 20px; display: flex; align-items: center; gap: 14px; padding: 0 18px; color: #111; box-shadow: 0 24px 50px rgba(0,0,0,.45); overflow: hidden; }
-.ptile .ic { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,.55); display: grid; place-items: center; flex: none; }
-.ptile b { display: block; font: 800 21px/1.1 "Manrope"; }
-.ptile span { display: block; font: 600 15px/1.2 "Manrope"; color: rgba(17,17,17,.7); margin-top: 3px; }
 
 
 /* Scène « Mesure tes progrès » */
@@ -180,7 +176,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .elo-h .up { margin-bottom: 10px; padding: 10px 18px; border-radius: 999px; background: rgba(107,220,125,.16); color: var(--green); font: 800 28px/1 "Manrope"; }
 .elo svg { position: absolute; left: 36px; top: 200px; width: 738px; height: 320px; overflow: visible; }
 .elo .gl { stroke: rgba(147,185,226,.12); stroke-width: 1.5; }
-.elo .gt { fill: var(--muted); font: 700 18px "Manrope"; }
+.elo .gt { fill: #aab4c3; font: 800 26px "Manrope"; }
 .vcard { position: absolute; left: 150px; top: 640px; width: 700px; padding: 30px 34px; border-radius: 30px; background: #f1f0ea; color: #1b1b1b; box-shadow: 0 50px 110px rgba(0,0,0,.6); }
 .vbar2 { position: relative; height: 22px; border-radius: 11px; background: #dedcd2; overflow: hidden; margin: 18px 0 14px; }
 .vbar2 i { position: absolute; inset: 0; border-radius: 11px; background: linear-gradient(90deg, #93b9e2, #fae361); transform-origin: 0 50%; transform: scaleX(0); }
@@ -223,6 +219,18 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .ft.hot { background: #fffbe0; }
 .fbubble { position: absolute; padding: 18px 22px; border-radius: 22px 22px 22px 6px; background: #f1f0ea; color: #1b1b1b; font: 700 22px/1.3 "Manrope"; box-shadow: 0 30px 70px rgba(0,0,0,.5); white-space: nowrap; display: flex; gap: 14px; align-items: center; }
 .fbubble i { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 800 17px/1 "Manrope"; font-style: normal; }
+/* Revue : bandeau du numéro du mois, recréé en grand */
+.rvb { position: absolute; left: 150px; top: 410px; width: 1620px; height: 340px; border-radius: 34px; background: var(--yellow); color: #111; box-shadow: 0 40px 90px rgba(0,0,0,.55); }
+.rvb-txt { position: absolute; left: 48px; top: 40px; width: 1080px; height: 260px; }
+.rvb-txt h4 { font: 800 40px/1.1 "Manrope"; margin-bottom: 16px; }
+.rvb-txt p { font: 600 28px/1.38 "Manrope"; }
+.rvb-txt .rvb-sub { margin-top: 10px; font: 600 23px/1.35 "Manrope"; color: rgba(17,17,17,.7); }
+.rvb-btn { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; background: #111; color: #fff; font: 800 22px/1 "Manrope"; }
+.rvb-cov { position: absolute; right: 120px; top: -34px; height: 400px; border-radius: 6px; box-shadow: 0 24px 50px rgba(0,0,0,.35); }
+.rvb-badge { position: absolute; right: 40px; top: -40px; width: 170px; height: 170px; border-radius: 50%; background: #8ebde0; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(14deg); box-shadow: 0 14px 30px rgba(0,0,0,.3); }
+.rvb-badge b { font: 900 60px/1 "Manrope"; }
+.rvb-badge small { font: 800 20px/1.2 "Manrope"; }
+
 /* Scène 4 : masterclasses en direct */
 .live { position: absolute; left: 1000px; top: 90px; width: 790px; height: 520px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .cam { position: absolute; left: 520px; top: 266px; width: 240px; height: 150px; border-radius: 18px; overflow: hidden; background: #0e141c; box-shadow: 0 0 0 3px var(--red), 0 20px 40px rgba(0,0,0,.5); }
@@ -412,12 +420,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
       <div class="prow s5b-row" style="left:150px;top:722px"><div class="hd"><span>BLANCS</span><span>NOIRS</span><span>ÉVÉNEMENT</span><span></span></div>
         <div class="rw" id="prow-rw"><span>Toi</span><span>Adversaire</span><em>Tournoi du club</em><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
-      <div class="ptile s5b-t" style="left:150px;top:856px;background:#93b9e2"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div><b>Mes parties</b><span>Tous tes fichiers</span></div></div>
-      <div class="ptile s5b-t" style="left:460px;top:856px;background:#fae361"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></div><div><b>Favoris</b><span>Parties marquées</span></div></div>
-      <div class="ptile s5b-t" style="left:150px;top:944px;background:#6bdc7d"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></div><div><b>Répertoires</b><span>Systèmes et analyses</span></div></div>
-      <div class="ptile s5b-t" style="left:460px;top:944px;background:#f06b8a"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><div><b>Bases</b><span>Bases de parties</span></div></div>
-            <div class="uitile s5b-win" style="left:840px;top:140px;width:960px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg">
-        <div class="s5b-focus" style="position:absolute;left:64.6%;top:6.6%;width:34.8%;height:88%;border-radius:16px;box-shadow:inset 0 0 0 5px #fae361, 0 0 40px rgba(250,227,97,.45)"></div></div>
+            <div class="uitile s5b-win" style="left:840px;top:140px;width:960px;border-radius:26px"><img src="../assets/captures/pgn/viewer.jpg"></div>
       <div class="share s5b-share" style="left:1300px;top:420px"><h5><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg>Partager la partie</h5><div class="who sh-who" id="sh0"><i style="background:#93b9e2">CR</i>Camille R.<span class="ok"></span></div><div class="who sh-who" id="sh1"><i style="background:#fae361">HM</i>Hugo M.<span class="ok"></span></div><div class="who sh-who" id="sh2"><i style="background:#ff8fa0">IB</i>Inès B.<span class="ok"></span></div><div class="send" id="sh-send">Envoyer</div></div>
     </div>
   </section>
@@ -496,8 +499,15 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="uitile rv-t" style="left:1030px;top:100px;width:220px"><img src="../assets/captures/tiles/theme-ouvertures.png"></div>
     <div class="uitile rv-t" style="left:1270px;top:140px;width:220px"><img src="../assets/captures/tiles/theme-strategie.png"></div>
     <div class="uitile rv-t" style="left:1510px;top:100px;width:220px"><img src="../assets/captures/tiles/theme-finales.png"></div>
-    <img class="rv-card" src="../assets/captures/ee/revue-779.png" style="position:absolute;left:150px;top:410px;width:1620px;filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))">
-    <div class="chip rv-pgn" style="position:absolute;left:1180px;top:372px;background:#111;color:var(--yellow);font-size:30px;padding:16px 28px;box-shadow:0 16px 40px rgba(0,0,0,.4)">
+    <div class="rv-card rvb">
+      <div class="rvb-txt"><h4>La revue du mois d'octobre 2026</h4>
+        <p>Neuf titres pour Étienne Bacrot, sept pour Sophie Milliet : les deux champions de France sont les héros de notre numéro d'octobre !</p>
+        <p class="rvb-sub">Avec les analyses de Wesley So, Vasyl Ivanchuk, Susan Polgar, Loïc Travadon et Marie Sebag.</p>
+        <span class="rvb-btn">Lire la revue <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span></div>
+      <img class="rvb-cov" src="../assets/captures/ee/revue-779-couv.png">
+      <div class="rvb-badge"><small>Numéro</small><b>779</b><small>Octobre 2026</small></div>
+    </div>
+    <div class="chip rv-pgn" style="position:absolute;left:1060px;top:378px;background:#111;color:var(--yellow);font-size:30px;padding:16px 28px;box-shadow:0 16px 40px rgba(0,0,0,.4)">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fae361" stroke-width="2.4" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>PGN</div>
     <div class="pill rv-row" style="left:150px;top:800px"><img src="../assets/captures/tiles/row-elephant.png"><span class="chev">›</span></div>
     <div class="pill rv-row" style="left:780px;top:800px"><img src="../assets/captures/tiles/row-herisson.png"><span class="chev">›</span></div>
@@ -646,19 +656,19 @@ const ICON = {
 };
 const cards = [
   { t: "Vidéos", ic: "play", c: "var(--blue)",
-    vis: `<div style="position:absolute;inset:0;background:#1d2a3a"></div><div class="board" style="left:18px;top:15px;width:120px;height:120px;border-radius:8px;box-shadow:none"></div><div style="position:absolute;left:160px;right:18px;bottom:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.15)"><div class="vbar" style="width:100%;height:100%;background:var(--yellow);border-radius:3px;transform-origin:0 50%;transform:scaleX(.1)"></div></div><div style="position:absolute;left:160px;top:24px;width:52px;height:52px;border-radius:50%;background:var(--yellow);display:grid;place-items:center">${ICON.play}</div>` },
+    vis: `<div style="position:absolute;inset:0;background:#1d2a3a"></div><div class="board" style="left:15px;top:15px;width:180px;height:180px;border-radius:8px;box-shadow:none"></div><div style="position:absolute;left:212px;right:16px;bottom:24px;height:6px;border-radius:3px;background:rgba(255,255,255,.15)"><div class="vbar" style="width:100%;height:100%;background:var(--yellow);border-radius:3px;transform-origin:0 50%;transform:scaleX(.1)"></div></div><div style="position:absolute;left:225px;top:62px;width:66px;height:66px;border-radius:50%;background:var(--yellow);display:grid;place-items:center">${ICON.play}</div>` },
   { t: "Cours écrits", ic: "book", c: "var(--ink)",
     vis: `<div class="doc"><div class="board doc-board"></div><div class="doc-txt"><div class="doc-h">Le clouage</div>${[100, 86, 94, 70].map((w, i) => `<div class="tl" style="width:${w}%">${i === 1 ? '<i class="doc-mark"></i>' : ""}</div>`).join("")}<div class="doc-mv"><img class="fig" src="${P}wB.png">b5 !</div></div></div>` },
   { t: "Exercices", ic: "target", c: "var(--green)",
-    vis: `<div class="board ex-board" style="left:50%;top:0;margin-left:-75px;width:150px;height:150px;border-radius:10px;box-shadow:none"></div>` },
+    vis: `<div class="board ex-board" style="left:50%;top:0;margin-left:-105px;width:210px;height:210px;border-radius:10px;box-shadow:none"></div>` },
   { t: "Quiz", ic: "quiz", c: "var(--yellow)",
-    vis: `<div class="opt">A · <img class="fig" src="${P}wN.png">f3</div><div class="opt quiz-ok" style="position:relative">B · <img class="fig" src="${P}wB.png">b5<svg class="qcheck" width="26" height="26" viewBox="0 0 24 24" style="position:absolute;right:12px;top:7px"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#6bdc7d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div><div class="opt">C · d4</div>` },
+    vis: `<div class="opt">A · <img class="fig" src="${P}wN.png">f3</div><div class="opt quiz-ok" style="position:relative">B · <img class="fig" src="${P}wB.png">b5<svg class="qcheck" width="26" height="26" viewBox="0 0 24 24" style="position:absolute;right:14px;top:16px"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="#6bdc7d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="24" stroke-dashoffset="24"/></svg></div><div class="opt">C · d4</div>` },
 ];
 cards.forEach((c, i) => {
   const d = document.createElement("div");
   d.className = "card";
   d.style.left = 150 + i * 412 + "px";
-  d.style.top = "580px";
+  d.style.top = "560px";
   d.innerHTML = `<div class="ic" style="background:${c.c}">${ICON[c.ic]}</div><h4>${c.t}</h4><div class="vis">${c.vis}</div>`;
   $("#cards").appendChild(d);
 });
@@ -1045,53 +1055,50 @@ scene("s5", ({ st, from, at, lines, dur }) => {
   lines(".s5-w", .1, .1);
   const mvRows = $$(".mv");
   GAME.forEach(([f, t], i) => {
-    const ti = .45 + i * .22;
-    at(b5[f], ti, { left: sqPos(t).left, top: sqPos(t).top, duration: .2, ease: "power2.inOut" });
-    sfx(st, "move", ti + .18, { p: i % 2 ? .9 : 1, g: .8 });
+    const ti = .35 + i * .19;
+    at(b5[f], ti, { left: sqPos(t).left, top: sqPos(t).top, duration: .18, ease: "power2.inOut" });
+    sfx(st, "move", ti + .16, { p: i % 2 ? .9 : 1, g: .8 });
     if (i % 2 === 0) from(mvRows[i / 2], ti, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .3 });
   });
-  at([h5, h5b], 1.35, { opacity: 1, duration: .2 });
-  from(".mv:nth-child(3) .nag", 1.4, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .3, ease: "back.out(3)" });
-  at(a5.line, 1.9, { strokeDashoffset: 0, duration: .35 });
-  from(a5.head, 2.2, { opacity: 0 }, { opacity: 1, duration: .12 });
-  from(".s5-l", 1.0, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
-  from("#p5", 1.3, { y: 460 }, { y: 0, duration: .5, ease: "back.out(1.3)" });
-  playPose(st, "#p5", 1.3);
-  // B. Import d'un PGN, rangement dans les bases, analyse
-  const T = 2.8;
-  at("#s5a", T, { x: -160, opacity: 0, duration: .35, ease: "power2.in" });
+  at([h5, h5b], 1.2, { opacity: 1, duration: .2 });
+  from(".mv:nth-child(3) .nag", 1.25, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: .3, ease: "back.out(3)" });
+  at(a5.line, 1.6, { strokeDashoffset: 0, duration: .3 });
+  from(a5.head, 1.88, { opacity: 0 }, { opacity: 1, duration: .1 });
+  from(".s5-l", .9, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
+  from("#p5", 1.0, { y: 460 }, { y: 0, duration: .5, ease: "back.out(1.3)" });
+  playPose(st, "#p5", 1.0);
+  // B. Import d'un PGN, analyse dans le lecteur, partage
+  const T = 2.25;
+  at("#s5a", T, { x: -160, opacity: 0, duration: .3, ease: "power2.in" });
   from("#s5b", T, { opacity: 0 }, { opacity: 1, duration: .01 });
   from(".s5b-k", T + .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
-  st.fromTo(".s5b-w", { yPercent: 110 }, { yPercent: 0, duration: .6, stagger: .09 }, T + .15);
-  from(".s5b-imp", T + .25, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .5 });
-  from(".s5b-t", T + .45, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .4, stagger: .07, ease: "back.out(1.8)" });
-  st.set("#imp-ph", { opacity: 1 }, 0); st.set("#imp-ph", { opacity: 0 }, T + .6);
+  st.fromTo(".s5b-w", { yPercent: 110 }, { yPercent: 0, duration: .55, stagger: .08 }, T + .12);
+  from(".s5b-imp", T + .2, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .45 });
+  st.set("#imp-ph", { opacity: 1 }, 0); st.set("#imp-ph", { opacity: 0 }, T + .45);
   const typ = { n: 0 };
-  st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: 1.05, ease: "none", onUpdate: () => { $("#imp-text").innerHTML = pgnFig(PGN_TXT.slice(0, Math.round(typ.n))); } }, T + .6);
-  for (let k = 0; k < 9; k++) sfx(st, "key", T + .62 + k * .116, { p: .9 + (k * 37 % 7) * .04, g: .2 });
-  sfx(st, "click", T + 1.77); sfx(st, "pop", T + 1.97, { g: .7 }); sfx(st, "whoosh", T + 2.35, { g: .5 });
-  at("#imp-go", T + 1.75, { scale: .9, duration: .08, ease: "power2.in" });
-  at("#imp-go", T + 1.83, { scale: 1, boxShadow: "0 0 0 8px rgba(250,227,97,.45)", duration: .2 });
-  from(".s5b-row", T + 1.95, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .35, ease: "back.out(2)" });
-  at("#prow-rw", T + 2.25, { backgroundColor: "rgba(250,227,97,.55)", duration: .15 });
-  from(".s5b-win", T + 2.35, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .6 });
-  at(".s5b-win", T + 2.95, { rotateY: -2, duration: Math.max(.2, dur - T - 2.95), ease: "sine.inOut" });
-  from(".s5b-focus", T + 3.0, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: .3 });
+  st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: .7, ease: "none", onUpdate: () => { $("#imp-text").innerHTML = pgnFig(PGN_TXT.slice(0, Math.round(typ.n))); } }, T + .45);
+  for (let k = 0; k < 8; k++) sfx(st, "key", T + .47 + k * .085, { p: .9 + (k * 37 % 7) * .04, g: .2 });
+  sfx(st, "click", T + 1.22); sfx(st, "pop", T + 1.37, { g: .7 }); sfx(st, "whoosh", T + 1.6, { g: .5 });
+  at("#imp-go", T + 1.2, { scale: .9, duration: .08, ease: "power2.in" });
+  at("#imp-go", T + 1.28, { scale: 1, boxShadow: "0 0 0 8px rgba(250,227,97,.45)", duration: .2 });
+  from(".s5b-row", T + 1.35, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: .3, ease: "back.out(2)" });
+  at("#prow-rw", T + 1.55, { backgroundColor: "rgba(250,227,97,.55)", duration: .15 });
+  from(".s5b-win", T + 1.6, { opacity: 0, x: 320, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -7, duration: .55 });
+  at(".s5b-win", T + 2.15, { rotateY: -2, duration: Math.max(.2, dur - T - 2.15), ease: "sine.inOut" });
   // Partage avec d'autres membres
-  const TS = T + 3.45;
-  at(".s5b-focus", TS - .1, { opacity: 0, duration: .2 });
-  from(".s5b-share", TS, { opacity: 0, y: 60, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(1.6)" });
-  from(".sh-who", TS + .2, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .3, stagger: .08 });
+  const TS = T + 2.25;
+  from(".s5b-share", TS, { opacity: 0, y: 60, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .4, ease: "back.out(1.6)" });
+  from(".sh-who", TS + .15, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .25, stagger: .06 });
   ["#sh0", "#sh2"].forEach((id, k) => {
-    at(id, TS + .6 + k * .2, { backgroundColor: "rgba(147,185,226,.35)", duration: .15 });
-    at(id + " .ok", TS + .6 + k * .2, { backgroundColor: "#2c9a45", borderColor: "#2c9a45", duration: .15 });
+    at(id, TS + .4 + k * .15, { backgroundColor: "rgba(147,185,226,.35)", duration: .12 });
+    at(id + " .ok", TS + .4 + k * .15, { backgroundColor: "#2c9a45", borderColor: "#2c9a45", duration: .12 });
   });
-  sfx(st, "click", TS + .62, { g: .6 }); sfx(st, "click", TS + .82, { g: .6, p: 1.1 });
-  sfx(st, "click", TS + 1.12); sfx(st, "ding", TS + 1.22);
-  at("#sh-send", TS + 1.1, { scale: .94, duration: .08 });
-  at("#sh-send", TS + 1.18, { scale: 1, backgroundColor: "#6bdc7d", duration: .2 });
-  st.call(() => { $("#sh-send").textContent = "Envoyer"; }, null, TS + 1.19);
-  st.call(() => { $("#sh-send").textContent = "Partagée ✓"; }, null, TS + 1.2);
+  sfx(st, "click", TS + .42, { g: .6 }); sfx(st, "click", TS + .57, { g: .6, p: 1.1 });
+  sfx(st, "click", TS + .77); sfx(st, "ding", TS + .87);
+  at("#sh-send", TS + .75, { scale: .94, duration: .08 });
+  at("#sh-send", TS + .83, { scale: 1, backgroundColor: "#6bdc7d", duration: .2 });
+  st.call(() => { $("#sh-send").textContent = "Envoyer"; }, null, TS + .84);
+  st.call(() => { $("#sh-send").textContent = "Partagée ✓"; }, null, TS + .85);
   exitZoom(st, "s5", dur, { scale: 1, y: 60 });
 });
 
