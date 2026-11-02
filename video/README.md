@@ -12,12 +12,12 @@ Fichiers produits :
 |---|---|---|---|
 | 1 | Pas à pas | L'échiquier se met en place, 1.e4 e5 | « hello » (animation du designer) |
 | 2 | Progression | Initiation → Objectif 1400, 1600, 1800 → 2000 et +, promotion en dame | Niveau supérieur (escalier) |
-| 3 | Mesure tes progrès | Barre de validation d'un module (Objectif 1400) qui se remplit, « Validé », 3 étoiles, courbe Elo qui monte de 1150 à 1480 | Série réussie |
-| 4 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
-| 5 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
-| 6 | Masterclasses en direct | « Masterclasses avec des pros » : direct (échiquier, caméra de Sylvain Ravot, question du chat), fiches de Sylvain Ravot, Marc Quenehen, Fabien Libiszewski et Gata Kamsky | Regarde, en prof (toque) |
-| 7 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
-| 8 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
+| 3 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
+| 4 | Mesure tes progrès | Barre de validation d'un module (Objectif 1400) qui se remplit, « Validé », 3 étoiles, courbe Elo qui monte de 1150 à 1480 | Série réussie |
+| 5 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
+| 6 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
+| 7 | Masterclasses en direct | « Masterclasses avec des pros » : direct (échiquier, caméra de Sylvain Ravot, question du chat), fiches de Sylvain Ravot, Marc Quenehen, Fabien Libiszewski et Gata Kamsky | Regarde, en prof (toque) |
+| 8 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
 | 9 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
 | 10 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
 | 11 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
