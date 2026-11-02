@@ -44,7 +44,7 @@ window.VISUELS = [
 
   // ---- Chiffres clés
   { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "saut-etoile" },
-  { id: "12-chiffre-2000-exercices", tpl: "chiffre", theme: "nuit", k: "Entraînement", n: "+2<b>&#8239;</b>000", t: "exercices", e: "et quiz.", pose: "karate" },
+  { id: "12-chiffre-2000-exercices", tpl: "chiffre", theme: "nuit", k: "Entraînement", n: "+2<b>&#8239;</b>000", t: "exercices", e: "et quiz.", pose: "bonne-reponse" },
   { id: "13-chiffre-4-formats", tpl: "chiffre", theme: "menthe", k: "Apprends comme tu veux", n: "4", t: "formats", e: "de leçon.", s: "Vidéo, cours écrit, exercice, quiz.", pose: "lit-assise" },
 
   // ---- Engagement : problème, solution, quiz
