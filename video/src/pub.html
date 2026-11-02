@@ -6,7 +6,7 @@
 <!--
   Publicités de 15 s construites pour les réseaux (pas de reprise du motion) :
   question en très grand, « Nous avons la solution ! », la réponse propre à chaque question, l'appel final.
-  Paramètres : ?q=1..5 (question) &fmt=story|feed|wide (1080×1920, 1080×1350, 1920×1080) &theme=nuit|soleil
+  Paramètres : ?q=1..5 (question) &fmt=story|feed|carre|wide (1080×1920, 1080×1350, 1080×1080, 1920×1080) &theme=nuit|soleil
   Rendu : scripts/pubs.sh (render.mjs --page pub.html).
 -->
 <style>
@@ -190,6 +190,24 @@ body.wide .ct { top: 450px; font-size: 80px; }
 body.wide .cb { top: 700px; }
 body.wide .cu { top: 840px; }
 body.wide #pc { left: 1500px; top: 600px; width: 290px; height: 355px; }
+body.carre #logo { left: 50%; top: 50px; height: 40px; margin-left: -85px; }
+body.carre .q { left: 70px; top: 125px; width: 940px; font-size: 82px; }
+body.carre #pvh { left: 150px; top: 615px; transform: scale(.62); }
+body.carre #pq { left: 800px; top: 760px; width: 190px; height: 233px; }
+body.carre .r { top: 320px; font-size: 110px; }
+body.carre .rs { top: 600px; font-size: 36px; }
+body.carre #pr { left: 440px; top: 720px; width: 200px; height: 245px; }
+body.carre .sk { left: 70px; top: 115px; }
+body.carre .st { left: 70px; top: 160px; width: 940px; font-size: 68px; }
+body.carre #svh { left: 70px; top: 345px; transform: scale(.62); }
+body.carre .cap { left: 640px; top: 400px; width: 380px; font-size: 34px; }
+body.carre #ps { left: 790px; top: 790px; width: 190px; height: 233px; }
+body.carre #lg2w { top: 190px; } body.carre #lg2 { width: 500px; }
+body.carre .ct { top: 360px; font-size: 66px; }
+body.carre .cb { top: 610px; }
+body.carre .cu { top: 745px; }
+body.carre #pc { left: 840px; top: 790px; width: 180px; height: 220px; }
+
 </style>
 </head>
 <body>
@@ -239,6 +257,7 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const prm = new URLSearchParams(location.search);
 const Q = +(prm.get("q") || 1), FMT = prm.get("fmt") || "story", THEME = prm.get("theme") || "nuit";
 document.body.classList.add(FMT, THEME);
+if (prm.get("still")) document.getElementById("bar").style.display = "none";   // images fixes : pas de barre de progression
 const nb = s => s.replace(/ ([?!:;])/g, " $1");
 const P = "../assets/pieces/", HD = "../assets/captures/ee/hd/";
 const CK = `<svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -338,11 +357,11 @@ if (Q === 2) {
 if (Q === 4) board($("#tb"), { g8: "bK", h7: "bP", g7: "bP", f7: "bP", e1: "wR", g1: "wK", f2: "wP", g2: "wP", h2: "wP" }, 290);
 
 // Le texte de la question remplit la place disponible sans déborder
-const MAXQ = { story: 720, feed: 560, wide: 640 }[FMT];
+const MAXQ = { story: 720, feed: 560, wide: 640, carre: 470 }[FMT];
 const fit = (el, max) => { let f = parseFloat(getComputedStyle(el).fontSize); while (el.offsetHeight > max && f > 40) { f -= 2; el.style.fontSize = f + "px"; } };
 fit($("#qt"), MAXQ);
-fit($("#stt"), { story: 260, feed: 200, wide: 300 }[FMT]);
-fit($("#cap"), { story: 260, feed: 420, wide: 200 }[FMT]);
+fit($("#stt"), { story: 260, feed: 200, wide: 300, carre: 170 }[FMT]);
+fit($("#cap"), { story: 260, feed: 420, wide: 200, carre: 380 }[FMT]);
 
 // Confettis déterministes
 const COLS = ["#fae361", "#93b9e2", "#6bdc7d", "#ff8fa0", "#f4f1ea", "#111"];
@@ -432,7 +451,7 @@ from("#rs", R0 + .45, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 })
 from("#pr", R0 + .2, { y: 500 }, { y: 0, duration: .5, ease: "back.out(1.5)" });
 pose("#pr", R0 + .2);
 burst(tl, confR, R0 + .05, 1.6);
-sfx("pop", R0 + .1, { p: .75, g: .7 });
+sfx("shimmer", R0); sfx("ding", R0 + .1, { p: 1.1, g: .7 });
 
 // 3. La réponse propre à la question
 const S0 = 5.4;
@@ -450,8 +469,8 @@ if (Q === 1) {
   from("#svt", S0 + 3.9, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
   from(".mod", S0 + 1.4, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .4, stagger: .9 });
   from(".mod .ck", S0 + 1.7, { scale: 0 }, { scale: 1, duration: .35, stagger: .9, ease: "back.out(3)" });
-  [0, 1, 2].forEach(k => sfx("pop", S0 + 1.75 + k * .9, { p: .75, g: .45 }));
-  sfx("pop", S0 + 3.95, { p: .7, g: .5 });
+  [0, 1, 2].forEach(k => sfx("ding", S0 + 1.75 + k * .9, { p: 1 + k * .12, g: .45 }));
+  sfx("notif", S0 + 3.95, { g: .6 });
 } else if (Q === 2) {
   from(".mv", S0 + .9, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .35, stagger: .2 });
   from("#err", S0 + 1.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .35 });
@@ -459,14 +478,14 @@ if (Q === 1) {
   from("#best", S0 + 2.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .4 });
   from("#exo", S0 + 3.4, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .5 });
   $$("#exo .dt").forEach((d, k) => tl.to(d, { backgroundColor: "#2c9a45", duration: .2 }, S0 + 4 + k * .45));
-  sfx("click", S0 + 1.65, { g: .5, p: .7 }); sfx("pop", S0 + 2.65, { p: .75, g: .5 });
-  [0, 1, 2].forEach(k => sfx("pop", S0 + 4 + k * .45, { p: .75, g: .4 }));
+  sfx("click", S0 + 1.65, { g: .5, p: .7 }); sfx("ding", S0 + 2.65, { g: .5 });
+  [0, 1, 2].forEach(k => sfx("ding", S0 + 4 + k * .45, { p: 1 + k * .12, g: .4 }));
 } else if (Q === 3) {
   from(".coach", S0 + .9, { opacity: 0, scale: .7, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: .5, stagger: .3, ease: "back.out(1.6)" });
   from("#live", S0 + 2.2, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
   tl.to("#live i", { opacity: .2, duration: .4, yoyo: true, repeat: 7, ease: "sine.inOut" }, S0 + 2.5);
   [0, 1, 2, 3].forEach(k => sfx("pop", S0 + 1 + k * .3, { p: .9 + k * .08, g: .4 }));
-  sfx("pop", S0 + 2.25, { p: .7, g: .5 });
+  sfx("notif", S0 + 2.25, { g: .6 });
 } else if (Q === 4) {
   at("#plb", S0 + 1, { scaleX: 1, duration: 1.6, ease: "none" });
   at(".fm:nth-child(1)", S0 + 1, { backgroundColor: "#fae361", color: "#111", duration: .2 });
@@ -478,7 +497,7 @@ if (Q === 1) {
   const rook = [...$$("#tb .pc")].find(d => d.style.backgroundImage.includes("wR"));
   at(rook, S0 + 3.6, { top: "0%", duration: .45, ease: "power3.inOut" });
   from("#okc", S0 + 4.2, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
-  sfx("click", S0 + 1, { g: .4 }); sfx("whoosh", S0 + 2.7, { g: .4 }); sfx("move", S0 + 4.05); sfx("pop", S0 + 4.25, { p: .75, g: .6 });
+  sfx("click", S0 + 1, { g: .4 }); sfx("whoosh", S0 + 2.7, { g: .4 }); sfx("move", S0 + 4.05); sfx("ding", S0 + 4.25, { p: 1.15, g: .6 });
 } else {
   from(".stp", S0 + .9, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .35, stagger: { each: .12, from: "end" } });
   from("#here", S0 + 1.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .4 });
@@ -489,7 +508,7 @@ if (Q === 1) {
     at(stp(i), S0 + 2.1 + i * .9, { color: "#f4f1ea", duration: .2 });
     at(stp(i).querySelector(".dt"), S0 + 2.1 + i * .9, { backgroundColor: "#fae361", borderColor: "#fae361", scale: 1.25, duration: .2 });
     at(stp(i).querySelector(".dt"), S0 + 2.3 + i * .9, { scale: 1, duration: .3 });
-    sfx("pop", S0 + 2.1 + i * .9, { p: .75, g: .45 });
+    sfx("ding", S0 + 2.1 + i * .9, { p: 1 + i * .12, g: .45 });
   });
   at("#here", S0 + 2.2, { top: 582 - 2 * 118, duration: 2.6, ease: "power1.inOut" });
 }
@@ -505,7 +524,7 @@ from("#url", C0 + 1.4, { opacity: 0 }, { opacity: 1, duration: .5 });
 from("#pc", C0 + 1.3, { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "back.out(1.5)" });
 pose("#pc", C0 + 1.3);
 burst(tl, confC, C0 + .1, 2);
-sfx("whoosh", C0, { g: .5 }); sfx("pop", C0 + 1.05, { p: .8 }); 
+sfx("whoosh", C0, { g: .5 }); sfx("pop", C0 + 1.05, { p: .8 }); sfx("shimmer", C0 + 1.3, { g: .6 });
 tl.set({}, {}, TOTAL);
 
 window.TOTAL = TOTAL;
