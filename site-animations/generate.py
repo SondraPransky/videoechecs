@@ -790,13 +790,17 @@ A[n] = ("Envoi de mail", "Newsletter, e-mail envoyé, invitation", svg(n, "Envoi
 # collé sur la hanche est remplacé par un second bras articulé, symétrique du premier.
 # Chaque pièce pivote autour de son articulation : on peut enfin bouger les DEUX bras,
 # les jambes, la tête et le buste.
-NECK, HIP, HIP_L, HIP_R, SH2 = (650, 470), (620, 900), (545, 915), (715, 915), (765, 575)
+NECK, HIP, HIP_L, HIP_R, SH2 = (650, 470), (625, 850), (548, 850), (708, 850), (765, 575)
 CLIPS = {
     "tete": "380,-10 1010,-10 1010,486 380,486",
-    "buste": "380,470 772,478 800,560 788,640 780,790 795,935 380,935",
-    "jambeg": "360,900 634,900 634,1110 360,1110",
-    "jambed": "634,905 792,905 840,1110 634,1110",
+    "buste": "380,470 772,478 800,560 788,640 780,790 780,862 380,862",
+    "jambeg": "360,760 628,760 628,1110 360,1110",
+    "jambed": "628,760 786,760 786,930 840,1110 628,1110",
 }
+
+
+# Jambe redessinée dans le style de la silhouette : cuisse pleine qui s'affine, pied tourné vers l'avant
+LEG = "M-84,-40 C-42,-68 42,-68 82,-40 L66,150 C66,176 56,196 28,198 L-108,198 C-138,198 -142,160 -110,152 L-72,142 Z"
 
 
 def piece(name, part, pivot):
@@ -808,13 +812,13 @@ def piece(name, part, pivot):
 def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", torso_inner=""):
     """Mascotte articulée : .rig > .legl, .legr, .torso > (.arm2, buste, .head, .arm)."""
     defs = "<defs>" + "".join(f'<clipPath id="{name}-{k}"><polygon points="{v}"/></clipPath>' for k, v in CLIPS.items()) + "</defs>"
-    jl = g(HIP_L, "legl", piece(name, "jambeg", HIP_L) + '<circle class="m" r="58"/>')
-    jr = g(HIP_R, "legr", piece(name, "jambed", HIP_R) + '<circle class="m" r="58"/>')
+    jl = g(HIP_L, "legl", f'<path class="m" d="{LEG}"/>')
+    jr = g(HIP_R, "legr", f'<path class="m" d="{LEG}"/>')
     arm2 = g(SH2, "arm2", f'<g transform="scale(-1 1)"><path class="m" d="{ARM}"/></g>{arm2_inner}<circle class="m" r="50"/>')
     head = g(NECK, "head", piece(name, "tete", NECK) + (f'<g transform="translate({HEAD_TOP[0] - NECK[0]} {HEAD_TOP[1] - NECK[1]})">{head_inner}</g>' if head_inner else ""))
     arm = g(PIVOT, "arm", f'<path class="m" d="{ARM}"/>{arm_inner}')
     torso = g(HIP, "torso", f'<g transform="translate({-HIP[0]} {-HIP[1]})">{arm2}{piece(name, "buste", (0, 0))}'
-              f'<circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
+              f'<ellipse class="m" cx="{HIP[0]}" cy="{HIP[1]}" rx="150" ry="62"/><circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
     fx, fy = FEET
     return defs + extra_back + g(FEET, "rig", f'<g transform="translate({-fx:.1f} {-fy:.1f})">{jl}{jr}{torso}</g>')
 
@@ -826,7 +830,8 @@ REPOS = ".arm2 { transform: rotate(150deg); } .arm { transform: rotate(-112deg);
 
 def pose2(n, title, usage, rules, extra_css="", **kw):
     """Ajoute une animation de la mascotte articulée ; repos par défaut : bras le long du corps."""
-    base = f".mascotte-{n} .arm2 {{ transform: rotate(104deg); }} .mascotte-{n} .arm {{ transform: rotate(-104deg); }}"
+    base = (f".mascotte-{n} .arm2 {{ transform: rotate(104deg); }} .mascotte-{n} .arm {{ transform: rotate(-104deg); }} "
+            f".mascotte-{n} .legl {{ transform: rotate(10deg); }} .mascotte-{n} .legr {{ transform: rotate(-10deg); }}")
     shadow = kw.pop("shadow", True)
     body = kw.pop("before", "") + mascot2(n, **kw) + kw.pop("after", "") if False else None
     A[n] = (title, usage, svg(n, title, base + "\n" + css(n, rules) + ("\n" + extra_css if extra_css else ""), BODY2(n, kw), shadow=shadow))
