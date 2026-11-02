@@ -813,14 +813,34 @@ def piece(name, part, pivot):
     return f'<g transform="translate({-px} {-py})"><path class="m" d="{BODY}" fill-rule="evenodd" clip-path="url(#{name}-{part})"/></g>'
 
 
+# Coude : le bras du designer est coupé au milieu de sa courbe (droite x + y = -385 dans le repère
+# de l'épaule) ; l'avant-bras pivote autour du coude, une articulation ronde masque le raccord.
+ELBOW = (-253, -132)   # centre du tube à la coupe (largeur mesurée : 120)
+ARM_UP = "300,-685 -685,300 300,300"       # côté épaule
+ARM_LOW = "300,-685 -685,300 -685,-685"    # côté poing
+
+
+def bras(name, inner="", mirror=False):
+    """Bras en deux segments : épaule > .fa / .fa2 (coude) ; `inner` est dans le repère de l'épaule."""
+    fa = "fa2" if mirror else "fa"
+    ex, ey = ELBOW
+    if mirror and inner:
+        inner = f'<g transform="scale(-1 1)">{inner}</g>'
+    low = (f'<g transform="translate({ex} {ey})"><g class="{fa}"><g transform="translate({-ex} {-ey})">'
+           f'<path class="m" d="{ARM}" clip-path="url(#{name}-avb)"/>{inner}<circle class="m" cx="{ex}" cy="{ey}" r="62"/></g></g></g>')
+    seg = f'<path class="m" d="{ARM}" clip-path="url(#{name}-bra)"/>{low}'
+    return f'<g transform="scale(-1 1)">{seg}</g>' if mirror else seg
+
+
 def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", torso_inner=""):
     """Mascotte articulée : .rig > .legl, .legr, .torso > (.arm2, buste, .head, .arm)."""
-    defs = "<defs>" + "".join(f'<clipPath id="{name}-{k}"><polygon points="{v}"/></clipPath>' for k, v in CLIPS.items()) + "</defs>"
+    defs = ("<defs>" + "".join(f'<clipPath id="{name}-{k}"><polygon points="{v}"/></clipPath>' for k, v in CLIPS.items())
+            + f'<clipPath id="{name}-bra"><polygon points="{ARM_UP}"/></clipPath><clipPath id="{name}-avb"><polygon points="{ARM_LOW}"/></clipPath></defs>')
     jl = g(HIP_L, "legl", f'<path class="m" d="{LEG}"/>')
     jr = g(HIP_R, "legr", f'<path class="m" d="{LEG}"/>')
-    arm2 = g(SH2, "arm2", f'<g transform="scale(-1 1)"><path class="m" d="{ARM}"/></g>{arm2_inner}<circle class="m" r="50"/>')
+    arm2 = g(SH2, "arm2", bras(name, arm2_inner, mirror=True) + '<circle class="m" r="50"/>')
     head = g(NECK, "head", piece(name, "tete", NECK) + (f'<g transform="translate({HEAD_TOP[0] - NECK[0]} {HEAD_TOP[1] - NECK[1]})">{head_inner}</g>' if head_inner else ""))
-    arm = g(PIVOT, "arm", f'<path class="m" d="{ARM}"/>{arm_inner}')
+    arm = g(PIVOT, "arm", bras(name, arm_inner))
     torso = g(HIP, "torso", f'<g transform="translate({-HIP[0]} {-HIP[1]})">{arm2}<path class="m" d="{BUSTE}"/>'
               f'<circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
     fx, fy = FEET
@@ -832,10 +852,21 @@ REPOS = ".arm2 { transform: rotate(150deg); } .arm { transform: rotate(-112deg);
 
 
 
-def pose2(n, title, usage, rules, extra_css="", **kw):
-    """Ajoute une animation de la mascotte articulée ; repos par défaut : bras le long du corps."""
+def pose2(n, title, usage, rules, extra_css="", ombre=None, coudes=None, **kw):
+    """Ajoute une animation de la mascotte articulée ; repos par défaut : bras le long du corps.
+    Les avant-bras (.fa, .fa2) ont un léger mouvement propre, en retard sur le corps (inertie) ;
+    `coudes` = (a, b) angles de flexion de repos ; `ombre` = (durée, keyframes) pour l'ombre au sol."""
+    rules = rules + PLIS.get(n, [])
+    coudes = coudes or REPOS_COUDES.get(n)
+    ombre = ombre or OMBRES.get(n)
+    ca, cb = coudes or (10, 10)
     base = (f".mascotte-{n} .arm2 {{ transform: rotate(104deg); }} .mascotte-{n} .arm {{ transform: rotate(-104deg); }} "
-            f".mascotte-{n} .legl {{ transform: rotate(10deg); }} .mascotte-{n} .legr {{ transform: rotate(-10deg); }}")
+            f".mascotte-{n} .legl {{ transform: rotate(10deg); }} .mascotte-{n} .legr {{ transform: rotate(-10deg); }}\n"
+            f".mascotte-{n} .fa {{ animation: {n}-fa 1.6s ease-in-out .15s infinite alternate; }} .mascotte-{n} .fa2 {{ animation: {n}-fb 1.6s ease-in-out .3s infinite alternate; }}\n"
+            f"@keyframes {n}-fa {{ from{{transform:rotate({ca - 6}deg)}} to{{transform:rotate({ca + 8}deg)}} }} @keyframes {n}-fb {{ from{{transform:rotate({cb - 6}deg)}} to{{transform:rotate({cb + 8}deg)}} }}\n"
+            f".mascotte-{n} .shadow {{ transform-box: fill-box; transform-origin: center; }}")
+    if ombre:
+        base += f"\n.mascotte-{n} .shadow {{ animation: {n}-sh {ombre[0]} infinite; }} @keyframes {n}-sh {{ {ombre[1]} }}"
     shadow = kw.pop("shadow", True)
     body = kw.pop("before", "") + mascot2(n, **kw) + kw.pop("after", "") if False else None
     A[n] = (title, usage, svg(n, title, base + "\n" + css(n, rules) + ("\n" + extra_css if extra_css else ""), BODY2(n, kw), shadow=shadow))
@@ -845,6 +876,46 @@ def BODY2(n, kw):
     before, after = kw.pop("before", ""), kw.pop("after", "")
     return before + mascot2(n, **kw) + after
 
+
+def ombre_saut(d):
+    """Ombre qui rétrécit et pâlit quand la mascotte est en l'air (même rythme que jump())."""
+    return (d, f"0%,16%,62%,100%{{transform:scale(1);opacity:.12;animation-timing-function:{UP}}} 42%{{transform:scale(.55);opacity:.05;animation-timing-function:{DOWN}}}")
+
+
+# ---------------------------------------------------------------- passe d'animation
+# Coudes : flexion de repos par pose (front, fond) et mouvements dédiés ; ombre au sol par pose.
+REPOS_COUDES = {"hourra": (-14, -14), "pancarte": (24, 24), "porte-echiquier": (24, 24), "champion": (20, 20),
+                "promenade": (24, 24), "coucou-autre-main": (10, 30), "selfie": (10, 10)}
+def _fa(n, sel, frames, d="1s", t="ease-in-out infinite"):
+    return (sel, f"{n}-{sel[1:]}x {d} {t}", {f"{n}-{sel[1:]}x": frames})
+PLIS = {
+    "haussement": [_fa("haussement", ".fa", "0%,60%,100%{transform:rotate(10deg)} 20%,40%{transform:rotate(78deg)}", "1.6s"),
+                   _fa("haussement", ".fa2", "0%,60%,100%{transform:rotate(10deg)} 20%,40%{transform:rotate(78deg)}", "1.6s")],
+    "sprint": [_fa("sprint", ".fa", "0%,100%{transform:rotate(60deg)} 50%{transform:rotate(96deg)}", ".5s"),
+               _fa("sprint", ".fa2", "0%,100%{transform:rotate(96deg)} 50%{transform:rotate(60deg)}", ".5s")],
+    "promenade": [_fa("promenade", ".fa", "0%,100%{transform:rotate(30deg)} 50%{transform:rotate(6deg)}", ".9s"),
+                  _fa("promenade", ".fa2", "0%,100%{transform:rotate(6deg)} 50%{transform:rotate(30deg)}", ".9s")],
+    "danse": [_fa("danse", ".fa", "0%,100%{transform:rotate(0)} 25%,75%{transform:rotate(70deg)}", "1.6s"),
+              _fa("danse", ".fa2", "0%,100%{transform:rotate(70deg)} 25%,75%{transform:rotate(0)}", "1.6s")],
+    "prof": [_fa("prof", ".fa2", "from{transform:rotate(20deg)} to{transform:rotate(64deg)}", ".8s", "ease-in-out infinite alternate")],
+    "discute": [_fa("discute", ".fa", "0%,100%{transform:rotate(50deg)} 50%{transform:rotate(0)}", "1.2s"),
+                _fa("discute", ".fa2", "0%,100%{transform:rotate(0)} 50%{transform:rotate(56deg)}", "1.2s")],
+    "karate": [_fa("karate", ".fa", "0%,30%,80%,100%{transform:rotate(96deg)} 42%,62%{transform:rotate(10deg)}", "1.4s"),
+               _fa("karate", ".fa2", "0%,30%,80%,100%{transform:rotate(90deg)} 42%,62%{transform:rotate(20deg)}", "1.4s")],
+    "saut-etoile": [_fa("saut-etoile", ".fa", "0%,100%{transform:rotate(30deg)} 50%{transform:rotate(-10deg)}", ".8s"),
+                    _fa("saut-etoile", ".fa2", "0%,100%{transform:rotate(30deg)} 50%{transform:rotate(-10deg)}", ".8s")],
+    "oups": [_fa("oups", ".fa", "from{transform:rotate(-30deg)} to{transform:rotate(60deg)}", ".3s", "linear infinite alternate-reverse"),
+             _fa("oups", ".fa2", "from{transform:rotate(-30deg)} to{transform:rotate(60deg)}", ".3s", "linear infinite alternate")],
+    "invite": [_fa("invite", ".fa2", "from{transform:rotate(0)} to{transform:rotate(80deg)}", ".5s", "ease-in-out infinite alternate")],
+    "coucou-autre-main": [_fa("coucou-autre-main", ".fa2", "from{transform:rotate(-20deg)} to{transform:rotate(36deg)}", ".4s", "ease-in-out infinite alternate")],
+    "equilibre": [_fa("equilibre", ".fa", "0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(10deg)}", "2s"),
+                  _fa("equilibre", ".fa2", "0%,100%{transform:rotate(10deg)} 50%{transform:rotate(-20deg)}", "2s")],
+    "reverence": [_fa("reverence", ".fa2", "0%,15%,90%,100%{transform:rotate(10deg)} 40%,65%{transform:rotate(90deg)}", "2.4s")],
+}
+OMBRES = {k: ombre_saut(d) for k, d in {"hourra": "1.1s", "champion": "1.2s", "pancarte": "1.4s", "saute-obstacle": "1.4s"}.items()}
+OMBRES["saut-etoile"] = (".8s", "0%,100%{transform:scale(1);opacity:.12} 50%{transform:scale(.6);opacity:.05}")
+OMBRES["sprint"] = (".25s", "from{transform:scale(1)} to{transform:scale(.85)}")
+OMBRES["tailleur"] = ("4s", "0%,100%{transform:scale(.9);opacity:.1} 50%{transform:scale(.7);opacity:.06}")
 
 # 43. Hourra : les DEUX bras en l'air, saute de joie -------------------------------
 pose2("hourra", "Hourra !", "Grande victoire, objectif atteint", [
@@ -1178,6 +1249,39 @@ pose2("invite", "Invite", "Appel à l'action, « rejoins-nous ! »", [
     anim("invite", ".rig", "r", "1.2s", "0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}"),
     anim("invite", ".legl", "l", "1.2s", "0%,100%{transform:rotate(24deg)} 50%{transform:rotate(16deg)}"),
 ])
+
+# 77. Muscles : montre ses biceps, gonfle le torse --------------------------------------
+pose2("muscles", "Muscles", "Progrès, force, « tu deviens fort ! »", [
+    anim("muscles", ".arm", "a", "1.2s", "0%,100%{transform:rotate(-52deg)} 50%{transform:rotate(-46deg)}"),
+    anim("muscles", ".fa", "c", "1.2s", "0%,100%{transform:rotate(48deg)} 50%{transform:rotate(80deg)}"),
+    anim("muscles", ".arm2", "b", "1.2s", "0%,100%{transform:rotate(122deg)} 50%{transform:rotate(118deg)}"),
+    anim("muscles", ".fa2", "d", "1.2s", "0%,100%{transform:rotate(76deg)} 50%{transform:rotate(80deg)}"),
+    anim("muscles", ".torso", "t", "1.2s", "0%,100%{transform:scale(1)} 50%{transform:scale(1.04,1.02) translateY(-10px)}"),
+    anim("muscles", ".head", "h", "1.2s", "0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)}"),
+], after="".join(g(p, f"sp sp{i}", sparkle(.8)) for i, p in enumerate([(160, 420), (1000, 420)])),
+   extra_css=".mascotte-muscles .sp { animation: muscles-sp 1.2s ease-in-out infinite; } @keyframes muscles-sp { 0%,100%{transform:scale(0)} 50%{transform:scale(1) rotate(45deg)} }")
+
+# 78. Boxe : enchaîne les directs, en garde ---------------------------------------------
+pose2("boxe", "Boxe", "Attaque, combinaison, « frappe fort »", [
+    anim("boxe", ".arm", "a", ".8s", "0%,40%,100%{transform:rotate(-80deg)} 20%{transform:rotate(-62deg)}"),
+    anim("boxe", ".fa", "c", ".8s", "0%,40%,100%{transform:rotate(100deg)} 20%{transform:rotate(-6deg)}"),
+    anim("boxe", ".arm2", "b", ".8s", "0%,50%,90%,100%{transform:rotate(-30deg)} 70%{transform:rotate(-50deg)}"),
+    anim("boxe", ".fa2", "d", ".8s", "0%,50%,90%,100%{transform:rotate(100deg)} 70%{transform:rotate(30deg)}"),
+    anim("boxe", ".rig", "r", ".4s", "from{transform:translateY(0)} to{transform:translateY(-14px)}", "ease-in-out infinite alternate"),
+    anim("boxe", ".torso", "t", ".8s", "0%,40%,100%{transform:rotate(-4deg)} 20%{transform:rotate(-12deg)} 70%{transform:rotate(-8deg)}"),
+    anim("boxe", ".legl", "l", ".4s", "from{transform:rotate(22deg)} to{transform:rotate(16deg)}", "ease-in-out infinite alternate"),
+    anim("boxe", ".legr", "m", ".4s", "from{transform:rotate(-26deg)} to{transform:rotate(-20deg)}", "ease-in-out infinite alternate"),
+])
+
+# 79. Menton : réfléchit, la main sous le menton (enfin possible grâce au coude) -----------
+pose2("menton", "Main sous le menton", "Réflexion, problème du jour, « à ton avis ? »", [
+    anim("menton", ".arm", "a", "3s", "0%,100%{transform:rotate(-64deg)} 50%{transform:rotate(-60deg)}"),
+    anim("menton", ".fa", "c", "3s", "0%,100%{transform:rotate(84deg)} 50%{transform:rotate(80deg)}"),
+    anim("menton", ".arm2", "b", "3s", "0%,100%{transform:rotate(104deg)} 50%{transform:rotate(100deg)}"),
+    anim("menton", ".fa2", "d", "3s", "0%,100%{transform:rotate(60deg)} 50%{transform:rotate(66deg)}"),
+    anim("menton", ".head", "h", "3s", "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(-10deg)}"),
+], after=g((930, -120), "bub", f'<circle cx="-200" cy="170" r="22" fill="#fff" stroke="{INK}" stroke-width="9"/><circle cx="-150" cy="110" r="34" fill="#fff" stroke="{INK}" stroke-width="9"/><ellipse rx="160" ry="95" fill="#fff" stroke="{INK}" stroke-width="10"/>' + "".join(g((x, 0), f"dt dt{i}", f'<circle r="26" fill="{INK}"/>') for i, x in enumerate([-70, 0, 70]))),
+   extra_css=".mascotte-menton .dt { animation: menton-dt 1.2s ease-in-out infinite backwards; } @keyframes menton-dt { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-34px)} } .mascotte-menton .dt1 { animation-delay: .18s; } .mascotte-menton .dt2 { animation-delay: .36s; }")
 
 # ---------------------------------------------------------------- versions miroir
 # Chaque animation existe aussi tournée vers la droite : tout le dessin est retourné

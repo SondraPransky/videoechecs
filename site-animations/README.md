@@ -1,6 +1,6 @@
 # Mascotte animée — echecs.com
 
-Soixante-quatorze animations de la mascotte (et leurs 74 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
+Soixante-dix-sept animations de la mascotte (et leurs 77 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
 
 Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relance les intros, et un autre bouton bascule entre fond clair et fond sombre.
 
@@ -51,7 +51,7 @@ Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relanc
 
 ### Mascotte articulée : tout le corps bouge
 
-Pour ces animations, la silhouette du designer est découpée en tête et buste, le bras posé sur la hanche est remplacé par un second bras articulé, et deux jambes avec un pied, dessinées dans le même style plein, pivotent aux hanches. La mascotte peut donc lever **les deux bras**, marcher, courir, s'asseoir, sauter, s'incliner…
+Pour ces animations, la silhouette du designer est découpée en tête et buste, le bras posé sur la hanche est remplacé par un second bras articulé, et deux jambes avec un pied, dessinées dans le même style plein, pivotent aux hanches. Chaque bras est coupé au coude : l'avant-bras se plie (garde, paumes ouvertes, main sous le menton…) et suit le mouvement avec un léger retard. L'ombre au sol rétrécit pendant les sauts. La mascotte peut donc lever **les deux bras**, marcher, courir, s'asseoir, sauter, s'incliner…
 
 | Fichier | Moment sur le site | Ce qui se passe |
 |---|---|---|
@@ -87,6 +87,9 @@ Pour ces animations, la silhouette du designer est découpée en tête et buste,
 | `mascotte-lit-assise` | Lecture, revue | Assise, la revue ouverte |
 | `mascotte-discute` | Forum | Les deux bras gesticulent, une bulle s'écrit |
 | `mascotte-invite` | Appel à l'action | Montre le bouton, fait « viens ! » de l'autre main |
+| `mascotte-muscles` | Progrès, force | Montre son biceps, l'autre main sur la hanche |
+| `mascotte-boxe` | Attaque, combinaison | Enchaîne les directs, en garde |
+| `mascotte-menton` | Réflexion, problème du jour | Main sous le menton, bulle de pensée |
 
 Le nom exact d'un fichier dépend de sa couleur, par exemple `svg/noir/mascotte-idee-noir.svg`.
 
