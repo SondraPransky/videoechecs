@@ -66,6 +66,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   box-shadow: 0 60px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
 .board .sq { position: absolute; width: 12.5%; height: 12.5%; }
 .board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; will-change: transform; }
+.board .co { position: absolute; font-family: "Manrope"; font-weight: 800; line-height: 1; pointer-events: none; z-index: 1; }
 .board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.55); opacity: 0; }
 .board svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 
@@ -429,7 +430,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div id="minis" class="layer"></div>
     <div class="lcard" id="ex1400" style="left:880px;top:130px;width:480px">
       <div class="lhead"><span class="lchip" style="background:#6bdc7d">Objectif 1400</span><span class="ltype">Exercice</span></div>
-      <div class="ltitle">Les Blancs jouent et matent en 1</div>
+      <div class="ltitle">Les Blancs jouent et matent en 1. Quel coup ?</div>
       <div id="b6" class="board" style="position:relative;width:420px;height:420px;margin-top:22px;border-radius:14px;box-shadow:none"></div>
       <div class="lres" id="res6"><svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#6bdc7d"/><path d="M6.5 12.5l3.6 3.6L17.5 8.5" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><img class="fig" src="../assets/pieces/wR.png">d8# — le mat du couloir !</span></div>
     </div>
@@ -560,6 +561,18 @@ function makeBoard(el, placement) {
   }
   return pieces;
 }
+// Coordonnées a–h et 1–8 dans les cases du bord, couleur contrastée avec la case
+function coords(el) {
+  const fs = Math.max(15, el.offsetWidth / 8 * .24);
+  for (let i = 0; i < 8; i++) {
+    const f = document.createElement("div"), r = document.createElement("div");
+    f.className = r.className = "co";
+    f.textContent = FILES[i]; r.textContent = 8 - i;
+    Object.assign(f.style, { left: `calc(${(i + 1) * 12.5}% - ${fs * .8}px)`, bottom: fs * .35 + "px", fontSize: fs + "px", color: i % 2 ? "#93b9e2" : "#e4ecf6" });
+    Object.assign(r.style, { left: fs * .35 + "px", top: `calc(${i * 12.5}% + ${fs * .3}px)`, fontSize: fs + "px", color: i % 2 ? "#e4ecf6" : "#93b9e2" });
+    el.append(f, r);
+  }
+}
 function highlight(el, sq) {
   const h = document.createElement("div");
   h.className = "hl";
@@ -689,6 +702,7 @@ const h4 = highlight($("#b4"), "e5");
 // S5 : partie italienne
 const b5el = $("#b5");
 const b5 = makeBoard(b5el, START);
+coords(b5el);
 const GAME = [["e2", "e4"], ["e7", "e5"], ["g1", "f3"], ["b8", "c6"], ["f1", "c4"], ["f8", "c5"], ["c2", "c3"], ["g8", "f6"]];
 // Notation figurine : l'initiale de la pièce est remplacée par son icône
 const FIG = { R: "K", D: "Q", T: "R", F: "B", C: "N" };
@@ -719,6 +733,7 @@ for (let i = 0; i < 42; i++) {
   $("#minis").appendChild(d);
 }
 const b6 = makeBoard($("#b6"), { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
+coords($("#b6"));
 const a6 = arrow($("#b6"), "d1", "d8");
 const h6 = highlight($("#b6"), "d8");
 
