@@ -314,6 +314,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .cta { display: inline-flex; align-items: center; gap: 20px; padding: 30px 56px; border-radius: 999px; background: var(--yellow); color: #111; font: 800 40px/1 "Manrope"; box-shadow: 0 20px 60px rgba(250,227,97,.25); }
 .url { font: 700 34px/1 "Manrope"; color: var(--blue); letter-spacing: .02em; }
 </style>
+<link rel="stylesheet" href="typo.css">
+<script src="typo.js"></script>
 </head>
 <body>
 <div id="stage">
@@ -1343,6 +1345,7 @@ window.seekTo = t => {
 };
 // Précharge les figurines insérées pendant la frappe du PGN
 const preload = "KQRBN".split("").map(c => { const i = new Image(); i.src = `${P}w${c}.png`; return i; });
+window.typo();
 window.ready = document.fonts.ready.then(() => Promise.all([...$$("img"), ...preload].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
 </script>
 </body>

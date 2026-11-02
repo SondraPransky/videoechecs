@@ -209,6 +209,8 @@ body.carre .cu { top: 745px; }
 body.carre #pc { left: 840px; top: 790px; width: 180px; height: 220px; }
 
 </style>
+<link rel="stylesheet" href="typo.css">
+<script src="typo.js"></script>
 </head>
 <body>
 <div id="stage">
@@ -359,9 +361,7 @@ if (Q === 4) board($("#tb"), { g8: "bK", h7: "bP", g7: "bP", f7: "bP", e1: "wR",
 // Le texte de la question remplit la place disponible sans déborder
 const MAXQ = { story: 720, feed: 560, wide: 640, carre: 470 }[FMT];
 const fit = (el, max) => { let f = parseFloat(getComputedStyle(el).fontSize); while (el.offsetHeight > max && f > 40) { f -= 2; el.style.fontSize = f + "px"; } };
-fit($("#qt"), MAXQ);
-fit($("#stt"), { story: 260, feed: 200, wide: 300, carre: 170 }[FMT]);
-fit($("#cap"), { story: 260, feed: 420, wide: 200, carre: 380 }[FMT]);
+// (ajustement fait après chargement des polices, voir window.ready)
 
 // Confettis déterministes
 const COLS = ["#fae361", "#93b9e2", "#6bdc7d", "#ff8fa0", "#f4f1ea", "#111"];
@@ -535,7 +535,12 @@ window.seekTo = t => {
   tl.seek(t, false);
   for (const p of poses) { const ms = Math.max(0, t - p.start) * 1000; p.anims.forEach(a => { a.currentTime = ms; }); }
 };
-window.ready = document.fonts.ready.then(() => Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+window.typo();
+window.ready = document.fonts.ready.then(() => Promise.all($$("img").map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })))).then(() => {
+  fit($("#qt"), MAXQ);
+  fit($("#stt"), { story: 260, feed: 200, wide: 300, carre: 170 }[FMT]);
+  fit($("#cap"), { story: 260, feed: 420, wide: 200, carre: 380 }[FMT]);
+});
 </script>
 </body>
 </html>

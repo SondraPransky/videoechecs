@@ -100,6 +100,8 @@ main.serre .t { font-size: 9.4rem; } main.serre .e { font-size: 10rem; }
 .ban .bt .e { display: inline; font-size: 9.6rem; }
 .ban img.lg { height: 8rem; filter: var(--logo); }
 </style>
+<link rel="stylesheet" href="typo.css">
+<script src="typo.js"></script>
 </head>
 <body>
 <div id="c"><div class="deco"><div class="dam"></div></div></div>
@@ -202,6 +204,7 @@ c.querySelectorAll(".fitpose > .pose").forEach(el => {
   }
 });
 }
+window.typo();
 window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })))).then(ajuste);
 </script>
 </body>

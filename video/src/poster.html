@@ -69,6 +69,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .play { position: absolute; left: 1400px; top: 490px; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; box-shadow: 0 0 0 16px rgba(250,227,97,.22), 0 30px 70px rgba(0,0,0,.55); }
 .spark { position: absolute; }
 </style>
+<link rel="stylesheet" href="typo.css">
+<script src="typo.js"></script>
 </head>
 <body>
 <div id="stage">
@@ -98,6 +100,7 @@ for (const [sq, c] of Object.entries(pos)) {
 document.querySelectorAll(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
 // Animations des mascottes figées sur une image expressive
 document.getAnimations().forEach(a => { a.pause(); a.currentTime = 1100; });
+window.typo();
 window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
 </script>
 </body>

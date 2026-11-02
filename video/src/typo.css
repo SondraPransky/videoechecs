@@ -1,0 +1,5 @@
+/* Typographie commune (vidéo, pubs, visuels, cadres, affiche) :
+   titres en lignes équilibrées, paragraphes sans mot orphelin, pas de coupure de mot. */
+body { text-wrap: pretty; hyphens: manual; }
+h1, h2, h3, h4, .h1, .h2, .h3, .t, .e, .big, .q, .st, .rt, .ct, .r, .sol-t, .sol-s, .hk-q, .s, .cap, .rs, .lead, .ltitle, .doc-h,
+.kick, .bt, .ft-t, .ft-e, .s8-t, .acard b, .coach b, .lcard b, .card h4, .hero .meta b { text-wrap: balance; }
