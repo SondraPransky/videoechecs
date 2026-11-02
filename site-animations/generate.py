@@ -785,6 +785,340 @@ A[n] = ("Envoi de mail", "Newsletter, e-mail envoyé, invitation", svg(n, "Envoi
         f"80%{{transform:translate(-160px,-330px) rotate(-18deg) scale(.7);opacity:1}} 92%,100%{{transform:translate(-200px,-400px) rotate(-24deg) scale(.4);opacity:0}}"}),
 ]), body))
 
+# ================================================================ mascotte articulée
+# La silhouette du designer est découpée (clipPath) en tête, buste et deux jambes ; le bras
+# collé sur la hanche est remplacé par un second bras articulé, symétrique du premier.
+# Chaque pièce pivote autour de son articulation : on peut enfin bouger les DEUX bras,
+# les jambes, la tête et le buste.
+NECK, HIP, HIP_L, HIP_R, SH2 = (650, 470), (620, 900), (545, 915), (715, 915), (765, 575)
+CLIPS = {
+    "tete": "380,-10 1010,-10 1010,486 380,486",
+    "buste": "380,470 772,478 800,560 788,640 780,790 795,935 380,935",
+    "jambeg": "360,900 634,900 634,1110 360,1110",
+    "jambed": "634,905 792,905 840,1110 634,1110",
+}
+
+
+def piece(name, part, pivot):
+    """Pièce de la silhouette dans le repère de son articulation."""
+    px, py = pivot
+    return f'<g transform="translate({-px} {-py})"><path class="m" d="{BODY}" fill-rule="evenodd" clip-path="url(#{name}-{part})"/></g>'
+
+
+def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", torso_inner=""):
+    """Mascotte articulée : .rig > .legl, .legr, .torso > (.arm2, buste, .head, .arm)."""
+    defs = "<defs>" + "".join(f'<clipPath id="{name}-{k}"><polygon points="{v}"/></clipPath>' for k, v in CLIPS.items()) + "</defs>"
+    jl = g(HIP_L, "legl", piece(name, "jambeg", HIP_L) + '<circle class="m" r="58"/>')
+    jr = g(HIP_R, "legr", piece(name, "jambed", HIP_R) + '<circle class="m" r="58"/>')
+    arm2 = g(SH2, "arm2", f'<g transform="scale(-1 1)"><path class="m" d="{ARM}"/></g>{arm2_inner}<circle class="m" r="50"/>')
+    head = g(NECK, "head", piece(name, "tete", NECK) + (f'<g transform="translate({HEAD_TOP[0] - NECK[0]} {HEAD_TOP[1] - NECK[1]})">{head_inner}</g>' if head_inner else ""))
+    arm = g(PIVOT, "arm", f'<path class="m" d="{ARM}"/>{arm_inner}')
+    torso = g(HIP, "torso", f'<g transform="translate({-HIP[0]} {-HIP[1]})">{arm2}{piece(name, "buste", (0, 0))}'
+              f'<circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
+    fx, fy = FEET
+    return defs + extra_back + g(FEET, "rig", f'<g transform="translate({-fx:.1f} {-fy:.1f})">{jl}{jr}{torso}</g>')
+
+
+# Pose de repos de la mascotte articulée : bras du fond posé sur la hanche
+REPOS = ".arm2 { transform: rotate(150deg); } .arm { transform: rotate(-112deg); }"
+
+
+
+def pose2(n, title, usage, rules, extra_css="", **kw):
+    """Ajoute une animation de la mascotte articulée ; repos par défaut : bras le long du corps."""
+    base = f".mascotte-{n} .arm2 {{ transform: rotate(104deg); }} .mascotte-{n} .arm {{ transform: rotate(-104deg); }}"
+    shadow = kw.pop("shadow", True)
+    body = kw.pop("before", "") + mascot2(n, **kw) + kw.pop("after", "") if False else None
+    A[n] = (title, usage, svg(n, title, base + "\n" + css(n, rules) + ("\n" + extra_css if extra_css else ""), BODY2(n, kw), shadow=shadow))
+
+
+def BODY2(n, kw):
+    before, after = kw.pop("before", ""), kw.pop("after", "")
+    return before + mascot2(n, **kw) + after
+
+
+# 43. Hourra : les DEUX bras en l'air, saute de joie -------------------------------
+pose2("hourra", "Hourra !", "Grande victoire, objectif atteint", [
+    (".rig", "hourra-jump 1.1s linear infinite", {"hourra-jump": jump(130)}),
+    (".arm", f"hourra-a 1.1s {SOFT} infinite", {"hourra-a": "0%,100%{transform:rotate(-4deg)} 42%{transform:rotate(16deg)}"}),
+    (".arm2", f"hourra-b 1.1s {SOFT} infinite", {"hourra-b": "0%,100%{transform:rotate(4deg)} 42%{transform:rotate(-16deg)}"}),
+    (".legl", f"hourra-l 1.1s {SOFT} infinite", {"hourra-l": "0%,16%,62%,100%{transform:rotate(0)} 42%{transform:rotate(22deg)}"}),
+    (".legr", f"hourra-r 1.1s {SOFT} infinite", {"hourra-r": "0%,16%,62%,100%{transform:rotate(0)} 42%{transform:rotate(-22deg)}"}),
+])
+
+# 44. Saut en étoile : bras et jambes s'écartent en rythme ---------------------------
+pose2("saut-etoile", "Saut en étoile", "Échauffement, énergie, bonne humeur", [
+    (".rig", "etoile-j .8s ease-in-out infinite", {"etoile-j": "0%,100%{transform:translateY(0) scale(1.02,.98)} 50%{transform:translateY(-90px) scale(.98,1.02)}"}),
+    (".arm", "etoile-a .8s ease-in-out infinite", {"etoile-a": "0%,100%{transform:rotate(-112deg)} 50%{transform:rotate(14deg)}"}),
+    (".arm2", "etoile-b .8s ease-in-out infinite", {"etoile-b": "0%,100%{transform:rotate(112deg)} 50%{transform:rotate(-14deg)}"}),
+    (".legl", "etoile-l .8s ease-in-out infinite", {"etoile-l": "0%,100%{transform:rotate(0)} 50%{transform:rotate(26deg)}"}),
+    (".legr", "etoile-r .8s ease-in-out infinite", {"etoile-r": "0%,100%{transform:rotate(0)} 50%{transform:rotate(-26deg)}"}),
+])
+
+# 45. Haussement d'épaules : « je ne sais pas » -------------------------------------
+qm2 = g((620, -140), "q", f'<text font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="190" text-anchor="middle" fill="{LINE}">?</text>')
+pose2("haussement", "Haussement d'épaules", "« Je ne sais pas », question ouverte, sondage", [
+    (".torso", "hauss-t 1.6s ease-in-out infinite", {"hauss-t": "0%,60%,100%{transform:translateY(0)} 20%,40%{transform:translateY(-34px)}"}),
+    (".arm", "hauss-a 1.6s ease-in-out infinite", {"hauss-a": "0%,60%,100%{transform:rotate(-100deg)} 20%,40%{transform:rotate(-66deg)}"}),
+    (".arm2", "hauss-b 1.6s ease-in-out infinite", {"hauss-b": "0%,60%,100%{transform:rotate(112deg)} 20%,40%{transform:rotate(102deg)}"}),
+    (".head", "hauss-h 1.6s ease-in-out infinite", {"hauss-h": "0%,60%,100%{transform:rotate(0)} 20%,40%{transform:rotate(-12deg)}"}),
+    (".q", "hauss-q 1.6s ease-in-out infinite", {"hauss-q": "0%,100%{opacity:0;transform:translateY(30px)} 25%,55%{opacity:1;transform:translateY(0)}"}),
+], after=qm2)
+
+# 46. Marche : les jambes avancent, les bras balancent en opposition ------------------
+pose2("promenade", "Promenade", "Parcours, « en route », pas à pas", [
+    (".rig", "prom-b .45s ease-in-out infinite alternate", {"prom-b": "from{transform:translateY(0)} to{transform:translateY(-22px)}"}),
+    (".legl", "prom-l .9s ease-in-out infinite", {"prom-l": "0%,100%{transform:rotate(22deg)} 50%{transform:rotate(-20deg)}"}),
+    (".legr", "prom-r .9s ease-in-out infinite", {"prom-r": "0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(22deg)}"}),
+    (".arm", "prom-a .9s ease-in-out infinite", {"prom-a": "0%,100%{transform:rotate(-140deg)} 50%{transform:rotate(-84deg)}"}),
+    (".arm2", "prom-c .9s ease-in-out infinite", {"prom-c": "0%,100%{transform:rotate(84deg)} 50%{transform:rotate(140deg)}"}),
+    (".torso", "prom-t .45s ease-in-out infinite alternate", {"prom-t": "from{transform:rotate(-3deg)} to{transform:rotate(-5deg)}"}),
+])
+
+# 47. Sprint : vraie course, grandes foulées, bras qui pompent -------------------------
+vit2 = "".join(g((930 + i * 30, 320 + i * 200), f"vl vl{i}", f'<path d="M0,0 L{200 - i * 40},0" stroke="{LINE}" stroke-width="16" stroke-linecap="round"/>') for i in range(3))
+pose2("sprint", "Sprint", "Défi chrono, blitz, « fonce ! »", [
+    (".rig", "sprint-b .25s ease-in-out infinite alternate", {"sprint-b": "from{transform:translateY(0)} to{transform:translateY(-40px)}"}),
+    (".torso", "sprint-t .5s ease-in-out infinite", {"sprint-t": "0%,100%{transform:rotate(-14deg)} 50%{transform:rotate(-17deg)}"}),
+    (".legl", "sprint-l .5s ease-in-out infinite", {"sprint-l": "0%,100%{transform:rotate(48deg)} 50%{transform:rotate(-34deg)}"}),
+    (".legr", "sprint-r .5s ease-in-out infinite", {"sprint-r": "0%,100%{transform:rotate(-34deg)} 50%{transform:rotate(48deg)}"}),
+    (".arm", "sprint-a .5s ease-in-out infinite", {"sprint-a": "0%,100%{transform:rotate(-150deg)} 50%{transform:rotate(-40deg)}"}),
+    (".arm2", "sprint-c .5s ease-in-out infinite", {"sprint-c": "0%,100%{transform:rotate(-40deg)} 50%{transform:rotate(124deg)}"}),
+    (".vl", ".5s linear infinite sprint-v", {"sprint-v": "from{transform:translateX(-60px);opacity:1} to{transform:translateX(140px);opacity:0}"}),
+], extra_css="\n".join(f".mascotte-sprint .vl{i} {{ animation-delay: -{i * .16:.2f}s; }}" for i in range(3)), before=vit2)
+
+# 48. Coucou de l'autre main ----------------------------------------------------------
+pose2("coucou-autre-main", "Coucou (autre main)", "Accueil, au revoir", [
+    (".rig", "cam-s 1.6s ease-in-out infinite", {"cam-s": "0%,100%{transform:rotate(1deg)} 50%{transform:rotate(-1deg) translateY(-6px)}"}),
+    (".arm2", "cam-w .4s ease-in-out infinite alternate", {"cam-w": "from{transform:rotate(4deg)} to{transform:rotate(-34deg)}"}),
+    (".arm", "cam-a 1.6s ease-in-out infinite", {"cam-a": "0%,100%{transform:rotate(-118deg)} 50%{transform:rotate(-110deg)}"}),
+    (".head", "cam-h 1.6s ease-in-out infinite", {"cam-h": "0%,100%{transform:rotate(6deg)} 50%{transform:rotate(9deg)}"}),
+])
+
+# 51. Cherche : main en visière, la tête tourne ----------------------------------------
+pose2("cherche", "Cherche à l'horizon", "Recherche, « où est le bon coup ? », nouveautés à venir", [
+    (".arm2", "che-b .6s ease-out both", {"che-b": "from{transform:rotate(112deg)} to{transform:rotate(-58deg)}"}),
+    (".arm", "che-a 2.4s ease-in-out infinite", {"che-a": "0%,100%{transform:rotate(-120deg)} 50%{transform:rotate(-112deg)}"}),
+    (".torso", "che-t 2.4s ease-in-out infinite", {"che-t": "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(5deg)}"}),
+    (".rig", "che-r 2.4s ease-in-out infinite", {"che-r": "0%,100%{transform:translateY(0)} 25%,75%{transform:translateY(-14px)}"}),
+])
+
+# 52. Danse : bras et jambes alternés ------------------------------------------------------
+pose2("danse", "Danse", "Fête, week-end, bonne nouvelle", [
+    (".rig", "dan-r .8s ease-in-out infinite", {"dan-r": "0%,100%{transform:rotate(-4deg) translateY(0)} 50%{transform:rotate(4deg) translateY(-26px)}"}),
+    (".arm", "dan-a 1.6s ease-in-out infinite", {"dan-a": "0%,100%{transform:rotate(10deg)} 50%{transform:rotate(-100deg)}"}),
+    (".arm2", "dan-b 1.6s ease-in-out infinite", {"dan-b": "0%,100%{transform:rotate(126deg)} 50%{transform:rotate(-14deg)}"}),
+    (".legl", "dan-l .8s ease-in-out infinite", {"dan-l": "0%,100%{transform:rotate(30deg)} 50%{transform:rotate(0)}"}),
+    (".legr", "dan-m .8s ease-in-out infinite", {"dan-m": "0%,100%{transform:rotate(0)} 50%{transform:rotate(-30deg)}"}),
+    (".head", "dan-h .4s ease-in-out infinite alternate", {"dan-h": "from{transform:rotate(-6deg)} to{transform:rotate(6deg)}"}),
+])
+
+# 54. Coup de pied : envoie un pion en l'air ------------------------------------------------
+pion_vole = g((330, 960), "pv", f'<g transform="scale(.5)">{PAWN}</g>')
+pose2("coup-de-pied", "Coup de pied", "Lancement, « c'est parti ! », défi", [
+    (".legl", "cdp-l 1.6s infinite", {"cdp-l": f"0%,20%{{transform:rotate(-30deg);animation-timing-function:{EASE_IN}}} 32%{{transform:rotate(80deg);animation-timing-function:{EASE_OUT}}} 60%,100%{{transform:rotate(0)}}"}),
+    (".torso", "cdp-t 1.6s ease-in-out infinite", {"cdp-t": "0%,20%{transform:rotate(4deg)} 32%{transform:rotate(10deg)} 60%,100%{transform:rotate(0)}"}),
+    (".arm", "cdp-a 1.6s ease-in-out infinite", {"cdp-a": "0%,20%{transform:rotate(-80deg)} 32%{transform:rotate(-150deg)} 60%,100%{transform:rotate(-112deg)}"}),
+    (".arm2", "cdp-b 1.6s ease-in-out infinite", {"cdp-b": "0%,20%{transform:rotate(130deg)} 32%{transform:rotate(40deg)} 60%,100%{transform:rotate(112deg)}"}),
+    (".pv", "cdp-p 1.6s infinite", {"cdp-p": f"0%,30%{{transform:translate(0,0) rotate(0);opacity:1;animation-timing-function:{EASE_OUT}}} 70%{{transform:translate(-260px,-760px) rotate(-260deg);opacity:1}} 80%,100%{{transform:translate(-300px,-860px) rotate(-300deg);opacity:0}}"}),
+], after=pion_vole)
+
+# 55. Étirement latéral : bras en l'air, se penche d'un côté puis de l'autre -------------------
+pose2("etirement-lateral", "Étirement latéral", "Échauffement, début de séance", [
+    (".torso", "etl-t 3s ease-in-out infinite", {"etl-t": "0%,100%{transform:rotate(-14deg)} 50%{transform:rotate(14deg)}"}),
+    (".arm", "etl-a 3s ease-in-out infinite", {"etl-a": "0%,100%{transform:rotate(30deg)} 50%{transform:rotate(14deg)}"}),
+    (".arm2", "etl-b 3s ease-in-out infinite", {"etl-b": "0%,100%{transform:rotate(-14deg)} 50%{transform:rotate(-30deg)}"}),
+    (".legl", "etl-l 3s ease-in-out infinite", {"etl-l": "0%,100%{transform:rotate(10deg)} 50%{transform:rotate(14deg)}"}),
+    (".legr", "etl-r 3s ease-in-out infinite", {"etl-r": "0%,100%{transform:rotate(-14deg)} 50%{transform:rotate(-10deg)}"}),
+])
+
+# 56. Équilibre : sur une jambe, bras écartés, vacille un peu -----------------------------------
+pose2("equilibre", "Équilibre", "Concentration, maîtrise, « tiens bon »", [
+    (".rig", "equ-r 2s ease-in-out infinite", {"equ-r": "0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)}"}),
+    (".legr", "equ-l .6s ease-out both", {"equ-l": "from{transform:rotate(0)} to{transform:rotate(-72deg)}"}),
+    (".arm", "equ-a 2s ease-in-out infinite", {"equ-a": "0%,100%{transform:rotate(-30deg)} 50%{transform:rotate(-40deg)}"}),
+    (".arm2", "equ-b 2s ease-in-out infinite", {"equ-b": "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)}"}),
+])
+
+# 57. Révérence : s'incline pour remercier ---------------------------------------------------
+pose2("reverence", "Révérence", "Merci, fin de cours, au revoir", [
+    (".torso", "rev-t 2.4s infinite", {"rev-t": f"0%,15%{{transform:rotate(0);animation-timing-function:{EASE_IO}}} 40%,65%{{transform:rotate(-38deg);animation-timing-function:{EASE_IO}}} 90%,100%{{transform:rotate(0)}}"}),
+    (".arm", "rev-a 2.4s ease-in-out infinite", {"rev-a": "0%,15%,90%,100%{transform:rotate(-112deg)} 40%,65%{transform:rotate(-150deg)}"}),
+    (".arm2", "rev-b 2.4s ease-in-out infinite", {"rev-b": "0%,15%,90%,100%{transform:rotate(104deg)} 40%,65%{transform:rotate(4deg)}"}),
+    (".head", "rev-h 2.4s ease-in-out infinite", {"rev-h": "0%,15%,90%,100%{transform:rotate(0)} 40%,65%{transform:rotate(-10deg)}"}),
+])
+
+# 58. Pouce levé (bras du fond tendu vers le haut, l'autre sur la hanche) -------------------
+pose2("super", "Super !", "Validation, « bien joué », approbation", [
+    (".rig", "sup-r .6s {0} both, sup-i 2s ease-in-out .6s infinite".format(EASE_BACK), {"sup-r": "from{transform:translateY(40px) scale(1.05,.92)} to{transform:none}", "sup-i": "0%,100%{transform:none} 50%{transform:translateY(-8px)}"}),
+    (".arm2", f"sup-b .6s {EASE_BACK} both", {"sup-b": "from{transform:rotate(112deg)} to{transform:rotate(2deg)}"}),
+    (".arm", "sup-a 2s ease-in-out infinite", {"sup-a": "0%,100%{transform:rotate(-120deg)} 50%{transform:rotate(-114deg)}"}),
+    (".head", "sup-h 2s ease-in-out infinite", {"sup-h": "0%,100%{transform:rotate(4deg)} 50%{transform:rotate(-2deg)}"}),
+], arm2_inner=g((324, -413), "spk", sparkle(1.2)))
+
+# ---------------------------------------------------------------- mascotte articulée : variantes
+def tilt(a, b, d="2s"):
+    return f"{d} ease-in-out infinite alternate", {"from": f"transform:rotate({a}deg)", "to": f"transform:rotate({b}deg)"}
+
+
+def anim(n, sel, name, dur, frames, timing="ease-in-out infinite"):
+    return (sel, f"{n}-{name} {dur} {timing}", {f"{n}-{name}": frames})
+
+
+PANCARTE = f'''<g><rect x="300" y="-300" width="780" height="390" rx="26" fill="#fff" stroke="{LINE}" stroke-width="14"/>
+<path d="M380,-210 L1000,-210 M380,-120 L900,-120 M380,-30 L760,-30" stroke="{BLUE}" stroke-width="34" stroke-linecap="round"/></g>'''
+ECHIQUIER = (f'<g><rect x="380" y="-310" width="620" height="390" rx="18" fill="#e4ecf6" stroke="{LINE}" stroke-width="14"/>'
+             + "".join(f'<rect x="{380 + (k % 8) * 77.5}" y="{-310 + (k // 8) * 48.75}" width="77.5" height="48.75" fill="{BLUE}"/>' for k in range(64) if (k + k // 8) % 2)
+             + f'<rect x="380" y="-310" width="620" height="390" rx="18" fill="none" stroke="{LINE}" stroke-width="14"/></g>')
+COUPE = f'''<g transform="translate(690 -40) scale(1.1)"><path d="M-95,-150 L95,-150 C95,-40 50,10 0,20 C-50,10 -95,-40 -95,-150 Z" fill="{YELLOW}" stroke="{LINE}" stroke-width="12" stroke-linejoin="round"/>
+<path d="M-95,-125 C-160,-125 -160,-40 -70,-30 M95,-125 C160,-125 160,-40 70,-30" fill="none" stroke="{LINE}" stroke-width="14" stroke-linecap="round"/>
+<rect x="-18" y="18" width="36" height="50" fill="{LINE}"/><rect x="-70" y="64" width="140" height="38" rx="8" fill="{LINE}"/></g>'''
+PAWN_Y = PAWN.replace('fill="#fff"', f'fill="{YELLOW}"')
+
+# 53. Assise par terre : jambes tendues devant, sur un coussin --------------------------
+COUSSIN = f'<rect x="470" y="980" width="320" height="80" rx="40" fill="{BLUE}" stroke="{LINE}" stroke-width="12"/>'
+pose2("assise", "Assise par terre", "Pause, lecture d'un cours, détente", [
+    anim("assise", ".rig", "r", "3s", "0%,100%{transform:translateY(60px)} 50%{transform:translateY(64px) scale(1.01,.99)}"),
+    anim("assise", ".legl", "l", ".7s", "from{transform:rotate(84deg)} to{transform:rotate(74deg)}", "ease-in-out infinite alternate"),
+    anim("assise", ".legr", "m", ".7s", "from{transform:rotate(72deg)} to{transform:rotate(82deg)}", "ease-in-out infinite alternate"),
+    anim("assise", ".arm", "a", "3s", "0%,100%{transform:rotate(-78deg)} 50%{transform:rotate(-72deg)}"),
+    anim("assise", ".arm2", "b", "3s", "0%,100%{transform:rotate(126deg)} 50%{transform:rotate(120deg)}"),
+    anim("assise", ".head", "h", "3s", "0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(5deg)}"),
+], before=COUSSIN)
+
+# 59. Se gratte la tête : « hmm… » -------------------------------------------------------
+pose2("gratte-tete", "Se gratte la tête", "Réflexion, problème difficile, « hmm… »", [
+    anim("gratte-tete", ".arm2", "b", ".25s", "from{transform:rotate(-24deg)} to{transform:rotate(-34deg)}", "ease-in-out infinite alternate"),
+    anim("gratte-tete", ".arm", "a", "3s", "0%,100%{transform:rotate(-110deg)} 50%{transform:rotate(-104deg)}"),
+    anim("gratte-tete", ".head", "h", "3s", "0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(-12deg)}"),
+    anim("gratte-tete", ".torso", "t", "3s", "0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(1deg)}"),
+], after=g((380, -60), "q", f'<text font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="150" text-anchor="middle" fill="{LINE}">?</text>'))
+
+# 60. Pancarte : brandit une pancarte des deux mains ------------------------------------------
+pose2("pancarte", "Pancarte", "Annonce, message, « à retenir » (texte à ajouter par-dessus)", [
+    anim("pancarte", ".rig", "j", "1.4s", jump(40), "linear infinite"),
+    anim("pancarte", ".arm", "a", "1.4s", "0%,100%{transform:rotate(14deg)} 50%{transform:rotate(10deg)}"),
+    anim("pancarte", ".arm2", "b", "1.4s", "0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(-8deg)}"),
+    anim("pancarte", ".pc", "p", "1.4s", "0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)}"),
+], torso_inner=g((690, -100), "pc", f'<g transform="translate(-690 100)">{PANCARTE}</g>'))
+
+# 61. Échiquier porté au-dessus de la tête ---------------------------------------------------
+pose2("porte-echiquier", "Porte un échiquier", "Nouvelle fonctionnalité, partie en ligne, « on joue ? »", [
+    anim("porte-echiquier", ".rig", "w", ".8s", "0%,100%{transform:rotate(-2deg) translateY(0)} 50%{transform:rotate(2deg) translateY(-14px)}"),
+    anim("porte-echiquier", ".legl", "l", ".8s", "0%,100%{transform:rotate(14deg)} 50%{transform:rotate(-10deg)}"),
+    anim("porte-echiquier", ".legr", "r", ".8s", "0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(14deg)}"),
+    anim("porte-echiquier", ".arm", "a", ".8s", "0%,100%{transform:rotate(16deg)} 50%{transform:rotate(12deg)}"),
+    anim("porte-echiquier", ".arm2", "b", ".8s", "0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(-16deg)}"),
+], torso_inner=ECHIQUIER)
+
+# 62. Champion : coupe brandie à deux mains --------------------------------------------------
+conf2 = "".join(g((150 + (k * 113) % 950, -300), f"cf cf{k}", f'<rect x="-10" y="-16" width="20" height="32" rx="4" fill="{[YELLOW, BLUE, GREEN, PINK][k % 4]}"/>') for k in range(12))
+pose2("champion", "Champion", "Tournoi gagné, podium, record", [
+    anim("champion", ".rig", "j", "1.2s", jump(90), "linear infinite"),
+    anim("champion", ".arm", "a", "1.2s", "0%,100%{transform:rotate(22deg)} 42%{transform:rotate(26deg)}"),
+    anim("champion", ".arm2", "b", "1.2s", "0%,100%{transform:rotate(-6deg)} 42%{transform:rotate(-10deg)}"),
+    anim("champion", ".legl", "l", "1.2s", "0%,16%,62%,100%{transform:rotate(0)} 42%{transform:rotate(18deg)}"),
+    anim("champion", ".legr", "r", "1.2s", "0%,16%,62%,100%{transform:rotate(0)} 42%{transform:rotate(-18deg)}"),
+    (".cf", "champion-f 2.4s linear infinite", {"champion-f": "from{transform:translateY(0) rotate(0)} to{transform:translateY(1400px) rotate(720deg)}"}),
+], extra_css="\n".join(f".mascotte-champion .cf{k} {{ animation-delay: -{(k * .41) % 2.4:.2f}s; }}" for k in range(12)), torso_inner=COUPE, before=conf2)
+
+# 63. Blancs ou Noirs ? un pion dans chaque main ---------------------------------------------
+pose2("blancs-ou-noirs", "Blancs ou Noirs ?", "Choix, sondage, tirage au sort", [
+    anim("blancs-ou-noirs", ".arm", "a", "1.6s", "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(-24deg)}"),
+    anim("blancs-ou-noirs", ".arm2", "b", "1.6s", "0%,100%{transform:rotate(-24deg)} 50%{transform:rotate(-6deg)}"),
+    anim("blancs-ou-noirs", ".head", "h", "1.6s", "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)}"),
+    anim("blancs-ou-noirs", ".torso", "t", "1.6s", "0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)}"),
+], arm_inner=g((FIST[0], FIST[1] - 40), "p1", f'<g transform="scale(.8)">{PAWN}</g>'), arm2_inner=g((324, -453), "p2", f'<g transform="scale(.8)">{PAWN_Y}</g>'))
+
+# 64. La roue : tourne sur elle-même, bras et jambes écartés -----------------------------------
+n = "roue"
+body = g((620, 560), "spin", f'<g transform="translate(-620 -560)">{mascot2(n)}</g>')
+A[n] = ("La roue", "Énorme progrès, « on a tout retourné ! »", svg(n, "La roue",
+    f".mascotte-{n} .arm {{ transform: rotate(4deg); }} .mascotte-{n} .arm2 {{ transform: rotate(-4deg); }} .mascotte-{n} .legl {{ transform: rotate(30deg); }} .mascotte-{n} .legr {{ transform: rotate(-30deg); }}\n"
+    + css(n, [(".spin", f"{n}-s 2.4s {EASE_IO} infinite", {f"{n}-s": "0%,15%{transform:rotate(0) scale(.86)} 85%,100%{transform:rotate(-360deg) scale(.86)}"})]), body))
+
+# 65. Oups ! trébuche, bras qui moulinent --------------------------------------------------
+pose2("oups", "Oups !", "Erreur, bug, « pas de panique »", [
+    anim("oups", ".torso", "t", "1.2s", f"0%,100%{{transform:rotate(-4deg)}} 30%{{transform:rotate(-26deg)}} 60%{{transform:rotate(-14deg)}}"),
+    anim("oups", ".rig", "r", "1.2s", "0%,100%{transform:translateX(0)} 30%{transform:translateX(-40px) translateY(-20px)} 60%{transform:translateX(-20px)}"),
+    anim("oups", ".arm", "a", ".3s", "from{transform:rotate(-30deg)} to{transform:rotate(30deg)}", "linear infinite alternate"),
+    anim("oups", ".arm2", "b", ".3s", "from{transform:rotate(-60deg)} to{transform:rotate(10deg)}", "linear infinite alternate-reverse"),
+    anim("oups", ".legr", "l", "1.2s", "0%,100%{transform:rotate(0)} 30%{transform:rotate(-46deg)} 60%{transform:rotate(-20deg)}"),
+    anim("oups", ".legl", "m", "1.2s", "0%,100%{transform:rotate(0)} 30%{transform:rotate(14deg)}"),
+], after=g((300, 120), "q", f'<text font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="170" text-anchor="middle" fill="{LINE}">!</text>'))
+
+# 66. Tailleur : méditation en lévitation ---------------------------------------------------
+waves2 = "".join(g((620, 620), f"aw aw{i}", f'<circle r="420" fill="none" stroke="{BLUE}" stroke-width="10"/>') for i in range(3))
+pose2("tailleur", "En tailleur", "Concentration, calme avant un tournoi", [
+    anim("tailleur", ".rig", "f", "4s", "0%,100%{transform:translateY(-10px)} 50%{transform:translateY(-70px)}"),
+    anim("tailleur", ".legl", "l", "4s", "0%,100%{transform:rotate(84deg)} 50%{transform:rotate(80deg)}"),
+    anim("tailleur", ".legr", "r", "4s", "0%,100%{transform:rotate(-84deg)} 50%{transform:rotate(-80deg)}"),
+    anim("tailleur", ".arm", "a", "4s", "0%,100%{transform:rotate(-74deg)} 50%{transform:rotate(-70deg)}"),
+    anim("tailleur", ".arm2", "b", "4s", "0%,100%{transform:rotate(104deg)} 50%{transform:rotate(100deg)}"),
+    (".aw", "tailleur-w 4s ease-out infinite backwards", {"tailleur-w": "from{transform:scale(.4);opacity:.8} to{transform:scale(1.3);opacity:0}"}),
+], extra_css="\n".join(f".mascotte-tailleur .aw{i} {{ animation-delay: {i * 1.33:.2f}s; }}" for i in range(3)), before=waves2)
+
+# 67. Arbre (yoga) : sur une jambe, mains jointes au-dessus de la tête --------------------------
+pose2("yoga-arbre", "Yoga : l'arbre", "Équilibre, bien-être, patience", [
+    anim("yoga-arbre", ".rig", "r", "3s", "0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)}"),
+    (".legr", "yoga-arbre-l .8s ease-out both", {"yoga-arbre-l": "from{transform:rotate(0)} to{transform:rotate(-96deg)}"}),
+    anim("yoga-arbre", ".arm", "a", "3s", "0%,100%{transform:rotate(28deg)} 50%{transform:rotate(24deg)}"),
+    anim("yoga-arbre", ".arm2", "b", "3s", "0%,100%{transform:rotate(-30deg)} 50%{transform:rotate(-26deg)}"),
+])
+
+# 68. Karaté : coup de pied haut, garde ----------------------------------------------------
+pose2("karate", "Karaté", "Attaque, combinaison tactique, « kiai ! »", [
+    anim("karate", ".legl", "l", "1.4s", f"0%,30%{{transform:rotate(10deg)}} 42%,62%{{transform:rotate(96deg)}} 80%,100%{{transform:rotate(10deg)}}"),
+    anim("karate", ".torso", "t", "1.4s", "0%,30%,80%,100%{transform:rotate(0)} 42%,62%{transform:rotate(16deg)}"),
+    anim("karate", ".arm", "a", "1.4s", "0%,30%,80%,100%{transform:rotate(-60deg)} 42%,62%{transform:rotate(-100deg)}"),
+    anim("karate", ".arm2", "b", "1.4s", "0%,30%,80%,100%{transform:rotate(-70deg)} 42%,62%{transform:rotate(120deg)}"),
+    anim("karate", ".rig", "r", "1.4s", "0%,30%,80%,100%{transform:translateY(0)} 42%,62%{transform:translateY(-20px)}"),
+])
+
+# 69. Patine : glisse sur la glace, une jambe en arrière ---------------------------------------
+traces = "".join(g((700 + i * 80, 1040), f"vl vl{i}", f'<path d="M0,0 L{160 - i * 30},0" stroke="{BLUE}" stroke-width="12" stroke-linecap="round"/>') for i in range(3))
+pose2("patine", "Patine", "Fluidité, « ça glisse ! », hiver", [
+    anim("patine", ".rig", "g", "2.4s", "0%,100%{transform:translateX(120px) rotate(-3deg)} 50%{transform:translateX(-120px) rotate(3deg)}"),
+    anim("patine", ".torso", "t", "2.4s", "0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(-14deg)}"),
+    anim("patine", ".legr", "r", "2.4s", "0%,100%{transform:rotate(-56deg)} 50%{transform:rotate(-40deg)}"),
+    anim("patine", ".legl", "l", "2.4s", "0%,100%{transform:rotate(8deg)} 50%{transform:rotate(14deg)}"),
+    anim("patine", ".arm", "a", "2.4s", "0%,100%{transform:rotate(-56deg)} 50%{transform:rotate(-66deg)}"),
+    anim("patine", ".arm2", "b", "2.4s", "0%,100%{transform:rotate(124deg)} 50%{transform:rotate(110deg)}"),
+    (".vl", "patine-v 1.2s linear infinite", {"patine-v": "from{transform:translateX(0);opacity:1} to{transform:translateX(200px);opacity:0}"}),
+], before=traces)
+
+# 70. Saut d'obstacle : saute par-dessus un pion qui défile ------------------------------------
+haie = g((1200, 1040), "haie", f'<g transform="scale(.7)">{PAWN}</g>')
+pose2("saute-obstacle", "Saut d'obstacle", "Difficulté surmontée, niveau suivant", [
+    anim("saute-obstacle", ".rig", "j", "1.4s", jump(260, 1.08), "linear infinite"),
+    anim("saute-obstacle", ".legl", "l", "1.4s", "0%,16%,70%,100%{transform:rotate(0)} 42%{transform:rotate(60deg)}"),
+    anim("saute-obstacle", ".legr", "r", "1.4s", "0%,16%,70%,100%{transform:rotate(0)} 42%{transform:rotate(-56deg)}"),
+    anim("saute-obstacle", ".arm", "a", "1.4s", "0%,16%,70%,100%{transform:rotate(-104deg)} 42%{transform:rotate(-30deg)}"),
+    anim("saute-obstacle", ".arm2", "b", "1.4s", "0%,16%,70%,100%{transform:rotate(104deg)} 42%{transform:rotate(-20deg)}"),
+    (".haie", "saute-obstacle-h 1.4s linear infinite", {"saute-obstacle-h": "from{transform:translateX(0)} to{transform:translateX(-1300px)}"}),
+], after=haie)
+
+# 71. Selfie : téléphone tenu à bout de bras, l'autre main fait coucou ---------------------------
+flash = g((1090, 60), "fl", f'<circle r="70" fill="#fff" opacity=".9"/>')
+pose2("selfie", "Selfie", "Partage, réseaux sociaux, « montre ta partie »", [
+    (".arm2", "selfie-b .6s ease-out both", {"selfie-b": "from{transform:rotate(104deg)} to{transform:rotate(-4deg)}"}),
+    anim("selfie", ".arm", "a", ".4s", "from{transform:rotate(-10deg)} to{transform:rotate(14deg)}", "ease-in-out infinite alternate"),
+    anim("selfie", ".head", "h", "2s", "0%,100%{transform:rotate(10deg)} 50%{transform:rotate(14deg)}"),
+    (".fl", "selfie-f 2s ease-out infinite", {"selfie-f": "0%,70%{opacity:0;transform:scale(.3)} 75%{opacity:1;transform:scale(1.4)} 100%{opacity:0;transform:scale(2)}"}),
+], arm2_inner=g((324, -413), "ph", f'<g transform="rotate(-20) translate(0 40) scale(.8)">{PHONE}</g>'), after=flash)
+
+# 72. Montre le ciel : désigne quelque chose en haut, une étoile brille ---------------------------
+etoile = g((960, -200), "st", star(90))
+pose2("montre-le-ciel", "Montre le ciel", "Objectif, « vise haut », nouveauté à venir", [
+    (".arm2", f"montre-le-ciel-b .6s {EASE_BACK} both", {"montre-le-ciel-b": "from{transform:rotate(104deg)} to{transform:rotate(4deg)}"}),
+    anim("montre-le-ciel", ".arm", "a", "2s", "0%,100%{transform:rotate(-118deg)} 50%{transform:rotate(-112deg)}"),
+    anim("montre-le-ciel", ".head", "h", "2s", "0%,100%{transform:rotate(14deg)} 50%{transform:rotate(18deg)}"),
+    anim("montre-le-ciel", ".torso", "t", "2s", "0%,100%{transform:rotate(4deg)} 50%{transform:rotate(6deg)}"),
+    (".st", f"montre-le-ciel-s .8s {EASE_BACK} .4s both, montre-le-ciel-tw 1.6s ease-in-out 1.2s infinite", {
+        "montre-le-ciel-s": "from{transform:scale(0) rotate(-180deg)} to{transform:scale(1) rotate(0)}",
+        "montre-le-ciel-tw": "0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(1.15) rotate(12deg)}"}),
+], after=etoile)
+
 # ---------------------------------------------------------------- versions miroir
 # Chaque animation existe aussi tournée vers la droite : tout le dessin est retourné
 # autour de l'axe vertical du cadre, sauf les textes (« ? », « Z ») remis à l'endroit.

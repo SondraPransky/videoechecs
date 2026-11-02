@@ -1,6 +1,6 @@
 # Mascotte animée — echecs.com
 
-Quarante-deux animations de la mascotte (et leurs 42 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
+Soixante-dix animations de la mascotte (et leurs 70 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
 
 Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relance les intros, et un autre bouton bascule entre fond clair et fond sombre.
 
@@ -48,6 +48,41 @@ Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relanc
 | `mascotte-bonnet` | Hiver, fêtes de fin d'année | Bonnet à pompon, la neige tombe |
 | `mascotte-message-recu` | Nouveau message, notification | Attrape une enveloppe, elle s'ouvre, la lettre sort |
 | `mascotte-envoi-mail` | Newsletter, e-mail envoyé | Lance une enveloppe qui s'envole |
+
+### Mascotte articulée : tout le corps bouge
+
+Pour ces animations, la silhouette du designer est découpée en tête, buste et deux jambes, et le bras posé sur la hanche est remplacé par un second bras articulé. La mascotte peut donc lever **les deux bras**, marcher, courir, s'asseoir, sauter, s'incliner…
+
+| Fichier | Moment sur le site | Ce qui se passe |
+|---|---|---|
+| `mascotte-hourra` | Grande victoire | Les deux bras en l'air, saute de joie |
+| `mascotte-saut-etoile` | Échauffement, énergie | Saut en étoile, bras et jambes écartés |
+| `mascotte-haussement` | « Je ne sais pas », sondage | Hausse les épaules, « ? » |
+| `mascotte-promenade` | Parcours, pas à pas | Marche, bras en opposition des jambes |
+| `mascotte-sprint` | Blitz, défi chrono | Course à grandes foulées, traits de vitesse |
+| `mascotte-coucou-autre-main` | Accueil, au revoir | Fait coucou de l'autre main |
+| `mascotte-cherche` | Recherche, nouveautés à venir | Main en visière, regarde de gauche à droite |
+| `mascotte-danse` | Fête, week-end | Bras et jambes alternés |
+| `mascotte-assise` | Pause, lecture | Assise par terre sur un coussin, balance les pieds |
+| `mascotte-coup-de-pied` | Lancement, « c'est parti » | Envoie un pion en l'air d'un coup de pied |
+| `mascotte-etirement-lateral` | Début de séance | Bras en l'air, se penche d'un côté puis de l'autre |
+| `mascotte-equilibre` | Concentration, maîtrise | Sur une jambe, bras en V |
+| `mascotte-reverence` | Merci, fin de cours | S'incline |
+| `mascotte-super` | « Bien joué » | Poing levé de l'autre bras, étincelle |
+| `mascotte-gratte-tete` | Problème difficile | Se gratte la tête, « ? » |
+| `mascotte-pancarte` | Annonce (texte à ajouter par-dessus) | Brandit une pancarte des deux mains |
+| `mascotte-porte-echiquier` | Partie en ligne, « on joue ? » | Porte un échiquier au-dessus de la tête |
+| `mascotte-champion` | Tournoi gagné | Coupe brandie à deux mains, confettis |
+| `mascotte-blancs-ou-noirs` | Choix, tirage au sort | Un pion dans chaque main |
+| `mascotte-roue` | Énorme progrès | Fait la roue |
+| `mascotte-oups` | Erreur, bug | Trébuche, bras qui moulinent, « ! » |
+| `mascotte-tailleur` | Calme avant un tournoi | Lévite en méditation, ondes de calme |
+| `mascotte-yoga-arbre` | Patience, équilibre | Posture de l'arbre, mains jointes en l'air |
+| `mascotte-karate` | Combinaison tactique | Coup de pied haut, garde |
+| `mascotte-patine` | « Ça glisse ! », hiver | Glisse sur la glace, une jambe en arrière |
+| `mascotte-saute-obstacle` | Difficulté surmontée | Saute par-dessus un pion qui défile |
+| `mascotte-selfie` | Partage, réseaux sociaux | Téléphone à bout de bras, coucou, flash |
+| `mascotte-montre-le-ciel` | Objectif, « vise haut » | Désigne une étoile qui brille |
 
 Le nom exact d'un fichier dépend de sa couleur, par exemple `svg/noir/mascotte-idee-noir.svg`.
 
