@@ -5,3 +5,6 @@ build/*
 !build/poster.jpg
 !build/sous-titres.vtt
 audio/music.wav
+!build/echecs-academie-court.mp4
+!build/echecs-academie-boucle.mp4
+!build/reseaux/

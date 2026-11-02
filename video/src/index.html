@@ -820,6 +820,7 @@ const S = Object.fromEntries(T.scenes.map(s => [s.id, s]));
 const EXIT = .32;
 
 function scene(id, build) {
+  if (!S[id]) return;  // scène absente de cette déclinaison (court, boucle)
   const { start, dur } = S[id];
   const st = gsap.timeline();
   const at = (sel, t, vars) => st.to(sel, vars, t);
@@ -837,8 +838,10 @@ const exitZoom = (st, id, dur, vars = {}) => st.to("#" + id, { opacity: 0, scale
 tl.fromTo("#glow1", { x: 0, y: 0 }, { x: 900, y: 300, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#glow2", { x: 0, y: 0 }, { x: -700, y: -200, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#grid", { backgroundPosition: "0px 0px, 0px 0px" }, { backgroundPosition: "0px 1300px, 0px 0px", duration: TOTAL, ease: "none" }, 0);
-tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: S.s8.start, ease: "none" }, 0);
-tl.to("#progress", { opacity: 0, duration: .3 }, S.s8.start);
+if (S.s8) {
+  tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: S.s8.start, ease: "none" }, 0);
+  tl.to("#progress", { opacity: 0, duration: .3 }, S.s8.start);
+} else tl.set("#progress", { opacity: 0 }, 0);  // pas de barre de progression dans la boucle
 
 // ===== S1 : Pas à pas — l'échiquier se met en place, puis le pion parcourt la progression
 const S1_T0 = 1.5, S1_TRAVEL = 2.7;
@@ -879,7 +882,7 @@ scene("s1", ({ st, from, at, lines, dur }) => {
   twinkle(st, spk2, tp + .1, .05);
   exitZoom(st, "s1", dur);
 });
-tl.fromTo("#flash", { opacity: 0 }, { opacity: .2, duration: .06, ease: "none" }, S.s1.start + S1_T0 + S1_TRAVEL + .05)
+if (S.s1) tl.fromTo("#flash", { opacity: 0 }, { opacity: .2, duration: .06, ease: "none" }, S.s1.start + S1_T0 + S1_TRAVEL + .05)
   .to("#flash", { opacity: 0, duration: .4, ease: "power2.out" }, ">");
 
 // ===== Mesure tes progrès : barre de validation, étoiles, courbe Elo
@@ -1182,7 +1185,7 @@ scene("s7", ({ st, from, at, lines, dur }) => {
 });
 
 // ===== S8 : Final
-tl.fromTo("#flash", { opacity: 0 }, { opacity: .5, duration: .05, ease: "none" }, S.s8.start).to("#flash", { opacity: 0, duration: .7, ease: "power2.out" }, ">");
+if (S.s8) tl.fromTo("#flash", { opacity: 0 }, { opacity: .5, duration: .05, ease: "none" }, S.s8.start).to("#flash", { opacity: 0, duration: .7, ease: "power2.out" }, ">");
 scene("s8", ({ st, from, at, dur }) => {
   from("#logo-wrap", 0, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: .9, ease: "expo.inOut" });
   from("#logo", 0, { scale: 1.15, filter: "blur(12px)" }, { scale: 1, filter: "blur(0px)", duration: 1.2 });

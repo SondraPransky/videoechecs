@@ -33,7 +33,13 @@ SCENES = [
 # Mode --music-only : durées fixes (secondes, multiples d'un temps)
 MUSIC_ONLY = {"s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
               "s4": 5.0, "s5": 6.0, "s6": 5.0, "forum": 5.0, "s7": 4.0, "s8": 5.5}
+# Déclinaisons courtes (toujours en musique seule) : sous-ensembles de scènes
+EDITIONS = {
+    "court": ["s1", "s3", "prog", "s4", "forum", "s8"],   # ~30 s pour les réseaux
+    "boucle": ["s3", "s6", "prog"],                       # boucle muette de l'en-tête du site
+}
 music_only = "--music-only" in sys.argv
+edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"
 
 
 def wav_dur(path):
@@ -55,12 +61,23 @@ for name, vo_id, lead, mn, tail in SCENES:
     scenes.append({"id": name, "start": t, "dur": dur})
     t += dur
 
-timing = {"total": t, "bpm": 120, "scenes": scenes, "vo": [] if music_only else vo}
+timings = {"long": {"total": t, "bpm": 120, "scenes": scenes, "vo": [] if music_only else vo}}
+for name, ids in EDITIONS.items():
+    t2, sc = 0.0, []
+    for i in ids:
+        sc.append({"id": i, "start": t2, "dur": MUSIC_ONLY[i]})
+        t2 += MUSIC_ONLY[i]
+    timings[name] = {"total": t2, "bpm": 120, "scenes": sc, "vo": []}
+timing = timings[edition]
+scenes, t = timing["scenes"], timing["total"]
 os.makedirs(os.path.join(ROOT, "build"), exist_ok=True)
 with open(os.path.join(ROOT, "build", "timing.json"), "w") as f:
     json.dump(timing, f, indent=1)
 with open(os.path.join(ROOT, "src", "timing.js"), "w") as f:
-    f.write("// Généré par scripts/timing.py — ne pas modifier à la main.\nwindow.TIMING = " + json.dumps(timing) + ";\n")
+    f.write("// Généré par scripts/timing.py — ne pas modifier à la main.\n"
+            "// Déclinaison choisie par ?edition=court|boucle dans l'URL (par défaut : la vidéo longue).\n"
+            "window.TIMINGS = " + json.dumps(timings) + ";\n"
+            "window.TIMING = window.TIMINGS[new URLSearchParams(location.search).get(\"edition\") || \"long\"];\n")
 for s in scenes:
     print(f'{s["id"]:7} {s["start"]:5.1f} → {s["start"] + s["dur"]:5.1f}')
 print("total", t)

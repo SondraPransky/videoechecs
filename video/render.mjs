@@ -1,6 +1,7 @@
 // Rend src/index.html image par image (timeline GSAP pilotée par seekTo) et encode en MP4.
 // Usage : node render.mjs [sortie.mp4] [--from s] [--to s] [--fps n] [--frames t1,t2,...]
 //         node render.mjs --sfx build/sfx.json   (exporte seulement les instants des bruitages)
+//         --edition court|boucle                 (déclinaison, voir scripts/timing.py)
 import { chromium } from 'playwright';
 import { spawn, execSync } from 'child_process';
 import path from 'path';
@@ -16,7 +17,7 @@ const here = path.dirname(new URL(import.meta.url).pathname);
 
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-await page.goto('file://' + path.join(here, 'src/index.html'));
+await page.goto('file://' + path.join(here, 'src/index.html') + '?edition=' + opt('--edition', 'long'));
 await page.evaluate(() => window.ready);
 const total = await page.evaluate(() => window.TOTAL);
 const sfxOut = opt('--sfx', null);

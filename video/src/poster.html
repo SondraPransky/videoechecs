@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>echecs.com — Académie (affiche)</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 700; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 900; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+:root {
+  --bg: #06080c;
+  --bg2: #0c1118;
+  --ink: #f4f1ea;
+  --muted: #8b95a5;
+  --blue: #93b9e2;
+  --blue-deep: #2c4a6e;
+  --yellow: #fae361;
+  --sq-light: #e4ecf6;
+  --sq-dark: #93b9e2;
+  --green: #6bdc7d;
+  --red: #ff5a6a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+#glow1, #glow2 { position: absolute; width: 1400px; height: 1400px; border-radius: 50%; filter: blur(40px); }
+#glow1 { background: radial-gradient(circle, rgba(147,185,226,.22), rgba(147,185,226,0) 62%); left: -300px; top: -500px; }
+#glow2 { background: radial-gradient(circle, rgba(250,227,97,.09), rgba(250,227,97,0) 60%); right: -500px; bottom: -700px; }
+#grid { position: absolute; left: 50%; top: 58%; width: 2600px; height: 2600px; margin-left: -1300px;
+  background:
+    linear-gradient(rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px,
+    linear-gradient(90deg, rgba(147,185,226,.07) 1px, transparent 1px) 0 0/162.5px 162.5px;
+  transform: perspective(900px) rotateX(68deg); transform-origin: 50% 0;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 60%); }
+#grain { position: absolute; inset: 0; opacity: .06; mix-blend-mode: overlay; }
+#vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); pointer-events: none; }
+.kicker { font: 800 22px/1 "Manrope"; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 18px; }
+.kicker::before { content: ""; width: 56px; height: 2px; background: currentColor; }
+.h1 { font: 900 128px/0.98 "Fraunces", serif; letter-spacing: -.02em; }
+.em { font-family: "Fraunces"; font-style: italic; font-weight: 400; color: var(--yellow); }
+.chip { display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px; font: 800 24px/1 "Manrope"; letter-spacing: .04em; }
+.board { position: absolute; border-radius: 18px; overflow: hidden;
+  background: repeating-conic-gradient(var(--sq-dark) 0 25%, var(--sq-light) 0 50%) 0 0 / 25% 25%;
+  box-shadow: 0 60px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06); }
+.board .sq { position: absolute; width: 12.5%; height: 12.5%; }
+.board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; will-change: transform; }
+.board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.55); opacity: 0; }
+.board svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pose.white .mascotte { --mascot: #ffffff; --line: #fae361; }
+.pose { position: absolute; }
+.pose svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
+.pose .shadow { display: none; }
+/* Affiche */
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--bg); }
+.logo { position: absolute; left: 150px; top: 120px; width: 620px; }
+.title { position: absolute; left: 150px; top: 330px; font-size: 118px; }
+.title .line { display: block; }
+.feat { position: absolute; left: 150px; top: 760px; display: flex; flex-wrap: wrap; gap: 16px; width: 820px; }
+.feat .chip { background: rgba(147,185,226,.12); color: #dfe6ef; font-size: 26px; box-shadow: inset 0 0 0 1px rgba(147,185,226,.2); }
+.feat .chip b { color: var(--yellow); }
+.cta { position: absolute; left: 150px; top: 900px; display: inline-flex; align-items: center; gap: 16px; padding: 22px 40px; border-radius: 999px; background: var(--yellow); color: #111; font: 800 32px/1 "Manrope"; box-shadow: 0 20px 60px rgba(250,227,97,.25); }
+#pb { left: 1080px; top: 170px; width: 640px; height: 640px; transform: perspective(1600px) rotateY(-14deg) rotateX(8deg) rotateZ(2deg); }
+.play { position: absolute; left: 1400px; top: 490px; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; box-shadow: 0 0 0 16px rgba(250,227,97,.22), 0 30px 70px rgba(0,0,0,.55); }
+.spark { position: absolute; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow1"></div><div id="glow2"></div><div id="grid"></div>
+  <svg id="grain" width="1920" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+  <img class="logo" src="../../assets/brand/logo-echecs-com.png">
+  <div class="h1 title"><span class="line">Les échecs,</span><span class="line">ça s'apprend.</span><span class="line em" style="font-size:140px">Pas à pas.</span></div>
+  <div class="feat"><span class="chip"><b>+200</b> leçons</span><span class="chip"><b>+2 000</b> exercices</span><span class="chip">Masterclasses</span><span class="chip">Tournois</span><span class="chip">Forum</span></div>
+  <div id="pb" class="board"></div>
+  <div class="play"><svg width="70" height="70" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg></div>
+  <div class="pose" data-pose="lecon-terminee" style="left:880px;top:560px;width:330px;height:404px"></div>
+  <div class="pose white" data-pose="victoire-tournoi" style="left:1590px;top:600px;width:300px;height:367px"></div>
+  <div class="pose" data-pose="idee" style="left:1610px;top:20px;width:250px;height:306px"></div>
+  <div id="vignette"></div>
+</div>
+<script src="../assets/mascot/poses.js"></script>
+<script>
+const P = "../assets/pieces/", F = "abcdefgh";
+const pos = { a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: "wN", h1: "wR", a8: "bR", b8: "bN", c8: "bB", d8: "bQ", e8: "bK", f8: "bB", g8: "bN", h8: "bR" };
+for (const f of F) { pos[f + "2"] = "wP"; pos[f + "7"] = "bP"; }
+delete pos.e2; delete pos.e7; pos.e4 = "wP"; pos.e5 = "bP";
+for (const [sq, c] of Object.entries(pos)) {
+  const d = document.createElement("div"); d.className = "pc";
+  d.style.backgroundImage = `url(${P}${c}.png)`;
+  d.style.left = F.indexOf(sq[0]) * 12.5 + "%"; d.style.top = (8 - +sq[1]) * 12.5 + "%";
+  document.getElementById("pb").appendChild(d);
+}
+document.querySelectorAll(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
+// Animations des mascottes figées sur une image expressive
+document.getAnimations().forEach(a => { a.pause(); a.currentTime = 1100; });
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+</script>
+</body>
+</html>

@@ -77,3 +77,32 @@ bash build.sh --skip-voice --skip-render
 
 - Fabien Libiszewski : Wolfgang Jekel, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:London_Chess_Classic_2016_Day5-19_(31872281495).jpg), CC BY 2.0, recadrée.
 - Gata Kamsky : Stefan64, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:GataKamsky24.jpg), CC BY-SA 3.0, recadrée.
+
+## Déclinaisons et réseaux sociaux
+
+| Fichier | Usage |
+|---|---|
+| `build/poster.jpg` | Affiche de la vidéo (image avant lecture), générée par `src/poster.html` |
+| `build/echecs-academie-court.mp4` | Version courte de 30,5 s : Pas à pas, Leçons, Valide chaque étape, Masterclasses, Forum, Final |
+| `build/echecs-academie-boucle.mp4` | Boucle muette de 14 s pour l'en-tête du site : Leçons, Exercices, Valide chaque étape |
+| `build/reseaux/video-9x16-reels-tiktok-stories.mp4` | Version courte en 1080×1920 (Reels, TikTok, Stories, Shorts) |
+| `build/reseaux/video-1x1-posts-instagram-x.mp4` | Version courte en 1080×1080 (posts Instagram, X, Facebook, LinkedIn) |
+| `build/reseaux/video-16x9-x-youtube-linkedin.mp4` | Version courte en 1920×1080 (X, YouTube, LinkedIn) |
+| `build/reseaux/boucle-entete-site-*.mp4` | Boucle muette en 1920×1080 et 1280×720 (plus légère) |
+| `build/reseaux/instagram-post-1080x1080.jpg` | Post carré |
+| `build/reseaux/story-reel-tiktok-1080x1920.jpg` | Story, couverture de Reel ou de TikTok |
+| `build/reseaux/x-post-1600x900.jpg` | Image de post X |
+| `build/reseaux/banniere-x-linkedin-1500x500.jpg` | Bannière de profil X ou LinkedIn |
+| `build/reseaux/youtube-miniature-1280x720.jpg` | Miniature YouTube |
+| `build/reseaux/partage-lien-1200x630.jpg` | Aperçu de lien (Open Graph : Facebook, LinkedIn, WhatsApp) |
+
+Pour tout régénérer :
+
+```bash
+bash build.sh --music-only       # version longue + affiche
+bash build.sh --edition court    # version courte
+bash build.sh --edition boucle   # boucle muette
+bash scripts/social.sh           # kit réseaux sociaux
+```
+
+Les scènes de chaque déclinaison sont définies dans `scripts/timing.py` (`EDITIONS`). Les visuels sont dans `src/social.html` (un format par `?fmt=`). Les vidéos 9:16 et 1:1 placent la vidéo 16:9 dans un cadre aux couleurs de la marque, avec le logo, l'accroche et l'appel à l'action.
