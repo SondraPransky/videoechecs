@@ -1,6 +1,6 @@
 # Mascotte animée — echecs.com
 
-Soixante-dix animations de la mascotte (et leurs 70 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
+Soixante-quatorze animations de la mascotte (et leurs 74 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
 
 Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relance les intros, et un autre bouton bascule entre fond clair et fond sombre.
 
@@ -83,6 +83,10 @@ Pour ces animations, la silhouette du designer est découpée en tête et buste,
 | `mascotte-saute-obstacle` | Difficulté surmontée | Saute par-dessus un pion qui défile |
 | `mascotte-selfie` | Partage, réseaux sociaux | Téléphone à bout de bras, coucou, flash |
 | `mascotte-montre-le-ciel` | Objectif, « vise haut » | Désigne une étoile qui brille |
+| `mascotte-prof` | Cours, masterclass | Toque, montre du doigt, l'autre main explique |
+| `mascotte-lit-assise` | Lecture, revue | Assise, la revue ouverte |
+| `mascotte-discute` | Forum | Les deux bras gesticulent, une bulle s'écrit |
+| `mascotte-invite` | Appel à l'action | Montre le bouton, fait « viens ! » de l'autre main |
 
 Le nom exact d'un fichier dépend de sa couleur, par exemple `svg/noir/mascotte-idee-noir.svg`.
 

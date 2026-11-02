@@ -43,14 +43,14 @@ window.VISUELS = [
   { id: "10-tournois", tpl: "accroche", theme: "soleil", k: "Tournois en ligne", t: "Mesure-toi", e: "aux autres joueurs.", s: "Cadence 10' + 5\", tous niveaux.", shot: "tournois", pose: "victoire-tournoi" },
 
   // ---- Chiffres clés
-  { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "idee" },
-  { id: "12-chiffre-2000-exercices", tpl: "chiffre", theme: "nuit", k: "Entraînement", n: "+2<b>&#8239;</b>000", t: "exercices", e: "et quiz.", pose: "bonne-reponse" },
-  { id: "13-chiffre-4-formats", tpl: "chiffre", theme: "menthe", k: "Apprends comme tu veux", n: "4", t: "formats", e: "de leçon.", s: "Vidéo, cours écrit, exercice, quiz.", pose: "lecture" },
+  { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "saut-etoile" },
+  { id: "12-chiffre-2000-exercices", tpl: "chiffre", theme: "nuit", k: "Entraînement", n: "+2<b>&#8239;</b>000", t: "exercices", e: "et quiz.", pose: "karate" },
+  { id: "13-chiffre-4-formats", tpl: "chiffre", theme: "menthe", k: "Apprends comme tu veux", n: "4", t: "formats", e: "de leçon.", s: "Vidéo, cours écrit, exercice, quiz.", pose: "lit-assise" },
 
   // ---- Engagement : problème, solution, quiz
-  { id: "14-probleme-mat-en-1", tpl: "puzzle", theme: "nuit", k: "Le problème du jour", t: "Mat en 1.", e: "À toi de jouer !", s: "Les Blancs jouent. Ta réponse en commentaire.", pos: MAT1, pose: "reflexion" },
-  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "Td8#", e: "le mat du couloir.", s: "Le roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "bonne-reponse" },
-  { id: "16-quiz-carlsbad", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1600", q: "Structure Carlsbad : quel est le plan typique des Blancs ?", opts: ["L'attaque de minorité", "Échanger toutes les pièces", "Pousser h4-h5 au plus vite"], s: "Réponds en commentaire : A, B ou C ?", pose: "idee" },
+  { id: "14-probleme-mat-en-1", tpl: "puzzle", theme: "nuit", k: "Le problème du jour", t: "Mat en 1.", e: "À toi de jouer !", s: "Les Blancs jouent. Ta réponse en commentaire.", pos: MAT1, pose: "gratte-tete" },
+  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "Td8#", e: "le mat du couloir.", s: "Le roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "hourra" },
+  { id: "16-quiz-carlsbad", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1600", q: "Structure Carlsbad : quel est le plan typique des Blancs ?", opts: ["L'attaque de minorité", "Échanger toutes les pièces", "Pousser h4-h5 au plus vite"], s: "Réponds en commentaire : A, B ou C ?", pose: "haussement" },
 
   // ---- Portraits des coachs
   { id: "17-coach-sylvain-ravot", tpl: "coach", theme: "rose", k: "Nos coachs", t: "Sylvain Ravot", e: "Maître FIDE.", s: "Calcul, tactique et masterclasses en direct.", photo: "auth-ravot", titre: "MF" },
@@ -59,12 +59,12 @@ window.VISUELS = [
   { id: "20-coach-gata-kamsky", tpl: "coach", theme: "soleil", k: "Nos coachs", t: "Gata Kamsky", e: "Grand Maître.", s: "En masterclass sur echecs.com.", photo: "auth-kamsky", titre: "GMI" },
 
   // ---- Humeurs de la mascotte
-  { id: "21-humeur-serie", tpl: "mascotte", theme: "nuit", k: "Ta série", t: "7 jours de suite.", e: "Ne lâche rien !", pose: "serie-de-jours" },
-  { id: "22-humeur-lecon-terminee", tpl: "mascotte", theme: "soleil", k: "Bravo", t: "Leçon terminée.", e: "Au tour de la suivante !", pose: "lecon-terminee" },
+  { id: "21-humeur-serie", tpl: "mascotte", theme: "nuit", k: "Ta série", t: "7 jours de suite.", e: "Ne lâche rien !", pose: "sprint" },
+  { id: "22-humeur-lecon-terminee", tpl: "mascotte", theme: "soleil", k: "Bravo", t: "Leçon terminée.", e: "Au tour de la suivante !", pose: "reverence" },
   { id: "23-humeur-rate", tpl: "mascotte", theme: "ciel", k: "Pas grave", t: "Raté ?", e: "C'est comme ça qu'on apprend.", pose: "parapluie" },
   { id: "24-humeur-dodo", tpl: "mascotte", theme: "nuit", k: "Ce soir", t: "Une partie avant de dormir ?", e: "Juste une.", pose: "sieste" },
-  { id: "25-humeur-victoire", tpl: "mascotte", theme: "rose", k: "Tournoi du week-end", t: "Premier du tournoi !", e: "Et toi, quand ?", pose: "victoire-tournoi" },
-  { id: "26-humeur-idee", tpl: "mascotte", theme: "craie", k: "Astuce du jour", t: "Sors tes pièces", e: "avant ta dame.", pose: "idee" },
+  { id: "25-humeur-victoire", tpl: "mascotte", theme: "rose", k: "Tournoi du week-end", t: "Premier du tournoi !", e: "Et toi, quand ?", pose: "champion" },
+  { id: "26-humeur-idee", tpl: "mascotte", theme: "craie", k: "Astuce du jour", t: "Sors tes pièces", e: "avant ta dame.", pose: "montre-le-ciel" },
 
   // ---- Annonces
   { id: "27-revue-numero-779", tpl: "revue", theme: "nuit", k: "Nouveau numéro", t: "Le n°779", e: "est sorti !", s: "Milliet & Bacrot : 16 titres pour 2 légendes.", },
@@ -72,21 +72,26 @@ window.VISUELS = [
 
   // ---- Nouvelles mascottes
   { id: "29-newsletter", tpl: "mascotte", theme: "soleil", k: "Newsletter", t: "Ta lettre", e: "de la semaine.", pose: "message-recu" },
-  { id: "30-bienvenue", tpl: "mascotte", theme: "ciel", k: "Nouveau membre", t: "Bienvenue", e: "dans l'académie !", pose: "coucou" },
+  { id: "30-bienvenue", tpl: "mascotte", theme: "ciel", k: "Nouveau membre", t: "Bienvenue", e: "dans l'académie !", pose: "coucou-autre-main" },
   { id: "31-pause-cafe", tpl: "mascotte", theme: "craie", k: "Pause", t: "Une leçon", e: "avec ton café ?", pose: "cafe" },
-  { id: "32-forum-discussion", tpl: "mascotte", theme: "menthe", k: "Le forum", t: "Une question ?", e: "La communauté répond.", pose: "discussion" },
+  { id: "32-forum-discussion", tpl: "mascotte", theme: "menthe", k: "Le forum", t: "Une question ?", e: "La communauté répond.", pose: "discute" },
   { id: "33-objectif-atteint", tpl: "mascotte", theme: "nuit", k: "Objectif atteint", t: "Module validé.", e: "Au suivant !", pose: "drapeau" },
+  { id: "34-grande-nouvelle", tpl: "mascotte", theme: "rose", k: "Annonce", t: "Grande nouvelle !", e: "Bientôt sur l'académie.", pose: "pancarte" },
+  { id: "35-blancs-ou-noirs", tpl: "mascotte", theme: "craie", k: "Sondage", t: "Blancs ou Noirs ?", e: "Tu joues quoi ?", pose: "blancs-ou-noirs" },
+  { id: "36-respire", tpl: "mascotte", theme: "menthe", k: "Avant ta partie", t: "Respire.", e: "Et calcule.", pose: "yoga-arbre" },
+  { id: "37-oups", tpl: "mascotte", theme: "ciel", k: "Ça arrive", t: "Une gaffe ?", e: "Même aux meilleurs.", pose: "oups" },
+  { id: "38-week-end", tpl: "mascotte", theme: "soleil", k: "C'est le week-end", t: "Une partie ?", e: "Ou deux, ou trois…", pose: "danse" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },
   { id: "id-avatar-soleil", tpl: "id-avatar", theme: "soleil", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },
-  { id: "id-banniere", tpl: "id-ban", theme: "nuit", pose: "lecon-terminee", only: [
+  { id: "id-banniere", tpl: "id-ban", theme: "nuit", pose: "prof", only: [
     ["x-1500x500", 1500, 500, "Bannière X", { sw: 1500, sh: 380, left: 260 }],
     ["linkedin-1584x396", 1584, 396, "Bannière LinkedIn (page)", { sw: 1584, sh: 300, left: 300 }],
     ["facebook-1640x624", 1640, 624, "Couverture Facebook", { sw: 1300, sh: 420 }],
     ["youtube-2560x1440", 2560, 1440, "Bannière YouTube (zone sûre 1546×423)", { sw: 1546, sh: 423 }],
   ] },
-  { id: "id-banniere-soleil", tpl: "id-ban", theme: "soleil", pose: "serie-reussie", only: [
+  { id: "id-banniere-soleil", tpl: "id-ban", theme: "soleil", pose: "hourra", only: [
     ["x-1500x500", 1500, 500, "Bannière X", { sw: 1500, sh: 380, left: 260 }],
     ["linkedin-1584x396", 1584, 396, "Bannière LinkedIn (page)", { sw: 1584, sh: 300, left: 300 }],
     ["facebook-1640x624", 1640, 624, "Couverture Facebook", { sw: 1300, sh: 420 }],

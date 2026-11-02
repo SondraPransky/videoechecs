@@ -790,7 +790,7 @@ A[n] = ("Envoi de mail", "Newsletter, e-mail envoyé, invitation", svg(n, "Envoi
 # collé sur la hanche est remplacé par un second bras articulé, symétrique du premier.
 # Chaque pièce pivote autour de son articulation : on peut enfin bouger les DEUX bras,
 # les jambes, la tête et le buste.
-NECK, HIP, HIP_L, HIP_R, SH2 = (650, 470), (625, 850), (548, 850), (708, 850), (765, 575)
+NECK, HIP, HIP_L, HIP_R, SH2 = (650, 470), (625, 800), (548, 795), (706, 795), (762, 575)
 CLIPS = {
     "tete": "380,-10 1010,-10 1010,486 380,486",
     "buste": "380,470 772,478 800,560 788,640 780,790 780,862 380,862",
@@ -800,7 +800,11 @@ CLIPS = {
 
 
 # Jambe redessinée dans le style de la silhouette : cuisse pleine qui s'affine, pied tourné vers l'avant
-LEG = "M-84,-40 C-42,-68 42,-68 82,-40 L66,150 C66,176 56,196 28,198 L-108,198 C-138,198 -142,160 -110,152 L-72,142 Z"
+LEG = ("M-72,-24 C-72,-72 72,-72 72,-24 C72,66 62,150 54,206 C50,232 38,244 14,244 L-100,244 "
+       "C-136,244 -142,204 -108,194 L-62,182 C-68,112 -72,40 -72,-24 Z")
+# Buste redessiné : reprend le contour gauche de la silhouette, bas arrondi, côté droit galbé
+BUSTE = ("M592,470 C566,510 546,560 532,612 C508,700 486,770 476,820 C520,872 734,872 790,826 "
+         "C806,740 810,640 794,566 C786,524 774,494 760,470 Z")
 
 
 def piece(name, part, pivot):
@@ -817,8 +821,8 @@ def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", tor
     arm2 = g(SH2, "arm2", f'<g transform="scale(-1 1)"><path class="m" d="{ARM}"/></g>{arm2_inner}<circle class="m" r="50"/>')
     head = g(NECK, "head", piece(name, "tete", NECK) + (f'<g transform="translate({HEAD_TOP[0] - NECK[0]} {HEAD_TOP[1] - NECK[1]})">{head_inner}</g>' if head_inner else ""))
     arm = g(PIVOT, "arm", f'<path class="m" d="{ARM}"/>{arm_inner}')
-    torso = g(HIP, "torso", f'<g transform="translate({-HIP[0]} {-HIP[1]})">{arm2}{piece(name, "buste", (0, 0))}'
-              f'<ellipse class="m" cx="{HIP[0]}" cy="{HIP[1]}" rx="150" ry="62"/><circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
+    torso = g(HIP, "torso", f'<g transform="translate({-HIP[0]} {-HIP[1]})">{arm2}<path class="m" d="{BUSTE}"/>'
+              f'<circle class="m" cx="{NECK[0]}" cy="{NECK[1] + 10}" r="70"/>{head}<circle class="m" cx="{PIVOT[0]:.1f}" cy="{PIVOT[1]:.1f}" r="46"/>{arm}{torso_inner}</g>')
     fx, fy = FEET
     return defs + extra_back + g(FEET, "rig", f'<g transform="translate({-fx:.1f} {-fy:.1f})">{jl}{jr}{torso}</g>')
 
@@ -972,9 +976,16 @@ def anim(n, sel, name, dur, frames, timing="ease-in-out infinite"):
 
 PANCARTE = f'''<g><rect x="300" y="-300" width="780" height="390" rx="26" fill="#fff" stroke="{LINE}" stroke-width="14"/>
 <path d="M380,-210 L1000,-210 M380,-120 L900,-120 M380,-30 L760,-30" stroke="{BLUE}" stroke-width="34" stroke-linecap="round"/></g>'''
-ECHIQUIER = (f'<g><rect x="380" y="-310" width="620" height="390" rx="18" fill="#e4ecf6" stroke="{LINE}" stroke-width="14"/>'
-             + "".join(f'<rect x="{380 + (k % 8) * 77.5}" y="{-310 + (k // 8) * 48.75}" width="77.5" height="48.75" fill="{BLUE}"/>' for k in range(64) if (k + k // 8) % 2)
-             + f'<rect x="380" y="-310" width="620" height="390" rx="18" fill="none" stroke="{LINE}" stroke-width="14"/></g>')
+PAWN_Y = PAWN.replace('fill="#fff"', f'fill="{YELLOW}"')
+KING = (f'<g><path d="M-14,-250 L14,-250 L14,-226 L38,-226 L38,-200 L14,-200 L14,-176 L-14,-176 L-14,-200 L-38,-200 L-38,-226 L-14,-226 Z" fill="#fff" stroke="{LINE}" stroke-width="12" stroke-linejoin="round"/>'
+        + PAWN.replace('<circle cy="-158" r="50"', '<ellipse cy="-150" rx="58" ry="46"') + '</g>')
+ECHIQUIER = (f'<g><path d="M372,-58 L1008,-58 L1046,-14 L334,-14 Z" fill="#e4ecf6" stroke="{LINE}" stroke-width="12" stroke-linejoin="round"/>'
+             + "".join(f'<path d="M{372 + k * 79.5},-58 L{372 + (k + 1) * 79.5},-58 L{334 + (k + 1) * 89},-14 L{334 + k * 89},-14 Z" fill="{BLUE}"/>' for k in range(0, 8, 2))
+             + f'<path d="M372,-58 L1008,-58 L1046,-14 L334,-14 Z" fill="none" stroke="{LINE}" stroke-width="12" stroke-linejoin="round"/>'
+             + f'<rect x="334" y="-14" width="712" height="54" rx="12" fill="{BLUE}" stroke="{LINE}" stroke-width="12"/>'
+             + "".join(f'<rect x="{346 + k * 86.5}" y="-2" width="43" height="30" rx="4" fill="#e4ecf6"/>' for k in range(8))
+             + g((500, -50), "pc1", f'<g transform="scale(.55)">{PAWN}</g>') + g((690, -50), "pc2", f'<g transform="scale(.62)">{KING}</g>')
+             + g((880, -50), "pc3", f'<g transform="scale(.55)">{PAWN_Y if "PAWN_Y" in globals() else PAWN}</g>') + '</g>')
 COUPE = f'''<g transform="translate(690 -40) scale(1.1)"><path d="M-95,-150 L95,-150 C95,-40 50,10 0,20 C-50,10 -95,-40 -95,-150 Z" fill="{YELLOW}" stroke="{LINE}" stroke-width="12" stroke-linejoin="round"/>
 <path d="M-95,-125 C-160,-125 -160,-40 -70,-30 M95,-125 C160,-125 160,-40 70,-30" fill="none" stroke="{LINE}" stroke-width="14" stroke-linecap="round"/>
 <rect x="-18" y="18" width="36" height="50" fill="{LINE}"/><rect x="-70" y="64" width="140" height="38" rx="8" fill="{LINE}"/></g>'''
@@ -987,7 +998,7 @@ pose2("assise", "Assise par terre", "Pause, lecture d'un cours, détente", [
     anim("assise", ".legl", "l", ".7s", "from{transform:rotate(84deg)} to{transform:rotate(74deg)}", "ease-in-out infinite alternate"),
     anim("assise", ".legr", "m", ".7s", "from{transform:rotate(72deg)} to{transform:rotate(82deg)}", "ease-in-out infinite alternate"),
     anim("assise", ".arm", "a", "3s", "0%,100%{transform:rotate(-78deg)} 50%{transform:rotate(-72deg)}"),
-    anim("assise", ".arm2", "b", "3s", "0%,100%{transform:rotate(126deg)} 50%{transform:rotate(120deg)}"),
+    anim("assise", ".arm2", "b", "3s", "0%,100%{transform:rotate(-14deg)} 50%{transform:rotate(-24deg)}"),
     anim("assise", ".head", "h", "3s", "0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(5deg)}"),
 ], before=COUSSIN)
 
@@ -1076,7 +1087,7 @@ pose2("karate", "Karaté", "Attaque, combinaison tactique, « kiai ! »", [
     anim("karate", ".legl", "l", "1.4s", f"0%,30%{{transform:rotate(10deg)}} 42%,62%{{transform:rotate(96deg)}} 80%,100%{{transform:rotate(10deg)}}"),
     anim("karate", ".torso", "t", "1.4s", "0%,30%,80%,100%{transform:rotate(0)} 42%,62%{transform:rotate(16deg)}"),
     anim("karate", ".arm", "a", "1.4s", "0%,30%,80%,100%{transform:rotate(-60deg)} 42%,62%{transform:rotate(-100deg)}"),
-    anim("karate", ".arm2", "b", "1.4s", "0%,30%,80%,100%{transform:rotate(-70deg)} 42%,62%{transform:rotate(120deg)}"),
+    anim("karate", ".arm2", "b", "1.4s", "0%,30%,80%,100%{transform:rotate(-24deg)} 42%,62%{transform:rotate(112deg)}"),
     anim("karate", ".rig", "r", "1.4s", "0%,30%,80%,100%{transform:translateY(0)} 42%,62%{transform:translateY(-20px)}"),
 ])
 
@@ -1123,6 +1134,50 @@ pose2("montre-le-ciel", "Montre le ciel", "Objectif, « vise haut », nouveauté
         "montre-le-ciel-s": "from{transform:scale(0) rotate(-180deg)} to{transform:scale(1) rotate(0)}",
         "montre-le-ciel-tw": "0%,100%{transform:scale(1) rotate(0)} 50%{transform:scale(1.15) rotate(12deg)}"}),
 ], after=etoile)
+
+# ---------------------------------------------------------------- poses pour la vidéo
+# 73. Prof : toque sur la tête, montre du doigt, l'autre main explique ---------------------
+pose2("prof", "Prof", "Cours, masterclass, explication", [
+    anim("prof", ".arm", "a", "2.4s", "0%,100%{transform:rotate(-64deg)} 50%{transform:rotate(-56deg)}"),
+    anim("prof", ".arm2", "b", ".8s", "from{transform:rotate(-40deg)} to{transform:rotate(-8deg)}", "ease-in-out infinite alternate"),
+    anim("prof", ".head", "h", "2.4s", "0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)}"),
+    anim("prof", ".torso", "t", "2.4s", "0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(0)}"),
+    (".cap", "prof-c 2.4s ease-in-out infinite", {"prof-c": "0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(-6deg)}"}),
+], head_inner=g((10, -20), "cap", CAP))
+
+# 74. Lit assise : assise par terre, la revue ouverte sur les genoux -----------------------
+pose2("lit-assise", "Lit assise", "Lecture d'un cours, revue, détente", [
+    anim("lit-assise", ".rig", "r", "3s", "0%,100%{transform:translateY(60px)} 50%{transform:translateY(64px) scale(1.01,.99)}"),
+    anim("lit-assise", ".legl", "l", "1.4s", "from{transform:rotate(80deg)} to{transform:rotate(72deg)}", "ease-in-out infinite alternate"),
+    anim("lit-assise", ".legr", "m", "1.4s", "from{transform:rotate(70deg)} to{transform:rotate(78deg)}", "ease-in-out infinite alternate"),
+    anim("lit-assise", ".arm", "a", "3s", "0%,100%{transform:rotate(-22deg)} 50%{transform:rotate(-16deg)}"),
+    anim("lit-assise", ".arm2", "b", "3s", "0%,100%{transform:rotate(-30deg)} 50%{transform:rotate(-36deg)}"),
+    anim("lit-assise", ".head", "h", "3s", "0%,100%{transform:rotate(-10deg)} 50%{transform:rotate(-6deg)}"),
+    (".pg", "lit-assise-p 3s ease-in-out 1s infinite backwards", {"lit-assise-p": "0%,45%{transform:scaleX(1)} 75%,100%{transform:scaleX(-1)}"}),
+], before=COUSSIN, arm_inner=g(FIST, "book", f'<g transform="rotate(26) translate(0 40) scale(1.2)">{BOOK}</g>'))
+
+# 75. Discute : les deux bras gesticulent, une bulle s'écrit ------------------------------
+pose2("discute", "Discute", "Forum, échange avec la communauté", [
+    anim("discute", ".arm", "a", "1.2s", "0%,100%{transform:rotate(-70deg)} 50%{transform:rotate(-30deg)}"),
+    anim("discute", ".arm2", "b", "1.2s", "0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(-56deg)}"),
+    anim("discute", ".head", "h", ".6s", "from{transform:rotate(-5deg)} to{transform:rotate(5deg)}", "ease-in-out infinite alternate"),
+    anim("discute", ".rig", "r", "1.2s", "0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}"),
+    (".bl", "discute-pop .5s {0} .2s both, discute-float 2.4s ease-in-out .7s infinite".format(EASE_BACK), {
+        "discute-pop": "from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1}",
+        "discute-float": "0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}"}),
+    (".l1,.l2,.l3", "discute-type 2.4s ease-out .5s infinite backwards", {"discute-type": "0%{stroke-dasharray:0 400} 40%,100%{stroke-dasharray:400 0}"}),
+], extra_css=".mascotte-discute .l2 { animation-delay: .8s; } .mascotte-discute .l3 { animation-delay: 1.1s; }", after=g((330, -150), "bl", f'<g transform="scale(-.9 .9)">{BULLE}</g>'.replace('<path class="l', '<path class="l')))
+
+# 76. Invite : montre le bouton et fait « viens ! » de l'autre main --------------------------
+pose2("invite", "Invite", "Appel à l'action, « rejoins-nous ! »", [
+    (".arm", f"invite-a .6s {EASE_BACK} both, invite-j 1.2s ease-in-out .6s infinite", {
+        "invite-a": "from{transform:rotate(-104deg)} to{transform:rotate(-70deg)}",
+        "invite-j": "0%,100%{transform:rotate(-70deg)} 50%{transform:rotate(-62deg)}"}),
+    anim("invite", ".arm2", "b", ".5s", "from{transform:rotate(-6deg)} to{transform:rotate(-40deg)}", "ease-in-out infinite alternate"),
+    anim("invite", ".torso", "t", "1.2s", "0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(-3deg)}"),
+    anim("invite", ".rig", "r", "1.2s", "0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)}"),
+    anim("invite", ".legl", "l", "1.2s", "0%,100%{transform:rotate(24deg)} 50%{transform:rotate(16deg)}"),
+])
 
 # ---------------------------------------------------------------- versions miroir
 # Chaque animation existe aussi tournée vers la droite : tout le dessin est retourné
