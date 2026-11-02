@@ -256,23 +256,6 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="pose" id="p3" data-pose="idee" style="left:1440px;top:40px;width:392px;height:480px"></div>
   </section>
 
-  <!-- Revue Europe Échecs en PGN -->
-  <section class="scene" id="revue">
-    <div style="position:absolute;left:150px;top:130px">
-      <div class="kicker rv-k">La revue Europe Échecs</div>
-      <div class="h2" style="margin-top:30px;font-size:86px"><span class="line"><span class="rv-w">Toute la revue,</span></span><span class="line"><span class="rv-w">en <span class="em">PGN interactif.</span></span></span></div>
-    </div>
-    <div class="uitile rv-card" style="left:1010px;top:120px;width:780px;border-radius:30px"><img src="../assets/captures/ee/revue-numero.jpg"></div>
-    <div class="chip rv-pgn" style="position:absolute;left:1650px;top:72px;background:var(--yellow);color:#111;font-size:30px;padding:16px 28px;box-shadow:0 16px 40px rgba(0,0,0,.4)">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>PGN</div>
-    <div class="pill rv-row" style="left:150px;top:560px"><img src="../assets/captures/tiles/row-elephant.png"><span class="chev">›</span></div>
-    <div class="pill rv-row" style="left:240px;top:715px"><img src="../assets/captures/tiles/row-herisson.png"><span class="chev">›</span></div>
-    <div class="uitile rv-t" style="left:1010px;top:470px;width:220px"><img src="../assets/captures/tiles/theme-ouvertures.png"></div>
-    <div class="uitile rv-t" style="left:1250px;top:525px;width:220px"><img src="../assets/captures/tiles/theme-strategie.png"></div>
-    <div class="uitile rv-t" style="left:1490px;top:470px;width:220px"><img src="../assets/captures/tiles/theme-finales.png"></div>
-    <div class="pose white" id="prv" data-pose="lecture" style="left:1540px;top:640px;width:340px;height:416px"></div>
-  </section>
-
   <!-- Catalogue vidéo Europe Échecs -->
   <section class="scene" id="videos">
     <div style="position:absolute;left:150px;top:64px">
@@ -382,6 +365,23 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="lb" id="lb"></div>
     <div class="pose white" id="p7" data-pose="victoire-tournoi" style="left:1545px;top:775px;width:250px;height:306px"></div>
     <div class="confetti" id="conf7" style="left:1100px;top:290px"></div>
+  </section>
+
+  <!-- Revue Europe Échecs en PGN -->
+  <section class="scene" id="revue">
+    <div style="position:absolute;left:150px;top:110px">
+      <div class="kicker rv-k">La revue Europe Échecs</div>
+      <div class="h2" style="margin-top:30px;font-size:86px"><span class="line"><span class="rv-w">Toute la revue,</span></span><span class="line"><span class="rv-w">en <span class="em">PGN interactif.</span></span></span></div>
+    </div>
+    <div class="uitile rv-t" style="left:1030px;top:100px;width:220px"><img src="../assets/captures/tiles/theme-ouvertures.png"></div>
+    <div class="uitile rv-t" style="left:1270px;top:140px;width:220px"><img src="../assets/captures/tiles/theme-strategie.png"></div>
+    <div class="uitile rv-t" style="left:1510px;top:100px;width:220px"><img src="../assets/captures/tiles/theme-finales.png"></div>
+    <img class="rv-card" src="../assets/captures/ee/revue-779.png" style="position:absolute;left:150px;top:410px;width:1620px;filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))">
+    <div class="chip rv-pgn" style="position:absolute;left:1180px;top:372px;background:#111;color:var(--yellow);font-size:30px;padding:16px 28px;box-shadow:0 16px 40px rgba(0,0,0,.4)">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fae361" stroke-width="2.4" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg>PGN</div>
+    <div class="pill rv-row" style="left:150px;top:800px"><img src="../assets/captures/tiles/row-elephant.png"><span class="chev">›</span></div>
+    <div class="pill rv-row" style="left:780px;top:800px"><img src="../assets/captures/tiles/row-herisson.png"><span class="chev">›</span></div>
+    <div class="pose white" id="prv" data-pose="lecture" style="left:1590px;top:735px;width:280px;height:343px"></div>
   </section>
 
   <!-- S8 — Final -->
@@ -736,13 +736,13 @@ scene("s3", ({ st, from, at, dur }) => {
 scene("revue", ({ st, from, at, lines, dur }) => {
   from(".rv-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   lines(".rv-w", .1, .1);
-  from(".rv-card", .2, { opacity: 0, x: 220, rotateY: -22, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -6, duration: .7 });
-  at(".rv-card", .9, { rotateY: -1, duration: dur - .9, ease: "sine.inOut" });
+  from(".rv-card", .2, { opacity: 0, y: 120, rotateX: 18, transformPerspective: 2000 }, { opacity: 1, y: 0, rotateX: 0, duration: .7 });
+  at(".rv-card", .9, { scale: 1.02, duration: dur - .9, ease: "sine.inOut" });
   from(".rv-pgn", .8, { scale: 0, rotation: -25 }, { scale: 1, rotation: 6, duration: .5, ease: "back.out(2.4)" });
   at(".rv-pgn", 1.4, { scale: 1.06, duration: .4, ease: "sine.inOut", yoyo: true, repeat: 3 });
   $$(".rv-row").forEach((el, i) => {
     from(el, .45 + i * .14, { opacity: 0, x: -260 }, { opacity: 1, x: 0, duration: .55 });
-    at(el, 1 + i * .14, { x: 18 - i * 10, duration: dur - 1.1, ease: "sine.inOut" });
+    at(el, 1 + i * .14, { x: 14 - i * 8, duration: dur - 1.1, ease: "sine.inOut" });
   });
   $$(".rv-t").forEach((el, i) => {
     from(el, .6 + i * .1, { opacity: 0, scale: .6, y: 80, rotation: [-14, 12, -10][i] }, { opacity: 1, scale: 1, y: 0, rotation: [-4, 3, -3][i], duration: .6, ease: "back.out(1.5)" });
