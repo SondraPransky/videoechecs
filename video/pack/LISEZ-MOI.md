@@ -47,11 +47,11 @@ puis **une réponse propre à chaque question**, et l'appel final. Chaque pub a 
 
 | Fichier | Question | Réponse montrée | Musique |
 |---|---|---|---|
-| `pub-1-*` | Vous enchaînez les parties, mais votre classement ne bouge pas ? | « Jouer ne suffit pas. Entraînez-vous avec méthode. » Courbe Elo qui monte, modules validés | électro-pop |
-| `pub-2-*` | Vous jouez beaucoup, mais vous n'avez pas l'impression de progresser ? | « Jouez moins, comprenez plus. » Analyse de partie, erreur repérée, exercices ciblés | disco-funk |
-| `pub-3-*` | Vous avez l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprenez des meilleurs. » Masterclasses en direct avec GM et MF | lo-fi puis hip-hop |
-| `pub-4-*` | Vous regardez des vidéos d'échecs, mais ne progressez pas ? | « Ne regardez plus, jouez ! » La vidéo devient un exercice : à vous de jouer | trap cinématique |
-| `pub-5-*` | Vous voulez progresser aux échecs, mais vous ne savez pas par où commencer ? | « Suivez le guide, étape par étape. » Le parcours de l'initiation à 2000+ | pop acoustique |
+| `pub-1-*` | Vous enchaînez les parties, mais votre classement ne bouge pas ? | « Jouer ne suffit pas. Entraînez-vous avec méthode. » Courbe Elo qui monte, modules validés | électro-house 128 BPM |
+| `pub-2-*` | Vous jouez beaucoup, mais vous n'avez pas l'impression de progresser ? | « Jouez moins, comprenez plus. » Analyse de partie, erreur repérée, exercices ciblés | funk-house 124 BPM |
+| `pub-3-*` | Vous avez l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprenez des meilleurs. » Masterclasses en direct avec GM et MF | drum'n'bass 174 BPM |
+| `pub-4-*` | Vous regardez des vidéos d'échecs, mais ne progressez pas ? | « Ne regardez plus, jouez ! » La vidéo devient un exercice : à vous de jouer | trap / phonk 150 BPM |
+| `pub-5-*` | Vous voulez progresser aux échecs, mais vous ne savez pas par où commencer ? | « Suivez le guide, étape par étape. » Le parcours de l'initiation à 2000+ | pop dance 128 BPM |
 
 Formats : `*-story-9x16.mp4` (Stories et Reels Instagram, TikTok), `*-story-9x16-jaune.mp4` (même pub sur fond jaune, pour varier
 ou tester), `*-feed-4x5.mp4` (fil Instagram et Facebook), `*-16x9.mp4` (YouTube, X, LinkedIn).
