@@ -61,14 +61,21 @@ window.VISUELS = [
   // ---- Humeurs de la mascotte
   { id: "21-humeur-serie", tpl: "mascotte", theme: "nuit", k: "Ta série", t: "7 jours de suite.", e: "Ne lâche rien !", pose: "serie-de-jours" },
   { id: "22-humeur-lecon-terminee", tpl: "mascotte", theme: "soleil", k: "Bravo", t: "Leçon terminée.", e: "Au tour de la suivante !", pose: "lecon-terminee" },
-  { id: "23-humeur-rate", tpl: "mascotte", theme: "ciel", k: "Pas grave", t: "Raté ?", e: "C'est comme ça qu'on apprend.", pose: "mauvaise-reponse" },
-  { id: "24-humeur-dodo", tpl: "mascotte", theme: "nuit", k: "Ce soir", t: "Une partie avant de dormir ?", e: "Juste une.", pose: "dodo", white: true },
+  { id: "23-humeur-rate", tpl: "mascotte", theme: "ciel", k: "Pas grave", t: "Raté ?", e: "C'est comme ça qu'on apprend.", pose: "parapluie" },
+  { id: "24-humeur-dodo", tpl: "mascotte", theme: "nuit", k: "Ce soir", t: "Une partie avant de dormir ?", e: "Juste une.", pose: "sieste" },
   { id: "25-humeur-victoire", tpl: "mascotte", theme: "rose", k: "Tournoi du week-end", t: "Premier du tournoi !", e: "Et toi, quand ?", pose: "victoire-tournoi" },
   { id: "26-humeur-idee", tpl: "mascotte", theme: "craie", k: "Astuce du jour", t: "Sors tes pièces", e: "avant ta dame.", pose: "idee" },
 
   // ---- Annonces
   { id: "27-revue-numero-779", tpl: "revue", theme: "nuit", k: "Nouveau numéro", t: "Le n°779", e: "est sorti !", s: "Milliet & Bacrot : 16 titres pour 2 légendes.", },
-  { id: "28-tournois-chaque-semaine", tpl: "event", theme: "ciel", k: "Tournois en ligne", t: "Chaque semaine,", e: "un tournoi.", facts: ["Cadence 10' + 5\"", "Ouvert à tous les niveaux", "Classement en direct"], pose: "victoire-tournoi", white: true },
+  { id: "28-tournois-chaque-semaine", tpl: "event", theme: "ciel", k: "Tournois en ligne", t: "Chaque semaine,", e: "un tournoi.", facts: ["Cadence 10' + 5\"", "Ouvert à tous les niveaux", "Classement en direct"], pose: "pendule" },
+
+  // ---- Nouvelles mascottes
+  { id: "29-newsletter", tpl: "mascotte", theme: "soleil", k: "Newsletter", t: "Ta lettre", e: "de la semaine.", pose: "message-recu" },
+  { id: "30-bienvenue", tpl: "mascotte", theme: "ciel", k: "Nouveau membre", t: "Bienvenue", e: "dans l'académie !", pose: "coucou" },
+  { id: "31-pause-cafe", tpl: "mascotte", theme: "craie", k: "Pause", t: "Une leçon", e: "avec ton café ?", pose: "cafe" },
+  { id: "32-forum-discussion", tpl: "mascotte", theme: "menthe", k: "Le forum", t: "Une question ?", e: "La communauté répond.", pose: "discussion" },
+  { id: "33-objectif-atteint", tpl: "mascotte", theme: "nuit", k: "Objectif atteint", t: "Module validé.", e: "Au suivant !", pose: "drapeau" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },

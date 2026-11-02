@@ -401,8 +401,8 @@ HALTERE = f'''<g><rect x="-230" y="-18" width="460" height="36" rx="12" fill="{L
 <rect x="190" y="-90" width="60" height="180" rx="16" fill="{BLUE}" stroke="{LINE}" stroke-width="12"/><rect x="160" y="-65" width="40" height="130" rx="12" fill="{BLUE}" stroke="{LINE}" stroke-width="12"/></g>'''
 
 DRAPEAU = f'''<g><rect x="-12" y="-470" width="24" height="520" rx="12" fill="{LINE}"/><circle cy="-480" r="24" fill="{YELLOW}" stroke="{LINE}" stroke-width="8"/>
-<g transform="translate(12 -450)"><g class="flag"><path d="M0,0 L300,0 L300,210 L0,210 Z" fill="#fff" stroke="{LINE}" stroke-width="10"/>
-{"".join(f'<rect x="{(k % 6) * 50}" y="{(k // 6) * 52.5}" width="50" height="52.5" fill="{LINE}"/>' for k in range(24) if (k + k // 6) % 2 == 0)}</g></g></g>'''
+<g transform="translate(12 -450)"><g class="flag"><path d="M0,0 L300,0 L300,210 L0,210 Z" fill="#fff" stroke="{INK}" stroke-width="10"/>
+{"".join(f'<rect x="{(k % 6) * 50}" y="{(k // 6) * 52.5}" width="50" height="52.5" fill="{INK}"/>' for k in range(24) if (k + k // 6) % 2 == 0)}</g></g></g>'''
 
 PENDULE = f'''<g><rect x="-230" y="-150" width="460" height="190" rx="26" fill="{BLUE}" stroke="{LINE}" stroke-width="12"/>
 <circle cx="-110" cy="-55" r="62" fill="#fff" stroke="{LINE}" stroke-width="10"/><circle cx="110" cy="-55" r="62" fill="#fff" stroke="{LINE}" stroke-width="10"/>
