@@ -27,7 +27,7 @@ python3 audio/sfx.py
 if [ "$MUSIC_ONLY" = 1 ]; then rm -f build/sous-titres.vtt; else python3 scripts/captions.py; fi
 
 # 3. Mixage : répliques placées selon build/timing.json, musique « pompée » par la voix
-SFX_VOL=${SFX_VOL:-0.5}  # niveau des bruitages par rapport à la musique
+SFX_VOL=${SFX_VOL:-0.28}  # niveau des bruitages par rapport à la musique
 TOTAL=$(python3 -c "import json;print(json.load(open('build/timing.json'))['total'])")
 if [ "$MUSIC_ONLY" = 1 ]; then
   "$FFMPEG" -y -loglevel error -i audio/music.wav -i build/sfx.wav -filter_complex "[1:a]volume=$SFX_VOL[fx];[0:a][fx]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.2:LRA=9[out]" -map "[out]" -ar 48000 -t "$TOTAL" build/mix.wav

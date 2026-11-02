@@ -875,7 +875,7 @@ scene("prog", ({ st, from, at, lines, dur }) => {
   } }, T0);
   from("#eloDot", T0, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .3, ease: "back.out(3)" });
   st.fromTo(ELO, { v: 1150 }, { v: 1480, duration: TD, ease: "power1.inOut", onUpdate: () => { $("#elov").textContent = Math.round(ELO.v); } }, T0);
-  sfxCount(st, T0, TD, 14, "power1.inOut", { g: .5 });
+  sfxCount(st, T0, TD, 7, "power1.inOut", { g: .3 });
   sfx(st, "ding", T0 + TD - .15, { p: 1.2, g: .6 });
   from("#eloup", T0 + TD - .2, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
   eloMarks.forEach((m, i) => from(m, T0 + TD * [.3, .63, .9][i], { scale: 0, rotation: -60, transformOrigin: "50% 50%" }, { scale: 1, rotation: 0, duration: .4, ease: "back.out(3)" }));
@@ -884,7 +884,7 @@ scene("prog", ({ st, from, at, lines, dur }) => {
   const pct = { v: 0 };
   st.fromTo("#vfill", { scaleX: 0 }, { scaleX: 1, duration: 1.8, ease: "power2.inOut" }, .8);
   st.fromTo(pct, { v: 0 }, { v: 100, duration: 1.8, ease: "power2.inOut", onUpdate: () => { $("#vpct").textContent = Math.round(pct.v) + " %"; } }, .8);
-  sfxCount(st, .8, 1.8, 10, "power2.inOut", { g: .35, p: .8 });
+  
   sfx(st, "ding", 2.65);
   [0, 1, 2].forEach(k => sfx(st, "pop", 2.85 + k * .14, { p: 1.1 + k * .15 }));
   from("#vok", 2.65, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.6)" });
@@ -899,8 +899,8 @@ scene("prog", ({ st, from, at, lines, dur }) => {
 scene("s3", ({ st, from, at, dur }) => {
   from("#s3-count", 0, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });
   const c200 = { v: 0 };
-  sfxCount(st, .1, 1.3, 10, "power2.out", { g: .45 });
-  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .95 + k * .3, { p: .9 + k * .08, g: .7 }));
+  sfxCount(st, .1, 1.3, 6, "power2.out", { g: .3 });
+  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .95 + k * .3, { p: .9 + k * .08, g: .4 }));
   sfx(st, "ding", 2.2, { p: 1.1, g: .6 });
   at(c200, .1, { v: 200, duration: 1.3, ease: "power2.out", onUpdate: () => $("#n200").textContent = Math.round(c200.v) });
   from(".card", .9, { opacity: 0, y: 120, rotateX: -25, transformPerspective: 1200 }, { opacity: 1, y: 0, rotateX: 0, duration: .55, stagger: .3 });
@@ -921,7 +921,7 @@ scene("revue", ({ st, from, at, lines, dur }) => {
   from(".rv-card", .2, { opacity: 0, y: 120, rotateX: 18, transformPerspective: 2000 }, { opacity: 1, y: 0, rotateX: 0, duration: .7 });
   at(".rv-card", .9, { scale: 1.02, duration: dur - .9, ease: "sine.inOut" });
   sfx(st, "pop", .82, { p: 1.15 }); sfx(st, "whoosh", .2, { g: .4 });
-  [0, 1, 2].forEach(k => sfx(st, "pop", .65 + k * .1, { p: .9 + k * .1, g: .5 }));
+  [0, 1, 2].forEach(k => sfx(st, "pop", .65 + k * .1, { p: .9 + k * .1, g: .35 }));
   from(".rv-pgn", .8, { scale: 0, rotation: -25 }, { scale: 1, rotation: 6, duration: .5, ease: "back.out(2.4)" });
   at(".rv-pgn", 1.4, { scale: 1.06, duration: .4, ease: "sine.inOut", yoyo: true, repeat: 3 });
   $$(".rv-row").forEach((el, i) => {
@@ -945,7 +945,7 @@ scene("videos", ({ st, from, at, lines, dur }) => {
   from(".vd-tag", .7, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   from(".vd-play", .6, { scale: 0 }, { scale: 1, duration: .45, ease: "back.out(2.5)" });
   sfx(st, "click", 1.38);
-  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .45 + k * .12, { p: .85 + k * .1, g: .55 }));
+  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .45 + k * .12, { p: .85 + k * .1, g: .35 }));
   at(".vd-play", 1.3, { scale: .8, duration: .12, ease: "power2.in" });
   at(".vd-play", 1.42, { scale: 1.6, opacity: 0, duration: .35, ease: "power2.out" });
   from(".vd-bar i", 1.5, { scaleX: 0 }, { scaleX: .5, duration: dur - 1.6, ease: "none" });
@@ -977,7 +977,7 @@ scene("s4", ({ st, from, at, lines, dur }) => {
   from(a4a.head, 1.25, { opacity: 0 }, { opacity: 1, duration: .12 });
   at(h4, 1.25, { opacity: 1, duration: .2 });
   sfx(st, "pop", .6, { p: .9, g: .6 }); sfx(st, "notif", 1.6);
-  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .5 + k * .13, { p: 1 + k * .1, g: .55 }));
+  [0, 1, 2, 3].forEach(k => sfx(st, "pop", .5 + k * .13, { p: 1 + k * .1, g: .35 }));
   from(".s4-q", 1.6, { opacity: 0, y: 20, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .4, ease: "back.out(2)" });
   at(a4b.line, 2.1, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
   from(a4b.head, 2.45, { opacity: 0 }, { opacity: 1, duration: .12 });
@@ -1030,7 +1030,7 @@ scene("s5", ({ st, from, at, lines, dur }) => {
   st.set("#imp-ph", { opacity: 1 }, 0); st.set("#imp-ph", { opacity: 0 }, T + .6);
   const typ = { n: 0 };
   st.fromTo(typ, { n: 0 }, { n: PGN_TXT.length, duration: 1.05, ease: "none", onUpdate: () => { $("#imp-text").innerHTML = pgnFig(PGN_TXT.slice(0, Math.round(typ.n))); } }, T + .6);
-  for (let k = 0; k < 18; k++) sfx(st, "key", T + .62 + k * .058, { p: .9 + (k * 37 % 7) * .04, g: .35 });
+  for (let k = 0; k < 9; k++) sfx(st, "key", T + .62 + k * .116, { p: .9 + (k * 37 % 7) * .04, g: .2 });
   sfx(st, "click", T + 1.77); sfx(st, "pop", T + 1.97, { g: .7 }); sfx(st, "whoosh", T + 2.35, { g: .5 });
   at("#imp-go", T + 1.75, { scale: .9, duration: .08, ease: "power2.in" });
   at("#imp-go", T + 1.83, { scale: 1, boxShadow: "0 0 0 8px rgba(250,227,97,.45)", duration: .2 });
@@ -1063,7 +1063,7 @@ scene("s6", ({ st, from, at, dur }) => {
   from(".mini", 0, { scale: .7, opacity: 0 }, { scale: 1, opacity: .16, duration: .45, stagger: { each: .008, from: "random" } });
   from(".s6-k", .1, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   const c2000 = { v: 0 };
-  sfxCount(st, .15, 1.5, 12, "power2.out", { g: .45 });
+  sfxCount(st, .15, 1.5, 6, "power2.out", { g: .3 });
   sfx(st, "move", 1.73); sfx(st, "ding", 1.78);
   sfx(st, "click", 2.08, { g: .6 }); sfx(st, "ding", 2.2, { p: 1.12, g: .7 });
   at(c2000, .15, { v: 2000, duration: 1.5, ease: "power2.out", onUpdate: () => $("#n2000").textContent = Math.round(c2000.v).toLocaleString("fr-FR").replace(/ | /g, " ") });
@@ -1098,8 +1098,7 @@ scene("forum", ({ st, from, at, lines, dur }) => {
   const rep = { v: 0 };
   st.fromTo(rep, { v: 0 }, { v: 3, duration: 1.4, ease: "none", onUpdate: () => { $("#fo-n").textContent = Math.floor(rep.v); } }, 1.4);
   from(".ft.hot", 1.2, { backgroundColor: "#ffffff" }, { backgroundColor: "#fff3a8", duration: .3, yoyo: true, repeat: 2, ease: "sine.inOut" });
-  [1, 2, 3].forEach(k => sfx(st, "tick", 1.4 + 1.4 * k / 3 - .01, { p: 1 + k * .15, g: .6 }));
-  sfx(st, "notif", 1.5); sfx(st, "notif", 2.2, { p: 1.12 });
+    sfx(st, "notif", 1.5); sfx(st, "notif", 2.2, { p: 1.12 });
   from(".fo-b1", 1.5, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(2)" });
   from(".fo-b2", 2.2, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(2)" });
   from("#pfo", 1.0, { y: 440 }, { y: 0, duration: .55, ease: "back.out(1.4)" });

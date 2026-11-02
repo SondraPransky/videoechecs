@@ -36,12 +36,12 @@ def band(x, lo, hi):
 
 def click(p):
     n = int(.03 * SR)
-    return band(rng.standard_normal(n), 2500 * p, 7000) * env(n, 260) * .6 + tone(1800 * p, .03, 180) * .35
+    return band(rng.standard_normal(n), 1800 * p, 5000) * env(n, 260) * .45 + tone(1400 * p, .03, 180) * .3
 
 
 def key(p):
     n = int(.035 * SR)
-    return band(rng.standard_normal(n), 1200 * p, 5000) * env(n, 200) * .5
+    return band(rng.standard_normal(n), 900 * p, 3500) * env(n, 200) * .4
 
 
 def pop(p):
@@ -49,7 +49,7 @@ def pop(p):
 
 
 def tick(p):
-    return tone(2600 * p, .025, 220) * .5
+    return tone(1700 * p, .025, 220) * .35
 
 
 def ding(p):
@@ -94,6 +94,9 @@ for k, e in enumerate(events):
     L[i:i + len(sig)] += sig * (1 - pan) * 2 * .5
     R[i:i + len(sig)] += sig * pan * 2 * .5
 
+# Aigus adoucis pour un rendu moins fatigant
+lp = butter(2, 5500, "lowpass", fs=SR, output="sos")
+L, R = sosfilt(lp, L), sosfilt(lp, R)
 peak = max(np.abs(L).max(), np.abs(R).max(), 1e-9)
 g = min(1.0, .9 / peak)
 pcm = (np.stack([L, R], 1) * g * 32767).astype("<i2")

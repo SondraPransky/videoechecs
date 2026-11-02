@@ -57,7 +57,7 @@ Sans ces deux variables, `build.sh` utilise la voix libre Piper, qui sert de maq
 - **Textes à l'écran, couleurs, animations** : `src/index.html`. La timeline GSAP est découpée par scène, en temps local.
 - **Voix off** : `voice/script.txt`, une réplique par scène. Les réglages ElevenLabs sont dans `voice/elevenlabs.py`.
 - **Musique** : `audio/music.py`, générée par code, donc libre de droits.
-- **Bruitages** : chaque scène note ses sons dans la timeline avec `sfx(st, type, t)` ; `node render.mjs --sfx build/sfx.json` exporte leurs instants et `audio/sfx.py` les synthétise (libres de droits). Le niveau se règle avec `SFX_VOL` (0.5 par défaut) : `SFX_VOL=0.35 bash build.sh --music-only --skip-render`.
+- **Bruitages** : chaque scène note ses sons dans la timeline avec `sfx(st, type, t)` ; `node render.mjs --sfx build/sfx.json` exporte leurs instants et `audio/sfx.py` les synthétise (libres de droits). Le niveau se règle avec `SFX_VOL` (0.28 par défaut, discret) : `SFX_VOL=0.2 bash build.sh --music-only --skip-render`.
 - **Mascottes** : `assets/mascot/` contient le `hello` du designer (Lottie) et `poses.js`, généré par `site-animations/generate.py`.
 - **Captures réelles de la plateforme** : `assets/captures/`. Les pièces d'échecs viennent du site : `assets/pieces/`.
 
