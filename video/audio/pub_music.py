@@ -6,6 +6,7 @@
   4  trap / phonk 150 BPM, do mineur      (« ne regardez plus, jouez ! »)
   5  pop dance 128 BPM, sol majeur        (« suivez le guide », optimiste)
 
+Pas de mélodie aiguë : rythme, basse saturée, stabs d'accords en médium, crashs et toms.
 Le rythme est là dès la première seconde, étouffé par un filtre qui s'ouvre pendant la question ;
 roulement et drop sur « Nous avons la solution ! » (3,9 s), mélodie pendant la réponse, roulement et impact
 sur l'appel final (11,6 s).
@@ -314,7 +315,8 @@ def pump_bus(x, bpm, t0):
 
 
 def melody(bpm, t0, t1, notes, rhythm, voice, g, pan=.0):
-    """notes : hauteurs MIDI ; rhythm : durées en temps (cycliques)."""
+    """notes : hauteurs MIDI ; rhythm : durées en temps (cycliques). Coupé : les sons aigus gênaient."""
+    return
     beat = 60 / bpm
     t, k = t0, 0
     while t < t1 - .05:
@@ -341,6 +343,43 @@ def filtered_intro():
             j = min(n, i + 512)
             out[i:j], zi = sosfilt(sos, buf[i:j], zi=zi)
         buf[:n] = out * .7
+
+
+def crash(dur=1.6):
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    return filt(noise(n), "highpass", 4000) * np.exp(-t * 2.8) * .6
+
+
+def tom(freq):
+    n = int(.3 * SR)
+    t = np.arange(n) / SR
+    return np.sin(2 * np.pi * np.cumsum(freq * (1 + .6 * np.exp(-t * 25))) / SR) * np.exp(-t * 11)
+
+
+def energie(bpm, prog, low=-12):
+    """Couche « pub » : crash à chaque mesure, stabs d'accords en médium qui pompent,
+    basse saturée, claps doublés et roulements de toms avant les changements."""
+    beat = 60 / bpm; bar = 4 * beat
+    for t, k in grid(bpm, T_DROP, DURATION, 4):
+        st(t, crash(), .22, .2 * (-1) ** k)
+    stabs = np.zeros(N)
+    for t, k in grid(bpm, T_DROP, T_FINAL + bar, .5):
+        root, notes = chord_at(prog, t, bar)
+        mid = sorted(((x - 60) % 12) + 55 for x in notes)[:4]
+        if k % 8 in (0, 3, 6):
+            add(stabs, t, supersaw(mid, beat * .4, 2400), .6)
+    stabs = pump_bus(stabs, bpm, T_DROP)
+    st(0, stabs, .7, -.15); st(.009, stabs, .55, .15)
+    for t, k in grid(bpm, T_DROP, DURATION, 1):
+        root, _ = chord_at(prog, t, bar)
+        x = bass(midi(root + low), beat * .9, 1500)
+        st(t, np.tanh(x * 3) * .5, .4)
+        if k % 2:
+            st(t + .012, clap(), .25, .3)
+    for t_end in (T_DROP, T_SOL, T_FINAL):
+        for i, f in enumerate((220, 180, 150, 120)):
+            st(t_end - (4 - i) * beat / 4, tom(f), .35, .3 - .2 * i)
 
 
 def common_transitions(bpm, final_notes, cut=5000):
@@ -386,9 +425,10 @@ def style1():   # électro-house 128 BPM, la mineur
     for t, k in grid(bpm, 0, DURATION, .25):
         root, notes = chord_at(prog, t, bar)
         tones = notes + [notes[0] + 12]
-        st(t, pluck(midi(tones[[0, 2, 1, 3, 2, 1, 3, 2][k % 8]] + 12)), .07, .4 * np.sin(k))
+        st(t, pluck(midi(tones[[0, 2, 1, 3, 2, 1, 3, 2][k % 8]] - 12), .2, 1200), .05, .4 * np.sin(k))
     melody(bpm, T_SOL, T_FINAL, [81, 79, 76, 76, 77, 76, 72, 74, 76, None, 81, 83, 84, 83, 79, None],
            [.5, .5, 1, .5, .5, .5, .5, 1, 1, 1, .5, .5, 1, .5, .5, 1], lead, .22, .1)
+    energie(bpm, prog)
     filtered_intro()
     common_transitions(bpm, [45, 57, 64, 69, 72, 76])
 
@@ -407,13 +447,12 @@ def style2():   # funk-house 124 BPM, ré dorien
         if k % 2 == 1:
             m = int(.04 * SR)
             st(t, filt(noise(m), "bandpass", [1500, 4000]) * np.exp(-np.arange(m) / SR * 80), .2, -.35)
-        if k % 4 == 3:
-            st(t, cowbell(560), .1, .4)
     melody(bpm, T_SOL, T_FINAL, [74, 77, 79, 81, 79, 77, 74, None, 72, 74, 77, 74, None, 81, 79, 77],
            [.5, .5, .5, 1, .5, .5, .5, .5, .5, .5, .5, 1, .5, .5, .5, 1], lambda f, d: pluck(f, max(d, .2), 4000, 6), .3, -.15)
     for t, k in grid(bpm, T_SOL, DURATION, 4):
         root, notes = chord_at(prog, t + .01, bar)
         st(t, pad([x + 12 for x in notes], bar, 3500), .2)
+    energie(bpm, prog)
     filtered_intro()
     common_transitions(bpm, [38, 50, 57, 62, 65, 69, 72])
 
@@ -440,6 +479,7 @@ def style3():   # drum'n'bass liquide 174 BPM
         st(t, pad([x + 12 for x in notes], bar, 2500), .14)
     melody(bpm, T_SOL, T_FINAL, [76, 79, 81, 84, 81, 79, 76, 74, 72, 74, 76, 79],
            [1, 1, 1, 1.5, .5, 1, 1, 1, 1, 1, 1, 2], lambda f, d: marimba(f, max(d, .4)), .28, .25)
+    energie(bpm, prog)
     filtered_intro()
     common_transitions(bpm, [41, 53, 64, 69, 72, 76])
 
@@ -461,12 +501,13 @@ def style4():   # trap / phonk 150 BPM, do mineur
         else:
             st(t, hat(), .07 if k % 2 == 0 else .04, .2 * np.sin(k))
         if [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0][kk]:   # cloche « phonk »
-            st(t, cowbell(midi(notes[(k // 3) % 3] + 12)), .22, .3)
+            st(t, cowbell(midi(notes[(k // 3) % 3] - 12)), .12, .3)
     for t, k in grid(bpm, 0, DURATION, 4):
         root, notes = chord_at(prog, t + .01, bar)
         st(t, pad([x - 12 for x in notes] + [notes[0]], bar, 2200), .3)
     melody(bpm, T_SOL, T_FINAL, [72, 75, 79, 77, 75, 74, 75, None, 72, 79, 80, 79, 75, 77, 74, None],
            [.5, .5, 1, .5, .5, .5, 1, .5, .5, .5, .5, 1, .5, .5, 1, .5], lead, .2, -.1)
+    energie(bpm, prog)
     filtered_intro()
     common_transitions(bpm, [36, 48, 55, 60, 63, 67])
 
@@ -485,6 +526,7 @@ def style5():   # pop dance 128 BPM, sol majeur
     melody(bpm, T_SOL, T_FINAL, [79, 83, 86, 83, 81, 79, 76, 79, 81, 83, 81, 79, 78, 79, 83, 86],
            [.5] * 16, lambda f, d: marimba(f, .5), .26, .3)
     melody(bpm, T_SOL, T_FINAL, [67, None, 71, None, 72, None, 74, None], [1] * 8, lambda f, d: pluck(f, .4, 3500, 8), .14, -.3)
+    energie(bpm, prog)
     filtered_intro()
     common_transitions(bpm, [43, 55, 62, 67, 71, 74])
 

@@ -432,7 +432,7 @@ from("#rs", R0 + .45, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 })
 from("#pr", R0 + .2, { y: 500 }, { y: 0, duration: .5, ease: "back.out(1.5)" });
 pose("#pr", R0 + .2);
 burst(tl, confR, R0 + .05, 1.6);
-sfx("shimmer", R0); sfx("ding", R0 + .1, { p: 1.1, g: .7 });
+sfx("pop", R0 + .1, { p: .75, g: .7 });
 
 // 3. La réponse propre à la question
 const S0 = 5.4;
@@ -450,8 +450,8 @@ if (Q === 1) {
   from("#svt", S0 + 3.9, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
   from(".mod", S0 + 1.4, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .4, stagger: .9 });
   from(".mod .ck", S0 + 1.7, { scale: 0 }, { scale: 1, duration: .35, stagger: .9, ease: "back.out(3)" });
-  [0, 1, 2].forEach(k => sfx("ding", S0 + 1.75 + k * .9, { p: 1 + k * .12, g: .45 }));
-  sfx("notif", S0 + 3.95, { g: .6 });
+  [0, 1, 2].forEach(k => sfx("pop", S0 + 1.75 + k * .9, { p: .75, g: .45 }));
+  sfx("pop", S0 + 3.95, { p: .7, g: .5 });
 } else if (Q === 2) {
   from(".mv", S0 + .9, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .35, stagger: .2 });
   from("#err", S0 + 1.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .35 });
@@ -459,14 +459,14 @@ if (Q === 1) {
   from("#best", S0 + 2.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .4 });
   from("#exo", S0 + 3.4, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .5 });
   $$("#exo .dt").forEach((d, k) => tl.to(d, { backgroundColor: "#2c9a45", duration: .2 }, S0 + 4 + k * .45));
-  sfx("click", S0 + 1.65, { g: .5, p: .7 }); sfx("ding", S0 + 2.65, { g: .5 });
-  [0, 1, 2].forEach(k => sfx("ding", S0 + 4 + k * .45, { p: 1 + k * .12, g: .4 }));
+  sfx("click", S0 + 1.65, { g: .5, p: .7 }); sfx("pop", S0 + 2.65, { p: .75, g: .5 });
+  [0, 1, 2].forEach(k => sfx("pop", S0 + 4 + k * .45, { p: .75, g: .4 }));
 } else if (Q === 3) {
   from(".coach", S0 + .9, { opacity: 0, scale: .7, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: .5, stagger: .3, ease: "back.out(1.6)" });
   from("#live", S0 + 2.2, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
   tl.to("#live i", { opacity: .2, duration: .4, yoyo: true, repeat: 7, ease: "sine.inOut" }, S0 + 2.5);
   [0, 1, 2, 3].forEach(k => sfx("pop", S0 + 1 + k * .3, { p: .9 + k * .08, g: .4 }));
-  sfx("notif", S0 + 2.25, { g: .6 });
+  sfx("pop", S0 + 2.25, { p: .7, g: .5 });
 } else if (Q === 4) {
   at("#plb", S0 + 1, { scaleX: 1, duration: 1.6, ease: "none" });
   at(".fm:nth-child(1)", S0 + 1, { backgroundColor: "#fae361", color: "#111", duration: .2 });
@@ -478,7 +478,7 @@ if (Q === 1) {
   const rook = [...$$("#tb .pc")].find(d => d.style.backgroundImage.includes("wR"));
   at(rook, S0 + 3.6, { top: "0%", duration: .45, ease: "power3.inOut" });
   from("#okc", S0 + 4.2, { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
-  sfx("click", S0 + 1, { g: .4 }); sfx("whoosh", S0 + 2.7, { g: .4 }); sfx("move", S0 + 4.05); sfx("ding", S0 + 4.25, { p: 1.15, g: .6 });
+  sfx("click", S0 + 1, { g: .4 }); sfx("whoosh", S0 + 2.7, { g: .4 }); sfx("move", S0 + 4.05); sfx("pop", S0 + 4.25, { p: .75, g: .6 });
 } else {
   from(".stp", S0 + .9, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .35, stagger: { each: .12, from: "end" } });
   from("#here", S0 + 1.6, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .4 });
@@ -489,7 +489,7 @@ if (Q === 1) {
     at(stp(i), S0 + 2.1 + i * .9, { color: "#f4f1ea", duration: .2 });
     at(stp(i).querySelector(".dt"), S0 + 2.1 + i * .9, { backgroundColor: "#fae361", borderColor: "#fae361", scale: 1.25, duration: .2 });
     at(stp(i).querySelector(".dt"), S0 + 2.3 + i * .9, { scale: 1, duration: .3 });
-    sfx("ding", S0 + 2.1 + i * .9, { p: 1 + i * .12, g: .45 });
+    sfx("pop", S0 + 2.1 + i * .9, { p: .75, g: .45 });
   });
   at("#here", S0 + 2.2, { top: 582 - 2 * 118, duration: 2.6, ease: "power1.inOut" });
 }
@@ -505,7 +505,7 @@ from("#url", C0 + 1.4, { opacity: 0 }, { opacity: 1, duration: .5 });
 from("#pc", C0 + 1.3, { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "back.out(1.5)" });
 pose("#pc", C0 + 1.3);
 burst(tl, confC, C0 + .1, 2);
-sfx("whoosh", C0, { g: .5 }); sfx("pop", C0 + 1.05, { p: .8 }); sfx("shimmer", C0 + 1.3, { g: .6 });
+sfx("whoosh", C0, { g: .5 }); sfx("pop", C0 + 1.05, { p: .8 }); 
 tl.set({}, {}, TOTAL);
 
 window.TOTAL = TOTAL;
