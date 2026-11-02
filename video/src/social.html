@@ -114,7 +114,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <!-- Cadre vertical 1080×1920 autour de la vidéo 16:9 (zone vidéo 1080×608 à y=656) -->
   <section class="fmt" id="frame-vertical">
     <div class="a center" style="top:120px"><img class="logo" src="../../assets/brand/logo-echecs-com.png" style="width:480px"></div>
-    <div class="a center h1 ttl" style="top:280px;font-size:110px"><span class="line">Progresse</span><span class="line em" style="font-size:118px">à ton rythme.</span></div>
+    <div class="a center h1 ttl" style="top:280px;font-size:104px"><span class="line ft-t">Progresse</span><span class="line em ft-e" style="font-size:112px">à ton rythme.</span></div>
     <div class="vid" style="left:0;top:656px;width:1080px;height:608px"></div>
     <div class="a center" style="top:1320px"><div class="chips big" style="justify-content:center;width:960px">%CHIPS%</div></div>
     <div class="a center" style="top:1500px"><span class="cta" style="padding:26px 46px;font-size:38px">Commencer maintenant <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div class="url" style="margin-top:28px">echecs.com/academie</div></div>
@@ -123,10 +123,19 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <!-- Cadre carré 1080×1080 autour de la vidéo 16:9 (zone vidéo 1080×608 à y=236) -->
   <section class="fmt" id="frame-square">
     <img class="a logo" src="../../assets/brand/logo-echecs-com.png" style="left:60px;top:70px;width:330px">
-    <div class="a h1 ttl" style="right:60px;top:66px;font-size:50px;text-align:right"><span class="line">Progresse</span><span class="line em" style="font-size:62px">à ton rythme.</span></div>
+    <div class="a h1 ttl" style="right:60px;top:66px;font-size:50px;text-align:right"><span class="line ft-t">Progresse</span><span class="line em ft-e" style="font-size:58px">à ton rythme.</span></div>
     <div class="vid" style="left:0;top:236px;width:1080px;height:608px"></div>
     <div class="a" style="left:60px;top:900px"><span class="cta" style="padding:20px 32px;font-size:28px">Commencer maintenant <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
     <div class="a url" style="left:540px;top:922px;font-size:28px">echecs.com/academie</div>
+  </section>
+  <!-- Cadre portrait 4:5 1080×1350 autour de la vidéo 16:9 (zone vidéo 1080×608 à y=300) -->
+  <section class="fmt" id="frame-portrait">
+    <img class="a logo" src="../../assets/brand/logo-echecs-com.png" style="left:60px;top:64px;width:340px">
+    <div class="a h1 ttl" style="right:60px;top:52px;font-size:64px;text-align:right"><span class="line ft-t">Progresse</span><span class="line em ft-e" style="font-size:70px">à ton rythme.</span></div>
+    <div class="vid" style="left:0;top:300px;width:1080px;height:608px"></div>
+    <div class="a" style="left:0;right:0;top:980px;display:flex;justify-content:center"><div class="chips big" style="justify-content:center;width:1000px">%CHIPS%</div></div>
+    <div class="a" style="left:60px;top:1190px"><span class="cta" style="padding:22px 36px;font-size:32px">Commencer maintenant <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+    <div class="a url" style="right:60px;top:1216px">echecs.com/academie</div>
   </section>
   <div id="vignette"></div>
 </div>
@@ -135,6 +144,10 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 const P = "../assets/pieces/", F = "abcdefgh";
 const fmt = new URLSearchParams(location.search).get("fmt") || "post";
 document.getElementById(fmt).classList.add("on");
+// Titre du cadre : ?t=...&e=... (par défaut l'accroche générale)
+const qs = new URLSearchParams(location.search);
+if (qs.get("t")) document.querySelectorAll(".ft-t").forEach(x => { x.textContent = qs.get("t"); });
+if (qs.get("e")) document.querySelectorAll(".ft-e").forEach(x => { x.textContent = qs.get("e"); });
 const CHIPS = '<span class="chip"><b>+200</b> leçons</span><span class="chip"><b>+2 000</b> exercices</span><span class="chip">Masterclasses</span><span class="chip">Tournois</span><span class="chip">Forum</span>';
 document.querySelectorAll(".chips").forEach(c => { c.innerHTML = CHIPS; });
 const pos = { a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: "wN", h1: "wR", a8: "bR", b8: "bN", c8: "bB", d8: "bQ", e8: "bK", f8: "bB", g8: "bN", h8: "bR" };

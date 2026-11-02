@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>echecs.com — visuels réseaux</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 900; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; src: url("../node_modules/@fontsource/manrope/files/manrope-latin-800-normal.woff2") format("woff2"); }
+
+/* 1rem = 1/108 du plus petit côté : les mises en page s'adaptent à chaque format */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* Ambiances de couleur */
+.nuit   { --bg: #06080c; --ink: #f4f1ea; --em: #fae361; --kick: #93b9e2; --sub: #c9d1dc; --chip: rgba(147,185,226,.14); --chipk: #dfe6ef; --cta: #fae361; --ctak: #111; --m: #fae361; --ml: #f4f1ea; --card: #121a25; --logo: none; }
+.soleil { --bg: #fae361; --ink: #111;    --em: #2c4a6e; --kick: #2c4a6e; --sub: #3a3627; --chip: rgba(17,17,17,.08);   --chipk: #111;    --cta: #111;    --ctak: #fae361; --m: #1b1b1b; --ml: #fae361; --card: #fff6c2; --logo: brightness(0); }
+.ciel   { --bg: #93b9e2; --ink: #0b1624; --em: #fff;    --kick: #0b1624; --sub: #1d3550; --chip: rgba(255,255,255,.4); --chipk: #0b1624; --cta: #0b1624; --ctak: #fff;    --m: #ffffff; --ml: #0b1624; --card: #dbe8f6; --logo: brightness(0) invert(1); }
+.craie  { --bg: #f4f1ea; --ink: #111;    --em: #2c4a6e; --kick: #6b6b66; --sub: #4a4a45; --chip: #e6e2d6;              --chipk: #111;    --cta: #fae361; --ctak: #111;    --m: #fae361; --ml: #111;    --card: #fff;    --logo: none; }
+.menthe { --bg: #6bdc7d; --ink: #0b1a10; --em: #fff;    --kick: #0b1a10; --sub: #173c22; --chip: rgba(255,255,255,.4); --chipk: #0b1a10; --cta: #0b1a10; --ctak: #6bdc7d; --m: #ffffff; --ml: #0b1a10; --card: #c9f3d0; --logo: brightness(0); }
+.rose   { --bg: #f06b8a; --ink: #1a0a10; --em: #fff;    --kick: #1a0a10; --sub: #3d1420; --chip: rgba(255,255,255,.35); --chipk: #1a0a10; --cta: #1a0a10; --ctak: #fff;    --m: #fae361; --ml: #1a0a10; --card: #ffd6df; --logo: brightness(0) invert(1); }
+
+#c { position: absolute; inset: 0; overflow: hidden; background: var(--bg); color: var(--ink); display: flex; flex-direction: column; padding: 6.5rem 6.5rem 5.5rem; }
+.deco { position: absolute; inset: 0; pointer-events: none; }
+.nuit .deco { background: radial-gradient(circle at 10% 0%, rgba(147,185,226,.22), transparent 45%), radial-gradient(circle at 100% 100%, rgba(250,227,97,.12), transparent 45%); }
+.nuit .deco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(147,185,226,.06) 1px, transparent 1px) 0 0 / 9rem 9rem, linear-gradient(90deg, rgba(147,185,226,.06) 1px, transparent 1px) 0 0 / 9rem 9rem; -webkit-mask-image: radial-gradient(ellipse at 50% 100%, #000, transparent 70%); }
+.deco .dam { position: absolute; width: 70rem; height: 70rem; right: -22rem; top: -22rem; transform: rotate(18deg); opacity: .14;
+  background: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0 / 17.5rem 17.5rem; border-radius: 4rem; }
+.nuit .deco .dam { opacity: .05; background: repeating-conic-gradient(#93b9e2 0 25%, transparent 0 50%) 0 0 / 17.5rem 17.5rem; }
+header, main, footer { position: relative; z-index: 2; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+header img { height: 6.6rem; filter: var(--logo); }
+.kick { font: 800 2.6rem/1 "Manrope"; letter-spacing: .26em; text-transform: uppercase; color: var(--kick); display: flex; align-items: center; gap: 1.8rem; }
+.kick::before { content: ""; width: 5rem; height: .3rem; background: currentColor; }
+main { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 4.5rem; padding: 4rem 0; }
+.land main { flex-direction: row; align-items: center; gap: 6rem; }
+.land .txt { flex: 1.05; } .land .vis { flex: 1; align-self: stretch; }
+.txt { position: relative; }
+.t { font: 900 11rem/.98 "Fraunces", serif; letter-spacing: -.02em; }
+.e { display: block; font: italic 400 12rem/1 "Fraunces", serif; color: var(--em); }
+.s { margin-top: 3rem; font: 600 3.8rem/1.3 "Manrope"; color: var(--sub); }
+.chips { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 3.5rem; }
+.chips span { padding: 1.4rem 2.6rem; border-radius: 99rem; background: var(--chip); color: var(--chipk); font: 800 2.6rem/1 "Manrope"; }
+.vis { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+body:not(.land) .vis > .board, body:not(.land) .vis > .cover { height: 100% !important; width: auto !important; max-width: 100%; }
+body:not(.land) .coachcard img { height: min(100%, 70rem) !important; width: auto !important; aspect-ratio: 1; }
+body:not(.land) .coachcard { height: 100%; justify-content: center; }
+.shot { max-width: 100%; max-height: 100%; border-radius: 2.6rem; box-shadow: 0 4rem 9rem rgba(0,0,0,.45), 0 0 0 .2rem rgba(255,255,255,.1); transform: rotate(-2deg); }
+footer { display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+.url { font: 800 3.2rem/1 "Manrope"; color: var(--ink); opacity: .85; }
+.cta { display: inline-flex; align-items: center; gap: 1.4rem; padding: 2.4rem 4rem; border-radius: 99rem; background: var(--cta); color: var(--ctak); font: 800 3.2rem/1 "Manrope"; white-space: nowrap; }
+.pose { position: absolute; z-index: 3; }
+.pose svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.pose .mascotte { --mascot: var(--m); --line: var(--ml); }
+.pose .shadow { display: none; }
+
+/* Échiquier */
+.board { position: relative; aspect-ratio: 1; border-radius: 2rem; overflow: hidden; box-shadow: 0 4rem 9rem rgba(0,0,0,.4);
+  background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
+.board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; }
+.board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.65); }
+.board svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Gabarits */
+.big { font: 900 23rem/.85 "Fraunces", serif; letter-spacing: -.04em; }
+.big b { color: var(--em); font-weight: 900; }
+.quiz .q { font: 800 5rem/1.2 "Manrope"; }
+.opt { display: flex; align-items: center; gap: 2rem; margin-top: 2.2rem; padding: 2.6rem 3rem; border-radius: 2.2rem; background: var(--card); color: #111; font: 700 3.6rem/1 "Manrope"; box-shadow: 0 1.2rem 3rem rgba(0,0,0,.12); }
+.opt i { font-style: normal; width: 5.6rem; height: 5.6rem; border-radius: 50%; display: grid; place-items: center; background: var(--cta); color: var(--ctak); font: 800 2.8rem/1 "Manrope"; flex: none; }
+.coachcard { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.coachcard img { width: 52rem; height: 52rem; border-radius: 50%; object-fit: cover; border: 1.4rem solid rgba(255,255,255,.9); box-shadow: 0 3rem 8rem rgba(0,0,0,.35); }
+.coachcard .ttl { position: absolute; top: 2rem; right: 2rem; padding: 1.6rem 2.6rem; border-radius: 99rem; background: #111; color: #fff; font: 800 4rem/1 "Manrope"; letter-spacing: .06em; }
+.cover { height: 100%; max-height: 92rem; border-radius: 1.2rem; transform: rotate(3deg); box-shadow: 0 4rem 9rem rgba(0,0,0,.5); }
+.badge { position: absolute; width: 26rem; height: 26rem; border-radius: 50%; background: #8ebde0; color: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(14deg); box-shadow: 0 2rem 5rem rgba(0,0,0,.3); }
+.badge b { font: 900 9rem/1 "Manrope"; } .badge small { font: 800 3rem/1.2 "Manrope"; }
+.facts { display: flex; flex-direction: column; gap: 2rem; margin-top: 4rem; }
+.facts span { display: flex; align-items: center; gap: 2rem; font: 700 4rem/1 "Manrope"; }
+.facts span::before { content: ""; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--em); box-shadow: 0 0 0 .6rem var(--chip); flex: none; }
+
+/* Identité : avatar, bannières, couvertures de stories à la une */
+.idt #c { padding: 0; align-items: center; justify-content: center; }
+.avatar { width: 62%; aspect-ratio: 1; border-radius: 50%; background: var(--card); display: grid; place-items: center; box-shadow: 0 3rem 8rem rgba(0,0,0,.35); }
+.avatar img { height: 62%; filter: var(--logo); }
+.hl-ico { width: 46rem; height: 46rem; border-radius: 50%; background: var(--cta); display: grid; place-items: center; }
+.hl-ico svg { width: 50%; height: 50%; }
+.hl-lab { margin-top: 6rem; font: 800 7rem/1 "Manrope"; color: var(--ink); }
+.ban { position: absolute; display: flex; align-items: center; gap: 4rem; }
+.ban .bt { font: 900 9rem/1 "Fraunces", serif; white-space: nowrap; }
+.ban .bt .e { display: inline; font-size: 9.6rem; }
+.ban img.lg { height: 8rem; filter: var(--logo); }
+</style>
+</head>
+<body>
+<div id="c"><div class="deco"><div class="dam"></div></div></div>
+<script src="../assets/mascot/poses.js"></script>
+<script src="visuels-data.js"></script>
+<script>
+const Q = new URLSearchParams(location.search);
+const W = +Q.get("w"), H = +Q.get("h"), ID = Q.get("id");
+const item = window.VISUELS.find(v => v.id === ID);
+const theme = Q.get("theme") || item.theme;
+document.documentElement.style.fontSize = Math.min(W, H) / 108 + "px";
+document.body.className = theme + (W > H * 1.15 ? " land" : "") + (item.tpl.startsWith("id-") ? " idt" : "");
+const c = document.getElementById("c");
+const LOGO = "../../assets/brand/logo-echecs-com.png", MARK = "../assets/logo-marque.png", P = "../assets/pieces/";
+const CHIPS = "<span>+200 leçons</span><span>+2 000 exercices</span><span>Masterclasses</span><span>Tournois</span><span>Forum</span>";
+const head = k => `<header><img src="${LOGO}">${k ? `<span class="kick">${k}</span>` : ""}</header>`;
+const foot = (cta = "Commencer") => `<footer><span class="url">echecs.com/academie</span><span class="cta">${cta} <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></footer>`;
+const title = it => `<div class="t">${it.t}<span class="e">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}`;
+const land = W > H * 1.15, tall = H > W * 1.6;
+function board(pos, opts = {}) {
+  const F = "abcdefgh";
+  let h = "";
+  for (const sq of opts.hl || []) h += `<div class="hl" style="left:${F.indexOf(sq[0]) * 12.5}%;top:${(8 - +sq[1]) * 12.5}%"></div>`;
+  for (const [sq, p] of Object.entries(pos)) h += `<div class="pc" style="left:${F.indexOf(sq[0]) * 12.5}%;top:${(8 - +sq[1]) * 12.5}%;background-image:url(${P}${p}.png)"></div>`;
+  if (opts.arrow) {
+    const cc = s => [F.indexOf(s[0]) * 12.5 + 6.25, (8 - +s[1]) * 12.5 + 6.25];
+    const [x1, y1] = cc(opts.arrow[0]), [x2, y2] = cc(opts.arrow[1]);
+    const a = Math.atan2(y2 - y1, x2 - x1), ex = x2 - Math.cos(a) * 3.4, ey = y2 - Math.sin(a) * 3.4;
+    h += `<svg viewBox="0 0 100 100"><line x1="${x1}" y1="${y1}" x2="${ex}" y2="${ey}" stroke="#2c9a45" stroke-width="2.4" stroke-linecap="round"/><polygon fill="#2c9a45" points="${x2},${y2} ${ex + Math.cos(a + 1.9) * 3.6},${ey + Math.sin(a + 1.9) * 3.6} ${ex + Math.cos(a - 1.9) * 3.6},${ey + Math.sin(a - 1.9) * 3.6}"/></svg>`;
+  }
+  return `<div class="board" style="${opts.style || ""}">${h}</div>`;
+}
+const pose = (name, style, white) => name ? `<div class="pose${white ? " white" : ""}" data-pose="${name}" style="${style}"></div>` : "";
+// Taille de la mascotte selon le format
+const mSize = f => { const h = (land ? 50 : tall ? 46 : 38) * f; return `height:${h}rem;width:${h * .82}rem;`; };
+
+const T = {
+  // Accroche d'un pan de l'académie, avec une capture du motion
+  accroche: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis"><img class="shot" src="../build/pack/_captures/${it.shot}.png"></div></main>` + foot(),
+  // Gros chiffre
+  chiffre: it => head(it.k) + `<main><div class="txt"><div class="big">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
+    + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : "right:5rem;bottom:15rem;")),
+  // Problème d'échecs (engagement)
+  puzzle: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, style: "height:100%" })}</div></main>` + foot("Voir la solution")
+    + (land ? pose(it.pose, mSize(.7) + "left:6rem;bottom:15rem;") : ""),   // en portrait, l'échiquier prend toute la place
+  // Quiz (engagement)
+  quiz: it => head(it.k) + `<main class="quiz"><div class="txt"><div class="q">${it.q}</div>${it.opts.map((o, i) => `<div class="opt"><i>${"ABC"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'entraîne")
+    + pose(it.pose, mSize(land ? 1.1 : .75) + (land ? "right:8rem;bottom:15rem;" : "right:4rem;bottom:15rem;")),
+  // Portrait de coach
+  coach: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis"><div class="coachcard"><img src="../assets/captures/ee/hd/${it.photo}.jpg" style="${land ? "width:52rem;height:52rem" : tall ? "width:70rem;height:70rem" : "width:44rem;height:44rem"}">${it.titre ? `<div class="ttl">${it.titre}</div>` : ""}</div></div></main>` + foot("Voir les masterclasses"),
+  // Humeur de la mascotte
+  mascotte: it => head(it.k) + `<main><div class="txt" style="${land ? "" : "text-align:left"}">${title(it)}</div><div class="vis">${pose(it.pose, `position:relative;${land ? "height:100%;aspect-ratio:.82" : tall ? "height:96rem;width:79rem" : "height:56rem;width:46rem"}`, it.white)}</div></main>` + foot(),
+  // Sortie de la revue
+  revue: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis"><img class="cover" src="../assets/captures/ee/revue-779-couv.png" style="${land ? "" : tall ? "height:90rem" : "height:56rem"}"><div class="badge" style="${land ? "right:4rem;top:0" : "right:8rem;top:0"}"><small>Numéro</small><b>779</b><small>Octobre 2026</small></div></div></main>` + foot("Lire la revue"),
+  // Tournois
+  event: it => head(it.k) + `<main><div class="txt">${title(it)}<div class="facts">${it.facts.map(f => `<span>${f}</span>`).join("")}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'inscris")
+    + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : "right:5rem;bottom:15rem;"), it.white),
+  // Identité : avatar
+  "id-avatar": it => `<div class="avatar"><img src="${MARK}"></div>`,
+  // Identité : couverture de story à la une (Instagram recadre un cercle au centre)
+  "id-hl": it => `<div style="display:flex;flex-direction:column;align-items:center"><div class="hl-ico">${it.svg}</div><div class="hl-lab">${it.label}</div></div>`,
+  // Identité : bannière (zone sûre centrée, dimensions passées par l'URL)
+  "id-ban": it => {
+    const sw = +Q.get("sw") || W, sh = +Q.get("sh") || H, left = +Q.get("left") || 0;
+    const u = sh / 42;   // taille relative à la hauteur de la zone sûre
+    return `<div class="ban" style="left:${(W - sw) / 2 + left}px;top:${(H - sh) / 2}px;width:${sw - left}px;height:${sh}px;font-size:${u / 10 * 1.2}px">
+      <div style="flex:1;font-size:${u * 1.05}px"><img class="lg" src="${LOGO}" style="height:${u * 7}px"><div class="bt" style="font-size:${u * 7.4}px;margin-top:${u * 1.6}px">Progresse <span class="e" style="font-size:${u * 7.8}px">à ton rythme.</span></div>
+      <div class="chips" style="margin-top:${u * 2.4}px;gap:${u * 1.1}px">${["+200 leçons", "+2 000 exercices", "Masterclasses", "Tournois", "Forum"].map(x => `<span style="font-size:${u * 2}px;padding:${u * 1}px ${u * 2}px">${x}</span>`).join("")}</div></div>
+      ${pose(it.pose, `position:relative;height:${sh * .96}px;width:${sh * .79}px;flex:none`, it.white)}</div>`
+      ;
+  },
+};
+c.insertAdjacentHTML("beforeend", T[item.tpl](item));
+c.querySelectorAll(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
+document.getAnimations().forEach(a => { a.pause(); a.currentTime = 1100; });
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; }))));
+</script>
+</body>
+</html>

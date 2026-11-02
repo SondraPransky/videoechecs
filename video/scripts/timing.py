@@ -37,6 +37,16 @@ MUSIC_ONLY = {"s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
 EDITIONS = {
     "court": ["s1", "s3", "prog", "s4", "forum", "s8"],   # ~30 s pour les réseaux
     "boucle": ["s3", "s6", "prog"],                       # boucle muette de l'en-tête du site
+    # Pack réseaux : une mini-vidéo par pan de l'académie, toujours conclue par l'écran final
+    "pan-progression": ["s1", "prog", "s8"],
+    "pan-lecons": ["s3", "s8"],
+    "pan-exercices": ["s6", "s8"],
+    "pan-videos": ["videos", "s8"],
+    "pan-masterclasses": ["s4", "s8"],
+    "pan-parties": ["s5", "s8"],
+    "pan-revue": ["revue", "s8"],
+    "pan-forum": ["forum", "s8"],
+    "pan-tournois": ["s7", "s8"],
 }
 music_only = "--music-only" in sys.argv
 edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"

@@ -25,6 +25,7 @@ DURATION = timing["total"]
 CUTS = [s["start"] for s in timing["scenes"]][1:]
 T_DROP = timing["scenes"][1]["start"]      # le beat complet démarre à la scène 2
 T_FINAL = timing["scenes"][-1]["start"]     # logo
+T_LIFT = timing["scenes"][min(3, len(timing["scenes"]) - 1)]["start"]  # basse à l'octave à partir de la 4e scène
 T_RISE = T_FINAL - 2 * BAR / 2              # montée sur la mesure qui précède
 N = int(SR * (DURATION + 0.5))
 L = np.zeros(N)
@@ -181,7 +182,7 @@ while t < DURATION - .1:
     b = int(t // BAR)
     root, notes = PROG[b % 4]
     tones = notes + [notes[0] + 12]
-    nn = tones[pattern[k % 8]] + (12 if t >= timing["scenes"][3]["start"] and (k // 8) % 2 else 0)
+    nn = tones[pattern[k % 8]] + (12 if t >= T_LIFT and (k // 8) % 2 else 0)
     g = .14 if k % 4 == 0 else .09
     if T_RISE <= t < T_FINAL:
         g *= .5
