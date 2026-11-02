@@ -19,7 +19,6 @@ GRID = 0.5  # un temps à 120 BPM
 # (scène, réplique de voice/script.txt ou None, lead, min, tail)
 SCENES = [
     ("s1", "01", 0.3, 4.0, 0.5),
-    ("s2", "02", 0.2, 4.5, 0.5),
     ("s6", "06", 0.2, 4.5, 0.4),
     ("prog", None, 0.2, 5.0, 0.4),
     ("s3", "03", 0.2, 4.5, 0.4),
@@ -32,7 +31,7 @@ SCENES = [
     ("s8", "08", 0.4, 6.5, 1.5),
 ]
 # Mode --music-only : durées fixes (secondes, multiples d'un temps)
-MUSIC_ONLY = {"s1": 3.5, "s2": 4.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
+MUSIC_ONLY = {"s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
               "s4": 5.0, "s5": 8.0, "s6": 5.0, "forum": 5.0, "s7": 4.0, "s8": 5.5}
 music_only = "--music-only" in sys.argv
 

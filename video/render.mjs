@@ -1,5 +1,6 @@
 // Rend src/index.html image par image (timeline GSAP pilotée par seekTo) et encode en MP4.
 // Usage : node render.mjs [sortie.mp4] [--from s] [--to s] [--fps n] [--frames t1,t2,...]
+//         node render.mjs --sfx build/sfx.json   (exporte seulement les instants des bruitages)
 import { chromium } from 'playwright';
 import { spawn, execSync } from 'child_process';
 import path from 'path';
@@ -18,6 +19,12 @@ const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
 await page.goto('file://' + path.join(here, 'src/index.html'));
 await page.evaluate(() => window.ready);
 const total = await page.evaluate(() => window.TOTAL);
+const sfxOut = opt('--sfx', null);
+if (sfxOut) {
+  fs.writeFileSync(sfxOut, JSON.stringify(await page.evaluate(() => window.SFX), null, 1));
+  await browser.close();
+  process.exit(0);
+}
 fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
 
 if (stills) {
