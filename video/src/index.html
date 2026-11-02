@@ -580,6 +580,29 @@ function arrow(el, from, to, color = "#fae361") {
   line.style.strokeDashoffset = len;
   return { g, line, head, len };
 }
+// Flèche de cavalier en L (départ → coude → arrivée), comme sur les interfaces d'échecs
+function knightArrow(el, from, via, to, color = "#fae361") {
+  const c = s => [FILES.indexOf(s[0]) * 12.5 + 6.25, (8 - +s[1]) * 12.5 + 6.25];
+  const [x1, y1] = c(from), [xm, ym] = c(via), [x2, y2] = c(to);
+  const ns = "http://www.w3.org/2000/svg";
+  let svg = el.querySelector("svg");
+  if (!svg) { svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 100 100"); el.appendChild(svg); }
+  const ang = Math.atan2(y2 - ym, x2 - xm);
+  const ex = x2 - Math.cos(ang) * 3.2, ey = y2 - Math.sin(ang) * 3.2;
+  const g = document.createElementNS(ns, "g");
+  const line = document.createElementNS(ns, "polyline");
+  Object.entries({ points: `${x1},${y1} ${xm},${ym} ${ex},${ey}`, fill: "none", stroke: color, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: .92 }).forEach(([k, v]) => line.setAttribute(k, v));
+  const head = document.createElementNS(ns, "polygon");
+  const p = [[x2, y2], [ex + Math.cos(ang + 1.9) * 3.4, ey + Math.sin(ang + 1.9) * 3.4], [ex + Math.cos(ang - 1.9) * 3.4, ey + Math.sin(ang - 1.9) * 3.4]];
+  head.setAttribute("points", p.map(q => q.join(",")).join(" "));
+  head.setAttribute("fill", color);
+  g.append(line, head);
+  svg.appendChild(g);
+  const len = Math.hypot(xm - x1, ym - y1) + Math.hypot(ex - xm, ey - ym);
+  line.style.strokeDasharray = len;
+  line.style.strokeDashoffset = len;
+  return { g, line, head, len };
+}
 const START = {
   a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: "wN", h1: "wR",
   a8: "bR", b8: "bN", c8: "bB", d8: "bQ", e8: "bK", f8: "bB", g8: "bN", h8: "bR",
@@ -651,7 +674,7 @@ const exArrow = arrow($(".ex-board"), "g6", "h7");
 const b4 = makeBoard($("#b4"), { g1: "wK", f1: "wR", a1: "wR", d2: "wQ", c3: "wN", e4: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
   g8: "bK", f8: "bR", a8: "bR", d7: "bQ", c6: "bN", e6: "bP", d5: "bP", f7: "bP", g7: "bP", h7: "bP", a7: "bP", b7: "bP" });
 const a4a = arrow($("#b4"), "e4", "e5");
-const a4b = arrow($("#b4"), "c3", "b5", "#93b9e2");
+const a4b = knightArrow($("#b4"), "c3", "c5", "b5", "#2c9a45");
 const h4 = highlight($("#b4"), "e5");
 
 // S5 : partie italienne
