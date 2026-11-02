@@ -861,7 +861,9 @@ def pose2(n, title, usage, rules, extra_css="", ombre=None, coudes=None, **kw):
     Les avant-bras (.fa, .fa2) ont un léger mouvement propre, en retard sur le corps (inertie) ;
     `coudes` = (a, b) angles de flexion de repos ; `ombre` = (durée, keyframes) pour l'ombre au sol."""
     rules = rules + PLIS.get(n, [])
-    # Jambes redessinées seulement si la pose les anime ; sinon, celles du dessin original
+    # Jambes redessinées seulement si elles sont le sujet de la pose ; sinon, celles du dessin original
+    if n in JAMBES_ORIGINE:
+        rules = [r for r in rules if ".leg" not in r[0]]
     kw.setdefault("jambes", any(".leg" in r[0] for r in rules))
     coudes = coudes or REPOS_COUDES.get(n)
     ombre = ombre or OMBRES.get(n)
@@ -889,6 +891,8 @@ def ombre_saut(d):
 
 
 # ---------------------------------------------------------------- passe d'animation
+# Poses où les jambes ne font que de petits mouvements : on garde les jambes du dessin original
+JAMBES_ORIGINE = {"hourra", "champion", "porte-echiquier", "invite", "boxe", "etirement-lateral"}
 # Coudes : flexion de repos par pose (front, fond) et mouvements dédiés ; ombre au sol par pose.
 REPOS_COUDES = {"hourra": (-14, -14), "pancarte": (24, 24), "porte-echiquier": (24, 24), "champion": (20, 20),
                 "promenade": (24, 24), "coucou-autre-main": (10, 30), "selfie": (10, 10)}
