@@ -1,6 +1,6 @@
 # Vidéo de présentation — echecs.com Académie
 
-Vidéo en motion design de 54 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
+Vidéo en motion design de 55 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
 
 Fichiers produits :
 - `build/echecs-academie-presentation.mp4` : la vidéo finale ;
@@ -15,7 +15,7 @@ Fichiers produits :
 | 3 | Mesure tes progrès | Barre de validation d'un module (Objectif 1400) qui se remplit, « Validé », 3 étoiles, courbe Elo qui monte de 1150 à 1480 | Série réussie |
 | 4 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
 | 5 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
-| 6 | Cours en direct | MI & GMI | — |
+| 6 | Masterclasses en direct | « Masterclasses avec des pros » : direct (échiquier, caméra de Sylvain Ravot, question du chat), fiches de Sylvain Ravot, Marc Quenehen, Fabien Libiszewski et Gata Kamsky | Regarde, en prof (toque) |
 | 7 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
 | 8 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
 | 9 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
@@ -71,3 +71,8 @@ Pour refaire seulement le mixage, sans nouveau rendu de l'image :
 ```bash
 bash build.sh --skip-voice --skip-render
 ```
+
+## Crédits photo
+
+- Fabien Libiszewski : Wolfgang Jekel, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:London_Chess_Classic_2016_Day5-19_(31872281495).jpg), CC BY 2.0, recadrée.
+- Gata Kamsky : Stefan64, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:GataKamsky24.jpg), CC BY-SA 3.0, recadrée.

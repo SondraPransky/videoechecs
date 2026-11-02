@@ -182,8 +182,21 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .vok { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; background: #2c9a45; color: #fff; font: 800 24px/1 "Manrope"; }
 .vstars { display: flex; gap: 10px; }
 .vstars svg { width: 54px; height: 54px; }
-/* Scène 4 : live */
-.live { position: absolute; left: 150px; top: 220px; width: 1060px; height: 640px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
+
+/* Scène 4 : masterclasses en direct */
+.live { position: absolute; left: 1000px; top: 90px; width: 790px; height: 520px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
+.cam { position: absolute; left: 520px; top: 268px; width: 240px; height: 140px; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 3px var(--red), 0 20px 40px rgba(0,0,0,.5); }
+.cam img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+.cam span { position: absolute; left: 10px; bottom: 10px; padding: 6px 10px; border-radius: 8px; background: rgba(0,0,0,.6); font: 700 16px/1 "Manrope"; }
+.viewers { position: absolute; left: 520px; top: 228px; display: flex; align-items: center; gap: 8px; font: 700 20px/1 "Manrope"; color: #c9d1dc; }
+.viewers b { font-variant-numeric: tabular-nums; color: var(--ink); }
+.bubble { position: absolute; left: 520px; width: 240px; padding: 14px 16px; border-radius: 16px 16px 16px 4px; background: #1b2633; font: 700 18px/1.3 "Manrope"; color: #dfe5ee; box-shadow: inset 0 0 0 1px rgba(147,185,226,.16); }
+.coach { position: absolute; top: 680px; width: 270px; height: 320px; border-radius: 30px; padding: 26px; color: #111; box-shadow: 0 34px 70px rgba(0,0,0,.45); overflow: hidden; }
+.coach img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 6px solid rgba(255,255,255,.9); display: block; margin: 8px auto 0; }
+.coach .ttl { position: absolute; right: 18px; top: 18px; padding: 8px 14px; border-radius: 999px; background: #111; color: #fff; font: 800 20px/1 "Manrope"; letter-spacing: .06em; }
+.coach b { display: block; margin-top: 22px; text-align: center; font: 800 28px/1.1 "Manrope"; }
+.coach span { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 12px; font: 700 19px/1.2 "Manrope"; color: rgba(17,17,17,.75); }
+.coach::after { content: ""; position: absolute; right: -50px; bottom: -50px; width: 170px; height: 170px; border-radius: 50%; background: rgba(255,255,255,.22); }
 .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px rgba(255,90,106,.25); }
 .tile { position: absolute; width: 170px; height: 120px; border-radius: 16px; background: #182230; display: grid; place-items: center; font: 800 34px/1 "Manrope"; color: var(--blue); box-shadow: inset 0 0 0 1px rgba(147,185,226,.14); }
 .title-badge { font: 900 190px/0.9 "Fraunces"; letter-spacing: -.03em; }
@@ -322,25 +335,29 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div class="reel" id="reel"><img src="../assets/captures/ee/hd/p-calcul-gagnant.jpg"><img src="../assets/captures/ee/hd/p-masterclass.jpg"><img src="../assets/captures/ee/hd/p-minute-finale.jpg"><img src="../assets/captures/ee/hd/p-coup-de-legende.jpg"><img src="../assets/captures/ee/hd/p-ouvertures-vogue.jpg"><img src="../assets/captures/ee/hd/p-minute-strategie.jpg"><img src="../assets/captures/ee/hd/p-flashback.jpg"><img src="../assets/captures/ee/hd/p-defendez.jpg"><img src="../assets/captures/ee/hd/p-en-finale.jpg"><img src="../assets/captures/ee/hd/p-graines.jpg"><img src="../assets/captures/ee/hd/p-un-jour-une-partie.jpg"><img src="../assets/captures/ee/hd/p-kramnik-karpov.jpg"><img src="../assets/captures/ee/hd/p-recap.jpg"></div>
   </section>
 
-  <!-- S4 — Live -->
+  <!-- S4 — Masterclasses en direct -->
   <section class="scene" id="s4">
-    <div class="live" id="live">
-      <div id="b4" class="board" style="left:40px;top:40px;width:560px;height:560px;border-radius:14px;box-shadow:none"></div>
-      <div style="position:absolute;left:640px;top:40px;display:flex;align-items:center;gap:14px" class="chip s4-live"><div style="position:relative;width:16px;height:16px"><div class="ripple"></div><div class="ripple"></div><div class="dot" id="livedot" style="position:absolute;left:0;top:0"></div></div><span style="color:var(--red)">EN DIRECT</span></div>
-      <div style="position:absolute;left:640px;top:130px;width:380px">
-        <div style="font:800 34px/1.2 Manrope">Cours #3</div>
-        <div style="font:600 24px/1.4 Manrope;color:var(--muted);margin-top:8px">Les plans typiques<br>du milieu de partie</div>
-      </div>
-      <div class="tile s4-t" style="left:640px;top:300px;background:#233246">MI</div>
-      <div class="tile s4-t" style="left:830px;top:300px">JD</div>
-      <div class="tile s4-t" style="left:640px;top:440px">LM</div>
-      <div class="tile s4-t" style="left:830px;top:440px">+24</div>
-    </div>
-    <div style="position:absolute;left:1290px;top:220px;width:540px">
+    <div style="position:absolute;left:150px;top:110px">
       <div class="kicker s4-k">Cours en direct</div>
-      <div class="title-badge" style="margin-top:40px"><span class="line"><span class="s4-b blue">MI</span></span><span class="line"><span class="s4-b">&amp; <span class="em">GMI</span></span></span></div>
-      <div class="lead s4-l" style="margin-top:34px">Maîtres Internationaux<br>et Grands Maîtres<br>en live, chaque semaine.</div>
+      <div class="h2" style="margin-top:30px;font-size:92px"><span class="line"><span class="s4-w">Masterclasses</span></span><span class="line"><span class="s4-w">avec des <span class="em">pros.</span></span></span></div>
     </div>
+    <div class="live" id="live">
+      <div id="b4" class="board" style="left:30px;top:30px;width:460px;height:460px;border-radius:14px;box-shadow:none"></div>
+      <div class="chip s4-live" style="position:absolute;left:520px;top:34px;padding:12px 20px;background:rgba(255,90,106,.14)"><div style="position:relative;width:16px;height:16px"><div class="ripple"></div><div class="ripple"></div><div class="dot" id="livedot" style="position:absolute;left:0;top:0"></div></div><span style="color:var(--red)">EN DIRECT</span></div>
+      <div style="position:absolute;left:520px;top:110px;width:240px">
+        <div style="font:800 30px/1.15 Manrope">Masterclass</div>
+        <div style="font:600 22px/1.4 Manrope;color:var(--muted);margin-top:8px">Les plans typiques du milieu de partie</div>
+      </div>
+      <div class="cam s4-cam"><img src="../assets/captures/ee/hd/auth-ravot.jpg"><span>Sylvain Ravot</span></div>
+      <div class="viewers s4-v"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9d1dc" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b id="viewers">0</b> en direct</div>
+      <div class="bubble s4-q" style="top:428px">Pourquoi pas ♘b5 tout de suite ?</div>
+    </div>
+    <div class="coach s4-c" style="left:150px;background:#f06b8a"><img src="../assets/captures/ee/hd/auth-ravot.jpg"><div class="ttl">MF</div><b>Sylvain Ravot</b><span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Calcul Gagnant</span></div>
+    <div class="coach s4-c" style="left:445px;background:#6bdc7d"><img src="../assets/captures/ee/hd/auth-quenehen.jpg"><b>Marc Quenehen</b><span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>La Minute Finale</span></div>
+    <div class="coach s4-c" style="left:740px;background:#93b9e2"><img src="../assets/captures/ee/hd/auth-libiszewski.jpg"><div class="ttl">GMI</div><b>Fabien Libiszewski</b><span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Masterclasses</span></div>
+    <div class="coach s4-c" style="left:1035px;background:#fae361"><img src="../assets/captures/ee/hd/auth-kamsky.jpg"><div class="ttl">GMI</div><b>Gata Kamsky</b><span><svg width="16" height="16" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg>Masterclasses</span></div>
+    <div class="lead s4-l" style="position:absolute;left:150px;top:420px;width:760px">Des maîtres et grands maîtres en live<br>chaque semaine, et en replay.</div>
+    <div class="pose prof" id="p4" data-pose="regarde" style="left:1450px;top:640px;width:340px;height:416px"></div>
   </section>
 
   <!-- S5 — Analyse -->
@@ -643,6 +660,16 @@ function playMascot(st, id, t0, t1) {
 // positionnées à chaque image depuis seekTo.
 const poses = [];
 $$(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
+// Mascotte « prof » : toque et lunettes ajoutées dans le groupe animé de la pose
+$$(".pose.prof").forEach(el => {
+  const g = el.querySelector(".rig > g");
+  g.insertAdjacentHTML("beforeend", `<g class="cap" transform="translate(770 40) rotate(-14)">
+    <path d="M-95,40 Q0,70 95,40 L95,95 Q0,125 -95,95 Z" fill="#1b2433" stroke="#f4f1ea" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M0,-30 L210,25 L0,80 L-210,25 Z" fill="#1b2433" stroke="#f4f1ea" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="0" cy="25" r="12" fill="#fae361"/>
+    <path d="M0,25 Q120,40 165,60 L170,150" fill="none" stroke="#fae361" stroke-width="9" stroke-linecap="round"/>
+    <path d="M150,145 L190,145 L182,200 L158,200 Z" fill="#fae361"/></g>`);
+});
 function playPose(st, el, t) { poses.push({ el: $(el), t, st }); }
 
 // Confettis déterministes
@@ -875,23 +902,33 @@ scene("videos", ({ st, from, at, lines, dur }) => {
   exitZoom(st, "videos", dur, { scale: .96 });
 });
 
-// ===== S4 : Live
+// ===== S4 : Masterclasses en direct
 scene("s4", ({ st, from, at, lines, dur }) => {
-  from("#live", 0, { opacity: 0, x: -120, rotateY: 14, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: 6, duration: .8 });
-  from(".s4-t", .3, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .4, stagger: .07, ease: "back.out(2)" });
-  from(".s4-live", .2, { opacity: 0 }, { opacity: 1, duration: .2 });
-  for (let k = 0; k < Math.ceil(dur); k++) from("#livedot", .2 + k, { opacity: 1 }, { opacity: .25, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 1 });
-  $$(".ripple").forEach((r, i) => { for (let k = 0; k < Math.ceil(dur); k++) from(r, .2 + k + i * .5, { scale: 1, opacity: .8 }, { scale: 3.2, opacity: 0, duration: 1, ease: "power1.out" }); });
-  from(".s4-k", .15, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .5 });
-  lines(".s4-b", .25, .18);
-  from(".s4-l", 1.0, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6 });
+  from(".s4-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  lines(".s4-w", .1, .1);
+  from("#live", .15, { opacity: 0, x: 160, rotateY: -16, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -5, duration: .7 });
+  at("#live", .85, { rotateY: -1, duration: dur - .85, ease: "sine.inOut" });
+  from(".s4-live", .35, { opacity: 0 }, { opacity: 1, duration: .2 });
+  for (let k = 0; k < Math.ceil(dur); k++) from("#livedot", .35 + k, { opacity: 1 }, { opacity: .25, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 1 });
+  $$(".ripple").forEach((r, i) => { for (let k = 0; k < Math.ceil(dur); k++) from(r, .35 + k + i * .5, { scale: 1, opacity: .8 }, { scale: 3.2, opacity: 0, duration: 1, ease: "power1.out" }); });
+  from(".s4-cam", .55, { opacity: 0, scale: .7 }, { opacity: 1, scale: 1, duration: .45, ease: "back.out(2)" });
+  from(".s4-v", .6, { opacity: 0 }, { opacity: 1, duration: .3 });
+  const vw = { v: 0 };
+  st.fromTo(vw, { v: 0 }, { v: 1248, duration: 1.6, ease: "power2.out", onUpdate: () => { $("#viewers").textContent = Math.round(vw.v).toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " "); } }, .6);
   at(a4a.line, .9, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
   from(a4a.head, 1.25, { opacity: 0 }, { opacity: 1, duration: .12 });
   at(h4, 1.25, { opacity: 1, duration: .2 });
-  at(a4b.line, 1.6, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
-  from(a4b.head, 1.95, { opacity: 0 }, { opacity: 1, duration: .12 });
-  at("#live", .8, { rotateY: -2, duration: dur - .8, ease: "sine.inOut" });
-  exitZoom(st, "s4", dur, { scale: 1, x: -80 });
+  from(".s4-q", 1.6, { opacity: 0, y: 20, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .4, ease: "back.out(2)" });
+  at(a4b.line, 2.1, { strokeDashoffset: 0, duration: .4, ease: "power2.out" });
+  from(a4b.head, 2.45, { opacity: 0 }, { opacity: 1, duration: .12 });
+  $$(".s4-c").forEach((el, i) => {
+    from(el, .45 + i * .13, { opacity: 0, y: 90, scale: .8, rotation: [-8, 6, -6, 7][i] }, { opacity: 1, y: 0, scale: 1, rotation: [-2, 1.5, -1.5, 2][i], duration: .6, ease: "back.out(1.6)" });
+    at(el, 1.1 + i * .13, { y: [-10, 8, -8, 10][i], duration: dur - 1.2, ease: "sine.inOut" });
+  });
+  from(".s4-l", 1.3, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
+  from("#p4", 1.0, { y: 440 }, { y: 0, duration: .55, ease: "back.out(1.4)" });
+  playPose(st, "#p4", 1.0);
+  exitZoom(st, "s4", dur, { scale: .96 });
 });
 
 // ===== S5 : Tes parties — saisie, puis import et analyse
