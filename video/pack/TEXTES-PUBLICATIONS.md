@@ -75,6 +75,17 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 
 ---
 
+## Publicités de 15 s (`00-publicites/`)
+
+Texte principal, à adapter à chaque question :
+> 1 · Vous enchaînez les parties sans que votre Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 echecs.com/academie
+> 2 · Beaucoup de parties, peu de progrès ? Analysez vos parties et corrigez vos points faibles avec +2 000 exercices. 👉 echecs.com/academie
+> 3 · Vous stagnez ? Passez un cap avec les masterclasses en direct de maîtres et grands maîtres. 👉 echecs.com/academie
+> 4 · Des heures de vidéos, toujours le même classement ? Avec l'académie, chaque leçon se termine sur l'échiquier. 👉 echecs.com/academie
+> 5 · Vous ne savez pas par où commencer ? Suivez le parcours, étape par étape, du premier coup à plus de 2000. 👉 echecs.com/academie
+
+Titre (Facebook / Instagram) : **Découvrez l'Académie Europe Échecs** · Bouton : **En savoir plus** ou **S'inscrire**
+
 ## Publications d'engagement
 
 **Problème du jour** (`14-probleme-mat-en-1/`, puis la solution `15-solution-mat-en-1/` le lendemain ou en story)

@@ -2,6 +2,7 @@
 // Usage : node render.mjs [sortie.mp4] [--from s] [--to s] [--fps n] [--frames t1,t2,...]
 //         node render.mjs --sfx build/sfx.json   (exporte seulement les instants des bruitages)
 //         --edition court|boucle                 (déclinaison, voir scripts/timing.py)
+//         --page pub.html --size 1080x1920 --query "q=1&fmt=story"   (autre page de src/, autre format)
 import { chromium } from 'playwright';
 import { spawn, execSync } from 'child_process';
 import path from 'path';
@@ -16,8 +17,9 @@ const ffmpeg = execSync("python3 -c 'import imageio_ffmpeg as f;print(f.get_ffmp
 const here = path.dirname(new URL(import.meta.url).pathname);
 
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-await page.goto('file://' + path.join(here, 'src/index.html') + '?edition=' + opt('--edition', 'long'));
+const [W, H] = opt('--size', '1920x1080').split('x').map(Number);
+const page = await browser.newPage({ viewport: { width: W, height: H } });
+await page.goto('file://' + path.join(here, 'src', opt('--page', 'index.html')) + '?edition=' + opt('--edition', 'long') + '&' + opt('--query', ''));
 await page.evaluate(() => window.ready);
 const total = await page.evaluate(() => window.TOTAL);
 const sfxOut = opt('--sfx', null);

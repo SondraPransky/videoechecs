@@ -13,8 +13,8 @@ from scipy.signal import butter, sosfilt
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SR = 48000
-timing = json.load(open(os.path.join(ROOT, "build", "timing.json")))
-events = json.load(open(os.path.join(ROOT, "build", "sfx.json")))
+timing = json.load(open(os.environ.get("TIMING_JSON", os.path.join(ROOT, "build", "timing.json"))))
+events = json.load(open(os.environ.get("SFX_JSON", os.path.join(ROOT, "build", "sfx.json"))))
 N = int(SR * (timing["total"] + 1))
 L, R = np.zeros(N), np.zeros(N)
 rng = np.random.default_rng(7)
@@ -100,6 +100,6 @@ L, R = sosfilt(lp, L), sosfilt(lp, R)
 peak = max(np.abs(L).max(), np.abs(R).max(), 1e-9)
 g = min(1.0, .9 / peak)
 pcm = (np.stack([L, R], 1) * g * 32767).astype("<i2")
-with wave.open(os.path.join(ROOT, "build", "sfx.wav"), "w") as w:
+with wave.open(os.environ.get("SFX_OUT", os.path.join(ROOT, "build", "sfx.wav")), "w") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
 print(f"{len(events)} bruitages → build/sfx.wav")

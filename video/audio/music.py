@@ -18,9 +18,9 @@ SR = 48000
 BPM = 120
 BEAT = 60 / BPM
 BAR = 4 * BEAT
-OUT = os.path.join(HERE, "music.wav")
+OUT = os.environ.get("MUSIC_OUT", os.path.join(HERE, "music.wav"))
 
-timing = json.load(open(os.path.join(ROOT, "build", "timing.json")))
+timing = json.load(open(os.environ.get("TIMING_JSON", os.path.join(ROOT, "build", "timing.json"))))
 DURATION = timing["total"]
 CUTS = [s["start"] for s in timing["scenes"]][1:]
 T_DROP = timing["scenes"][1]["start"]      # le beat complet démarre à la scène 2
