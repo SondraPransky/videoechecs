@@ -17,8 +17,8 @@ Fichiers produits :
 | 5 | Cours en direct | MI & GMI | — |
 | 6 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
 | 7 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
-| 8 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
-| 9 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
+| 8 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
+| 9 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
 | 10 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
 
 Pour la version musique seule, les durées de scène sont fixées dans `scripts/timing.py` (`MUSIC_ONLY`). Avec une voix off, elles sont calculées à partir des répliques.
