@@ -10,7 +10,7 @@ Fichiers produits :
 
 | # | Scène | Contenu | Mascotte |
 |---|---|---|---|
-| 1 | Pas à pas | « Les échecs, ça s'apprend. Pas à pas. Du premier coup à plus de 2000. » : 1.e4 e5 sur l'échiquier, puis le pion parcourt Initiation → Objectif 1400, 1600, 1800 → 2000 et + et devient dame | « hello » (animation du designer) |
+| 1 | Progresse à ton rythme | « Progresse à ton rythme. Du premier coup à plus de 2000. » : 1.e4 e5 sur l'échiquier, puis le pion parcourt Initiation → Objectif 1400, 1600, 1800 → 2000 et + et devient dame | « hello » (animation du designer) |
 | 2 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
 | 3 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
 | 4 | Mesure tes progrès | Barre de validation d'un module (Objectif 1400) qui se remplit, « Validé », 3 étoiles, courbe Elo qui monte de 1150 à 1480 | Série réussie |
@@ -83,7 +83,7 @@ bash build.sh --skip-voice --skip-render
 | Fichier | Usage |
 |---|---|
 | `build/poster.jpg` | Affiche de la vidéo (image avant lecture), générée par `src/poster.html` |
-| `build/echecs-academie-court.mp4` | Version courte de 30,5 s : Pas à pas, Leçons, Valide chaque étape, Masterclasses, Forum, Final |
+| `build/echecs-academie-court.mp4` | Version courte de 30,5 s : Progresse à ton rythme, Leçons, Valide chaque étape, Masterclasses, Forum, Final |
 | `build/echecs-academie-boucle.mp4` | Boucle muette de 14 s pour l'en-tête du site : Leçons, Exercices, Valide chaque étape |
 | `build/reseaux/video-9x16-reels-tiktok-stories.mp4` | Version courte en 1080×1920 (Reels, TikTok, Stories, Shorts) |
 | `build/reseaux/video-1x1-posts-instagram-x.mp4` | Version courte en 1080×1080 (posts Instagram, X, Facebook, LinkedIn) |
