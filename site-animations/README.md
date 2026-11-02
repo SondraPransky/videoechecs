@@ -51,7 +51,7 @@ Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relanc
 
 ### Mascotte articulée : tout le corps bouge
 
-Pour ces animations, la silhouette du designer est découpée en tête et buste, le bras posé sur la hanche est remplacé par un second bras articulé, et deux jambes avec un pied, dessinées dans le même style plein, pivotent aux hanches. Chaque bras est coupé au coude : l'avant-bras se plie (garde, paumes ouvertes, main sous le menton…) et suit le mouvement avec un léger retard. L'ombre au sol rétrécit pendant les sauts. La mascotte peut donc lever **les deux bras**, marcher, courir, s'asseoir, sauter, s'incliner…
+Pour ces animations, la silhouette du designer est découpée en tête et buste, le bras posé sur la hanche est remplacé par un second bras articulé, et deux jambes avec un pied, dessinées dans le même style plein, pivotent aux hanches. Chaque bras est coupé au coude : l'avant-bras se plie (garde, paumes ouvertes, main sous le menton…) et suit le mouvement avec un léger retard. L'ombre au sol rétrécit pendant les sauts. Quand une pose ne fait pas bouger les jambes, elle garde celles du dessin original. La mascotte peut donc lever **les deux bras**, marcher, courir, s'asseoir, sauter, s'incliner…
 
 | Fichier | Moment sur le site | Ce qui se passe |
 |---|---|---|

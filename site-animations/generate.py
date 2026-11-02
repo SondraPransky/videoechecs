@@ -796,6 +796,7 @@ CLIPS = {
     "buste": "380,470 772,478 800,560 788,640 780,790 780,862 380,862",
     "jambeg": "360,760 628,760 628,1110 360,1110",
     "jambed": "628,760 786,760 786,930 840,1110 628,1110",
+    "jambes": "360,800 786,800 786,930 840,1110 360,1110",   # jambes d'origine, quand elles ne bougent pas
 }
 
 
@@ -832,12 +833,15 @@ def bras(name, inner="", mirror=False):
     return f'<g transform="scale(-1 1)">{seg}</g>' if mirror else seg
 
 
-def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", torso_inner=""):
+def mascot2(name, arm_inner="", arm2_inner="", head_inner="", extra_back="", torso_inner="", jambes=True):
     """Mascotte articulée : .rig > .legl, .legr, .torso > (.arm2, buste, .head, .arm)."""
     defs = ("<defs>" + "".join(f'<clipPath id="{name}-{k}"><polygon points="{v}"/></clipPath>' for k, v in CLIPS.items())
             + f'<clipPath id="{name}-bra"><polygon points="{ARM_UP}"/></clipPath><clipPath id="{name}-avb"><polygon points="{ARM_LOW}"/></clipPath></defs>')
-    jl = g(HIP_L, "legl", f'<path class="m" d="{LEG}"/>')
-    jr = g(HIP_R, "legr", f'<path class="m" d="{LEG}"/>')
+    if jambes:
+        jl = g(HIP_L, "legl", f'<path class="m" d="{LEG}"/>')
+        jr = g(HIP_R, "legr", f'<path class="m" d="{LEG}"/>')
+    else:   # jambes du dessin original, fixes
+        jl, jr = f'<path class="m" d="{BODY}" fill-rule="evenodd" clip-path="url(#{name}-jambes)"/>', ""
     arm2 = g(SH2, "arm2", bras(name, arm2_inner, mirror=True) + '<circle class="m" r="50"/>')
     head = g(NECK, "head", piece(name, "tete", NECK) + (f'<g transform="translate({HEAD_TOP[0] - NECK[0]} {HEAD_TOP[1] - NECK[1]})">{head_inner}</g>' if head_inner else ""))
     arm = g(PIVOT, "arm", bras(name, arm_inner))
@@ -857,6 +861,8 @@ def pose2(n, title, usage, rules, extra_css="", ombre=None, coudes=None, **kw):
     Les avant-bras (.fa, .fa2) ont un léger mouvement propre, en retard sur le corps (inertie) ;
     `coudes` = (a, b) angles de flexion de repos ; `ombre` = (durée, keyframes) pour l'ombre au sol."""
     rules = rules + PLIS.get(n, [])
+    # Jambes redessinées seulement si la pose les anime ; sinon, celles du dessin original
+    kw.setdefault("jambes", any(".leg" in r[0] for r in rules))
     coudes = coudes or REPOS_COUDES.get(n)
     ombre = ombre or OMBRES.get(n)
     ca, cb = coudes or (10, 10)
