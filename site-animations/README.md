@@ -1,6 +1,6 @@
 # Mascotte animée — echecs.com
 
-Treize animations de la mascotte, dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
+Quarante-deux animations de la mascotte (et leurs 42 versions miroir, tournées vers la droite), dans le style de l'animation « hello » du designer (même silhouette et même bras articulé à l'épaule). Chaque fichier est un **SVG autonome animé en CSS**, sans JavaScript, d'environ 8 Ko.
 
 Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relance les intros, et un autre bouton bascule entre fond clair et fond sombre.
 
@@ -19,8 +19,39 @@ Aperçu : ouvrir `index.html` dans un navigateur. Le bouton « Rejouer » relanc
 | `mascotte-victoire-tournoi` | Tournoi gagné, podium | Trophée brandi avec reflet, confettis |
 | `mascotte-dodo` | Inactivité, « reviens vite » | Avachie, respire lentement, « Z z z » |
 | `mascotte-regarde` | Onboarding : « regarde ici » | Bras tendu qui montre vers la gauche |
+| `mascotte-coucou` | Accueil, bienvenue | Grand signe de la main, traits de mouvement |
+| `mascotte-course` | Défi chronométré, « vite ! » | Court penchée en avant, traits de vitesse, poussière |
+| `mascotte-salto` | Grande victoire, record | Saut périlleux complet, étincelles à l'atterrissage |
+| `mascotte-surgit` | Coin d'écran, astuce discrète | Surgit du bas, salue, redescend |
+| `mascotte-pion-brandi` | Débutant, premier coup | Brandit un grand pion |
+| `mascotte-loupe` | Analyse de partie, recherche | Balaie avec une loupe |
+| `mascotte-megaphone` | Annonce, nouveauté | Crie dans un mégaphone, ondes sonores |
+| `mascotte-telephone` | Application mobile, notification | Regarde son téléphone, pastille de notification |
+| `mascotte-haltere` | Entraînement du jour | Soulève une haltère |
+| `mascotte-drapeau` | Objectif atteint | Agite un drapeau à damier |
+| `mascotte-pendule` | Blitz, cadence, tournoi | Tape la pendule d'échecs, les aiguilles tournent |
+| `mascotte-discussion` | Forum, commentaires | Bulle de discussion qui s'écrit, parle avec la main |
+| `mascotte-coeur` | Merci, communauté | Tient un cœur qui bat, cœurs qui s'envolent |
+| `mascotte-assoupie` | « Tu es toujours là ? » | Pique du nez, sursaute, recommence |
+| `mascotte-sieste` | Inactivité longue, mode nuit | Couchée sur un oreiller sous une couverture, « Z z z » |
+| `mascotte-s-endort` | Fin de journée, « à demain » | Bâille, pique du nez, se couche, dort, se relève |
+| `mascotte-disco` | Fête, week-end | Danse disco sous une boule à facettes |
+| `mascotte-etirement` | Début de séance, échauffement | S'étire vers le ciel |
+| `mascotte-toupie` | Transition, « et maintenant ? » | Se retourne d'un côté puis de l'autre |
+| `mascotte-marche` | Parcours, prochaine étape | Traverse le cadre d'un pas décidé |
+| `mascotte-fete` | Anniversaire, cap franchi | Chapeau pointu, confettis |
+| `mascotte-jongle` | Astuces, multitâche | Jongle avec trois pions |
+| `mascotte-super-heros` | Super-progrès, défi relevé | Cape au vent, poing levé |
+| `mascotte-zen` | Concentration avant un tournoi | Flotte en méditation, ondes de calme |
+| `mascotte-cafe` | Bonjour, révision du matin | Tasse fumante |
+| `mascotte-parapluie` | Coup dur, défaite | À l'abri sous la pluie |
+| `mascotte-bonnet` | Hiver, fêtes de fin d'année | Bonnet à pompon, la neige tombe |
+| `mascotte-message-recu` | Nouveau message, notification | Attrape une enveloppe, elle s'ouvre, la lettre sort |
+| `mascotte-envoi-mail` | Newsletter, e-mail envoyé | Lance une enveloppe qui s'envole |
 
 Le nom exact d'un fichier dépend de sa couleur, par exemple `svg/noir/mascotte-idee-noir.svg`.
+
+**Versions miroir** : chaque animation existe aussi tournée vers la droite, avec le suffixe `-miroir` (par exemple `svg/jaune/mascotte-coucou-miroir-jaune.svg`). Pratique pour qu'elle regarde vers le contenu, quel que soit le côté de la page où elle est placée.
 
 Chaque animation joue d'abord une **intro une seule fois** (apparition, saut…), puis passe sur une **boucle** discrète.
 

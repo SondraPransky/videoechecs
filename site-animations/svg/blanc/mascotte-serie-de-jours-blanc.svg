@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -330 1160 1420" class="mascotte mascotte-serie-de-jours mascotte-serie-de-jours-blanc" role="img" aria-label="Série de jours">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -330 1160 1420" class="mascotte mascotte-serie-de-jours-blanc mascotte-serie-de-jours" role="img" aria-label="Série de jours">
 <style>
 .mascotte.mascotte-serie-de-jours-blanc { --mascot: #ffffff; --line: #fae361; }
 .mascotte-serie-de-jours .m { fill: var(--mascot); }
