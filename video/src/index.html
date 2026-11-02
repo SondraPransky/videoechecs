@@ -183,6 +183,39 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .vstars { display: flex; gap: 10px; }
 .vstars svg { width: 54px; height: 54px; }
 
+
+/* Forum de la communauté */
+.forum { position: absolute; left: 860px; top: 110px; width: 960px; height: 860px; border-radius: 22px; overflow: hidden; background: #fff; color: #222; box-shadow: 0 50px 120px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); font-family: "Manrope"; }
+.forum .bar { height: 46px; background: #1a212c; display: flex; align-items: center; gap: 10px; padding: 0 20px; }
+.forum .bar i { width: 13px; height: 13px; border-radius: 50%; background: #3a4453; display: block; }
+.forum .bar .u { margin-left: 22px; height: 28px; width: 360px; border-radius: 8px; background: #0f141b; color: var(--muted); font: 600 15px/28px "Manrope"; padding: 0 14px; }
+.fhead { height: 74px; display: flex; align-items: center; gap: 22px; padding: 0 28px; border-bottom: 1px solid #e6e6e6; }
+.fhead .burger { width: 26px; height: 18px; border-top: 3px solid #b5b5b5; border-bottom: 3px solid #b5b5b5; position: relative; }
+.fhead .burger::after { content: ""; position: absolute; left: 0; right: 0; top: 4.5px; border-top: 3px solid #b5b5b5; }
+.fhead img { height: 40px; display: block; }
+.fhead .me { margin-left: auto; width: 40px; height: 40px; border-radius: 50%; background: #6bdc7d; display: grid; place-items: center; font: 800 18px/1 "Manrope"; color: #111; }
+.fbody { display: flex; }
+.fside { width: 210px; padding: 20px 18px; border-right: 1px solid #ececec; height: 740px; }
+.fside div { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 10px; border-radius: 8px; font: 600 18px/1 "Manrope"; color: #333; }
+.fside div.on { background: #eef1f5; font-weight: 800; }
+.fside small { display: block; margin: 18px 10px 6px; font: 800 13px/1 "Manrope"; letter-spacing: .12em; color: #777; }
+.fside div i { width: 14px; height: 14px; border-radius: 3px; display: block; }
+.fmain { flex: 1; padding: 18px 26px; }
+.ftabs { display: flex; align-items: center; gap: 26px; height: 44px; font: 600 18px/1 "Manrope"; color: #333; }
+.ftabs .on { color: #2c4a6e; padding-bottom: 10px; border-bottom: 3px solid #fae361; margin-top: 13px; }
+.ftabs .new { margin-left: auto; padding: 12px 18px; border-radius: 10px; background: #fae361; color: #111; font-weight: 800; }
+.fcols { display: grid; grid-template-columns: 1fr 150px 80px 80px; padding: 18px 6px 10px; font: 700 14px/1 "Manrope"; color: #888; border-bottom: 1px solid #e6e6e6; }
+.ft { display: grid; grid-template-columns: 1fr 150px 80px 80px; align-items: center; height: 82px; padding: 0 6px; border-bottom: 1px solid #ececec; }
+.ft b { display: block; font: 700 20px/1.2 "Manrope"; color: #1b1b1b; }
+.ft em { display: flex; align-items: center; gap: 7px; margin-top: 6px; font: 600 15px/1 "Manrope"; font-style: normal; color: #666; }
+.ft em::before { content: ""; width: 11px; height: 11px; border-radius: 2px; background: var(--cat, #93b9e2); }
+.ft .av { display: flex; }
+.ft .av span { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; margin-right: -6px; border: 2px solid #fff; font: 800 14px/1 "Manrope"; color: #111; }
+.ft .n { text-align: center; font: 800 18px/1 "Manrope"; font-variant-numeric: tabular-nums; }
+.ft .a { text-align: center; font: 600 16px/1 "Manrope"; color: #666; }
+.ft.hot { background: #fffbe0; }
+.fbubble { position: absolute; padding: 18px 22px; border-radius: 22px 22px 22px 6px; background: #f1f0ea; color: #1b1b1b; font: 700 22px/1.3 "Manrope"; box-shadow: 0 30px 70px rgba(0,0,0,.5); white-space: nowrap; display: flex; gap: 14px; align-items: center; }
+.fbubble i { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 800 17px/1 "Manrope"; font-style: normal; }
 /* Scène 4 : masterclasses en direct */
 .live { position: absolute; left: 1000px; top: 90px; width: 790px; height: 520px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .cam { position: absolute; left: 520px; top: 268px; width: 240px; height: 140px; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 3px var(--red), 0 20px 40px rgba(0,0,0,.5); }
@@ -415,6 +448,30 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="counter" style="margin-top:40px;font-size:180px"><span class="blue">+</span><span id="n2000">0</span></div>
       <div class="h3" style="margin-top:20px">exercices et quiz,<br><span class="em">à ton niveau</span></div>
     </div>
+  </section>
+
+  <!-- Forum de la communauté -->
+  <section class="scene" id="forum">
+    <div style="position:absolute;left:150px;top:200px;width:700px">
+      <div class="kicker fo-k">Le forum</div>
+      <div class="h2" style="margin-top:34px;font-size:84px"><span class="line"><span class="fo-w">Progresse</span></span><span class="line"><span class="fo-w">en <span class="em">communauté.</span></span></span></div>
+      <div class="lead fo-l" style="margin-top:34px">Pose tes questions, partage<br>tes parties, échange avec<br>les coachs et les membres.</div>
+    </div>
+    <div class="forum" id="fo-win">
+      <div class="bar"><i></i><i></i><i></i><div class="u">echecs.com/forum</div></div>
+      <div class="fhead"><div class="burger"></div><img src="../../assets/brand/logo-echecs-com.png"><span class="me">T</span></div>
+      <div class="fbody">
+        <div class="fside"><div class="on">Sujets</div><div>Mes brouillons</div><small>CATÉGORIES</small><div><i style="background:#93b9e2"></i>Général</div><div><i style="background:#8e6fd8"></i>Académie</div><div><i style="background:#6bdc7d"></i>Tes parties</div><div><i style="background:#b5b5b5"></i>Le site</div></div>
+        <div class="fmain">
+          <div class="ftabs"><span class="on">Récents</span><span>Nouveau</span><span>Populaire</span><span class="new">＋ Créer un sujet</span></div>
+          <div class="fcols"><span>Sujet</span><span></span><span style="text-align:center">Réponses</span><span style="text-align:center">Activité</span></div>
+          <div id="fo-list"><div class="ft fo-t hot"><div><b>Comment contrer la Sicilienne ?</b><em style="--cat:#8e6fd8">Académie</em></div><div class="av"><span style="background:#93b9e2">C</span><span style="background:#fae361">H</span><span style="background:#6bdc7d">M</span></div><div class="n" id="fo-n">0</div><div class="a">1 min</div></div><div class="ft fo-t"><div><b>Ma partie du club : vos avis ?</b><em style="--cat:#6bdc7d">Tes parties</em></div><div class="av"><span style="background:#f06b8a">I</span><span style="background:#f7a35c">T</span></div><div class="n">7</div><div class="a">2 h</div></div><div class="ft fo-t"><div><b>Défense Philidor : le bon plan ?</b><em style="--cat:#93b9e2">Général</em></div><div class="av"><span style="background:#93b9e2">P</span><span style="background:#fae361">L</span></div><div class="n">4</div><div class="a">5 h</div></div><div class="ft fo-t"><div><b>Système blanc original</b><em style="--cat:#93b9e2">Général</em></div><div class="av"><span style="background:#f7a35c">S</span></div><div class="n">3</div><div class="a">1 j</div></div><div class="ft fo-t"><div><b>Finales de tours : vos exercices préférés</b><em style="--cat:#8e6fd8">Académie</em></div><div class="av"><span style="background:#6bdc7d">E</span><span style="background:#93b9e2">J</span><span style="background:#f06b8a">A</span></div><div class="n">12</div><div class="a">2 j</div></div><div class="ft fo-t"><div><b>Le nouveau guide des échecs</b><em style="--cat:#93b9e2">Général</em></div><div class="av"><span style="background:#fae361">M</span><span style="background:#f7a35c">E</span></div><div class="n">9</div><div class="a">3 j</div></div><div class="ft fo-t"><div><b>Question à propos de Lichess</b><em style="--cat:#93b9e2">Général</em></div><div class="av"><span style="background:#6bdc7d">S</span></div><div class="n">2</div><div class="a">4 j</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fbubble fo-b1" style="left:1010px;top:770px"><i style="background:#93b9e2">CR</i>Essaie 3.♗b5, c'est très solide !</div>
+    <div class="fbubble fo-b2" style="left:1330px;top:880px"><i style="background:#f06b8a">SR</i>Je t'explique ça en vidéo !</div>
+    <div class="pose white" id="pfo" data-pose="bonne-reponse" style="left:150px;top:690px;width:300px;height:367px"></div>
   </section>
 
   <!-- S7 — Tournois -->
@@ -1016,6 +1073,25 @@ scene("s6", ({ st, from, at, dur }) => {
   from("#p6", 1.8, { y: 420, opacity: 1 }, { y: 0, duration: .5, ease: "back.out(1.3)" });
   playPose(st, "#p6", 1.8);
   exitZoom(st, "s6", dur);
+});
+
+// ===== Forum de la communauté
+scene("forum", ({ st, from, at, lines, dur }) => {
+  from(".fo-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  lines(".fo-w", .1, .1);
+  from(".fo-l", .6, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
+  from("#fo-win", .15, { opacity: 0, x: 220, rotateY: -18, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -6, duration: .7 });
+  at("#fo-win", .85, { rotateY: -1, duration: dur - .85, ease: "sine.inOut" });
+  from(".fo-t", .45, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .4, stagger: .06 });
+  // Le sujet du moment reçoit des réponses
+  const rep = { v: 0 };
+  st.fromTo(rep, { v: 0 }, { v: 3, duration: 1.4, ease: "none", onUpdate: () => { $("#fo-n").textContent = Math.floor(rep.v); } }, 1.4);
+  from(".ft.hot", 1.2, { backgroundColor: "#ffffff" }, { backgroundColor: "#fff3a8", duration: .3, yoyo: true, repeat: 2, ease: "sine.inOut" });
+  from(".fo-b1", 1.5, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(2)" });
+  from(".fo-b2", 2.2, { opacity: 0, y: 30, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .45, ease: "back.out(2)" });
+  from("#pfo", 1.0, { y: 440 }, { y: 0, duration: .55, ease: "back.out(1.4)" });
+  playPose(st, "#pfo", 1.0);
+  exitZoom(st, "forum", dur, { scale: .96 });
 });
 
 // ===== S7 : Tournois

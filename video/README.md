@@ -1,6 +1,6 @@
 # Vidéo de présentation — echecs.com Académie
 
-Vidéo en motion design de 55 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
+Vidéo en motion design de 60 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
 
 Fichiers produits :
 - `build/echecs-academie-presentation.mp4` : la vidéo finale ;
@@ -19,8 +19,9 @@ Fichiers produits :
 | 7 | Masterclasses en direct | « Masterclasses avec des pros » : direct (échiquier, caméra de Sylvain Ravot, question du chat), fiches de Sylvain Ravot, Marc Quenehen, Fabien Libiszewski et Gata Kamsky | Regarde, en prof (toque) |
 | 8 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
 | 9 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
-| 10 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
-| 11 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
+| 10 | Forum | « Progresse en communauté » : forum echecs.com (logo echecs.com), sujet « Comment contrer la Sicilienne ? » qui reçoit des réponses, bulles de coachs | Bonne réponse (blanche) |
+| 11 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
+| 12 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
 
 Pour la version musique seule, les durées de scène sont fixées dans `scripts/timing.py` (`MUSIC_ONLY`). Avec une voix off, elles sont calculées à partir des répliques.
 
