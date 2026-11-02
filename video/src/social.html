@@ -148,6 +148,8 @@ document.getElementById(fmt).classList.add("on");
 const qs = new URLSearchParams(location.search);
 if (qs.get("t")) document.querySelectorAll(".ft-t").forEach(x => { x.textContent = qs.get("t"); });
 if (qs.get("e")) document.querySelectorAll(".ft-e").forEach(x => { x.textContent = qs.get("e"); });
+// Taille du titre (?fs=…), pour les longues questions des publicités
+if (qs.get("fs")) document.querySelectorAll(".fmt.on .ttl").forEach(x => { x.style.fontSize = qs.get("fs") + "px"; x.querySelectorAll(".em").forEach(e => { e.style.fontSize = (+qs.get("fs") * 1.06) + "px"; }); x.style.width = "980px"; x.style.left = "50px"; x.style.right = "50px"; });
 const CHIPS = '<span class="chip"><b>+200</b> leçons</span><span class="chip"><b>+2 000</b> exercices</span><span class="chip">Masterclasses</span><span class="chip">Tournois</span><span class="chip">Forum</span>';
 document.querySelectorAll(".chips").forEach(c => { c.innerHTML = CHIPS; });
 const pos = { a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: "wN", h1: "wR", a8: "bR", b8: "bN", c8: "bB", d8: "bQ", e8: "bK", f8: "bB", g8: "bN", h8: "bR" };

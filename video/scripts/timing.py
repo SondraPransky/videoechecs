@@ -31,7 +31,7 @@ SCENES = [
     ("s8", "08", 0.4, 6.5, 1.5),
 ]
 # Mode --music-only : durées fixes (secondes, multiples d'un temps)
-MUSIC_ONLY = {"s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
+MUSIC_ONLY = {"hook": 4.0, "sol": 2.5, "s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
               "s4": 5.0, "s5": 6.0, "s6": 5.0, "forum": 5.0, "s7": 4.0, "s8": 5.5}
 # Déclinaisons courtes (toujours en musique seule) : sous-ensembles de scènes
 EDITIONS = {
@@ -47,6 +47,8 @@ EDITIONS = {
     "pan-revue": ["revue", "s8"],
     "pan-forum": ["forum", "s8"],
     "pan-tournois": ["s7", "s8"],
+    # Publicités : une question-accroche, la réponse, puis l'essentiel de l'académie (~31 s)
+    **{f"accroche-{k}": ["hook", "sol", "s3", "prog", "s4", "forum", "s8"] for k in range(1, 6)},
 }
 music_only = "--music-only" in sys.argv
 edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"

@@ -232,6 +232,33 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .rvb-badge b { font: 900 60px/1 "Manrope"; }
 .rvb-badge small { font: 800 20px/1.2 "Manrope"; }
 
+/* Accroches publicitaires (éditions accroche-1 à 5) */
+.hk-q { position: absolute; left: 150px; top: 190px; width: 900px; }
+.hk-q .t { font: 900 76px/1.05 "Fraunces", serif; letter-spacing: -.015em; }
+.hk-q .e { display: block; margin-top: 10px; font: italic 400 76px/1.08 "Fraunces", serif; color: var(--yellow); }
+.hk-vis { position: absolute; left: 1120px; top: 170px; width: 670px; height: 460px; border-radius: 30px; padding: 30px 34px; background: linear-gradient(160deg, #131b26, #0b1017); box-shadow: 0 50px 110px rgba(0,0,0,.55), inset 0 0 0 1px rgba(147,185,226,.16); overflow: hidden; }
+.hk-vis small { display: block; font: 800 20px/1 "Manrope"; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.hk-vis .big { font: 900 96px/1 "Fraunces"; margin-top: 12px; font-variant-numeric: tabular-nums; }
+.hk-vis .tag { display: inline-block; margin-top: 14px; padding: 10px 18px; border-radius: 999px; background: rgba(255,90,106,.16); color: var(--red); font: 800 24px/1 "Manrope"; }
+.hk-vis svg.flat { position: absolute; left: 34px; right: 34px; bottom: 40px; width: 602px; height: 200px; }
+.hk-games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
+.hk-games div { position: relative; height: 92px; border-radius: 12px; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
+.hk-games b { position: absolute; right: 6px; bottom: 6px; padding: 4px 8px; border-radius: 8px; background: #111; color: #fff; font: 800 15px/1 "Manrope"; }
+.hk-cal { display: flex; gap: 14px; margin-top: 26px; }
+.hk-cal div { flex: 1; height: 120px; border-radius: 16px; background: #f1f0ea; color: #111; display: grid; place-items: center; font: 800 26px/1 "Manrope"; }
+.hk-bar { position: relative; height: 26px; margin-top: 40px; border-radius: 13px; background: #2a3442; overflow: hidden; }
+.hk-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 40%; border-radius: 13px; background: linear-gradient(90deg, #93b9e2, #fae361); }
+.hk-vids { display: flex; gap: 14px; margin-top: 22px; }
+.hk-vids div { position: relative; flex: 1; }
+.hk-vids img { width: 100%; height: 112px; object-fit: cover; border-radius: 12px; display: block; }
+.hk-vids span { position: absolute; left: 50%; top: 56px; width: 44px; height: 44px; margin: -22px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; }
+.hk-sign { position: absolute; left: 50%; top: 60px; width: 18px; height: 420px; margin-left: -9px; border-radius: 9px; background: #c9a36a; }
+.hk-arrow { position: absolute; padding: 16px 26px; font: 800 30px/1 "Manrope"; color: #111; background: #f1f0ea; box-shadow: 0 14px 30px rgba(0,0,0,.35); }
+.sol-t { font: 900 128px/1 "Fraunces", serif; letter-spacing: -.02em; text-align: center; }
+.sol-t .e { font-style: italic; font-weight: 400; color: var(--yellow); }
+.sol-s { margin-top: 34px; font: 700 46px/1.2 "Manrope"; color: #dfe6ef; text-align: center; }
+.sol-s b { color: var(--yellow); }
+
 /* Scène 4 : masterclasses en direct */
 .live { position: absolute; left: 1000px; top: 90px; width: 790px; height: 520px; border-radius: 28px; overflow: hidden; background: #0e141c; box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 0 0 1px rgba(147,185,226,.14); }
 .cam { position: absolute; left: 520px; top: 266px; width: 240px; height: 150px; border-radius: 18px; overflow: hidden; background: #0e141c; box-shadow: 0 0 0 3px var(--red), 0 20px 40px rgba(0,0,0,.5); }
@@ -295,6 +322,24 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
     <div id="grid"></div>
     <svg id="grain" width="1920" height="1080"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
   </div>
+
+  <!-- Accroche : question au spectateur (éditions accroche-1 à 5) -->
+  <section class="scene" id="hook">
+    <div class="hk-q"><div class="kicker hk-k">Et toi ?</div><div style="margin-top:30px"><span class="line"><span class="t hk-w" id="hk-t"></span></span><span class="line"><span class="e hk-w" id="hk-e"></span></span></div></div>
+    <div class="hk-vis" id="hk-vis"></div>
+    <div class="pose" id="phk" style="left:170px;top:700px;width:290px;height:355px"></div>
+  </section>
+
+  <!-- Réponse : « Nous avons la solution ! » -->
+  <section class="scene" id="sol">
+    <div style="position:absolute;left:0;right:0;top:330px">
+      <div class="sol-t"><span class="line"><span class="sol-w" id="sol-t"></span></span></div>
+      <div class="sol-s" id="sol-s">Découvrez l'<b>Académie Europe Échecs</b>.</div>
+    </div>
+    <div class="pose" id="psol" data-pose="hourra" style="left:1500px;top:600px;width:340px;height:416px"></div>
+    <div id="sparksSol" style="position:absolute;left:0;top:0"></div>
+    <div class="confetti" id="confSol" style="left:960px;top:420px"></div>
+  </section>
 
   <!-- S1 — Progresse à ton rythme : de l'échiquier au parcours de progression -->
   <section class="scene" id="s1">
@@ -856,6 +901,78 @@ if (S.s8) {
   tl.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, duration: S.s8.start, ease: "none" }, 0);
   tl.to("#progress", { opacity: 0, duration: .3 }, S.s8.start);
 } else tl.set("#progress", { opacity: 0 }, 0);  // pas de barre de progression dans la boucle
+
+// ===== Accroches (éditions accroche-1 à 5) : une question, puis la réponse
+const HOOK = +((new URLSearchParams(location.search).get("edition") || "").match(/accroche-(\d)/) || [0, 1])[1];
+const ACCROCHES = {
+  1: { t: "Vous enchaînez les parties,", e: "mais votre classement ne bouge pas ?", pose: "gratte-tete", vis: "elo" },
+  2: { t: "Vous jouez beaucoup,", e: "mais vous n'avez pas l'impression de progresser ?", pose: "sprint", vis: "parties" },
+  3: { t: "Vous avez l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
+  4: { t: "Vous regardez des vidéos d'échecs,", e: "mais ne progressez pas ?", pose: "menton", vis: "videos" },
+  5: { t: "Vous voulez progresser aux échecs,", e: "mais vous ne savez pas par où commencer ?", pose: "haussement", vis: "commencer" },
+};
+window.ACCROCHES = ACCROCHES;
+const ACC = ACCROCHES[HOOK] || ACCROCHES[1];
+$("#hk-t").textContent = ACC.t; $("#hk-e").textContent = ACC.e.replace(/ ([?!])/g, "\u00a0$1");
+$("#phk").dataset.pose = ACC.pose + "-miroir"; $("#phk").innerHTML = window.MASCOT_POSES[ACC.pose + "-miroir"];   // tournée vers le visuel
+$("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à vous\u00a0!</span>';
+$("#hk-vis").innerHTML = {
+  elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
+    <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
+  parties: `<small>Parties jouées ce mois-ci</small><div class="big" id="hk-n">0</div><div class="hk-games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="hk-g"><b>${r}</b></div>`).join("")}</div>`,
+  stagne: `<small>Objectif 1400</small><div class="hk-cal">${["Janvier", "Mars", "Juin"].map(m => `<div class="hk-m">${m}</div>`).join("")}</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag">Toujours 40 %</span>`,
+  videos: `<small>Vidéos regardées</small><div class="big" id="hk-h">0 h</div><div class="hk-vids">${["p-calcul-gagnant", "p-minute-finale", "p-ouvertures-vogue"].map(v => `<div class="hk-v"><img src="../assets/captures/ee/hd/${v}.jpg"><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg></span></div>`).join("")}</div><span class="tag">Classement : inchangé</span>`,
+  commencer: `<div class="hk-sign"></div>${[["Ouvertures ?", 90, 150, -6, "#93b9e2"], ["Tactique ?", 330, 210, 5, "#fae361"], ["Finales ?", 60, 290, -4, "#6bdc7d"], ["Stratégie ?", 320, 370, 6, "#f06b8a"]].map(([l, x, y, r, c], i) => `<div class="hk-arrow hk-a" style="left:${x}px;top:${y}px;background:${c};transform:rotate(${r}deg);clip-path:polygon(${i % 2 ? "0 0,88% 0,100% 50%,88% 100%,0 100%" : "12% 0,100% 0,100% 100%,12% 100%,0 50%"});padding-${i % 2 ? "right" : "left"}:44px">${l}</div>`).join("")}`,
+}[ACC.vis];
+const spkSol = sparks($("#sparksSol"), [[480, 300, .9], [1440, 320, 1], [560, 640, .6], [1360, 660, .7]]);
+const confSol = confetti($("#confSol"), 50, 31);
+
+scene("hook", ({ st, from, at, lines, dur }) => {
+  from(".hk-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  lines(".hk-w", .15, .35);
+  sfx(st, "pop", .2, { p: .8, g: .5 }); sfx(st, "pop", .55, { p: 1, g: .5 });
+  from("#hk-vis", .3, { opacity: 0, x: 160, rotateY: -16, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -5, duration: .7 });
+  at("#hk-vis", 1, { rotateY: -1, duration: dur - 1, ease: "sine.inOut" });
+  from("#phk", .6, { y: 440 }, { y: 0, duration: .55, ease: "back.out(1.4)" });
+  playPose(st, "#phk", .6);
+  if (ACC.vis === "elo") {
+    at("#hk-line", .8, { strokeDashoffset: 0, duration: 1.8, ease: "none" });
+    const v = { k: 0 };
+    st.to(v, { k: 1, duration: 2.4, ease: "none", onUpdate: () => { $("#hk-elo").textContent = ["1 201", "1 203", "1 198", "1 202", "1 199", "1 201"][Math.floor(v.k * 5.99)]; } }, .9);
+    sfx(st, "tick", 1.2, { g: .3 }); sfx(st, "tick", 1.7, { g: .3, p: .9 }); sfx(st, "tick", 2.2, { g: .3 });
+  } else if (ACC.vis === "parties") {
+    from(".hk-g", .7, { opacity: 0, scale: .5, y: -40 }, { opacity: 1, scale: 1, y: 0, duration: .3, stagger: .18, ease: "back.out(2)" });
+    const v = { n: 0 };
+    st.to(v, { n: 247, duration: 2.2, ease: "power1.in", onUpdate: () => { $("#hk-n").textContent = Math.round(v.n); } }, .7);
+    [0, 1, 2, 3, 4, 5].forEach(k => sfx(st, "pop", .75 + k * .36, { p: .9 + k * .05, g: .3 }));
+  } else if (ACC.vis === "stagne") {
+    from(".hk-m", .7, { opacity: 0, rotateX: -90, transformPerspective: 800 }, { opacity: 1, rotateX: 0, duration: .4, stagger: .55 });
+    st.fromTo("#hk-bar", { width: "36%" }, { width: "41%", duration: .5, yoyo: true, repeat: 4, ease: "sine.inOut" }, .8);
+    [0, 1, 2].forEach(k => sfx(st, "click", .75 + k * .55, { g: .3 }));
+  } else if (ACC.vis === "videos") {
+    from(".hk-v", .7, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .4, stagger: .2 });
+    const v = { h: 0 };
+    st.to(v, { h: 12, duration: 2, ease: "power1.out", onUpdate: () => { $("#hk-h").textContent = Math.round(v.h) + " h"; } }, .8);
+    sfx(st, "click", .9, { g: .4 });
+  } else {
+    from(".hk-sign", .6, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: .4 });
+    from(".hk-a", .9, { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .35, stagger: .3, ease: "back.out(2.4)" });
+    [0, 1, 2, 3].forEach(k => sfx(st, "pop", .95 + k * .3, { p: .9 + k * .1, g: .4 }));
+  }
+  exitZoom(st, "hook", dur, { scale: .96 });
+});
+
+scene("sol", ({ st, from, at, lines, dur }) => {
+  lines(".sol-w", .05, .1);
+  from("#sol-s", .45, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .5 });
+  burst(st, confSol, .1, 2);
+  twinkle(st, spkSol, .3, .08);
+  from("#psol", .25, { y: 460 }, { y: 0, duration: .5, ease: "back.out(1.5)" });
+  playPose(st, "#psol", .25);
+  sfx(st, "shimmer", .1); sfx(st, "ding", .45, { p: 1.1, g: .7 });
+  exitZoom(st, "sol", dur, { scale: 1.06 });
+});
+if (S.sol) tl.fromTo("#flash", { opacity: 0 }, { opacity: .45, duration: .05, ease: "none" }, S.sol.start).to("#flash", { opacity: 0, duration: .6, ease: "power2.out" }, ">");
 
 // ===== S1 : Progresse à ton rythme — l'échiquier se met en place, puis le pion parcourt la progression
 const S1_T0 = 1.5, S1_TRAVEL = 2.7;

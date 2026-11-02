@@ -7,6 +7,7 @@ Ouvrir **apercu.html** dans un navigateur pour voir toutes les images d'un coup.
 
 ```
 videos/
+  00-accroches/      5 publicités de 31 s qui commencent par une question (16:9 et story 9:16)
   00-general/        présentation longue (56 s), présentation courte (30 s) en 4 formats, boucle muette d'en-tête de site
   01-progression/    une mini-vidéo par pan de l'académie (10 à 17 s), chacune en 4 formats
   02-lecons/ … 09-tournois/
@@ -37,6 +38,20 @@ TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type
 | Pinterest | — | `*-pinterest-1000x1500.jpg` |
 | Site web | `boucle-entete-site-muette-*.mp4` (en-tête), `presentation-longue-16x9.mp4` | `affiche-video-1920x1080.jpg` (image avant lecture), `partage-lien-1200x630.jpg` (Open Graph) |
 | Photo de profil, partout | — | `00-identite/avatar-*.jpg` (s'affiche en rond) |
+
+## Publicités (videos/00-accroches/)
+
+Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons la solution ! » ou « Nous avons pensé à vous ! Découvrez l'Académie Europe Échecs »), puis leçons, progression, masterclasses, forum et l'appel final.
+
+| Fichier | Question |
+|---|---|
+| `accroche-1-*` | Vous enchaînez les parties, mais votre classement ne bouge pas ? |
+| `accroche-2-*` | Vous jouez beaucoup, mais vous n'avez pas l'impression de progresser ? |
+| `accroche-3-*` | Vous avez l'impression de stagner depuis quelque temps ? |
+| `accroche-4-*` | Vous regardez des vidéos d'échecs, mais ne progressez pas ? |
+| `accroche-5-*` | Vous voulez progresser aux échecs, mais vous ne savez pas par où commencer ? |
+
+`*-story-9x16.mp4` pour les pubs Instagram (Stories, Reels), `*-16x9.mp4` pour YouTube, X, LinkedIn. En story, la question s'affiche en grand en haut de l'écran pendant l'accroche. Idéal pour un test A/B : même budget sur les 5 versions, puis garder celle qui convertit le mieux.
 
 ## Bon à savoir
 
