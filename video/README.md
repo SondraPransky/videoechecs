@@ -1,6 +1,6 @@
 # Vidéo de présentation — echecs.com Académie
 
-Vidéo en motion design de 49 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
+Vidéo en motion design de 54 s (1920×1080, 30 i/s), en musique seule : électro-pop originale à 120 BPM, avec les coupes calées sur les temps. Elle présente la mascotte du site et de vraies captures de la plateforme et d'Europe Échecs.
 
 Fichiers produits :
 - `build/echecs-academie-presentation.mp4` : la vidéo finale ;
@@ -12,14 +12,15 @@ Fichiers produits :
 |---|---|---|---|
 | 1 | Pas à pas | L'échiquier se met en place, 1.e4 e5 | « hello » (animation du designer) |
 | 2 | Progression | Initiation → Objectif 1400, 1600, 1800 → 2000 et +, promotion en dame | Niveau supérieur (escalier) |
-| 3 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
-| 4 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
-| 5 | Cours en direct | MI & GMI | — |
-| 6 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
-| 7 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
-| 8 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
-| 9 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
-| 10 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
+| 3 | Mesure tes progrès | Barre de validation d'un module (Objectif 1400) qui se remplit, « Validé », 3 étoiles, courbe Elo qui monte de 1150 à 1480 | Série réussie |
+| 4 | Leçons | +200 leçons, 4 formats (vidéo, cours, exercice, quiz) | Idée (ampoule) |
+| 5 | Vidéos Europe Échecs | Lecteur HD (Marc Quenehen), fiches auteurs en couleur (Nataf, De Labaca, Quenehen, Ravot), carrousel des séries | — |
+| 6 | Cours en direct | MI & GMI | — |
+| 7 | Tes parties | Saisie coup par coup en notation figurine, puis import d'un PGN dans le lecteur Europe Échecs recoloré, analyse et partage avec d'autres membres | Réflexion |
+| 8 | Exercices et quiz | Exercice Objectif 1400, quiz Objectif 1600 | Bonne réponse (pirouette) |
+| 9 | Revue Europe Échecs | Numéro du mois (n°779, octobre 2026) en PGN, leçons d'Igor Nataf et Romuald De Labaca, thèmes | Lecture (blanche) |
+| 10 | Tournois | 10'+5", « Toi » passe premier | Victoire en tournoi |
+| 11 | Final | Logo, « Commencer maintenant », echecs.com/academie | Regarde ! (montre le bouton) |
 
 Pour la version musique seule, les durées de scène sont fixées dans `scripts/timing.py` (`MUSIC_ONLY`). Avec une voix off, elles sont calculées à partir des répliques.
 
