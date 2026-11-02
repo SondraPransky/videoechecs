@@ -352,7 +352,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="lead s1-l" style="margin-top:22px;font-size:38px">Du premier coup à <b style="color:var(--yellow)">plus de 2000.</b></div>
     </div>
     <div id="b1" class="board" style="left:1110px;top:80px;width:520px;height:520px"></div>
-    <div class="pose" id="m1" data-pose="promenade" style="left:1530px;top:200px;width:330px;height:404px"></div>
+    <div class="mascot" id="m1" style="left:1490px;top:250px;width:370px;height:370px"></div>
     <div class="path" id="path" style="top:810px"><div class="fill"></div></div>
     <div class="traveler" id="trav" style="top:630px"><div id="trav-p"></div><div id="trav-q" style="opacity:0"></div><div id="sparks2"></div></div>
   </section>
@@ -793,7 +793,7 @@ LB.forEach(([rk, nm, c, pt, me]) => {
 
 // Mascotte (Lottie pilotée image par image)
 const mascots = {};
-for (const id of []) {   // la mascotte « hello » (Lottie) n'est plus utilisée
+for (const id of ["m1"]) {   // mascotte « hello » du designer (Lottie) sur la scène d'ouverture
   mascots[id] = lottie.loadAnimation({ container: $("#" + id), renderer: "svg", loop: false, autoplay: false,
     animationData: JSON.parse(JSON.stringify(window.MASCOT_HELLO)) });
 }
@@ -987,7 +987,7 @@ scene("s1", ({ st, from, at, lines, dur }) => {
   sfx(st, "move", 1.62); sfx(st, "move", 2.07, { p: .9 });
   from("#b1", 1.1, { rotateY: 0, rotateX: 0, scale: 1, transformPerspective: 1600 }, { rotateY: -12, rotateX: 8, scale: 1.04, duration: dur - 1.1, ease: "sine.inOut" });
   from("#m1", .7, { y: 460 }, { y: 0, duration: .7, ease: "back.out(1.4)" });
-  playPose(st, "#m1", .7);
+  playMascot(st, "m1", .7, dur);
   // Parcours de progression
   from("#path", .9, { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: .7 });
   from(".stop", 1.0, { scale: 0 }, { scale: 1, duration: .4, stagger: .05, ease: "back.out(3)" });
