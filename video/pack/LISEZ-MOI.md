@@ -20,12 +20,14 @@ images/
                      chaque quiz a aussi sa réponse : `…-reponse-story-1080x1920.jpg` et `…-reponse-carre-1080x1080.jpg`, à publier le lendemain
   carrousel-1-mat-du-couloir/, carrousel-2-regle-du-carre/, carrousel-3-fegatello/
                      3 carrousels pédagogiques de 7 diapositives (portrait 1080×1350, Instagram, LinkedIn, Facebook)
+emails/              32 e-mails de suivi des abonnés en HTML (img/ à héberger, apercus/ pour les voir)
 apercu.html          planche de toutes les images
 TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
 TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)
 QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçons de l'académie (visuels 65 à 85)
 CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mails, phases de la publicité payante
 TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
+EMAILS.md                parcours de l'abonné, catalogue des 32 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
 ```
 
 ## Quel format pour quel réseau

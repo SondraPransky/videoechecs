@@ -68,7 +68,8 @@ for f in build/reseaux/*.jpg; do cp "$f" "$PACK/images/00-general/"; done
 
 # 4. Textes, puis archive
 python3 scripts/textes-alternatifs.py >/dev/null
-cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md pack/TEXTES-ALTERNATIFS.md pack/QUIZ-ACADEMIE.md pack/CALENDRIER-LANCEMENT.md pack/TEXTES-PUBS-VARIANTES.md "$PACK/"
+cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md pack/TEXTES-ALTERNATIFS.md pack/QUIZ-ACADEMIE.md pack/CALENDRIER-LANCEMENT.md pack/TEXTES-PUBS-VARIANTES.md pack/EMAILS.md "$PACK/"
+python3 scripts/emails.py && node scripts/emails-apercus.mjs >/dev/null
 rm -rf "$PACK/_cadres"
 rm -f build/pack-reseaux-echecs-com.zip
 (cd build && zip -qr pack-reseaux-echecs-com.zip pack -x 'pack/_captures/*')

@@ -13,7 +13,7 @@ def nb(f): return re.sub(r"[^a-z0-9.-]+", "-", str(f.relative_to(PACK)).lower())
 def img(f):
     dst = MED / (nb(f).rsplit(".", 1)[0] + ".jpg")
     if not dst.exists() or dst.stat().st_mtime < f.stat().st_mtime:   # refait si la source a changé
-        im = Image.open(f).convert("RGB"); im.thumbnail((800, 800)); im.save(dst, quality=80, optimize=True)
+        im = Image.open(f).convert("RGB"); im.thumbnail((800, 800) if im.height < 2 * im.width else (640, 9000)); im.save(dst, quality=80, optimize=True)   # e-mails : pleine hauteur
     w, h = Image.open(f).size
     return {"type": "image", "src": "media/" + dst.name, "w": w, "h": h}
 
@@ -34,6 +34,7 @@ ETIQ = [("reponse-story", "Réponse · story 9:16"), ("reponse-carre", "Réponse
         ("avatar", "Photo de profil"), ("banniere", "Bannière"), ("a-la-une", "Story à la une")]
 def etiquette(f):
     n = f.name.lower(); lab = next((l for k, l in ETIQ if k in n), f.stem)
+    if f.parent.name == "apercus": return "Aperçu sur téléphone"
     if "jaune" in n and "jaune" not in lab: lab += " · fond jaune"
     for k, l in [("facebook", "Facebook"), ("linkedin", "LinkedIn"), ("youtube", "YouTube"), ("-x-1500", "X")]:
         if k in n and "banniere" in n: lab = "Bannière " + l + (" · soleil" if "soleil" in n else "")
@@ -82,16 +83,20 @@ def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
     return fan(re.sub(r"<[^>]+>|&#8239;", "", t))
-GARDE_Q = ("-carre-1080x1080.jpg", "-story-1080x1920.jpg", "-lien-1200x630.jpg", "reponse-story-1080x1920.jpg")   # quiz : 3 formats + la réponse
+GARDE_Q = ("-carre-1080x1080.jpg", "-story-1080x1920.jpg", "reponse-story-1080x1920.jpg")   # quiz : carré, story + la réponse (limite de fichiers de la page)
 GARDE = ("carre-1080x1080.jpg", "portrait-1080x1350.jpg", "story-1080x1920.jpg", "lien-1200x630.jpg")   # 4 formats par visuel (limite de fichiers de la page)
 S.append({"id": "visuels", "titre": "Visuels", "items": [
     item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if not d.name[3:].startswith(("quiz", "academie"))]})
 S.append({"id": "quiz", "titre": "Quiz", "items": [
-    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats + réponse (story, carré) dans le pack, 3 + réponse ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE_Q) and not f.name.endswith(("reponse-carre-1080x1080.jpg",))], ORDRE_I), "image") for d in vi if d.name[3:].startswith(("quiz", "academie"))]})
+    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats + réponse (story, carré) dans le pack, 2 + réponse ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE_Q) and not f.name.endswith(("reponse-carre-1080x1080.jpg",))], ORDRE_I), "image") for d in vi if d.name[3:].startswith(("quiz", "academie"))]})
 CAR = sorted(d for d in I.iterdir() if d.is_dir() and d.name.startswith("carrousel-"))
 S.append({"id": "carrousels", "titre": "Carrousels pédagogiques", "items": [
     item("carrousel-" + d.name.split("-", 2)[2], f"Carrousel {d.name.split('-')[1]} · {d.name.split('-', 2)[2].replace('-', ' ').capitalize()}", f"{len(list(d.glob('*.jpg')))} diapositives · portrait 4:5 · Instagram, LinkedIn, Facebook",
          sorted(d.glob("*.jpg"), key=lambda f: int(f.name.split("-portrait")[0].rsplit("-", 1)[1])), "image") for d in CAR]})
+EM = PACK / "emails/apercus"
+S.append({"id": "emails", "titre": "E-mails de suivi des abonnés", "items": [
+    item("email-" + f.stem, f"{f.stem[:2]} · " + next((l.split("|")[3].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), f.stem),
+         next((l.split("|")[2].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), ""), [f], "image") for f in sorted(EM.glob("*.jpg"))]})
 idt = I / "00-identite"
 S.append({"id": "identite", "titre": "Identité des comptes", "items": [
     item("id-avatars", "Photos de profil", "nuit et soleil", sorted(idt.glob("avatar-*.jpg")), "image"),

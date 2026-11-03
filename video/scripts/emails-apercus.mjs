@@ -1,0 +1,16 @@
+// Captures des e-mails (build/_emails_apercu/*.html) en largeur téléphone, pour la page de validation.
+// Usage : node scripts/emails-apercus.mjs  → build/pack/emails/apercus/*.jpg
+import { chromium } from 'playwright';
+import path from 'path';
+import fs from 'fs';
+const here = path.dirname(path.dirname(new URL(import.meta.url).pathname));
+const src = path.join(here, 'build/_emails_apercu'), out = path.join(here, 'build/pack/emails/apercus');
+fs.mkdirSync(out, { recursive: true });
+const b = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });
+for (const f of fs.readdirSync(src).filter(f => f.endsWith('.html')).sort()) {
+  const p = await b.newPage({ viewport: { width: 420, height: 900 }, deviceScaleFactor: 2 });
+  await p.goto('file://' + path.join(src, f)); await p.waitForLoadState('load');
+  await p.screenshot({ path: path.join(out, f.replace('.html', '.jpg')), fullPage: true, type: 'jpeg', quality: 82 });
+  await p.close(); console.log('aperçu', f);
+}
+await b.close();
