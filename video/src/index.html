@@ -336,7 +336,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
   <section class="scene" id="sol">
     <div style="position:absolute;left:0;right:0;top:330px">
       <div class="sol-t"><span class="line"><span class="sol-w" id="sol-t"></span></span></div>
-      <div class="sol-s" id="sol-s">Découvrez l'<b>Académie Europe Échecs</b>.</div>
+      <div class="sol-s" id="sol-s">Découvre l'<b>Académie Europe Échecs</b>.</div>
     </div>
     <div class="pose" id="psol" data-pose="hourra" style="left:1500px;top:600px;width:340px;height:416px"></div>
     <div id="sparksSol" style="position:absolute;left:0;top:0"></div>
@@ -462,7 +462,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       </div>
       <div class="imp s5b-imp" style="left:150px;top:400px">
         <div class="imp-tabs"><span class="on">Importer des parties</span><span class="btn-o" style="margin-bottom:10px">＋ Créer une partie</span></div>
-        <div class="imp-area"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="#fae361" stroke="#1b1b1b" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 11v6m-3-3l3 3 3-3" fill="none" stroke="#1b1b1b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ph" id="imp-ph">Collez ici un PGN ou une position FEN</span><pre id="imp-text"></pre></div>
+        <div class="imp-area"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="#fae361" stroke="#1b1b1b" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 11v6m-3-3l3 3 3-3" fill="none" stroke="#1b1b1b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ph" id="imp-ph">Colle ici un PGN ou une position FEN</span><pre id="imp-text"></pre></div>
         <div class="imp-actions"><span class="btn-o">Choisir un fichier PGN</span><span class="btn-y" id="imp-go">Importer des parties</span></div>
       </div>
       <div class="prow s5b-row" style="left:150px;top:722px"><div class="hd"><span>BLANCS</span><span>NOIRS</span><span>ÉVÉNEMENT</span><span></span></div>
@@ -907,17 +907,17 @@ if (S.s8) {
 // ===== Accroches (éditions accroche-1 à 5) : une question, puis la réponse
 const HOOK = +((new URLSearchParams(location.search).get("edition") || "").match(/accroche-(\d)/) || [0, 1])[1];
 const ACCROCHES = {
-  1: { t: "Vous enchaînez les parties,", e: "mais votre classement ne bouge pas ?", pose: "gratte-tete", vis: "elo" },
-  2: { t: "Vous jouez beaucoup,", e: "mais vous n'avez pas l'impression de progresser ?", pose: "sprint", vis: "parties" },
-  3: { t: "Vous avez l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
-  4: { t: "Vous regardez des vidéos d'échecs,", e: "mais ne progressez pas ?", pose: "menton", vis: "videos" },
-  5: { t: "Vous voulez progresser aux échecs,", e: "mais vous ne savez pas par où commencer ?", pose: "haussement", vis: "commencer" },
+  1: { t: "Tu enchaînes les parties,", e: "mais ton classement ne bouge pas ?", pose: "gratte-tete", vis: "elo" },
+  2: { t: "Tu joues beaucoup,", e: "mais tu n'as pas l'impression de progresser ?", pose: "sprint", vis: "parties" },
+  3: { t: "Tu as l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
+  4: { t: "Tu regardes des vidéos d'échecs,", e: "mais tu ne progresses pas ?", pose: "menton", vis: "videos" },
+  5: { t: "Tu veux progresser aux échecs,", e: "mais tu ne sais pas par où commencer ?", pose: "haussement", vis: "commencer" },
 };
 window.ACCROCHES = ACCROCHES;
 const ACC = ACCROCHES[HOOK] || ACCROCHES[1];
 $("#hk-t").textContent = ACC.t; $("#hk-e").textContent = ACC.e.replace(/ ([?!])/g, "\u00a0$1");
 $("#phk").dataset.pose = ACC.pose + "-miroir"; $("#phk").innerHTML = window.MASCOT_POSES[ACC.pose + "-miroir"];   // tournée vers le visuel
-$("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à vous\u00a0!</span>';
+$("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à toi\u00a0!</span>';
 $("#hk-vis").innerHTML = {
   elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
     <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,

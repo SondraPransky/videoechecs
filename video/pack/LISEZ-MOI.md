@@ -43,16 +43,16 @@ TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type
 
 ## Publicités de 15 s (videos/00-publicites/)
 
-Construites pour la pub, sans reprendre le motion : la question en très grand, « Nous avons la solution ! » (ou « pensé à vous ! »),
+Construites pour la pub, sans reprendre le motion : la question en très grand, « Nous avons la solution ! » (ou « pensé à toi ! »),
 puis **une réponse propre à chaque question**, et l'appel final. Chaque pub a sa musique.
 
 | Fichier | Question | Réponse montrée | Musique |
 |---|---|---|---|
-| `pub-1-*` | Vous enchaînez les parties, mais votre classement ne bouge pas ? | « Jouer ne suffit pas. Entraînez-vous avec méthode. » Courbe Elo qui monte, modules validés | électro-pop |
-| `pub-2-*` | Vous jouez beaucoup, mais vous n'avez pas l'impression de progresser ? | « Jouez moins, comprenez plus. » Analyse de partie, erreur repérée, exercices ciblés | disco-funk |
-| `pub-3-*` | Vous avez l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprenez des meilleurs. » Masterclasses en direct avec GM et MF | lo-fi puis hip-hop |
-| `pub-4-*` | Vous regardez des vidéos d'échecs, mais ne progressez pas ? | « Ne regardez plus, jouez ! » La vidéo devient un exercice : à vous de jouer | trap cinématique |
-| `pub-5-*` | Vous voulez progresser aux échecs, mais vous ne savez pas par où commencer ? | « Suivez le guide, étape par étape. » Le parcours de l'initiation à 2000+ | pop acoustique |
+| `pub-1-*` | Tu enchaînes les parties, mais ton classement ne bouge pas ? | « Jouer ne suffit pas. Entraîne-toi avec méthode. » Courbe Elo qui monte, modules validés | électro-pop |
+| `pub-2-*` | Tu joues beaucoup, mais tu n'as pas l'impression de progresser ? | « Joue moins, comprends plus. » Analyse de partie, erreur repérée, exercices ciblés | disco-funk |
+| `pub-3-*` | Tu as l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprends des meilleurs. » Masterclasses en direct avec GM et MF | lo-fi puis hip-hop |
+| `pub-4-*` | Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? | « Ne regarde plus, joue ! » La vidéo devient un exercice : à toi de jouer | trap cinématique |
+| `pub-5-*` | Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? | « Suis le guide, étape par étape. » Le parcours de l'initiation à 2000+ | pop acoustique |
 
 Formats : `*-story-9x16.mp4` (Stories et Reels Instagram, TikTok), `*-story-9x16-jaune.mp4` (même pub sur fond jaune, pour varier
 ou tester), `*-feed-4x5.mp4` (fil Instagram et Facebook), `*-carre-1x1.mp4` (posts carrés, LinkedIn, Facebook),
@@ -65,15 +65,15 @@ Conseil : lancer les 5 en test A/B avec le même budget, garder la question qui 
 
 ## Première version : publicités de 31 s (videos/00-accroches/)
 
-Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons la solution ! » ou « Nous avons pensé à vous ! Découvrez l'Académie Europe Échecs »), puis leçons, progression, masterclasses, forum et l'appel final.
+Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons la solution ! » ou « Nous avons pensé à toi ! Découvre l'Académie Europe Échecs »), puis leçons, progression, masterclasses, forum et l'appel final.
 
 | Fichier | Question |
 |---|---|
-| `accroche-1-*` | Vous enchaînez les parties, mais votre classement ne bouge pas ? |
-| `accroche-2-*` | Vous jouez beaucoup, mais vous n'avez pas l'impression de progresser ? |
-| `accroche-3-*` | Vous avez l'impression de stagner depuis quelque temps ? |
-| `accroche-4-*` | Vous regardez des vidéos d'échecs, mais ne progressez pas ? |
-| `accroche-5-*` | Vous voulez progresser aux échecs, mais vous ne savez pas par où commencer ? |
+| `accroche-1-*` | Tu enchaînes les parties, mais ton classement ne bouge pas ? |
+| `accroche-2-*` | Tu joues beaucoup, mais tu n'as pas l'impression de progresser ? |
+| `accroche-3-*` | Tu as l'impression de stagner depuis quelque temps ? |
+| `accroche-4-*` | Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? |
+| `accroche-5-*` | Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? |
 
 `*-story-9x16.mp4` pour les pubs Instagram (Stories, Reels), `*-16x9.mp4` pour YouTube, X, LinkedIn. En story, la question s'affiche en grand en haut de l'écran pendant l'accroche. Idéal pour un test A/B : même budget sur les 5 versions, puis garder celle qui convertit le mieux.
 

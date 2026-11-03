@@ -154,7 +154,7 @@ const T = {
   chiffre: it => head(it.k) + `<main><div class="txt"><div class="big">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
     + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : "right:5rem;bottom:15rem;")),
   // Problème d'échecs (engagement)
-  puzzle: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, style: "height:100%" })}</div></main>` + foot("Voir la solution")
+  puzzle: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, style: "height:100%" })}</div></main>` + foot(it.arrow ? "Je m'entraîne" : "Voir la solution")
     ,   // l'échiquier suffit : la mascotte masquait le texte en paysage
   // Quiz (engagement)
   quiz: it => head(it.k) + `<main class="quiz"><div class="txt"><div class="q">${it.q}</div>${it.opts.map((o, i) => `<div class="opt"><i>${"ABC"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'entraîne")

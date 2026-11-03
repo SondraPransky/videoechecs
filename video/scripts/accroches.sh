@@ -11,11 +11,11 @@ SFX_VOL=${SFX_VOL:-0.28}
 COUPE=6.5   # fin de l'accroche et de la réponse (hook 4 s + sol 2,5 s)
 ENC=(-c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p -r 30 -c:a aac -b:a 160k -movflags +faststart)
 QUESTIONS=(
-  "Vous enchaînez les parties,|mais votre classement ne bouge pas ?"
-  "Vous jouez beaucoup,|mais vous n'avez pas l'impression de progresser ?"
-  "Vous avez l'impression|de stagner depuis quelque temps ?"
-  "Vous regardez des vidéos d'échecs,|mais ne progressez pas ?"
-  "Vous voulez progresser aux échecs,|mais vous ne savez pas par où commencer ?"
+  "Tu enchaînes les parties,|mais ton classement ne bouge pas ?"
+  "Tu joues beaucoup,|mais tu n'as pas l'impression de progresser ?"
+  "Tu as l'impression|de stagner depuis quelque temps ?"
+  "Tu regardes des vidéos d'échecs,|mais tu ne progresses pas ?"
+  "Tu veux progresser aux échecs,|mais tu ne sais pas par où commencer ?"
 )
 for k in 1 2 3 4 5; do
   python3 scripts/timing.py --music-only --edition "accroche-$k" >/dev/null
@@ -35,7 +35,7 @@ for k in 1 2 3 4 5; do
   "$FFMPEG" -y -loglevel error -i "build/_acc/video-$k.mp4" -i "build/_acc/mix-$k.wav" -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart "$O/accroche-$k-16x9.mp4"
   # Story 9:16 : la question en grand pendant l'accroche, puis la réponse, puis le titre habituel
   IFS='|' read -r qt qe <<< "${QUESTIONS[$((k - 1))]}"
-  if [ $((k % 2)) = 1 ]; then st="Nous avons"; se="la solution !"; else st="Nous avons"; se="pensé à vous !"; fi
+  if [ $((k % 2)) = 1 ]; then st="Nous avons"; se="la solution !"; else st="Nous avons"; se="pensé à toi !"; fi
   node scripts/social.mjs "build/_acc/q$k" --cadres "$qt|$qe" --fs 64 >/dev/null
   node scripts/social.mjs "build/_acc/s$k" --cadres "$st|$se" --fs 92 >/dev/null
   node scripts/social.mjs "build/_acc/d" --cadres "Progresse|à ton rythme." >/dev/null

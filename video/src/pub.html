@@ -118,9 +118,9 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .coach span { display: block; margin-top: 6px; font: 700 22px/1 "Manrope"; opacity: .75; }
 .live { position: absolute; right: 44px; top: 34px; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #ff3b4f; color: #fff; font: 800 24px/1 "Manrope"; letter-spacing: .1em; }
 .live i { width: 14px; height: 14px; border-radius: 50%; background: #fff; }
-.player { position: absolute; left: 44px; right: 44px; top: 90px; height: 330px; border-radius: 22px; overflow: hidden; }
+.player { position: absolute; left: 44px; right: 44px; top: 90px; height: 434px; border-radius: 22px; overflow: hidden; }
 .player img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.player .pl { position: absolute; left: 50%; top: 50%; width: 110px; height: 110px; margin: -55px; border-radius: 50%; background: #fae361; display: grid; place-items: center; }
+.player .pl { position: absolute; left: 28px; bottom: 36px; width: 96px; height: 96px; box-shadow: 0 10px 30px rgba(0,0,0,.45); border-radius: 50%; background: #fae361; display: grid; place-items: center; }
 .player .pb { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: rgba(0,0,0,.4); }
 .player .pb i { display: block; height: 100%; background: #fae361; transform-origin: 0 50%; transform: scaleX(0); }
 .fmts { position: absolute; left: 44px; right: 44px; bottom: 44px; display: flex; gap: 14px; }
@@ -137,23 +137,23 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .here::after { content: ""; position: absolute; left: -12px; top: 50%; margin-top: -12px; border: 12px solid transparent; border-left: 0; border-right-color: #fae361; }
 
 /* ---------- Mises en page par format ---------- */
-body.story #logo { left: 50%; top: 110px; height: 52px; margin-left: -111px; }
-body.story .q { left: 80px; top: 300px; width: 920px; font-size: 108px; }
-body.story #pvh { left: 110px; top: 1070px; }
-body.story #pq { left: 720px; top: 1300px; width: 280px; height: 343px; }
-body.story .r { top: 640px; font-size: 140px; }
-body.story .rs { top: 940px; font-size: 44px; }
-body.story #pr { left: 395px; top: 1280px; width: 290px; height: 355px; }
-body.story .sk { left: 80px; top: 280px; }
-body.story .st { left: 80px; top: 335px; width: 920px; font-size: 96px; }
-body.story #svh { left: 110px; top: 610px; }
-body.story .cap { left: 80px; top: 1380px; width: 720px; }
-body.story #ps { left: 800px; top: 1360px; width: 220px; height: 270px; }
+body.story #logo { left: 50%; top: 282px; height: 44px; margin-left: -94px; }
+body.story .q { left: 80px; top: 400px; width: 920px; font-size: 108px; }
+body.story #pvh { left: 110px; top: 1100px; }
+body.story #pq { left: 790px; top: 1262px; width: 230px; height: 282px; }
+body.story .r { top: 680px; font-size: 140px; }
+body.story .rs { top: 980px; font-size: 44px; }
+body.story #pr { left: 395px; top: 1185px; width: 290px; height: 355px; }
+body.story .sk { left: 80px; top: 362px; }
+body.story .st { left: 80px; top: 412px; width: 920px; font-size: 96px; }
+body.story #svh { left: 110px; top: 676px; }
+body.story .cap { left: 80px; top: 1418px; width: 720px; }
+body.story #ps { left: 830px; top: 1330px; width: 175px; height: 215px; }
 body.story #lg2w { top: 500px; } body.story #lg2 { width: 680px; }
 body.story .ct { top: 760px; font-size: 84px; }
 body.story .cb { top: 1060px; }
 body.story .cu { top: 1200px; }
-body.story #pc { left: 410px; top: 1320px; width: 260px; height: 318px; }
+body.story #pc { left: 410px; top: 1290px; width: 260px; height: 318px; }
 
 body.feed #logo { left: 50%; top: 64px; height: 44px; margin-left: -94px; }
 body.feed .q { left: 70px; top: 170px; width: 940px; font-size: 88px; }
@@ -224,7 +224,7 @@ body.carre #pc { left: 840px; top: 790px; width: 180px; height: 220px; }
 
   <section class="scene" id="r">
     <div class="a big center r" id="rt"></div>
-    <div class="a center rs" id="rs">Découvrez l'<b>Académie Europe Échecs</b>.</div>
+    <div class="a center rs" id="rs">Découvre l'<b>Académie Europe Échecs</b>.</div>
     <div class="pose" id="pr" data-pose="hourra"></div>
     <div class="confetti" id="confR"></div>
   </section>
@@ -278,34 +278,34 @@ function board(el, placement, size) {
 // ---------- Contenus ----------
 const ADS = {
   1: {
-    q: ["Vous enchaînez les parties,", "mais votre classement ne bouge pas ?"], pose: "gratte-tete",
-    pv: `<small>Votre classement Elo</small><div class="n" id="pvn">1 201</div><span class="tag bad">± 0 en 3 mois</span>
+    q: ["Tu enchaînes les parties,", "mais ton classement ne bouge pas ?"], pose: "gratte-tete",
+    pv: `<small>Ton classement Elo</small><div class="n" id="pvn">1 201</div><span class="tag bad">± 0 en 3 mois</span>
       <svg class="tr" width="380" height="200" viewBox="0 0 380 200"><path id="pvl" d="M0,100 L40,92 L75,108 L115,96 L155,104 L195,94 L235,110 L275,98 L315,104 L350,96 L380,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="700" stroke-dashoffset="700"/><path d="M0,100 L380,100" stroke="rgba(255,90,106,.55)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
-    sk: "Le déclic", st: ["Jouer ne suffit pas.", "Entraînez-vous avec méthode."], ps: "haltere",
-    sv: `<small>Votre classement Elo</small><div class="n" id="svn">1 201</div><span class="tag ok" id="svt">▲ +211</span>
+    sk: "Le déclic", st: ["Jouer ne suffit pas.", "Entraîne-toi avec méthode."], ps: "haltere",
+    sv: `<small>Ton classement Elo</small><div class="n" id="svn">1 201</div><span class="tag ok" id="svt">▲ +211</span>
       <svg class="chart" viewBox="0 0 772 260" preserveAspectRatio="none"><defs><linearGradient id="ga" x1="0" x2="1"><stop offset="0" stop-color="#93b9e2"/><stop offset="1" stop-color="#fae361"/></linearGradient></defs>
       <path id="svl" d="M0,230 L90,222 L170,200 L250,196 L330,160 L410,150 L490,112 L570,100 L650,62 L772,30" fill="none" stroke="url(#ga)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000"/></svg>
       <div class="mods">${["Tactique", "Finales", "Ouvertures"].map(m => `<div class="mod"><span class="ck">${CK}</span>${m}</div>`).join("")}</div>`,
     cap: "Un programme par niveau, <b>de l'initiation à 2000+</b>.",
   },
   2: {
-    q: ["Vous jouez beaucoup,", "mais vous n'avez pas l'impression de progresser ?"], pose: "sprint",
+    q: ["Tu joues beaucoup,", "mais tu n'as pas l'impression de progresser ?"], pose: "sprint",
     pv: `<small>Parties jouées ce mois-ci</small><div class="n" id="pvn">0</div>
       <div class="games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="pg"><b>${r}</b></div>`).join("")}</div>`,
-    sk: "Le déclic", st: ["Jouez moins,", "comprenez plus."], ps: "loupe",
-    sv: `<small>Analyse de votre partie</small><div class="board" id="sb" style="left:44px;top:90px"></div>
+    sk: "Le déclic", st: ["Joue moins,", "comprends plus."], ps: "loupe",
+    sv: `<small>Analyse de ta partie</small><div class="board" id="sb" style="left:44px;top:90px"></div>
       <div class="moves" style="top:90px">
         <div class="mv">16. Fd3 &nbsp;Cbd7</div><div class="mv">17. Cf3 &nbsp;Fe7</div>
         <div class="mv err" id="err">18. Fxh7+ ?? <i>Erreur</i></div><div class="mv best" id="best">18. Cd5 ! <i>Meilleur</i></div></div>
-      <div class="exo" id="exo"><b>Exercices ciblés : le clouage</b><span>Votre point faible du mois</span>
+      <div class="exo" id="exo"><b>Exercices ciblés : le clouage</b><span>Ton point faible du mois</span>
         <div class="dots">${[0, 1, 2].map(() => `<i class="dt">${CK}</i>`).join("")}</div></div>`,
-    cap: "<b>Analysez vos parties</b>, puis +2 000 exercices ciblés.",
+    cap: "<b>Analyse tes parties</b>, puis +2 000 exercices ciblés.",
   },
   3: {
-    q: ["Vous avez l'impression", "de stagner depuis quelque temps ?"], pose: "assoupie",
+    q: ["Tu as l'impression", "de stagner depuis quelque temps ?"], pose: "assoupie",
     pv: `<small>Objectif 1400</small><div class="months">${["Janvier", "Mars", "Juin"].map(m => `<div class="mo">${m}</div>`).join("")}</div>
       <div class="pbar"><i id="pvb"></i></div><div style="margin-top:22px"><span class="tag bad">Toujours 40 %</span></div>`,
-    sk: "Le déclic", st: ["Pour passer un cap,", "apprenez des meilleurs."], ps: "prof",
+    sk: "Le déclic", st: ["Pour passer un cap,", "apprends des meilleurs."], ps: "prof",
     sv: `<small>Masterclasses</small><div class="live" id="live"><i></i>EN DIRECT</div>
       <div class="coaches">${[["libiszewski", "Fabien Libiszewski", "GM", "#93b9e2", "Masterclass"], ["kamsky", "Gata Kamsky", "GM", "#fae361", "Masterclass"],
         ["ravot", "Sylvain Ravot", "MF", "#6bdc7d", "Calcul Gagnant"], ["quenehen", "Marc Quenehen", "", "#f06b8a", "La Minute Finale"]]
@@ -313,29 +313,29 @@ const ADS = {
     cap: "<b>Maîtres et grands maîtres</b>, en direct chaque semaine.",
   },
   4: {
-    q: ["Vous regardez des vidéos d'échecs,", "mais ne progressez pas ?"], pose: "menton",
+    q: ["Tu regardes des vidéos d'échecs,", "mais tu ne progresses pas ?"], pose: "menton",
     pv: `<small>Vidéos regardées</small><div class="n" id="pvn">0 h</div>
       <div class="vids">${["p-calcul-gagnant", "p-minute-finale", "p-ouvertures-vogue"].map(v => `<div class="vd"><img src="${HD}${v}.jpg"><span>${PLAY(20)}</span></div>`).join("")}</div>
       <div style="margin-top:20px"><span class="tag bad">Classement : inchangé</span></div>`,
-    sk: "Le déclic", st: ["Ne regardez plus,", "jouez !"], ps: "bonne-reponse",
+    sk: "Le déclic", st: ["Ne regarde plus,", "joue !"], ps: "bonne-reponse",
     sv: `<small>Leçon : la Minute Finale</small>
       <div class="player" id="pl"><img src="${HD}p-minute-finale.jpg"><div class="pl">${PLAY(48)}</div><div class="pb"><i id="plb"></i></div></div>
-      <div id="try" style="position:absolute;left:44px;right:44px;top:90px;height:330px;border-radius:22px;background:#f1f0ea;opacity:0">
+      <div id="try" style="position:absolute;left:44px;right:44px;top:90px;height:434px;border-radius:22px;background:#f1f0ea;opacity:0">
         <div class="board" id="tb" style="left:20px;top:20px"></div>
-        <div style="position:absolute;left:340px;top:40px;color:#111;font:800 40px/1.1 Manrope">À vous<br>de jouer !</div>
+        <div style="position:absolute;left:340px;top:40px;color:#111;font:800 40px/1.1 Manrope">À toi<br>de jouer !</div>
         <div style="position:absolute;left:340px;top:150px;color:#6b6b66;font:700 26px/1.25 Manrope">Les Blancs jouent<br>et matent en 1.</div>
         <div class="ok-chip" id="okc" style="left:340px;top:240px">${CK} Bonne réponse</div></div>
       <div class="fmts">${["Vidéo", "Cours", "Exercice", "Quiz"].map(f => `<div class="fm">${f}</div>`).join("")}</div>`,
-    cap: "<b>Vidéo, cours, exercice, quiz</b> : vous pratiquez tout de suite.",
+    cap: "<b>Vidéo, cours, exercice, quiz</b> : tu pratiques tout de suite.",
   },
   5: {
-    q: ["Vous voulez progresser aux échecs,", "mais vous ne savez pas par où commencer ?"], pose: "haussement",
+    q: ["Tu veux progresser aux échecs,", "mais tu ne sais pas par où commencer ?"], pose: "haussement",
     pv: `<div class="sign"></div>${[["Ouvertures ?", 120, 70, -6, "#93b9e2"], ["Tactique ?", 450, 140, 5, "#fae361"], ["Finales ?", 100, 230, -4, "#6bdc7d"], ["Stratégie ?", 440, 310, 6, "#f06b8a"]]
       .map(([l, x, y, r, c], i) => `<div class="arrow ar" style="left:${x}px;top:${y}px;background:${c};transform:rotate(${r}deg);clip-path:polygon(${i % 2 ? "0 0,88% 0,100% 50%,88% 100%,0 100%" : "12% 0,100% 0,100% 100%,12% 100%,0 50%"});padding-${i % 2 ? "right" : "left"}:54px">${l}</div>`).join("")}`,
-    sk: "Le déclic", st: ["Suivez le guide,", "étape par étape."], ps: "marche",
-    sv: `<small>Votre parcours</small><div class="path"><i id="pth"></i></div>
+    sk: "Le déclic", st: ["Suis le guide,", "étape par étape."], ps: "marche",
+    sv: `<small>Ton parcours</small><div class="path"><i id="pth"></i></div>
       ${["2000 et +", "Objectif 1800", "Objectif 1600", "Objectif 1400", "Initiation"].map((l, i) => `<div class="stp" data-i="${4 - i}" style="top:${110 + i * 118}px"><span class="dt">${CK}</span>${l}</div>`).join("")}
-      <div class="here" id="here" style="left:520px;top:582px">Vous êtes ici</div>`,
+      <div class="here" id="here" style="left:520px;top:582px">Tu es ici</div>`,
     cap: "Un parcours clair, <b>du premier coup à 2000+</b>.",
   },
 };
@@ -346,7 +346,7 @@ const words = (txt, cls) => nb(txt).split(" ").map(w => `<span class="wd ${cls}"
 $("#qt").innerHTML = words(AD.q[0], "") + "<br>" + `<span class="e">${words(AD.q[1], "")}</span>`;
 $("#pv").innerHTML = AD.pv;
 $("#pq").innerHTML = window.MASCOT_POSES[AD.pose + (FMT === "wide" ? "" : "-miroir")];
-$("#rt").innerHTML = `Nous avons<br><span class="e">${Q % 2 ? "la solution !" : "pensé à vous !"}</span>`;
+$("#rt").innerHTML = `Nous avons<br><span class="e">${Q % 2 ? "la solution !" : "pensé à toi !"}</span>`;
 $("#sk").textContent = AD.sk;
 $("#stt").innerHTML = nb(AD.st[0]) + `<br><span class="e">${nb(AD.st[1])}</span>`;
 $("#sv").innerHTML = AD.sv;
