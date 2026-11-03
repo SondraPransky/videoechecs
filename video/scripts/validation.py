@@ -77,7 +77,7 @@ vi = sorted(d for d in I.iterdir() if d.is_dir() and re.match(r"\d\d-", d.name) 
 data = {v["id"]: v for v in json.loads(subprocess.check_output(["node", "-e", 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");console.log(JSON.stringify(window.VISUELS))'], cwd=ICI))}
 FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
 def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
-    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)
+    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)] + "\u202f", s)   # espace fine insécable entre la figurine et la case
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
     return fan(re.sub(r"<[^>]+>|&#8239;", "", t))

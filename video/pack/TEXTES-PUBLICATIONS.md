@@ -93,7 +93,7 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 **Problème du jour** (`14-probleme-mat-en-1/`, puis la solution `15-solution-mat-en-1/` le lendemain ou en story)
 > Les Blancs jouent et matent en 1. Tu vois le coup ? Réponse en commentaire 👇
 
-> Solution : ♖d8# ! Le mat du couloir : le Roi noir est enfermé par ses propres pions. Bravo à ceux qui l'ont trouvé !
+> Solution : ♖ d8# ! Le mat du couloir : le Roi noir est enfermé par ses propres pions. Bravo à ceux qui l'ont trouvé !
 
 **Quiz** (`16-quiz-carlsbad/`)
 > Structure Carlsbad : quel est le plan typique des Blancs ? A, B ou C ? On donne la réponse demain.
@@ -106,7 +106,7 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 |---|---|---|
 | `39-quiz-roque/` · Initiation | Peut-on roquer quand son Roi est en échec ? | **B, non, jamais.** On ne roque ni pour sortir d'un échec, ni en passant par une case attaquée, ni pour arriver sur une case attaquée. |
 | `40-quiz-clouage/` · 1200 | Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… | **C, un clouage.** Dans l'enfilade, c'est l'inverse : la pièce la plus précieuse est devant et doit s'écarter. |
-| `41-quiz-espagnole/` · 1400 | 1.e4 e5 2.♘f3 ♘c6 3.♗b5 : quelle est cette ouverture ? | **B, la partie espagnole** (ou Ruy Lopez). Avec 3.♗c4, c'est l'italienne. |
+| `41-quiz-espagnole/` · 1400 | 1.e4 e5 2.♘ f3 ♘ c6 3.♗ b5 : quelle est cette ouverture ? | **B, la partie espagnole** (ou Ruy Lopez). Avec 3.♗ c4, c'est l'italienne. |
 | `42-quiz-colonne-ouverte/` · 1400 | Où une Tour est-elle la plus active ? | **A, sur une colonne ouverte**, sans pion : elle contrôle toute la colonne et peut pénétrer en 7e rangée. |
 | `43-quiz-regle-du-carre/` · 1600 | Roi contre pion passé : comment savoir si le Roi le rattrape ? | **B, la règle du carré** : on trace le carré entre le pion et sa case de promotion ; si le Roi peut y entrer, il rattrape le pion. |
 | `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses Tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la Tour gagne en activité à chaque avance du pion. |
@@ -116,11 +116,11 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 
 | Visuel | Question | Réponse et renvoi |
 |---|---|---|
-| `48-quiz-gambit-elephant/` | Par quels coups commence le Gambit Éléphant ? | **A, 1.e4 e5 2.♘f3 d5.** Igor Nataf y consacre une leçon (Objectif 1400 et 1600). |
+| `48-quiz-gambit-elephant/` | Par quels coups commence le Gambit Éléphant ? | **A, 1.e4 e5 2.♘ f3 d5.** Igor Nataf y consacre une leçon (Objectif 1400 et 1600). |
 | `49-quiz-herisson/` | Dans le Hérisson, où les Noirs placent-ils leurs pions ? | **B, a6, b6, d6, e6** : sur la 3e rangée, comme les piquants d'un hérisson. Leçon de Romuald De Labaca (Objectif 1600 et 1800). |
 | `50-quiz-revue-779/` | Milliet et Bacrot : combien de titres de champion de France à eux deux ? | **C, 16** : 9 pour Étienne Bacrot, 7 pour Sophie Milliet. Tout le n°779 est en PGN interactif sur l'académie. |
 | `51-quiz-sicilienne/` | Par quel coup les Noirs jouent-ils la défense sicilienne ? | **B, 1.e4 c5.** 1…e6 est la française, 1…c6 la Caro-Kann. Toutes dans le thème Ouvertures (19 leçons). |
-| `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'académie le montre : ♖d8# ! |
+| `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'académie le montre : ♖ d8# ! |
 | `54-quiz-pion-isole/` | Un pion isolé, c'est un pion… | **B, sans pion de son camp sur les colonnes voisines.** Le thème Stratégie (19 leçons) explique comment le jouer et comment l'attaquer. |
 | `57-quiz-citation/` | « Les pions sont l'âme des échecs. » Qui l'a dit ? | **C, Philidor**, dans son *Analyse du jeu des échecs* (1749). |
 | `58-quiz-fourchette/` | Une pièce attaque deux pièces adverses en même temps. C'est… | **A, une fourchette.** Un thème travaillé dans Calcul Gagnant avec Sylvain Ravot. |

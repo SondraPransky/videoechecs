@@ -47,7 +47,7 @@ def fr(s):   # notation française : Nf3 → Cf3, Qxd5 → Dxd5, Rb8+ → Tb8+ (
     return maj(re.sub(r"(?<![A-Za-zÀ-ÿ])([KQRBN])(?=[a-h1-8]?x?[a-h][1-8])", lambda m: FR[m.group(1)], s or ""))
 FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
 def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
-    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)
+    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)] + "\u202f", s)   # espace fine insécable entre la figurine et la case
 def fen_pos(fen):
     pos, rows = {}, fen.split()[0].split("/")
     for r, row in enumerate(rows):
