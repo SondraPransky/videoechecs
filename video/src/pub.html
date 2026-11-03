@@ -46,7 +46,7 @@ body.soleil #bar { background: #111; }
 .wd { display: inline-block; white-space: pre; }
 .cap { font: 600 46px/1.28 "Manrope"; color: var(--sub); }
 .cap b, .rs b { color: var(--ink); font-weight: 800; }
-.rs { font: 600 44px/1.3 "Manrope"; color: var(--sub); }
+.rs { font: 700 44px/1.3 "Manrope"; color: var(--ink); opacity: .92; }
 .btn { display: inline-flex; align-items: center; gap: 16px; padding: 30px 54px; border-radius: 999px; background: var(--btn); color: var(--btnk); font: 800 44px/1 "Manrope"; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
 .url { font: 700 36px/1 "Manrope"; color: var(--blue); letter-spacing: .02em; }
 body.soleil .url { color: #2c4a6e; }
@@ -56,9 +56,9 @@ body.soleil .url { color: #2c4a6e; }
 .hold { position: absolute; transform-origin: 0 0; }
 .card { position: relative; border-radius: 36px; padding: 40px 44px; color: #f4f1ea; background: linear-gradient(160deg, #141c28, #0a0f16);
   box-shadow: 0 50px 110px rgba(0,0,0,.45), inset 0 0 0 1px rgba(147,185,226,.16); overflow: hidden; }
-.card small { display: block; font: 800 24px/1 "Manrope"; letter-spacing: .2em; text-transform: uppercase; color: #8b95a5; }
+.card small { display: block; font: 800 31px/1 "Manrope"; letter-spacing: .12em; text-transform: uppercase; color: #8b95a5; }
 .card .n { font: 900 120px/1 "Fraunces"; margin-top: 14px; font-variant-numeric: tabular-nums; }
-.tag { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; font: 800 28px/1 "Manrope"; }
+.tag { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; font: 800 34px/1 "Manrope"; }
 .tag.bad { background: rgba(255,90,106,.16); color: #ff5a6a; }
 .tag.ok { background: rgba(107,220,125,.16); color: #6bdc7d; }
 #pv { width: 860px; height: 440px; }
@@ -80,7 +80,7 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 /* Visuels « problème » */
 .games { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; margin-top: 26px; }
 .games div { position: relative; height: 84px; border-radius: 10px; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
-.games b { position: absolute; right: 4px; bottom: 4px; padding: 4px 6px; border-radius: 6px; background: #111; color: #fff; font: 800 14px/1 "Manrope"; }
+.games b { position: absolute; right: 4px; bottom: 4px; padding: 4px 6px; border-radius: 6px; background: #111; color: #fff; font: 800 20px/1 "Manrope"; }
 .months { display: flex; gap: 16px; margin-top: 30px; }
 .months div { flex: 1; height: 110px; border-radius: 18px; background: #f1f0ea; color: #111; display: grid; place-items: center; font: 800 30px/1 "Manrope"; }
 .pbar { position: relative; height: 30px; margin-top: 34px; border-radius: 15px; background: #2a3442; overflow: hidden; }
@@ -96,27 +96,27 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 /* Visuels « solution » */
 .chart { position: absolute; left: 44px; right: 44px; bottom: 150px; height: 260px; }
 .mods { position: absolute; left: 44px; right: 44px; bottom: 44px; display: flex; gap: 14px; }
-.mod { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; height: 76px; border-radius: 18px; background: #f1f0ea; color: #111; font: 800 27px/1 "Manrope"; }
+.mod { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; height: 76px; border-radius: 18px; background: #f1f0ea; color: #111; font: 800 31px/1 "Manrope"; }
 .mod .ck { width: 34px; height: 34px; border-radius: 50%; background: #2c9a45; display: grid; place-items: center; }
 .moves { position: absolute; left: 440px; top: 40px; right: 44px; font: 700 30px/1 "Manrope"; }
 .moves div { display: flex; align-items: center; gap: 12px; height: 62px; padding: 0 16px; border-radius: 14px; margin-bottom: 8px; color: #c9d1dc; }
 .moves .err { background: rgba(255,90,106,.16); color: #ff8a96; }
 .moves .best { background: rgba(107,220,125,.16); color: #6bdc7d; }
-.moves i { font-style: normal; font: 800 22px/1 "Manrope"; padding: 6px 10px; border-radius: 8px; margin-left: auto; }
+.moves i { font-style: normal; font: 800 26px/1 "Manrope"; padding: 6px 10px; border-radius: 8px; margin-left: auto; }
 .moves .err i { background: #ff5a6a; color: #fff; }
 .moves .best i { background: #6bdc7d; color: #0b1a10; }
 .exo { position: absolute; left: 44px; right: 44px; bottom: 44px; height: 150px; border-radius: 24px; background: #f1f0ea; color: #111; padding: 26px 30px; }
 .exo b { display: block; font: 800 32px/1.1 "Manrope"; }
-.exo span { display: block; margin-top: 10px; font: 700 24px/1 "Manrope"; color: #6b6b66; }
+.exo span { display: block; margin-top: 10px; font: 700 29px/1 "Manrope"; color: #6b6b66; }
 .exo .dots { position: absolute; right: 30px; top: 48px; display: flex; gap: 12px; }
 .exo .dots i { width: 52px; height: 52px; border-radius: 50%; background: #dedcd2; display: grid; place-items: center; }
 .coaches { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 26px; }
 .coach { position: relative; height: 230px; border-radius: 26px; padding: 22px; color: #111; overflow: hidden; }
 .coach img { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; border: 5px solid rgba(255,255,255,.9); display: block; }
-.coach .ttl { position: absolute; right: 20px; top: 22px; padding: 8px 14px; border-radius: 999px; background: #111; color: #fff; font: 800 22px/1 "Manrope"; }
+.coach .ttl { position: absolute; right: 20px; top: 22px; padding: 8px 14px; border-radius: 999px; background: #111; color: #fff; font: 800 26px/1 "Manrope"; }
 .coach b { display: block; margin-top: 14px; font: 800 30px/1.05 "Manrope"; }
-.coach span { display: block; margin-top: 6px; font: 700 22px/1 "Manrope"; opacity: .75; }
-.live { position: absolute; right: 44px; top: 34px; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #ff3b4f; color: #fff; font: 800 24px/1 "Manrope"; letter-spacing: .1em; }
+.coach span { display: block; margin-top: 6px; font: 700 27px/1 "Manrope"; opacity: .8; }
+.live { position: absolute; right: 44px; top: 34px; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; background: #ff3b4f; color: #fff; font: 800 28px/1 "Manrope"; letter-spacing: .1em; }
 .live i { width: 14px; height: 14px; border-radius: 50%; background: #fff; }
 .player { position: absolute; left: 44px; right: 44px; top: 90px; height: 434px; border-radius: 22px; overflow: hidden; }
 .player img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -124,7 +124,7 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .player .pb { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: rgba(0,0,0,.4); }
 .player .pb i { display: block; height: 100%; background: #fae361; transform-origin: 0 50%; transform: scaleX(0); }
 .fmts { position: absolute; left: 44px; right: 44px; bottom: 44px; display: flex; gap: 14px; }
-.fmts div { flex: 1; height: 76px; border-radius: 18px; background: rgba(147,185,226,.14); color: #c9d1dc; display: grid; place-items: center; font: 800 27px/1 "Manrope"; }
+.fmts div { flex: 1; height: 76px; border-radius: 18px; background: rgba(147,185,226,.14); color: #c9d1dc; display: grid; place-items: center; font: 800 31px/1 "Manrope"; }
 .fmts div.on { background: #fae361; color: #111; }
 .ok-chip { position: absolute; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #2c9a45; color: #fff; font: 800 28px/1 "Manrope"; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
 .path { position: absolute; left: 150px; top: 90px; bottom: 50px; width: 8px; border-radius: 4px; background: rgba(147,185,226,.2); }
@@ -133,7 +133,7 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .stp .dt { width: 48px; height: 48px; margin-left: -24px; border-radius: 50%; background: #0a0f16; border: 5px solid rgba(147,185,226,.45); display: grid; place-items: center; }
 .stp.on { color: #f4f1ea; }
 .stp.on .dt { background: #fae361; border-color: #fae361; }
-.here { position: absolute; padding: 12px 20px; border-radius: 14px; background: #fae361; color: #111; font: 800 24px/1 "Manrope"; letter-spacing: .06em; text-transform: uppercase; }
+.here { position: absolute; padding: 12px 20px; border-radius: 14px; background: #fae361; color: #111; font: 800 29px/1 "Manrope"; letter-spacing: .04em; text-transform: uppercase; }
 .here::after { content: ""; position: absolute; left: -12px; top: 50%; margin-top: -12px; border: 12px solid transparent; border-left: 0; border-right-color: #fae361; }
 
 /* ---------- Mises en page par format ---------- */
@@ -142,7 +142,7 @@ body.story .q { left: 80px; top: 400px; width: 920px; font-size: 108px; }
 body.story #pvh { left: 110px; top: 1100px; }
 body.story #pq { left: 790px; top: 1262px; width: 230px; height: 282px; }
 body.story .r { top: 680px; font-size: 140px; }
-body.story .rs { top: 980px; font-size: 44px; }
+body.story .rs { top: 990px; font-size: 54px; }
 body.story #pr { left: 395px; top: 1185px; width: 290px; height: 355px; }
 body.story .sk { left: 80px; top: 362px; }
 body.story .st { left: 80px; top: 412px; width: 920px; font-size: 96px; }
@@ -157,16 +157,16 @@ body.story #pc { left: 410px; top: 1290px; width: 260px; height: 318px; }
 
 body.feed #logo { left: 50%; top: 64px; height: 44px; margin-left: -94px; }
 body.feed .q { left: 70px; top: 170px; width: 940px; font-size: 88px; }
-body.feed #pvh { left: 120px; top: 790px; transform: scale(.72); }
-body.feed #pq { left: 790px; top: 960px; width: 210px; height: 257px; }
+body.feed #pvh { left: 70px; top: 720px; transform: scale(.9); }
+body.feed #pq { left: 830px; top: 1000px; width: 200px; height: 245px; }
 body.feed .r { top: 430px; font-size: 118px; }
-body.feed .rs { top: 700px; font-size: 38px; }
+body.feed .rs { top: 710px; font-size: 48px; }
 body.feed #pr { left: 430px; top: 960px; width: 220px; height: 270px; }
 body.feed .sk { left: 70px; top: 150px; }
 body.feed .st { left: 70px; top: 200px; width: 940px; font-size: 76px; }
-body.feed #svh { left: 70px; top: 420px; transform: scale(.7); }
-body.feed .cap { left: 690px; top: 470px; width: 340px; font-size: 32px; }
-body.feed #ps { left: 790px; top: 1000px; width: 200px; height: 245px; }
+body.feed #svh { left: 70px; top: 400px; transform: scale(.8); }
+body.feed .cap { left: 70px; top: 1005px; width: 700px; font-size: 38px; }
+body.feed #ps { left: 800px; top: 1010px; width: 200px; height: 245px; }
 body.feed #lg2w { top: 290px; } body.feed #lg2 { width: 560px; }
 body.feed .ct { top: 490px; font-size: 70px; }
 body.feed .cb { top: 760px; }
@@ -178,7 +178,7 @@ body.wide .q { left: 100px; top: 190px; width: 1000px; font-size: 108px; }
 body.wide #pvh { left: 1110px; top: 250px; transform: scale(.86); }
 body.wide #pq { left: 1520px; top: 640px; width: 280px; height: 343px; }
 body.wide .r { top: 330px; font-size: 150px; }
-body.wide .rs { top: 670px; font-size: 44px; }
+body.wide .rs { top: 680px; font-size: 54px; }
 body.wide #pr { left: 1530px; top: 600px; width: 290px; height: 355px; }
 body.wide .sk { left: 100px; top: 220px; }
 body.wide .st { left: 100px; top: 275px; width: 840px; font-size: 88px; }
@@ -192,15 +192,15 @@ body.wide .cu { top: 840px; }
 body.wide #pc { left: 1500px; top: 600px; width: 290px; height: 355px; }
 body.carre #logo { left: 50%; top: 50px; height: 40px; margin-left: -85px; }
 body.carre .q { left: 70px; top: 125px; width: 940px; font-size: 82px; }
-body.carre #pvh { left: 150px; top: 615px; transform: scale(.62); }
-body.carre #pq { left: 800px; top: 760px; width: 190px; height: 233px; }
+body.carre #pvh { left: 70px; top: 590px; transform: scale(.8); }
+body.carre #pq { left: 805px; top: 770px; width: 190px; height: 233px; }
 body.carre .r { top: 320px; font-size: 110px; }
-body.carre .rs { top: 600px; font-size: 36px; }
+body.carre .rs { top: 610px; font-size: 46px; }
 body.carre #pr { left: 440px; top: 720px; width: 200px; height: 245px; }
 body.carre .sk { left: 70px; top: 115px; }
 body.carre .st { left: 70px; top: 160px; width: 940px; font-size: 68px; }
-body.carre #svh { left: 70px; top: 345px; transform: scale(.62); }
-body.carre .cap { left: 640px; top: 400px; width: 380px; font-size: 34px; }
+body.carre #svh { left: 70px; top: 345px; transform: scale(.7); }
+body.carre .cap { left: 700px; top: 400px; width: 330px; font-size: 34px; }
 body.carre #ps { left: 790px; top: 790px; width: 190px; height: 233px; }
 body.carre #lg2w { top: 190px; } body.carre #lg2 { width: 500px; }
 body.carre .ct { top: 360px; font-size: 66px; }
@@ -323,7 +323,7 @@ const ADS = {
       <div id="try" style="position:absolute;left:44px;right:44px;top:90px;height:434px;border-radius:22px;background:#f1f0ea;opacity:0">
         <div class="board" id="tb" style="left:20px;top:20px"></div>
         <div style="position:absolute;left:340px;top:40px;color:#111;font:800 40px/1.1 Manrope">À toi<br>de jouer !</div>
-        <div style="position:absolute;left:340px;top:150px;color:#6b6b66;font:700 26px/1.25 Manrope">Les Blancs jouent<br>et matent en 1.</div>
+        <div style="position:absolute;left:340px;top:150px;color:#6b6b66;font:700 30px/1.25 Manrope">Les Blancs jouent<br>et matent en 1.</div>
         <div class="ok-chip" id="okc" style="left:340px;top:240px">${CK} Bonne réponse</div></div>
       <div class="fmts">${["Vidéo", "Cours", "Exercice", "Quiz"].map(f => `<div class="fm">${f}</div>`).join("")}</div>`,
     cap: "<b>Vidéo, cours, exercice, quiz</b> : tu pratiques tout de suite.",
@@ -384,6 +384,10 @@ const W = innerWidth, H = innerHeight;
 $("#confR").style.left = W / 2 + "px"; $("#confR").style.top = H * .4 + "px";
 $("#confC").style.left = W / 2 + "px"; $("#confC").style.top = H * .3 + "px";
 const confR = confetti($("#confR"), 60, 7), confC = confetti($("#confC"), 60, 19);
+{ // « Nous avons la solution ! » : les confettis restent sous le logo
+  const lg = $("#logo").getBoundingClientRect(), room = H * .4 - (lg.bottom + 40);
+  const up = Math.max(...confR.map(p => -p.y)); if (up > room) confR.forEach(p => { if (p.y < 0) p.y *= room / up; });
+}
 
 // ---------- Timeline ----------
 gsap.defaults({ ease: "expo.out" });
