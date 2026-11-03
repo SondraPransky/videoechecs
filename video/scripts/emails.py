@@ -32,13 +32,18 @@ IMG = {
     "oups": PACK / "images/37-oups/37-oups-lien-1200x630.jpg",
     "puzzle": PACK / "images/14-probleme-mat-en-1/14-probleme-mat-en-1-lien-1200x630.jpg",
 }
+BANDEAUX = sorted(f.name[6:-13] for f in (PACK / "images/00-emails").glob("email-*-1200x480.jpg"))
+for b in BANDEAUX: IMG["b-" + b] = PACK / f"images/00-emails/email-{b}-1200x480.jpg"
 from PIL import Image
 for k, f in IMG.items():
     for d in (OUT, APER):
         if f.suffix == ".png": shutil.copy(f, d / "img" / (k + ".png")); continue
+        if k.startswith("b-"): Image.open(f).convert("RGB").save(d / "img" / (k + ".jpg"), quality=86, optimize=True); continue   # en-tête dédié : tel quel
         im = Image.open(f).convert("RGB"); w, h = im.size   # sans le logo ni le bouton du visuel réseau (doublons dans un e-mail)
         im.crop((0, int(h * .14), w, int(h * .85))).save(d / "img" / (k + ".jpg"), quality=86, optimize=True)
 
+for src, nom in ((ICI / "assets/captures/ee/hd/auth-kamsky.jpg", "coach-exemple.jpg"), (PACK / "images/00-emails/email-puzzle-1080x1080.jpg", "puzzle-exemple.jpg")):
+    im = Image.open(src).convert("RGB"); im.thumbnail((600, 600)); im.save(APER / "img" / nom, quality=86)
 C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
 SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
 # Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
@@ -90,6 +95,9 @@ def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
             f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
             f'<tr><td style="font-family:{SANS};font-weight:800;font-size:15px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:26px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
+def coach():   # le coach de la masterclass : photo ronde, nom et titre
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px"><tr><td width="72" valign="middle"><img src="[URL_PHOTO_COACH]" width="64" height="64" alt="[COACH]" style="display:block;width:64px;height:64px;border-radius:50%;border:3px solid {C["jaune"]};object-fit:cover"></td>'
+            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:900;font-size:19px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
 def podium(p1, p2, p3):
     col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:13px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
         f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:900;font-size:30px;color:#111">{rang}</div></td>')
@@ -107,12 +115,24 @@ def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise
             + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
             + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:13px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
-def carte(img, titre, texte, lien, cta):
+def carte(img, titre, texte, lien, cta, src=None):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
-<tr><td><img src="{{IMG}}/{img}.jpg" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td{' style="background:#f1f0ea;padding:18px 18px 0"' if src else ""}><img src="{src or "{IMG}/" + img + ".jpg"}" width="{500 if src else 536}" alt="" style="display:block;width:100%;height:auto;border:0;{"border-radius:10px;" if src else ""}"></td></tr>
 <tr><td style="padding:18px 20px 20px"><div style="font:bold 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
 <div style="font:15px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 15px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
+DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><style>
+@media (prefers-color-scheme: dark) {
+  body, [style*="background:#f1f0ea"] { background:#06080c !important; }
+  [style*="background:#ffffff"] { background:#121a25 !important; }
+  td[style*="background:#f1f0ea"], div[style*="background:#f1f0ea"] { background:#1b2533 !important; }
+  [style*="color:#1d1d1b"] { color:#f4f1ea !important; } [style*="color:#6b6b66"] { color:#a9b4c2 !important; }
+  [style*="color:#2c4a6e"] { color:#93b9e2 !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
+  [style*="#e4e1d8"] { border-color:#2a3546 !important; }
+  [style*="background:#fff6c2"] [style*="color:#1d1d1b"], [style*="background:#fae361"] [style*="color:#1d1d1b"] { color:#111111 !important; }
+  [style*="background:#fff6c2"] [style*="color:#6b6b66"] { color:#4a4636 !important; }
+}
+</style>"""
 def page(e):
     pied = ("Tu reçois cet e-mail car tu as un compte sur echecs.com. "
             + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e-mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
@@ -125,7 +145,7 @@ def page(e):
     corps = "".join(e["corps"])
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">
-<title>{html.escape(e["objet"])}</title>{{FONTS}}</head>
+<title>{html.escape(e["objet"])}</title>{{FONTS}}{DARK}</head>
 <body style="margin:0;padding:0;background:{C['fond']}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{html.escape(e["pre"])}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td align="center" style="padding:24px 12px">
@@ -240,7 +260,7 @@ mail(id="18-inactif-30-jours", cat="Réactivation", quand="Abonné sans connexio
 mail(id="19-annonce-masterclass", cat="Événements", quand="Dès qu'une masterclass est programmée (au moins 7 jours avant)", img="masterclasses", alt="Portrait du coach",
      objet="Masterclass : [THEME] avec [COACH]", pre="En direct le [DATE] à [HEURE]. Pose tes questions !", sur="Nouvelle masterclass", titre="[THEME]",
      corps=[para("<b>[COACH]</b> ([TITRE_COACH]) te donne rendez-vous en direct pour une masterclass sur <b>[THEME]</b>."),
-            billet("[THEME]", [("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]"), ("Avec", "[COACH]")]),
+            billet("[THEME]", [("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]")]), coach(),
             para("[DESCRIPTION_MASTERCLASS]"), bouton("Voir la masterclass", L("MASTERCLASS")),
             para('<span style="color:#6b6b66;font-size:14px">Tu ne peux pas être là ? Le replay sera disponible dans l\'Académie.</span>')])
 mail(id="20-rappel-masterclass", cat="Événements", quand="La veille, puis 1 heure avant (même modèle)", img="masterclasses", alt="Masterclass en direct",
@@ -272,10 +292,10 @@ mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque num
 mail(id="26-lettre-plusieurs-nouvelles", cat="Lettre d'information", quand="Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés)", img="progression", alt="Les nouvelles de l'Académie",
      objet="Cette semaine dans l'Académie : [TITRE_UNE]", pre="Masterclass, tournoi, nouveau cours et le puzzle de la semaine.", sur="Les nouvelles · [DATE]", titre="Cette semaine dans l'Académie",
      corps=[para("Bonjour [PRENOM], voici ce qui t'attend cette semaine."),
-            carte("masterclasses", "Masterclass : [THEME]", "Avec [COACH], en direct le [DATE] à [HEURE].", L("MASTERCLASS"), "Voir la masterclass"),
-            carte("tournois", "Tournoi : [NOM_TOURNOI]", "Le [DATE], cadence [CADENCE], ouvert à tous.", L("INSCRIPTION_TOURNOI"), "Je m'inscris"),
-            carte("lecons", "Nouveau cours : [TITRE_COURS]", "[NB_LECONS_COURS] leçons, niveau [NIVEAU].", L("COURS"), "Découvrir le cours"),
-            carte("puzzle", "Le puzzle de la semaine", "Les Blancs jouent et font mat en 1. Tu trouves ?", L("PUZZLE"), "Voir le puzzle"),
+            carte("b-masterclass", "Masterclass : [THEME]", "Avec [COACH], en direct le [DATE] à [HEURE].", L("MASTERCLASS"), "Voir la masterclass"),
+            carte("b-tournoi", "Tournoi : [NOM_TOURNOI]", "Le [DATE], cadence [CADENCE], ouvert à tous.", L("INSCRIPTION_TOURNOI"), "Je m'inscris"),
+            carte("b-cours", "Nouveau cours : [TITRE_COURS]", "[NB_LECONS_COURS] leçons, niveau [NIVEAU].", L("COURS"), "Découvrir le cours"),
+            carte("puzzle", "Le puzzle de la semaine", "[CONSIGNE_PUZZLE] Tu trouves ? La solution est en ligne.", L("PUZZLE"), "Voir la solution", src="[URL_IMAGE_PUZZLE]"),
             para('<span style="color:#6b6b66;font-size:14px">Les blocs sont indépendants : garde ceux qui ont une actualité et supprime les autres.</span>')])
 
 # ---------- 8. Fin d'abonnement ----------
@@ -345,6 +365,18 @@ mail(id="40-suppression-compte", cat="Compte", marketing=False, quand="À la sup
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
      sign="Merci d'avoir joué avec nous,<br><b>L'équipe de l'Académie echecs.com</b>")
 
+mail(id="41-parrainage", cat="Engagement", quand="À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre)", img="b-parrainage", alt="Invite un ami",
+     objet="Invite un ami, et profitez-en tous les deux", pre="Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN].", sur="Parrainage", titre="Joue avec | tes amis.",
+     corps=[para("[PRENOM], tu connais quelqu'un qui veut progresser aux échecs ? Partage ton lien : ton ami reçoit <b>[OFFRE_FILLEUL]</b>, et toi <b>[RECOMPENSE_PARRAIN]</b> dès qu'il s'abonne."),
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0"><tr><td align="center" style="border:2px dashed {C["jaune"]};border-radius:14px;background:#fff6c2;padding:18px">'
+            f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:{C["gris"]}">Ton code</div>'
+            f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:28px;letter-spacing:.12em;color:#111">[CODE_PARRAINAGE]</div></td></tr></table>',
+            bouton("Partager mon lien", L("PARRAINAGE")), para('<span style="color:#6b6b66;font-size:14px">Pas de limite : chaque ami abonné te rapporte [RECOMPENSE_PARRAIN].</span>')])
+mail(id="42-filleul-abonne", cat="Engagement", quand="Quand un ami parrainé s'abonne", img="b-filleul", alt="Ton ami est arrivé",
+     objet="[PRENOM_FILLEUL] a rejoint l'Académie grâce à toi 🎉", pre="Ta récompense : [RECOMPENSE_PARRAIN].", sur="Parrainage", titre="Merci | pour l'invitation !",
+     corps=[para("<b>[PRENOM_FILLEUL]</b> vient de s'abonner à l'Académie avec ton code. Comme promis, tu reçois <b>[RECOMPENSE_PARRAIN]</b> : c'est déjà sur ton compte."),
+            para("Défiez-vous sur l'échiquier : les tournois en ligne sont ouverts à tous les niveaux."), bouton("Voir le prochain tournoi", L("TOURNOIS"))])
+
 # Titres en deux temps (« | » : la suite en italique bleu) et mascotte des e-mails sans image
 TITRES = {
     "01-confirmation-adresse": "Plus qu'un clic, | [PRENOM] !", "02-bienvenue-compte-gratuit": "Ton compte | est prêt.",
@@ -364,7 +396,12 @@ TITRES = {
 MASCOTTES = {"01-confirmation-adresse": "coucou", "03-mot-de-passe": "cherche", "08-paiement-refuse": "gratte-tete", "09-paiement-recu": "super",
              "30-resiliation-confirmee": "reverence", "33-paiement-abandonne": "gratte-tete", "34-changement-formule": "super", "35-carte-expire": "telephone",
              "37-masterclass-reportee": "pendule", "39-changement-tarif": "pancarte", "40-suppression-compte": "coucou"}
+ENTETES = {"02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
+           "13": "communaute", "14": "bilan", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
+           "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
+           "32": "anniversaire", "36": "inscription", "38": "forum"}
 for e in E:
+    if e["id"][:2] in ENTETES: e["img"] = "b-" + ENTETES[e["id"][:2]]
     e["titre"] = TITRES.get(e["id"], e["titre"])
     if e["id"] in MASCOTTES: e["mascotte"] = MASCOTTES[e["id"]]
 
@@ -391,7 +428,9 @@ EXEMPLES = {"PRENOM": "Léa", "DATE": "18 novembre", "HEURE": "20 h 30", "JOUR":
     "DATE_RENOUVELLEMENT": "18 décembre", "DATE_FIN": "30 novembre", "DATE_SUSPENSION": "25 novembre", "DATE_FIN_OFFRE": "15 décembre", "TITRE_UNE": "masterclass avec Gata Kamsky",
     "NB_LECONS_GRATUITES_RESTANTES": "4", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "AUTEUR_REPONSE": "Sylvain Ravot", "TITRE_SUJET": "Que jouer contre la Caro-Kann ?",
     "EXTRAIT_REPONSE": "Essaie la variante d'avance : 3.e5, avec un plan simple…", "DATE_EFFET": "1er février", "CHANGEMENT": "l'abonnement mensuel passera à 21,90 €",
-    "EMAIL_CONTACT": "contact@echecs.com", "QUAND": "Demain", "ADRESSE_POSTALE": "Paris, France"}
+    "EMAIL_CONTACT": "contact@echecs.com", "URL_PHOTO_COACH": "img/coach-exemple.jpg", "URL_IMAGE_PUZZLE": "img/puzzle-exemple.jpg",
+    "CONSIGNE_PUZZLE": "Les Blancs jouent et font mat en 1.", "OFFRE_FILLEUL": "son premier mois à 9,90 €", "RECOMPENSE_PARRAIN": "un mois offert",
+    "CODE_PARRAINAGE": "LEA-2026", "PRENOM_FILLEUL": "Thomas", "QUAND": "Demain", "ADRESSE_POSTALE": "Paris, France"}
 def exemple(h): return re.sub(r"\[([A-Z_0-9]+)\]", lambda m: EXEMPLES.get(m.group(1), m.group(0)) if not m.group(1).startswith("LIEN_") else "#", h)
 VARS = set()
 for e in E:

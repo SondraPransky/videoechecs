@@ -1,0 +1,41 @@
+// En-têtes dédiés des e-mails (1200×480, affichés en 600×240) et échiquier du puzzle de la lettre d'information.
+// Rendus par scripts/pack.mjs dans images/00-emails/ ; utilisés par scripts/emails.py.
+(() => {
+  const B = (id, theme, t, e, pose) => ({ id: "email-" + id, dir: "00-emails", tpl: "bandeau", theme, t, e, pose,
+    only: [["1200x480", 1200, 480, "En-tête d'e-mail (affiché en 600×240)"]] });
+  const L = [
+    B("bienvenue", "ciel", "Bienvenue", "dans l'Académie !", "coucou"),
+    B("lecons", "soleil", "6 leçons", "offertes.", "lecture"),
+    B("offre", "nuit", "L'Académie", "complète.", "niveau-superieur"),
+    B("hesites", "rose", "Et si", "tu essayais ?", "haussement"),
+    B("abonne", "nuit", "Bienvenue", "parmi nous !", "hourra"),
+    B("parcours", "ciel", "Ton parcours", "commence ici.", "marche"),
+    B("exercices", "craie", "10 minutes", "par jour.", "pendule"),
+    B("masterclasses", "rose", "Les grands maîtres", "t'attendent.", "prof"),
+    B("communaute", "menthe", "Joue, partage,", "mesure-toi.", "discute"),
+    B("bilan", "nuit", "Ton mois", "d'échecs.", "serie-reussie"),
+    B("module", "nuit", "Module", "validé !", "drapeau"),
+    B("serie", "soleil", "Ta série", "continue ?", "serie-de-jours"),
+    B("reprendre", "craie", "On reprend", "ensemble ?", "cherche"),
+    B("manque", "ciel", "Tu nous", "manques !", "dodo"),
+    B("masterclass", "rose", "Masterclass", "en direct.", "megaphone"),
+    B("replay", "nuit", "Le replay", "est en ligne.", "regarde"),
+    B("cours", "menthe", "Nouveau", "cours.", "lecture"),
+    B("tournoi", "soleil", "Tournoi", "en ligne.", "pion-brandi"),
+    B("resultats", "rose", "Les résultats", "sont là.", "champion"),
+    B("revue", "craie", "Le nouveau", "numéro.", "lit-assise"),
+    B("nouvelles", "soleil", "Les nouvelles", "de la semaine.", "megaphone"),
+    B("annuel", "nuit", "Passe", "à l'annuel.", "saut-etoile"),
+    B("fin", "craie", "Plus que", "7 jours.", "pendule"),
+    B("retour", "ciel", "Reviens", "quand tu veux.", "coucou-autre-main"),
+    B("anniversaire", "rose", "Joyeux", "anniversaire !", "fete"),
+    B("inscription", "menthe", "Inscription", "confirmée.", "super"),
+    B("forum", "ciel", "Nouvelle", "réponse.", "discussion"),
+    B("parrainage", "soleil", "Invite", "un ami.", "invite"),
+    B("filleul", "menthe", "Ton ami", "est arrivé !", "fete"),
+    { id: "email-puzzle", dir: "00-emails", tpl: "plateau", theme: "craie",
+      pos: { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" },
+      only: [["1080x1080", 1080, 1080, "Puzzle de la lettre d'information (exemple)"]] },
+  ];
+  L.forEach(v => window.VISUELS.push(v));
+})();

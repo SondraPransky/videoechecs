@@ -109,6 +109,12 @@ body.rep.land main.quiz:not(.qp) .q { font-size: 5.4rem; }
 body.rep.land main.quiz:not(.qp) .opt { font-size: 4.2rem; }
 body.rep.land main.quiz:not(.qp) .ex { font-size: 3.4rem; }
 body.rep.tall main.qp .ex { font-size: 4rem; }
+.bd { position: absolute; inset: 0; background: var(--bg); overflow: hidden; }
+.bd .dam { position: absolute; right: -140px; top: -220px; width: 760px; height: 760px; transform: rotate(-14deg); background: repeating-conic-gradient(var(--chip) 0 25%, transparent 0 50%) 0 0 / 150px 150px; }
+.bd .bt { position: absolute; left: 80px; top: 50%; transform: translateY(-50%); width: 700px; }
+.bd .bt1 { font: 900 92px/1 "Fraunces"; color: var(--ink); letter-spacing: -.01em; }
+.bd .bt2 { font: italic 400 92px/1.08 "Fraunces"; color: var(--em); }
+.bd.plat { padding: 60px; } .bd.plat .pw { position: relative; width: 100%; height: 100%; } .bd.plat .board { border-radius: 26px; box-shadow: 0 30px 60px rgba(0,0,0,.18); }
 main.sl { display: flex; flex-direction: column; gap: 3rem; }
 .t .ei { font-family: "Fraunces"; font-style: italic; font-weight: 400; color: var(--em); }   /* suite en italique sur la même ligne */
 main.sl .num { font: 800 3rem/1 "Manrope"; letter-spacing: .1em; opacity: .55; }
@@ -160,6 +166,7 @@ main.qp .bas .vis { min-height: 0; } body:not(.tall) main.qp.long .q { font-size
 <script src="quiz-academie.js"></script>
 <script src="reponses.js"></script>
 <script src="carrousels.js"></script>
+<script src="emails-visuels.js"></script>
 <script>
 const Q = new URLSearchParams(location.search);
 const W = +Q.get("w"), H = +Q.get("h"), ID = Q.get("id");
@@ -237,6 +244,10 @@ const CKR = `<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColo
 const opt = (it, o, i) => `<div class="opt${it.rep === undefined ? "" : i === it.rep ? " ok" : " ko"}"><i>${"ABCD"[i]}</i>${o}${i === it.rep ? CKR : ""}</div>`;
 const sol = it => it.rep === undefined ? `<div class="s" style="font-size:3.4rem">${it.s}</div>` : `<div class="ex">${it.s}</div>`;
 const T = {
+  // En-tête d'e-mail : grand titre et mascotte, sans logo (l'e-mail a déjà le sien)
+  bandeau: it => `<div class="bd"><div class="dam"></div><div class="bt"><div class="bt1">${nb(it.t)}</div><div class="bt2">${nb(it.e)}</div></div>${pose(it.pose, "right:90px;bottom:8px;height:410px;width:336px")}</div>`,
+  // Échiquier seul (puzzle de la lettre d'information)
+  plateau: it => `<div class="bd plat"><div class="pw">${board(it.pos, { coords: true, style: "width:100%;height:100%" })}</div></div>`,
   // Diapositive de carrousel pédagogique (src/carrousels.js)
   slide: it => head(it.k) + `<main class="sl${it.cover ? " une" : ""}${it.cta ? " fin" : ""}${!it.pos && !it.cta ? " texte" : ""}"><div class="num">${it.n} / ${it.total}</div><div class="txt"><div class="t">${nb(it.t)}${it.e ? `<span class="e">${nb(it.e)}</span>` : ""}</div>${it.s ? `<div class="s">${nb(it.s)}</div>` : ""}</div>${it.pos ? `<div class="plat">${board(it.pos, { hl: it.hl, arrow: it.arrow, coords: true, style: "width:1px" })}</div>` : it.cta ? pose("hourra", "position:relative;height:44rem;width:36rem;margin:2rem auto 0") : ""}</main>`
     + (it.cta ? foot("Découvre l'Académie") : `<footer><span class="glisse">Glisse <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></footer>`),

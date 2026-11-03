@@ -1,6 +1,6 @@
 # E-mails de suivi des abonnés — Académie echecs.com
 
-40 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
+42 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
 dans `emails/img/`, et un aperçu de chaque e-mail (largeur téléphone) dans `emails/apercus/`.
 Tous en « tu », dans le style du pack (fond crème, en-tête nuit, bouton jaune), lisibles sur téléphone et dans les messageries
 qui bloquent les images (les textes ne sont jamais dans les images).
@@ -18,6 +18,7 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (co
 Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours ──► J+3 11 Exercices ──► J+6 12 Masterclasses ──► J+10 13 Communauté
         │
         ├── chaque mois : 09 Reçu (renouvellement) · 14 Bilan du mois · 32 Anniversaire (chaque année)
+        ├── parrainage  : 41 Invite un ami (J+30, après un module) · 42 Ton ami a rejoint l'Académie
         ├── en continu  : 15 Module validé · 16 Série en danger · 17 Inactif 7 j · 18 Inactif 30 j
         ├── à 3 mois    : 28 Passage à l'annuel (mensuels)
         ├── paiement    : 08 Paiement refusé (relance J+3) · 35 Carte bientôt expirée · 34 Changement de formule
@@ -36,6 +37,9 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Polices de l'Académie** : Fraunces pour les titres (gras, avec une suite en italique bleu, comme sur les visuels), Manrope pour le texte.
   Elles sont chargées depuis Google Fonts : Apple Mail, l'appli Mail de l'iPhone et Outlook.com les affichent ; Gmail et Outlook sur PC
   affichent Georgia et Arial à la place, sans casser la mise en page.
+- **En-têtes dédiés** (600×240) : un grand titre et la mascotte, dans les couleurs du pack, propres à chaque e-mail (dossier `images/00-emails/`).
+- **Photo du coach** dans l'annonce de masterclass (`[URL_PHOTO_COACH]`), **puzzle de la semaine** en image dans la lettre (`[URL_IMAGE_PUZZLE]`, l'échiquier du jour généré par le site).
+- **Mode sombre** : sur Apple Mail, l'iPhone et Outlook.com en thème sombre, l'e-mail passe en fond nuit (aperçus sur la page de validation). Gmail applique sa propre inversion.
 - **La mascotte** apparaît en tête des e-mails sans image (confirmation, mot de passe, paiement, résiliation…), sur le fond nuit de l'en-tête.
   Les autres e-mails ont une image tirée des visuels du pack (sans leur logo ni leur bouton, pour ne pas faire doublon).
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
@@ -56,6 +60,11 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Exclusions** : pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inactivité pendant les 5 premiers jours.
 - **Heures conseillées** : 18 h-20 h en semaine, 9 h-11 h le week-end. Rappels de masterclass : la veille à 18 h et 1 h avant.
 - **Expéditeur** : « Académie echecs.com », adresse de réponse lue par quelqu'un (les réponses aux e-mails sont un bon signal).
+
+## Parrainage : à définir
+
+Les e-mails 41 et 42 sont prêts, mais l'offre reste à fixer : `[OFFRE_FILLEUL]` (ex. « son premier mois à 9,90 € ») et `[RECOMPENSE_PARRAIN]` (ex. « un mois offert »).
+Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[CODE_PARRAINAGE]`, `[LIEN_PARRAINAGE]`).
 
 ## Pages à créer sur le site (les e-mails y renvoient)
 
@@ -125,6 +134,8 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s'arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
 | `32-anniversaire.html` | À la date anniversaire de l'abonnement | Déjà [DUREE_ABONNEMENT] dans l'Académie 🎉 | Merci, [PRENOM] ! Voici ton parcours. | Information (désinscription possible) |
 | `38-reponse-forum.html` | Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t'a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
+| `41-parrainage.html` | À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre) | Invite un ami, et profitez-en tous les deux | Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
+| `42-filleul-abonne.html` | Quand un ami parrainé s'abonne | [PRENOM_FILLEUL] a rejoint l'Académie grâce à toi 🎉 | Ta récompense : [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
 
 ### Réactivation
 
@@ -165,7 +176,7 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 ## Variables
 
-**Liens** (adresse de la page correspondante sur le site, et des comptes de réseaux pour le pied de page) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CGV]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DESINSCRIPTION_TOURNOI]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACEBOOK]`, `[LIEN_FACTURES]`, `[LIEN_FORUM]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_INSTAGRAM]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_LINKEDIN]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_SUJET_FORUM]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`, `[LIEN_TOURNOI]`, `[LIEN_X]`, `[LIEN_YOUTUBE]`.
+**Liens** (adresse de la page correspondante sur le site, et des comptes de réseaux pour le pied de page) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CGV]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DESINSCRIPTION_TOURNOI]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACEBOOK]`, `[LIEN_FACTURES]`, `[LIEN_FORUM]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_INSTAGRAM]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_LINKEDIN]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PARRAINAGE]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_SUJET_FORUM]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`, `[LIEN_TOURNOI]`, `[LIEN_X]`, `[LIEN_YOUTUBE]`.
 
 | Variable | Contenu |
 |---|---|
@@ -245,5 +256,12 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `[MOIS_COURT]` | mois abrégé, ex. « nov. » (bloc calendrier) |
 | `[NOUVEAU_JOUR]` | nouveau jour (masterclass déplacée) |
 | `[NOUVEAU_MOIS_COURT]` | nouveau mois abrégé (masterclass déplacée) |
+| `[CODE_PARRAINAGE]` | code de parrainage de l'abonné |
+| `[CONSIGNE_PUZZLE]` | ex. « Les Blancs jouent et font mat en 1. » |
+| `[OFFRE_FILLEUL]` | offre du filleul, à définir |
+| `[PRENOM_FILLEUL]` | prénom de l'ami parrainé |
+| `[RECOMPENSE_PARRAIN]` | récompense du parrain, à définir |
+| `[URL_IMAGE_PUZZLE]` | adresse de l'image de l'échiquier du puzzle (carrée, 600 px) |
+| `[URL_PHOTO_COACH]` | adresse de la photo du coach (carrée, au moins 128 px) |
 
 Les variables non décrites portent un nom explicite (dates, nombres, noms de coach, de tournoi, de cours…).
