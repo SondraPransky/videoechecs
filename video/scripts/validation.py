@@ -12,7 +12,7 @@ def nb(f): return re.sub(r"[^a-z0-9.-]+", "-", str(f.relative_to(PACK)).lower())
 
 def img(f):
     dst = MED / (nb(f).rsplit(".", 1)[0] + ".jpg")
-    if not dst.exists():
+    if not dst.exists() or dst.stat().st_mtime < f.stat().st_mtime:   # refait si la source a changé
         im = Image.open(f).convert("RGB"); im.thumbnail((800, 800)); im.save(dst, quality=80, optimize=True)
     w, h = Image.open(f).size
     return {"type": "image", "src": "media/" + dst.name, "w": w, "h": h}
@@ -22,7 +22,7 @@ def vid(f):
     out = subprocess.run([FF, "-i", str(f)], capture_output=True, text=True).stderr
     m = re.search(r"Video:.*?(\d{3,4})x(\d{3,4})", out); w, h = int(m.group(1)), int(m.group(2))
     d = re.search(r"Duration: (\d+):(\d+):([\d.]+)", out); dur = int(d.group(2)) * 60 + float(d.group(3))
-    if not dst.exists():
+    if not dst.exists() or dst.stat().st_mtime < f.stat().st_mtime:   # refait si la source a changé
         sc = "scale=960:-2" if w >= h else "scale=-2:960"
         subprocess.run([FF, "-y", "-loglevel", "error", "-i", str(f), "-vf", sc, "-c:v", "libx264", "-preset", "medium", "-crf", "29",
                         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", str(dst)], check=True)
