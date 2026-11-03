@@ -31,6 +31,17 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
                                         26 Lettre d'information à plusieurs nouvelles (toutes les 1 à 2 semaines)
 ```
 
+## Design
+
+- **Polices de l'Académie** : Fraunces pour les titres (gras, avec une suite en italique bleu, comme sur les visuels), Manrope pour le texte.
+  Elles sont chargées depuis Google Fonts : Apple Mail, l'appli Mail de l'iPhone et Outlook.com les affichent ; Gmail et Outlook sur PC
+  affichent Georgia et Arial à la place, sans casser la mise en page.
+- **La mascotte** apparaît en tête des e-mails sans image (confirmation, mot de passe, paiement, résiliation…), sur le fond nuit de l'en-tête.
+  Les autres e-mails ont une image tirée des visuels du pack (sans leur logo ni leur bouton, pour ne pas faire doublon).
+- **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
+- **Largeur 600 px**, s'adapte au téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
+- **Pied de page** : liens vers l'Académie, les masterclasses, les tournois, le forum et les réseaux, puis la mention légale et l'adresse.
+
 ## Règles d'envoi
 
 - **E-mails « Compte »** (confirmation, mot de passe, paiement, résiliation, renouvellement annuel) : envoyés à tous, même désinscrits
@@ -151,7 +162,7 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 ## Variables
 
-**Liens** (adresse de la page correspondante sur le site) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CGV]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DESINSCRIPTION_TOURNOI]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACTURES]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_SUJET_FORUM]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`, `[LIEN_TOURNOI]`.
+**Liens** (adresse de la page correspondante sur le site, et des comptes de réseaux pour le pied de page) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CGV]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DESINSCRIPTION_TOURNOI]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACEBOOK]`, `[LIEN_FACTURES]`, `[LIEN_FORUM]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_INSTAGRAM]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_LINKEDIN]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_SUJET_FORUM]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`, `[LIEN_TOURNOI]`, `[LIEN_X]`, `[LIEN_YOUTUBE]`.
 
 | Variable | Contenu |
 |---|---|

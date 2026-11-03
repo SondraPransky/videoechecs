@@ -40,12 +40,18 @@ for k, f in IMG.items():
         im = Image.open(f).convert("RGB"); w, h = im.size   # sans le logo ni le bouton du visuel réseau (doublons dans un e-mail)
         im.crop((0, int(h * .14), w, int(h * .85))).save(d / "img" / (k + ".jpg"), quality=86, optimize=True)
 
-C = {"fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
-SERIF = "Georgia, 'Times New Roman', serif"; SANS = "Arial, Helvetica, sans-serif"
+C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
+SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
+# Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
+# fichiers locaux pour les aperçus.
+FONTS_WEB = '<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">'
+NM = ICI / "node_modules/@fontsource"
+FONTS_LOCAL = "<style>" + "".join(f'@font-face{{font-family:"{f}";font-weight:{w};font-style:{st};src:url("file://{NM}/{f.lower()}/files/{f.lower()}-latin-{w}-{st}.woff2") format("woff2")}}'
+    for f, w, st in (("Fraunces", 900, "normal"), ("Fraunces", 400, "italic"), ("Manrope", 500, "normal"), ("Manrope", 700, "normal"), ("Manrope", 800, "normal"))) + "</style>"
 
 def bouton(txt, lien):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td style="border-radius:999px;background:{C['jaune']}">
-<a href="{lien}" style="display:inline-block;padding:16px 30px;font:bold 17px {SANS};color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
+<a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:17px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'
 def encadre(t): return f'<div style="margin:22px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:15px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
@@ -64,10 +70,14 @@ def page(e):
             + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e-mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
                else "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."))
     hero = f'<tr><td><img src="{{IMG}}/{e["img"]}.jpg" width="600" alt="{html.escape(e.get("alt", ""))}" style="display:block;width:100%;height:auto;border:0"></td></tr>' if e.get("img") else ""
+    if not e.get("img") and e.get("mascotte"):   # pas d'image : la mascotte, sur le fond nuit de l'en-tête
+        hero = f'<tr><td align="center" style="background:{C["nuit"]};padding:4px 0 0"><img src="{{IMG}}/mascotte-{e["mascotte"]}.png" height="150" alt="" style="display:block;height:150px;width:auto;border:0;margin:6px auto 0"></td></tr>'
+    t1, _, t2 = e["titre"].partition("|")
+    titre = t1.strip() + (f'<br><span style="font-family:{SERIF};font-style:italic;font-weight:400;color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
     corps = "".join(e["corps"])
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">
-<title>{html.escape(e["objet"])}</title></head>
+<title>{html.escape(e["objet"])}</title>{{FONTS}}</head>
 <body style="margin:0;padding:0;background:{C['fond']}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{html.escape(e["pre"])}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td align="center" style="padding:24px 12px">
@@ -75,12 +85,15 @@ def page(e):
 <tr><td style="background:{C['nuit']};padding:22px 32px"><img src="{{IMG}}/logo.png" width="170" alt="echecs.com" style="display:block;border:0;width:170px;height:auto"></td></tr>
 {hero}
 <tr><td style="padding:34px 32px 30px">
-<div style="font:bold 13px {SANS};letter-spacing:.14em;text-transform:uppercase;color:{C['gris']};margin:0 0 12px">{e['sur']}</div>
-<h1 style="margin:0 0 20px;font:bold 30px/1.2 {SERIF};color:{C['texte']}">{e['titre']}</h1>
+<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C['em']};margin:0 0 14px">&mdash;&nbsp;{e['sur']}</div>
+<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1.15;color:{C['texte']}">{titre}</h1>
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', "À très vite sur l'échiquier,<br><b>L'équipe de l'Académie echecs.com</b>")}</p>
 </td></tr>
-<tr><td style="padding:20px 32px 26px;border-top:1px solid {C['filet']};font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>echecs.com · Europe Échecs · [ADRESSE_POSTALE]</td></tr>
+<tr><td style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:13px;color:{C['texte']}">
+<a href="[LIEN_ACADEMIE]" style="color:{C['texte']};text-decoration:none">L'Académie</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_MASTERCLASSES]" style="color:{C['texte']};text-decoration:none">Masterclasses</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_TOURNOIS]" style="color:{C['texte']};text-decoration:none">Tournois</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_FORUM]" style="color:{C['texte']};text-decoration:none">Forum</a></td></tr>
+<tr><td style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C['gris']}">Suis-nous : <a href="[LIEN_INSTAGRAM]" style="color:{C['gris']}">Instagram</a> · <a href="[LIEN_FACEBOOK]" style="color:{C['gris']}">Facebook</a> · <a href="[LIEN_YOUTUBE]" style="color:{C['gris']}">YouTube</a> · <a href="[LIEN_X]" style="color:{C['gris']}">X</a> · <a href="[LIEN_LINKEDIN]" style="color:{C['gris']}">LinkedIn</a></td></tr>
+<tr><td style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>echecs.com · Europe Échecs · [ADRESSE_POSTALE]</td></tr>
 </table></td></tr></table></body></html>'''
 
 L = lambda nom: f"[LIEN_{nom}]"
@@ -97,7 +110,7 @@ mail(id="02-bienvenue-compte-gratuit", cat="Compte", quand="Juste après la conf
      objet="Bienvenue sur echecs.com, [PRENOM] ♟️", pre="6 leçons offertes, le forum et le puzzle du jour t'attendent.", sur="Bienvenue", titre="Ton compte est prêt.",
      corps=[para("Bienvenue dans la communauté echecs.com ! Sans attendre et sans payer, tu as déjà accès à :"),
             liste(["<b>6 leçons</b> de l'Académie, pour découvrir la méthode", "<b>Le puzzle du jour</b>, un nouveau problème chaque matin", "<b>Le forum</b>, pour poser tes questions et partager tes parties"]),
-            bouton("Commencer ma première leçon", L("PREMIERE_LECON")),
+            bouton("Ma première leçon", L("PREMIERE_LECON")),
             encadre(f"Envie d'aller plus loin ? Pour le lancement, l'Académie complète est à {OFFRE} : +200 leçons, +2 000 exercices, les masterclasses et la revue en PGN.")])
 mail(id="03-mot-de-passe", cat="Compte", marketing=False, quand="Sur demande de réinitialisation (transactionnel)",
      objet="Réinitialise ton mot de passe", pre="Ce lien est valable 1 heure.", sur="Ton compte", titre="Nouveau mot de passe",
@@ -284,12 +297,42 @@ mail(id="40-suppression-compte", cat="Compte", marketing=False, quand="À la sup
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
      sign="Merci d'avoir joué avec nous,<br><b>L'équipe de l'Académie echecs.com</b>")
 
+# Titres en deux temps (« | » : la suite en italique bleu) et mascotte des e-mails sans image
+TITRES = {
+    "01-confirmation-adresse": "Plus qu'un clic, | [PRENOM] !", "02-bienvenue-compte-gratuit": "Ton compte | est prêt.",
+    "03-mot-de-passe": "Nouveau | mot de passe.", "04-gratuit-j3-lecons": "Tu as essayé | une leçon ?", "05-gratuit-j7-offre": "Passe à | l'Académie complète.",
+    "06-gratuit-j21-relance": "Tu hésites | encore ?", "07-confirmation-abonnement": "Tu fais partie | de l'Académie.", "08-paiement-refuse": "Ton paiement | n'est pas passé.",
+    "09-paiement-recu": "Merci, | [PRENOM] !", "10-demarrage-j1-parcours": "Trouve | ton niveau.", "11-demarrage-j3-exercices": "10 minutes | par jour.",
+    "12-demarrage-j6-masterclasses": "Apprends | des meilleurs.", "13-demarrage-j10-communaute": "Rejoins | la communauté.", "14-bilan-mensuel": "Ton mois | en chiffres.",
+    "15-objectif-atteint": "Module validé. | Au suivant !", "16-serie-en-danger": "Garde | ta série !", "17-inactif-7-jours": "On reprend | là où tu t'es arrêté ?",
+    "18-inactif-30-jours": "Tu nous | manques !", "21-replay-masterclass": "Tu l'as manquée ? | Le replay est là.", "24-resultats-tournoi": "Merci | d'avoir joué !",
+    "25-sortie-revue": "Le n°[NUMERO] | est là.", "26-lettre-plusieurs-nouvelles": "Cette semaine | dans l'Académie", "27-renouvellement-annuel-j30": "Ton année d'Académie | se termine bientôt.",
+    "28-passage-annuel": "Passe | à l'annuel.", "29-fin-abonnement-j7": "Plus que 7 jours | d'accès.", "30-resiliation-confirmee": "C'est noté, | [PRENOM].",
+    "31-reconquete-j30": "Reviens | quand tu veux.", "32-anniversaire": "Joyeux anniversaire | d'abonnement !", "33-paiement-abandonne": "Il ne manque | qu'une étape.",
+    "34-changement-formule": "C'est | enregistré.", "35-carte-expire": "Ta carte | expire bientôt.", "36-inscription-tournoi": "C'est noté, | rendez-vous à [HEURE] !",
+    "37-masterclass-reportee": "La masterclass | est déplacée.", "38-reponse-forum": "Nouvelle réponse | à ton sujet.", "39-changement-tarif": "Ce qui change | pour ton abonnement.",
+    "40-suppression-compte": "Au revoir, | [PRENOM].", "20-rappel-masterclass": "Rendez-vous | à [HEURE] !",
+}
+MASCOTTES = {"01-confirmation-adresse": "coucou", "03-mot-de-passe": "cherche", "08-paiement-refuse": "gratte-tete", "09-paiement-recu": "super",
+             "30-resiliation-confirmee": "reverence", "33-paiement-abandonne": "gratte-tete", "34-changement-formule": "super", "35-carte-expire": "telephone",
+             "37-masterclass-reportee": "pendule", "39-changement-tarif": "pancarte", "40-suppression-compte": "coucou"}
+for e in E:
+    e["titre"] = TITRES.get(e["id"], e["titre"])
+    if e["id"] in MASCOTTES: e["mascotte"] = MASCOTTES[e["id"]]
+
+MASC = sorted({e["mascotte"] for e in E if e.get("mascotte") and not e.get("img")})
+if MASC:
+    import subprocess
+    subprocess.run(["node", str(ICI / "scripts/mascotte-png.mjs"), ",".join(MASC)], check=True, capture_output=True)
+    for m in MASC:
+        im = Image.open(ICI / f"build/_mascotte/{m}.png"); im = im.crop(im.getbbox())
+        for d in (OUT, APER): im.save(d / "img" / f"mascotte-{m}.png", optimize=True)
 VARS = set()
 for e in E:
     h = page(e)
     VARS |= set(re.findall(r"\[[A-Z_0-9]+\]", h))
-    (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]"))
-    (APER / f"{e['id']}.html").write_text(h.replace("{IMG}", "img"))
+    (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
+    (APER / f"{e['id']}.html").write_text(h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)
