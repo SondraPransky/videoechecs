@@ -22,7 +22,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Europe Échecs · Vidéos : « Tout le catalogue vidéo inclus. » Les séries d'Europe Échecs, en HD. Capture de l'Académie : le lecteur vidéo de la Minute Finale et les cartes des auteurs d'Europe Échecs. La mascotte jaune d'echecs.com regarde une vidéo.
 
 **`06-masterclasses/`**
-> echecs.com — Cours en direct : « Masterclasses avec des pros. » MF et GMI en direct, chaque semaine. Capture de l'Académie : une masterclass en direct : échiquier, caméra du coach et nombre de spectateurs. La mascotte jaune d'echecs.com salue, leçon terminée.
+> echecs.com — Cours en direct : « Masterclasses avec des pros. » MF et GMI en direct, et en replay. Capture de l'Académie : une masterclass en direct : échiquier, caméra du coach et nombre de spectateurs. La mascotte jaune d'echecs.com salue, leçon terminée.
 
 **`07-tes-parties/`**
 > echecs.com — Tes parties : « Saisis, analyse, partage. » Ton espace de parties, en PGN. Capture de l'Académie : un échiquier de partie importée et la fenêtre de partage avec d'autres membres. La mascotte jaune d'echecs.com réfléchit.
@@ -492,7 +492,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > « Tu as l'impression de stagner depuis quelque temps ? » La mascotte jaune d'echecs.com, perplexe, à côté d'une barre de progression bloquée à 40 % de janvier à juin.
 
 **`pub-3-2-reponse`**
-> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et grands maîtres, en direct chaque semaine.
+> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et grands maîtres, en direct et en replay.
 
 **`pub-3-3-final`**
 > Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
