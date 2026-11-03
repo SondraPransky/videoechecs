@@ -171,6 +171,33 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 **`55-quiz-formats/`**
 > echecs.com — Quiz · L'académie : Combien de formats de leçon propose l'académie echecs.com ? A : 2. B : 3. C : 4. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lève les bras de joie.
 
+**`56-quiz-philidor/`**
+> echecs.com — Quiz · La revue n°778 : Le n°778 consacre un dossier de 33 pages à un grand nom français des échecs. Lequel ? A : Alexandre Alekhine. B : François-André Philidor. C : José Raúl Capablanca. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit.
+
+**`57-quiz-citation/`**
+> echecs.com — Quiz · Culture échecs : « Les pions sont l'âme des échecs. » Qui l'a dit ? A : Garry Kasparov. B : Magnus Carlsen. C : François-André Philidor. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+
+**`58-quiz-fourchette/`**
+> echecs.com — Quiz · Calcul Gagnant : Une pièce attaque deux pièces adverses en même temps. C'est… A : une fourchette. B : un coup intermédiaire. C : une élimination du défenseur. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
+
+**`59-quiz-coup-intermediaire/`**
+> echecs.com — Quiz · Calcul Gagnant : Au lieu de reprendre tout de suite, on joue d'abord un coup plus fort. C'est… A : un roque. B : une promotion. C : un coup intermédiaire. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`60-quiz-finales-778/`**
+> echecs.com — Quiz · La revue n°778 : Dans le n°778, qui vous réconcilie avec les finales ? A : Vincent Moret. B : Paul Velten. C : Étienne Bacrot. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit.
+
+**`61-quiz-repertoires/`**
+> echecs.com — Quiz · Tes parties : Dans ton espace de parties, où ranger les ouvertures que tu joues ? A : Dans Bases. B : Dans Répertoires. C : Dans Favoris. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`62-quiz-tata-steel/`**
+> echecs.com — Quiz · Vidéos : Dans quel pays se joue le tournoi Tata Steel Chess ? A : Aux Pays-Bas. B : En Inde. C : En Norvège. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com regarde une vidéo.
+
+**`63-quiz-candidats/`**
+> echecs.com — Quiz · Le Récap' : Que désigne le Tournoi des candidats ? A : le champion d'Europe. B : le meilleur jeune joueur. C : le challenger du champion du monde. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`64-quiz-karpov/`**
+> echecs.com — Quiz · Culture échecs : Qui succède à Bobby Fischer comme champion du monde en 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Boris Spassky. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
+
 ## Identité (`images/00-identite/`)
 
 **`id-avatar-nuit`**

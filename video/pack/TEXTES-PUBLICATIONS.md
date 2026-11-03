@@ -126,6 +126,15 @@ Titre (Facebook / Instagram) : **Découvre l'Académie Europe Échecs** · Bouto
 | `53-quiz-gmi/` | Gata Kamsky est GMI. Que veut dire ce titre ? | **C, Grand Maître International**, le plus haut titre décerné par la FIDE. Gata Kamsky donne des masterclasses sur l'académie. |
 | `54-quiz-pion-isole/` | Un pion isolé, c'est un pion… | **B, sans pion de son camp sur les colonnes voisines.** Le thème Stratégie (19 leçons) explique comment le jouer et comment l'attaquer. |
 | `55-quiz-formats/` | Combien de formats de leçon propose l'académie echecs.com ? | **C, 4** : vidéo, cours écrit, exercice et quiz. |
+| `56-quiz-philidor/` | Le n°778 consacre un dossier de 33 pages à un grand nom français des échecs. Lequel ? | **B, François-André Philidor**, compositeur et meilleur joueur de son siècle. Le dossier est dans le n°778, en PGN sur l'académie. |
+| `57-quiz-citation/` | « Les pions sont l'âme des échecs. » Qui l'a dit ? | **C, Philidor**, dans son *Analyse du jeu des échecs* (1749). |
+| `58-quiz-fourchette/` | Une pièce attaque deux pièces adverses en même temps. C'est… | **A, une fourchette.** Un thème travaillé dans Calcul Gagnant avec Sylvain Ravot. |
+| `59-quiz-coup-intermediaire/` | Au lieu de reprendre tout de suite, on joue d'abord un coup plus fort. C'est… | **C, un coup intermédiaire.** À voir dans Calcul Gagnant #17. |
+| `60-quiz-finales-778/` | Dans le n°778, qui vous réconcilie avec les finales ? | **A, Vincent Moret.** Paul Velten, lui, bouscule les principes, et Étienne Bacrot raconte la plus belle partie de sa carrière. |
+| `61-quiz-repertoires/` | Dans ton espace de parties, où ranger les ouvertures que tu joues ? | **B, dans Répertoires.** Bases, Favoris, Mes parties et Répertoires : tout est dans ton espace de parties. |
+| `62-quiz-tata-steel/` | Dans quel pays se joue le tournoi Tata Steel Chess ? | **A, aux Pays-Bas**, à Wijk aan Zee. Marc Quenehen l'a commenté dans Un jour une partie. |
+| `63-quiz-candidats/` | Que désigne le Tournoi des candidats ? | **C, le challenger du champion du monde.** Tout le tournoi est résumé dans Le Récap'. |
+| `64-quiz-karpov/` | Qui succède à Bobby Fischer comme champion du monde en 1975 ? | **B, Anatoli Karpov**, sans jouer : Fischer refuse de défendre son titre. |
 
 **Humeurs de la mascotte** (`21-` à `26-humeur-*`) — pour les stories, les week-ends, les rappels :
 > 7 jours de suite sur l'académie ? Ne lâche rien ! 🔥
