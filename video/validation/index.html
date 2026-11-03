@@ -1,0 +1,319 @@
+<title>Validation du pack echecs.com</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,800;1,9..144,400&family=Manrope:wght@500;700;800&display=swap">
+<style>
+/* Mise en page : une table de relecture — barre d'avancement collante, sommaire des rubriques, puis une fiche par élément du pack */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #121821; --sub: #5a6574; --line: #dfe4eb;
+  --stage: #0b0f15; --brand: #2c4a6e; --blue: #93b9e2; --yellow: #fae361;
+  --ok: #1f8a43; --ok-bg: #e3f4e8; --todo: #b4570f; --todo-bg: #fbeee2; --new: #6a4bc4; --new-bg: #ece7fa;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0f15; --surface: #141b25; --ink: #eef1f5; --sub: #9aa6b6; --line: #273141;
+  --stage: #06080c; --brand: #93b9e2; --ok: #6bdc7d; --ok-bg: #16301f; --todo: #ffaf6b; --todo-bg: #3a2616; --new: #b9a4ff; --new-bg: #261f3d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0f15; --surface: #141b25; --ink: #eef1f5; --sub: #9aa6b6; --line: #273141;
+  --stage: #06080c; --brand: #93b9e2; --ok: #6bdc7d; --ok-bg: #16301f; --todo: #ffaf6b; --todo-bg: #3a2616; --new: #b9a4ff; --new-bg: #261f3d; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 500 15px/1.5 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { padding-block: 28px 8px; }
+h1 { font: 800 clamp(28px, 4vw, 40px)/1.05 var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 em { font-style: italic; font-weight: 400; color: var(--brand); }
+.intro { color: var(--sub); max-width: 62ch; margin: 10px 0 0; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 10px; }
+.counts { display: flex; gap: 14px; font-weight: 800; font-variant-numeric: tabular-nums; flex-wrap: wrap; }
+.counts span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.dot.ok { background: var(--ok); } .dot.todo { background: var(--todo); } .dot.new { background: var(--new); }
+.track { flex: 1 1 180px; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; display: flex; min-width: 120px; }
+.track i { display: block; height: 100%; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filters button, .chip { font: 700 13px/1 var(--body); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.status-note { color: var(--sub); font-size: 13px; }
+
+nav.toc { display: flex; gap: 8px; flex-wrap: wrap; padding-block: 16px 4px; }
+nav.toc a { text-decoration: none; color: var(--ink); font: 700 13px/1 var(--body); padding: 9px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); display: inline-flex; gap: 8px; align-items: center; }
+nav.toc a b { font-variant-numeric: tabular-nums; color: var(--sub); font-weight: 700; }
+
+section.rub { padding-block: 26px 6px; }
+section.rub > h2 { font: 800 24px/1.1 var(--display); margin: 0 0 14px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+section.rub > h2 small { font: 700 13px/1 var(--body); color: var(--sub); }
+
+.fiche { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin-bottom: 18px; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); overflow: hidden; }
+.fiche[data-statut="ok"] { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.fiche[data-statut="revoir"] { border-color: color-mix(in srgb, var(--todo) 55%, var(--line)); }
+.scene { background: var(--stage); display: flex; flex-direction: column; min-width: 0; }
+.vue { flex: 1; display: grid; place-items: center; padding: 16px; min-height: 300px; }
+.vue img, .vue video { max-width: 100%; max-height: 62vh; border-radius: 6px; display: block; background: #000; }
+.vue img { cursor: zoom-in; }
+.formats { display: flex; gap: 6px; overflow-x: auto; padding: 10px 12px 12px; border-top: 1px solid rgba(255,255,255,.08); }
+.formats button { flex: none; font: 700 12px/1 var(--body); padding: 7px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,.18); background: transparent; color: #c9d1dc; cursor: pointer; white-space: nowrap; }
+.formats button[aria-pressed="true"] { background: var(--yellow); color: #111; border-color: var(--yellow); }
+.cote { padding: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.cote h3 { margin: 0; font: 800 19px/1.2 var(--display); text-wrap: balance; }
+.cote .sous { color: var(--sub); font-size: 13px; margin-top: -6px; }
+.badge { align-self: flex-start; font: 800 12px/1 var(--body); letter-spacing: .04em; padding: 6px 10px; border-radius: 999px; background: var(--line); color: var(--sub); }
+.badge.ok { background: var(--ok-bg); color: var(--ok); } .badge.revoir { background: var(--todo-bg); color: var(--todo); } .badge.new { background: var(--new-bg); color: var(--new); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions button { flex: 1 1 120px; font: 800 14px/1 var(--body); padding: 12px 14px; border-radius: 12px; cursor: pointer; border: 2px solid var(--line); background: var(--surface); color: var(--ink); }
+.actions .b-ok[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: #fff; }
+.actions .b-revoir[aria-pressed="true"] { background: var(--todo); border-color: var(--todo); color: #fff; }
+.actions button:disabled { opacity: .45; cursor: not-allowed; }
+label.lab { font: 700 13px/1 var(--body); color: var(--sub); }
+textarea { width: 100%; min-height: 92px; resize: vertical; font: 500 14px/1.45 var(--body); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.saved { font-size: 12px; color: var(--sub); min-height: 1em; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.vide { padding: 40px 0; color: var(--sub); }
+dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+dialog::backdrop { background: rgba(0,0,0,.85); }
+dialog img { max-width: 96vw; max-height: 92vh; display: block; border-radius: 6px; }
+dialog button { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); font: 800 14px/1 var(--body); padding: 10px 14px; border-radius: 999px; border: 0; background: #fff; color: #111; cursor: pointer; }
+.equipe { border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.equipe h4 { margin: 0; font: 800 13px/1.2 var(--body); color: var(--sub); text-transform: uppercase; letter-spacing: .06em; }
+.equipe ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.equipe li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: start; font-size: 13px; }
+.equipe li img { width: 26px; height: 26px; border-radius: 50%; }
+.equipe li b { font-weight: 800; } .equipe li .st-ok { color: var(--ok); font-weight: 800; } .equipe li .st-revoir { color: var(--todo); font-weight: 800; }
+.equipe li p { margin: 2px 0 0; color: var(--ink); overflow-wrap: anywhere; } .equipe li .old { color: var(--sub); font-style: italic; }
+.equipe .rien { color: var(--sub); font-size: 13px; margin: 0; }
+.panneau { display: flex; flex-direction: column; gap: 10px; }
+.panneau h4 { margin: 0; font: 800 13px/1.2 var(--body); color: var(--sub); text-transform: uppercase; letter-spacing: .06em; }
+footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
+
+@media (max-width: 820px) {
+  .fiche { grid-template-columns: minmax(0, 1fr); }
+  .vue { min-height: 220px; }
+}
+@media (prefers-reduced-motion: no-preference) { .fiche { transition: border-color .2s; } }
+</style>
+
+<header class="top wrap">
+  <h1>Validation du pack <em>echecs.com</em></h1>
+  <p class="intro">Une fiche par élément : la vidéo longue, les vidéos, les publicités, les visuels et l'identité des comptes. Regarde chaque format, puis donne ton avis : « Validé » ou « À revoir », avec ce qu'il faut changer. Chacun a son propre avis, signé de son nom ; la décision finale de chaque fiche revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="counts" aria-live="polite">
+      <span><i class="dot ok"></i><b id="n-ok">0</b> validés (décision finale)</span>
+      <span><i class="dot todo"></i><b id="n-revoir">0</b> à revoir</span>
+      <span><i class="dot"></i><b id="n-reste">0</b> à regarder</span>
+    </div>
+    <div class="track" aria-hidden="true"><i id="t-ok" style="background:var(--ok)"></i><i id="t-revoir" style="background:var(--todo)"></i></div>
+    <div class="filters" role="group" aria-label="Afficher">
+      <button type="button" data-f="tout" aria-pressed="true">Tout</button>
+      <button type="button" data-f="reste" aria-pressed="false">À regarder</button>
+      <button type="button" data-f="revoir" aria-pressed="false">À revoir</button>
+      <button type="button" data-f="ok" aria-pressed="false">Validés</button>
+    </div>
+    <span class="status-note" id="etat">Chargement des avis…</span>
+  </div>
+</div>
+
+<main class="wrap">
+  <nav class="toc" id="toc" aria-label="Rubriques"></nav>
+  <div id="liste"><p class="vide">Chargement du pack…</p></div>
+</main>
+<footer class="wrap">Les aperçus sont allégés pour la relecture (vidéos en 960 px, images en 800 px). Les fichiers à publier sont dans le zip du pack, en pleine qualité.</footer>
+
+<dialog id="zoom"><button type="button" id="fermer">Fermer</button><img id="zoom-img" alt=""></dialog>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const quand = iso => iso ? new Date(iso).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) : "";
+// Données : decisions/<fiche> = décision finale (propriétaire seulement) ; personnes/<id> = { avis: { <fiche>: {statut, note, v, maj} } }
+let SECTIONS = [], ITEMS = new Map(), DECISIONS = {}, PERSONNES = {}, NOMS = {};
+let filtre = "tout", db = null, user = null, moi = null, proprio = false, peutEcrire = true, monDocExiste = false;
+
+function etat(it) {                       // état de la fiche selon la décision finale
+  const d = DECISIONS[it.id];
+  if (!d || !d.statut) return "reste";
+  if ((d.v || 1) < it.v) return "nouveau";
+  return d.statut;
+}
+function monAvis(id) { return (PERSONNES[moi]?.avis || {})[id] || {}; }
+function avisEquipe(it) {                 // [{pid, statut, note, maj, ancien}] des autres personnes
+  const out = [];
+  for (const [pid, doc] of Object.entries(PERSONNES)) {
+    const a = (doc.avis || {})[it.id];
+    if (!a || !a.statut && !a.note) continue;
+    out.push({ pid, ...a, ancien: (a.v || 1) < it.v });
+  }
+  return out.sort((a, b) => String(b.maj).localeCompare(String(a.maj)));
+}
+function compte() {
+  let ok = 0, rev = 0, reste = 0;
+  ITEMS.forEach(it => { const s = etat(it); if (s === "ok") ok++; else if (s === "revoir") rev++; else reste++; });
+  const n = ITEMS.size || 1;
+  $("#n-ok").textContent = ok; $("#n-revoir").textContent = rev; $("#n-reste").textContent = reste;
+  $("#t-ok").style.width = (ok / n * 100) + "%"; $("#t-revoir").style.width = (rev / n * 100) + "%";
+  $("#toc").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${esc(s.titre)} <b>${s.items.filter(it => etat(it) === "ok").length}/${s.items.length}</b></a>`).join("");
+}
+function badge(it) {
+  return { ok: ["ok", "Validé"], revoir: ["revoir", "À revoir"], nouveau: ["new", "Nouvelle version à revoir"], reste: ["", "En attente de décision"] }[etat(it)];
+}
+function mediaHtml(m, titre) {
+  if (m.type === "video") return `<video src="${esc(m.src)}#t=0.8" controls playsinline preload="metadata" aria-label="${esc(titre + " · " + m.label)}"></video>`;
+  return `<img src="${esc(m.src)}" alt="${esc(titre + " · " + m.label)}" loading="lazy" data-zoom>`;
+}
+function panneau(it) {      // la décision finale pour la propriétaire, son avis pour les autres
+  const a = proprio ? (DECISIONS[it.id] || {}) : monAvis(it.id);
+  const actif = a.statut && (a.v || 1) >= it.v ? a.statut : null;
+  const dis = peutEcrire && db && moi ? "" : "disabled";
+  return `<div class="panneau">
+    <h4>${proprio ? "Ta décision finale" : "Ton avis"}</h4>
+    <div class="actions">
+      <button type="button" class="b-ok" aria-pressed="${actif === "ok"}" ${dis}>Validé</button>
+      <button type="button" class="b-revoir" aria-pressed="${actif === "revoir"}" ${dis}>À revoir</button>
+    </div>
+    <label class="lab" for="note-${esc(it.id)}">${proprio ? "Ce qu'il faut changer (Claude corrige à partir de ce texte)" : "Ta remarque (format concerné, ce qu'il faut changer)"}</label>
+    <textarea id="note-${esc(it.id)}" ${dis ? "readonly" : ""} placeholder="Ex. : en story, la mascotte cache le bouton">${esc(a.note || "")}</textarea>
+    <div class="saved" aria-live="polite">${a.maj ? "Enregistré le " + quand(a.maj) : ""}</div>
+  </div>`;
+}
+function equipeHtml(it) {
+  const liste = avisEquipe(it).filter(a => !(a.pid === moi && !proprio));   // son propre avis est déjà dans le panneau
+  const ok = liste.filter(a => a.statut === "ok" && !a.ancien).length, rev = liste.filter(a => a.statut === "revoir" && !a.ancien).length;
+  return `<div class="equipe"><h4>Avis de l'équipe${liste.length ? ` · ${ok} validé${ok > 1 ? "s" : ""}, ${rev} à revoir` : ""}</h4>
+    ${liste.length ? `<ul>${liste.map(a => `<li data-pid="${esc(a.pid)}"><img alt="" src="${esc(NOMS[a.pid]?.avatarUrl || "")}"><div>
+      <b class="nom">${esc(NOMS[a.pid]?.name || "Quelqu'un")}</b> · ${a.statut === "ok" ? '<span class="st-ok">Validé</span>' : a.statut === "revoir" ? '<span class="st-revoir">À revoir</span>' : "Remarque"}
+      ${a.ancien ? '<span class="old"> · sur la version précédente</span>' : ""}
+      ${a.note ? `<p>${esc(a.note)}</p>` : ""}</div></li>`).join("")}</ul>` : `<p class="rien">Pas encore d'avis.</p>`}
+  </div>`;
+}
+function fiche(it) {
+  const [cls, txt] = badge(it);
+  return `<article class="fiche" id="f-${esc(it.id)}" data-id="${esc(it.id)}" data-statut="${etat(it)}">
+    <div class="scene">
+      <div class="vue">${mediaHtml(it.medias[0], it.titre)}</div>
+      ${it.medias.length > 1 ? `<div class="formats" role="group" aria-label="Formats">${it.medias.map((m, i) =>
+        `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${esc(m.label)}</button>`).join("")}</div>` : ""}
+    </div>
+    <div class="cote">
+      <span class="badge ${cls}">${txt}</span>
+      <h3>${esc(it.titre)}</h3>
+      <div class="sous">${esc(it.sous)}${it.medias.length > 1 ? ` · ${it.medias.length} aperçus` : ""}</div>
+      <div class="zone-panneau">${panneau(it)}</div>
+      <div class="zone-equipe">${equipeHtml(it)}</div>
+    </div>
+  </article>`;
+}
+function rendre() {
+  const garde = it => filtre === "tout" || etat(it) === filtre || (filtre === "reste" && etat(it) === "nouveau");
+  const html = SECTIONS.map(s => {
+    const items = s.items.filter(garde);
+    if (!items.length) return "";
+    return `<section class="rub" id="${esc(s.id)}"><h2>${esc(s.titre)} <small>${s.items.length} fiche${s.items.length > 1 ? "s" : ""}</small></h2>${items.map(fiche).join("")}</section>`;
+  }).join("");
+  $("#liste").innerHTML = html || `<p class="vide">Aucune fiche dans ce filtre.</p>`;
+  compte(); noms();
+}
+function majFiche(id) {      // sans toucher à la vidéo en cours ni au texte en train d'être tapé
+  const el = document.getElementById("f-" + id), it = ITEMS.get(id); if (!el || !it) return;
+  const [cls, txt] = badge(it); el.dataset.statut = etat(it);
+  const b = $(".badge", el); b.className = "badge " + cls; b.textContent = txt;
+  const ta = $("textarea", el);
+  if (document.activeElement !== ta) $(".zone-panneau", el).innerHTML = panneau(it);
+  else { const a = proprio ? (DECISIONS[id] || {}) : monAvis(id), actif = a.statut && (a.v || 1) >= it.v ? a.statut : null;
+    $(".b-ok", el).setAttribute("aria-pressed", actif === "ok"); $(".b-revoir", el).setAttribute("aria-pressed", actif === "revoir"); }
+  $(".zone-equipe", el).innerHTML = equipeHtml(it);
+}
+function toutMaj() { ITEMS.forEach((_, id) => majFiche(id)); compte(); noms(); }
+async function noms() {      // noms et photos résolus au rendu, jamais stockés
+  if (!user) return;
+  const ids = Object.keys(PERSONNES); if (!ids.length) return;
+  NOMS = await user.profiles(ids);
+  document.querySelectorAll(".equipe li[data-pid]").forEach(li => {
+    const p = NOMS[li.dataset.pid]; if (!p) return;
+    $(".nom", li).textContent = p.name || "Quelqu'un"; $("img", li).src = p.avatarUrl;
+  });
+}
+
+let file = Promise.resolve();   // une écriture à la fois (un seul document par personne)
+function enregistrer(id, patch) {
+  const it = ITEMS.get(id), el = document.getElementById("f-" + id);
+  const ancien = proprio ? (DECISIONS[id] || {}) : monAvis(id);
+  const val = { statut: ancien.statut ?? null, note: ancien.note ?? "", ...patch, v: it.v, maj: new Date().toISOString() };
+  if (proprio) DECISIONS[id] = val;
+  else { PERSONNES[moi] = PERSONNES[moi] || { avis: {} }; PERSONNES[moi] = { ...PERSONNES[moi], avis: { ...(PERSONNES[moi].avis || {}), [id]: val } }; }
+  majFiche(id); compte();
+  if (!db || !moi) return;
+  file = file.then(async () => {
+    if (proprio) return db.collection("decisions").doc(id).set(val);
+    const ref = db.collection("personnes").doc(moi);
+    if (monDocExiste) return ref.update({ avis: { [id]: val } });
+    await ref.set({ avis: { ...(PERSONNES[moi].avis || {}) } }); monDocExiste = true;
+  }).catch(e => {
+    if (e && e.code === "invalid_argument") { peutEcrire = false; $("#etat").textContent = "Lecture seule : ton accès à cette page ne permet pas d'enregistrer d'avis."; toutMaj(); }
+    else if (el) $(".saved", el).textContent = "Échec de l'enregistrement, réessaie dans un instant.";
+  });
+}
+
+document.addEventListener("click", e => {
+  const f = e.target.closest(".filters button");
+  if (f) { filtre = f.dataset.f; document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", b === f)); rendre(); return; }
+  const fm = e.target.closest(".formats button");
+  if (fm) {
+    const el = fm.closest(".fiche"), it = ITEMS.get(el.dataset.id);
+    $(".vue", el).innerHTML = mediaHtml(it.medias[+fm.dataset.i], it.titre);
+    fm.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === fm)); return;
+  }
+  const z = e.target.closest("img[data-zoom]");
+  if (z) { $("#zoom-img").src = z.src; $("#zoom-img").alt = z.alt; $("#zoom").showModal(); return; }
+  const bt = e.target.closest(".b-ok, .b-revoir");
+  if (bt && !bt.disabled) {
+    const el = bt.closest(".fiche"), id = el.dataset.id, ta = $("textarea", el), it = ITEMS.get(id);
+    const st = bt.classList.contains("b-ok") ? "ok" : "revoir";
+    const a = proprio ? (DECISIONS[id] || {}) : monAvis(id);
+    const deja = a.statut === st && (a.v || 1) >= it.v;
+    enregistrer(id, { statut: deja ? null : st, note: ta.value });
+    if (st === "revoir" && !deja && !ta.value.trim()) $("textarea", el).focus();
+  }
+});
+$("#fermer").addEventListener("click", () => $("#zoom").close());
+$("#zoom").addEventListener("click", e => { if (e.target === $("#zoom")) $("#zoom").close(); });
+const minuteries = new Map();
+document.addEventListener("input", e => {
+  if (e.target.tagName !== "TEXTAREA") return;
+  const id = e.target.closest(".fiche").dataset.id;
+  clearTimeout(minuteries.get(id));
+  minuteries.set(id, setTimeout(() => enregistrer(id, { note: e.target.value }), 900));
+});
+document.addEventListener("focusout", e => { if (e.target.tagName === "TEXTAREA") setTimeout(() => majFiche(e.target.closest(".fiche").dataset.id), 0); });
+
+fetch("media/manifest.json").then(r => r.json()).then(m => {
+  SECTIONS = m.sections; SECTIONS.forEach(s => s.items.forEach(it => ITEMS.set(it.id, it)));
+  rendre();
+}).catch(() => { $("#liste").innerHTML = `<p class="vide">Le pack n'a pas pu être chargé. Recharge la page.</p>`; });
+
+(async () => {
+  [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+  if (user) { proprio = await user.isOwner(); moi = await user.id(); if (await user.can("data.write") === false) peutEcrire = false; }
+  if (!db) { $("#etat").textContent = "Connecte-toi à claude.ai pour voir et donner les avis."; toutMaj(); return; }
+  if (!moi) peutEcrire = false;
+  $("#etat").textContent = peutEcrire ? "Chargement des avis…" : "Lecture seule : tu vois les avis sans pouvoir en donner.";
+  toutMaj();
+  let pret = 0; const minuterie = setTimeout(() => { $("#etat").textContent = "Les avis enregistrés ne répondent pas encore…"; }, 10000);
+  const charge = snap => { if (!snap.metadata.fromCache && ++pret >= 2) { clearTimeout(minuterie); if (peutEcrire) $("#etat").textContent = proprio ? "Tu as la décision finale sur chaque fiche." : "Ton avis est enregistré automatiquement."; } };
+  const echec = () => { clearTimeout(minuterie); $("#etat").textContent = "Les avis ne peuvent pas être chargés pour le moment."; };
+  db.collection("decisions").onSnapshot(snap => {
+    const n = {}; snap.docs.forEach(d => { n[d.id] = d.data(); }); DECISIONS = n; charge(snap); toutMaj();
+  }, echec);
+  db.collection("personnes").onSnapshot(snap => {
+    const n = {}; snap.docs.forEach(d => { n[d.id] = d.data(); }); PERSONNES = n;
+    if (moi && n[moi]) monDocExiste = true; charge(snap); toutMaj();
+  }, echec);
+})();
+</script>
