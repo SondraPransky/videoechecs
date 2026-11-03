@@ -7,7 +7,7 @@ Ouvrir **apercu.html** dans un navigateur pour voir toutes les images d'un coup.
 
 ```
 videos/
-  00-publicites/     5 publicités de 15 s : une question, sa réponse, une musique par pub (story, 4:5, 1:1, 16:9, story jaune)
+  00-publicites/     5 publicités de 16 s : une question, sa réponse, une musique par pub (story, 4:5, 1:1, 16:9, story jaune)
   00-accroches/      première version : 5 publicités de 31 s qui reprennent le motion (16:9 et story 9:16)
   00-general/        présentation longue (56 s), présentation courte (30 s) en 4 formats, boucle muette d'en-tête de site
   01-progression/    une mini-vidéo par pan de l'académie (10 à 17 s), chacune en 4 formats
@@ -24,7 +24,7 @@ TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran 
 
 ## Quel format pour quel réseau
 
-Sur mobile, privilégier les vidéos pensées pour le vertical : les pubs de 15 s et la présentation courte 9:16 sont composées
+Sur mobile, privilégier les vidéos pensées pour le vertical : les pubs de 16 s et la présentation courte 9:16 sont composées
 écran par écran pour le téléphone (textes lisibles, rien sous les boutons d'Instagram ou de TikTok). Les versions 9:16, 4:5 et 1:1
 des vidéos par thème reprennent la vidéo 16:9 dans un cadre : à garder pour compléter.
 
@@ -33,7 +33,7 @@ des vidéos par thème reprennent la vidéo 16:9 dans un cadre : à garder pour 
 | Instagram — feed | `*-4x5-feed-instagram-facebook.mp4` (le plus visible) ou `*-1x1-posts.mp4` | `*-portrait-1080x1350.jpg` ou `*-carre-1080x1080.jpg` |
 | Instagram — Reels, Stories | d'abord les pubs `00-publicites/pub-*-story-9x16.mp4` et `00-general/presentation-courte-9x16-…` (conçues pour le vertical) ; les `*-9x16-…` des thèmes en complément | `*-story-1080x1920.jpg` |
 | Instagram — stories à la une | — | `00-identite/a-la-une-*.jpg` |
-| TikTok | idem : pubs 15 s `*-story-9x16.mp4` et présentation courte 9:16 en priorité | `*-story-1080x1920.jpg` (carrousel photo) |
+| TikTok | idem : pubs 16 s `*-story-9x16.mp4` et présentation courte 9:16 en priorité | `*-story-1080x1920.jpg` (carrousel photo) |
 | Facebook — page | `*-4x5-feed-instagram-facebook.mp4` ou `*-1x1-posts.mp4` | `*-portrait-1080x1350.jpg`, `*-lien-1200x630.jpg` pour un lien |
 | Facebook — couverture | — | `00-identite/banniere-facebook-1640x624.jpg` |
 | X (Twitter) | `*-16x9-x-youtube-linkedin.mp4` | `*-x-1600x900.jpg` |
@@ -46,7 +46,7 @@ des vidéos par thème reprennent la vidéo 16:9 dans un cadre : à garder pour 
 | Site web | `boucle-entete-site-muette-*.mp4` (en-tête), `presentation-longue-16x9.mp4` | `affiche-video-1920x1080.jpg` (image avant lecture), `partage-lien-1200x630.jpg` (Open Graph) |
 | Photo de profil, partout | — | `00-identite/avatar-*.jpg` (s'affiche en rond) |
 
-## Publicités de 15 s (videos/00-publicites/)
+## Publicités de 16 s (videos/00-publicites/)
 
 Construites pour la pub, sans reprendre le motion : la question en très grand, « Nous avons la solution ! » (ou « pensé à toi ! »),
 puis **une réponse propre à chaque question**, et l'appel final. Chaque pub a sa musique.

@@ -231,10 +231,10 @@ for c in CUTS:
         continue
     st(c - .45, whoosh(.45), .5)
     st(c, impact(), .32)
-st(T_FINAL, impact(), .75)
+st(T_FINAL, impact(), .36)   # coup final au niveau des autres coupes (il sautait d'un coup)
 for nn in (45, 57, 64, 69, 72, 76):   # accord final tenu
     s = supersaw([nn], 3.0) * .9
-    st(T_FINAL, filt(s, "lowpass", 5000) * np.exp(-np.arange(len(s)) / SR * .9), .5)
+    st(T_FINAL, filt(s, "lowpass", 5000) * np.exp(-np.arange(len(s)) / SR * .9), .3)
 
 
 # ------------------------------------------------------------------ master

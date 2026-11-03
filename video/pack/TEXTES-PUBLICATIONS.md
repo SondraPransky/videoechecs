@@ -77,7 +77,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 
 ---
 
-## Publicités de 15 s (`00-publicites/`)
+## Publicités de 16 s (`00-publicites/`)
 
 Texte principal, à adapter à chaque question :
 > 1 · Tu enchaînes les parties sans que ton Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 lien tagué (voir Liens de suivi)
@@ -133,7 +133,7 @@ Le même lien, avec trois ou quatre repères ajoutés à la fin. Ils ne changent
 |---|---|---|
 | `utm_source` | le réseau | `instagram`, `facebook`, `tiktok`, `linkedin`, `x`, `youtube`, `pinterest`, `newsletter` |
 | `utm_medium` | le type de lien | `social` (publication), `bio` (lien de la bio), `story`, `paid_social` (publicité payante), `email` |
-| `utm_campaign` | l'opération | `lancement-academie`, `pubs-15s`, `pubs-31s`, `probleme-du-jour`, `nos-coachs`… |
+| `utm_campaign` | l'opération | `lancement-academie`, `pubs-16s`, `pubs-31s`, `probleme-du-jour`, `nos-coachs`… |
 | `utm_content` | le visuel ou la pub | le nom du dossier ou du fichier : `01-progression`, `pub-3-story`, `14-probleme-mat-en-1`… |
 
 Règles : tout en minuscules, sans accents ni espaces (des tirets à la place), et toujours les mêmes mots, sinon les statistiques se dispersent.
@@ -152,15 +152,15 @@ Règles : tout en minuscules, sans accents ni espaces (des tirets à la place), 
 | Story avec sticker lien (exemple : problème du jour) | `https://echecs.com/academie?utm_source=instagram&utm_medium=story&utm_campaign=probleme-du-jour&utm_content=14-probleme-mat-en-1` |
 | Newsletter | `https://echecs.com/academie?utm_source=newsletter&utm_medium=email&utm_campaign=lancement-academie` |
 
-**Publicités de 15 s** : un lien par pub et par format, pour comparer les 5 questions.
+**Publicités de 16 s** : un lien par pub et par format, pour comparer les 5 questions.
 
 | Pub | Lien (exemple en story Instagram ; changer `utm_source` et le format à la fin selon la diffusion) |
 |---|---|
-| 1 · classement | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-1-story` |
-| 2 · parties | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-2-story` |
-| 3 · stagner | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-3-story` |
-| 4 · vidéos | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-4-story` |
-| 5 · commencer | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-5-story` |
+| 1 · classement | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-16s&utm_content=pub-1-story` |
+| 2 · parties | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-16s&utm_content=pub-2-story` |
+| 3 · stagner | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-16s&utm_content=pub-3-story` |
+| 4 · vidéos | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-16s&utm_content=pub-4-story` |
+| 5 · commencer | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-16s&utm_content=pub-5-story` |
 
 Dans le gestionnaire de publicités Meta (Facebook, Instagram), plus simple : laisser l'URL `https://echecs.com/academie` et remplir le champ
 « Paramètres d'URL » de chaque pub avec

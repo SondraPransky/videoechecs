@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>echecs.com — Publicités</title>
 <!--
-  Publicités de 15 s construites pour les réseaux (pas de reprise du motion) :
+  Publicités de 16 s construites pour les réseaux (pas de reprise du motion) :
   question en très grand, « Nous avons la solution ! », la réponse propre à chaque question, l'appel final.
   Paramètres : ?q=1..5 (question) &fmt=story|feed|carre|wide (1080×1920, 1080×1350, 1080×1080, 1920×1080) &theme=nuit|soleil
   Rendu : scripts/pubs.sh (render.mjs --page pub.html).
@@ -391,8 +391,8 @@ const confR = confetti($("#confR"), 60, 7), confC = confetti($("#confC"), 60, 19
 // ---------- Timeline ----------
 gsap.defaults({ ease: "expo.out" });
 const tl = gsap.timeline({ paused: true });
-const SC = [["q", 0, 3.9], ["r", 3.9, 1.5], ["s", 5.4, 6.2], ["c", 11.6, 3.4]];
-const TOTAL = 15;
+const SC = [["q", 0, 3.9], ["r", 3.9, 2.5], ["s", 6.4, 6.2], ["c", 12.6, 3.4]];   // « Nous avons la solution » : 2,5 s pour avoir le temps de lire
+const TOTAL = 16;
 const SFX = [];
 const sfx = (type, t, o = {}) => SFX.push({ type, t: +t.toFixed(3), g: o.g ?? 1, p: o.p ?? 1 });
 const poses = [];
@@ -407,8 +407,8 @@ for (const [id, t0, d] of SC) {
 tl.fromTo("#glow1", { x: 0, y: 0 }, { x: 700, y: 400, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#glow2", { x: 0, y: 0 }, { x: -600, y: -300, duration: TOTAL, ease: "sine.inOut" }, 0);
 tl.fromTo("#grid", { backgroundPosition: "0px 0px, 0px 0px" }, { backgroundPosition: "0px 1200px, 0px 0px", duration: TOTAL, ease: "none" }, 0);
-tl.fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 11.6, ease: "none" }, 0);
-at("#bar", 11.6, { opacity: 0, duration: .3 });
+tl.fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 12.6, ease: "none" }, 0);
+at("#bar", 12.6, { opacity: 0, duration: .3 });
 from("#logo", 0, { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: .6 });
 at("#logo", 11.4, { opacity: 0, duration: .25 });
 
@@ -457,7 +457,7 @@ burst(tl, confR, R0 + .05, 1.6);
 sfx("shimmer", R0); sfx("ding", R0 + .1, { p: 1.1, g: .7 });
 
 // 3. La réponse propre à la question
-const S0 = 5.4;
+const S0 = 6.4;
 from("#sk", S0 + .1, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 });
 from("#stt", S0 + .15, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .7 });
 from("#sv", S0 + .5, { opacity: 0, y: 90, rotationX: 22, transformPerspective: 1600 }, { opacity: 1, y: 0, rotationX: 0, duration: .8 });
@@ -517,7 +517,7 @@ if (Q === 1) {
 }
 
 // 4. Appel final
-const C0 = 11.6;
+const C0 = 12.6;
 from("#lg2w", C0, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: .8, ease: "expo.inOut" });
 from("#lg2", C0, { scale: 1.12, filter: "blur(10px) " + (THEME === "soleil" ? "brightness(0)" : "") }, { scale: 1, filter: "blur(0px) " + (THEME === "soleil" ? "brightness(0)" : ""), duration: 1 });
 from("#ct", C0 + .5, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });

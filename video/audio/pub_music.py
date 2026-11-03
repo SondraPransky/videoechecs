@@ -19,8 +19,8 @@ from scipy.signal import butter, sosfilt
 SR = 48000
 STYLE = int(sys.argv[1])
 OUT = sys.argv[2]
-DURATION = 15.0
-T_DROP, T_SOL, T_FINAL = 3.9, 5.4, 11.6
+DURATION = 16.0
+T_DROP, T_SOL, T_FINAL = 3.9, 6.4, 12.6
 N = int(SR * (DURATION + .5))
 L = np.zeros(N)
 R = np.zeros(N)
@@ -319,7 +319,7 @@ def style2():   # disco-funk, ré dorien
 def style3():   # lo-fi qui s'endort, puis hip-hop chaleureux
     bpm = 84; beat = 60 / bpm; bar = 4 * beat
     prog = [(53, [64, 69, 72, 76]), (52, [62, 67, 71, 74]), (50, [60, 65, 69, 72]), (48, [64, 67, 71, 74])]   # Fmaj7 Em7 Dm7 Cmaj7
-    st(0, crackle(DURATION), .5)
+    st(0, crackle(DURATION), .12)   # grésillement de vinyle discret (il était trop présent)
     for t, k in grid(bpm, 0, T_DROP, 2):   # Rhodes en boucle, légèrement désaccordé : on tourne en rond
         root, notes = chord_at(prog, t + .01, bar)
         st(t, rhodes([x - .25 for x in notes], beat * 2), .38)

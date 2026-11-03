@@ -60,8 +60,8 @@ S.append({"id": "generales", "titre": "Vidéos générales", "items": [
          tri(list((V / "00-general").glob("presentation-courte-*.mp4")), ORDRE_V), "video"),
     item("video-boucle", "Boucle d'en-tête du site", "14 s · muette · se répète en fond", [V / "00-general/boucle-entete-site-muette-1920x1080.mp4"], "video")]})
 QS = {1: "Tu enchaînes les parties…", 2: "Tu joues beaucoup…", 3: "Tu as l'impression de stagner…", 4: "Tu regardes des vidéos d'échecs…", 5: "Tu veux progresser…"}
-S.append({"id": "pubs", "titre": "Publicités 15 s", "items": [
-    item(f"pub-{q}", f"Pub {q} · {QS[q]}", "15 s · 5 formats", tri(list((V / "00-publicites").glob(f"pub-{q}-*.mp4")), ["story-9x16.mp4", "feed", "carre", "16x9", "jaune"]), "video") for q in QS]})
+S.append({"id": "pubs", "titre": "Publicités 16 s", "items": [
+    item(f"pub-{q}", f"Pub {q} · {QS[q]}", "16 s · 5 formats", tri(list((V / "00-publicites").glob(f"pub-{q}-*.mp4")), ["story-9x16.mp4", "feed", "carre", "16x9", "jaune"]), "video") for q in QS]})
 ORDRE_I = ["story-1080x1920.jpg", "portrait", "carre-1080x1080.jpg", "x-1600", "lien", "pinterest", "jaune"]
 S.append({"id": "pubs-images", "titre": "Publicités en images", "items": [
     item(f"pub-images-{q}", f"Pub {q} en images", "3 vues (question, réponse, final), seules ou en carrousel",
