@@ -139,7 +139,7 @@ mail(id="09-paiement-recu", cat="Abonnement", marketing=False, quand="À chaque 
 mail(id="10-demarrage-j1-parcours", cat="Démarrage de l'abonné", quand="J+1 après l'abonnement", img="etapes", alt="Valide chaque étape",
      objet="Par où commencer ? Ton parcours en 3 étapes", pre="Initiation, 1400, 1600, 1800 : trouve ton niveau.", sur="Démarrage · 1/4", titre="Trouve ton niveau.",
      corps=[para("[PRENOM], l'Académie est organisée en parcours : <b>Initiation</b>, <b>Objectif 1400</b>, <b>1600</b>, <b>1800</b>, puis <b>2000 et +</b>."),
-            liste(["Choisis le parcours qui correspond à ton niveau (ou passe le test de placement)", "Fais une leçon : vidéo, cours, exercices, quiz", "Valide le quiz pour débloquer la suivante"]),
+            liste(['Choisis le parcours qui correspond à ton niveau, ou <a href="[LIEN_TEST_PLACEMENT]" style="color:#1f5fa8">passe le test de placement</a> (5 minutes)', "Fais une leçon : vidéo, cours, exercices, quiz", "Valide le quiz pour débloquer la suivante"]),
             bouton("Choisir mon parcours", L("PARCOURS"))])
 mail(id="11-demarrage-j3-exercices", cat="Démarrage de l'abonné", quand="J+3 après l'abonnement", img="exercices", alt="Les exercices de l'Académie",
      objet="10 minutes par jour suffisent", pre="+2 000 exercices, rangés par thème et par niveau.", sur="Démarrage · 2/4", titre="10 minutes par jour.",
@@ -157,7 +157,7 @@ mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+1
 # ---------- 5. Engagement ----------
 mail(id="14-bilan-mensuel", cat="Engagement", quand="Le 1er de chaque mois, si au moins une activité dans le mois", img="progression", alt="La mascotte fête une victoire",
      objet="[PRENOM], ton mois d'échecs en chiffres", pre="[NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ton bilan de [MOIS]", titre="Ton mois en chiffres.",
-     corps=[infos([("Leçons terminées", "[NB_LECONS]"), ("Exercices réussis", "[NB_EXERCICES] ([TAUX_REUSSITE] %)"), ("Meilleure série", "[SERIE_MAX] jours"), ("Masterclasses suivies", "[NB_MASTERCLASSES]")]),
+     corps=[infos([("Leçons terminées", "[NB_LECONS]"), ("Exercices réussis", "[NB_EXERCICES] ([TAUX_REUSSITE] %)"), ("Meilleure série", "[SERIE_MAX] jours")]),
             para("Ton thème le plus travaillé : <b>[THEME_FORT]</b>. À renforcer : <b>[THEME_FAIBLE]</b>."), bouton("Travailler [THEME_FAIBLE]", L("THEME_FAIBLE"))])
 mail(id="15-objectif-atteint", cat="Engagement", quand="Quand l'abonné valide un module ou un parcours", img="objectif", alt="Objectif atteint",
      objet="Module validé : [MODULE] 🎉", pre="Une étape de plus vers ton objectif.", sur="Bravo", titre="Module validé !",
@@ -179,7 +179,7 @@ mail(id="19-annonce-masterclass", cat="Événements", quand="Dès qu'une masterc
      objet="Masterclass : [THEME] avec [COACH]", pre="En direct le [DATE] à [HEURE]. Pose tes questions !", sur="Nouvelle masterclass", titre="[THEME]",
      corps=[para("<b>[COACH]</b> ([TITRE_COACH]) te donne rendez-vous en direct pour une masterclass sur <b>[THEME]</b>."),
             infos([("Date", "[DATE]"), ("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]")]),
-            para("[DESCRIPTION_MASTERCLASS]"), bouton("Ajouter à mon agenda", L("AGENDA")),
+            para("[DESCRIPTION_MASTERCLASS]"), bouton("Voir la masterclass", L("MASTERCLASS")),
             para('<span style="color:#6b6b66;font-size:14px">Tu ne peux pas être là ? Le replay sera disponible dans l\'Académie.</span>')])
 mail(id="20-rappel-masterclass", cat="Événements", quand="La veille, puis 1 heure avant (même modèle)", img="masterclasses", alt="Masterclass en direct",
      objet="[QUAND] : masterclass avec [COACH]", pre="[THEME], en direct à [HEURE].", sur="Rappel", titre="C'est [QUAND] !",
@@ -210,7 +210,7 @@ mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque num
 mail(id="26-lettre-plusieurs-nouvelles", cat="Lettre d'information", quand="Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés)", img="progression", alt="Les nouvelles de l'Académie",
      objet="Cette semaine dans l'Académie : [TITRE_UNE]", pre="Masterclass, tournoi, nouveau cours et le puzzle de la semaine.", sur="Les nouvelles · [DATE]", titre="Cette semaine dans l'Académie",
      corps=[para("Bonjour [PRENOM], voici ce qui t'attend cette semaine."),
-            carte("masterclasses", "Masterclass : [THEME]", "Avec [COACH], en direct le [DATE] à [HEURE].", L("MASTERCLASS"), "Ajouter à mon agenda"),
+            carte("masterclasses", "Masterclass : [THEME]", "Avec [COACH], en direct le [DATE] à [HEURE].", L("MASTERCLASS"), "Voir la masterclass"),
             carte("tournois", "Tournoi : [NOM_TOURNOI]", "Le [DATE], cadence [CADENCE], ouvert à tous.", L("INSCRIPTION_TOURNOI"), "Je m'inscris"),
             carte("lecons", "Nouveau cours : [TITRE_COURS]", "[NB_LECONS_COURS] leçons, niveau [NIVEAU].", L("COURS"), "Découvrir le cours"),
             carte("puzzle", "Le puzzle de la semaine", "Les Blancs jouent et font mat en 1. Tu trouves ?", L("PUZZLE"), "Voir le puzzle"),
@@ -220,7 +220,7 @@ mail(id="26-lettre-plusieurs-nouvelles", cat="Lettre d'information", quand="Tout
 mail(id="27-renouvellement-annuel-j30", cat="Fin d'abonnement", marketing=False, quand="30 jours avant le renouvellement d'un abonnement annuel (obligatoire)",
      objet="Ton abonnement annuel se renouvelle le [DATE_RENOUVELLEMENT]", pre="Rien à faire si tu continues : voici le récapitulatif.", sur="Renouvellement", titre="Ton année d'Académie se termine bientôt.",
      corps=[para("[PRENOM], ton abonnement annuel se renouvellera automatiquement le <b>[DATE_RENOUVELLEMENT]</b> pour <b>[PRIX]</b>."),
-            infos([("Leçons terminées cette année", "[NB_LECONS_ANNEE]"), ("Exercices réussis", "[NB_EXERCICES_ANNEE]"), ("Masterclasses suivies", "[NB_MASTERCLASSES_ANNEE]")]),
+            infos([("Leçons terminées cette année", "[NB_LECONS_ANNEE]"), ("Exercices réussis", "[NB_EXERCICES_ANNEE]")]),
             para("Rien à faire si tu continues. Tu peux modifier ou arrêter ton abonnement à tout moment avant cette date."), bouton("Gérer mon abonnement", L("ABONNEMENT_GERER"))])
 mail(id="28-passage-annuel", cat="Fin d'abonnement", quand="Abonnés mensuels depuis 3 mois", img="progression", alt="Ta progression",
      objet="Près de 2 mois offerts en passant à l'annuel", pre="150 €/an au lieu de 12 × 14,90 € : tu économises.", sur="Ton abonnement", titre="Passe à l'annuel.",
@@ -236,9 +236,9 @@ mail(id="30-resiliation-confirmee", cat="Fin d'abonnement", marketing=False, qua
             para("Pour nous aider à nous améliorer, dis-nous en une question pourquoi tu pars :"), bouton("Répondre (30 secondes)", L("QUESTIONNAIRE_DEPART")),
             para('<span style="color:#6b6b66;font-size:14px">Ta progression, tes parties et tes statistiques restent enregistrées.</span>')])
 mail(id="31-reconquete-j30", cat="Fin d'abonnement", quand="30 jours après la fin de l'abonnement", img="masterclasses", alt="Les nouveautés de l'Académie",
-     objet="Ce qui a changé depuis ton départ", pre="Et une offre pour revenir : [OFFRE_RETOUR].", sur="Quoi de neuf", titre="Reviens quand tu veux.",
+     objet="Ton premier mois à 9,90 € pour revenir", pre="Et tout ce qui a changé depuis ton départ.", sur="Quoi de neuf", titre="Reviens quand tu veux.",
      corps=[para("[PRENOM], l'Académie a continué d'avancer :"), liste(["[NOUVEAUTE_1]", "[NOUVEAUTE_2]", "[NOUVEAUTE_3]"]),
-            encadre("Pour ton retour : <b>[OFFRE_RETOUR]</b>, jusqu'au [DATE_FIN_OFFRE]. Ta progression t'attend là où tu l'as laissée."), bouton("Revenir sur l'Académie", L("REACTIVATION"))])
+            encadre("Pour ton retour : <b>ton premier mois à 9,90&nbsp;€</b>, puis 19,90&nbsp;€/mois, sans engagement. Offre valable jusqu'au [DATE_FIN_OFFRE]. Ta progression t'attend là où tu l'as laissée."), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
 mail(id="32-anniversaire", cat="Engagement", quand="À la date anniversaire de l'abonnement", img="progression", alt="Anniversaire",
      objet="Déjà [ANNEES] an(s) dans l'Académie 🎉", pre="Merci, [PRENOM] ! Voici ton parcours.", sur="Anniversaire", titre="Joyeux anniversaire d'abonnement !",
      corps=[para("[PRENOM], ça fait <b>[ANNEES] an(s)</b> que tu t'entraînes avec nous. Merci !"),

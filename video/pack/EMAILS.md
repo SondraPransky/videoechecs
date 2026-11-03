@@ -39,6 +39,16 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Heures conseillées** : 18 h-20 h en semaine, 9 h-11 h le week-end. Rappels de masterclass : la veille à 18 h et 1 h avant.
 - **Expéditeur** : « Académie echecs.com », adresse de réponse lue par quelqu'un (les réponses aux e-mails sont un bon signal).
 
+## Pages à créer sur le site (les e-mails y renvoient)
+
+| Page | Obligatoire ? | Pourquoi |
+|---|---|---|
+| **Préférences e-mails et désinscription** (`[LIEN_PREFERENCES]`, `[LIEN_DESINSCRIPTION]`) | **Oui** | Tout e-mail d'information doit permettre de se désinscrire simplement, sans se connecter (RGPD). Idéalement : choisir par type (événements, lettre, conseils) plutôt que tout ou rien. |
+| **Gestion de l'abonnement** (`[LIEN_ABONNEMENT_GERER]`, `[LIEN_PAIEMENT]`, `[LIEN_PASSAGE_ANNUEL]`) | **Oui** | En France, un abonnement souscrit en ligne doit pouvoir être résilié en ligne, en quelques clics (fonction « résilier mon abonnement »). On y change aussi sa carte et sa formule. |
+| **Factures** (`[LIEN_FACTURES]`) | Oui, sous une forme ou une autre | Une facture doit être fournie à chaque paiement. À défaut de page, joindre la facture en PDF aux e-mails 07 et 09. |
+| **Ajout à l'agenda** (fichier .ics) | Non | Confort pour les masterclasses. En attendant, les e-mails 19 et 26 renvoient vers la page de la masterclass. |
+| **Questionnaire de départ** (`[LIEN_QUESTIONNAIRE_DEPART]`) | Non | Une seule question à choix (trop cher, pas le temps, niveau pas adapté…) : très utile pour les décisions suivantes. Un simple formulaire suffit. |
+
 ## Intégration
 
 1. Héberger le dossier `emails/img/` et remplacer `[URL_IMAGES]` par son adresse.
@@ -123,7 +133,7 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `28-passage-annuel.html` | Abonnés mensuels depuis 3 mois | Près de 2 mois offerts en passant à l'annuel | 150 €/an au lieu de 12 × 14,90 € : tu économises. | Information (désinscription possible) |
 | `29-fin-abonnement-j7.html` | 7 jours avant la fin d'un abonnement résilié (fin de période payée) | Ton accès à l'Académie se termine le [DATE_FIN] | Ta progression reste enregistrée. | Compte (toujours envoyé) |
 | `30-resiliation-confirmee.html` | À la résiliation (transactionnel) | Ta résiliation est confirmée | Tu gardes l'accès jusqu'au [DATE_FIN]. | Compte (toujours envoyé) |
-| `31-reconquete-j30.html` | 30 jours après la fin de l'abonnement | Ce qui a changé depuis ton départ | Et une offre pour revenir : [OFFRE_RETOUR]. | Information (désinscription possible) |
+| `31-reconquete-j30.html` | 30 jours après la fin de l'abonnement | Ton premier mois à 9,90 € pour revenir | Et tout ce qui a changé depuis ton départ. | Information (désinscription possible) |
 
 ### Engagement
 
@@ -133,7 +143,7 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 ## Variables
 
-**Liens** (adresse de la page correspondante sur le site) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_AGENDA]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACTURES]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`.
+**Liens** (adresse de la page correspondante sur le site) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACTURES]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`.
 
 | Variable | Contenu |
 |---|---|
@@ -172,8 +182,6 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `[NB_LECONS_GRATUITES_RESTANTES]` |  |
 | `[NB_LECONS_MODULE]` |  |
 | `[NB_LECONS_TOTAL]` |  |
-| `[NB_MASTERCLASSES]` |  |
-| `[NB_MASTERCLASSES_ANNEE]` |  |
 | `[NB_MODULES]` |  |
 | `[NB_RONDES]` |  |
 | `[NIVEAU]` |  |
@@ -182,7 +190,6 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `[NOUVEAUTE_2]` |  |
 | `[NOUVEAUTE_3]` |  |
 | `[NUMERO]` |  |
-| `[OFFRE_RETOUR]` | offre de reconquête, ex. « 1 mois à 9,90 € » |
 | `[PLACE]` |  |
 | `[POINTS]` |  |
 | `[PRENOM]` | prénom de l'abonné (à défaut : « » vide et la phrase reste correcte) |
