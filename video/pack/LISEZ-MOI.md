@@ -71,7 +71,7 @@ Conseil : lancer les 5 en test A/B avec le même budget, garder la question qui 
 
 ## Première version : publicités de 31 s (videos/00-accroches/)
 
-Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons la solution ! » ou « Nous avons pensé à toi ! Découvre l'Académie Europe Échecs »), puis leçons, progression, masterclasses, forum et l'appel final.
+Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons la solution ! » ou « Nous avons pensé à toi ! Découvre l'Académie echecs.com »), puis leçons, progression, masterclasses, forum et l'appel final.
 
 | Fichier | Question |
 |---|---|
