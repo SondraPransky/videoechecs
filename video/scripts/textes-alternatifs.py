@@ -40,9 +40,9 @@ def alt(v):
     if tpl == "accroche": return phrase(f"echecs.com — {k} : « {t} {e} » {s}", f"Capture de l'académie : {CAPTURE.get(v.get('shot'), '')}.", mascotte(v.get("pose")))
     if tpl == "chiffre": return phrase(f"echecs.com : « {txt(v.get('n'))} {t} {e} »", s, mascotte(v.get("pose")))
     if tpl == "puzzle" and "solution" in v["id"]:
-        return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
+        return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la Tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
     if tpl == "puzzle":
-        return phrase(f"Problème du jour : « {t} {e} » {s}", "Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.")
+        return phrase(f"Problème du jour : « {t} {e} » {s}", "Échiquier : Roi blanc g1, Tour blanche d1, pions blancs f2, g2, h2 ; Roi noir g8, Dame noire b2, pions noirs a7, f7, g7, h7.")
     if tpl == "quizpos":
         return phrase(f"echecs.com — {k} : {txt(v['q'])}", " ".join(f"{'ABCD'[i]} : {o}." for i, o in enumerate(v["opts"])),
                       "Avec la position sur l'échiquier." if v.get("pos") else "", f"Question tirée de la leçon « {v.get('lecon', '')} » de l'académie.")
@@ -52,7 +52,7 @@ def alt(v):
     if tpl == "revue": return phrase(f"La revue Europe Échecs : « {t} {e} » {s}", "Couverture du numéro 779 avec Sophie Milliet et Étienne Bacrot.")
     if tpl == "event": return phrase(f"Tournois en ligne echecs.com : « {t} {e} »", ", ".join(txt(f) for f in v["facts"]) + ".", mascotte(v.get("pose")))
     if tpl == "mascotte": return phrase(f"echecs.com — {k} : « {t} {e} »", mascotte(v.get("pose")))
-    if tpl == "id-avatar": return "Logo echecs.com : le cavalier et le nom echecs.com."
+    if tpl == "id-avatar": return "Logo echecs.com : le Cavalier et le nom echecs.com."
     if tpl == "id-ban": return phrase("Bannière echecs.com : « Progresse à ton rythme. » +200 leçons, +2 000 exercices, masterclasses, tournois, forum.", mascotte(v.get("pose")))
     if tpl == "id-hl": return f"Couverture de story à la une : {v['label']}."
     return ""

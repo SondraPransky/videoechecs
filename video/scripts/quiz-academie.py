@@ -31,8 +31,20 @@ CHOIX = [
     ("la-defense-de-vancura", "Dans la défense de Vancura", None),
 ]
 FR = {"K": "R", "Q": "D", "R": "T", "B": "F", "N": "C"}
-def fr(s):   # notation française : Nf3 → Cf3, Qxd5 → Dxd5, Rb8+ → Tb8+ (seulement devant une case)
-    return re.sub(r"(?<![A-Za-zÀ-ÿ])([KQRBN])(?=[a-h1-8]?x?[a-h][1-8])", lambda m: FR[m.group(1)], s or "")
+# Majuscule aux noms des pièces (sauf le pion) : « son roi » → « son Roi » ; « au tour suivant » reste tel quel
+PIECES = r"(roi|rois|dame|dames|tour|tours|fou|fous|cavalier|cavaliers)"
+def maj(t):
+    def r(m):
+        avant, mot = m.group(1), m.group(2)
+        if mot.startswith("tour"):
+            pre = t[max(0, m.start(2) - 12):m.start(2)].lower()
+            post = t[m.end(2):m.end(2) + 14].lower()
+            if re.search(r"(au|à son|à ton|à mon|chaque|un|ce)\s+$", pre) or re.match(r"\s+(suivant|de jeu|de la suivante|d'horizon|de table)", post):
+                return m.group(0)
+        return avant + mot[0].upper() + mot[1:]
+    return re.sub(r"(^|[\s«(\"'’>])" + PIECES + r"\b(?![-/])", r, t)
+def fr(s):   # notation française : Nf3 → Cf3, Qxd5 → Dxd5, Rb8+ → Tb8+ (seulement devant une case), noms de pièces en majuscule
+    return maj(re.sub(r"(?<![A-Za-zÀ-ÿ])([KQRBN])(?=[a-h1-8]?x?[a-h][1-8])", lambda m: FR[m.group(1)], s or ""))
 FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
 def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
     return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)

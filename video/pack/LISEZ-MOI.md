@@ -16,7 +16,7 @@ images/
   00-publicites/     les 5 pubs en images fixes : question, réponse, appel final (seules ou en carrousel), tous formats
   00-identite/       photos de profil, bannières X / LinkedIn / Facebook / YouTube, couvertures de stories à la une
   00-general/        affiche de la vidéo et visuels généraux
-  01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 48 quiz : 16, 39 à 64, et 65 à 85 tirés des leçons de l'académie)
+  01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'académie)
 apercu.html          planche de toutes les images
 TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
 TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)

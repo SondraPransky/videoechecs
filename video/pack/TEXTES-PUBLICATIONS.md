@@ -34,7 +34,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 *Vidéo : `03-exercices/` · Images : `04-exercices/`, `12-chiffre-2000-exercices/`*
 
 > +2 000 exercices et quiz, classés par niveau.
-> Du mat en 1 aux finales de tours : de quoi s'entraîner un peu chaque jour. 🎯
+> Du mat en 1 aux finales de Tours : de quoi s'entraîner un peu chaque jour. 🎯
 
 ## 04 · Vidéos Europe Échecs
 *Vidéo : `04-videos/` · Image : `05-videos/`*
@@ -104,34 +104,27 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 
 | Visuel | Question | Réponse et explication |
 |---|---|---|
-| `39-quiz-roque/` · Initiation | Peut-on roquer quand son roi est en échec ? | **B, non, jamais.** On ne roque ni pour sortir d'un échec, ni en passant par une case attaquée, ni pour arriver sur une case attaquée. |
+| `39-quiz-roque/` · Initiation | Peut-on roquer quand son Roi est en échec ? | **B, non, jamais.** On ne roque ni pour sortir d'un échec, ni en passant par une case attaquée, ni pour arriver sur une case attaquée. |
 | `40-quiz-clouage/` · 1200 | Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… | **C, un clouage.** Dans l'enfilade, c'est l'inverse : la pièce la plus précieuse est devant et doit s'écarter. |
 | `41-quiz-espagnole/` · 1400 | 1.e4 e5 2.♘f3 ♘c6 3.♗b5 : quelle est cette ouverture ? | **B, la partie espagnole** (ou Ruy Lopez). Avec 3.♗c4, c'est l'italienne. |
-| `42-quiz-colonne-ouverte/` · 1400 | Où une tour est-elle la plus active ? | **A, sur une colonne ouverte**, sans pion : elle contrôle toute la colonne et peut pénétrer en 7e rangée. |
-| `43-quiz-regle-du-carre/` · 1600 | Roi contre pion passé : comment savoir si le roi le rattrape ? | **B, la règle du carré** : on trace le carré entre le pion et sa case de promotion ; si le roi peut y entrer, il rattrape le pion. |
-| `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la tour gagne en activité à chaque avance du pion. |
+| `42-quiz-colonne-ouverte/` · 1400 | Où une Tour est-elle la plus active ? | **A, sur une colonne ouverte**, sans pion : elle contrôle toute la colonne et peut pénétrer en 7e rangée. |
+| `43-quiz-regle-du-carre/` · 1600 | Roi contre pion passé : comment savoir si le Roi le rattrape ? | **B, la règle du carré** : on trace le carré entre le pion et sa case de promotion ; si le Roi peut y entrer, il rattrape le pion. |
+| `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses Tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la Tour gagne en activité à chaque avance du pion. |
 | `45-quiz-champion-1972/` · Culture | Qui fut champion du monde d'échecs de 1972 à 1975 ? | **C, Bobby Fischer**, vainqueur de Boris Spassky à Reykjavik en 1972. |
 
 **Quiz de l'académie** (on fait découvrir les séries, les coachs et les leçons ; la réponse renvoie vers l'académie)
 
 | Visuel | Question | Réponse et renvoi |
 |---|---|---|
-| `46-quiz-minute-finale/` | Quelle série vidéo de Marc Quenehen est consacrée aux finales ? | **B, La Minute Finale.** Toute la série est incluse dans l'académie. |
-| `47-quiz-calcul-gagnant/` | Qui présente la série Calcul Gagnant ? | **C, Sylvain Ravot**, Maître FIDE. À retrouver dans le catalogue vidéo de l'académie. |
 | `48-quiz-gambit-elephant/` | Par quels coups commence le Gambit Éléphant ? | **A, 1.e4 e5 2.♘f3 d5.** Igor Nataf y consacre une leçon (Objectif 1400 et 1600). |
 | `49-quiz-herisson/` | Dans le Hérisson, où les Noirs placent-ils leurs pions ? | **B, a6, b6, d6, e6** : sur la 3e rangée, comme les piquants d'un hérisson. Leçon de Romuald De Labaca (Objectif 1600 et 1800). |
 | `50-quiz-revue-779/` | Milliet et Bacrot : combien de titres de champion de France à eux deux ? | **C, 16** : 9 pour Étienne Bacrot, 7 pour Sophie Milliet. Tout le n°779 est en PGN interactif sur l'académie. |
 | `51-quiz-sicilienne/` | Par quel coup les Noirs jouent-ils la défense sicilienne ? | **B, 1.e4 c5.** 1…e6 est la française, 1…c6 la Caro-Kann. Toutes dans le thème Ouvertures (19 leçons). |
 | `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'académie le montre : ♖d8# ! |
-| `53-quiz-gmi/` | Gata Kamsky est GMI. Que veut dire ce titre ? | **C, Grand Maître International**, le plus haut titre décerné par la FIDE. Gata Kamsky donne des masterclasses sur l'académie. |
 | `54-quiz-pion-isole/` | Un pion isolé, c'est un pion… | **B, sans pion de son camp sur les colonnes voisines.** Le thème Stratégie (19 leçons) explique comment le jouer et comment l'attaquer. |
-| `55-quiz-formats/` | Combien de formats de leçon propose l'académie echecs.com ? | **C, 4** : vidéo, cours écrit, exercice et quiz. |
-| `56-quiz-philidor/` | Le n°778 consacre un dossier de 33 pages à un grand nom français des échecs. Lequel ? | **B, François-André Philidor**, compositeur et meilleur joueur de son siècle. Le dossier est dans le n°778, en PGN sur l'académie. |
 | `57-quiz-citation/` | « Les pions sont l'âme des échecs. » Qui l'a dit ? | **C, Philidor**, dans son *Analyse du jeu des échecs* (1749). |
 | `58-quiz-fourchette/` | Une pièce attaque deux pièces adverses en même temps. C'est… | **A, une fourchette.** Un thème travaillé dans Calcul Gagnant avec Sylvain Ravot. |
 | `59-quiz-coup-intermediaire/` | Au lieu de reprendre tout de suite, on joue d'abord un coup plus fort. C'est… | **C, un coup intermédiaire.** À voir dans Calcul Gagnant #17. |
-| `60-quiz-finales-778/` | Dans le n°778, qui vous réconcilie avec les finales ? | **A, Vincent Moret.** Paul Velten, lui, bouscule les principes, et Étienne Bacrot raconte la plus belle partie de sa carrière. |
-| `61-quiz-repertoires/` | Dans ton espace de parties, où ranger les ouvertures que tu joues ? | **B, dans Répertoires.** Bases, Favoris, Mes parties et Répertoires : tout est dans ton espace de parties. |
 | `62-quiz-tata-steel/` | Dans quel pays se joue le tournoi Tata Steel Chess ? | **A, aux Pays-Bas**, à Wijk aan Zee. Marc Quenehen l'a commenté dans Un jour une partie. |
 | `63-quiz-candidats/` | Que désigne le Tournoi des candidats ? | **C, le challenger du champion du monde.** Tout le tournoi est résumé dans Le Récap'. |
 | `64-quiz-karpov/` | Qui succède à Bobby Fischer comme champion du monde en 1975 ? | **B, Anatoli Karpov**, sans jouer : Fischer refuse de défendre son titre. |
@@ -140,7 +133,7 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 > 7 jours de suite sur l'académie ? Ne lâche rien ! 🔥
 > Une partie avant de dormir ? Juste une. 😴
 > Raté ? C'est comme ça qu'on apprend.
-> Astuce du jour : sors tes pièces avant ta dame.
+> Astuce du jour : sors tes pièces avant ta Dame.
 
 ---
 
