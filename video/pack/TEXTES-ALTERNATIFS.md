@@ -46,10 +46,10 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com : « 4 formats de leçon. » Vidéo, cours écrit, exercice, quiz. La mascotte jaune d'echecs.com lit, assise.
 
 **`14-probleme-mat-en-1/`**
-> Problème du jour : « Mat en 1. À toi de jouer ! » Les Blancs jouent. Ta réponse en commentaire. Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.
+> Problème du jour : « Mat en 1. À toi de jouer ! » Les Blancs jouent. Ta réponse en commentaire. Échiquier : Roi blanc g1, Tour blanche d1, pions blancs f2, g2, h2 ; Roi noir g8, Dame noire b2, pions noirs a7, f7, g7, h7.
 
 **`15-solution-mat-en-1/`**
-> Solution du problème du jour : ♖d8#, le mat du couloir. Le Roi noir est enfermé par ses propres pions. Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
+> Solution du problème du jour : ♖ d8#, le mat du couloir. Le Roi noir est enfermé par ses propres pions. Échiquier : la Tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
 
 **`16-quiz-carlsbad/`**
 > echecs.com — Quiz · Objectif 1600 : Structure Carlsbad : quel est le plan typique des Blancs ? A : L'attaque de minorité. B : Échanger toutes les pièces. C : Pousser h4-h5 au plus vite. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com hausse les épaules.
@@ -82,7 +82,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Tournoi du week-end : « Premier du tournoi ! Et toi, quand ? » La mascotte jaune d'echecs.com brandit un trophée.
 
 **`26-humeur-idee/`**
-> echecs.com — Astuce du jour : « Sors tes pièces avant ta dame. » La mascotte jaune d'echecs.com pointe une étoile du doigt.
+> echecs.com — Astuce du jour : « Sors tes pièces avant ta Dame. » La mascotte jaune d'echecs.com pointe une étoile du doigt.
 
 **`27-revue-numero-779/`**
 > La revue Europe Échecs : « Le n°779 est sorti ! » Milliet & Bacrot : 16 titres pour 2 légendes. Couverture du numéro 779 avec Sophie Milliet et Étienne Bacrot.
@@ -121,34 +121,28 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — C'est le week-end : « Une partie ? Ou deux, ou trois… » La mascotte jaune d'echecs.com est là.
 
 **`39-quiz-roque/`**
-> echecs.com — Quiz · Initiation : Peut-on roquer quand son roi est en échec ? A : Oui, toujours. B : Non, jamais. C : Seulement le petit roque. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+> echecs.com — Quiz · Initiation : Peut-on roquer quand son Roi est en échec ? A : Oui, toujours. B : Non, jamais. C : Seulement le petit roque. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`40-quiz-clouage/`**
 > echecs.com — Quiz · Objectif 1200 : Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… A : Une fourchette. B : Une enfilade. C : Un clouage. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`41-quiz-espagnole/`**
-> echecs.com — Quiz · Objectif 1400 : 1.e4 e5 2.♘f3 ♘c6 3.♗b5 : quelle est cette ouverture ? A : La partie italienne. B : La partie espagnole. C : La défense française. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+> echecs.com — Quiz · Objectif 1400 : 1.e4 e5 2.♘ f3 ♘ c6 3.♗ b5 : quelle est cette ouverture ? A : La partie italienne. B : La partie espagnole. C : La défense française. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
 
 **`42-quiz-colonne-ouverte/`**
-> echecs.com — Quiz · Objectif 1400 : Où une tour est-elle la plus active ? A : Sur une colonne ouverte. B : Dans un coin, bien protégée. C : Devant ses propres pions. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
+> echecs.com — Quiz · Objectif 1400 : Où une Tour est-elle la plus active ? A : Sur une colonne ouverte. B : Dans un coin, bien protégée. C : Devant ses propres pions. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
 
 **`43-quiz-regle-du-carre/`**
-> echecs.com — Quiz · Objectif 1600 : Roi contre pion passé : comment savoir si le roi le rattrape ? A : La règle de l'opposition. B : La règle du carré. C : La règle des 50 coups. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+> echecs.com — Quiz · Objectif 1600 : Roi contre pion passé : comment savoir si le Roi le rattrape ? A : La règle de l'opposition. B : La règle du carré. C : La règle des 50 coups. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`44-quiz-tarrasch/`**
-> echecs.com — Quiz · Objectif 1800 : Avec un pion passé, où placer ses tours selon la règle de Tarrasch ? A : Derrière le pion passé. B : Devant le pion passé. C : Sur la première rangée. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit, assise.
+> echecs.com — Quiz · Objectif 1800 : Avec un pion passé, où placer ses Tours selon la règle de Tarrasch ? A : Derrière le pion passé. B : Devant le pion passé. C : Sur la première rangée. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit, assise.
 
 **`45-quiz-champion-1972/`**
 > echecs.com — Quiz · Culture échecs : Qui fut champion du monde d'échecs de 1972 à 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Bobby Fischer. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
-**`46-quiz-minute-finale/`**
-> echecs.com — Quiz · Vidéos : Quelle série vidéo de Marc Quenehen est consacrée aux finales ? A : Flashback. B : La Minute Finale. C : Les ouvertures en vogue. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com regarde une vidéo.
-
-**`47-quiz-calcul-gagnant/`**
-> echecs.com — Quiz · Nos coachs : Qui présente la série Calcul Gagnant ? A : Igor Nataf. B : Marc Quenehen. C : Sylvain Ravot. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
-
 **`48-quiz-gambit-elephant/`**
-> echecs.com — Quiz · Ouvertures : Par quels coups commence le Gambit Éléphant ? A : 1.e4 e5 2.♘f3 d5. B : 1.d4 d5 2.c4. C : 1.e4 c5 2.♘f3 d6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+> echecs.com — Quiz · Ouvertures : Par quels coups commence le Gambit Éléphant ? A : 1.e4 e5 2.♘ f3 d5. B : 1.d4 d5 2.c4. C : 1.e4 c5 2.♘ f3 d6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
 
 **`49-quiz-herisson/`**
 > echecs.com — Quiz · Stratégie : Dans le Hérisson, où les Noirs placent-ils leurs pions ? A : a5, b5, d5, e5. B : a6, b6, d6, e6. C : c5, d5, e5. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
@@ -160,19 +154,10 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Ouvertures : Par quel coup les Noirs jouent-ils la défense sicilienne ? A : 1.e4 e6. B : 1.e4 c5. C : 1.e4 c6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
 
 **`52-quiz-mat-du-couloir/`**
-> echecs.com — Quiz · Exercices : Le mat du couloir arrive souvent quand… A : le roi est enfermé par ses propres pions. B : la dame est clouée. C : les tours sont doublées. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
-
-**`53-quiz-gmi/`**
-> echecs.com — Quiz · Masterclasses : Gata Kamsky est GMI. Que veut dire ce titre ? A : Grand Maître Initié. B : Gagnant Mondial Invaincu. C : Grand Maître International. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+> echecs.com — Quiz · Exercices : Le mat du couloir arrive souvent quand… A : le Roi est enfermé par ses propres pions. B : la Dame est clouée. C : les Tours sont doublées. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`54-quiz-pion-isole/`**
 > echecs.com — Quiz · Stratégie : Un pion isolé, c'est un pion… A : bloqué par une pièce adverse. B : sans pion de son camp sur les colonnes voisines. C : qui a avancé de deux cases. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com hausse les épaules.
-
-**`55-quiz-formats/`**
-> echecs.com — Quiz · L'académie : Combien de formats de leçon propose l'académie echecs.com ? A : 2. B : 3. C : 4. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lève les bras de joie.
-
-**`56-quiz-philidor/`**
-> echecs.com — Quiz · La revue n°778 : Le n°778 consacre un dossier de 33 pages à un grand nom français des échecs. Lequel ? A : Alexandre Alekhine. B : François-André Philidor. C : José Raúl Capablanca. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit.
 
 **`57-quiz-citation/`**
 > echecs.com — Quiz · Culture échecs : « Les pions sont l'âme des échecs. » Qui l'a dit ? A : Garry Kasparov. B : Magnus Carlsen. C : François-André Philidor. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
@@ -182,12 +167,6 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 
 **`59-quiz-coup-intermediaire/`**
 > echecs.com — Quiz · Calcul Gagnant : Au lieu de reprendre tout de suite, on joue d'abord un coup plus fort. C'est… A : un roque. B : une promotion. C : un coup intermédiaire. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
-
-**`60-quiz-finales-778/`**
-> echecs.com — Quiz · La revue n°778 : Dans le n°778, qui vous réconcilie avec les finales ? A : Vincent Moret. B : Paul Velten. C : Étienne Bacrot. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit.
-
-**`61-quiz-repertoires/`**
-> echecs.com — Quiz · Tes parties : Dans ton espace de parties, où ranger les ouvertures que tu joues ? A : Dans Bases. B : Dans Répertoires. C : Dans Favoris. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`62-quiz-tata-steel/`**
 > echecs.com — Quiz · Vidéos : Dans quel pays se joue le tournoi Tata Steel Chess ? A : Aux Pays-Bas. B : En Inde. C : En Norvège. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com regarde une vidéo.
@@ -220,7 +199,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Initiation : Laquelle de ces pièces doit généralement être développée en premier ? A : La Tour. B : La Dame. C : Le Cavalier. D : Le Roi. Question tirée de la leçon « Principes d'ouverture » de l'académie.
 
 **`72-academie-creer-et-parer-une-menace/`**
-> echecs.com — Quiz · Objectif 1400 : Trait aux Blancs. Quel coup les Noirs menacent-ils ? A : ♘b4. B : ♕d6. C : ♕b4+. D : e5. Avec la position sur l'échiquier. Question tirée de la leçon « Créer et parer une menace » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Trait aux Blancs. Quel coup les Noirs menacent-ils ? A : ♘ b4. B : ♕ d6. C : ♕ b4+. D : e5. Avec la position sur l'échiquier. Question tirée de la leçon « Créer et parer une menace » de l'académie.
 
 **`73-academie-la-regle-du-carre/`**
 > echecs.com — Quiz · Objectif 1400 : Trait aux Noirs - Le Roi peut-il arrêter le pion blanc ? A : Oui. B : Non. Avec la position sur l'échiquier. Question tirée de la leçon « La règle du carré » de l'académie.
@@ -229,19 +208,19 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Objectif 1400 : Dans presque tous les pièges de cette leçon, les Blancs frappent la même case. Laquelle ? A : e5. B : f7. C : d5. D : h7. Question tirée de la leçon « Les pièges d'ouverture » de l'académie.
 
 **`75-academie-la-scandinave/`**
-> echecs.com — Quiz · Objectif 1400 : Après 1.e4 d5 2.exd5 ♕xd5, quel coup blanc gagne aussitôt un tempo ? A : 3.d4. B : 3.♘c3, en attaquant la Dame. C : 3.♘f3. D : 3.c4. Avec la position sur l'échiquier. Question tirée de la leçon « La Scandinave » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Après 1.e4 d5 2.exd5 ♕ xd5, quel coup blanc gagne aussitôt un tempo ? A : 3.d4. B : 3.♘ c3, en attaquant la Dame. C : 3.♘ f3. D : 3.c4. Avec la position sur l'échiquier. Question tirée de la leçon « La Scandinave » de l'académie.
 
 **`76-academie-contrer-le-gambit-roi/`**
-> echecs.com — Quiz · Objectif 1400 : Face au gambit Roi 1.e4 e5 2.f4, quelle est la réponse conseillée aux Noirs dans cette leçon ? A : 2...exf4 en acceptant le gambit. B : 2...♗c5 en refusant. C : 2...d5, le contre-gambit. D : 2...d6 pour tenir le pion e5. Avec la position sur l'échiquier. Question tirée de la leçon « Contrer le gambit Roi » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Face au gambit Roi 1.e4 e5 2.f4, quelle est la réponse conseillée aux Noirs dans cette leçon ? A : 2...exf4 en acceptant le gambit. B : 2...♗ c5 en refusant. C : 2...d5, le contre-gambit. D : 2...d6 pour tenir le pion e5. Avec la position sur l'échiquier. Question tirée de la leçon « Contrer le gambit Roi » de l'académie.
 
 **`77-academie-le-trebuchet/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs, étude de Walker. Un seul coup gagne, et il recule. Lequel ? A : 1.♔a3. B : 1.♔c3. C : 1.a4. D : 1.a3. Avec la position sur l'échiquier. Question tirée de la leçon « Le trébuchet » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs, étude de Walker. Un seul coup gagne, et il recule. Lequel ? A : 1.♔ a3. B : 1.♔ c3. C : 1.a4. D : 1.a3. Avec la position sur l'échiquier. Question tirée de la leçon « Le trébuchet » de l'académie.
 
 **`78-academie-le-roi-cible-de-l-attaque-au/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs. Trois échecs se présentent, un seul mate. Lequel ? A : ♘d7+. B : ♖b7+. C : ♘a6+. D : ♖a8+. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roi cible, de l'attaque au mat » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs. Trois échecs se présentent, un seul mate. Lequel ? A : ♘ d7+. B : ♖ b7+. C : ♘ a6+. D : ♖ a8+. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roi cible, de l'attaque au mat » de l'académie.
 
 **`79-academie-le-fegatello/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Noirs. Les Blancs viennent de jouer 6.♘xf7, le sacrifice qui donne son nom au Fegatello. Que fais-tu ? A : ♕h4. B : ♔xf7. C : ♕f6. D : ♕e7. Avec la position sur l'échiquier. Question tirée de la leçon « Le Fegatello » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Noirs. Les Blancs viennent de jouer 6.♘ xf7, le sacrifice qui donne son nom au Fegatello. Que fais-tu ? A : ♕ h4. B : ♔ xf7. C : ♕ f6. D : ♕ e7. Avec la position sur l'échiquier. Question tirée de la leçon « Le Fegatello » de l'académie.
 
 **`80-academie-chercher-un-abri-pour-son-ro/`**
 > echecs.com — Quiz · Objectif 1600 : Où se trouve le talon d'Achille d'une chaîne de pions ? A : À sa tête. B : Au milieu. C : Sur les colonnes voisines. D : À sa base. Question tirée de la leçon « Chercher un abri pour son Roi » de l'académie.
@@ -256,7 +235,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Objectif 1800 : Que veut dire avoir l'initiative ? A : Avoir plus de matériel. B : Imposer ses menaces. C : Jouer avec les Blancs. D : Avoir le Roi le plus sûr. Question tirée de la leçon « L’initiative » de l'académie.
 
 **`84-academie-sauver-la-partie-pat-materie/`**
-> echecs.com — Quiz · Objectif 1800 : Trait aux Blancs. Après 1.♖b8+, que se passe-t-il si les Noirs prennent par 1...♖xb8 ? A : Les Noirs matent. B : Ton Roi reprend la Tour. C : Les Noirs gagnent. D : C'est pat. Avec la position sur l'échiquier. Question tirée de la leçon « Sauver la partie : pat, matériel insuffisant, perpétuel » de l'académie.
+> echecs.com — Quiz · Objectif 1800 : Trait aux Blancs. Après 1.♖ b8+, que se passe-t-il si les Noirs prennent par 1...♖ xb8 ? A : Les Noirs matent. B : Ton Roi reprend la Tour. C : Les Noirs gagnent. D : C'est pat. Avec la position sur l'échiquier. Question tirée de la leçon « Sauver la partie : pat, matériel insuffisant, perpétuel » de l'académie.
 
 **`85-academie-la-defense-de-vancura/`**
 > echecs.com — Quiz · Objectif 1800 : Dans la défense de Vancura, où place-t-on la Tour ? A : Sur la sixième rangée. B : Devant le pion. C : Près de son Roi. D : Sur la huitième rangée. Question tirée de la leçon « La défense de Vancura » de l'académie.
@@ -264,10 +243,10 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 ## Identité (`images/00-identite/`)
 
 **`id-avatar-nuit`**
-> Logo echecs.com : le cavalier et le nom echecs.com.
+> Logo echecs.com : le Cavalier et le nom echecs.com.
 
 **`id-avatar-soleil`**
-> Logo echecs.com : le cavalier et le nom echecs.com.
+> Logo echecs.com : le Cavalier et le nom echecs.com.
 
 **`id-banniere`**
 > Bannière echecs.com : « Progresse à ton rythme. » +200 leçons, +2 000 exercices, masterclasses, tournois, forum. La mascotte jaune d'echecs.com porte une toque de diplômé.
@@ -332,7 +311,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > « Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? » La mascotte jaune d'echecs.com, perplexe, à côté d'12 heures de vidéos regardées, classement inchangé.
 
 **`pub-4-2-reponse`**
-> Le déclic : « Ne regarde plus, joue ! » Illustration : une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse. Vidéo, cours, exercice, quiz : tu pratiques tout de suite.
+> Le déclic : « Passe à l'action : chaque leçon se joue ! » Illustration : une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse. Vidéo, cours, exercice, quiz : tu pratiques tout de suite.
 
 **`pub-4-3-final`**
 > Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».

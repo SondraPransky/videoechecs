@@ -17,10 +17,15 @@ images/
   00-identite/       photos de profil, bannières X / LinkedIn / Facebook / YouTube, couvertures de stories à la une
   00-general/        affiche de la vidéo et visuels généraux
   01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'académie)
+                     chaque quiz a aussi sa réponse : `…-reponse-story-1080x1920.jpg` et `…-reponse-carre-1080x1080.jpg`, à publier le lendemain
+  carrousel-1-mat-du-couloir/, carrousel-2-regle-du-carre/, carrousel-3-fegatello/
+                     3 carrousels pédagogiques de 7 diapositives (portrait 1080×1350, Instagram, LinkedIn, Facebook)
 apercu.html          planche de toutes les images
 TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
 TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)
 QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçons de l'académie (visuels 65 à 85)
+CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mails, phases de la publicité payante
+TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
 ```
 
 ## Quel format pour quel réseau

@@ -28,7 +28,7 @@ def vid(f):
                         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", str(dst)], check=True)
     return {"type": "video", "src": "media/" + dst.name, "w": w, "h": h, "dur": round(dur, 1)}
 
-ETIQ = [("story-9x16-jaune", "Story 9:16 · fond jaune"), ("9x16", "Vertical 9:16"), ("story-1080x1920", "Story 9:16"), ("story", "Story 9:16"),
+ETIQ = [("reponse-story", "Réponse · story 9:16"), ("reponse-carre", "Réponse · carré"), ("story-9x16-jaune", "Story 9:16 · fond jaune"), ("9x16", "Vertical 9:16"), ("story-1080x1920", "Story 9:16"), ("story", "Story 9:16"),
         ("4x5", "Portrait 4:5"), ("feed", "Portrait 4:5"), ("portrait", "Portrait 4:5"), ("1x1", "Carré 1:1"), ("carre", "Carré 1:1"),
         ("16x9", "Paysage 16:9"), ("x-1600x900", "X 16:9"), ("lien-120", "Lien partagé"), ("pinterest", "Pinterest 2:3"),
         ("avatar", "Photo de profil"), ("banniere", "Bannière"), ("a-la-une", "Story à la une")]
@@ -38,6 +38,7 @@ def etiquette(f):
     for k, l in [("facebook", "Facebook"), ("linkedin", "LinkedIn"), ("youtube", "YouTube"), ("-x-1500", "X")]:
         if k in n and "banniere" in n: lab = "Bannière " + l + (" · soleil" if "soleil" in n else "")
     if "avatar" in n: lab = "Photo de profil" + (" · soleil" if "soleil" in n else " · nuit")
+    if n.startswith("carrousel-"): lab = "Diapo " + n.split("-portrait")[0].rsplit("-", 1)[1]
     if "a-la-une" in n: lab = "À la une · " + n.split("a-la-une-")[1].split("-")[0].capitalize()
     return lab
 def media(files, kind):
@@ -51,7 +52,7 @@ def item(id_, titre, sous, files, kind):
 V, I = PACK / "videos", PACK / "images"
 ORDRE_V = ["16x9", "4x5", "1x1", "9x16", "story-9x16.mp4", "story-9x16-jaune", "feed", "carre"]
 def tri(fs, ordre):
-    return sorted(fs, key=lambda f: next((i for i, k in enumerate(ordre) if k in f.name), 99))
+    return sorted(fs, key=lambda f: 98 if "reponse" in f.name else next((i for i, k in enumerate(ordre) if k in f.name), 97))
 S = []
 S.append({"id": "motion", "titre": "Motion — version longue", "items": [
     item("motion-longue", "Présentation de l'académie", "56 s · 16:9 · YouTube, site, LinkedIn", [V / "00-general/presentation-longue-16x9.mp4"], "video")]})
@@ -81,11 +82,16 @@ def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
     return fan(re.sub(r"<[^>]+>|&#8239;", "", t))
+GARDE_Q = ("-carre-1080x1080.jpg", "-story-1080x1920.jpg", "-lien-1200x630.jpg", "reponse-story-1080x1920.jpg")   # quiz : 3 formats + la réponse
 GARDE = ("carre-1080x1080.jpg", "portrait-1080x1350.jpg", "story-1080x1920.jpg", "lien-1200x630.jpg")   # 4 formats par visuel (limite de fichiers de la page)
 S.append({"id": "visuels", "titre": "Visuels", "items": [
     item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if not d.name[3:].startswith(("quiz", "academie"))]})
 S.append({"id": "quiz", "titre": "Quiz", "items": [
-    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if d.name[3:].startswith(("quiz", "academie"))]})
+    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats + réponse (story, carré) dans le pack, 3 + réponse ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE_Q) and not f.name.endswith(("reponse-carre-1080x1080.jpg",))], ORDRE_I), "image") for d in vi if d.name[3:].startswith(("quiz", "academie"))]})
+CAR = sorted(d for d in I.iterdir() if d.is_dir() and d.name.startswith("carrousel-"))
+S.append({"id": "carrousels", "titre": "Carrousels pédagogiques", "items": [
+    item("carrousel-" + d.name.split("-", 2)[2], f"Carrousel {d.name.split('-')[1]} · {d.name.split('-', 2)[2].replace('-', ' ').capitalize()}", f"{len(list(d.glob('*.jpg')))} diapositives · portrait 4:5 · Instagram, LinkedIn, Facebook",
+         sorted(d.glob("*.jpg"), key=lambda f: int(f.name.split("-portrait")[0].rsplit("-", 1)[1])), "image") for d in CAR]})
 idt = I / "00-identite"
 S.append({"id": "identite", "titre": "Identité des comptes", "items": [
     item("id-avatars", "Photos de profil", "nuit et soleil", sorted(idt.glob("avatar-*.jpg")), "image"),

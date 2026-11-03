@@ -31,16 +31,18 @@ const SHOTS = { progression: ['s1', 5.4], progres: ['prog', 4.3], lecons: ['s3',
 const data = await (async () => {
   const page = await browser.newPage();
   await page.goto('file://' + path.join(here, 'src/visuels.html') + '?id=01-progression&w=100&h=100');
-  const d = await page.evaluate(() => ({ items: window.VISUELS.map(v => ({ id: v.id, tpl: v.tpl, theme: v.theme, only: v.only || null, t: v.t, e: v.e })), posts: window.FORMATS.posts }));
+  const d = await page.evaluate(() => ({ items: window.VISUELS.map(v => ({ id: v.id, tpl: v.tpl, theme: v.theme, only: v.only || null, dir: v.dir || null, t: v.t, e: v.e, rep: !!(window.REPONSES || {})[v.id] })), posts: window.FORMATS.posts }));
   await page.close();
   return d;
 })();
 const index = [];
 for (const it of data.items) {
   if (only && !only.includes(it.id)) continue;
-  const dir = it.tpl.startsWith('id-') ? '00-identite' : it.id;
+  const dir = it.dir || (it.tpl.startsWith('id-') ? '00-identite' : it.id);
   fs.mkdirSync(path.join(PACK, 'images', dir), { recursive: true });
-  for (const [suffix, w, h, usage, extra] of it.only || data.posts) {
+  // Quiz : en plus, le visuel « réponse » du lendemain (story et carré)
+  const REP_F = [['reponse-story-1080x1920', 1080, 1920, 'Réponse du quiz, en story le lendemain', { rep: 1 }], ['reponse-carre-1080x1080', 1080, 1080, 'Réponse du quiz, en post ou en commentaire', { rep: 1 }]];
+  for (const [suffix, w, h, usage, extra] of [...(it.only || data.posts), ...(it.rep ? REP_F : [])]) {
     const page = await browser.newPage({ viewport: { width: w, height: h } });
     const q = new URLSearchParams({ id: it.id, w, h, ...(extra || {}) });
     await page.goto('file://' + path.join(here, 'src/visuels.html') + '?' + q);

@@ -137,7 +137,25 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 
 ---
 
+## Carrousels pédagogiques (`images/carrousel-*/`)
+
+Publier les 7 diapositives dans l'ordre, en un seul post. Sur LinkedIn, les regrouper en PDF (« document ») pour qu'elles défilent.
+
+**Le mat du couloir** (`carrousel-1-mat-du-couloir/`)
+> Le mat du couloir : l'erreur qui coûte la partie, même aux bons joueurs. Glisse pour comprendre… et trouve le mat de la diapo 5 ! ♟️
+> Réponse en commentaire, explication diapo 6. Le mat du couloir et +2 000 exercices t'attendent dans l'Académie echecs.com.
+
+**La règle du carré** (`carrousel-2-regle-du-carre/`)
+> Ton Roi rattrape-t-il ce pion ? Avec la règle du carré, tu le sais en 2 secondes, sans calculer. Glisse ! ♟️
+> Enregistre ce post pour ta prochaine finale. Toutes les finales qui comptent sont dans l'Académie echecs.com.
+
+**Le Fegatello** (`carrousel-3-fegatello/`)
+> Le Fegatello : le sacrifice d'ouverture le plus célèbre… et comment l'éviter avec les Noirs. Glisse ! ♟️
+> Tu l'as déjà joué, ou subi ? Dis-le en commentaire. Les pièges d'ouverture s'apprennent dans l'Académie echecs.com.
+
 ## Calendrier type (une semaine)
+
+Pour le lancement, suivre d'abord `CALENDRIER-LANCEMENT.md` (teasing + 4 semaines), puis ce rythme.
 
 | Jour | Publication | Format conseillé |
 |---|---|---|
@@ -145,7 +163,7 @@ Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir
 | Mardi | Un pan de l'académie (vidéo) | Reel 9:16 + post 4:5 |
 | Mercredi | Solution du problème + astuce | Story + post carré |
 | Jeudi | Portrait de coach / masterclass de la semaine | Image portrait + rappel en story |
-| Vendredi | Quiz | Image carrée, réponse en story le lendemain |
+| Vendredi | Quiz | Image carrée, réponse en story le lendemain (`…-reponse-story-1080x1920.jpg`) |
 | Samedi | Tournoi du week-end | Image story + post 16:9 sur X |
 | Dimanche | Humeur de la mascotte / résultats du tournoi | Story |
 
