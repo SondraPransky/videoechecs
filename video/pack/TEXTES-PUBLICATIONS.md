@@ -112,6 +112,21 @@ Titre (Facebook / Instagram) : **Découvre l'Académie Europe Échecs** · Bouto
 | `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la tour gagne en activité à chaque avance du pion. |
 | `45-quiz-champion-1972/` · Culture | Qui fut champion du monde d'échecs de 1972 à 1975 ? | **C, Bobby Fischer**, vainqueur de Boris Spassky à Reykjavik en 1972. |
 
+**Quiz de l'académie** (on fait découvrir les séries, les coachs et les leçons ; la réponse renvoie vers l'académie)
+
+| Visuel | Question | Réponse et renvoi |
+|---|---|---|
+| `46-quiz-minute-finale/` | Quelle série vidéo de Marc Quenehen est consacrée aux finales ? | **B, La Minute Finale.** Toute la série est incluse dans l'académie. |
+| `47-quiz-calcul-gagnant/` | Qui présente la série Calcul Gagnant ? | **C, Sylvain Ravot**, Maître FIDE. À retrouver dans le catalogue vidéo de l'académie. |
+| `48-quiz-gambit-elephant/` | Par quels coups commence le Gambit Éléphant ? | **A, 1.e4 e5 2.Cf3 d5.** Igor Nataf y consacre une leçon (Objectif 1400 et 1600). |
+| `49-quiz-herisson/` | Dans le Hérisson, où les Noirs placent-ils leurs pions ? | **B, a6, b6, d6, e6** : sur la 3e rangée, comme les piquants d'un hérisson. Leçon de Romuald De Labaca (Objectif 1600 et 1800). |
+| `50-quiz-revue-779/` | Milliet et Bacrot : combien de titres de champion de France à eux deux ? | **C, 16** : 9 pour Étienne Bacrot, 7 pour Sophie Milliet. Tout le n°779 est en PGN interactif sur l'académie. |
+| `51-quiz-sicilienne/` | Par quel coup les Noirs jouent-ils la défense sicilienne ? | **B, 1.e4 c5.** 1…e6 est la française, 1…c6 la Caro-Kann. Toutes dans le thème Ouvertures (19 leçons). |
+| `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'académie le montre : Td8# ! |
+| `53-quiz-gmi/` | Gata Kamsky est GMI. Que veut dire ce titre ? | **C, Grand Maître International**, le plus haut titre décerné par la FIDE. Gata Kamsky donne des masterclasses sur l'académie. |
+| `54-quiz-pion-isole/` | Un pion isolé, c'est un pion… | **B, sans pion de son camp sur les colonnes voisines.** Le thème Stratégie (19 leçons) explique comment le jouer et comment l'attaquer. |
+| `55-quiz-formats/` | Combien de formats de leçon propose l'académie echecs.com ? | **C, 4** : vidéo, cours écrit, exercice et quiz. |
+
 **Humeurs de la mascotte** (`21-` à `26-humeur-*`) — pour les stories, les week-ends, les rappels :
 > 7 jours de suite sur l'académie ? Ne lâche rien ! 🔥
 > Une partie avant de dormir ? Juste une. 😴

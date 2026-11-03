@@ -40,7 +40,7 @@ def alt(v):
     if tpl == "accroche": return phrase(f"echecs.com — {k} : « {t} {e} » {s}", f"Capture de l'académie : {CAPTURE.get(v.get('shot'), '')}.", mascotte(v.get("pose")))
     if tpl == "chiffre": return phrase(f"echecs.com : « {txt(v.get('n'))} {t} {e} »", s, mascotte(v.get("pose")))
     if tpl == "puzzle" and "solution" in v["id"]:
-        return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la tour blanche monte de d1 à d8 et fait mat, le roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
+        return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
     if tpl == "puzzle":
         return phrase(f"Problème du jour : « {t} {e} » {s}", "Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.")
     if tpl == "quiz":

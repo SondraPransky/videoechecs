@@ -43,18 +43,18 @@ window.VISUELS = [
   { id: "10-tournois", tpl: "accroche", theme: "soleil", k: "Tournois en ligne", t: "Mesure-toi", e: "aux autres joueurs.", s: "Ouvert à tous les niveaux.", shot: "tournois", pose: "victoire-tournoi" },
 
   // ---- Chiffres clés
-  { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "saut-etoile" },
+  { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "hourra" },
   { id: "12-chiffre-2000-exercices", tpl: "chiffre", theme: "nuit", k: "Entraînement", n: "+2<b>&#8239;</b>000", t: "exercices", e: "et quiz.", pose: "bonne-reponse" },
   { id: "13-chiffre-4-formats", tpl: "chiffre", theme: "menthe", k: "Apprends comme tu veux", n: "4", t: "formats", e: "de leçon.", s: "Vidéo, cours écrit, exercice, quiz.", pose: "lit-assise" },
 
   // ---- Engagement : problème, solution, quiz
-  { id: "14-probleme-mat-en-1", tpl: "puzzle", theme: "nuit", k: "Le problème du jour", t: "Mat en 1.", e: "À toi de jouer !", s: "Les Blancs jouent. Ta réponse en commentaire.", pos: MAT1, pose: "gratte-tete" },
-  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "Td8#", e: "le mat du couloir.", s: "Le roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "hourra" },
+  { id: "14-probleme-mat-en-1", tpl: "puzzle", theme: "nuit", k: "Le problème du jour", t: "Mat en 1.", e: "À toi de jouer !", s: "Les Blancs jouent. Ta réponse en commentaire.", pos: MAT1, pose: "reflexion" },
+  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "Td8#", e: "le mat du couloir.", s: "Le Roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "hourra" },
   { id: "16-quiz-carlsbad", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1600", q: "Structure Carlsbad : quel est le plan typique des Blancs ?", opts: ["L'attaque de minorité", "Échanger toutes les pièces", "Pousser h4-h5 au plus vite"], s: "Réponds en commentaire : A, B ou C ?", pose: "haussement" },
 
   // ---- Portraits des coachs
-  { id: "17-coach-sylvain-ravot", tpl: "coach", theme: "rose", k: "Nos coachs", t: "Sylvain Ravot", e: "Maître FIDE.", s: "Calcul, tactique et masterclasses en direct.", photo: "auth-ravot", titre: "MF" },
-  { id: "18-coach-marc-quenehen", tpl: "coach", theme: "menthe", k: "Nos coachs", t: "Marc Quenehen", e: "la Minute Finale.", s: "Les finales expliquées simplement.", photo: "auth-quenehen" },
+  { id: "17-coach-sylvain-ravot", tpl: "coach", theme: "rose", k: "Nos coachs", t: "Sylvain Ravot", e: "Maître FIDE.", photo: "auth-ravot", titre: "MF" },
+  { id: "18-coach-marc-quenehen", tpl: "coach", theme: "menthe", k: "Nos coachs", t: "Marc Quenehen", e: "Entraîneur.", photo: "auth-quenehen" },
   { id: "19-coach-fabien-libiszewski", tpl: "coach", theme: "ciel", k: "Nos coachs", t: "Fabien Libiszewski", e: "Grand Maître.", s: "En masterclass sur echecs.com.", photo: "auth-libiszewski", titre: "GMI" },
   { id: "20-coach-gata-kamsky", tpl: "coach", theme: "soleil", k: "Nos coachs", t: "Gata Kamsky", e: "Grand Maître.", s: "En masterclass sur echecs.com.", photo: "auth-kamsky", titre: "GMI" },
 
@@ -78,17 +78,28 @@ window.VISUELS = [
   { id: "33-objectif-atteint", tpl: "mascotte", theme: "nuit", k: "Objectif atteint", t: "Module validé.", e: "Au suivant !", pose: "drapeau" },
   { id: "34-grande-nouvelle", tpl: "mascotte", theme: "rose", k: "Annonce", t: "Grande nouvelle !", e: "Bientôt sur l'académie.", pose: "pancarte" },
   { id: "35-blancs-ou-noirs", tpl: "mascotte", theme: "craie", k: "Sondage", t: "Blancs ou Noirs ?", e: "Tu joues quoi ?", pose: "blancs-ou-noirs" },
-  { id: "36-respire", tpl: "mascotte", theme: "menthe", k: "Avant ta partie", t: "Respire.", e: "Et calcule.", pose: "yoga-arbre" },
-  { id: "37-oups", tpl: "mascotte", theme: "ciel", k: "Ça arrive", t: "Une gaffe ?", e: "Même aux meilleurs.", pose: "oups" },
-  { id: "38-week-end", tpl: "mascotte", theme: "soleil", k: "C'est le week-end", t: "Une partie ?", e: "Ou deux, ou trois…", pose: "danse" },
+  { id: "36-respire", tpl: "mascotte", theme: "menthe", k: "Avant ta partie", t: "Respire.", e: "Et calcule.", pose: "etirement" },
+  { id: "37-oups", tpl: "mascotte", theme: "ciel", k: "Ça arrive", t: "Une gaffe ?", e: "Même aux meilleurs.", pose: "haussement" },
+  { id: "38-week-end", tpl: "mascotte", theme: "soleil", k: "C'est le week-end", t: "Une partie ?", e: "Ou deux, ou trois…", pose: "fete" },
   // Quiz supplémentaires (même gabarit que le 16) : la bonne réponse change de place d'un quiz à l'autre
-  { id: "39-quiz-roque", tpl: "quiz", theme: "ciel", k: "Quiz · Initiation", q: "Peut-on roquer quand son roi est en échec ?", opts: ["Oui, toujours", "Non, jamais", "Seulement le petit roque"], s: "Réponds en commentaire : A, B ou C ?", pose: "gratte-tete" },
+  { id: "39-quiz-roque", tpl: "quiz", theme: "ciel", k: "Quiz · Initiation", q: "Peut-on roquer quand son roi est en échec ?", opts: ["Oui, toujours", "Non, jamais", "Seulement le petit roque"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
   { id: "40-quiz-clouage", tpl: "quiz", theme: "soleil", k: "Quiz · Objectif 1200", q: "Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est…", opts: ["Une fourchette", "Une enfilade", "Un clouage"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
   { id: "41-quiz-espagnole", tpl: "quiz", theme: "menthe", k: "Quiz · Objectif 1400", q: "1.e4 e5 2.Cf3 Cc6 3.Fb5 : quelle est cette ouverture ?", opts: ["La partie italienne", "La partie espagnole", "La défense française"], s: "Réponds en commentaire : A, B ou C ?", pose: "reflexion" },
   { id: "42-quiz-colonne-ouverte", tpl: "quiz", theme: "rose", k: "Quiz · Objectif 1400", q: "Où une tour <span style=\"white-space:nowrap\">est-elle</span> la plus active ?", opts: ["Sur une colonne ouverte", "Dans un coin, bien protégée", "Devant ses propres pions"], s: "Réponds en commentaire : A, B ou C ?", pose: "idee" },
   { id: "43-quiz-regle-du-carre", tpl: "quiz", theme: "nuit", k: "Quiz · Objectif 1600", q: "Roi contre pion passé : comment savoir si le roi le rattrape ?", opts: ["La règle de l'opposition", "La règle du carré", "La règle des 50 coups"], s: "Réponds en commentaire : A, B ou C ?", pose: "loupe" },
   { id: "44-quiz-tarrasch", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1800", q: "Avec un pion passé, où placer ses tours selon la règle de Tarrasch ?", opts: ["Derrière le pion passé", "Devant le pion passé", "Sur la première rangée"], s: "Réponds en commentaire : A, B ou C ?", pose: "lit-assise" },
   { id: "45-quiz-champion-1972", tpl: "quiz", theme: "soleil", k: "Quiz · Culture échecs", q: "Qui fut champion du monde d'échecs de 1972 à 1975 ?", opts: ["Garry Kasparov", "Anatoli Karpov", "Bobby Fischer"], s: "Réponds en commentaire : A, B ou C ?", pose: "cherche" },
+  // Quiz inspirés de l'académie : séries vidéo, coachs, leçons, revue
+  { id: "46-quiz-minute-finale", tpl: "quiz", theme: "ciel", k: "Quiz · Vidéos", q: "Quelle série vidéo de Marc Quenehen est consacrée aux finales ?", opts: ["Flashback", "La Minute Finale", "Les ouvertures en vogue"], s: "Réponds en commentaire : A, B ou C ?", pose: "regarde" },
+  { id: "47-quiz-calcul-gagnant", tpl: "quiz", theme: "rose", k: "Quiz · Nos coachs", q: "Qui présente la série Calcul Gagnant ?", opts: ["Igor Nataf", "Marc Quenehen", "Sylvain Ravot"], s: "Réponds en commentaire : A, B ou C ?", pose: "prof" },
+  { id: "48-quiz-gambit-elephant", tpl: "quiz", theme: "menthe", k: "Quiz · Ouvertures", q: "Par quels coups commence le Gambit Éléphant ?", opts: ["1.e4 e5 2.Cf3 d5", "1.d4 d5 2.c4", "1.e4 c5 2.Cf3 d6"], s: "Réponds en commentaire : A, B ou C ?", pose: "reflexion" },
+  { id: "49-quiz-herisson", tpl: "quiz", theme: "nuit", k: "Quiz · Stratégie", q: "Dans le Hérisson, où les Noirs placent-ils leurs pions ?", opts: ["a5, b5, d5, e5", "a6, b6, d6, e6", "c5, d5, e5"], s: "Réponds en commentaire : A, B ou C ?", pose: "loupe" },
+  { id: "50-quiz-revue-779", tpl: "quiz", theme: "soleil", k: "Quiz · La revue n°779", q: "Milliet et Bacrot : combien de titres de champion de France à eux deux ?", opts: ["9", "12", "16"], s: "Réponds en commentaire : A, B ou C ?", pose: "lecture" },
+  { id: "51-quiz-sicilienne", tpl: "quiz", theme: "craie", k: "Quiz · Ouvertures", q: "Par quel coup les Noirs <span style=\"white-space:nowrap\">jouent-ils</span> la défense sicilienne ?", opts: ["1.e4 e6", "1.e4 c5", "1.e4 c6"], s: "Réponds en commentaire : A, B ou C ?", pose: "idee" },
+  { id: "52-quiz-mat-du-couloir", tpl: "quiz", theme: "rose", k: "Quiz · Exercices", q: "Le mat du couloir arrive souvent quand…", opts: ["le roi est enfermé par ses propres pions", "la dame est clouée", "les tours sont doublées"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
+  { id: "53-quiz-gmi", tpl: "quiz", theme: "ciel", k: "Quiz · Masterclasses", q: "Gata Kamsky est GMI. Que veut dire ce titre ?", opts: ["Grand Maître Initié", "Gagnant Mondial Invaincu", "Grand Maître International"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
+  { id: "54-quiz-pion-isole", tpl: "quiz", theme: "menthe", k: "Quiz · Stratégie", q: "Un pion isolé, c'est un pion…", opts: ["bloqué par une pièce adverse", "sans pion de son camp sur les colonnes voisines", "qui a avancé de deux cases"], s: "Réponds en commentaire : A, B ou C ?", pose: "haussement" },
+  { id: "55-quiz-formats", tpl: "quiz", theme: "soleil", k: "Quiz · L'académie", q: "Combien de formats de leçon propose l'académie echecs.com ?", opts: ["2", "3", "4"], s: "Réponds en commentaire : A, B ou C ?", pose: "hourra" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },

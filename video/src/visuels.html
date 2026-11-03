@@ -138,6 +138,16 @@ function board(pos, opts = {}) {
     const a = Math.atan2(y2 - y1, x2 - x1), ex = x2 - Math.cos(a) * 3.4, ey = y2 - Math.sin(a) * 3.4;
     h += `<svg viewBox="0 0 100 100"><line x1="${x1}" y1="${y1}" x2="${ex}" y2="${ey}" stroke="#2c9a45" stroke-width="2.4" stroke-linecap="round"/><polygon fill="#2c9a45" points="${x2},${y2} ${ex + Math.cos(a + 1.9) * 3.6},${ey + Math.sin(a + 1.9) * 3.6} ${ex + Math.cos(a - 1.9) * 3.6},${ey + Math.sin(a - 1.9) * 3.6}"/></svg>`;
   }
+  if (opts.coords) {   // coordonnées dans les cases du bord, comme sur l'académie : lettres en bas, chiffres à gauche
+    const clair = "#2c4a6e", fonce = "#f4f7fb", ft = 'font-family="Manrope" font-weight="800" font-size="4.4"';
+    let t = "";
+    for (let i = 0; i < 8; i++) {
+      t += `<text x="${i * 12.5 + 11.6}" y="99" text-anchor="end" ${ft} fill="${i % 2 === 0 ? fonce : clair}">${F[i]}</text>`;
+      const r = 8 - i;
+      t += `<text x=".9" y="${i * 12.5 + 4.4}" ${ft} fill="${r % 2 === 1 ? fonce : clair}">${r}</text>`;
+    }
+    h += `<svg viewBox="0 0 100 100">${t}</svg>`;
+  }
   return `<div class="board" style="${opts.style || ""}">${h}</div>`;
 }
 const pose = (name, style, white) => name ? `<div class="pose${white ? " white" : ""}" data-pose="${name}" style="${style}"></div>` : "";
@@ -155,10 +165,10 @@ const T = {
   // Accroche d'un pan de l'académie, avec le visuel du motion recadré
   accroche: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${shot(it.shot)}</div></main>` + foot(),   // pas de mascotte en plus : la capture du motion en a souvent déjà une
   // Gros chiffre
-  chiffre: it => head(it.k) + `<main><div class="txt"><div class="big">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
+  chiffre: it => head(it.k) + `<main><div class="txt"><div class="big" style="${it.n.replace(/<[^>]+>|&#8239;/g, "").length > 4 ? `font-size:${tall ? 24 : 17}rem` : ""}">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
     + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : `right:5rem;bottom:${15 + PB}rem;`)),
   // Problème d'échecs (engagement)
-  puzzle: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, style: "height:100%" })}</div></main>` + foot(it.arrow ? "Je m'entraîne" : "Voir la solution")
+  puzzle: it => head(it.k) + `<main class="${land || tall ? "" : "serre"}"><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, coords: true, style: "height:100%" })}</div></main>` + foot(it.arrow ? "Je m'entraîne" : "Voir la solution")
     ,   // l'échiquier suffit : la mascotte masquait le texte en paysage
   // Quiz (engagement)
   quiz: it => head(it.k) + `<main class="quiz"><div class="txt"><div class="q">${it.q}</div>${it.opts.map((o, i) => `<div class="opt"><i>${"ABC"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'entraîne")
@@ -190,6 +200,8 @@ const T = {
 };
 c.insertAdjacentHTML("beforeend", T[item.tpl](item));
 c.querySelectorAll(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
+// « Blancs ou Noirs » : le second pion est noir (il était jaune comme la mascotte)
+c.querySelectorAll('.pose[data-pose^="blancs-ou-noirs"] .p2 [fill="#fae361"]').forEach(e => e.setAttribute("fill", "#1b1b1b"));
 document.getAnimations().forEach(a => { a.pause(); a.currentTime = 1100; });
 function ajuste() {
 // Capture : la plus grande possible dans la zone visuelle, en gardant ses proportions

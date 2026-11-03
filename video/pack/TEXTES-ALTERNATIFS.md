@@ -37,7 +37,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Tournois en ligne : « Mesure-toi aux autres joueurs. » Ouvert à tous les niveaux. Capture de l'académie : le classement en direct d'un tournoi en ligne. La mascotte jaune d'echecs.com fête une victoire.
 
 **`11-chiffre-200-lecons/`**
-> echecs.com : « +200 leçons pour progresser. » La mascotte jaune d'echecs.com saute de joie.
+> echecs.com : « +200 leçons pour progresser. » La mascotte jaune d'echecs.com lève les bras de joie.
 
 **`12-chiffre-2000-exercices/`**
 > echecs.com : « +2 000 exercices et quiz. » La mascotte jaune d'echecs.com lève le poing, contente.
@@ -49,16 +49,16 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Problème du jour : « Mat en 1. À toi de jouer ! » Les Blancs jouent. Ta réponse en commentaire. Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.
 
 **`15-solution-mat-en-1/`**
-> Solution du problème du jour : Td8#, le mat du couloir. Le roi noir est enfermé par ses propres pions. Échiquier : la tour blanche monte de d1 à d8 et fait mat, le roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
+> Solution du problème du jour : Td8#, le mat du couloir. Le Roi noir est enfermé par ses propres pions. Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
 
 **`16-quiz-carlsbad/`**
 > echecs.com — Quiz · Objectif 1600 : Structure Carlsbad : quel est le plan typique des Blancs ? A : L'attaque de minorité. B : Échanger toutes les pièces. C : Pousser h4-h5 au plus vite. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com hausse les épaules.
 
 **`17-coach-sylvain-ravot/`**
-> Nos coachs : portrait de Sylvain Ravot, maître fide. Calcul, tactique et masterclasses en direct.
+> Nos coachs : portrait de Sylvain Ravot, maître fide.
 
 **`18-coach-marc-quenehen/`**
-> Nos coachs : portrait de Marc Quenehen, la minute finale. Les finales expliquées simplement.
+> Nos coachs : portrait de Marc Quenehen, entraîneur.
 
 **`19-coach-fabien-libiszewski/`**
 > Nos coachs : portrait de Fabien Libiszewski, grand maître. En masterclass sur echecs.com.
@@ -112,16 +112,16 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Sondage : « Blancs ou Noirs ? Tu joues quoi ? » La mascotte jaune d'echecs.com tient un pion blanc et un pion noir.
 
 **`36-respire/`**
-> echecs.com — Avant ta partie : « Respire. Et calcule. » La mascotte jaune d'echecs.com fait la posture de l'arbre.
+> echecs.com — Avant ta partie : « Respire. Et calcule. » La mascotte jaune d'echecs.com est là.
 
 **`37-oups/`**
-> echecs.com — Ça arrive : « Une gaffe ? Même aux meilleurs. » La mascotte jaune d'echecs.com se tient la tête, oups.
+> echecs.com — Ça arrive : « Une gaffe ? Même aux meilleurs. » La mascotte jaune d'echecs.com hausse les épaules.
 
 **`38-week-end/`**
-> echecs.com — C'est le week-end : « Une partie ? Ou deux, ou trois… » La mascotte jaune d'echecs.com danse.
+> echecs.com — C'est le week-end : « Une partie ? Ou deux, ou trois… » La mascotte jaune d'echecs.com est là.
 
 **`39-quiz-roque/`**
-> echecs.com — Quiz · Initiation : Peut-on roquer quand son roi est en échec ? A : Oui, toujours. B : Non, jamais. C : Seulement le petit roque. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com se gratte la tête.
+> echecs.com — Quiz · Initiation : Peut-on roquer quand son roi est en échec ? A : Oui, toujours. B : Non, jamais. C : Seulement le petit roque. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`40-quiz-clouage/`**
 > echecs.com — Quiz · Objectif 1200 : Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… A : Une fourchette. B : Une enfilade. C : Un clouage. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
@@ -140,6 +140,36 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 
 **`45-quiz-champion-1972/`**
 > echecs.com — Quiz · Culture échecs : Qui fut champion du monde d'échecs de 1972 à 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Bobby Fischer. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`46-quiz-minute-finale/`**
+> echecs.com — Quiz · Vidéos : Quelle série vidéo de Marc Quenehen est consacrée aux finales ? A : Flashback. B : La Minute Finale. C : Les ouvertures en vogue. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com regarde une vidéo.
+
+**`47-quiz-calcul-gagnant/`**
+> echecs.com — Quiz · Nos coachs : Qui présente la série Calcul Gagnant ? A : Igor Nataf. B : Marc Quenehen. C : Sylvain Ravot. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
+
+**`48-quiz-gambit-elephant/`**
+> echecs.com — Quiz · Ouvertures : Par quels coups commence le Gambit Éléphant ? A : 1.e4 e5 2.Cf3 d5. B : 1.d4 d5 2.c4. C : 1.e4 c5 2.Cf3 d6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+
+**`49-quiz-herisson/`**
+> echecs.com — Quiz · Stratégie : Dans le Hérisson, où les Noirs placent-ils leurs pions ? A : a5, b5, d5, e5. B : a6, b6, d6, e6. C : c5, d5, e5. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`50-quiz-revue-779/`**
+> echecs.com — Quiz · La revue n°779 : Milliet et Bacrot : combien de titres de champion de France à eux deux ? A : 9. B : 12. C : 16. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit.
+
+**`51-quiz-sicilienne/`**
+> echecs.com — Quiz · Ouvertures : Par quel coup les Noirs jouent-ils la défense sicilienne ? A : 1.e4 e6. B : 1.e4 c5. C : 1.e4 c6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
+
+**`52-quiz-mat-du-couloir/`**
+> echecs.com — Quiz · Exercices : Le mat du couloir arrive souvent quand… A : le roi est enfermé par ses propres pions. B : la dame est clouée. C : les tours sont doublées. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`53-quiz-gmi/`**
+> echecs.com — Quiz · Masterclasses : Gata Kamsky est GMI. Que veut dire ce titre ? A : Grand Maître Initié. B : Gagnant Mondial Invaincu. C : Grand Maître International. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`54-quiz-pion-isole/`**
+> echecs.com — Quiz · Stratégie : Un pion isolé, c'est un pion… A : bloqué par une pièce adverse. B : sans pion de son camp sur les colonnes voisines. C : qui a avancé de deux cases. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com hausse les épaules.
+
+**`55-quiz-formats/`**
+> echecs.com — Quiz · L'académie : Combien de formats de leçon propose l'académie echecs.com ? A : 2. B : 3. C : 4. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lève les bras de joie.
 
 ## Identité (`images/00-identite/`)
 
