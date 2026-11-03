@@ -92,5 +92,8 @@ for n, (q, pv, st, sv, cap) in PUBS.items():
             f"**`pub-{n}-3-final`**", "> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».", ""]
 out += ["## Images générales (`images/00-general/`)", "",
         "> echecs.com : « Progresse à ton rythme. » L'Académie echecs.com : +200 leçons, +2 000 exercices, masterclasses, tournois et forum. La mascotte jaune d'echecs.com à côté d'un échiquier.", ""]
-(ICI / "pack/TEXTES-ALTERNATIFS.md").write_text("\n".join(out))
+FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
+def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
+    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)
+(ICI / "pack/TEXTES-ALTERNATIFS.md").write_text(fan("\n".join(out)))
 print(len(out), "lignes")

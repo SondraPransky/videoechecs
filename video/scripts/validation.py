@@ -75,9 +75,12 @@ S.append({"id": "themes", "titre": "Vidéos par thème", "items": [
     item("theme-" + d.name[3:], d.name[3:].replace("-", " ").capitalize(), "10 à 17 s · 4 formats", tri(list(d.glob("*.mp4")), ORDRE_V), "video") for d in th]})
 vi = sorted(d for d in I.iterdir() if d.is_dir() and re.match(r"\d\d-", d.name) and not d.name.startswith("00"))
 data = {v["id"]: v for v in json.loads(subprocess.check_output(["node", "-e", 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");console.log(JSON.stringify(window.VISUELS))'], cwd=ICI))}
+FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
+def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
+    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
-    return re.sub(r"<[^>]+>|&#8239;", "", t)
+    return fan(re.sub(r"<[^>]+>|&#8239;", "", t))
 GARDE = ("carre-1080x1080.jpg", "portrait-1080x1350.jpg", "story-1080x1920.jpg", "lien-1200x630.jpg")   # 4 formats par visuel (limite de fichiers de la page)
 S.append({"id": "visuels", "titre": "Visuels", "items": [
     item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if not d.name[3:].startswith(("quiz", "academie"))]})

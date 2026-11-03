@@ -49,7 +49,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Problème du jour : « Mat en 1. À toi de jouer ! » Les Blancs jouent. Ta réponse en commentaire. Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.
 
 **`15-solution-mat-en-1/`**
-> Solution du problème du jour : Td8#, le mat du couloir. Le Roi noir est enfermé par ses propres pions. Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
+> Solution du problème du jour : ♖d8#, le mat du couloir. Le Roi noir est enfermé par ses propres pions. Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
 
 **`16-quiz-carlsbad/`**
 > echecs.com — Quiz · Objectif 1600 : Structure Carlsbad : quel est le plan typique des Blancs ? A : L'attaque de minorité. B : Échanger toutes les pièces. C : Pousser h4-h5 au plus vite. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com hausse les épaules.
@@ -127,7 +127,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Objectif 1200 : Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… A : Une fourchette. B : Une enfilade. C : Un clouage. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
 
 **`41-quiz-espagnole/`**
-> echecs.com — Quiz · Objectif 1400 : 1.e4 e5 2.Cf3 Cc6 3.Fb5 : quelle est cette ouverture ? A : La partie italienne. B : La partie espagnole. C : La défense française. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+> echecs.com — Quiz · Objectif 1400 : 1.e4 e5 2.♘f3 ♘c6 3.♗b5 : quelle est cette ouverture ? A : La partie italienne. B : La partie espagnole. C : La défense française. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
 
 **`42-quiz-colonne-ouverte/`**
 > echecs.com — Quiz · Objectif 1400 : Où une tour est-elle la plus active ? A : Sur une colonne ouverte. B : Dans un coin, bien protégée. C : Devant ses propres pions. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
@@ -148,7 +148,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Nos coachs : Qui présente la série Calcul Gagnant ? A : Igor Nataf. B : Marc Quenehen. C : Sylvain Ravot. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
 
 **`48-quiz-gambit-elephant/`**
-> echecs.com — Quiz · Ouvertures : Par quels coups commence le Gambit Éléphant ? A : 1.e4 e5 2.Cf3 d5. B : 1.d4 d5 2.c4. C : 1.e4 c5 2.Cf3 d6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+> echecs.com — Quiz · Ouvertures : Par quels coups commence le Gambit Éléphant ? A : 1.e4 e5 2.♘f3 d5. B : 1.d4 d5 2.c4. C : 1.e4 c5 2.♘f3 d6. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
 
 **`49-quiz-herisson/`**
 > echecs.com — Quiz · Stratégie : Dans le Hérisson, où les Noirs placent-ils leurs pions ? A : a5, b5, d5, e5. B : a6, b6, d6, e6. C : c5, d5, e5. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
@@ -220,7 +220,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Initiation : Laquelle de ces pièces doit généralement être développée en premier ? A : La Tour. B : La Dame. C : Le Cavalier. D : Le Roi. Question tirée de la leçon « Principes d'ouverture » de l'académie.
 
 **`72-academie-creer-et-parer-une-menace/`**
-> echecs.com — Quiz · Objectif 1400 : Trait aux Blancs. Quel coup les Noirs menacent-ils ? A : Cb4. B : Dd6. C : Db4+. D : e5. Avec la position sur l'échiquier. Question tirée de la leçon « Créer et parer une menace » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Trait aux Blancs. Quel coup les Noirs menacent-ils ? A : ♘b4. B : ♕d6. C : ♕b4+. D : e5. Avec la position sur l'échiquier. Question tirée de la leçon « Créer et parer une menace » de l'académie.
 
 **`73-academie-la-regle-du-carre/`**
 > echecs.com — Quiz · Objectif 1400 : Trait aux Noirs - Le Roi peut-il arrêter le pion blanc ? A : Oui. B : Non. Avec la position sur l'échiquier. Question tirée de la leçon « La règle du carré » de l'académie.
@@ -229,19 +229,19 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Objectif 1400 : Dans presque tous les pièges de cette leçon, les Blancs frappent la même case. Laquelle ? A : e5. B : f7. C : d5. D : h7. Question tirée de la leçon « Les pièges d'ouverture » de l'académie.
 
 **`75-academie-la-scandinave/`**
-> echecs.com — Quiz · Objectif 1400 : Après 1.e4 d5 2.exd5 Dxd5, quel coup blanc gagne aussitôt un tempo ? A : 3.d4. B : 3.Cc3, en attaquant la Dame. C : 3.Cf3. D : 3.c4. Avec la position sur l'échiquier. Question tirée de la leçon « La Scandinave » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Après 1.e4 d5 2.exd5 ♕xd5, quel coup blanc gagne aussitôt un tempo ? A : 3.d4. B : 3.♘c3, en attaquant la Dame. C : 3.♘f3. D : 3.c4. Avec la position sur l'échiquier. Question tirée de la leçon « La Scandinave » de l'académie.
 
 **`76-academie-contrer-le-gambit-roi/`**
-> echecs.com — Quiz · Objectif 1400 : Face au gambit Roi 1.e4 e5 2.f4, quelle est la réponse conseillée aux Noirs dans cette leçon ? A : 2...exf4 en acceptant le gambit. B : 2...Fc5 en refusant. C : 2...d5, le contre-gambit. D : 2...d6 pour tenir le pion e5. Avec la position sur l'échiquier. Question tirée de la leçon « Contrer le gambit Roi » de l'académie.
+> echecs.com — Quiz · Objectif 1400 : Face au gambit Roi 1.e4 e5 2.f4, quelle est la réponse conseillée aux Noirs dans cette leçon ? A : 2...exf4 en acceptant le gambit. B : 2...♗c5 en refusant. C : 2...d5, le contre-gambit. D : 2...d6 pour tenir le pion e5. Avec la position sur l'échiquier. Question tirée de la leçon « Contrer le gambit Roi » de l'académie.
 
 **`77-academie-le-trebuchet/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs, étude de Walker. Un seul coup gagne, et il recule. Lequel ? A : 1.Ra3. B : 1.Rc3. C : 1.a4. D : 1.a3. Avec la position sur l'échiquier. Question tirée de la leçon « Le trébuchet » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs, étude de Walker. Un seul coup gagne, et il recule. Lequel ? A : 1.♔a3. B : 1.♔c3. C : 1.a4. D : 1.a3. Avec la position sur l'échiquier. Question tirée de la leçon « Le trébuchet » de l'académie.
 
 **`78-academie-le-roi-cible-de-l-attaque-au/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs. Trois échecs se présentent, un seul mate. Lequel ? A : Cd7+. B : Tb7+. C : Ca6+. D : Ta8+. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roi cible, de l'attaque au mat » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs. Trois échecs se présentent, un seul mate. Lequel ? A : ♘d7+. B : ♖b7+. C : ♘a6+. D : ♖a8+. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roi cible, de l'attaque au mat » de l'académie.
 
 **`79-academie-le-fegatello/`**
-> echecs.com — Quiz · Objectif 1600 : Trait aux Noirs. Les Blancs viennent de jouer 6.Cxf7, le sacrifice qui donne son nom au Fegatello. Que fais-tu ? A : Dh4. B : Rxf7. C : Df6. D : De7. Avec la position sur l'échiquier. Question tirée de la leçon « Le Fegatello » de l'académie.
+> echecs.com — Quiz · Objectif 1600 : Trait aux Noirs. Les Blancs viennent de jouer 6.♘xf7, le sacrifice qui donne son nom au Fegatello. Que fais-tu ? A : ♕h4. B : ♔xf7. C : ♕f6. D : ♕e7. Avec la position sur l'échiquier. Question tirée de la leçon « Le Fegatello » de l'académie.
 
 **`80-academie-chercher-un-abri-pour-son-ro/`**
 > echecs.com — Quiz · Objectif 1600 : Où se trouve le talon d'Achille d'une chaîne de pions ? A : À sa tête. B : Au milieu. C : Sur les colonnes voisines. D : À sa base. Question tirée de la leçon « Chercher un abri pour son Roi » de l'académie.
@@ -256,7 +256,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Quiz · Objectif 1800 : Que veut dire avoir l'initiative ? A : Avoir plus de matériel. B : Imposer ses menaces. C : Jouer avec les Blancs. D : Avoir le Roi le plus sûr. Question tirée de la leçon « L’initiative » de l'académie.
 
 **`84-academie-sauver-la-partie-pat-materie/`**
-> echecs.com — Quiz · Objectif 1800 : Trait aux Blancs. Après 1.Tb8+, que se passe-t-il si les Noirs prennent par 1...Txb8 ? A : Les Noirs matent. B : Ton Roi reprend la Tour. C : Les Noirs gagnent. D : C'est pat. Avec la position sur l'échiquier. Question tirée de la leçon « Sauver la partie : pat, matériel insuffisant, perpétuel » de l'académie.
+> echecs.com — Quiz · Objectif 1800 : Trait aux Blancs. Après 1.♖b8+, que se passe-t-il si les Noirs prennent par 1...♖xb8 ? A : Les Noirs matent. B : Ton Roi reprend la Tour. C : Les Noirs gagnent. D : C'est pat. Avec la position sur l'échiquier. Question tirée de la leçon « Sauver la partie : pat, matériel insuffisant, perpétuel » de l'académie.
 
 **`85-academie-la-defense-de-vancura/`**
 > echecs.com — Quiz · Objectif 1800 : Dans la défense de Vancura, où place-t-on la Tour ? A : Sur la sixième rangée. B : Devant le pion. C : Près de son Roi. D : Sur la huitième rangée. Question tirée de la leçon « La défense de Vancura » de l'académie.

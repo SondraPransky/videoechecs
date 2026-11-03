@@ -33,6 +33,9 @@ CHOIX = [
 FR = {"K": "R", "Q": "D", "R": "T", "B": "F", "N": "C"}
 def fr(s):   # notation française : Nf3 → Cf3, Qxd5 → Dxd5, Rb8+ → Tb8+ (seulement devant une case)
     return re.sub(r"(?<![A-Za-zÀ-ÿ])([KQRBN])(?=[a-h1-8]?x?[a-h][1-8])", lambda m: FR[m.group(1)], s or "")
+FAN_RE = re.compile(r"(?<![A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])")
+def fan(s):   # notation figurine Unicode dans les textes : Cf3 → ♘f3
+    return FAN_RE.sub(lambda m: {"R": "♔", "D": "♕", "T": "♖", "F": "♗", "C": "♘"}[m.group(1)], s)
 def fen_pos(fen):
     pos, rows = {}, fen.split()[0].split("/")
     for r, row in enumerate(rows):
@@ -62,7 +65,7 @@ for n, (les, debut, fenk) in enumerate(CHOIX):
          "opts": [fr(o).replace("’", "'") for o in q["choices"]], "s": "Réponds en commentaire !", "lecon": x["titre"]}
     if x["fen"]: v["pos"] = fen_pos(x["fen"])
     out.append(v)
-    md.append(f"| `{id_}/` · {x['niv']} | {v['q']} | **{'ABCD'[rep]}, {v['opts'][rep]}.** {fr(q['choiceMessages'][rep]).replace('’', chr(39))} | {x['titre']} |")
+    md.append(fan(f"| `{id_}/` · {x['niv']} | {v['q']} | **{'ABCD'[rep]}, {v['opts'][rep]}.** {fr(q['choiceMessages'][rep]).replace('’', chr(39))} | {x['titre']} |"))
 js = "// Généré par scripts/quiz-academie.py à partir des quiz de l'académie : ne pas modifier à la main.\nwindow.VISUELS.push(\n" + \
      ",\n".join("  " + json.dumps(v, ensure_ascii=False) for v in out) + "\n);\n"
 (ICI / "src/quiz-academie.js").write_text(js)
