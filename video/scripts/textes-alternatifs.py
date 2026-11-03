@@ -3,7 +3,7 @@
 Lit le catalogue src/visuels-data.js (via node) ; les descriptions des captures et des poses sont ci-dessous."""
 import json, re, subprocess, pathlib
 ICI = pathlib.Path(__file__).resolve().parent.parent
-js = 'global.window={};require("./src/visuels-data.js");console.log(JSON.stringify(window.VISUELS))'
+js = 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");console.log(JSON.stringify(window.VISUELS))'
 VIS = json.loads(subprocess.check_output(["node", "-e", js], cwd=ICI))
 
 CAPTURE = {
@@ -43,6 +43,9 @@ def alt(v):
         return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
     if tpl == "puzzle":
         return phrase(f"Problème du jour : « {t} {e} » {s}", "Échiquier : roi blanc g1, tour blanche d1, pions blancs f2, g2, h2 ; roi noir g8, dame noire b2, pions noirs a7, f7, g7, h7.")
+    if tpl == "quizpos":
+        return phrase(f"echecs.com — {k} : {txt(v['q'])}", " ".join(f"{'ABCD'[i]} : {o}." for i, o in enumerate(v["opts"])),
+                      "Avec la position sur l'échiquier." if v.get("pos") else "", f"Question tirée de la leçon « {v.get('lecon', '')} » de l'académie.")
     if tpl == "quiz":
         return phrase(f"echecs.com — {k} : {txt(v['q'])}", " ".join(f"{'ABC'[i]} : {o}." for i, o in enumerate(v["opts"])), s, mascotte(v.get("pose")))
     if tpl == "coach": return phrase(f"Nos coachs : portrait de {t}, {e.rstrip('.').lower()}.", s)

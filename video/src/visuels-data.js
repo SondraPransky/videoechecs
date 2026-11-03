@@ -34,7 +34,7 @@ window.VISUELS = [
   { id: "01-progression", tpl: "accroche", theme: "nuit", k: "Ta progression", t: "Progresse", e: "à ton rythme.", s: "Du premier coup à plus de 2000.", shot: "progression", pose: "niveau-superieur" },
   { id: "02-valide-chaque-etape", tpl: "accroche", theme: "ciel", k: "Mesure tes progrès", t: "Valide", e: "chaque étape.", s: "Modules, étoiles et courbe Elo.", shot: "progres", pose: "serie-reussie" },
   { id: "03-lecons", tpl: "accroche", theme: "soleil", k: "Leçons interactives", t: "+200 leçons", e: "interactives.", s: "Vidéos, cours, exercices et quiz.", shot: "lecons", pose: "idee" },
-  { id: "04-exercices", tpl: "accroche", theme: "craie", k: "Entraînement", t: "+2 000 exercices", e: "à ton niveau.", s: "Du mat en 1 aux finales de tours.", shot: "exercices", pose: "bonne-reponse" },
+  { id: "04-exercices", tpl: "accroche", theme: "craie", k: "Entraînement", t: "+2 000 exercices", e: "à ton niveau.", s: "Du mat en 1 aux finales de Tours.", shot: "exercices", pose: "bonne-reponse" },
   { id: "05-videos", tpl: "accroche", theme: "nuit", k: "Europe Échecs · Vidéos", t: "Tout le catalogue", e: "vidéo inclus.", s: "Les séries d'Europe Échecs, en HD.", shot: "videos", pose: "regarde" },
   { id: "06-masterclasses", tpl: "accroche", theme: "rose", k: "Cours en direct", t: "Masterclasses", e: "avec des pros.", s: "MF et GMI en direct, chaque semaine.", shot: "masterclasses", pose: "lecon-terminee" },
   { id: "07-tes-parties", tpl: "accroche", theme: "menthe", k: "Tes parties", t: "Saisis, analyse,", e: "partage.", s: "Ton espace de parties, en PGN.", shot: "parties", pose: "reflexion" },

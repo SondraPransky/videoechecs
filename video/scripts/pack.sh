@@ -68,7 +68,7 @@ for f in build/reseaux/*.jpg; do cp "$f" "$PACK/images/00-general/"; done
 
 # 4. Textes, puis archive
 python3 scripts/textes-alternatifs.py >/dev/null
-cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md pack/TEXTES-ALTERNATIFS.md "$PACK/"
+cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md pack/TEXTES-ALTERNATIFS.md pack/QUIZ-ACADEMIE.md "$PACK/"
 rm -rf "$PACK/_cadres"
 rm -f build/pack-reseaux-echecs-com.zip
 (cd build && zip -qr pack-reseaux-echecs-com.zip pack -x 'pack/_captures/*')

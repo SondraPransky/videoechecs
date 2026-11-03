@@ -79,6 +79,19 @@ main.serre .t { font-size: 9.4rem; } main.serre .e { font-size: 10rem; }
 .tall .big { font-size: 32rem; }
 .tall .chips, .tall .facts span { font-size: 4.6rem; }
 .quiz .q { font: 800 5.6rem/1.2 "Manrope"; }
+/* Quiz de l'académie avec position : question et choix à gauche, échiquier à droite (en story : l'un sous l'autre) */
+main.qp { gap: 3.5rem; }
+main.qp .q { font-size: 5rem; }
+main.qp .bas { flex: 1; min-height: 0; display: flex; gap: 4.5rem; align-items: center; }
+main.qp .bas .txt { flex: 1; min-width: 0; } main.qp .bas .vis { flex: 0 0 52%; align-self: stretch; }
+main.qp .opt { font-size: 3.6rem; padding: 2.2rem 2.6rem; margin-top: 1.6rem; } main.qp .opt:first-child { margin-top: 0; }
+.tall main.qp .bas { flex-direction: column; align-items: stretch; } .tall main.qp .bas .vis { order: -1; flex: 1 1 auto; }
+.tall main.qp .q { font-size: 5.6rem; } .tall main.qp .opt { font-size: 4.2rem; }
+main.qp .bas .vis { min-height: 0; } body:not(.tall) main.qp.long .q { font-size: 4.2rem; } body:not(.tall) main.qp.long .opt { font-size: 3.1rem; padding: 1.7rem 2.2rem; } .tall main.qp .bas .vis { flex: 1 1 0; }
+.land main.qp { display: grid; grid-template-columns: minmax(0, 1fr) 42%; grid-template-rows: auto 1fr; column-gap: 5rem; row-gap: 3rem; }
+.land main.qp .bas { display: contents; } .land main.qp .q { grid-column: 1; align-self: end; } .land main.qp .txt { grid-column: 1; align-self: start; }
+.land main.qp .vis { grid-column: 2; grid-row: 1 / 3; align-self: stretch; }
+.land main.qp .q { font-size: 4.4rem; } .land main.qp .opt { font-size: 3.2rem; padding: 1.8rem 2.2rem; margin-top: 1.2rem; }
 .opt { display: flex; align-items: center; gap: 2rem; margin-top: 2.2rem; padding: 2.6rem 3rem; border-radius: 2.2rem; background: var(--card); color: #111; font: 700 4.2rem/1 "Manrope"; box-shadow: 0 1.2rem 3rem rgba(0,0,0,.12); }
 .opt i { font-style: normal; width: 5.6rem; height: 5.6rem; border-radius: 50%; display: grid; place-items: center; background: var(--cta); color: var(--ctak); font: 800 2.8rem/1 "Manrope"; flex: none; }
 .coachcard { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -110,6 +123,7 @@ main.serre .t { font-size: 9.4rem; } main.serre .e { font-size: 10rem; }
 <div id="c"><div class="deco"><div class="dam"></div></div></div>
 <script src="../assets/mascot/poses.js"></script>
 <script src="visuels-data.js"></script>
+<script src="quiz-academie.js"></script>
 <script>
 const Q = new URLSearchParams(location.search);
 const W = +Q.get("w"), H = +Q.get("h"), ID = Q.get("id");
@@ -154,24 +168,46 @@ const pose = (name, style, white) => name ? `<div class="pose${white ? " white" 
 // Taille de la mascotte selon le format
 const mSize = f => { const h = (land ? 50 : tall ? 46 : 38) * f; return `height:${h}rem;width:${h * .82}rem;`; };
 
-// Recadrage de chaque capture du motion (x, y, largeur, hauteur sur 1920×1080) : le visuel seul, sans le titre
-const CROP = { progression: [1040, 40, 840, 820], progres: [140, 140, 1660, 780], lecons: [150, 540, 1650, 460],
-  exercices: [860, 140, 1020, 700], videos: [130, 280, 1720, 740], masterclasses: [960, 80, 880, 560],
-  parties: [840, 120, 980, 660], revue: [110, 360, 1720, 700], forum: [840, 130, 1010, 880], tournois: [960, 180, 920, 880] };
-const shot = name => { const [x, y, w, h] = CROP[name];
-  return `<div class="shot" data-r="${w / h}" style="background-image:url(../build/pack/_captures/${name}.png);background-size:${1920 / w * 100}% auto;background-position:${x / (1920 - w) * 100}% ${y / (1080 - h) * 100}%"></div>`; };
+// Recadrages de chaque capture du motion (x, y, largeur, hauteur sur 1920×1080), sans le titre du motion.
+// Chaque capture a plusieurs cadrages (large, moyen, serré) : on prend celui dont la forme colle le mieux à la zone
+// du visuel, puis on l'élargit (dans sa zone « b ») ou on le rogne pour remplir la zone : le contenu est le plus grand possible.
+const CROPS = {
+  progression: [{ c: [1080, 50, 800, 620], b: [960, 0, 960, 1080] }, { c: [1000, 40, 900, 430], b: [960, 0, 960, 1080] }],
+  progres: [{ c: [930, 130, 880, 600], b: [900, 100, 1020, 980] }, { c: [130, 560, 1760, 500], b: [100, 540, 1820, 540] }],
+  lecons: [{ c: [140, 530, 1660, 480], b: [0, 520, 1920, 560] }, { c: [140, 530, 830, 480], b: [100, 520, 900, 560] }],
+  exercices: [{ c: [860, 110, 1020, 700], b: [840, 90, 1080, 990] }, { c: [860, 110, 520, 700], b: [840, 90, 560, 990] }],
+  videos: [{ c: [130, 280, 1720, 740], b: [0, 240, 1920, 840] }, { c: [130, 300, 900, 600], b: [100, 260, 940, 820] }, { c: [1060, 280, 780, 560], b: [1050, 240, 860, 840] }],
+  masterclasses: [{ c: [980, 70, 880, 560], b: [960, 40, 960, 640] }, { c: [120, 660, 1240, 380], b: [100, 640, 1420, 440] }, { c: [960, 60, 900, 1000], b: [940, 40, 980, 1040] }],
+  parties: [{ c: [830, 120, 1000, 800], b: [820, 100, 1100, 980] }, { c: [140, 380, 1680, 540], b: [100, 360, 1800, 700] }],
+  revue: [{ c: [110, 360, 1720, 700], b: [0, 340, 1920, 740] }, { c: [1180, 380, 700, 600], b: [1170, 60, 750, 1020] }],
+  forum: [{ c: [840, 100, 1010, 900], b: [820, 80, 1100, 1000] }, { c: [850, 100, 1000, 470], b: [820, 80, 1100, 1000] }],
+  tournois: [{ c: [960, 180, 920, 880], b: [940, 100, 980, 980] }, { c: [960, 250, 920, 440], b: [940, 100, 980, 980] }],
+};
+function cadre(name, A) {   // meilleur cadrage pour une zone de proportion A (largeur / hauteur)
+  const ecart = r => Math.abs(Math.log(r / A));
+  const { c, b } = CROPS[name].reduce((m, k) => ecart(k.c[2] / k.c[3]) < ecart(m.c[2] / m.c[3]) ? k : m);
+  let [x, y, w, h] = c;
+  if (ecart(w / h) > Math.log(1.45)) return [x, y, w, h];   // trop éloigné : on garde le cadrage entier
+  if (w / h > A) { const nh = Math.min(w / A, b[3]); y = Math.max(b[1], Math.min(y - (nh - h) / 2, b[1] + b[3] - nh)); h = nh; if (w / h > A) { const nw = h * A; x += (w - nw) / 2; w = nw; } }
+  else { const nw = Math.min(h * A, b[2]); x = Math.max(b[0], Math.min(x - (nw - w) / 2, b[0] + b[2] - nw)); w = nw; if (w / h < A) { const nh = w / A; y += (h - nh) / 2; h = nh; } }
+  return [x, y, w, h];
+}
+const shot = name => `<div class="shot" data-shot="${name}" style="background-image:url(../build/pack/_captures/${name}.png)"></div>`;
 
 const T = {
   // Accroche d'un pan de l'académie, avec le visuel du motion recadré
-  accroche: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis">${shot(it.shot)}</div></main>` + foot(),   // pas de mascotte en plus : la capture du motion en a souvent déjà une
+  accroche: it => head(it.k) + `<main class="${land || tall ? "" : "serre"}"><div class="txt">${title(it)}</div><div class="vis">${shot(it.shot)}</div></main>` + foot(),   // pas de mascotte en plus : la capture du motion en a souvent déjà une
   // Gros chiffre
   chiffre: it => head(it.k) + `<main><div class="txt"><div class="big" style="${it.n.replace(/<[^>]+>|&#8239;/g, "").length > 4 ? `font-size:${tall ? 24 : 17}rem` : ""}">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
     + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : `right:5rem;bottom:${15 + PB}rem;`)),
   // Problème d'échecs (engagement)
   puzzle: it => head(it.k) + `<main class="${land || tall ? "" : "serre"}"><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, coords: true, style: "height:100%" })}</div></main>` + foot(it.arrow ? "Je m'entraîne" : "Voir la solution")
     ,   // l'échiquier suffit : la mascotte masquait le texte en paysage
+  // Quiz de l'académie : avec la position de la leçon quand il y en a une
+  quizpos: it => !it.pos ? T.quiz({ ...it, pose: ["reflexion", "menton", "idee", "haussement", "cherche"][it.id.length % 5] })
+    : head(it.k) + `<main class="quiz qp${it.q.length > 75 ? " long" : ""}"><div class="q">${it.q}</div><div class="bas"><div class="txt">${it.opts.map((o, i) => `<div class="opt"><i>${"ABCD"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div><div class="vis">${board(it.pos, { coords: true, style: "width:1px" })}</div></div></main>` + foot("Je m'entraîne"),
   // Quiz (engagement)
-  quiz: it => head(it.k) + `<main class="quiz"><div class="txt"><div class="q">${it.q}</div>${it.opts.map((o, i) => `<div class="opt"><i>${"ABC"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'entraîne")
+  quiz: it => head(it.k) + `<main class="quiz"><div class="txt"><div class="q">${it.q}</div>${it.opts.map((o, i) => `<div class="opt"><i>${"ABCD"[i]}</i>${o}</div>`).join("")}<div class="s" style="font-size:3.4rem">${it.s}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'entraîne")
     + pose(it.pose, mSize(land ? 1.1 : .75) + (land ? "right:8rem;bottom:15rem;" : `right:4rem;bottom:${15 + PB}rem;`)),
   // Portrait de coach
   coach: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis"><div class="coachcard"><img src="../assets/captures/ee/hd/${it.photo}.jpg" style="${land ? "width:52rem;height:52rem" : tall ? "width:70rem;height:70rem" : "width:44rem;height:44rem"}">${it.titre ? `<div class="ttl">${it.titre}</div>` : ""}</div></div></main>` + foot("Voir les masterclasses"),
@@ -205,9 +241,12 @@ c.querySelectorAll('.pose[data-pose^="blancs-ou-noirs"] .p2 [fill="#fae361"]').f
 document.getAnimations().forEach(a => { a.pause(); a.currentTime = 1100; });
 function ajuste() {
 // Capture : la plus grande possible dans la zone visuelle, en gardant ses proportions
-c.querySelectorAll(".shot").forEach(el => { const v = el.parentElement.getBoundingClientRect(), r = +el.dataset.r;
-  const cs = getComputedStyle(el.parentElement), h = v.height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);   // zone utile, sans les marges
-  const w = Math.min(v.width, h * r); el.style.width = w + "px"; el.style.height = w / r + "px"; });
+c.querySelectorAll(".shot").forEach(el => { const v = el.parentElement.getBoundingClientRect(), cs = getComputedStyle(el.parentElement);
+  const zw = v.width, zh = v.height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);   // zone utile
+  const [x, y, w, h] = cadre(el.dataset.shot, zw / zh), sc = Math.min(zw / w, zh / h);
+  el.style.width = w * sc + "px"; el.style.height = h * sc + "px";
+  el.style.backgroundSize = 1920 * sc + "px " + 1080 * sc + "px"; el.style.backgroundPosition = -x * sc + "px " + -y * sc + "px"; });
+c.querySelectorAll("main.qp .vis .board").forEach(el => { const v = el.parentElement.getBoundingClientRect(); const s = Math.min(v.width, v.height); el.style.width = el.style.height = s + "px"; el.style.margin = "auto"; });
 // Mascotte d'humeur : jamais plus haute que la zone libre (sinon ses accessoires recouvrent le titre)
 c.querySelectorAll(".fitpose > .pose").forEach(el => {
   const v = el.parentElement.getBoundingClientRect();

@@ -16,7 +16,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Leçons interactives : « +200 leçons interactives. » Vidéos, cours, exercices et quiz. Capture de l'académie : les quatre formats de leçon : vidéo, cours écrit, exercice et quiz. La mascotte jaune d'echecs.com a une idée.
 
 **`04-exercices/`**
-> echecs.com — Entraînement : « +2 000 exercices à ton niveau. » Du mat en 1 aux finales de tours. Capture de l'académie : une carte d'exercice « mat en 1 » et une carte de quiz. La mascotte jaune d'echecs.com lève le poing, contente.
+> echecs.com — Entraînement : « +2 000 exercices à ton niveau. » Du mat en 1 aux finales de Tours. Capture de l'académie : une carte d'exercice « mat en 1 » et une carte de quiz. La mascotte jaune d'echecs.com lève le poing, contente.
 
 **`05-videos/`**
 > echecs.com — Europe Échecs · Vidéos : « Tout le catalogue vidéo inclus. » Les séries d'Europe Échecs, en HD. Capture de l'académie : le lecteur vidéo de la Minute Finale et les cartes des auteurs d'Europe Échecs. La mascotte jaune d'echecs.com regarde une vidéo.
@@ -197,6 +197,69 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 
 **`64-quiz-karpov/`**
 > echecs.com — Quiz · Culture échecs : Qui succède à Bobby Fischer comme champion du monde en 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Boris Spassky. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
+
+**`65-academie-echiquier-et-cases/`**
+> echecs.com — Quiz · Initiation : Combien de cases y a-t-il sur un échiquier ? A : 64. B : 100. C : 36. D : 72. Question tirée de la leçon « Échiquier et cases » de l'académie.
+
+**`66-academie-echiquier-et-cases/`**
+> echecs.com — Quiz · Initiation : Comment sont appelées les lignes HORIZONTALES de l'échiquier ? A : Colonnes. B : Rang. C : Rangées. D : Diagonales. Question tirée de la leçon « Échiquier et cases » de l'académie.
+
+**`67-academie-l-echec-et-mat/`**
+> echecs.com — Quiz · Initiation : Les Blancs sont-ils échec et mat ? A : Oui. B : Non. Avec la position sur l'échiquier. Question tirée de la leçon « L'échec et mat » de l'académie.
+
+**`68-academie-le-roque/`**
+> echecs.com — Quiz · Initiation : Les Blancs peuvent-ils roquer ? A : Oui. B : Non. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roque » de l'académie.
+
+**`69-academie-la-prise-en-passant/`**
+> echecs.com — Quiz · Initiation : Trait aux Blancs. Le dernier coup des Noirs a été d7-d5. Le pion blanc en e5 peut-il capturer en passant ? A : Oui, il capture en d6. B : Oui, il capture en d5. C : Non, il ne peut pas. D : Oui, mais seulement au tour suivant. Avec la position sur l'échiquier. Question tirée de la leçon « La prise en passant » de l'académie.
+
+**`70-academie-le-pat/`**
+> echecs.com — Quiz · Initiation : Trait aux Noirs - Mat ou Pat ? A : Mat. B : Pat. Avec la position sur l'échiquier. Question tirée de la leçon « Le pat » de l'académie.
+
+**`71-academie-principes-d-ouverture/`**
+> echecs.com — Quiz · Initiation : Laquelle de ces pièces doit généralement être développée en premier ? A : La Tour. B : La Dame. C : Le Cavalier. D : Le Roi. Question tirée de la leçon « Principes d'ouverture » de l'académie.
+
+**`72-academie-creer-et-parer-une-menace/`**
+> echecs.com — Quiz · Objectif 1400 : Trait aux Blancs. Quel coup les Noirs menacent-ils ? A : Cb4. B : Dd6. C : Db4+. D : e5. Avec la position sur l'échiquier. Question tirée de la leçon « Créer et parer une menace » de l'académie.
+
+**`73-academie-la-regle-du-carre/`**
+> echecs.com — Quiz · Objectif 1400 : Trait aux Noirs - Le Roi peut-il arrêter le pion blanc ? A : Oui. B : Non. Avec la position sur l'échiquier. Question tirée de la leçon « La règle du carré » de l'académie.
+
+**`74-academie-les-pieges-d-ouverture/`**
+> echecs.com — Quiz · Objectif 1400 : Dans presque tous les pièges de cette leçon, les Blancs frappent la même case. Laquelle ? A : e5. B : f7. C : d5. D : h7. Question tirée de la leçon « Les pièges d'ouverture » de l'académie.
+
+**`75-academie-la-scandinave/`**
+> echecs.com — Quiz · Objectif 1400 : Après 1.e4 d5 2.exd5 Dxd5, quel coup blanc gagne aussitôt un tempo ? A : 3.d4. B : 3.Cc3, en attaquant la Dame. C : 3.Cf3. D : 3.c4. Avec la position sur l'échiquier. Question tirée de la leçon « La Scandinave » de l'académie.
+
+**`76-academie-contrer-le-gambit-roi/`**
+> echecs.com — Quiz · Objectif 1400 : Face au gambit Roi 1.e4 e5 2.f4, quelle est la réponse conseillée aux Noirs dans cette leçon ? A : 2...exf4 en acceptant le gambit. B : 2...Fc5 en refusant. C : 2...d5, le contre-gambit. D : 2...d6 pour tenir le pion e5. Avec la position sur l'échiquier. Question tirée de la leçon « Contrer le gambit Roi » de l'académie.
+
+**`77-academie-le-trebuchet/`**
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs, étude de Walker. Un seul coup gagne, et il recule. Lequel ? A : 1.Ra3. B : 1.Rc3. C : 1.a4. D : 1.a3. Avec la position sur l'échiquier. Question tirée de la leçon « Le trébuchet » de l'académie.
+
+**`78-academie-le-roi-cible-de-l-attaque-au/`**
+> echecs.com — Quiz · Objectif 1600 : Trait aux Blancs. Trois échecs se présentent, un seul mate. Lequel ? A : Cd7+. B : Tb7+. C : Ca6+. D : Ta8+. Avec la position sur l'échiquier. Question tirée de la leçon « Le Roi cible, de l'attaque au mat » de l'académie.
+
+**`79-academie-le-fegatello/`**
+> echecs.com — Quiz · Objectif 1600 : Trait aux Noirs. Les Blancs viennent de jouer 6.Cxf7, le sacrifice qui donne son nom au Fegatello. Que fais-tu ? A : Dh4. B : Rxf7. C : Df6. D : De7. Avec la position sur l'échiquier. Question tirée de la leçon « Le Fegatello » de l'académie.
+
+**`80-academie-chercher-un-abri-pour-son-ro/`**
+> echecs.com — Quiz · Objectif 1600 : Où se trouve le talon d'Achille d'une chaîne de pions ? A : À sa tête. B : Au milieu. C : Sur les colonnes voisines. D : À sa base. Question tirée de la leçon « Chercher un abri pour son Roi » de l'académie.
+
+**`81-academie-le-sacrifice-de-fou-en-h7/`**
+> echecs.com — Quiz · Objectif 1600 : Un Cavalier adverse est en f6. Que devient le sacrifice en h7 ? A : Il gagne toujours. B : Il faut l'oublier. C : Il devient encore plus fort. D : Il faut d'abord jouer h3. Question tirée de la leçon « Le sacrifice de Fou en h7 » de l'académie.
+
+**`82-academie-la-triangulation/`**
+> echecs.com — Quiz · Objectif 1800 : Trait aux Noirs. C'est la position de départ, mais les Noirs ont le trait. Que se passe-t-il ? A : Le pion b7 avance. B : Les Noirs sont pat. C : C'est nulle. D : Zugzwang : ils perdent. Avec la position sur l'échiquier. Question tirée de la leçon « La triangulation » de l'académie.
+
+**`83-academie-l-initiative/`**
+> echecs.com — Quiz · Objectif 1800 : Que veut dire avoir l'initiative ? A : Avoir plus de matériel. B : Imposer ses menaces. C : Jouer avec les Blancs. D : Avoir le Roi le plus sûr. Question tirée de la leçon « L’initiative » de l'académie.
+
+**`84-academie-sauver-la-partie-pat-materie/`**
+> echecs.com — Quiz · Objectif 1800 : Trait aux Blancs. Après 1.Tb8+, que se passe-t-il si les Noirs prennent par 1...Txb8 ? A : Les Noirs matent. B : Ton Roi reprend la Tour. C : Les Noirs gagnent. D : C'est pat. Avec la position sur l'échiquier. Question tirée de la leçon « Sauver la partie : pat, matériel insuffisant, perpétuel » de l'académie.
+
+**`85-academie-la-defense-de-vancura/`**
+> echecs.com — Quiz · Objectif 1800 : Dans la défense de Vancura, où place-t-on la Tour ? A : Sur la sixième rangée. B : Devant le pion. C : Près de son Roi. D : Sur la huitième rangée. Question tirée de la leçon « La défense de Vancura » de l'académie.
 
 ## Identité (`images/00-identite/`)
 

@@ -74,7 +74,7 @@ th = sorted(d for d in V.iterdir() if d.is_dir() and re.match(r"\d\d-", d.name) 
 S.append({"id": "themes", "titre": "Vidéos par thème", "items": [
     item("theme-" + d.name[3:], d.name[3:].replace("-", " ").capitalize(), "10 à 17 s · 4 formats", tri(list(d.glob("*.mp4")), ORDRE_V), "video") for d in th]})
 vi = sorted(d for d in I.iterdir() if d.is_dir() and re.match(r"\d\d-", d.name) and not d.name.startswith("00"))
-data = {v["id"]: v for v in json.loads(subprocess.check_output(["node", "-e", 'global.window={};require("./src/visuels-data.js");console.log(JSON.stringify(window.VISUELS))'], cwd=ICI))}
+data = {v["id"]: v for v in json.loads(subprocess.check_output(["node", "-e", 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");console.log(JSON.stringify(window.VISUELS))'], cwd=ICI))}
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
     return re.sub(r"<[^>]+>|&#8239;", "", t)
