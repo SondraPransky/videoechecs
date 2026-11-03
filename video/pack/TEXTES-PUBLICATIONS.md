@@ -86,7 +86,7 @@ Texte principal, à adapter à chaque question :
 > 4 · Des heures de vidéos, toujours le même classement ? Avec l'académie, chaque leçon se termine sur l'échiquier. 👉 lien tagué (voir Liens de suivi)
 > 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 
-Titre (Facebook / Instagram) : **Découvre l'Académie echecs.com** · Bouton : **En savoir plus** ou **S'inscrire**
+Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir plus** ou **S'inscrire**
 
 ## Publications d'engagement
 
