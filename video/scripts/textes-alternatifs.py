@@ -89,7 +89,7 @@ out += ["## Publicités en images (`images/00-publicites/pub-N/`)", ""]
 for n, (q, pv, st, sv, cap) in PUBS.items():
     out += [f"**`pub-{n}-1-question`**", f"> « {q} » La mascotte jaune d'echecs.com, perplexe, à côté d'{pv}.", "",
             f"**`pub-{n}-2-reponse`**", f"> Le déclic : « {st} » Illustration : {sv}. {cap}", "",
-            f"**`pub-{n}-3-final`**", "> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».", ""]
+            f"**`pub-{n}-3-final`**", "> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».", ""]
 out += ["## Images générales (`images/00-general/`)", "",
         "> echecs.com : « Progresse à ton rythme. » L'Académie echecs.com : +200 leçons, +2 000 exercices, masterclasses, tournois et forum. La mascotte jaune d'echecs.com à côté d'un échiquier.", ""]
 (ICI / "pack/TEXTES-ALTERNATIFS.md").write_text("\n".join(out))

@@ -308,7 +308,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Le déclic : « Jouer ne suffit pas. Entraîne-toi avec méthode. » Illustration : une courbe Elo qui monte jusqu'à 1 412 et les modules Tactique, Finales et Ouvertures validés. Un programme par niveau, de l'initiation à 2000+.
 
 **`pub-1-3-final`**
-> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».
+> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
 
 **`pub-2-1-question`**
 > « Tu joues beaucoup, mais tu n'as pas l'impression de progresser ? » La mascotte jaune d'echecs.com, perplexe, à côté d'une carte avec 247 parties jouées ce mois-ci.
@@ -317,7 +317,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Le déclic : « Joue moins, comprends plus. » Illustration : l'analyse d'une partie qui repère une erreur, puis des exercices ciblés sur le clouage. Analyse tes parties, puis +2 000 exercices ciblés.
 
 **`pub-2-3-final`**
-> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».
+> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
 
 **`pub-3-1-question`**
 > « Tu as l'impression de stagner depuis quelque temps ? » La mascotte jaune d'echecs.com, perplexe, à côté d'une barre de progression bloquée à 40 % de janvier à juin.
@@ -326,7 +326,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et grands maîtres, en direct chaque semaine.
 
 **`pub-3-3-final`**
-> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».
+> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
 
 **`pub-4-1-question`**
 > « Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? » La mascotte jaune d'echecs.com, perplexe, à côté d'12 heures de vidéos regardées, classement inchangé.
@@ -335,7 +335,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Le déclic : « Ne regarde plus, joue ! » Illustration : une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse. Vidéo, cours, exercice, quiz : tu pratiques tout de suite.
 
 **`pub-4-3-final`**
-> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».
+> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
 
 **`pub-5-1-question`**
 > « Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? » La mascotte jaune d'echecs.com, perplexe, à côté d'un panneau indicateur : Ouvertures, Tactique, Finales, Stratégie.
@@ -344,7 +344,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Le déclic : « Suis le guide, étape par étape. » Illustration : un parcours de l'initiation à 2000 et plus, avec la mention « Tu es ici ». Un parcours clair, du premier coup à 2000+.
 
 **`pub-5-3-final`**
-> Logo echecs.com, « L'Académie echecs.com » et bouton « Commencer maintenant ».
+> Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
 
 ## Images générales (`images/00-general/`)
 
