@@ -10,7 +10,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 
 ---
 
-## Lancement — présentation de l'académie
+## Lancement — présentation de l'Académie
 *Vidéo : `00-general/presentation-*` · Images : `00-general/`*
 
 > Progresse à ton rythme. ♟️
@@ -46,7 +46,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 ## 05 · Masterclasses
 *Vidéo : `05-masterclasses/` · Images : `06-masterclasses/`, `17-` à `20-coach-*`*
 
-> Des masterclasses en direct avec des maîtres et grands maîtres, chaque semaine, et en replay.
+> Des masterclasses en direct avec des maîtres et grands maîtres, en direct et en replay.
 > Tu poses tes questions dans le chat, ils te répondent en direct. 🎓
 
 **Série « Nos coachs »** (un portrait par semaine) :
@@ -62,13 +62,13 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 *Vidéo : `07-revue/` · Images : `08-revue/`, `27-revue-numero-779/`*
 
 > Le n°779 est sorti ! Milliet & Bacrot : 16 titres pour 2 légendes des échecs français.
-> Toute la revue est disponible en PGN interactif sur l'académie. 📖
+> Toute la revue est disponible en PGN interactif sur l'Académie. 📖
 
 ## 08 · Forum
 *Vidéo : `08-forum/` · Image : `09-forum/`*
 
 > Une question sur la Sicilienne ? Une partie à faire commenter ?
-> Rejoins la communauté sur le forum de l'académie : membres et coachs te répondent. 💬
+> Rejoins la communauté sur le forum de l'Académie : membres et coachs te répondent. 💬
 
 ## 09 · Tournois
 *Vidéo : `09-tournois/` · Images : `10-tournois/`, `28-tournois-chaque-semaine/`, `25-humeur-victoire/`*
@@ -84,12 +84,12 @@ Texte principal, à adapter à chaque question :
 > 1 · Tu enchaînes les parties sans que ton Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 > 2 · Beaucoup de parties, peu de progrès ? Analyse tes parties et corrige tes points faibles avec +2 000 exercices. 👉 lien tagué (voir Liens de suivi)
 > 3 · Tu stagnes ? Passe un cap avec les masterclasses en direct de maîtres et grands maîtres. 👉 lien tagué (voir Liens de suivi)
-> 4 · Des heures de vidéos, toujours le même classement ? Avec l'académie, chaque leçon se termine sur l'échiquier. 👉 lien tagué (voir Liens de suivi)
+> 4 · Des heures de vidéos, toujours le même classement ? Avec l'Académie, chaque leçon se termine sur l'échiquier. 👉 lien tagué (voir Liens de suivi)
 > 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 
 Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir plus** ou **S'inscrire**
 
-Variantes de textes avec l'offre (14,90 €/mois au lancement) et l'urgence de fin de promo : voir `TEXTES-PUBS-VARIANTES.md`.
+Variantes de textes avec l'offre (14,90 €/mois au lancement) : voir `TEXTES-PUBS-VARIANTES.md`.
 
 ## Publications d'engagement
 
@@ -115,15 +115,15 @@ Variantes de textes avec l'offre (14,90 €/mois au lancement) et l'urgence de f
 | `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses Tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la Tour gagne en activité à chaque avance du pion. |
 | `45-quiz-champion-1972/` · Culture | Qui fut champion du monde d'échecs de 1972 à 1975 ? | **C, Bobby Fischer**, vainqueur de Boris Spassky à Reykjavik en 1972. |
 
-**Quiz de l'académie** (on fait découvrir les séries, les coachs et les leçons ; la réponse renvoie vers l'académie)
+**Quiz de l'Académie** (on fait découvrir les séries, les coachs et les leçons ; la réponse renvoie vers l'Académie)
 
 | Visuel | Question | Réponse et renvoi |
 |---|---|---|
 | `48-quiz-gambit-elephant/` | Par quels coups commence le Gambit Éléphant ? | **A, 1.e4 e5 2.♘ f3 d5.** Igor Nataf y consacre une leçon (Objectif 1400 et 1600). |
 | `49-quiz-herisson/` | Dans le Hérisson, où les Noirs placent-ils leurs pions ? | **B, a6, b6, d6, e6** : sur la 3e rangée, comme les piquants d'un hérisson. Leçon de Romuald De Labaca (Objectif 1600 et 1800). |
-| `50-quiz-revue-779/` | Milliet et Bacrot : combien de titres de champion de France à eux deux ? | **C, 16** : 9 pour Étienne Bacrot, 7 pour Sophie Milliet. Tout le n°779 est en PGN interactif sur l'académie. |
+| `50-quiz-revue-779/` | Milliet et Bacrot : combien de titres de champion de France à eux deux ? | **C, 16** : 9 pour Étienne Bacrot, 7 pour Sophie Milliet. Tout le n°779 est en PGN interactif sur l'Académie. |
 | `51-quiz-sicilienne/` | Par quel coup les Noirs jouent-ils la défense sicilienne ? | **B, 1.e4 c5.** 1…e6 est la française, 1…c6 la Caro-Kann. Toutes dans le thème Ouvertures (19 leçons). |
-| `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'académie le montre : ♖ d8# ! |
+| `52-quiz-mat-du-couloir/` | Le mat du couloir arrive souvent quand… | **A, le Roi est enfermé par ses propres pions.** Un exercice de l'Académie le montre : ♖ d8# ! |
 | `54-quiz-pion-isole/` | Un pion isolé, c'est un pion… | **B, sans pion de son camp sur les colonnes voisines.** Le thème Stratégie (19 leçons) explique comment le jouer et comment l'attaquer. |
 | `57-quiz-citation/` | « Les pions sont l'âme des échecs. » Qui l'a dit ? | **C, Philidor**, dans son *Analyse du jeu des échecs* (1749). |
 | `58-quiz-fourchette/` | Une pièce attaque deux pièces adverses en même temps. C'est… | **A, une fourchette.** Un thème travaillé dans Calcul Gagnant avec Sylvain Ravot. |
@@ -133,7 +133,7 @@ Variantes de textes avec l'offre (14,90 €/mois au lancement) et l'urgence de f
 | `64-quiz-karpov/` | Qui succède à Bobby Fischer comme champion du monde en 1975 ? | **B, Anatoli Karpov**, sans jouer : Fischer refuse de défendre son titre. |
 
 **Humeurs de la mascotte** (`21-` à `26-humeur-*`) — pour les stories, les week-ends, les rappels :
-> 7 jours de suite sur l'académie ? Ne lâche rien ! 🔥
+> 7 jours de suite sur l'Académie ? Ne lâche rien ! 🔥
 > Une partie avant de dormir ? Juste une. 😴
 > Raté ? C'est comme ça qu'on apprend.
 > Astuce du jour : sors tes pièces avant ta Dame.
@@ -163,9 +163,9 @@ Pour le lancement, suivre d'abord `CALENDRIER-LANCEMENT.md` (teasing + 4 semaine
 | Jour | Publication | Format conseillé |
 |---|---|---|
 | Lundi | Problème du jour | Image carrée ou portrait + story avec sondage |
-| Mardi | Un pan de l'académie (vidéo) | Reel 9:16 + post 4:5 |
+| Mardi | Un pan de l'Académie (vidéo) | Reel 9:16 + post 4:5 |
 | Mercredi | Solution du problème + astuce | Story + post carré |
-| Jeudi | Portrait de coach / masterclass de la semaine | Image portrait + rappel en story |
+| Jeudi | Portrait de coach / prochaine masterclass | Image portrait + rappel en story |
 | Vendredi | Quiz | Image carrée, réponse en story le lendemain (`…-reponse-story-1080x1920.jpg`) |
 | Samedi | Tournoi du week-end | Image story + post 16:9 sur X |
 | Dimanche | Humeur de la mascotte / résultats du tournoi | Story |

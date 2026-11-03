@@ -30,13 +30,13 @@ const ICON = {
 };
 
 window.VISUELS = [
-  // ---- Accroches : un visuel par pan de l'académie, avec une capture du motion
+  // ---- Accroches : un visuel par pan de l'Académie, avec une capture du motion
   { id: "01-progression", tpl: "accroche", theme: "nuit", k: "Ta progression", t: "Progresse", e: "à ton rythme.", s: "Du premier coup à plus de 2000.", shot: "progression", pose: "niveau-superieur" },
   { id: "02-valide-chaque-etape", tpl: "accroche", theme: "ciel", k: "Mesure tes progrès", t: "Valide", e: "chaque étape.", s: "Modules, étoiles et courbe Elo.", shot: "progres", pose: "serie-reussie" },
   { id: "03-lecons", tpl: "accroche", theme: "soleil", k: "Leçons interactives", t: "+200 leçons", e: "interactives.", s: "Vidéos, cours, exercices et quiz.", shot: "lecons", pose: "idee" },
   { id: "04-exercices", tpl: "accroche", theme: "craie", k: "Entraînement", t: "+2 000 exercices", e: "à ton niveau.", s: "Du mat en 1 aux finales de Tours.", shot: "exercices", pose: "bonne-reponse" },
   { id: "05-videos", tpl: "accroche", theme: "nuit", k: "Europe Échecs · Vidéos", t: "Tout le catalogue", e: "vidéo inclus.", s: "Les séries d'Europe Échecs, en HD.", shot: "videos", pose: "regarde" },
-  { id: "06-masterclasses", tpl: "accroche", theme: "rose", k: "Cours en direct", t: "Masterclasses", e: "avec des pros.", s: "MF et GMI en direct, chaque semaine.", shot: "masterclasses", pose: "lecon-terminee" },
+  { id: "06-masterclasses", tpl: "accroche", theme: "rose", k: "Cours en direct", t: "Masterclasses", e: "avec des pros.", s: "MF et GMI en direct, et en replay.", shot: "masterclasses", pose: "lecon-terminee" },
   { id: "07-tes-parties", tpl: "accroche", theme: "menthe", k: "Tes parties", t: "Saisis, analyse,", e: "partage.", s: "Ton espace de parties, en PGN.", shot: "parties", pose: "reflexion" },
   { id: "08-revue", tpl: "accroche", theme: "nuit", k: "La revue Europe Échecs", t: "Toute la revue", e: "en PGN interactif.", s: "Chaque mois, le nouveau numéro.", shot: "revue", pose: "lecture" },
   { id: "09-forum", tpl: "accroche", theme: "ciel", k: "Le forum", t: "Rejoins", e: "la communauté.", s: "Pose tes questions, partage tes parties.", shot: "forum", pose: "serie-de-jours" },
@@ -49,7 +49,7 @@ window.VISUELS = [
 
   // ---- Engagement : problème, solution, quiz
   { id: "14-probleme-mat-en-1", tpl: "puzzle", theme: "nuit", k: "Le problème du jour", t: "Mat en 1.", e: "À toi de jouer !", s: "Les Blancs jouent. Ta réponse en commentaire.", pos: MAT1, pose: "reflexion" },
-  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "Td8#", e: "le mat du couloir.", s: "Le Roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "hourra" },
+  { id: "15-solution-mat-en-1", tpl: "puzzle", theme: "menthe", k: "La solution", t: "1.Td8#", e: "le mat du couloir.", s: "Le Roi noir est enfermé par ses propres pions.", pos: MAT1_OK, hl: ["d1", "d8"], arrow: ["d1", "d8"], pose: "hourra" },
   { id: "16-quiz-carlsbad", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1600", q: "Structure Carlsbad : quel est le plan typique des Blancs ?", opts: ["L'attaque de minorité", "Échanger toutes les pièces", "Pousser h4-h5 au plus vite"], s: "Réponds en commentaire : A, B ou C ?", pose: "haussement" },
 
   // ---- Portraits des coachs
@@ -72,11 +72,11 @@ window.VISUELS = [
 
   // ---- Nouvelles mascottes
   { id: "29-newsletter", tpl: "mascotte", theme: "soleil", k: "Newsletter", t: "Ta lettre", e: "de la semaine.", pose: "message-recu" },
-  { id: "30-bienvenue", tpl: "mascotte", theme: "ciel", k: "Nouveau membre", t: "Bienvenue", e: "dans l'académie !", pose: "coucou-autre-main" },
+  { id: "30-bienvenue", tpl: "mascotte", theme: "ciel", k: "Nouveau membre", t: "Bienvenue", e: "dans l'Académie !", pose: "coucou-autre-main" },
   { id: "31-pause-cafe", tpl: "mascotte", theme: "craie", k: "Pause", t: "Une leçon", e: "avec ton café ?", pose: "cafe" },
   { id: "32-forum-discussion", tpl: "mascotte", theme: "menthe", k: "Le forum", t: "Une question ?", e: "La communauté répond.", pose: "discute" },
   { id: "33-objectif-atteint", tpl: "mascotte", theme: "nuit", k: "Objectif atteint", t: "Module validé.", e: "Au suivant !", pose: "drapeau" },
-  { id: "34-grande-nouvelle", tpl: "mascotte", theme: "rose", k: "Annonce", t: "Grande nouvelle !", e: "Bientôt sur l'académie.", pose: "pancarte" },
+  { id: "34-grande-nouvelle", tpl: "mascotte", theme: "rose", k: "Annonce", t: "Grande nouvelle !", e: "Bientôt sur l'Académie.", pose: "pancarte" },
   { id: "35-blancs-ou-noirs", tpl: "mascotte", theme: "craie", k: "Sondage", t: "Blancs ou Noirs ?", e: "Tu joues quoi ?", pose: "blancs-ou-noirs" },
   { id: "36-respire", tpl: "mascotte", theme: "menthe", k: "Avant ta partie", t: "Respire.", e: "Et calcule.", pose: "etirement" },
   { id: "37-oups", tpl: "mascotte", theme: "ciel", k: "Ça arrive", t: "Une gaffe ?", e: "Même aux meilleurs.", pose: "haussement" },
@@ -89,7 +89,7 @@ window.VISUELS = [
   { id: "43-quiz-regle-du-carre", tpl: "quiz", theme: "nuit", k: "Quiz · Objectif 1600", q: "Roi contre pion passé : comment savoir si le Roi le rattrape ?", opts: ["La règle de l'opposition", "La règle du carré", "La règle des 50 coups"], s: "Réponds en commentaire : A, B ou C ?", pose: "loupe" },
   { id: "44-quiz-tarrasch", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1800", q: "Avec un pion passé, où placer ses Tours selon la règle de Tarrasch ?", opts: ["Derrière le pion passé", "Devant le pion passé", "Sur la première rangée"], s: "Réponds en commentaire : A, B ou C ?", pose: "lit-assise" },
   { id: "45-quiz-champion-1972", tpl: "quiz", theme: "soleil", k: "Quiz · Culture échecs", q: "Qui fut champion du monde d'échecs de 1972 à 1975 ?", opts: ["Garry Kasparov", "Anatoli Karpov", "Bobby Fischer"], s: "Réponds en commentaire : A, B ou C ?", pose: "cherche" },
-  // Quiz inspirés de l'académie : séries vidéo, coachs, leçons, revue
+  // Quiz inspirés de l'Académie : séries vidéo, coachs, leçons, revue
   { id: "48-quiz-gambit-elephant", tpl: "quiz", theme: "menthe", k: "Quiz · Ouvertures", q: "Par quels coups commence le Gambit Éléphant ?", opts: ["1.e4 e5 2.Cf3 d5", "1.d4 d5 2.c4", "1.e4 c5 2.Cf3 d6"], s: "Réponds en commentaire : A, B ou C ?", pose: "reflexion" },
   { id: "49-quiz-herisson", tpl: "quiz", theme: "nuit", k: "Quiz · Stratégie", q: "Dans le Hérisson, où les Noirs placent-ils leurs pions ?", opts: ["a5, b5, d5, e5", "a6, b6, d6, e6", "c5, d5, e5"], s: "Réponds en commentaire : A, B ou C ?", pose: "loupe" },
   { id: "50-quiz-revue-779", tpl: "quiz", theme: "soleil", k: "Quiz · La revue n°779", q: "Milliet et Bacrot : combien de titres de champion de France à eux deux ?", opts: ["9", "12", "16"], s: "Réponds en commentaire : A, B ou C ?", pose: "lecture" },

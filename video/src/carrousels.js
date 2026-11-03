@@ -1,4 +1,4 @@
-// Carrousels pédagogiques (Instagram et LinkedIn, 1080×1350) tirés des leçons de l'académie.
+// Carrousels pédagogiques (Instagram et LinkedIn, 1080×1350) tirés des leçons de l'Académie.
 // Une diapositive = un visuel « slide » ; toutes les diapositives d'un carrousel vont dans le même dossier (dir).
 (() => {
   const S = (o => { const r = {}; for (const [k, v] of Object.entries(o)) for (const sq of v.split(" ")) r[sq] = k; return r; });

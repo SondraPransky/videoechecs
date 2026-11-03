@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Quiz des réseaux tirés des vrais quiz de l'académie (exports des modules, en JSON).
+"""Quiz des réseaux tirés des vrais quiz de l'Académie (exports des modules, en JSON).
 Usage : python3 -I scripts/quiz-academie.py DOSSIER_EXPORTS
 Écrit src/quiz-academie.js (visuels ajoutés au catalogue) et pack/QUIZ-ACADEMIE.md (réponses et explications)."""
 import json, glob, re, sys, pathlib
@@ -78,11 +78,11 @@ for n, (les, debut, fenk) in enumerate(CHOIX):
     if x["fen"]: v["pos"] = fen_pos(x["fen"])
     out.append(v)
     md.append(fan(f"| `{id_}/` · {x['niv']} | {v['q']} | **{'ABCD'[rep]}, {v['opts'][rep]}.** {fr(q['choiceMessages'][rep]).replace('’', chr(39))} | {x['titre']} |"))
-js = "// Généré par scripts/quiz-academie.py à partir des quiz de l'académie : ne pas modifier à la main.\nwindow.VISUELS.push(\n" + \
+js = "// Généré par scripts/quiz-academie.py à partir des quiz de l'Académie : ne pas modifier à la main.\nwindow.VISUELS.push(\n" + \
      ",\n".join("  " + json.dumps(v, ensure_ascii=False) for v in out) + "\n);\n"
 (ICI / "src/quiz-academie.js").write_text(js)
-(ICI / "pack/QUIZ-ACADEMIE.md").write_text("# Quiz de l'académie pour les réseaux\n\n"
+(ICI / "pack/QUIZ-ACADEMIE.md").write_text("# Quiz de l'Académie pour les réseaux\n\n"
   "Questions reprises telles quelles des quiz des modules (Initiation, Objectif 1400, 1600 et 1800), avec leur position et leur explication.\n"
   "Publier la question, puis donner la réponse le lendemain (commentaire épinglé ou story), avec un renvoi vers la leçon.\n\n"
-  "| Visuel | Question | Réponse et explication | Leçon de l'académie |\n|---|---|---|---|\n" + "\n".join(md) + "\n")
+  "| Visuel | Question | Réponse et explication | Leçon de l'Académie |\n|---|---|---|---|\n" + "\n".join(md) + "\n")
 print(len(out), "quiz")

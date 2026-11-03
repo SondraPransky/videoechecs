@@ -1,9 +1,9 @@
-# Quiz de l'académie pour les réseaux
+# Quiz de l'Académie pour les réseaux
 
 Questions reprises telles quelles des quiz des modules (Initiation, Objectif 1400, 1600 et 1800), avec leur position et leur explication.
 Publier la question, puis donner la réponse le lendemain (commentaire épinglé ou story), avec un renvoi vers la leçon.
 
-| Visuel | Question | Réponse et explication | Leçon de l'académie |
+| Visuel | Question | Réponse et explication | Leçon de l'Académie |
 |---|---|---|---|
 | `65-academie-echiquier-et-cases/` · Initiation | Combien de cases y a-t-il sur un échiquier ? | **A, 64.** Bravo, c'est ça ! 8 × 8, ça fait 64 cases. | Échiquier et cases |
 | `66-academie-echiquier-et-cases/` · Initiation | Comment sont appelées les lignes HORIZONTALES de l'échiquier ? | **C, Rangées.** Oui ! Les lignes horizontales sont les rangées, numérotées de 1 à 8. | Échiquier et cases |

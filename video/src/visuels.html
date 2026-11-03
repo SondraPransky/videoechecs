@@ -80,6 +80,7 @@ main.serre .t { font-size: 9.4rem; } main.serre .e { font-size: 10rem; }
 .tall .chips, .tall .facts span { font-size: 4.6rem; }
 .quiz .q { font: 800 5.6rem/1.2 "Manrope"; }
 .mv { white-space: nowrap; }
+.fig.halo { filter: drop-shadow(0 0 .045em #fff) drop-shadow(0 0 .02em #fff) !important; }
 .fig { height: 1em; width: auto; vertical-align: -.14em; margin-right: 0; filter: drop-shadow(0 0 .02em rgba(0,0,0,.6)); }
 /* Quiz de l'académie avec position : question et choix à gauche, échiquier à droite (en story : l'un sous l'autre) */
 main.qp { gap: 3.5rem; }
@@ -87,8 +88,9 @@ main.qp .q { font-size: 5rem; }
 main.qp .bas { flex: 1; min-height: 0; display: flex; gap: 4.5rem; align-items: center; }
 main.qp .bas .txt { flex: 1; min-width: 0; } main.qp .bas .vis { flex: 0 0 52%; align-self: stretch; }
 main.qp .opt { font-size: 3.6rem; padding: 2.2rem 2.6rem; margin-top: 1.6rem; } main.qp .opt:first-child { margin-top: 0; }
-.tall main.qp .bas { flex-direction: column; align-items: stretch; } .tall main.qp .bas .vis { order: -1; flex: 1 1 auto; }
-.tall main.qp .q { font-size: 5.6rem; } .tall main.qp .opt { font-size: 4.2rem; }
+.tall main.qp .bas { flex-direction: column; align-items: stretch; } .tall main.qp .bas .vis { order: -1; flex: 1 1 auto; } .tall main.qp .bas .txt { flex: 0 0 auto; }   /* story : les réponses prennent leur place, l'échiquier tout le reste */
+.tall main.qp .q { font-size: 5.6rem; } .tall main.qp .opt { font-size: 3.9rem; padding: 1.8rem 2.4rem; margin-top: 1.2rem; } .tall main.qp { gap: 3rem; }
+.tall main.qp:not(.rep2) .bas .txt { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; } .tall main.qp .bas .txt .opt { margin-top: 0; } .tall main.qp .bas .txt .s, .tall main.qp .bas .txt .ex, .tall main.qp .bas .txt .opt.ok { grid-column: 1 / -1; margin-top: .6rem; }   /* story : réponses sur 2 colonnes, échiquier plus grand */
 .opt.ok { background: #2f9e44 !important; color: #fff !important; box-shadow: 0 1rem 3rem rgba(47,158,68,.35); }
 .opt.ok i { background: #fff !important; color: #2f9e44 !important; }
 .opt.ok .ck { width: 1.2em; height: 1.2em; margin-left: auto; flex: 0 0 auto; }
@@ -215,7 +217,7 @@ const CROPS = {
   videos: [{ c: [130, 280, 1720, 740], b: [0, 240, 1920, 840] }, { c: [130, 300, 900, 600], b: [100, 260, 940, 820] }, { c: [1060, 280, 780, 560], b: [1050, 240, 860, 840] }],
   masterclasses: [{ c: [980, 70, 880, 560], b: [960, 40, 960, 640] }, { c: [120, 660, 1240, 380], b: [100, 640, 1420, 440] }, { c: [1018, 70, 842, 985], b: [1016, 40, 900, 1040] }],
   parties: [{ c: [830, 120, 1000, 800], b: [820, 100, 1100, 980] }, { c: [140, 380, 1680, 540], b: [100, 360, 1800, 700] }],
-  revue: [{ c: [110, 360, 1720, 700], b: [0, 340, 1920, 740] }, { c: [1180, 380, 700, 600], b: [1170, 60, 750, 1020] }],
+  revue: [{ c: [110, 360, 1720, 700], b: [0, 340, 1920, 740] }, { c: [1285, 325, 475, 520], b: [1262, 300, 512, 545] }],
   forum: [{ c: [840, 100, 1010, 900], b: [820, 80, 1100, 1000] }, { c: [850, 100, 1000, 470], b: [820, 80, 1100, 1000] }],
   tournois: [{ c: [960, 180, 920, 880], b: [940, 100, 980, 980] }, { c: [960, 250, 920, 440], b: [940, 100, 980, 980] }],
 };
@@ -279,7 +281,7 @@ const T = {
 c.insertAdjacentHTML("beforeend", T[item.tpl](item));
 // Notation figurine : dans les coups écrits (Cf3, Td8#, Dxd5…), l'initiale de la pièce devient son icône
 function figurines(root, base) {   // la figurine suit le camp qui joue (1.♖b8+ blanc, 1...♜xb8 noir), séparée de la case par une espace fine insécable, sans coupure de ligne
-  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ])([RDTFC])([a-h1-8]?x?[a-h][1-8][+#]?)/g;
+  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ0-9.])(\d+\.(?:\.\.|…)?\s?)?([RDTFC])([a-h1-8]?x?[a-h][1-8][+#]?)/g;
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), ns = [];
   while (w.nextNode()) ns.push(w.currentNode);
   for (const n of ns) {
@@ -287,9 +289,10 @@ function figurines(root, base) {   // la figurine suit le camp qui joue (1.♖b8
     const [r, g, bl] = (getComputedStyle(n.parentElement).color.match(/\d+/g) || [0, 0, 0]).map(Number);
     const coul = r * .3 + g * .59 + bl * .11 > 140 ? "w" : "b";   // sans numéro de coup : texte clair → figurine blanche, texte foncé → noire
     const t = document.createElement("span");
-    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, p, mv, off, s) => {
-      const avant = s.slice(0, off + a.length), c = /(\.\.\.|…)\s*$/.test(avant) ? "b" : /\d\.\s*$/.test(avant) ? "w" : coul;
-      return `${a}<span class="mv"><img class="fig" src="${base}${c}${FIGS[p]}.png" alt="${p}">\u202F${mv}</span>`;
+    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, num, p, mv, off, s) => {   // le numéro de coup reste collé au coup (pas de coupure entre « 1. » et la figurine)
+      const avant = s.slice(0, off + a.length) + (num || ""), c = /(\.\.\.|…)\s*$/.test(avant) ? "b" : /\d\.\s*$/.test(avant) ? "w" : coul;
+      const halo = c === "b" && coul === "w" ? " halo" : "";   // figurine noire sur texte clair (fond sombre) : liseré clair pour rester visible
+      return `${a}<span class="mv">${num || ""}<img class="fig${halo}" src="${base}${c}${FIGS[p]}.png" alt="${p}">\u202F${mv}</span>`;
     });
     n.replaceWith(t);   // un seul span : dans une ligne en flex, la figurine ne devient pas un élément séparé
   }

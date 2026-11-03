@@ -1,6 +1,6 @@
 # Pack réseaux sociaux — echecs.com Académie
 
-Tout ce qu'il faut pour animer les comptes de l'académie, dans le style du motion de présentation.
+Tout ce qu'il faut pour animer les comptes de l'Académie, dans le style du motion de présentation.
 Ouvrir **apercu.html** dans un navigateur pour voir toutes les images d'un coup.
 
 ## Organisation
@@ -10,24 +10,24 @@ videos/
   00-publicites/     5 publicités de 16 s : une question, sa réponse, une musique par pub (story, 4:5, 1:1, 16:9, story jaune)
   00-accroches/      première version : 5 publicités de 31 s qui reprennent le motion (16:9 et story 9:16)
   00-general/        présentation longue (56 s), présentation courte (30 s) en 4 formats, boucle muette d'en-tête de site
-  01-progression/    une mini-vidéo par pan de l'académie (10 à 17 s), chacune en 4 formats
+  01-progression/    une mini-vidéo par pan de l'Académie (9 à 17 s), chacune en 4 formats
   02-lecons/ … 09-tournois/
 images/
   00-publicites/     les 5 pubs en images fixes : question, réponse, appel final (seules ou en carrousel), tous formats
   00-identite/       photos de profil, bannières X / LinkedIn / Facebook / YouTube, couvertures de stories à la une
   00-general/        affiche de la vidéo et visuels généraux
-  01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'académie)
+  01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'Académie)
                      chaque quiz a aussi sa réponse : `…-reponse-story-1080x1920.jpg` et `…-reponse-carre-1080x1080.jpg`, à publier le lendemain
   carrousel-1-mat-du-couloir/, carrousel-2-regle-du-carre/, carrousel-3-fegatello/
                      3 carrousels pédagogiques de 7 diapositives (portrait 1080×1350, Instagram, LinkedIn, Facebook)
-emails/              32 e-mails de suivi des abonnés en HTML (img/ à héberger, apercus/ pour les voir)
+emails/              40 e-mails de suivi des abonnés en HTML (img/ à héberger, apercus/ pour les voir)
 apercu.html          planche de toutes les images
 TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
 TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)
-QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçons de l'académie (visuels 65 à 85)
+QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçons de l'Académie (visuels 65 à 85)
 CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mails, phases de la publicité payante
 TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
-EMAILS.md                parcours de l'abonné, catalogue des 32 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
+EMAILS.md                parcours de l'abonné, catalogue des 40 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
 ```
 
 ## Quel format pour quel réseau
@@ -63,7 +63,7 @@ puis **une réponse propre à chaque question**, et l'appel final. Chaque pub a 
 |---|---|---|---|
 | `pub-1-*` | Tu enchaînes les parties, mais ton classement ne bouge pas ? | « Jouer ne suffit pas. Entraîne-toi avec méthode. » Courbe Elo qui monte, modules validés | électro-pop |
 | `pub-2-*` | Tu joues beaucoup, mais tu n'as pas l'impression de progresser ? | « Joue moins, comprends plus. » Analyse de partie, erreur repérée, exercices ciblés | disco-funk |
-| `pub-3-*` | Tu as l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprends des meilleurs. » Masterclasses en direct avec GM et MF | électro-pop de la vidéo longue (ré mineur) |
+| `pub-3-*` | Tu as l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprends des meilleurs. » Masterclasses en direct avec GMI et MF | électro-pop de la vidéo longue (ré mineur) |
 | `pub-4-*` | Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? | « Passe à l'action : chaque leçon se joue ! » La vidéo devient un exercice : à toi de jouer | trap cinématique |
 | `pub-5-*` | Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? | « Suis le guide, étape par étape. » Le parcours de l'initiation à 2000+ | électro-pop de la vidéo longue (sol majeur) |
 

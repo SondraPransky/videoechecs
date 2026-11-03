@@ -74,6 +74,7 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 /* Petits échiquiers */
 .board { position: absolute; border-radius: 14px; overflow: hidden; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
 .mv { white-space: nowrap; }
+.fig.halo { filter: drop-shadow(0 0 .045em #fff) drop-shadow(0 0 .02em #fff) !important; }
 .fig { height: 1em; width: auto; vertical-align: -.14em; margin-right: 0; }
 .board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; }
 .board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.7); }
@@ -334,10 +335,10 @@ const ADS = {
       <div class="pbar"><i id="pvb"></i></div><div style="margin-top:22px"><span class="tag bad">Toujours 40 %</span></div>`,
     sk: "Le déclic", st: ["Pour passer un cap,", "apprends des meilleurs."], ps: "prof",
     sv: `<small>Masterclasses</small><div class="live" id="live"><i></i>EN DIRECT</div>
-      <div class="coaches">${[["libiszewski", "Fabien Libiszewski", "GM", "#93b9e2", "Masterclass"], ["kamsky", "Gata Kamsky", "GM", "#fae361", "Masterclass"],
+      <div class="coaches">${[["libiszewski", "Fabien Libiszewski", "GMI", "#93b9e2", "Masterclass"], ["kamsky", "Gata Kamsky", "GMI", "#fae361", "Masterclass"],
         ["ravot", "Sylvain Ravot", "MF", "#6bdc7d", "Calcul Gagnant"], ["quenehen", "Marc Quenehen", "", "#f06b8a", "La Minute Finale"]]
         .map(([f, n, t, c, s]) => `<div class="coach" style="background:${c}"><img src="${HD}auth-${f}.jpg">${t ? `<div class="ttl">${t}</div>` : ""}<b>${n}</b><span>${s}</span></div>`).join("")}</div>`,
-    cap: "<b>Maîtres et grands maîtres</b>, en direct chaque semaine.",
+    cap: "<b>Maîtres et grands maîtres</b>, en direct et en replay.",
   },
   4: {
     q: ["Tu regardes des vidéos d'échecs,", "mais tu ne progresses pas ?"], pose: "menton",
@@ -369,7 +370,7 @@ const ADS = {
 const AD = ADS[Q] || ADS[1];
 // Notation figurine : dans les coups écrits (Cf3, Td8#, Dxd5…), l'initiale de la pièce devient son icône
 function figurines(root, base) {   // la figurine suit le camp qui joue (1.♖b8+ blanc, 1...♜xb8 noir), séparée de la case par une espace fine insécable, sans coupure de ligne
-  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ])([RDTFC])([a-h1-8]?x?[a-h][1-8][+#]?)/g;
+  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ0-9.])(\d+\.(?:\.\.|…)?\s?)?([RDTFC])([a-h1-8]?x?[a-h][1-8][+#]?)/g;
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), ns = [];
   while (w.nextNode()) ns.push(w.currentNode);
   for (const n of ns) {
@@ -377,9 +378,10 @@ function figurines(root, base) {   // la figurine suit le camp qui joue (1.♖b8
     const [r, g, bl] = (getComputedStyle(n.parentElement).color.match(/\d+/g) || [0, 0, 0]).map(Number);
     const coul = r * .3 + g * .59 + bl * .11 > 140 ? "w" : "b";   // sans numéro de coup : texte clair → figurine blanche, texte foncé → noire
     const t = document.createElement("span");
-    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, p, mv, off, s) => {
-      const avant = s.slice(0, off + a.length), c = /(\.\.\.|…)\s*$/.test(avant) ? "b" : /\d\.\s*$/.test(avant) ? "w" : coul;
-      return `${a}<span class="mv"><img class="fig" src="${base}${c}${FIGS[p]}.png" alt="${p}">\u202F${mv}</span>`;
+    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, num, p, mv, off, s) => {   // le numéro de coup reste collé au coup (pas de coupure entre « 1. » et la figurine)
+      const avant = s.slice(0, off + a.length) + (num || ""), c = /(\.\.\.|…)\s*$/.test(avant) ? "b" : /\d\.\s*$/.test(avant) ? "w" : coul;
+      const halo = c === "b" && coul === "w" ? " halo" : "";   // figurine noire sur texte clair (fond sombre) : liseré clair pour rester visible
+      return `${a}<span class="mv">${num || ""}<img class="fig${halo}" src="${base}${c}${FIGS[p]}.png" alt="${p}">\u202F${mv}</span>`;
     });
     n.replaceWith(t);   // un seul span : dans une ligne en flex, la figurine ne devient pas un élément séparé
   }

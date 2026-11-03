@@ -3,8 +3,8 @@
 Lit le catalogue src/visuels-data.js (via node) ; les descriptions des captures et des poses sont ci-dessous."""
 import json, re, subprocess, pathlib
 ICI = pathlib.Path(__file__).resolve().parent.parent
-js = 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");console.log(JSON.stringify(window.VISUELS))'
-VIS = json.loads(subprocess.check_output(["node", "-e", js], cwd=ICI))
+js = 'global.window={};require("./src/visuels-data.js");require("./src/quiz-academie.js");require("./src/reponses.js");require("./src/carrousels.js");console.log(JSON.stringify({v:window.VISUELS,r:window.REPONSES}))//(JSON.stringify(window.VISUELS))'
+_D = json.loads(subprocess.check_output(["node", "-e", js], cwd=ICI)); REP = _D["r"]; SLIDES = [v for v in _D["v"] if v["tpl"] == "slide"]; VIS = [v for v in _D["v"] if v["tpl"] != "slide"]
 
 CAPTURE = {
     "progression": "un échiquier en position de départ et le parcours de niveaux, de l'initiation à 2000 et plus",
@@ -37,7 +37,7 @@ def phrase(*parts): return " ".join(p for p in parts if p)
 def alt(v):
     t, e, s, k = txt(v.get("t")), txt(v.get("e")), txt(v.get("s")), txt(v.get("k"))
     tpl = v["tpl"]
-    if tpl == "accroche": return phrase(f"echecs.com — {k} : « {t} {e} » {s}", f"Capture de l'académie : {CAPTURE.get(v.get('shot'), '')}.", mascotte(v.get("pose")))
+    if tpl == "accroche": return phrase(f"echecs.com — {k} : « {t} {e} » {s}", f"Capture de l'Académie : {CAPTURE.get(v.get('shot'), '')}.", mascotte(v.get("pose")))
     if tpl == "chiffre": return phrase(f"echecs.com : « {txt(v.get('n'))} {t} {e} »", s, mascotte(v.get("pose")))
     if tpl == "puzzle" and "solution" in v["id"]:
         return phrase(f"Solution du problème du jour : {t}, {e} {s}", "Échiquier : la Tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.")
@@ -45,7 +45,7 @@ def alt(v):
         return phrase(f"Problème du jour : « {t} {e} » {s}", "Échiquier : Roi blanc g1, Tour blanche d1, pions blancs f2, g2, h2 ; Roi noir g8, Dame noire b2, pions noirs a7, f7, g7, h7.")
     if tpl == "quizpos":
         return phrase(f"echecs.com — {k} : {txt(v['q'])}", " ".join(f"{'ABCD'[i]} : {o}." for i, o in enumerate(v["opts"])),
-                      "Avec la position sur l'échiquier." if v.get("pos") else "", f"Question tirée de la leçon « {v.get('lecon', '')} » de l'académie.")
+                      "Avec la position sur l'échiquier." if v.get("pos") else "", f"Question tirée de la leçon « {v.get('lecon', '')} » de l'Académie.")
     if tpl == "quiz":
         return phrase(f"echecs.com — {k} : {txt(v['q'])}", " ".join(f"{'ABC'[i]} : {o}." for i, o in enumerate(v["opts"])), s, mascotte(v.get("pose")))
     if tpl == "coach": return phrase(f"Nos coachs : portrait de {t}, {e.rstrip('.').lower()}.", s)
@@ -66,6 +66,15 @@ out = ["# Textes alternatifs — images du pack", "",
 for v in VIS:
     if v["tpl"].startswith("id-"): continue
     out += [f"**`{v['id']}/`**", f"> {alt(v)}", ""]
+out += ["## Réponses des quiz (`…-reponse-story-1080x1920.jpg`, `…-reponse-carre-1080x1080.jpg`)", ""]
+for v in VIS:
+    if v["id"] in REP:
+        r = REP[v["id"]]
+        out += [f"**`{v['id']}/` · réponse**", f"> Réponse du quiz echecs.com : « {txt(v.get('q'))} » Bonne réponse, en vert : {'ABCD'[r['r']]}. {txt(r['ex'])}", ""]
+out += ["## Carrousels pédagogiques (`images/carrousel-*/`)", ""]
+for v in SLIDES:
+    plat = " Échiquier illustrant la position." if v.get("pos") else (" La mascotte jaune d'echecs.com lève les bras de joie, avec le bouton « Découvre l'Académie »." if v.get("cta") else "")
+    out += [f"**`{v['id']}`** ({v['n']}/{v['total']})", f"> {txt(v.get('k'))}, diapositive {v['n']} sur {v['total']} : « {txt(v.get('t'))} {txt(v.get('e'))} » {txt(v.get('s'))}{plat}".replace("  ", " "), ""]
 out += ["## Identité (`images/00-identite/`)", ""]
 for v in VIS:
     if v["tpl"].startswith("id-"): out += [f"**`{v['id']}`**", f"> {alt(v)}", ""]
@@ -78,7 +87,7 @@ PUBS = {1: ("Tu enchaînes les parties, mais ton classement ne bouge pas ?", "un
             "Analyse tes parties, puis +2 000 exercices ciblés."),
         3: ("Tu as l'impression de stagner depuis quelque temps ?", "une barre de progression bloquée à 40 % de janvier à juin",
             "Pour passer un cap, apprends des meilleurs.", "les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen",
-            "Maîtres et grands maîtres, en direct chaque semaine."),
+            "Maîtres et grands maîtres, en direct et en replay."),
         4: ("Tu regardes des vidéos d'échecs, mais tu ne progresses pas ?", "12 heures de vidéos regardées, classement inchangé",
             "Passe à l'action : chaque leçon se joue !", "une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse",
             "Vidéo, cours, exercice, quiz : tu pratiques tout de suite."),

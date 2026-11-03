@@ -3,9 +3,8 @@
 Tous les fichiers cités sont dans le pack (`videos/`, `images/`). Les textes sont dans `TEXTES-PUBLICATIONS.md` (organique)
 et `TEXTES-PUBS-VARIANTES.md` (publicité payante). Les liens se taguent comme indiqué dans « Liens de suivi (UTM) ».
 
-**L'offre** : 19,90 €/mois ou 179,90 €/an ; **lancement : 14,90 €/mois ou 150 €/an** jusqu'au `[FIN PROMO]`.
-Gratuit sans abonnement : 6 leçons, le forum, le puzzle du jour. **À compléter** : la date du jour J et `[FIN PROMO]`
-(conseil : J+27, à la fin de la semaine 4). Le calendrier compte en jours à partir de J (un lundi conseillé).
+**L'offre** : 19,90 €/mois ou 179,90 €/an ; **lancement : 14,90 €/mois ou 150 €/an**, sans date de fin pour l'instant (aucune publication n'annonce d'échéance).
+Gratuit sans abonnement : 6 leçons, le forum, le puzzle du jour. **À compléter** : la date du jour J. Le calendrier compte en jours à partir de J (un lundi conseillé).
 
 **Rythme de croisière** : Instagram et Facebook 5 posts + stories chaque jour, TikTok 4 à 5 vidéos par semaine,
 LinkedIn 3 posts, X 1 post par jour, YouTube 1 vidéo par semaine. Quiz le vendredi, réponse en story le samedi.
@@ -22,7 +21,7 @@ Objectif : créer l'attente et faire s'abonner aux comptes avant l'ouverture. **
 | J-6 | IG, FB, TikTok | « Quelque chose se prépare… » : la boucle muette, sans légende explicite | `videos/00-general/boucle-entete-site-muette-1920x1080.mp4` (recadrée 9:16 dans l'appli) |
 | J-5 | IG, FB, LinkedIn | Quiz d'échauffement (règle du roque) | `images/39-quiz-roque/` |
 | J-4 | IG, FB | Story : réponse du quiz | `images/39-quiz-roque/…-reponse-story-1080x1920.jpg` |
-| J-3 | Tous | « 4 coachs, 1 académie » : un portrait par jour jusqu'à J-1, Gata Kamsky en premier | `images/20-coach-gata-kamsky/` |
+| J-3 | Tous | « 4 coachs, 1 Académie » : un portrait par jour jusqu'à J-1, Gata Kamsky en premier | `images/20-coach-gata-kamsky/` |
 | J-3 | E-mail | Teaser aux abonnés de la revue et de la newsletter : « Lundi, on ouvre l'Académie » | visuel `images/34-grande-nouvelle/` |
 | J-2 | Tous | Portrait de coach : Fabien Libiszewski | `images/19-coach-fabien-libiszewski/` |
 | J-1 | Tous | Portrait de coach : Sylvain Ravot + story compte à rebours (sticker « Compte à rebours » d'Instagram) | `images/17-coach-sylvain-ravot/` |
@@ -74,7 +73,7 @@ C'est aussi la semaine conseillée pour la **sortie du numéro de la revue** (à
 | J+14 | Pub | Ajout du **reciblage** : visiteurs du site et personnes ayant vu 50 % d'une pub, avec les carrousels de pub en images | `images/00-publicites/pub-N/` (1-question, 2-reponse, 3-final) |
 | J+15 | IG, FB, LinkedIn | Carrousel « Le Fegatello » | `images/carrousel-3-fegatello/` |
 | J+16 | Tous | **Sortie de la revue** : la revue en PGN interactif dans l'Académie | `videos/07-revue/`, `images/27-revue-numero-779/` |
-| J+16 | E-mail | Sortie de la revue + rappel de l'offre (150 €/an au lieu de 179,90 €) jusqu'au `[FIN PROMO]` | `images/08-revue/` |
+| J+16 | E-mail | Sortie de la revue + rappel de l'offre annuelle (150 €/an au lieu de 179,90 €) | `images/08-revue/` |
 | J+17 | IG, FB, TikTok | Mini-vidéo « Forum » : « Pose ta question, on répond » | `videos/08-forum/` |
 | J+18 | Tous | Quiz (règle du carré, niveau 1600) | `images/43-quiz-regle-du-carre/` |
 | J+19 | IG, FB | Story : réponse + **premiers retours d'élèves** (si tu en as d'ici là) | `…-reponse-story-1080x1920.jpg` |
@@ -82,20 +81,20 @@ C'est aussi la semaine conseillée pour la **sortie du numéro de la revue** (à
 
 ---
 
-## Semaine 4 — Dernier appel (J+21 à J+27)
+## Semaine 4 — Relance (J+21 à J+27)
 
-Objectif : convertir les hésitants avant la fin de l'offre de lancement. **Pubs : budget sur la meilleure pub, message d'urgence.**
+Objectif : convertir les hésitants, sans fausse urgence. **Pubs : budget sur la meilleure pub, angle « relance ».**
 
 | Jour | Réseaux | Publication | Fichiers |
 |---|---|---|---|
-| J+21 | Pub | Variante « dernière semaine » sur la meilleure pub (voir `TEXTES-PUBS-VARIANTES.md`, angle C) | — |
+| J+21 | Pub | Angle C « relance » (prix de lancement) sur la meilleure pub (voir `TEXTES-PUBS-VARIANTES.md`) | — |
 | J+21 | IG, FB, TikTok | Mini-vidéo « Vidéos » : tout le catalogue Europe Échecs | `videos/04-videos/` |
 | J+22 | IG, FB, LinkedIn | Chiffre « +2 000 exercices » | `images/12-chiffre-2000-exercices/` |
-| J+23 | E-mail | **Dernier rappel** : « Plus que 4 jours pour l'Académie à 14,90 €/mois ou 150 €/an » | `images/01-progression/` |
+| J+23 | E-mail | **Relance des comptes gratuits** : « Tu hésites encore ? » (e-mail `06`) | `images/01-progression/` |
 | J+24 | Tous | Quiz (le Fegatello, en écho au carrousel) | `images/79-academie-le-fegatello/` |
-| J+25 | IG, FB | Story : réponse + compte à rebours de fin de promo | `…-reponse-story-1080x1920.jpg` |
-| J+26 | Tous | **Veille de fin de promo** : vidéo courte en story et en post, « Dernier jour demain » | `videos/00-general/presentation-courte-9x16-reels-tiktok-stories.mp4` |
-| J+27 | IG, FB, E-mail | **Dernier jour** : story + court e-mail « C'est ce soir » | `images/30-bienvenue/` |
+| J+25 | IG, FB | Story : réponse + rappel des 6 leçons offertes | `…-reponse-story-1080x1920.jpg` |
+| J+26 | Tous | Vidéo courte en story et en post, rappel du prix de lancement | `videos/00-general/presentation-courte-9x16-reels-tiktok-stories.mp4` |
+| J+27 | IG, FB | **Un mois d'Académie** : merci à la communauté, chiffres du premier mois (si tu veux les partager) | `images/30-bienvenue/` |
 
 Après J+27 : retour au calendrier type d'une semaine (`TEXTES-PUBLICATIONS.md`).
 
@@ -108,7 +107,7 @@ Après J+27 : retour au calendrier type d'une semaine (`TEXTES-PUBLICATIONS.md`)
 | Test | J à J+6 | Les 5 pubs de 16 s, story et 4:5, même budget chacune, audience large France + Belgique + Suisse francophones, centres d'intérêt échecs | 60 % du budget de la semaine 1, réparti à parts égales |
 | Sélection | J+7 | On garde les 2 pubs au **coût par inscription** le plus bas (pas au nombre de clics). On teste aussi fond noir contre fond jaune sur la meilleure | 2 pubs |
 | Reciblage | J+14 à J+27 | Carrousels de pub en images (question, réponse, appel final) pour les visiteurs du site et les spectateurs à 50 % | 25 à 30 % du budget total |
-| Urgence | J+21 à J+27 | Variante « fin de promo » (angle C) sur la meilleure pub | le reste |
+| Relance | J+21 à J+27 | Angle C « relance » (prix de lancement) sur la meilleure pub | le reste |
 
 **Chiffres à regarder chaque lundi** (dans le gestionnaire de pubs et dans les statistiques du site, grâce aux liens de suivi) :
 coût par inscription, taux de clic, pourcentage de vidéo vue à 50 %, inscriptions par réseau (`utm_source`) et par pub (`utm_content`).
