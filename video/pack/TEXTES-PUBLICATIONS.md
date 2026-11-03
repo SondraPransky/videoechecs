@@ -16,6 +16,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 > Progresse à ton rythme. ♟️
 > Leçons interactives, +2 000 exercices, masterclasses avec des maîtres et grands maîtres, tournois en ligne, la revue Europe Échecs en PGN… Tout est au même endroit.
 > Du premier coup à plus de 2000 : c'est sur echecs.com/academie
+> 🎁 Offre de lancement : 14,90 €/mois au lieu de 19,90 €, ou 150 €/an au lieu de 179,90 €. Et pour essayer : 6 leçons, le forum et le puzzle du jour, gratuits.
 
 ## 01 · Progression
 *Vidéo : `01-progression/` · Image : `01-progression/`, `02-valide-chaque-etape/`*
@@ -87,6 +88,8 @@ Texte principal, à adapter à chaque question :
 > 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 
 Titre (Facebook / Instagram) : **Découvre l'Académie** · Bouton : **En savoir plus** ou **S'inscrire**
+
+Variantes de textes avec l'offre (14,90 €/mois au lancement) et l'urgence de fin de promo : voir `TEXTES-PUBS-VARIANTES.md`.
 
 ## Publications d'engagement
 
