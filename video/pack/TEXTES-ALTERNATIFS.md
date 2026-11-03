@@ -120,6 +120,27 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 **`38-week-end/`**
 > echecs.com — C'est le week-end : « Une partie ? Ou deux, ou trois… » La mascotte jaune d'echecs.com danse.
 
+**`39-quiz-roque/`**
+> echecs.com — Quiz · Initiation : Peut-on roquer quand son roi est en échec ? A : Oui, toujours. B : Non, jamais. C : Seulement le petit roque. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com se gratte la tête.
+
+**`40-quiz-clouage/`**
+> echecs.com — Quiz · Objectif 1200 : Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… A : Une fourchette. B : Une enfilade. C : Un clouage. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`41-quiz-espagnole/`**
+> echecs.com — Quiz · Objectif 1400 : 1.e4 e5 2.Cf3 Cc6 3.Fb5 : quelle est cette ouverture ? A : La partie italienne. B : La partie espagnole. C : La défense française. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com réfléchit.
+
+**`42-quiz-colonne-ouverte/`**
+> echecs.com — Quiz · Objectif 1400 : Où une tour est-elle la plus active ? A : Sur une colonne ouverte. B : Dans un coin, bien protégée. C : Devant ses propres pions. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com a une idée.
+
+**`43-quiz-regle-du-carre/`**
+> echecs.com — Quiz · Objectif 1600 : Roi contre pion passé : comment savoir si le roi le rattrape ? A : La règle de l'opposition. B : La règle du carré. C : La règle des 50 coups. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
+**`44-quiz-tarrasch/`**
+> echecs.com — Quiz · Objectif 1800 : Avec un pion passé, où placer ses tours selon la règle de Tarrasch ? A : Derrière le pion passé. B : Devant le pion passé. C : Sur la première rangée. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com lit, assise.
+
+**`45-quiz-champion-1972/`**
+> echecs.com — Quiz · Culture échecs : Qui fut champion du monde d'échecs de 1972 à 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Bobby Fischer. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com est là.
+
 ## Identité (`images/00-identite/`)
 
 **`id-avatar-nuit`**

@@ -81,6 +81,14 @@ window.VISUELS = [
   { id: "36-respire", tpl: "mascotte", theme: "menthe", k: "Avant ta partie", t: "Respire.", e: "Et calcule.", pose: "yoga-arbre" },
   { id: "37-oups", tpl: "mascotte", theme: "ciel", k: "Ça arrive", t: "Une gaffe ?", e: "Même aux meilleurs.", pose: "oups" },
   { id: "38-week-end", tpl: "mascotte", theme: "soleil", k: "C'est le week-end", t: "Une partie ?", e: "Ou deux, ou trois…", pose: "danse" },
+  // Quiz supplémentaires (même gabarit que le 16) : la bonne réponse change de place d'un quiz à l'autre
+  { id: "39-quiz-roque", tpl: "quiz", theme: "ciel", k: "Quiz · Initiation", q: "Peut-on roquer quand son roi est en échec ?", opts: ["Oui, toujours", "Non, jamais", "Seulement le petit roque"], s: "Réponds en commentaire : A, B ou C ?", pose: "gratte-tete" },
+  { id: "40-quiz-clouage", tpl: "quiz", theme: "soleil", k: "Quiz · Objectif 1200", q: "Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est…", opts: ["Une fourchette", "Une enfilade", "Un clouage"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
+  { id: "41-quiz-espagnole", tpl: "quiz", theme: "menthe", k: "Quiz · Objectif 1400", q: "1.e4 e5 2.Cf3 Cc6 3.Fb5 : quelle est cette ouverture ?", opts: ["La partie italienne", "La partie espagnole", "La défense française"], s: "Réponds en commentaire : A, B ou C ?", pose: "reflexion" },
+  { id: "42-quiz-colonne-ouverte", tpl: "quiz", theme: "rose", k: "Quiz · Objectif 1400", q: "Où une tour <span style=\"white-space:nowrap\">est-elle</span> la plus active ?", opts: ["Sur une colonne ouverte", "Dans un coin, bien protégée", "Devant ses propres pions"], s: "Réponds en commentaire : A, B ou C ?", pose: "idee" },
+  { id: "43-quiz-regle-du-carre", tpl: "quiz", theme: "nuit", k: "Quiz · Objectif 1600", q: "Roi contre pion passé : comment savoir si le roi le rattrape ?", opts: ["La règle de l'opposition", "La règle du carré", "La règle des 50 coups"], s: "Réponds en commentaire : A, B ou C ?", pose: "loupe" },
+  { id: "44-quiz-tarrasch", tpl: "quiz", theme: "craie", k: "Quiz · Objectif 1800", q: "Avec un pion passé, où placer ses tours selon la règle de Tarrasch ?", opts: ["Derrière le pion passé", "Devant le pion passé", "Sur la première rangée"], s: "Réponds en commentaire : A, B ou C ?", pose: "lit-assise" },
+  { id: "45-quiz-champion-1972", tpl: "quiz", theme: "soleil", k: "Quiz · Culture échecs", q: "Qui fut champion du monde d'échecs de 1972 à 1975 ?", opts: ["Garry Kasparov", "Anatoli Karpov", "Bobby Fischer"], s: "Réponds en commentaire : A, B ou C ?", pose: "cherche" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },

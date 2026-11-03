@@ -100,6 +100,18 @@ Titre (Facebook / Instagram) : **Découvre l'Académie Europe Échecs** · Bouto
 
 > Réponse : A, l'attaque de minorité ! On t'explique pourquoi dans la leçon Objectif 1600.
 
+**Autres quiz** (même principe : la question le jour J, la réponse le lendemain en commentaire ou en story)
+
+| Visuel | Question | Réponse et explication |
+|---|---|---|
+| `39-quiz-roque/` · Initiation | Peut-on roquer quand son roi est en échec ? | **B, non, jamais.** On ne roque ni pour sortir d'un échec, ni en passant par une case attaquée, ni pour arriver sur une case attaquée. |
+| `40-quiz-clouage/` · 1200 | Une pièce ne peut pas bouger sans exposer une pièce plus précieuse derrière elle. C'est… | **C, un clouage.** Dans l'enfilade, c'est l'inverse : la pièce la plus précieuse est devant et doit s'écarter. |
+| `41-quiz-espagnole/` · 1400 | 1.e4 e5 2.Cf3 Cc6 3.Fb5 : quelle est cette ouverture ? | **B, la partie espagnole** (ou Ruy Lopez). Avec 3.Fc4, c'est l'italienne. |
+| `42-quiz-colonne-ouverte/` · 1400 | Où une tour est-elle la plus active ? | **A, sur une colonne ouverte**, sans pion : elle contrôle toute la colonne et peut pénétrer en 7e rangée. |
+| `43-quiz-regle-du-carre/` · 1600 | Roi contre pion passé : comment savoir si le roi le rattrape ? | **B, la règle du carré** : on trace le carré entre le pion et sa case de promotion ; si le roi peut y entrer, il rattrape le pion. |
+| `44-quiz-tarrasch/` · 1800 | Avec un pion passé, où placer ses tours selon la règle de Tarrasch ? | **A, derrière le pion passé**, le sien comme celui de l'adversaire : la tour gagne en activité à chaque avance du pion. |
+| `45-quiz-champion-1972/` · Culture | Qui fut champion du monde d'échecs de 1972 à 1975 ? | **C, Bobby Fischer**, vainqueur de Boris Spassky à Reykjavik en 1972. |
+
 **Humeurs de la mascotte** (`21-` à `26-humeur-*`) — pour les stories, les week-ends, les rappels :
 > 7 jours de suite sur l'académie ? Ne lâche rien ! 🔥
 > Une partie avant de dormir ? Juste une. 😴
