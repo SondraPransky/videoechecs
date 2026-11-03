@@ -57,8 +57,20 @@ def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["t
 def encadre(t): return f'<div style="margin:22px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:15px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
 def liste(items): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 18px">' + "".join(
     f'<tr><td valign="top" style="padding:6px 12px 6px 0;font:bold 16px {SANS};color:{C["vert"]}">&#10003;</td><td style="padding:6px 0;font:16px/1.5 {SANS};color:{C["texte"]}">{i}</td></tr>' for i in items) + "</table>"
-def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border:1px solid ' + C["filet"] + ';border-radius:10px">' + "".join(
-    f'<tr><td style="padding:12px 16px;font:bold 14px {SANS};color:{C["gris"]};text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid {C["filet"]};width:38%">{k}</td><td style="padding:12px 16px;font:16px {SANS};color:{C["texte"]};border-bottom:1px solid {C["filet"]}">{v}</td></tr>' for k, v in rows) + "</table>"
+def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:20px 0;background:' + C["fond"] + ';border-radius:12px">' + "".join(
+    f'<tr><td style="padding:13px 18px;font-family:{SANS};font-weight:500;font-size:14px;color:{C["gris"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}width:42%">{k}</td>'
+    f'<td style="padding:13px 18px;font-family:{SANS};font-weight:800;font-size:15px;color:{C["texte"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}">{v}</td></tr>' for i, (k, v) in enumerate(rows)) + "</table>"
+def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
+    ok = f'<span style="color:{C["vert"]};font-weight:800">&#10003;</span>'; non = f'<span style="color:#b9b5aa">&mdash;</span>'
+    cell = lambda v: ok if v is True else non if v is False else v
+    th = lambda t, bg, col: f'<td align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
+    h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate"><tr><td></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
+    for i, (k, g, a) in enumerate(rows):
+        last = i == len(rows) - 1; bb = "" if last else f"border-bottom:1px solid {C['filet']};"
+        h += (f'<tr><td style="padding:13px 10px 13px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]};{bb}">{k}</td>'
+              f'<td align="center" style="padding:13px 8px;background:{C["fond"]};font-family:{SANS};font-size:14px;color:{C["gris"]};{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(g)}</td>'
+              f'<td align="center" style="padding:13px 8px;background:#fff6c2;font-family:{SANS};font-weight:800;font-size:14px;color:#111;{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(a)}</td></tr>')
+    return h + "</table>"
 def carte(img, titre, texte, lien, cta):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
 <tr><td><img src="{{IMG}}/{img}.jpg" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></td></tr>
@@ -129,8 +141,8 @@ mail(id="05-gratuit-j7-offre", cat="Compte gratuit → abonnement", quand="J+7 a
             encadre(f"Prix de lancement : {OFFRE}. Sans engagement en mensuel, et ton tarif est garanti tant que tu restes abonné."), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours", img="exercices", alt="Les exercices de l'Académie",
      objet="Tu hésites encore, [PRENOM] ?", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
-     corps=[para("Tu utilises déjà le puzzle du jour et les leçons offertes. Voici ce qui change avec l'abonnement :"),
-            infos([("Leçons", "6 → +200"), ("Exercices", "le puzzle du jour → +2 000, à ton niveau"), ("Masterclasses", "en direct et en replay"), ("Revue", "tous les numéros en PGN")]),
+     corps=[para("Tu utilises déjà le puzzle du jour et les leçons offertes. Voici ce que l'abonnement ajoute :"),
+            comparatif([("Leçons", "6", "+200"), ("Exercices", "puzzle du jour", "+2 000"), ("Masterclasses", False, True), ("Revue en PGN", False, True), ("Tes parties analysées", False, True), ("Forum", True, True)]),
             encadre(f"Toujours au prix de lancement : {OFFRE}. Sans engagement en mensuel : tu arrêtes quand tu veux."), bouton("Voir les formules", L("ABONNEMENT"))])
 
 # ---------- 3. Abonnement ----------
