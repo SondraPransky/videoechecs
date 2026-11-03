@@ -532,7 +532,6 @@ html.v #grain { width: 100%; height: 100%; }
     <div style="position:absolute;left:150px;top:230px;width:760px">
       <div class="kicker s7-k">Tournois en ligne</div>
       <div class="h2" style="margin-top:36px"><span class="line"><span class="s7-w">Mesure-toi</span></span><span class="line"><span class="s7-w">aux <span class="em">autres joueurs.</span></span></span></div>
-      <div class="chip s7-c" style="margin-top:44px;background:rgba(147,185,226,.12);color:var(--blue)">Cadence 10' + 5"</div>
     </div>
     <div class="clock" id="clock" style="left:150px;top:720px">
       <div class="face" style="background:var(--ink);color:#111" id="c1">09:12</div>
@@ -1335,7 +1334,6 @@ scene("forum", ({ st, from, at, lines, dur }) => {
 scene("s7", ({ st, from, at, lines, dur }) => {
   from(".s7-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
   lines(".s7-w", .1, .1);
-  from(".s7-c", .6, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .4 });
   from("#clock", .45, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });
   const clk = { a: 552 };
   const fmt = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;

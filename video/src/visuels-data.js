@@ -40,7 +40,7 @@ window.VISUELS = [
   { id: "07-tes-parties", tpl: "accroche", theme: "menthe", k: "Tes parties", t: "Saisis, analyse,", e: "partage.", s: "Ton espace de parties, en PGN.", shot: "parties", pose: "reflexion" },
   { id: "08-revue", tpl: "accroche", theme: "nuit", k: "La revue Europe Échecs", t: "Toute la revue", e: "en PGN interactif.", s: "Chaque mois, le nouveau numéro.", shot: "revue", pose: "lecture" },
   { id: "09-forum", tpl: "accroche", theme: "ciel", k: "Le forum", t: "Rejoins", e: "la communauté.", s: "Pose tes questions, partage tes parties.", shot: "forum", pose: "serie-de-jours" },
-  { id: "10-tournois", tpl: "accroche", theme: "soleil", k: "Tournois en ligne", t: "Mesure-toi", e: "aux autres joueurs.", s: "Cadence 10' + 5\", tous niveaux.", shot: "tournois", pose: "victoire-tournoi" },
+  { id: "10-tournois", tpl: "accroche", theme: "soleil", k: "Tournois en ligne", t: "Mesure-toi", e: "aux autres joueurs.", s: "Ouvert à tous les niveaux.", shot: "tournois", pose: "victoire-tournoi" },
 
   // ---- Chiffres clés
   { id: "11-chiffre-200-lecons", tpl: "chiffre", theme: "soleil", k: "Leçons interactives", n: "+200", t: "leçons", e: "pour progresser.", pose: "saut-etoile" },
@@ -68,7 +68,7 @@ window.VISUELS = [
 
   // ---- Annonces
   { id: "27-revue-numero-779", tpl: "revue", theme: "nuit", k: "Nouveau numéro", t: "Le n°779", e: "est sorti !", s: "Milliet & Bacrot : 16 titres pour 2 légendes.", },
-  { id: "28-tournois-chaque-semaine", tpl: "event", theme: "ciel", k: "Tournois en ligne", t: "Chaque semaine,", e: "un tournoi.", facts: ["Cadence 10' + 5\"", "Ouvert à tous les niveaux", "Classement en direct"], pose: "pendule" },
+  { id: "28-tournois-chaque-semaine", tpl: "event", theme: "ciel", k: "Tournois en ligne", t: "Chaque semaine,", e: "un tournoi.", facts: ["Ouvert à tous les niveaux", "Classement en direct"], pose: "pendule" },
 
   // ---- Nouvelles mascottes
   { id: "29-newsletter", tpl: "mascotte", theme: "soleil", k: "Newsletter", t: "Ta lettre", e: "de la semaine.", pose: "message-recu" },

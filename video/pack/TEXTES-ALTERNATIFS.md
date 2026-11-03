@@ -34,7 +34,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > echecs.com — Le forum : « Rejoins la communauté. » Pose tes questions, partage tes parties. Capture de l'académie : la liste des sujets du forum avec des réponses de membres et de coachs. La mascotte jaune d'echecs.com coche les jours d'une série.
 
 **`10-tournois/`**
-> echecs.com — Tournois en ligne : « Mesure-toi aux autres joueurs. » Cadence 10' + 5", tous niveaux. Capture de l'académie : le classement en direct d'un tournoi en ligne. La mascotte jaune d'echecs.com fête une victoire.
+> echecs.com — Tournois en ligne : « Mesure-toi aux autres joueurs. » Ouvert à tous les niveaux. Capture de l'académie : le classement en direct d'un tournoi en ligne. La mascotte jaune d'echecs.com fête une victoire.
 
 **`11-chiffre-200-lecons/`**
 > echecs.com : « +200 leçons pour progresser. » La mascotte jaune d'echecs.com saute de joie.
@@ -67,7 +67,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Nos coachs : portrait de Gata Kamsky, grand maître. En masterclass sur echecs.com.
 
 **`21-humeur-serie/`**
-> echecs.com — Ta série : « 7 jours de suite. Ne lâche rien ! » La mascotte jaune d'echecs.com court à toute vitesse.
+> echecs.com — Ta série : « 7 jours de suite. Ne lâche rien ! » La mascotte jaune d'echecs.com coche les jours d'une série.
 
 **`22-humeur-lecon-terminee/`**
 > echecs.com — Bravo : « Leçon terminée. Au tour de la suivante ! » La mascotte jaune d'echecs.com fait une révérence.
@@ -88,7 +88,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > La revue Europe Échecs : « Le n°779 est sorti ! » Milliet & Bacrot : 16 titres pour 2 légendes. Couverture du numéro 779 avec Sophie Milliet et Étienne Bacrot.
 
 **`28-tournois-chaque-semaine/`**
-> Tournois en ligne echecs.com : « Chaque semaine, un tournoi. » Cadence 10' + 5", Ouvert à tous les niveaux, Classement en direct. La mascotte jaune d'echecs.com est à côté d'une pendule d'échecs.
+> Tournois en ligne echecs.com : « Chaque semaine, un tournoi. » Ouvert à tous les niveaux, Classement en direct. La mascotte jaune d'echecs.com est à côté d'une pendule d'échecs.
 
 **`29-newsletter/`**
 > echecs.com — Newsletter : « Ta lettre de la semaine. » La mascotte jaune d'echecs.com reçoit une lettre.

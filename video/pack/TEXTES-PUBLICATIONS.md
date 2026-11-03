@@ -72,7 +72,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 ## 09 · Tournois
 *Vidéo : `09-tournois/` · Images : `10-tournois/`, `28-tournois-chaque-semaine/`, `25-humeur-victoire/`*
 
-> Chaque semaine, un tournoi en ligne. Cadence 10' + 5", ouvert à tous les niveaux. 🏆
+> Chaque semaine, un tournoi en ligne, ouvert à tous les niveaux. 🏆
 > Qui sera premier ce week-end ?
 
 ---
