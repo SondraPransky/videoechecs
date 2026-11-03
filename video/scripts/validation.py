@@ -65,7 +65,7 @@ S.append({"id": "pubs", "titre": "Publicités 16 s", "items": [
 ORDRE_I = ["story-1080x1920.jpg", "portrait", "carre-1080x1080.jpg", "x-1600", "lien", "pinterest", "jaune"]
 S.append({"id": "pubs-images", "titre": "Publicités en images", "items": [
     item(f"pub-images-{q}", f"Pub {q} en images", "3 vues (question, réponse, final), seules ou en carrousel",
-         [f for vue in ("1-question", "2-reponse", "3-final") for f in tri(list((I / f"00-publicites/pub-{q}").glob(f"pub-{q}-{vue}-*.jpg")), ORDRE_I)], "image") for q in QS]})
+         [f for vue in ("1-question", "2-reponse", "3-final") for f in tri([g for g in (I / f"00-publicites/pub-{q}").glob(f"pub-{q}-{vue}-*.jpg") if "jaune" not in g.name and ("story" in g.name or "carre" in g.name or "lien" in g.name)], ORDRE_I)], "image") for q in QS]})
 for m in S[-1]["items"]:
     for x in m["medias"]: x["label"] = {"1-q": "Question", "2-r": "Réponse", "3-f": "Final"}[x["src"].split(f"pub-")[-1].split("-", 1)[1][:3]] + " · " + x["label"]
 S.append({"id": "accroches", "titre": "Publicités 31 s (première version)", "items": [
@@ -78,8 +78,11 @@ data = {v["id"]: v for v in json.loads(subprocess.check_output(["node", "-e", 'g
 def titre_vis(d):
     v = data.get(d.name, {}); t = " ".join(x for x in (v.get("t"), v.get("e")) if x) or v.get("q", d.name)
     return re.sub(r"<[^>]+>|&#8239;", "", t)
+GARDE = ("carre-1080x1080.jpg", "portrait-1080x1350.jpg", "story-1080x1920.jpg", "lien-1200x630.jpg")   # 4 formats par visuel (limite de fichiers de la page)
 S.append({"id": "visuels", "titre": "Visuels", "items": [
-    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats", tri(list(d.glob("*.jpg")), ORDRE_I), "image") for d in vi]})
+    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if not d.name[3:].startswith(("quiz", "academie"))]})
+S.append({"id": "quiz", "titre": "Quiz", "items": [
+    item("visuel-" + d.name, f"{d.name[:2]} · {titre_vis(d)}", (data.get(d.name, {}).get("k") or "") + " · 6 formats dans le pack, 4 ici", tri([f for f in d.glob("*.jpg") if f.name.endswith(GARDE)], ORDRE_I), "image") for d in vi if d.name[3:].startswith(("quiz", "academie"))]})
 idt = I / "00-identite"
 S.append({"id": "identite", "titre": "Identité des comptes", "items": [
     item("id-avatars", "Photos de profil", "nuit et soleil", sorted(idt.glob("avatar-*.jpg")), "image"),
