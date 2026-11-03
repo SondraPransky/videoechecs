@@ -73,6 +73,7 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 
 /* Petits échiquiers */
 .board { position: absolute; border-radius: 14px; overflow: hidden; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
+.fig { height: 1em; width: auto; vertical-align: -.14em; margin-right: .03em; }
 .board .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; }
 .board .hl { position: absolute; width: 12.5%; height: 12.5%; background: rgba(250,227,97,.7); }
 .board svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -339,6 +340,21 @@ const ADS = {
   },
 };
 const AD = ADS[Q] || ADS[1];
+// Notation figurine : dans les coups écrits (Cf3, Td8#, Dxd5…), l'initiale de la pièce devient son icône
+function figurines(root, base) {
+  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])/g;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), ns = [];
+  while (w.nextNode()) ns.push(w.currentNode);
+  for (const n of ns) {
+    re.lastIndex = 0; if (!re.test(n.data)) continue; re.lastIndex = 0;
+    const [r, g, bl] = (getComputedStyle(n.parentElement).color.match(/\d+/g) || [0, 0, 0]).map(Number);
+    const coul = r * .3 + g * .59 + bl * .11 > 140 ? "w" : "b";   // texte clair : figurine blanche ; texte foncé : figurine noire
+    const t = document.createElement("span");
+    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, p) => `${a}<img class="fig" src="${base}${coul}${FIGS[p]}.png" alt="${p}">`);
+    n.replaceWith(...t.childNodes);
+  }
+}
+
 
 // Question : un mot à la fois, la fin en italique jaune
 const words = (txt, cls) => nb(txt).split(" ").map(w => `<span class="wd ${cls}">${w} </span>`).join("");
@@ -347,8 +363,10 @@ $("#pv").innerHTML = AD.pv;
 $("#pq").innerHTML = window.MASCOT_POSES[AD.pose + (FMT === "wide" ? "" : "-miroir")];
 $("#rt").innerHTML = `Nous avons<br><span class="e">${Q % 2 ? "la solution !" : "pensé à toi !"}</span>`;
 $("#sk").textContent = AD.sk;
+
 $("#stt").innerHTML = nb(AD.st[0]) + `<br><span class="e">${nb(AD.st[1])}</span>`;
 $("#sv").innerHTML = AD.sv;
+figurines($("#sv"), P);
 $("#cap").innerHTML = nb(AD.cap);
 $("#ps").innerHTML = window.MASCOT_POSES[AD.ps];
 $$(".pose[data-pose]").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });

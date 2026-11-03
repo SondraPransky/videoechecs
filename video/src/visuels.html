@@ -79,6 +79,7 @@ main.serre .t { font-size: 9.4rem; } main.serre .e { font-size: 10rem; }
 .tall .big { font-size: 32rem; }
 .tall .chips, .tall .facts span { font-size: 4.6rem; }
 .quiz .q { font: 800 5.6rem/1.2 "Manrope"; }
+.fig { height: 1em; width: auto; vertical-align: -.14em; margin-right: .03em; filter: drop-shadow(0 0 .02em rgba(0,0,0,.6)); }
 /* Quiz de l'académie avec position : question et choix à gauche, échiquier à droite (en story : l'un sous l'autre) */
 main.qp { gap: 3.5rem; }
 main.qp .q { font-size: 5rem; }
@@ -235,6 +236,21 @@ const T = {
   },
 };
 c.insertAdjacentHTML("beforeend", T[item.tpl](item));
+// Notation figurine : dans les coups écrits (Cf3, Td8#, Dxd5…), l'initiale de la pièce devient son icône
+function figurines(root, base) {
+  const FIGS = { R: "K", D: "Q", T: "R", F: "B", C: "N" }, re = /(^|[^A-Za-zÀ-ÿ])([RDTFC])(?=[a-h1-8]?x?[a-h][1-8])/g;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), ns = [];
+  while (w.nextNode()) ns.push(w.currentNode);
+  for (const n of ns) {
+    re.lastIndex = 0; if (!re.test(n.data)) continue; re.lastIndex = 0;
+    const [r, g, bl] = (getComputedStyle(n.parentElement).color.match(/\d+/g) || [0, 0, 0]).map(Number);
+    const coul = r * .3 + g * .59 + bl * .11 > 140 ? "w" : "b";   // texte clair : figurine blanche ; texte foncé : figurine noire
+    const t = document.createElement("span");
+    t.innerHTML = n.data.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(re, (m, a, p) => `${a}<img class="fig" src="${base}${coul}${FIGS[p]}.png" alt="${p}">`);
+    n.replaceWith(...t.childNodes);
+  }
+}
+figurines(c, P);
 c.querySelectorAll(".pose").forEach(el => { el.innerHTML = window.MASCOT_POSES[el.dataset.pose]; });
 // « Blancs ou Noirs » : le second pion est noir (il était jaune comme la mascotte)
 c.querySelectorAll('.pose[data-pose^="blancs-ou-noirs"] .p2 [fill="#fae361"]').forEach(e => e.setAttribute("fill", "#1b1b1b"));
