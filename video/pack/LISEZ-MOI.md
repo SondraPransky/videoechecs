@@ -56,9 +56,9 @@ puis **une réponse propre à chaque question**, et l'appel final. Chaque pub a 
 |---|---|---|---|
 | `pub-1-*` | Tu enchaînes les parties, mais ton classement ne bouge pas ? | « Jouer ne suffit pas. Entraîne-toi avec méthode. » Courbe Elo qui monte, modules validés | électro-pop |
 | `pub-2-*` | Tu joues beaucoup, mais tu n'as pas l'impression de progresser ? | « Joue moins, comprends plus. » Analyse de partie, erreur repérée, exercices ciblés | disco-funk |
-| `pub-3-*` | Tu as l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprends des meilleurs. » Masterclasses en direct avec GM et MF | lo-fi puis hip-hop |
-| `pub-4-*` | Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? | « Ne regarde plus, joue ! » La vidéo devient un exercice : à toi de jouer | trap cinématique |
-| `pub-5-*` | Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? | « Suis le guide, étape par étape. » Le parcours de l'initiation à 2000+ | pop acoustique |
+| `pub-3-*` | Tu as l'impression de stagner depuis quelque temps ? | « Pour passer un cap, apprends des meilleurs. » Masterclasses en direct avec GM et MF | électro-pop de la vidéo longue (ré mineur) |
+| `pub-4-*` | Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? | « Passe à l'action : chaque leçon se joue ! » La vidéo devient un exercice : à toi de jouer | trap cinématique |
+| `pub-5-*` | Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ? | « Suis le guide, étape par étape. » Le parcours de l'initiation à 2000+ | électro-pop de la vidéo longue (sol majeur) |
 
 Formats : `*-story-9x16.mp4` (Stories et Reels Instagram, TikTok), `*-story-9x16-jaune.mp4` (même pub sur fond jaune, pour varier
 ou tester), `*-feed-4x5.mp4` (fil Instagram et Facebook), `*-carre-1x1.mp4` (posts carrés, LinkedIn, Facebook),

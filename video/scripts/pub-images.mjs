@@ -18,7 +18,7 @@ const FORMATS = [
 ];
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });
 let n = 0;
-for (const q of [1, 2, 3, 4, 5]) {
+for (const q of (process.env.PUBS || "1 2 3 4 5").split(" ").map(Number)) {
   const dir = path.join(OUT, `pub-${q}`);
   fs.mkdirSync(dir, { recursive: true });
   for (const [suffix, fmt, [w, h], scale, themes] of FORMATS) {

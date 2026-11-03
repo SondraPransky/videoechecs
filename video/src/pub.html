@@ -79,17 +79,23 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .board svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 
 /* Visuels « problème » */
-.games { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; margin-top: 26px; }
-.games div { position: relative; height: 84px; border-radius: 10px; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
-.games b { position: absolute; right: 4px; bottom: 4px; padding: 4px 6px; border-radius: 6px; background: #111; color: #fff; font: 800 20px/1 "Manrope"; }
+.games { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+.games .pg { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: repeating-conic-gradient(#93b9e2 0 25%, #e4ecf6 0 50%) 0 0 / 25% 25%; }
+.games .pc { position: absolute; width: 12.5%; height: 12.5%; background-size: 100% 100%; }
+.games b { position: absolute; right: 5px; bottom: 5px; z-index: 2; padding: 5px 8px; border-radius: 7px; color: #fff; font: 800 22px/1 "Manrope"; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.games b.l { background: #e5484d; } .games b.w { background: #2f9e44; } .games b.d { background: #6b6b66; }
 .months { display: flex; gap: 16px; margin-top: 30px; }
 .months div { flex: 1; height: 110px; border-radius: 18px; background: #f1f0ea; color: #111; display: grid; place-items: center; font: 800 30px/1 "Manrope"; }
 .pbar { position: relative; height: 30px; margin-top: 34px; border-radius: 15px; background: #2a3442; overflow: hidden; }
 .pbar i { position: absolute; left: 0; top: 0; bottom: 0; width: 40%; border-radius: 15px; background: linear-gradient(90deg, #93b9e2, #fae361); }
-.vids { display: flex; gap: 16px; margin-top: 24px; }
-.vids div { position: relative; flex: 1; }
-.vids img { width: 100%; height: 130px; object-fit: cover; border-radius: 14px; display: block; }
-.vids span { position: absolute; left: 50%; top: 65px; width: 50px; height: 50px; margin: -25px; border-radius: 50%; background: #fae361; display: grid; place-items: center; }
+.vids { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.vids .vd { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.vids img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vids .vu { position: absolute; left: 8px; top: 8px; display: flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 8px; background: rgba(17,17,17,.82); color: #fff; font: 800 18px/1 "Manrope"; }
+.vids .vu svg { width: 16px; height: 16px; }
+.vids .du { position: absolute; right: 8px; bottom: 14px; padding: 4px 7px; border-radius: 6px; background: rgba(17,17,17,.82); color: #fff; font: 700 17px/1 "Manrope"; }
+.vids .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(255,255,255,.3); }
+.vids .bar i { display: block; height: 100%; width: 100%; background: #ff5a6a; }
 .sign { position: absolute; left: 50%; top: 40px; width: 20px; height: 380px; margin-left: -10px; border-radius: 10px; background: #c9a36a; }
 .arrow { position: absolute; padding: 18px 30px; font: 800 34px/1 "Manrope"; color: #111; box-shadow: 0 14px 30px rgba(0,0,0,.35); white-space: nowrap; }
 .tr { position: absolute; right: 44px; top: 40px; }
@@ -138,10 +144,10 @@ body:not(.soleil) .pose .mascotte { --mascot: #fae361; --line: #f4f1ea; }
 .here::after { content: ""; position: absolute; left: -12px; top: 50%; margin-top: -12px; border: 12px solid transparent; border-left: 0; border-right-color: #fae361; }
 
 /* ---------- Mises en page par format ---------- */
-body.story #logo { left: 50%; top: 282px; height: 44px; margin-left: -94px; }
+body.story #logo { left: 50%; top: 270px; height: 68px; margin-left: -145px; }
 body.story .q { left: 80px; top: 400px; width: 920px; font-size: 108px; }
 body.story #pvh { left: 110px; top: 1100px; }
-body.story #pq { left: 790px; top: 1262px; width: 230px; height: 282px; }
+body.story #pq { left: 815px; top: 1470px; width: 200px; height: 245px; }
 body.story .r { top: 680px; font-size: 140px; }
 body.story .rs { top: 990px; font-size: 54px; }
 body.story #pr { left: 395px; top: 1185px; width: 290px; height: 355px; }
@@ -156,7 +162,7 @@ body.story .cb { top: 990px; } body.story .btn { font-size: 58px; padding: 38px 
 body.story .cu { top: 1200px; }
 body.story #pc { left: 390px; top: 1200px; width: 300px; height: 367px; }
 
-body.feed #logo { left: 50%; top: 64px; height: 44px; margin-left: -94px; }
+body.feed #logo { left: 50%; top: 54px; height: 64px; margin-left: -136px; }
 body.feed .q { left: 70px; top: 170px; width: 940px; font-size: 88px; }
 body.feed #pvh { left: 70px; top: 720px; transform: scale(.9); }
 body.feed #pq { left: 830px; top: 1000px; width: 200px; height: 245px; }
@@ -174,7 +180,7 @@ body.feed .cb { top: 770px; } body.feed .btn { font-size: 54px; padding: 36px 64
 body.feed .cu { top: 900px; }
 body.feed #pc { left: 820px; top: 960px; width: 200px; height: 245px; }
 
-body.wide #logo { left: 100px; top: 70px; height: 46px; }
+body.wide #logo { left: 100px; top: 62px; height: 68px; }
 body.wide .q { left: 100px; top: 190px; width: 1000px; font-size: 108px; }
 body.wide #pvh { left: 1110px; top: 250px; transform: scale(.86); }
 body.wide #pq { left: 1520px; top: 640px; width: 280px; height: 343px; }
@@ -191,7 +197,7 @@ body.wide .ct { top: 510px; font-size: 120px; }
 body.wide .cb { top: 710px; } body.wide .btn { font-size: 56px; padding: 38px 70px; }
 body.wide .cu { top: 840px; }
 body.wide #pc { left: 1500px; top: 600px; width: 290px; height: 355px; }
-body.carre #logo { left: 50%; top: 50px; height: 40px; margin-left: -85px; }
+body.carre #logo { left: 50%; top: 40px; height: 58px; margin-left: -123px; }
 body.carre .q { left: 70px; top: 125px; width: 940px; font-size: 82px; }
 body.carre #pvh { left: 70px; top: 590px; transform: scale(.8); }
 body.carre #pq { left: 805px; top: 770px; width: 190px; height: 233px; }
@@ -275,6 +281,26 @@ function board(el, placement, size) {
   }
 }
 
+// Mini-échiquiers des « parties jouées » (pub 2) : positions de milieu de partie, résultats surtout perdus
+const GAMES = [["0-1", "l"], ["1-0", "w"], ["0-1", "l"], ["½", "d"]];
+function mini(seed) {
+  const F = "abcdefgh", base = { e1: "wK", d1: "wQ", a1: "wR", h1: "wR", c1: "wB", f1: "wB", b1: "wN", g1: "wN",
+    e8: "bK", d8: "bQ", a8: "bR", h8: "bR", c8: "bB", f8: "bB", b8: "bN", g8: "bN" };
+  for (const f of F) { base[f + "2"] = "wP"; base[f + "7"] = "bP"; }
+  let r = seed * 9301 + 49297; const rnd = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+  const pos = {};
+  for (const [sq, c] of Object.entries(base)) {
+    if (c[1] !== "K" && rnd() < .38) continue;   // pièces échangées
+    let f = F.indexOf(sq[0]), k = +sq[1];
+    if (c[1] === "P") k += (c[0] === "w" ? 1 : -1) * Math.floor(rnd() * 3);
+    else if (c[1] === "K") { if (rnd() < .6) f = 6; }
+    else if (rnd() < .7) { f = Math.min(7, Math.max(0, f + Math.floor(rnd() * 5) - 2)); k += (c[0] === "w" ? 1 : -1) * (1 + Math.floor(rnd() * 3)); }
+    const s2 = F[f] + k;
+    if (!pos[s2]) pos[s2] = c;
+  }
+  return Object.entries(pos).map(([sq, c]) => `<i class="pc" style="left:${F.indexOf(sq[0]) * 12.5}%;top:${(8 - +sq[1]) * 12.5}%;background-image:url(${P}${c}.png)"></i>`).join("");
+}
+
 // ---------- Contenus ----------
 const ADS = {
   1: {
@@ -291,7 +317,7 @@ const ADS = {
   2: {
     q: ["Tu joues beaucoup,", "mais tu n'as pas l'impression de progresser ?"], pose: "course",
     pv: `<small>Parties jouées ce mois-ci</small><div class="n" id="pvn">0</div>
-      <div class="games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="pg"><b>${r}</b></div>`).join("")}</div>`,
+      <div class="games">${GAMES.map(([r, c], i) => `<div class="pg">${mini(i)}<b class="${c}">${r}</b></div>`).join("")}</div>`,
     sk: "Le déclic", st: ["Joue moins,", "comprends plus."], ps: "loupe",
     sv: `<small>Analyse de ta partie</small><div class="board" id="sb" style="left:44px;top:90px"></div>
       <div class="moves" style="top:90px">
@@ -315,9 +341,9 @@ const ADS = {
   4: {
     q: ["Tu regardes des vidéos d'échecs,", "mais tu ne progresses pas ?"], pose: "menton",
     pv: `<small>Vidéos regardées</small><div class="n" id="pvn">0 h</div>
-      <div class="vids">${["p-calcul-gagnant", "p-minute-finale", "p-ouvertures-vogue"].map(v => `<div class="vd"><img src="${HD}${v}.jpg"><span>${PLAY(20)}</span></div>`).join("")}</div>
+      <div class="vids">${[["p-calcul-gagnant", "42:10"], ["p-minute-finale", "18:35"], ["p-ouvertures-vogue", "55:02"]].map(([v, d]) => `<div class="vd"><img src="${HD}${v}.jpg"><div class="vu">${CK}Vu</div><div class="du">${d}</div><div class="bar"><i></i></div></div>`).join("")}</div>
       <div style="margin-top:20px"><span class="tag bad">Classement : inchangé</span></div>`,
-    sk: "Le déclic", st: ["Ne regarde plus,", "joue !"], ps: "bonne-reponse",
+    sk: "Le déclic", st: ["Passe à l'action :", "chaque leçon se joue !"], ps: "bonne-reponse",
     sv: `<small>Leçon : la Minute Finale</small>
       <div class="player" id="pl"><img src="${HD}p-minute-finale.jpg"><div class="pl">${PLAY(48)}</div><div class="pb"><i id="plb"></i></div></div>
       <div id="try" style="position:absolute;left:44px;right:44px;top:90px;height:434px;border-radius:22px;background:#f1f0ea;opacity:0">

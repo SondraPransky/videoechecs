@@ -80,7 +80,7 @@ PUBS = {1: ("Tu enchaînes les parties, mais ton classement ne bouge pas ?", "un
             "Pour passer un cap, apprends des meilleurs.", "les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen",
             "Maîtres et grands maîtres, en direct chaque semaine."),
         4: ("Tu regardes des vidéos d'échecs, mais tu ne progresses pas ?", "12 heures de vidéos regardées, classement inchangé",
-            "Ne regarde plus, joue !", "une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse",
+            "Passe à l'action : chaque leçon se joue !", "une leçon vidéo de la Minute Finale qui devient un exercice « À toi de jouer », avec la bonne réponse",
             "Vidéo, cours, exercice, quiz : tu pratiques tout de suite."),
         5: ("Tu veux progresser aux échecs, mais tu ne sais pas par où commencer ?", "un panneau indicateur : Ouvertures, Tactique, Finales, Stratégie",
             "Suis le guide, étape par étape.", "un parcours de l'initiation à 2000 et plus, avec la mention « Tu es ici »",

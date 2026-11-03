@@ -2,9 +2,9 @@
 
   1  électro-pop 124 BPM, la mineur        (classement bloqué → ça décolle)
   2  disco-funk 116 BPM, ré dorien         (« jouez moins, comprenez plus »)
-  3  lo-fi 84 BPM puis hip-hop chaleureux  (on stagne… puis on passe un cap)
-  4  trap cinématique 140 BPM, do mineur   (« ne regardez plus, jouez ! »)
-  5  pop acoustique 104 BPM, sol majeur    (« suivez le guide », optimiste)
+  3  électro-pop de la vidéo longue, 120 BPM, ré mineur (on stagne… puis tout s'ouvre)
+  4  trap cinématique 140 BPM, do mineur   (« passe à l'action ! »)
+  5  électro-pop de la vidéo longue, 120 BPM, sol majeur (« suis le guide », lumineux)
 
 Structure calée sur les scènes de la pub : question (0 → 3,9 s, ambiance qui retient son souffle),
 « Nous avons la solution ! » (impact et départ du groove à 3,9 s), réponse, appel final (11,6 s).
@@ -316,30 +316,61 @@ def style2():   # disco-funk, ré dorien
     common_transitions([38, 50, 57, 62, 65, 69, 72])
 
 
-def style3():   # lo-fi qui s'endort, puis hip-hop chaleureux
-    bpm = 84; beat = 60 / bpm; bar = 4 * beat
-    prog = [(53, [64, 69, 72, 76]), (52, [62, 67, 71, 74]), (50, [60, 65, 69, 72]), (48, [64, 67, 71, 74])]   # Fmaj7 Em7 Dm7 Cmaj7
-    st(0, crackle(DURATION), .12)   # grésillement de vinyle discret (il était trop présent)
-    for t, k in grid(bpm, 0, T_DROP, 2):   # Rhodes en boucle, légèrement désaccordé : on tourne en rond
+def longue(prog, final_notes):
+    """Électro-pop de la vidéo longue (120 BPM) : intro filtrée, sidechain, basse à l'octave, arpège, montée finale."""
+    bpm = 120; beat = 60 / bpm; bar = 4 * beat
+    t_rise = T_FINAL - bar / 2
+    # Sidechain : le kick « pompe » les accords et la basse, comme dans la vidéo longue
+    pump = np.ones(N)
+    seg = 1 - .75 * np.exp(-np.arange(int(beat * SR)) / SR * 11)
+    for t, k in grid(bpm, T_DROP, DURATION, 1):
+        i = int(t * SR); j = min(N, i + len(seg))
+        pump[i:j] = np.minimum(pump[i:j], seg[: j - i])
+    chords = np.zeros(N)
+    bassline = np.zeros(N)
+    for t, k in grid(bpm, 0, DURATION, 4):
         root, notes = chord_at(prog, t + .01, bar)
-        st(t, rhodes([x - .25 for x in notes], beat * 2), .38)
-    for t, k in grid(bpm, T_DROP, DURATION, 2):
+        add(chords, t, supersaw([x - 12 for x in notes] + [notes[0]], bar))
+    for t, k in grid(bpm, T_DROP, DURATION, .5):   # basse en croches, octave sur les contretemps
+        root, _ = chord_at(prog, t + .01, bar)
+        add(bassline, t, bass(midi(root - 12 + (12 if k % 2 else 0)), beat / 2 * .9))
+    # Intro : accords filtrés qui s'ouvrent peu à peu (on stagne…), puis tout s'ouvre au drop
+    tt = np.arange(N) / SR
+    intro = filt(chords, "lowpass", 900) * (.4 + .6 * np.clip(tt / T_DROP, 0, 1))
+    mix = np.where(tt < T_DROP, intro, chords * pump)
+    st(0, mix, .55, -.1)
+    st(0, np.roll(mix, int(.012 * SR)), .45, .1)
+    st(0, bassline * pump, .55)
+    for t, k in grid(bpm, 0, T_DROP, 2):   # kick étouffé dans l'intro
+        st(t, filt(kick(), "lowpass", 300), .45)
+    for t, k in grid(bpm, T_DROP, DURATION, .25):   # arpège pluck, à l'octave après « la solution »
         root, notes = chord_at(prog, t + .01, bar)
-        st(t, rhodes(notes, beat * 2), .45)
-        st(t, bass(midi(root - 24), beat * 1.8, 400), .7)
-    for t, k in grid(bpm, T_DROP, DURATION, .5):   # boom-bap avec swing
-        sw = .06 if k % 2 else 0
-        pat_k = [1, 0, 0, 0, 0, 1, 1, 0][k % 8]
-        if pat_k:
-            st(t, kick(110, 45, 7), .75)
-        if k % 8 in (2, 6):
-            st(t + sw, snare(180), .5)
-        st(t + sw, hat(), .07 if k % 2 == 0 else .04)
-    for t, k in grid(bpm, T_SOL, DURATION, .25):   # mélodie en marimba : on repart
-        root, notes = chord_at(prog, t, bar)
-        if [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0][k % 16]:
-            st(t, marimba(midi(notes[(k // 3) % len(notes)] + 12)), .22, .3 * np.sin(k))
-    common_transitions([41, 53, 64, 69, 72, 76])
+        tones = notes + [notes[0] + 12]
+        g = (.14 if k % 4 == 0 else .09) * (.5 if t_rise <= t < T_FINAL else 1)
+        st(t, pluck(midi(tones[[0, 1, 2, 1, 2, 3, 2, 1][k % 8]] + (12 if t >= T_SOL and (k // 8) % 2 else 0))), g, .45 * np.sin(k * .9))
+    for t, k in grid(bpm, T_DROP, DURATION, 1):   # batterie four-on-the-floor
+        if not t_rise <= t < T_FINAL:
+            st(t, kick(), .8)
+            if k % 2:
+                st(t, clap(), .42)
+            st(t + beat / 2, hat(True), .1, .2)
+        st(t, hat(), .07, -.3)
+        st(t + beat / 4, hat(), .045, .3)
+        st(t + beat * .75, hat(), .045, -.2)
+    for i in range(16):   # roulement + montée avant l'appel final
+        st(t_rise + (T_FINAL - t_rise) * i / 16, clap(), .12 + .3 * i / 16)
+    st(t_rise, riser(T_FINAL - t_rise), .35)
+    st(T_DROP - .45, riser(.45), .3)
+    st(T_DROP, impact(), .32)
+    st(T_SOL, impact(), .25)
+    st(T_FINAL, impact(), .36)
+    for nn in final_notes:   # accord final tenu
+        s = supersaw([nn], 3.4) * .9
+        st(T_FINAL, filt(s, "lowpass", 5000) * np.exp(-np.arange(len(s)) / SR * .9), .3)
+
+
+def style3():   # électro-pop de la vidéo longue, ré mineur : Dm – B♭ – F – C (on stagne… puis tout s'ouvre)
+    longue([(50, [62, 65, 69]), (46, [62, 65, 70]), (41, [60, 65, 69]), (48, [60, 64, 67])], (38, 50, 57, 62, 65, 69))
 
 
 def style4():   # trap cinématique, do mineur
@@ -372,29 +403,13 @@ def style4():   # trap cinématique, do mineur
     common_transitions([36, 48, 55, 60, 63, 67])
 
 
-def style5():   # pop acoustique, sol majeur
-    bpm = 104; beat = 60 / bpm; bar = 4 * beat
-    prog = [(55, [55, 59, 62, 67, 71]), (52, [52, 59, 64, 67, 71]), (48, [48, 55, 60, 64, 67]), (50, [50, 57, 62, 66, 69])]   # G Em C D
-    for t, k in grid(bpm, 0, T_DROP, 1):   # guitare hésitante : une note, on cherche…
+def style5():   # électro-pop de la vidéo longue, version lumineuse en sol majeur : G – D – Em – C
+    bpm = 120; beat = 60 / bpm; bar = 4 * beat
+    prog = [(43, [62, 67, 71]), (50, [62, 66, 69]), (52, [64, 67, 71]), (48, [64, 67, 72])]
+    longue(prog, (43, 55, 62, 67, 71, 74))
+    for t, k in grid(bpm, T_SOL, T_FINAL - bar / 2, .5):   # glockenspiel qui monte, étape par étape
         root, notes = chord_at(prog, t + .01, bar)
-        st(t, guitar(midi(notes[k % 3 + 2]), .8), .32, .2)
-    for t, k in grid(bpm, T_DROP, DURATION, .5):   # rythmique folk bas / haut
-        root, notes = chord_at(prog, t + .01, bar)
-        if k % 8 in (0, 3, 4, 6, 7):
-            strum(notes, t, .5 if k % 8 == 0 else .3, down=k % 2 == 0)
-        st(t, shaker(), .12 if k % 2 else .07)
-    for t, k in grid(bpm, T_DROP, DURATION, 1):
-        root, _ = chord_at(prog, t + .01, bar)
-        st(t, bass(midi(root - 12), beat * .9, 600), .55)
-        if k % 2 == 0:
-            st(t, kick(130, 52, 10), .6)
-        else:
-            st(t, clap(), .4)
-    for t, k in grid(bpm, T_SOL, DURATION, .5):   # glockenspiel qui monte, étape par étape
-        root, notes = chord_at(prog, t + .01, bar)
-        if k % 2 == 0:
-            st(t, marimba(midi(notes[(k // 2) % 5] + 24), .6), .14, .4 * np.sin(k))
-    common_transitions([43, 55, 62, 67, 71, 74])
+        st(t, marimba(midi(notes[k % 3] + 24 + (12 if k % 8 >= 6 else 0)), .5), .1, .4 * np.sin(k))
 
 
 {1: style1, 2: style2, 3: style3, 4: style4, 5: style5}[STYLE]()
