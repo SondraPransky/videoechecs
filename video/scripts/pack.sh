@@ -55,6 +55,7 @@ G="$PACK/videos/00-general"
 mkdir -p "$G"
 cp build/echecs-academie-presentation.mp4 "$G/presentation-longue-16x9.mp4"
 declinaisons build/echecs-academie-court.mp4 "$G" "presentation-courte" "Progresse|à ton rythme."
+bash scripts/vertical.sh   # 9:16 : vraie version verticale, remplace la version « 16:9 dans un cadre »
 cp build/echecs-academie-boucle.mp4 "$G/boucle-entete-site-muette-1920x1080.mp4"
 "$FFMPEG" -y -loglevel error -i build/echecs-academie-boucle.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -crf 24 -pix_fmt yuv420p -an -movflags +faststart "$G/boucle-entete-site-muette-1280x720.mp4"
 
@@ -66,7 +67,8 @@ cp build/poster.jpg "$PACK/images/00-general/affiche-video-1920x1080.jpg"
 for f in build/reseaux/*.jpg; do cp "$f" "$PACK/images/00-general/"; done
 
 # 4. Textes, puis archive
-cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md "$PACK/"
+python3 scripts/textes-alternatifs.py >/dev/null
+cp pack/LISEZ-MOI.md pack/TEXTES-PUBLICATIONS.md pack/TEXTES-ALTERNATIFS.md "$PACK/"
 rm -rf "$PACK/_cadres"
 rm -f build/pack-reseaux-echecs-com.zip
 (cd build && zip -qr pack-reseaux-echecs-com.zip pack -x 'pack/_captures/*')

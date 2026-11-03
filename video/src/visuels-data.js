@@ -59,7 +59,7 @@ window.VISUELS = [
   { id: "20-coach-gata-kamsky", tpl: "coach", theme: "soleil", k: "Nos coachs", t: "Gata Kamsky", e: "Grand Maître.", s: "En masterclass sur echecs.com.", photo: "auth-kamsky", titre: "GMI" },
 
   // ---- Humeurs de la mascotte
-  { id: "21-humeur-serie", tpl: "mascotte", theme: "nuit", k: "Ta série", t: "7 jours de suite.", e: "Ne lâche rien !", pose: "sprint" },
+  { id: "21-humeur-serie", tpl: "mascotte", theme: "nuit", k: "Ta série", t: "7 jours de suite.", e: "Ne lâche rien !", pose: "serie-de-jours" },
   { id: "22-humeur-lecon-terminee", tpl: "mascotte", theme: "soleil", k: "Bravo", t: "Leçon terminée.", e: "Au tour de la suivante !", pose: "reverence" },
   { id: "23-humeur-rate", tpl: "mascotte", theme: "ciel", k: "Pas grave", t: "Raté ?", e: "C'est comme ça qu'on apprend.", pose: "parapluie" },
   { id: "24-humeur-dodo", tpl: "mascotte", theme: "nuit", k: "Ce soir", t: "Une partie avant de dormir ?", e: "Juste une.", pose: "sieste" },

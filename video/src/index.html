@@ -313,6 +313,12 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 /* Scène 8 : fin */
 .cta { display: inline-flex; align-items: center; gap: 20px; padding: 30px 56px; border-radius: 999px; background: var(--yellow); color: #111; font: 800 40px/1 "Manrope"; box-shadow: 0 20px 60px rgba(250,227,97,.25); }
 .url { font: 700 34px/1 "Manrope"; color: var(--blue); letter-spacing: .02em; }
+
+/* Format vertical (?fmt=v, 1080×1920) : chaque scène est découpée en groupes déplacés et mis à l'échelle (voir VGROUPS) */
+html.v, html.v body { width: 1080px; height: 1920px; }
+html.v #progress { width: 100%; }
+html.v #grain { width: 100%; height: 100%; }
+.vg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
 </style>
 <link rel="stylesheet" href="typo.css">
 <script src="typo.js"></script>
@@ -571,7 +577,6 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
       <div class="cta s8-c" style="margin-top:60px">Commencer maintenant
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </div>
-      <div class="url s8-u" style="margin-top:36px">echecs.com/academie</div>
     </div>
     <div class="pose" id="p8" data-pose="invite" style="left:1300px;top:560px;width:343px;height:420px"></div>
     <div id="sparks8" style="position:absolute;left:960px;top:735px"></div>
@@ -593,6 +598,45 @@ const P = "../assets/pieces/";
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const FILES = "abcdefgh";
+
+// ---------- Format vertical (?fmt=v) ----------
+// Pour chaque scène : [éléments, rectangle source x,y,l,h dans la mise en page 1920×1080, destination x,y,largeur en 1080×1920]
+const VERT = new URLSearchParams(location.search).get("fmt") === "v";
+const VGROUPS = {
+  s1: [["div:not([id]):not([class])", [150, 140, 900, 360], [80, 330, 920]],
+       ["#b1,#m1", [1100, 70, 780, 560], [130, 790, 820]],
+       ["#path,#trav", [150, 620, 1620, 260], [50, 1395, 980]]],
+  prog: [["div:not([id]):not([class])", [150, 170, 800, 260], [80, 300, 880]],
+         ["#elo,#sparksPg", [960, 150, 810, 560], [80, 620, 920]],
+         ["#vcard", [150, 640, 700, 240], [80, 1290, 700]],
+         ["#ppg", [830, 700, 290, 355], [810, 1250, 230]]],
+  s3: [["#s3-count", [150, 180, 1000, 380], [80, 300, 920]],
+       ["#cards", [150, 560, 792, 872], [164, 700, 752]],
+       ["#p3", [1440, 60, 380, 465], [830, 1330, 190]]],
+  s4: [["div:not([id]):not([class])", [150, 110, 700, 230], [80, 290, 840]],
+       [".s4-l", [150, 420, 760, 110], [80, 640, 840]],
+       ["#live", [1000, 90, 790, 520], [110, 790, 860]],
+       [".coach", [150, 690, 1180, 300], [80, 1375, 650]],
+       ["#p4", [1450, 640, 340, 416], [800, 1345, 160]]],
+  forum: [["div:not([id]):not([class])", [150, 200, 720, 470], [80, 280, 760]],
+          ["#pfo", [150, 690, 300, 367], [860, 470, 170]],
+          ["#fo-win,.fbubble", [860, 100, 1000, 900], [100, 790, 880]]],
+  s8: [["div:not([id]):not([class]),#sparks8,#conf8", [490, 300, 940, 560], [70, 560, 940]],
+       ["#p8", [1300, 560, 343, 420], [410, 1180, 290]]],
+};
+if (VERT) {
+  document.documentElement.classList.add("v");
+  for (const [id, groups] of Object.entries(VGROUPS)) {
+    const sc = document.getElementById(id);
+    const kids = [...sc.children];
+    const plan = groups.map(([sel, src, dst]) => [kids.filter(k => k.matches(sel)), src, dst]);   // tout repérer avant de déplacer
+    for (const [els, [sx, sy, sw], [dx, dy, dw]] of plan) {
+      const g = document.createElement("div"), k = dw / sw;
+      g.className = "vg"; g.style.transform = `translate(${dx - sx * k}px, ${dy - sy * k}px) scale(${k})`;
+      els.forEach(e => g.appendChild(e)); sc.appendChild(g);
+    }
+  }
+}
 
 // ---------- Échiquier ----------
 function sqPos(sq) { return { left: FILES.indexOf(sq[0]) * 12.5 + "%", top: (8 - +sq[1]) * 12.5 + "%" }; }
@@ -726,8 +770,8 @@ const cards = [
 cards.forEach((c, i) => {
   const d = document.createElement("div");
   d.className = "card";
-  d.style.left = 150 + i * 412 + "px";
-  d.style.top = "560px";
+  d.style.left = 150 + (VERT ? i % 2 : i) * 412 + "px";   // en vertical : grille 2 × 2
+  d.style.top = (VERT ? 560 + Math.floor(i / 2) * 452 : 560) + "px";
   d.innerHTML = `<div class="ic" style="background:${c.c}">${ICON[c.ic]}</div><h4>${c.t}</h4><div class="vis">${c.vis}</div>`;
   $("#cards").appendChild(d);
 });
@@ -908,7 +952,7 @@ if (S.s8) {
 const HOOK = +((new URLSearchParams(location.search).get("edition") || "").match(/accroche-(\d)/) || [0, 1])[1];
 const ACCROCHES = {
   1: { t: "Tu enchaînes les parties,", e: "mais ton classement ne bouge pas ?", pose: "gratte-tete", vis: "elo" },
-  2: { t: "Tu joues beaucoup,", e: "mais tu n'as pas l'impression de progresser ?", pose: "sprint", vis: "parties" },
+  2: { t: "Tu joues beaucoup,", e: "mais tu n'as pas l'impression de progresser ?", pose: "course", vis: "parties" },
   3: { t: "Tu as l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
   4: { t: "Tu regardes des vidéos d'échecs,", e: "mais tu ne progresses pas ?", pose: "menton", vis: "videos" },
   5: { t: "Tu veux progresser aux échecs,", e: "mais tu ne sais pas par où commencer ?", pose: "haussement", vis: "commencer" },
@@ -1325,7 +1369,6 @@ scene("s8", ({ st, from, at, dur }) => {
   from(".s8-t", .9, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7 });
   sfx(st, "pop", 1.65, { p: .8 }); sfx(st, "shimmer", 1.9, { g: .6 });
   from(".s8-c", 1.6, { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: "back.out(1.6)" });
-  from(".s8-u", 2.1, { opacity: 0 }, { opacity: 1, duration: .6 });
   at(".s8-c", 2.6, { scale: 1.04, duration: .5, ease: "sine.inOut", yoyo: true, repeat: 5 });
   at("#glow2", 0, { scale: 1.3, duration: 2.5, ease: "sine.out" });
   burst(st, conf8, .15, 2.2);

@@ -1,6 +1,8 @@
 # Textes de publication — echecs.com Académie
 
-Textes prêts à copier, à adapter au ton de chaque réseau. Le lien à mettre partout : **echecs.com/academie**.
+Textes prêts à copier, à adapter au ton de chaque réseau. Le lien : **echecs.com/academie**, toujours avec ses repères de suivi
+(voir « Liens de suivi » en bas) pour savoir quel réseau et quelle pub amènent des inscrits.
+Les textes alternatifs des images (accessibilité) sont dans **TEXTES-ALTERNATIFS.md**.
 Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et ajouter une phrase sur la pédagogie.
 
 **Hashtags de base** : #échecs #chess #echecscom #apprendreleséchecs #jeudéchecs
@@ -78,11 +80,11 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 ## Publicités de 15 s (`00-publicites/`)
 
 Texte principal, à adapter à chaque question :
-> 1 · Tu enchaînes les parties sans que ton Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 echecs.com/academie
-> 2 · Beaucoup de parties, peu de progrès ? Analyse tes parties et corrige tes points faibles avec +2 000 exercices. 👉 echecs.com/academie
-> 3 · Tu stagnes ? Passe un cap avec les masterclasses en direct de maîtres et grands maîtres. 👉 echecs.com/academie
-> 4 · Des heures de vidéos, toujours le même classement ? Avec l'académie, chaque leçon se termine sur l'échiquier. 👉 echecs.com/academie
-> 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 echecs.com/academie
+> 1 · Tu enchaînes les parties sans que ton Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 lien tagué (voir Liens de suivi)
+> 2 · Beaucoup de parties, peu de progrès ? Analyse tes parties et corrige tes points faibles avec +2 000 exercices. 👉 lien tagué (voir Liens de suivi)
+> 3 · Tu stagnes ? Passe un cap avec les masterclasses en direct de maîtres et grands maîtres. 👉 lien tagué (voir Liens de suivi)
+> 4 · Des heures de vidéos, toujours le même classement ? Avec l'académie, chaque leçon se termine sur l'échiquier. 👉 lien tagué (voir Liens de suivi)
+> 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 
 Titre (Facebook / Instagram) : **Découvre l'Académie Europe Échecs** · Bouton : **En savoir plus** ou **S'inscrire**
 
@@ -119,3 +121,53 @@ Titre (Facebook / Instagram) : **Découvre l'Académie Europe Échecs** · Bouto
 | Dimanche | Humeur de la mascotte / résultats du tournoi | Story |
 
 Une fois par mois : la sortie du nouveau numéro de la revue.
+
+---
+
+## Liens de suivi (UTM)
+
+Le même lien, avec trois ou quatre repères ajoutés à la fin. Ils ne changent rien pour le visiteur, mais l'outil de statistiques du site
+(Google Analytics ou autre) range chaque visite et chaque inscription par réseau, par campagne et par visuel.
+
+| Repère | Ce qu'il dit | Valeurs à utiliser |
+|---|---|---|
+| `utm_source` | le réseau | `instagram`, `facebook`, `tiktok`, `linkedin`, `x`, `youtube`, `pinterest`, `newsletter` |
+| `utm_medium` | le type de lien | `social` (publication), `bio` (lien de la bio), `story`, `paid_social` (publicité payante), `email` |
+| `utm_campaign` | l'opération | `lancement-academie`, `pubs-15s`, `pubs-31s`, `probleme-du-jour`, `nos-coachs`… |
+| `utm_content` | le visuel ou la pub | le nom du dossier ou du fichier : `01-progression`, `pub-3-story`, `14-probleme-mat-en-1`… |
+
+Règles : tout en minuscules, sans accents ni espaces (des tirets à la place), et toujours les mêmes mots, sinon les statistiques se dispersent.
+
+**Liens prêts à copier**
+
+| Où | Lien |
+|---|---|
+| Bio Instagram | `https://echecs.com/academie?utm_source=instagram&utm_medium=bio&utm_campaign=lancement-academie` |
+| Bio TikTok | `https://echecs.com/academie?utm_source=tiktok&utm_medium=bio&utm_campaign=lancement-academie` |
+| Page Facebook (bouton) | `https://echecs.com/academie?utm_source=facebook&utm_medium=social&utm_campaign=lancement-academie` |
+| Page LinkedIn | `https://echecs.com/academie?utm_source=linkedin&utm_medium=social&utm_campaign=lancement-academie` |
+| Profil X | `https://echecs.com/academie?utm_source=x&utm_medium=social&utm_campaign=lancement-academie` |
+| Chaîne YouTube, description des vidéos | `https://echecs.com/academie?utm_source=youtube&utm_medium=social&utm_campaign=lancement-academie` |
+| Publication d'un visuel (exemple : progression sur LinkedIn) | `https://echecs.com/academie?utm_source=linkedin&utm_medium=social&utm_campaign=lancement-academie&utm_content=01-progression` |
+| Story avec sticker lien (exemple : problème du jour) | `https://echecs.com/academie?utm_source=instagram&utm_medium=story&utm_campaign=probleme-du-jour&utm_content=14-probleme-mat-en-1` |
+| Newsletter | `https://echecs.com/academie?utm_source=newsletter&utm_medium=email&utm_campaign=lancement-academie` |
+
+**Publicités de 15 s** : un lien par pub et par format, pour comparer les 5 questions.
+
+| Pub | Lien (exemple en story Instagram ; changer `utm_source` et le format à la fin selon la diffusion) |
+|---|---|
+| 1 · classement | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-1-story` |
+| 2 · parties | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-2-story` |
+| 3 · stagner | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-3-story` |
+| 4 · vidéos | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-4-story` |
+| 5 · commencer | `https://echecs.com/academie?utm_source=instagram&utm_medium=paid_social&utm_campaign=pubs-15s&utm_content=pub-5-story` |
+
+Dans le gestionnaire de publicités Meta (Facebook, Instagram), plus simple : laisser l'URL `https://echecs.com/academie` et remplir le champ
+« Paramètres d'URL » de chaque pub avec
+`utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}`.
+Meta remplit tout seul le réseau, la campagne et le nom de la pub (nommer les pubs `pub-1-story`, `pub-2-feed`…).
+TikTok Ads propose le même champ, avec `__CAMPAIGN_NAME__` et `__AID_NAME__`.
+
+Pour lire les résultats : dans Google Analytics, rapport « Acquisition de trafic », colonnes « Source / support » et « Campagne »,
+avec les inscriptions comme conversion.
+

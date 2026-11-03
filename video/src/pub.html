@@ -241,7 +241,6 @@ body.carre #pc { left: 840px; top: 790px; width: 180px; height: 220px; }
     <div class="a center" id="lg2w"><img id="lg2" src="../../assets/brand/logo-echecs-com.png" style="filter:var(--logo)"></div>
     <div class="a big center ct" id="ct">L'Académie<br><span class="e">Europe Échecs</span></div>
     <div class="a center cb"><span class="btn" id="btn">Commencer maintenant <svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-    <div class="a center url cu" id="url">echecs.com/academie</div>
     <div class="pose" id="pc" data-pose="invite"></div>
     <div class="confetti" id="confC"></div>
   </section>
@@ -289,7 +288,7 @@ const ADS = {
     cap: "Un programme par niveau, <b>de l'initiation à 2000+</b>.",
   },
   2: {
-    q: ["Tu joues beaucoup,", "mais tu n'as pas l'impression de progresser ?"], pose: "sprint",
+    q: ["Tu joues beaucoup,", "mais tu n'as pas l'impression de progresser ?"], pose: "course",
     pv: `<small>Parties jouées ce mois-ci</small><div class="n" id="pvn">0</div>
       <div class="games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="pg"><b>${r}</b></div>`).join("")}</div>`,
     sk: "Le déclic", st: ["Joue moins,", "comprends plus."], ps: "loupe",
@@ -524,7 +523,6 @@ from("#lg2", C0, { scale: 1.12, filter: "blur(10px) " + (THEME === "soleil" ? "b
 from("#ct", C0 + .5, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .6 });
 from("#btn", C0 + 1, { opacity: 0, y: 40, scale: .85 }, { opacity: 1, y: 0, scale: 1, duration: .6, ease: "back.out(1.7)" });
 at("#btn", C0 + 1.7, { scale: 1.05, duration: .4, ease: "sine.inOut", yoyo: true, repeat: 3 });
-from("#url", C0 + 1.4, { opacity: 0 }, { opacity: 1, duration: .5 });
 from("#pc", C0 + 1.3, { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: "back.out(1.5)" });
 pose("#pc", C0 + 1.3);
 burst(tl, confC, C0 + .1, 2);

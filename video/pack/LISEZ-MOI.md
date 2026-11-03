@@ -18,17 +18,22 @@ images/
   00-general/        affiche de la vidéo et visuels généraux
   01-progression/ … 28-tournois-chaque-semaine/   un dossier par visuel, dans 6 formats
 apercu.html          planche de toutes les images
-TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type
+TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
+TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)
 ```
 
 ## Quel format pour quel réseau
 
+Sur mobile, privilégier les vidéos pensées pour le vertical : les pubs de 15 s et la présentation courte 9:16 sont composées
+écran par écran pour le téléphone (textes lisibles, rien sous les boutons d'Instagram ou de TikTok). Les versions 9:16, 4:5 et 1:1
+des vidéos par thème reprennent la vidéo 16:9 dans un cadre : à garder pour compléter.
+
 | Réseau | Vidéo | Image |
 |---|---|---|
 | Instagram — feed | `*-4x5-feed-instagram-facebook.mp4` (le plus visible) ou `*-1x1-posts.mp4` | `*-portrait-1080x1350.jpg` ou `*-carre-1080x1080.jpg` |
-| Instagram — Reels, Stories | `*-9x16-reels-tiktok-stories.mp4` | `*-story-1080x1920.jpg` |
+| Instagram — Reels, Stories | d'abord les pubs `00-publicites/pub-*-story-9x16.mp4` et `00-general/presentation-courte-9x16-…` (conçues pour le vertical) ; les `*-9x16-…` des thèmes en complément | `*-story-1080x1920.jpg` |
 | Instagram — stories à la une | — | `00-identite/a-la-une-*.jpg` |
-| TikTok | `*-9x16-reels-tiktok-stories.mp4` | `*-story-1080x1920.jpg` (carrousel photo) |
+| TikTok | idem : pubs 15 s `*-story-9x16.mp4` et présentation courte 9:16 en priorité | `*-story-1080x1920.jpg` (carrousel photo) |
 | Facebook — page | `*-4x5-feed-instagram-facebook.mp4` ou `*-1x1-posts.mp4` | `*-portrait-1080x1350.jpg`, `*-lien-1200x630.jpg` pour un lien |
 | Facebook — couverture | — | `00-identite/banniere-facebook-1640x624.jpg` |
 | X (Twitter) | `*-16x9-x-youtube-linkedin.mp4` | `*-x-1600x900.jpg` |
@@ -79,7 +84,8 @@ Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons l
 
 ## Bon à savoir
 
-- Toutes les vidéos se terminent par l'écran « Commencer maintenant · echecs.com/academie ».
+- Toutes les vidéos se terminent par l'écran « Commencer maintenant ». L'adresse n'est pas écrite sur les visuels : le logo echecs.com suffit,
+  et le lien (tagué, voir TEXTES-PUBLICATIONS.md) va dans la légende, la bio ou le bouton de la pub.
 - Musique et bruitages sont générés par code : libres de droits, utilisables partout.
 - Sur TikTok et les Reels, l'interface de l'application recouvre le bas et le côté droit : le titre et le logo sont en haut exprès.
 - Le pack se régénère après toute modification : `bash scripts/pack.sh` dans le dossier `video/` (voir le README).
