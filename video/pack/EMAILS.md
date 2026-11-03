@@ -40,6 +40,9 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
   Les autres e-mails ont une image tirée des visuels du pack (sans leur logo ni leur bouton, pour ne pas faire doublon).
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
 - **Largeur 600 px**, s'adapte au téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
+- **Composants** : chiffres clés en tuiles (bilans), bloc calendrier pour les événements (masterclass, tournoi), reçu avec total (paiements),
+  podium (résultats de tournoi), cartes de prix avec l'ancien prix barré (offres), comparatif Gratuit / Abonné.
+- **Aperçus** : remplis avec des exemples réalistes (Léa, 18 nov., Gata Kamsky…) ; les fichiers HTML livrés gardent les variables.
 - **Pied de page** : liens vers l'Académie, les masterclasses, les tournois, le forum et les réseaux, puis la mention légale et l'adresse.
 
 ## Règles d'envoi
@@ -238,5 +241,9 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 | `[MOIS_EXPIRATION]` | |
 | `[NOUVELLE_DATE]` | |
 | `[TITRE_SUJET]` | |
+| `[JOUR]` | jour de l'événement en chiffres, ex. « 18 » (bloc calendrier) |
+| `[MOIS_COURT]` | mois abrégé, ex. « nov. » (bloc calendrier) |
+| `[NOUVEAU_JOUR]` | nouveau jour (masterclass déplacée) |
+| `[NOUVEAU_MOIS_COURT]` | nouveau mois abrégé (masterclass déplacée) |
 
 Les variables non décrites portent un nom explicite (dates, nombres, noms de coach, de tournoi, de cours…).

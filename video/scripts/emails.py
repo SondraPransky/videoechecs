@@ -30,7 +30,6 @@ IMG = {
     "bienvenue": PACK / "images/30-bienvenue/30-bienvenue-lien-1200x630.jpg",
     "objectif": PACK / "images/33-objectif-atteint/33-objectif-atteint-lien-1200x630.jpg",
     "oups": PACK / "images/37-oups/37-oups-lien-1200x630.jpg",
-    "kamsky": PACK / "images/20-coach-gata-kamsky/20-coach-gata-kamsky-lien-1200x630.jpg",
     "puzzle": PACK / "images/14-probleme-mat-en-1/14-probleme-mat-en-1-lien-1200x630.jpg",
 }
 from PIL import Image
@@ -71,6 +70,43 @@ def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
               f'<td align="center" style="padding:13px 8px;background:{C["fond"]};font-family:{SANS};font-size:14px;color:{C["gris"]};{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(g)}</td>'
               f'<td align="center" style="padding:13px 8px;background:#fff6c2;font-family:{SANS};font-weight:800;font-size:14px;color:#111;{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(a)}</td></tr>')
     return h + "</table>"
+def tuiles(items):   # chiffres clés : grandes valeurs en Fraunces, sur des tuiles crème
+    w = 100 // len(items)
+    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate;border-spacing:8px 0"><tr>' + "".join(
+        f'<td width="{w}%" valign="top" style="background:{C["fond"]};border-radius:14px;padding:18px 12px 16px;text-align:center">'
+        f'<div style="font-family:{SERIF};font-weight:900;font-size:30px;line-height:1.05;color:{C["texte"]}">{v}</div>'
+        f'<div style="margin-top:8px;font-family:{SANS};font-weight:700;font-size:12px;line-height:1.35;color:{C["gris"]}">{k}</div></td>' for v, k in items) + "</tr></table>")
+def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement : bloc calendrier nuit + détails
+    det = "".join(f'<div style="margin-top:7px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><b style="color:{C["texte"]};font-weight:800">{k}</b>&nbsp;&nbsp;{v}</div>' for k, v in lignes)
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate"><tr>'
+            f'<td width="88" valign="middle" align="center" style="background:{C["nuit"]};border-radius:14px 0 0 14px;padding:16px 6px">'
+            f'<div style="font-family:{SERIF};font-weight:900;font-size:36px;line-height:1;color:{C["jaune"]}">{jour}</div>'
+            f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f4f1ea">{mois}</div></td>'
+            f'<td valign="middle" style="background:{C["fond"]};border-radius:0 14px 14px 0;padding:16px 18px">'
+            f'<div style="font-family:{SERIF};font-weight:900;font-size:19px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
+def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total en gras
+    rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:14px;color:{C["gris"]}">{k}</td><td align="right" style="padding:9px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]}">{v}</td></tr>' for k, v in lignes)
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border:1px solid {C["filet"]};border-radius:14px"><tr><td style="padding:16px 20px">'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
+            f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
+            f'<tr><td style="font-family:{SANS};font-weight:800;font-size:15px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:26px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
+def podium(p1, p2, p3):
+    col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:13px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
+        f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:900;font-size:30px;color:#111">{rang}</div></td>')
+    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0 6px"><tr>'
+            + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
+def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
+    b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
+    return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:18px 16px">{b}'
+            f'<div style="font-family:{SANS};font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
+            f'<div style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:34px;line-height:1;color:{C["texte"]}">{prix}<span style="font-family:{SANS};font-weight:700;font-size:14px;color:{C["gris"]}">&nbsp;{unite}</span></div>'
+            f'<div style="margin-top:6px;font-family:{SANS};font-size:13px;color:{C["gris"]}"><s>{barre}</s></div>'
+            f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:13px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
+def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise en avant
+    return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate;border-spacing:8px 0"><tr>'
+            + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
+            + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
+            + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:13px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
 def carte(img, titre, texte, lien, cta):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
 <tr><td><img src="{{IMG}}/{img}.jpg" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></td></tr>
@@ -123,7 +159,7 @@ mail(id="02-bienvenue-compte-gratuit", cat="Compte", quand="Juste après la conf
      corps=[para("Bienvenue dans la communauté echecs.com ! Sans attendre et sans payer, tu as déjà accès à :"),
             liste(["<b>6 leçons</b> de l'Académie, pour découvrir la méthode", "<b>Le puzzle du jour</b>, un nouveau problème chaque matin", "<b>Le forum</b>, pour poser tes questions et partager tes parties"]),
             bouton("Ma première leçon", L("PREMIERE_LECON")),
-            encadre(f"Envie d'aller plus loin ? Pour le lancement, l'Académie complète est à {OFFRE} : +200 leçons, +2 000 exercices, les masterclasses et la revue en PGN.")])
+            offre("Envie d'aller plus loin ? L'Académie complète : +200 leçons, +2 000 exercices, les masterclasses et la revue en PGN.")])
 mail(id="03-mot-de-passe", cat="Compte", marketing=False, quand="Sur demande de réinitialisation (transactionnel)",
      objet="Réinitialise ton mot de passe", pre="Ce lien est valable 1 heure.", sur="Ton compte", titre="Nouveau mot de passe",
      corps=[para("[PRENOM], tu as demandé à changer ton mot de passe. Clique ci-dessous pour en choisir un nouveau."), bouton("Choisir un nouveau mot de passe", L("MOT_DE_PASSE")),
@@ -138,18 +174,18 @@ mail(id="05-gratuit-j7-offre", cat="Compte gratuit → abonnement", quand="J+7 a
      objet="L'Académie complète à 14,90 €/mois", pre="Prix de lancement, sans engagement en mensuel.", sur="Offre de lancement", titre="Passe à l'Académie complète.",
      corps=[para("Tu as goûté à la méthode, [PRENOM]. Avec l'abonnement, tu débloques tout :"),
             liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéo Europe Échecs et la revue en PGN", "Tes parties analysées, les tournois en ligne"]),
-            encadre(f"Prix de lancement : {OFFRE}. Sans engagement en mensuel, et ton tarif est garanti tant que tu restes abonné."), bouton("Je m'abonne", L("ABONNEMENT"))])
+            offre(), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours", img="exercices", alt="Les exercices de l'Académie",
      objet="Tu hésites encore, [PRENOM] ?", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
      corps=[para("Tu utilises déjà le puzzle du jour et les leçons offertes. Voici ce que l'abonnement ajoute :"),
             comparatif([("Leçons", "6", "+200"), ("Exercices", "puzzle du jour", "+2 000"), ("Masterclasses", False, True), ("Revue en PGN", False, True), ("Tes parties analysées", False, True), ("Forum", True, True)]),
-            encadre(f"Toujours au prix de lancement : {OFFRE}. Sans engagement en mensuel : tu arrêtes quand tu veux."), bouton("Voir les formules", L("ABONNEMENT"))])
+            offre("Toujours au prix de lancement :"), bouton("Choisir ma formule", L("ABONNEMENT"))])
 
 # ---------- 3. Abonnement ----------
 mail(id="07-confirmation-abonnement", cat="Abonnement", marketing=False, quand="Au paiement du premier abonnement (transactionnel)", img="objectif", alt="Objectif atteint",
      objet="Bienvenue dans l'Académie, [PRENOM] !", pre="Ton abonnement est actif : voici ton récapitulatif.", sur="Abonnement confirmé", titre="Tu fais partie de l'Académie.",
      corps=[para("Merci pour ta confiance ! Ton abonnement est actif dès maintenant."),
-            infos([("Formule", "[FORMULE]"), ("Prix", "[PRIX]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]"), ("Moyen de paiement", "[MOYEN_PAIEMENT]")]),
+            recu([("Formule", "[FORMULE]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]"), ("Moyen de paiement", "[MOYEN_PAIEMENT]")], "Payé aujourd'hui", "[PRIX]"),
             bouton("Choisir mon parcours", L("PARCOURS")), para('<span style="color:#6b6b66;font-size:14px">Ta facture est disponible dans <a href="[LIEN_FACTURES]" style="color:#1f5fa8">ton espace</a>.</span>')])
 mail(id="08-paiement-refuse", cat="Abonnement", marketing=False, quand="Échec d'un prélèvement (transactionnel), relance à J+3 si non réglé",
      objet="Ton paiement n'est pas passé", pre="Mets à jour ta carte pour garder l'accès à l'Académie.", sur="Paiement", titre="Ton paiement n'est pas passé.",
@@ -158,7 +194,7 @@ mail(id="08-paiement-refuse", cat="Abonnement", marketing=False, quand="Échec d
             para('<span style="color:#6b6b66;font-size:14px">Sans régularisation, ton accès sera suspendu le [DATE_SUSPENSION]. Ta progression reste enregistrée.</span>')])
 mail(id="09-paiement-recu", cat="Abonnement", marketing=False, quand="À chaque renouvellement réussi (transactionnel)",
      objet="Ton reçu echecs.com · [MOIS]", pre="Merci ! Ton abonnement continue.", sur="Reçu", titre="Merci, [PRENOM] !",
-     corps=[para("Ton abonnement à l'Académie est renouvelé."), infos([("Formule", "[FORMULE]"), ("Montant", "[PRIX]"), ("Date", "[DATE]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")]),
+     corps=[para("Ton abonnement à l'Académie est renouvelé."), recu([("Formule", "[FORMULE]"), ("Date", "[DATE]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")], "Montant", "[PRIX]"),
             bouton("Voir ma facture", L("FACTURES"))])
 
 # ---------- 4. Démarrage de l'abonné ----------
@@ -183,7 +219,7 @@ mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+1
 # ---------- 5. Engagement ----------
 mail(id="14-bilan-mensuel", cat="Engagement", quand="Le 1er de chaque mois, si au moins une activité dans le mois", img="progression", alt="La mascotte fête une victoire",
      objet="[PRENOM], ton mois d'échecs en chiffres", pre="[NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ton bilan de [MOIS]", titre="Ton mois en chiffres.",
-     corps=[infos([("Leçons terminées", "[NB_LECONS]"), ("Exercices réussis", "[NB_EXERCICES] ([TAUX_REUSSITE] %)"), ("Meilleure série", "[SERIE_MAX] jours")]),
+     corps=[tuiles([("[NB_LECONS]", "leçons terminées"), ("[NB_EXERCICES]", "exercices réussis ([TAUX_REUSSITE] %)"), ("[SERIE_MAX]&nbsp;j", "meilleure série")]),
             para("Ton thème le plus travaillé : <b>[THEME_FORT]</b>. À renforcer : <b>[THEME_FAIBLE]</b>."), bouton("Travailler [THEME_FAIBLE]", L("THEME_FAIBLE"))])
 mail(id="15-objectif-atteint", cat="Engagement", quand="Quand l'abonné valide un module ou un parcours", img="objectif", alt="Objectif atteint",
      objet="Module validé : [MODULE] 🎉", pre="Une étape de plus vers ton objectif.", sur="Bravo", titre="Module validé !",
@@ -201,10 +237,10 @@ mail(id="18-inactif-30-jours", cat="Réactivation", quand="Abonné sans connexio
             para("Ton abonnement est toujours actif : profites-en !"), bouton("Revenir sur l'Académie", L("ACADEMIE"))])
 
 # ---------- 6. Événements ----------
-mail(id="19-annonce-masterclass", cat="Événements", quand="Dès qu'une masterclass est programmée (au moins 7 jours avant)", img="kamsky", alt="Portrait du coach",
+mail(id="19-annonce-masterclass", cat="Événements", quand="Dès qu'une masterclass est programmée (au moins 7 jours avant)", img="masterclasses", alt="Portrait du coach",
      objet="Masterclass : [THEME] avec [COACH]", pre="En direct le [DATE] à [HEURE]. Pose tes questions !", sur="Nouvelle masterclass", titre="[THEME]",
      corps=[para("<b>[COACH]</b> ([TITRE_COACH]) te donne rendez-vous en direct pour une masterclass sur <b>[THEME]</b>."),
-            infos([("Date", "[DATE]"), ("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]")]),
+            billet("[THEME]", [("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]"), ("Avec", "[COACH]")]),
             para("[DESCRIPTION_MASTERCLASS]"), bouton("Voir la masterclass", L("MASTERCLASS")),
             para('<span style="color:#6b6b66;font-size:14px">Tu ne peux pas être là ? Le replay sera disponible dans l\'Académie.</span>')])
 mail(id="20-rappel-masterclass", cat="Événements", quand="La veille, puis 1 heure avant (même modèle)", img="masterclasses", alt="Masterclass en direct",
@@ -217,15 +253,15 @@ mail(id="21-replay-masterclass", cat="Événements", quand="Dès que le replay e
 mail(id="22-nouveau-cours", cat="Événements", quand="À la mise en ligne d'un nouveau cours ou d'un replay de cours", img="videos", alt="Nouveau cours en ligne",
      objet="Nouveau cours : [TITRE_COURS]", pre="[NB_LECONS_COURS] leçons, niveau [NIVEAU].", sur="Nouveau dans l'Académie", titre="[TITRE_COURS]",
      corps=[para("Un nouveau cours vient d'arriver dans l'Académie : <b>[TITRE_COURS]</b>, par [AUTEUR]."),
-            infos([("Leçons", "[NB_LECONS_COURS]"), ("Niveau", "[NIVEAU]"), ("Durée totale", "[DUREE]")]), para("[DESCRIPTION_COURS]"), bouton("Commencer le cours", L("COURS"))])
+            tuiles([("[NB_LECONS_COURS]", "leçons"), ("[NIVEAU]", "niveau"), ("[DUREE]", "au total")]), para("[DESCRIPTION_COURS]"), bouton("Commencer le cours", L("COURS"))])
 mail(id="23-annonce-tournoi", cat="Événements", quand="5 jours avant un tournoi, rappel le jour J (même modèle)", img="tournois", alt="Tournoi en ligne",
      objet="Tournoi : [NOM_TOURNOI] le [DATE]", pre="Cadence [CADENCE], ouvert à tous les niveaux.", sur="Tournoi en ligne", titre="[NOM_TOURNOI]",
-     corps=[para("Mesure-toi aux autres membres de l'Académie !"), infos([("Date", "[DATE]"), ("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "Ouvert à tous")]),
+     corps=[para("Mesure-toi aux autres membres de l'Académie !"), billet("[NOM_TOURNOI]", [("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
             bouton("Je m'inscris", L("INSCRIPTION_TOURNOI"))])
 mail(id="24-resultats-tournoi", cat="Événements", quand="Le lendemain du tournoi, aux participants", img="tournois", alt="Résultats du tournoi",
      objet="Résultats : [NOM_TOURNOI]", pre="Tu termines [PLACE]e sur [NB_JOUEURS] : bravo !", sur="Résultats", titre="Tu termines [PLACE]<sup>e</sup> !",
-     corps=[para("[PRENOM], merci d'avoir joué <b>[NOM_TOURNOI]</b>. Tu as marqué <b>[POINTS] points</b> sur [NB_RONDES]."),
-            infos([("1er", "[VAINQUEUR]"), ("2e", "[DEUXIEME]"), ("3e", "[TROISIEME]")]), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
+     corps=[para("[PRENOM], merci d'avoir joué <b>[NOM_TOURNOI]</b>. Tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
+            podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
             bouton("Analyser mes parties", L("MES_PARTIES"))])
 mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque numéro", img="revue", alt="La revue Europe Échecs",
      objet="Le n°[NUMERO] d'Europe Échecs est sorti", pre="Toutes les parties en PGN interactif dans l'Académie.", sur="La revue", titre="Le n°[NUMERO] est là.",
@@ -246,12 +282,12 @@ mail(id="26-lettre-plusieurs-nouvelles", cat="Lettre d'information", quand="Tout
 mail(id="27-renouvellement-annuel-j30", cat="Fin d'abonnement", marketing=False, quand="30 jours avant le renouvellement d'un abonnement annuel (obligatoire)",
      objet="Ton abonnement annuel se renouvelle le [DATE_RENOUVELLEMENT]", pre="Rien à faire si tu continues : voici le récapitulatif.", sur="Renouvellement", titre="Ton année d'Académie se termine bientôt.",
      corps=[para("[PRENOM], ton abonnement annuel se renouvellera automatiquement le <b>[DATE_RENOUVELLEMENT]</b> pour <b>[PRIX]</b>."),
-            infos([("Leçons terminées cette année", "[NB_LECONS_ANNEE]"), ("Exercices réussis", "[NB_EXERCICES_ANNEE]")]),
+            tuiles([("[NB_LECONS_ANNEE]", "leçons terminées cette année"), ("[NB_EXERCICES_ANNEE]", "exercices réussis")]),
             para("Rien à faire si tu continues. Tu peux modifier ou arrêter ton abonnement à tout moment avant cette date."), bouton("Gérer mon abonnement", L("ABONNEMENT_GERER"))])
 mail(id="28-passage-annuel", cat="Fin d'abonnement", quand="Abonnés mensuels depuis 3 mois", img="progression", alt="Ta progression",
      objet="Près de 2 mois offerts en passant à l'annuel", pre="150 €/an au lieu de 12 × 14,90 € : tu économises.", sur="Ton abonnement", titre="Passe à l'annuel.",
      corps=[para("[PRENOM], ça fait 3 mois que tu progresses avec l'Académie. En passant à l'abonnement annuel, tu paies <b>150&nbsp;€ par an</b>, soit 12,50&nbsp;€ par mois au lieu de 14,90&nbsp;€."),
-            para("Ton tarif reste garanti tant que tu restes abonné."), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate"><tr>' + carte_prix("Annuel", "150&nbsp;€", "/an", "12 × 14,90 € = 178,80 €", "Soit 12,50 € par mois. Ton tarif reste garanti tant que tu restes abonné.", True, "Près de 2 mois offerts") + "</tr></table>"), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
 mail(id="29-fin-abonnement-j7", cat="Fin d'abonnement", marketing=False, quand="7 jours avant la fin d'un abonnement résilié (fin de période payée)", img="oups", alt="La mascotte, surprise",
      objet="Ton accès à l'Académie se termine le [DATE_FIN]", pre="Ta progression reste enregistrée.", sur="Fin d'abonnement", titre="Plus que 7 jours d'accès.",
      corps=[para("[PRENOM], ton abonnement se termine le <b>[DATE_FIN]</b>. Après cette date, tu gardes ton compte gratuit (6 leçons, forum, puzzle du jour), et ta progression reste enregistrée."),
@@ -264,22 +300,22 @@ mail(id="30-resiliation-confirmee", cat="Fin d'abonnement", marketing=False, qua
 mail(id="31-reconquete-j30", cat="Fin d'abonnement", quand="30 jours après la fin de l'abonnement", img="masterclasses", alt="Les nouveautés de l'Académie",
      objet="Ton premier mois à 9,90 € pour revenir", pre="Et tout ce qui a changé depuis ton départ.", sur="Quoi de neuf", titre="Reviens quand tu veux.",
      corps=[para("[PRENOM], l'Académie a continué d'avancer :"), liste(["[NOUVEAUTE_1]", "[NOUVEAUTE_2]", "[NOUVEAUTE_3]"]),
-            encadre("Pour ton retour : <b>ton premier mois à 9,90&nbsp;€</b>, puis 19,90&nbsp;€/mois, sans engagement. Offre valable jusqu'au [DATE_FIN_OFFRE]. Ta progression t'attend là où tu l'as laissée."), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate"><tr>' + carte_prix("Ton retour", "9,90&nbsp;€", "le 1er mois", "19,90 €/mois", "Puis 19,90 €/mois, sans engagement. Jusqu'au [DATE_FIN_OFFRE].", True, "Offre de retour") + "</tr></table>" + para("Ta progression t'attend là où tu l'as laissée.")), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
 mail(id="32-anniversaire", cat="Engagement", quand="À la date anniversaire de l'abonnement", img="progression", alt="Anniversaire",
      objet="Déjà [DUREE_ABONNEMENT] dans l'Académie 🎉", pre="Merci, [PRENOM] ! Voici ton parcours.", sur="Anniversaire", titre="Joyeux anniversaire d'abonnement !",
      corps=[para("[PRENOM], ça fait <b>[DUREE_ABONNEMENT]</b> que tu t'entraînes avec nous. Merci !"),
-            infos([("Leçons terminées", "[NB_LECONS_TOTAL]"), ("Exercices réussis", "[NB_EXERCICES_TOTAL]"), ("Modules validés", "[NB_MODULES]")]), bouton("Voir ma progression", L("PROGRESSION"))])
+            tuiles([("[NB_LECONS_TOTAL]", "leçons"), ("[NB_EXERCICES_TOTAL]", "exercices réussis"), ("[NB_MODULES]", "modules validés")]), bouton("Voir ma progression", L("PROGRESSION"))])
 
 
 # ---------- 9. Compléments (compte, facturation, événements) ----------
 mail(id="33-paiement-abandonne", cat="Compte gratuit → abonnement", quand="2 heures après une page de paiement ouverte sans paiement", img="progression", alt="Ta progression",
      objet="Ton abonnement n'est pas finalisé", pre="Il ne manque qu'une étape.", sur="Abonnement", titre="Il ne manque qu'une étape.",
      corps=[para("[PRENOM], tu as commencé à t'abonner à l'Académie sans aller jusqu'au bout. Un souci de paiement ? Une question ?"),
-            infos([("Formule choisie", "[FORMULE]"), ("Prix", "[PRIX]")]), bouton("Finaliser mon abonnement", L("ABONNEMENT")),
+            recu([("Formule choisie", "[FORMULE]")], "Prix", "[PRIX]"), bouton("Finaliser mon abonnement", L("ABONNEMENT")),
             para('<span style="color:#6b6b66;font-size:14px">Une question ? Réponds simplement à cet e-mail.</span>')])
 mail(id="34-changement-formule", cat="Abonnement", marketing=False, quand="Au passage du mensuel à l'annuel (ou l'inverse), transactionnel",
      objet="Ta nouvelle formule est enregistrée", pre="Voici ce qui change pour toi.", sur="Ton abonnement", titre="C'est enregistré.",
-     corps=[para("[PRENOM], ton changement de formule est pris en compte."), infos([("Nouvelle formule", "[FORMULE]"), ("Prix", "[PRIX]"), ("À partir du", "[DATE]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")]),
+     corps=[para("[PRENOM], ton changement de formule est pris en compte."), recu([("Nouvelle formule", "[FORMULE]"), ("À partir du", "[DATE]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")], "Nouveau prix", "[PRIX]"),
             bouton("Gérer mon abonnement", L("ABONNEMENT_GERER"))])
 mail(id="35-carte-expire", cat="Abonnement", marketing=False, quand="30 jours avant l'expiration de la carte enregistrée (transactionnel)",
      objet="Ta carte bancaire expire bientôt", pre="Mets-la à jour pour éviter une interruption.", sur="Paiement", titre="Ta carte expire bientôt.",
@@ -287,13 +323,13 @@ mail(id="35-carte-expire", cat="Abonnement", marketing=False, quand="30 jours av
             para("Mets-la à jour dès maintenant pour ne pas perdre l'accès à tes leçons."), bouton("Mettre à jour ma carte", L("PAIEMENT"))])
 mail(id="36-inscription-tournoi", cat="Événements", marketing=False, quand="À l'inscription à un tournoi (transactionnel)", img="tournois", alt="Tournoi en ligne",
      objet="Inscription confirmée : [NOM_TOURNOI]", pre="Rendez-vous le [DATE] à [HEURE].", sur="Inscription confirmée", titre="C'est noté, à [HEURE] !",
-     corps=[infos([("Tournoi", "[NOM_TOURNOI]"), ("Date", "[DATE]"), ("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]")]),
+     corps=[billet("[NOM_TOURNOI]", [("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]")]),
             para("Connecte-toi 10 minutes avant le début : les appariements de la 1re ronde sont publiés à [HEURE]."), bouton("Voir le tournoi", L("TOURNOI")),
             para('<span style="color:#6b6b66;font-size:14px">Un empêchement ? <a href="[LIEN_DESINSCRIPTION_TOURNOI]" style="color:#1f5fa8">Libère ta place</a>.</span>')])
 mail(id="37-masterclass-reportee", cat="Événements", marketing=False, quand="Si une masterclass annoncée est déplacée ou annulée (aux inscrits)",
      objet="Changement d'horaire : masterclass [THEME]", pre="Nouvelle date : [NOUVELLE_DATE].", sur="Information", titre="La masterclass est déplacée.",
      corps=[para("[PRENOM], la masterclass <b>[THEME]</b> avec <b>[COACH]</b>, prévue le [DATE], est déplacée."),
-            infos([("Nouvelle date", "[NOUVELLE_DATE]"), ("Heure", "[HEURE] (heure de Paris)")]), para("Désolés pour ce changement. Si tu ne peux pas être là, le replay sera disponible comme d'habitude."),
+            billet("[THEME] · nouvelle date", [("Heure", "[HEURE] (heure de Paris)"), ("Avec", "[COACH]")], "[NOUVEAU_JOUR]", "[NOUVEAU_MOIS_COURT]"), para("Désolés pour ce changement. Si tu ne peux pas être là, le replay sera disponible comme d'habitude."),
             bouton("Voir la masterclass", L("MASTERCLASS"))])
 mail(id="38-reponse-forum", cat="Engagement", quand="Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé)", img="forum", alt="Le forum de l'Académie",
      objet="[AUTEUR_REPONSE] t'a répondu sur le forum", pre="« [EXTRAIT_REPONSE] »", sur="Le forum", titre="Nouvelle réponse à ton sujet",
@@ -323,7 +359,7 @@ TITRES = {
     "31-reconquete-j30": "Reviens | quand tu veux.", "32-anniversaire": "Joyeux anniversaire | d'abonnement !", "33-paiement-abandonne": "Il ne manque | qu'une étape.",
     "34-changement-formule": "C'est | enregistré.", "35-carte-expire": "Ta carte | expire bientôt.", "36-inscription-tournoi": "C'est noté, | rendez-vous à [HEURE] !",
     "37-masterclass-reportee": "La masterclass | est déplacée.", "38-reponse-forum": "Nouvelle réponse | à ton sujet.", "39-changement-tarif": "Ce qui change | pour ton abonnement.",
-    "40-suppression-compte": "Au revoir, | [PRENOM].", "20-rappel-masterclass": "Rendez-vous | à [HEURE] !",
+    "40-suppression-compte": "Au revoir, | [PRENOM].", "20-rappel-masterclass": "Rendez-vous | à [HEURE] !", "19-annonce-masterclass": "Nouvelle | masterclass.", "23-annonce-tournoi": "À toi | de jouer !", "22-nouveau-cours": "Nouveau cours : | [TITRE_COURS]",
 }
 MASCOTTES = {"01-confirmation-adresse": "coucou", "03-mot-de-passe": "cherche", "08-paiement-refuse": "gratte-tete", "09-paiement-recu": "super",
              "30-resiliation-confirmee": "reverence", "33-paiement-abandonne": "gratte-tete", "34-changement-formule": "super", "35-carte-expire": "telephone",
@@ -339,12 +375,30 @@ if MASC:
     for m in MASC:
         im = Image.open(ICI / f"build/_mascotte/{m}.png"); im = im.crop(im.getbbox())
         for d in (OUT, APER): im.save(d / "img" / f"mascotte-{m}.png", optimize=True)
+# Valeurs d'exemple pour les aperçus (les fichiers livrés gardent les variables)
+EXEMPLES = {"PRENOM": "Léa", "DATE": "18 novembre", "HEURE": "20 h 30", "JOUR": "18", "MOIS_COURT": "nov.", "NOUVEAU_JOUR": "25", "NOUVEAU_MOIS_COURT": "nov.",
+    "NOUVELLE_DATE": "25 novembre", "THEME": "Les plans typiques du milieu de partie", "COACH": "Gata Kamsky", "TITRE_COACH": "GMI", "DUREE": "1 h 30", "NIVEAU": "1400 à 1800",
+    "DESCRIPTION_MASTERCLASS": "Comment choisir un plan à partir de la structure de pions, avec des parties commentées en direct.", "NOM_TOURNOI": "Blitz du samedi",
+    "CADENCE": "3 min + 2 s", "NB_RONDES": "7", "PLACE": "4", "POINTS": "5", "NB_JOUEURS": "38", "VAINQUEUR": "Hugo M.", "DEUXIEME": "Camille R.", "TROISIEME": "Inès B.",
+    "FORMULE": "Annuelle", "PRIX": "150,00 €", "DATE_PROCHAIN_PAIEMENT": "18 novembre 2027", "MOYEN_PAIEMENT": "Carte •••• 4242", "MOIS": "novembre",
+    "NB_LECONS": "12", "NB_EXERCICES": "184", "TAUX_REUSSITE": "78", "SERIE_MAX": "9", "THEME_FORT": "les finales de Tours", "THEME_FAIBLE": "le clouage",
+    "MODULE": "Objectif 1400 · Tactique", "MODULE_SUIVANT": "Objectif 1400 · Finales", "NB_LECONS_MODULE": "14", "NB_EXERCICES_MODULE": "96", "SERIE": "12",
+    "DERNIERE_LECON": "La règle du carré", "LECON_SUIVANTE": "L'opposition", "TITRE_COURS": "Les finales de Tours", "AUTEUR": "Marc Quenehen", "NB_LECONS_COURS": "18",
+    "DESCRIPTION_COURS": "Lucena, Philidor, la Tour active : tout ce qu'il faut savoir pour sauver ou gagner les finales les plus fréquentes.", "NUMERO": "780",
+    "SOMMAIRE_1": "Le championnat de France décrypté", "SOMMAIRE_2": "Les secrets de la Caro-Kann", "SOMMAIRE_3": "Finales : la défense de Vancura",
+    "NOUVEAUTE_1": "Un nouveau cours sur les finales de Tours", "NOUVEAUTE_2": "3 masterclasses en replay", "NOUVEAUTE_3": "Le n°780 de la revue en PGN",
+    "NB_LECONS_ANNEE": "86", "NB_EXERCICES_ANNEE": "1 240", "NB_LECONS_TOTAL": "86", "NB_EXERCICES_TOTAL": "1 240", "NB_MODULES": "5", "DUREE_ABONNEMENT": "1 an",
+    "DATE_RENOUVELLEMENT": "18 décembre", "DATE_FIN": "30 novembre", "DATE_SUSPENSION": "25 novembre", "DATE_FIN_OFFRE": "15 décembre", "TITRE_UNE": "masterclass avec Gata Kamsky",
+    "NB_LECONS_GRATUITES_RESTANTES": "4", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "AUTEUR_REPONSE": "Sylvain Ravot", "TITRE_SUJET": "Que jouer contre la Caro-Kann ?",
+    "EXTRAIT_REPONSE": "Essaie la variante d'avance : 3.e5, avec un plan simple…", "DATE_EFFET": "1er février", "CHANGEMENT": "l'abonnement mensuel passera à 21,90 €",
+    "EMAIL_CONTACT": "contact@echecs.com", "QUAND": "Demain", "ADRESSE_POSTALE": "Paris, France"}
+def exemple(h): return re.sub(r"\[([A-Z_0-9]+)\]", lambda m: EXEMPLES.get(m.group(1), m.group(0)) if not m.group(1).startswith("LIEN_") else "#", h)
 VARS = set()
 for e in E:
     h = page(e)
     VARS |= set(re.findall(r"\[[A-Z_0-9]+\]", h))
     (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
-    (APER / f"{e['id']}.html").write_text(h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL))
+    (APER / f"{e['id']}.html").write_text(exemple(h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)
