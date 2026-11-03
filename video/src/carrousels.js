@@ -42,7 +42,7 @@
       { cta: true, t: "+200 leçons", e: "interactives.", s: "La règle du carré, l'opposition, la triangulation… Toutes les finales qui comptent, dans l'Académie echecs.com." },
     ] },
     { dir: "carrousel-3-fegatello", theme: "menthe", k: "Carrousel · Ouvertures", slides: [
-      { t: "Le", e: "Fegatello.", s: "Le sacrifice d'ouverture le plus célèbre. « Petit foie » en italien… et un Roi noir en danger.", pos: FEG3, cover: true, hl: ["f7"] },
+      { t: "Le <i class=\"ei\">Fegatello.</i>", s: "Le sacrifice d'ouverture le plus célèbre. « Petit foie » en italien… et un Roi noir en danger.", pos: FEG3, cover: true, hl: ["f7"] },
       { t: "Le départ", s: "1.e4 e5 2.Cf3 Cc6 3.Fc4 Cf6 : la défense des deux Cavaliers. Le Fou c4 vise déjà f7.", pos: FEG1, hl: ["c4", "f7"] },
       { t: "L'erreur noire", s: "4.Cg5 d5 5.exd5 Cxd5 ? Les Noirs reprennent avec le Cavalier… et tout bascule.", pos: FEG2, hl: ["d5"] },
       { t: "Le sacrifice", s: "6.Cxf7 ! Le Cavalier se sacrifie pour arracher le Roi noir à son abri. Après 6...Rxf7 7.Df3+ Re6 8.Cc3, toutes les pièces blanches arrivent.", pos: FEG4, hl: ["e6"] },
