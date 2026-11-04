@@ -43,7 +43,8 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **La mascotte** apparaît en tête des e-mails sans image (confirmation, mot de passe, paiement, résiliation…), sur le fond nuit de l'en-tête.
   Les autres e-mails ont une image tirée des visuels du pack (sans leur logo ni leur bouton, pour ne pas faire doublon).
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
-- **Largeur 600 px**, s'adapte au téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
+- **Tous les écrans** : colonne de 600 px centrée sur ordinateur (Gmail, Outlook.com, Apple Mail), pleine largeur sur téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
+- **Outlook sur PC** (moteur Word) : il affiche Arial et Georgia à la place des polices de l'Académie, des coins carrés au lieu d'arrondis ; les boutons gardent leur taille. Mise en page en tableaux, compatible.
 - **Composants** : chiffres clés en tuiles (bilans), bloc calendrier pour les événements (masterclass, tournoi), reçu avec total (paiements),
   podium (résultats de tournoi), cartes de prix avec l'ancien prix barré (offres), comparatif Gratuit / Abonné.
 - **Aperçus** : remplis avec des exemples réalistes (Léa, 18 nov., Gata Kamsky…) ; les fichiers HTML livrés gardent les variables.

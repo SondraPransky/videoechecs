@@ -48,13 +48,15 @@ C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", 
 SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
 # Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
 # fichiers locaux pour les aperçus.
-FONTS_WEB = '<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">'
+FONTS_WEB = '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"><!--<![endif]-->'
+# Outlook sur PC (moteur Word) : il ne charge pas les polices web et prendrait Times New Roman ; on impose Arial et Georgia
+FONTS_WEB += '<!--[if mso]><style>body,table,td,p,a,div,span,li{font-family:Arial,Helvetica,sans-serif !important} h1,h1 span{font-family:Georgia,serif !important}</style><![endif]-->'
 NM = ICI / "node_modules/@fontsource"
 FONTS_LOCAL = "<style>" + "".join(f'@font-face{{font-family:"{f}";font-weight:{w};font-style:{st};src:url("file://{NM}/{f.lower()}/files/{f.lower()}-latin-{w}-{st}.woff2") format("woff2")}}'
     for f, w, st in (("Fraunces", 900, "normal"), ("Fraunces", 400, "italic"), ("Manrope", 500, "normal"), ("Manrope", 700, "normal"), ("Manrope", 800, "normal"))) + "</style>"
 
 def bouton(txt, lien):
-    return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td style="border-radius:999px;background:{C['jaune']}">
+    return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td bgcolor="{C['jaune']}" style="border-radius:999px;background:{C['jaune']};mso-padding-alt:16px 28px">
 <a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:17px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'

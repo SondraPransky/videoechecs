@@ -36,6 +36,7 @@ def etiquette(f):
     n = f.name.lower(); lab = next((l for k, l in ETIQ if k in n), f.stem)
     if f.parent.name == "apercus": return "Aperçu sur téléphone"
     if f.parent.name == "sombre": return "Mode sombre · " + f.stem[:2]
+    if f.parent.name == "ordinateur": return "Ordinateur · " + f.stem[:2]
     if "jaune" in n and "jaune" not in lab: lab += " · fond jaune"
     for k, l in [("facebook", "Facebook"), ("linkedin", "LinkedIn"), ("youtube", "YouTube"), ("-x-1500", "X")]:
         if k in n and "banniere" in n: lab = "Bannière " + l + (" · soleil" if "soleil" in n else "")
@@ -99,6 +100,7 @@ S.append({"id": "emails", "titre": "E-mails de suivi des abonnés", "items": [
     item("email-" + f.stem, f"{f.stem[:2]} · " + next((l.split("|")[3].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), f.stem),
          next((l.split("|")[2].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), ""), [f], "image") for f in sorted(EM.glob("*.jpg"))]})
 if (EM / "sombre").exists():
+    S[-1]["items"].append(item("email-ordinateur", "Sur ordinateur · exemples", "Gmail, Outlook.com, Apple Mail : colonne de 600 px centrée", sorted((EM / "ordinateur").glob("*.jpg")), "image"))
     S[-1]["items"].append(item("email-mode-sombre", "Mode sombre · exemples", "Apple Mail, iPhone, Outlook.com en thème sombre", sorted((EM / "sombre").glob("*.jpg")), "image"))
 idt = I / "00-identite"
 S.append({"id": "identite", "titre": "Identité des comptes", "items": [
