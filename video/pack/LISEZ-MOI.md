@@ -27,6 +27,7 @@ TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran 
 QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçons de l'Académie (visuels 65 à 85)
 CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mails, phases de la publicité payante
 TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
+DEVELOPPEURS.md          ce que l'équipe technique doit brancher (e-mails, pages, suivi) ; va avec kit-developpeurs.zip
 EMAILS.md                parcours de l'abonné, catalogue des 42 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
 ```
 
