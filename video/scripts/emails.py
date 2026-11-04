@@ -196,7 +196,7 @@ mail(id="02-bienvenue-compte-gratuit", cat="Compte", quand="Juste après la conf
             offre("Envie d'aller plus loin ? L'Académie complète : +200 leçons, +2 000 exercices, les masterclasses et la revue en PGN."), para('<a href="[LIEN_ABONNEMENT]" style="font-weight:800;color:#1f5fa8;text-decoration:none">Voir les formules&nbsp;&rarr;</a>')])
 mail(id="03-mot-de-passe", cat="Compte", marketing=False, quand="Sur demande de réinitialisation (transactionnel)",
      objet="Réinitialise ton mot de passe", pre="Ce lien est valable 1 heure.", sur="Ton compte", titre="Nouveau mot de passe",
-     corps=[para("[PRENOM], tu as demandé à changer ton mot de passe. Clique ci-dessous pour en choisir un nouveau."), bouton("Nouveau mot de passe", L("MOT_DE_PASSE")),
+     corps=[para("[PRENOM], tu as demandé à changer ton mot de passe. Clique ci-dessous pour en choisir un nouveau."), bouton("Choisir mon mot de passe", L("MOT_DE_PASSE")),
             para('<span style="color:#6b6b66;font-size:14px">Ce lien est valable 1 heure. Si tu n\'es pas à l\'origine de cette demande, ignore cet e-mail : ton mot de passe ne change pas.</span>')])
 
 # ---------- 2. Conversion du compte gratuit ----------
@@ -272,9 +272,9 @@ mail(id="18-inactif-30-jours", cat="Réactivation", quand="Abonné sans connexio
 
 # ---------- 6. Événements ----------
 mail(id="19-annonce-masterclass", cat="Événements", quand="Dès qu'une masterclass est programmée (au moins 7 jours avant)", img="masterclasses", alt="Portrait du coach",
-     objet="Masterclass : [THEME] avec [COACH]", pre="En direct le [DATE] à [HEURE]. Pose tes questions !", sur="Nouvelle masterclass", titre="[THEME]",
-     corps=[para("<b>[COACH]</b> ([TITRE_COACH]) te donne rendez-vous en direct pour une masterclass sur <b>[THEME]</b>."),
-            billet("[THEME]", [("Heure", "[HEURE] (heure de Paris)"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]")]), coach(),
+     objet="Masterclass en direct avec [COACH]", pre="[THEME], le [DATE] à [HEURE]. Pose tes questions !", sur="Nouvelle masterclass", titre="[THEME]",
+     corps=[para("<b>[COACH]</b> ([TITRE_COACH]) te donne rendez-vous pour une masterclass en direct :"),
+            billet("[THEME]", [("Heure", "[HEURE] · Paris"), ("Durée", "[DUREE]"), ("Niveau", "[NIVEAU]")]), coach(),
             para("[DESCRIPTION_MASTERCLASS]"), bouton("Voir la masterclass", L("MASTERCLASS")),
             para('<span style="color:#6b6b66;font-size:14px">Tu ne peux pas être là ? Le replay sera disponible dans l\'Académie.</span>')])
 mail(id="20-rappel-masterclass", cat="Événements", quand="La veille, puis 1 heure avant (même modèle)", img="masterclasses", alt="Masterclass en direct",
@@ -290,11 +290,11 @@ mail(id="22-nouveau-cours", cat="Événements", quand="À la mise en ligne d'un 
             tuiles([("[NB_LECONS_COURS]", "leçons"), ("[NIVEAU]", "niveau"), ("[DUREE]", "au total")]), para("[DESCRIPTION_COURS]"), bouton("Commencer le cours", L("COURS"))])
 mail(id="23-annonce-tournoi", cat="Événements", quand="5 jours avant un tournoi, rappel le jour J (même modèle)", img="tournois", alt="Tournoi en ligne",
      objet="Tournoi : [NOM_TOURNOI] le [DATE]", pre="Cadence [CADENCE], ouvert à tous les niveaux.", sur="Tournoi en ligne", titre="[NOM_TOURNOI]",
-     corps=[para("Mesure-toi aux autres membres de l'Académie !"), billet("[NOM_TOURNOI]", [("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
+     corps=[para("Mesure-toi aux autres membres de l'Académie !"), billet("[NOM_TOURNOI]", [("Heure", "[HEURE] · Paris"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
             bouton("Je m'inscris", L("INSCRIPTION_TOURNOI"))])
 mail(id="24-resultats-tournoi", cat="Événements", quand="Le lendemain du tournoi, aux participants", img="tournois", alt="Résultats du tournoi",
      objet="Résultats : [NOM_TOURNOI]", pre="Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo !", sur="Résultats", titre="Tu termines [PLACE]<sup>e</sup> !",
-     corps=[para("[PRENOM], merci d'avoir joué <b>[NOM_TOURNOI]</b>. Tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
+     corps=[para("[PRENOM], tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b> au <b>[NOM_TOURNOI]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
             podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
             bouton("Analyser mes parties", L("MES_PARTIES"))])
 mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque numéro", img="revue", alt="La revue Europe Échecs",
@@ -344,7 +344,7 @@ mail(id="32-anniversaire", cat="Engagement", quand="À la date anniversaire de l
 # ---------- 9. Compléments (compte, facturation, événements) ----------
 mail(id="33-paiement-abandonne", cat="Compte gratuit → abonnement", quand="2 heures après une page de paiement ouverte sans paiement", 
      objet="Ton abonnement n'est pas finalisé", pre="Il ne manque qu'une étape.", sur="Abonnement", titre="Il ne manque qu'une étape.",
-     corps=[para("[PRENOM], tu as commencé à t'abonner à l'Académie sans aller jusqu'au bout. Un souci de paiement ? Une question ?"),
+     corps=[para("[PRENOM], tu as commencé à t'abonner à l'Académie sans aller jusqu'au bout. Un souci avec le paiement ?"),
             recu([("Formule choisie", "[FORMULE]")], "Prix", "[PRIX]"), bouton("Finaliser mon abonnement", L("ABONNEMENT")),
             para('<span style="color:#6b6b66;font-size:14px">Une question ? Réponds simplement à cet e-mail.</span>')])
 mail(id="34-changement-formule", cat="Abonnement", marketing=False, quand="Au passage du mensuel à l'annuel (ou l'inverse), transactionnel",
@@ -357,13 +357,13 @@ mail(id="35-carte-expire", cat="Abonnement", marketing=False, quand="30 jours av
             para("Mets-la à jour dès maintenant pour ne pas perdre l'accès à tes leçons."), bouton("Mettre à jour ma carte", L("PAIEMENT"))])
 mail(id="36-inscription-tournoi", cat="Événements", marketing=False, quand="À l'inscription à un tournoi (transactionnel)", img="tournois", alt="Tournoi en ligne",
      objet="Inscription confirmée : [NOM_TOURNOI]", pre="Rendez-vous le [DATE] à [HEURE].", sur="Inscription confirmée", titre="C'est noté, à [HEURE] !",
-     corps=[billet("[NOM_TOURNOI]", [("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]")]),
+     corps=[billet("[NOM_TOURNOI]", [("Heure", "[HEURE] · Paris"), ("Cadence", "[CADENCE]")]),
             para("Connecte-toi 10 minutes avant le début : les appariements de la 1re ronde sont publiés à [HEURE]."), bouton("Voir le tournoi", L("TOURNOI")),
             para('<span style="color:#6b6b66;font-size:14px">Un empêchement ? <a href="[LIEN_DESINSCRIPTION_TOURNOI]" style="color:#1f5fa8">Libère ta place</a>.</span>')])
 mail(id="37-masterclass-reportee", cat="Événements", marketing=False, quand="Si une masterclass annoncée est déplacée ou annulée (aux inscrits)",
-     objet="Changement d'horaire : masterclass [THEME]", pre="Nouvelle date : [NOUVELLE_DATE].", sur="Information", titre="La masterclass est déplacée.",
+     objet="Masterclass déplacée au [NOUVELLE_DATE]", pre="[THEME], avec [COACH] : la nouvelle date.", sur="Information", titre="La masterclass est déplacée.",
      corps=[para("[PRENOM], la masterclass <b>[THEME]</b> avec <b>[COACH]</b>, prévue le [DATE], est déplacée."),
-            billet("[THEME] · nouvelle date", [("Heure", "[HEURE] (heure de Paris)"), ("Avec", "[COACH]")], "[NOUVEAU_JOUR]", "[NOUVEAU_MOIS_COURT]"), para("Désolés pour ce changement. Si tu ne peux pas être là, le replay sera disponible comme d'habitude."),
+            billet("[THEME]", [("Heure", "[HEURE] · Paris"), ("Avec", "[COACH]")], "[NOUVEAU_JOUR]", "[NOUVEAU_MOIS_COURT]"), para("Désolés pour ce changement. Si tu ne peux pas être là, le replay sera disponible comme d'habitude."),
             bouton("Voir la masterclass", L("MASTERCLASS"))])
 mail(id="38-reponse-forum", cat="Engagement", quand="Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé)", img="forum", alt="Le forum de l'Académie",
      objet="[AUTEUR_REPONSE] t'a répondu sur le forum", pre="« [EXTRAIT_REPONSE] »", sur="Le forum", titre="Nouvelle réponse à ton sujet",
@@ -438,7 +438,7 @@ EXEMPLES = {"PRENOM": "Léa", "DATE": "18 novembre", "HEURE": "20 h 30", "JOUR":
     "DERNIERE_LECON": "La règle du carré", "LECON_SUIVANTE": "L'opposition", "TITRE_COURS": "Les finales de Tours", "AUTEUR": "Marc Quenehen", "NB_LECONS_COURS": "18",
     "DESCRIPTION_COURS": "Lucena, Philidor, la Tour active : tout ce qu'il faut savoir pour sauver ou gagner les finales les plus fréquentes.", "NUMERO": "780",
     "SOMMAIRE_1": "Le championnat de France décrypté", "SOMMAIRE_2": "Les secrets de la Caro-Kann", "SOMMAIRE_3": "Finales : la défense de Vancura",
-    "NOUVEAUTE_1": "Un nouveau cours sur les finales de Tours", "NOUVEAUTE_2": "3 masterclasses en replay", "NOUVEAUTE_3": "Le n°780 de la revue en PGN",
+    "NOUVEAUTE_1": "Un nouveau cours sur les finales de Tours", "NOUVEAUTE_2": "3 masterclasses en replay", "NOUVEAUTE_3": "Le n° 780 de la revue en PGN",
     "NB_LECONS_ANNEE": "86", "NB_EXERCICES_ANNEE": "1 240", "NB_LECONS_TOTAL": "86", "NB_EXERCICES_TOTAL": "1 240", "NB_MODULES": "5", "DUREE_ABONNEMENT": "1 an",
     "DATE_RENOUVELLEMENT": "18 décembre", "DATE_FIN": "30 novembre", "DATE_SUSPENSION": "25 novembre", "DATE_FIN_OFFRE": "15 décembre", "TITRE_UNE": "masterclass avec Gata Kamsky",
     "NB_LECONS_GRATUITES_RESTANTES": "4", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "AUTEUR_REPONSE": "Sylvain Ravot", "TITRE_SUJET": "Que jouer contre la Caro-Kann ?",

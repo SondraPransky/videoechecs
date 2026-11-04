@@ -153,7 +153,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `19-annonce-masterclass.html` | Dès qu'une masterclass est programmée (au moins 7 jours avant) | Masterclass : [THEME] avec [COACH] | En direct le [DATE] à [HEURE]. Pose tes questions ! | Information (désinscription possible) |
+| `19-annonce-masterclass.html` | Dès qu'une masterclass est programmée (au moins 7 jours avant) | Masterclass en direct avec [COACH] | [THEME], le [DATE] à [HEURE]. Pose tes questions ! | Information (désinscription possible) |
 | `20-rappel-masterclass.html` | La veille, puis 1 heure avant (même modèle) | [QUAND] : masterclass avec [COACH] | [THEME], en direct à [HEURE]. | Information (désinscription possible) |
 | `21-replay-masterclass.html` | Dès que le replay est en ligne | Le replay est en ligne : [THEME] | La masterclass de [COACH] en entier, et les positions en PGN. | Information (désinscription possible) |
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
@@ -161,7 +161,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
 | `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
-| `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Changement d’horaire : masterclass [THEME] | Nouvelle date : [NOUVELLE_DATE]. | Compte (toujours envoyé) |
+| `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Masterclass déplacée au [NOUVELLE_DATE] | [THEME], avec [COACH] : la nouvelle date. | Compte (toujours envoyé) |
 
 ### Lettre d'information
 
