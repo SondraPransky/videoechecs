@@ -20,7 +20,7 @@ for d in (OUT, APER):
 
 # Images utilisées (copiées dans img/, à héberger à l'adresse [URL_IMAGES])
 IMG = {
-    "logo": ICI.parent / ("assets/brand/ccas/logo-email-440.png" if PROFIL == "ccas" else "assets/brand/logo-echecs-com-blanc.png"),
+    "logo": ICI.parent / ("assets/brand/ccas/logo-email-560.png" if PROFIL == "ccas" else "assets/brand/logo-echecs-com-blanc.png"),
     "progression": PACK / "images/01-progression/01-progression-lien-1200x630.jpg",
     "etapes": PACK / "images/02-valide-chaque-etape/02-valide-chaque-etape-lien-1200x630.jpg",
     "lecons": PACK / "images/03-lecons/03-lecons-lien-1200x630.jpg",
@@ -49,15 +49,15 @@ for k, f in IMG.items():
 
 for src, nom in ((ICI / "assets/captures/ee/hd/auth-kamsky.jpg", "coach-exemple.jpg"), (PACK / "images/00-emails/email-puzzle-1080x1080.jpg", "puzzle-exemple.jpg")):
     im = Image.open(src).convert("RGB"); im.thumbnail((600, 600)); im.save(APER / "img" / nom, quality=86)
-from PIL import ImageDraw
-def _lecture():   # bouton lecture : disque blanc translucide, triangle nuit
-    n = 4; t = 76 * 2 * n; im = Image.new("RGBA", (t, t), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-    d.ellipse((0, 0, t - 1, t - 1), fill=(255, 255, 255, 235)); r = t / 2
-    d.polygon([(r - t * .13, r - t * .2), (r - t * .13, r + t * .2), (r + t * .22, r)], fill=(15, 20, 32, 255))
-    return im.resize((152, 152), Image.LANCZOS)
-for d in (OUT, APER): _lecture().save(d / "img/lecture.png", optimize=True)
-_m = Image.new("RGB", (960, 540), (15, 20, 32))   # miniature d'exemple (sans logo) : l'échiquier du puzzle sur fond nuit
-_m.paste(Image.open(PACK / "images/00-emails/email-puzzle-1080x1080.jpg").convert("RGB").resize((460, 460), Image.LANCZOS), (250, 40)); _m.save(APER / "img/miniature-exemple.jpg", quality=84)
+# Miniature d'exemple pour les aperçus (vraie miniature de cours si présente, sinon l'échiquier du puzzle), bouton lecture incrusté
+import importlib.util
+_spec = importlib.util.spec_from_file_location("miniature_mail", ICI / "scripts/miniature-mail.py"); _mm = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_mm)
+_ex = ICI / "assets/exemples/miniature-cours-youtube.jpg"
+if not _ex.exists():
+    _m = Image.new("RGB", (1280, 720), (15, 20, 32)); _m.paste(Image.open(PACK / "images/00-emails/email-puzzle-1080x1080.jpg").convert("RGB").resize((620, 620), Image.LANCZOS), (330, 50))
+    _ex = APER / "_miniature-source.jpg"; _m.save(_ex, quality=90)
+_mm.miniature_mail(_ex, APER / "img/miniature-exemple.jpg")
+if PROFIL == "ccas": shutil.copy(ICI.parent / "assets/brand/ccas/ccas-favicon-72.png", APER / "img/favicon.png")   # pastille de l'expéditeur (aperçus)
 C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
 SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
 # Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
@@ -138,10 +138,9 @@ def carte(img, titre, texte, lien, cta, src=None):
 <tr><td style="padding:18px 20px 20px"><div style="font:bold 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
 <div style="font:16px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
-def video(miniature, titre, sous, lien_lecon, lien_youtube):   # cours filmé : miniature cliquable (bouton lecture), titre, liens leçon et YouTube
+def video(miniature, titre, sous, lien_lecon, lien_youtube):   # cours filmé : miniature YouTube en entier (bouton lecture incrusté, scripts/miniature-mail.py), titre, liens
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C["filet"]};border-radius:12px;overflow:hidden">'
-            f'<tr><td background="{miniature}" bgcolor="{C["nuit"]}" align="center" valign="middle" height="300" style="height:300px;background:{C["nuit"]} url({miniature}) center / cover no-repeat">'
-            f'<a href="{lien_youtube}" style="display:block;height:300px;line-height:300px;text-decoration:none"><img src="{{IMG}}/lecture.png" width="76" height="76" alt="Lire la vidéo" style="display:inline-block;vertical-align:middle;width:76px;height:76px;border:0"></a></td></tr>'
+            f'<tr><td style="background:{C["nuit"]}"><a href="{lien_youtube}"><img src="{miniature}" width="536" alt="Regarder la vidéo : {titre}" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
             f'<tr><td style="padding:16px 20px 18px"><div style="font:bold 20px/1.3 {SERIF};color:{C["texte"]};margin:0 0 6px">{titre}</div>'
             f'<div style="font:14px/1.5 {SANS};color:{C["gris"]};margin:0 0 12px">{sous}</div>'
             f'<a href="{lien_lecon}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">Revoir le cours&nbsp;&rarr;</a>'
@@ -156,7 +155,7 @@ DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-c
   [style*="background:#ffffff"] { background:#121a25 !important; }
   td[style*="background:#f1f0ea"], div[style*="background:#f1f0ea"] { background:#1b2533 !important; }
   [style*="color:#1d1d1b"] { color:#f4f1ea !important; } [style*="color:#6b6b66"] { color:#a9b4c2 !important; }
-  [style*="color:#2c4a6e"] { color:#93b9e2 !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
+  [style*="color:#2c4a6e"] { color:#93b9e2 !important; } [style*="color:#0066cc"] { color:#7db8f5 !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
   [style*="#e4e1d8"] { border-color:#2a3546 !important; }
   [style*="background:#fff6c2"] [style*="color:#1d1d1b"], [style*="background:#fae361"] [style*="color:#1d1d1b"] { color:#111111 !important; }
   [style*="background:#fff6c2"] [style*="color:#6b6b66"] { color:#4a4636 !important; }
@@ -181,7 +180,7 @@ SIGNATURE = "À très vite sur l'échiquier,<br><b>L'équipe de l'Académie eche
 ENTETE = f'''<tr><td class="m-pad" style="background:{C['nuit']};padding:22px 32px"><img src="{{IMG}}/logo.png" width="170" alt="echecs.com" style="display:block;border:0;width:170px;height:auto"></td></tr>'''
 LIENS_PIED = [("L'Académie", "[LIEN_ACADEMIE]"), ("Masterclasses", "[LIEN_MASTERCLASSES]"), ("Tournois", "[LIEN_TOURNOIS]"), ("Forum", "[LIEN_FORUM]")]
 RESEAUX = [("Instagram", "[LIEN_INSTAGRAM]"), ("Facebook", "[LIEN_FACEBOOK]"), ("YouTube", "[LIEN_YOUTUBE]"), ("X", "[LIEN_X]"), ("LinkedIn", "[LIEN_LINKEDIN]")]
-MENTION = "echecs.com · Europe Echecs · [ADRESSE_POSTALE]"
+MENTION = "echecs.com · Europe Échecs · [ADRESSE_POSTALE]"
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
     pied = (POURQUOI + " "
@@ -292,3 +291,8 @@ if doc.exists():
     t = doc.read_text(); a, b = t.find("## Catalogue"), t.find("## Variables")
     if a >= 0 and b > a: doc.write_text(t[:a] + "## Catalogue\n" + "\n".join(lignes) + "\n\n" + t[b:])
 shutil.copytree(APER / "img", ART / "img")
+# img/ à héberger : seulement les images utilisées par les e-mails de la série
+_ref = set()
+for f in OUT.glob("*.html"): _ref |= set(re.findall(r"\[URL_IMAGES\]/([a-z0-9-]+\.(?:jpg|png))", f.read_text()))
+for f in (OUT / "img").iterdir():
+    if f.name not in _ref: f.unlink()

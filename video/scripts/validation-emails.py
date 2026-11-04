@@ -17,7 +17,7 @@ if PROFIL == "ccas":   # page des bénéficiaires des Activités Sociales de l'�
     page = (page.replace("<title>E-mails de l’Académie</title>", "<title>E-mails CCAS</title>")
                 .replace("<h1>Les e-mails de <em>l’Académie</em></h1>", "<h1>Les e-mails <em>CCAS</em></h1>")
                 .replace("envoyés aux membres, de la création du compte à la fin d’abonnement", "envoyés aux bénéficiaires des Activités Sociales de l’Énergie (accès offert, sans abonnement ni paiement), de la création du compte au bilan de l’année")
-                .replace("Léa, 18 nov., Gata Kamsky", "Léa, 18 nov., Eric et Florian"))
+                .replace("Léa, 18 nov., Gata Kamsky", "Léa, 18 nov., Éric et Florian"))
 (OUT / "index.html").write_text(page)
 VERS = json.loads((ICI / "pack/validation-versions.json").read_text())
 

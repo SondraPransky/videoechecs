@@ -49,9 +49,9 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
 - **Tous les écrans** : colonne de 600 px centrée sur ordinateur (Gmail, Outlook.com, Apple Mail), pleine largeur sur téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
 - **Outlook sur PC** (moteur Word) : il affiche Arial et Georgia à la place des polices de l'Académie, des coins carrés au lieu d'arrondis ; les boutons gardent leur taille. Mise en page en tableaux, compatible.
-- **Bloc vidéo** (e-mail 43) : la miniature YouTube du cours (`[URL_MINIATURE_COURS_1]`, 16:9) avec un bouton lecture, cliquable vers YouTube ;
-  en dessous, le titre, le jour, l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon dans l'Académie) et « Sur YouTube ».
-  Les jours des cours sont en variables (`[JOUR_COURS_1]`, `[JOUR_COURS_2]`) tant qu'ils ne sont pas fixés.
+- **Bloc vidéo** (e-mail 43) : la miniature YouTube du cours en entier (16:9), cliquable vers YouTube ; en dessous, le titre, le jour, l'animateur, la durée,
+  et deux liens : « Revoir le cours » (la leçon dans l'Académie) et « Sur YouTube ». La miniature habituelle (1280 × 720) passe dans `scripts/miniature-mail.py`
+  (1072 × 603 px, bouton lecture incrusté, ≈ 100 à 150 Ko). Les jours des cours sont en variables (`[JOUR_COURS_1]`, `[JOUR_COURS_2]`) tant qu'ils ne sont pas fixés.
 - **Composants** : chiffres clés en tuiles (bilans), bloc calendrier pour les événements (masterclass, tournoi), reçu avec total (paiements),
   podium (résultats de tournoi), cartes de prix avec l'ancien prix barré (offres), comparatif Gratuit / Abonné.
 - **Aperçus** : remplis avec des exemples réalistes (Léa, 18 nov., Gata Kamsky…) ; les fichiers HTML livrés gardent les variables.
@@ -162,7 +162,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
-| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Echecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
+| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
 | `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Masterclass déplacée au [NOUVELLE_DATE] | [THEME], avec [COACH] : la nouvelle date. | Compte (toujours envoyé) |
 | `43-cours-de-la-semaine.html` | Chaque semaine, le lendemain du dernier cours (jours des cours à fixer) | Les cours de la semaine : [THEME_COURS_1], [THEME_COURS_2] | Tu les as manqués ? Revois-les en vidéo. | Information (désinscription possible) |

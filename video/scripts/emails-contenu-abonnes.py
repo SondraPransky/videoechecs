@@ -25,7 +25,7 @@ mail(id="04-gratuit-j3-lecons", cat="Compte gratuit → abonnement", quand="J+3 
 mail(id="05-gratuit-j7-offre", cat="Compte gratuit → abonnement", quand="J+7 après la création du compte, si pas abonné", img="progression", alt="Le parcours de progression de l'Académie",
      objet="L'Académie complète à 14,90 €/mois", pre="Prix de lancement, sans engagement en mensuel.", sur="Offre de lancement", titre="Passe à l'Académie complète.",
      corps=[para("Tu as goûté à la méthode, [PRENOM]. Avec l'abonnement, tu débloques tout :"),
-            liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéo Europe Echecs et la revue en PGN", "Tes parties analysées, les tournois en ligne"]),
+            liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéo Europe Échecs et la revue en PGN", "Tes parties analysées, les tournois en ligne"]),
             offre(), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours", img="exercices", alt="Les exercices de l'Académie",
      objet="Tu hésites encore, [PRENOM] ?", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
@@ -51,20 +51,20 @@ mail(id="09-paiement-recu", cat="Abonnement", marketing=False, quand="À chaque 
 
 # ---------- 4. Démarrage de l'abonné ----------
 mail(id="10-demarrage-j1-parcours", cat="Démarrage de l'abonné", quand="J+1 après l'abonnement", img="etapes", alt="Valide chaque étape",
-     objet="Par où commencer ? Ton parcours en 3 étapes", pre="Initiation, 1400, 1600, 1800 : trouve ton niveau.", sur="Démarrage · 1/4", titre="Trouve ton niveau.",
+     objet="Par où commencer ? Ton parcours en 3 étapes", pre="Initiation, 1400, 1600, 1800 : trouve ton niveau.", sur="Ton parcours", titre="Trouve ton niveau.",
      corps=[para("[PRENOM], l'Académie est organisée en parcours : <b>Initiation</b>, <b>Objectif 1400</b>, <b>1600</b>, <b>1800</b>, puis <b>2000 et +</b>."),
             liste(['Choisis le parcours qui correspond à ton niveau, ou <a href="[LIEN_TEST_PLACEMENT]" style="color:#1f5fa8">passe le test de placement</a> (5 minutes)', "Fais une leçon : vidéo, cours, exercices, quiz", "Valide le quiz pour débloquer la suivante"]),
             bouton("Choisir mon parcours", L("PARCOURS"))])
 mail(id="11-demarrage-j3-exercices", cat="Démarrage de l'abonné", quand="J+3 après l'abonnement", img="exercices", alt="Les exercices de l'Académie",
-     objet="10 minutes par jour suffisent", pre="+2 000 exercices, rangés par thème et par niveau.", sur="Démarrage · 2/4", titre="10 minutes par jour.",
+     objet="10 minutes par jour suffisent", pre="+2 000 exercices, rangés par thème et par niveau.", sur="Exercices", titre="10 minutes par jour.",
      corps=[para("La régularité fait plus que les longues séances. Chaque jour, quelques exercices à ton niveau : mat en 1, fourchette, clouage, finales…"),
             para("Ta <b>série de jours</b> s'affiche sur ton tableau de bord : essaie de ne pas la casser !"), bouton("Faire mes exercices du jour", L("EXERCICES"))])
 mail(id="12-demarrage-j6-masterclasses", cat="Démarrage de l'abonné", quand="J+6 après l'abonnement", img="masterclasses", alt="Les masterclasses en direct",
-     objet="Les grands maîtres t'attendent", pre="Masterclasses en direct et replays, inclus dans ton abonnement.", sur="Démarrage · 3/4", titre="Apprends des meilleurs.",
+     objet="Les grands maîtres t'attendent", pre="Masterclasses en direct et replays, inclus dans ton abonnement.", sur="Masterclasses", titre="Apprends des meilleurs.",
      corps=[para("Gata Kamsky, Fabien Libiszewski, Sylvain Ravot, Marc Quenehen… Les masterclasses sont <b>incluses</b> dans ton abonnement, en direct et en replay."),
             para("Tu peux poser tes questions pendant le direct."), bouton("Voir les masterclasses", L("MASTERCLASSES"))])
 mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+10 après l'abonnement", img="tournois", alt="Les tournois en ligne",
-     objet="Joue, partage, mesure-toi", pre="Tournois en ligne, forum, tes parties analysées.", sur="Démarrage · 4/4", titre="Rejoins la communauté.",
+     objet="Joue, partage, mesure-toi", pre="Tournois en ligne, forum, tes parties analysées.", sur="Communauté", titre="Rejoins la communauté.",
      corps=[liste(["<b>Les tournois en ligne</b>, ouverts à tous les niveaux", "<b>Le forum</b>, pour poser tes questions aux coachs et aux autres membres", "<b>Tes parties</b> : saisis-les, analyse-les, partage-les en PGN"]),
             bouton("Voir le prochain tournoi", L("TOURNOIS"))])
 
@@ -115,8 +115,8 @@ mail(id="24-resultats-tournoi", cat="Événements", quand="Le lendemain du tourn
      corps=[para("[PRENOM], tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b> au <b>[NOM_TOURNOI]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
             podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
             bouton("Analyser mes parties", L("MES_PARTIES"))])
-mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque numéro", img="revue", alt="La revue Europe Echecs",
-     objet="Le n° [NUMERO] d'Europe Echecs est sorti", pre="Toutes les parties en PGN interactif dans l'Académie.", sur="La revue", titre="Le n° [NUMERO] est là.",
+mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque numéro", img="revue", alt="La revue Europe Échecs",
+     objet="Le n° [NUMERO] d'Europe Échecs est sorti", pre="Toutes les parties en PGN interactif dans l'Académie.", sur="La revue", titre="Le n° [NUMERO] est là.",
      corps=[para("Au sommaire de ce numéro :"), liste(["[SOMMAIRE_1]", "[SOMMAIRE_2]", "[SOMMAIRE_3]"]),
             para("Rejoue chaque partie commentée directement sur l'échiquier, en PGN interactif."), bouton("Lire le numéro", L("REVUE"))])
 
@@ -239,10 +239,8 @@ TITRES = {
     "37-masterclass-reportee": "La masterclass | est déplacée.", "38-reponse-forum": "Nouvelle réponse | à ton sujet.", "39-changement-tarif": "Ce qui change | pour ton abonnement.",
     "40-suppression-compte": "Au revoir, | [PRENOM].", "20-rappel-masterclass": "Rendez-vous | à [HEURE] !", "19-annonce-masterclass": "Nouvelle | masterclass.", "23-annonce-tournoi": "À toi | de jouer !", "22-nouveau-cours": "Nouveau cours : | [TITRE_COURS]",
 }
-MASCOTTES = {"01-confirmation-adresse": "coucou", "03-mot-de-passe": "cherche", "08-paiement-refuse": "gratte-tete", "09-paiement-recu": "super",
-             "30-resiliation-confirmee": "reverence", "33-paiement-abandonne": "gratte-tete", "34-changement-formule": "super", "35-carte-expire": "telephone",
-             "37-masterclass-reportee": "pendule", "27-renouvellement-annuel-j30": "pendule", "39-changement-tarif": "pancarte", "40-suppression-compte": "coucou"}
-ENTETES = {"02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
+MASCOTTES = {}
+ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merci", "27": "renouvellement", "30": "resiliation", "33": "etape", "34": "enregistre", "35": "carte", "37": "deplace", "39": "information", "40": "aurevoir", "02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
            "13": "communaute", "14": "bilan", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
            "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine"}

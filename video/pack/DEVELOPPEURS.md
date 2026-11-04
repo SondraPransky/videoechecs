@@ -9,8 +9,9 @@ kit-developpeurs/
   emails/                43 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails/img/            images des e-mails, à héberger (≈ 2,5 Mo)
   emails/apercus/        aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
-  EMAILS-CCAS.md         les 25 e-mails de la plateforme CCAS (ccas.echecs.com/academy) : accès offert, sans paiement, logo des Activités Sociales
-  emails-ccas/           ces 25 e-mails en HTML, avec leurs images (img/) et leurs aperçus (apercus/)
+  EMAILS-CCAS.md         les 23 e-mails de la plateforme CCAS (ccas.echecs.com/academy) : accès offert, sans paiement, logo des Activités Sociales
+  emails-ccas/           ces 23 e-mails en HTML, avec leurs images (img/) et leurs aperçus (apercus/)
+  miniature-mail.py      prépare la miniature YouTube d'un cours pour les e-mails (bouton lecture incrusté, 1072 × 603)
   site/                  vidéo d'en-tête muette (boucle), image de partage du lien (Open Graph)
 ```
 
