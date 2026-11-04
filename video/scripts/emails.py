@@ -60,17 +60,17 @@ def bouton(txt, lien):
 <a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:17px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'
-def encadre(t): return f'<div style="margin:22px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:16px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
+def encadre(t): return f'<div style="margin:24px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:16px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
 def liste(items): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 18px">' + "".join(
     f'<tr><td valign="top" style="padding:6px 12px 6px 0;font:bold 16px {SANS};color:{C["vert"]}">&#10003;</td><td style="padding:6px 0;font:16px/1.5 {SANS};color:{C["texte"]}">{i}</td></tr>' for i in items) + "</table>"
-def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:20px 0;background:' + C["fond"] + ';border-radius:12px">' + "".join(
+def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;background:' + C["fond"] + ';border-radius:12px">' + "".join(
     f'<tr><td style="padding:13px 18px;font-family:{SANS};font-weight:500;font-size:14px;color:{C["gris"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}width:42%">{k}</td>'
     f'<td style="padding:13px 18px;font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}">{v}</td></tr>' for i, (k, v) in enumerate(rows)) + "</table>"
 def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
     ok = f'<span style="color:{C["vert"]};font-weight:800">&#10003;</span>'; non = f'<span style="color:#b9b5aa">&mdash;</span>'
     cell = lambda v: ok if v is True else non if v is False else v
     th = lambda t, bg, col: f'<td align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
-    h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate"><tr><td></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
+    h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr><td></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
     for i, (k, g, a) in enumerate(rows):
         last = i == len(rows) - 1; bb = "" if last else f"border-bottom:1px solid {C['filet']};"
         h += (f'<tr><td style="padding:13px 10px 13px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]};{bb}">{k}</td>'
@@ -79,13 +79,13 @@ def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
     return h + "</table>"
 def tuiles(items):   # chiffres clés : grandes valeurs en Fraunces, sur des tuiles crème
     w = 100 // len(items)
-    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate;border-spacing:8px 0"><tr>' + "".join(
+    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;border-spacing:8px 0"><tr>' + "".join(
         f'<td width="{w}%" valign="top" style="background:{C["fond"]};border-radius:14px;padding:18px 12px 16px;text-align:center">'
         f'<div style="font-family:{SERIF};font-weight:900;font-size:{30 if len(re.sub(r"<[^>]+>|&[a-z]+;", "x", v)) <= 6 else 20}px;line-height:1.1;color:{C["texte"]}">{v}</div>'
         f'<div style="margin-top:8px;font-family:{SANS};font-weight:700;font-size:12px;line-height:1.35;color:{C["gris"]}">{k}</div></td>' for v, k in items) + "</tr></table>")
 def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement : bloc calendrier nuit + détails
     det = "".join(f'<div style="margin-top:7px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><b style="color:{C["texte"]};font-weight:800">{k}</b>&nbsp;&nbsp;{v}</div>' for k, v in lignes)
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate"><tr>'
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>'
             f'<td width="88" valign="middle" align="center" style="background:{C["nuit"]};border-radius:14px 0 0 14px;padding:16px 6px">'
             f'<div style="font-family:{SERIF};font-weight:900;font-size:36px;line-height:1;color:{C["jaune"]}">{jour}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f4f1ea">{mois}</div></td>'
@@ -93,7 +93,7 @@ def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement :
             f'<div style="font-family:{SERIF};font-weight:900;font-size:20px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
 def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total en gras
     rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:14px;color:{C["gris"]}">{k}</td><td align="right" style="padding:9px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]}">{v}</td></tr>' for k, v in lignes)
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border:1px solid {C["filet"]};border-radius:14px"><tr><td style="padding:16px 20px">'
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border:1px solid {C["filet"]};border-radius:14px"><tr><td style="padding:16px 20px">'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
             f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
             f'<tr><td style="font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:30px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
@@ -103,7 +103,7 @@ def coach():   # le coach de la masterclass : photo ronde, nom et titre
 def podium(p1, p2, p3):
     col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:14px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
         f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:900;font-size:30px;color:#111">{rang}</div></td>')
-    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0 6px"><tr>'
+    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 8px"><tr>'
             + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
 def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
     b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
@@ -114,7 +114,7 @@ def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
             f'<div style="margin-top:6px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><s>{barre}</s></div>'
             f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:14px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
 def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise en avant
-    return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
+    return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
             + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
             + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:14px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
@@ -141,7 +141,10 @@ def typo(h):   # espace insécable avant : ; ? ! » % et après «, entre un nom
         x = re.sub(r" ([:;?!»%])", "\u00a0\\1", x); x = x.replace("« ", "«\u00a0")
         x = re.sub(r"(?<=[A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])", "’", x)   # apostrophe typographique
         x = re.sub(r"\b1(er|re)\b", r"1<sup>\1</sup>", x)
+        x = re.sub(r"(\d) (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)", "\\1\u00a0\\2", x)   # 18 novembre
+        x = re.sub(r"\b(Objectif|n°|N°|Calcul Gagnant) (\d)", "\\1\u00a0\\2", x)   # Objectif 1400, n° 780
         x = re.sub(r"(\d) (h|min|€|s|jours?|leçons|exercices|points|ans?)\b", "\\1\u00a0\\2", x)
+        x = re.sub(r"(\d\u00a0h) (\d)", "\\1\u00a0\\2", x)   # 20 h 30
         return re.sub(r"(\d) (\d{3})\b", "\\1\u00a0\\2", x)
     return "".join(p if p.startswith("<") else t(p) for p in re.split(r"(<[^>]+>)", h))
 def page(e):
@@ -260,8 +263,8 @@ mail(id="16-serie-en-danger", cat="Engagement", quand="Le soir, si la série de 
      objet="Ta série de [SERIE] jours va s'arrêter ⏳", pre="Un exercice suffit pour la garder.", sur="Ta série", titre="Garde ta série !",
      corps=[para("[PRENOM], tu as joué [SERIE] jours d'affilée. Il te reste jusqu'à minuit pour la prolonger : <b>un seul exercice suffit</b>."), bouton("Faire un exercice", L("EXERCICE_DU_JOUR"))])
 mail(id="17-inactif-7-jours", cat="Réactivation", quand="Abonné sans connexion depuis 7 jours", img="lecons", alt="Les leçons de l'Académie",
-     objet="Ta prochaine leçon t'attend", pre="On reprend là où tu t'es arrêté ?", sur="On reprend ?", titre="On reprend là où tu t'es arrêté ?",
-     corps=[para("[PRENOM], ta dernière leçon était <b>[DERNIERE_LECON]</b>. La suivante, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE] minutes."), bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
+     objet="Ta prochaine leçon t'attend", pre="On reprend là où tu en étais ?", sur="On reprend ?", titre="On reprend là où tu en étais ?",
+     corps=[para("[PRENOM], ta dernière leçon était <b>[DERNIERE_LECON]</b>. La suivante, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]."), bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
 mail(id="18-inactif-30-jours", cat="Réactivation", quand="Abonné sans connexion depuis 30 jours", img="dodo", alt="La mascotte qui dort",
      objet="Tu nous manques, [PRENOM]", pre="Voici ce qui est nouveau depuis ta dernière visite.", sur="Quoi de neuf", titre="Tu nous manques !",
      corps=[para("Depuis ta dernière visite, il s'est passé des choses dans l'Académie :"), liste(["[NOUVEAUTE_1]", "[NOUVEAUTE_2]", "[NOUVEAUTE_3]"]),
@@ -295,7 +298,7 @@ mail(id="24-resultats-tournoi", cat="Événements", quand="Le lendemain du tourn
             podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
             bouton("Analyser mes parties", L("MES_PARTIES"))])
 mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque numéro", img="revue", alt="La revue Europe Échecs",
-     objet="Le n°[NUMERO] d'Europe Échecs est sorti", pre="Toutes les parties en PGN interactif dans l'Académie.", sur="La revue", titre="Le n°[NUMERO] est là.",
+     objet="Le n° [NUMERO] d'Europe Échecs est sorti", pre="Toutes les parties en PGN interactif dans l'Académie.", sur="La revue", titre="Le n° [NUMERO] est là.",
      corps=[para("Au sommaire de ce numéro :"), liste(["[SOMMAIRE_1]", "[SOMMAIRE_2]", "[SOMMAIRE_3]"]),
             para("Rejoue chaque partie commentée directement sur l'échiquier, en PGN interactif."), bouton("Lire le numéro", L("REVUE"))])
 
@@ -318,7 +321,7 @@ mail(id="27-renouvellement-annuel-j30", cat="Fin d'abonnement", marketing=False,
 mail(id="28-passage-annuel", cat="Fin d'abonnement", quand="Abonnés mensuels depuis 3 mois", img="progression", alt="Ta progression",
      objet="Près de 2 mois offerts en passant à l'annuel", pre="150 €/an au lieu de 12 × 14,90 € : tu économises.", sur="Ton abonnement", titre="Passe à l'annuel.",
      corps=[para("[PRENOM], ça fait 3 mois que tu progresses avec l'Académie. En passant à l'abonnement annuel, tu paies <b>150&nbsp;€ par an</b>, soit 12,50&nbsp;€ par mois au lieu de 14,90&nbsp;€."),
-            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate"><tr>' + carte_prix("Annuel", "150&nbsp;€", "/an", "12 × 14,90 € = 178,80 €", "Soit 12,50 € par mois. Ton tarif reste garanti tant que tu restes abonné.", True, "Près de 2 mois offerts") + "</tr></table>"), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Annuel", "150&nbsp;€", "/an", "12 × 14,90 € = 178,80 €", "Soit 12,50 € par mois. Ton tarif reste garanti tant que tu restes abonné.", True, "Près de 2 mois offerts") + "</tr></table>"), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
 mail(id="29-fin-abonnement-j7", cat="Fin d'abonnement", marketing=False, quand="7 jours avant la fin d'un abonnement résilié (fin de période payée)", img="oups", alt="La mascotte, surprise",
      objet="Ton accès à l'Académie se termine le [DATE_FIN]", pre="Ta progression reste enregistrée.", sur="Fin d'abonnement", titre="Plus que 7 jours d'accès.",
      corps=[para("[PRENOM], ton abonnement se termine le <b>[DATE_FIN]</b>. Après cette date, tu gardes ton compte gratuit (6 leçons, forum, puzzle du jour), et ta progression reste enregistrée."),
@@ -331,7 +334,7 @@ mail(id="30-resiliation-confirmee", cat="Fin d'abonnement", marketing=False, qua
 mail(id="31-reconquete-j30", cat="Fin d'abonnement", quand="30 jours après la fin de l'abonnement", img="masterclasses", alt="Les nouveautés de l'Académie",
      objet="Ton premier mois à 9,90 € pour revenir", pre="Et tout ce qui a changé depuis ton départ.", sur="Quoi de neuf", titre="Reviens quand tu veux.",
      corps=[para("[PRENOM], l'Académie a continué d'avancer :"), liste(["[NOUVEAUTE_1]", "[NOUVEAUTE_2]", "[NOUVEAUTE_3]"]),
-            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate"><tr>' + carte_prix("Ton retour", "9,90&nbsp;€", "le 1er mois", "19,90 €/mois", "Puis 19,90 €/mois, sans engagement. Jusqu'au [DATE_FIN_OFFRE].", True, "Offre de retour") + "</tr></table>" + para("Ta progression t'attend là où tu l'as laissée.")), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Ton retour", "9,90&nbsp;€", "le 1er mois", "19,90 €/mois", "Puis 19,90 €/mois, sans engagement. Jusqu'au [DATE_FIN_OFFRE].", True, "Offre de retour") + "</tr></table>" + para("Ta progression t'attend là où tu l'as laissée.")), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
 mail(id="32-anniversaire", cat="Engagement", quand="À la date anniversaire de l'abonnement", img="progression", alt="Anniversaire",
      objet="Déjà [DUREE_ABONNEMENT] dans l'Académie 🎉", pre="Merci, [PRENOM] ! Voici ton parcours.", sur="Anniversaire", titre="Joyeux anniversaire d'abonnement !",
      corps=[para("[PRENOM], ça fait <b>[DUREE_ABONNEMENT]</b> que tu t'entraînes avec nous. Merci !"),
@@ -379,7 +382,7 @@ mail(id="40-suppression-compte", cat="Compte", marketing=False, quand="À la sup
 mail(id="41-parrainage", cat="Engagement", quand="À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre)", img="b-parrainage", alt="Invite un ami",
      objet="Invite un ami, et profitez-en tous les deux", pre="Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN].", sur="Parrainage", titre="Joue avec | tes amis.",
      corps=[para("[PRENOM], tu connais quelqu'un qui veut progresser aux échecs ? Partage ton lien : ton ami reçoit <b>[OFFRE_FILLEUL]</b>, et toi <b>[RECOMPENSE_PARRAIN]</b> dès qu'il s'abonne."),
-            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0"><tr><td align="center" style="border:2px dashed {C["jaune"]};border-radius:14px;background:#fff6c2;padding:18px">'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0"><tr><td align="center" style="border:2px dashed {C["jaune"]};border-radius:14px;background:#fff6c2;padding:18px">'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:{C["gris"]}">Ton code</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:30px;letter-spacing:.12em;color:#111">[CODE_PARRAINAGE]</div></td></tr></table>',
             bouton("Partager mon lien", L("PARRAINAGE")), para('<span style="color:#6b6b66;font-size:14px">Pas de limite : chaque ami abonné te rapporte [RECOMPENSE_PARRAIN].</span>')])
@@ -395,9 +398,9 @@ TITRES = {
     "06-gratuit-j21-relance": "Tu hésites | encore ?", "07-confirmation-abonnement": "Tu fais partie | de l'Académie.", "08-paiement-refuse": "Ton paiement | n'est pas passé.",
     "09-paiement-recu": "Merci, | [PRENOM] !", "10-demarrage-j1-parcours": "Trouve | ton niveau.", "11-demarrage-j3-exercices": "10 minutes | par jour.",
     "12-demarrage-j6-masterclasses": "Apprends | des meilleurs.", "13-demarrage-j10-communaute": "Rejoins | la communauté.", "14-bilan-mensuel": "Ton mois | en chiffres.",
-    "15-objectif-atteint": "Module validé. | Au suivant !", "16-serie-en-danger": "Garde | ta série !", "17-inactif-7-jours": "On reprend | là où tu t'es arrêté ?",
+    "15-objectif-atteint": "Module validé. | Au suivant !", "16-serie-en-danger": "Garde | ta série !", "17-inactif-7-jours": "On reprend | là où tu en étais ?",
     "18-inactif-30-jours": "Tu nous | manques !", "21-replay-masterclass": "Tu l'as manquée ? | Le replay est là.", "24-resultats-tournoi": "Merci | d'avoir joué !",
-    "25-sortie-revue": "Le n°[NUMERO] | est là.", "26-lettre-plusieurs-nouvelles": "Cette semaine | dans l'Académie", "27-renouvellement-annuel-j30": "Ton année d'Académie | se termine bientôt.",
+    "25-sortie-revue": "Le n° [NUMERO] | est là.", "26-lettre-plusieurs-nouvelles": "Cette semaine | dans l'Académie.", "27-renouvellement-annuel-j30": "Ton année d'Académie | se termine bientôt.",
     "28-passage-annuel": "Passe | à l'annuel.", "29-fin-abonnement-j7": "Plus que 7 jours | d'accès.", "30-resiliation-confirmee": "C'est noté, | [PRENOM].",
     "31-reconquete-j30": "Reviens | quand tu veux.", "32-anniversaire": "Joyeux anniversaire | d'abonnement !", "33-paiement-abandonne": "Il ne manque | qu'une étape.",
     "34-changement-formule": "C'est | enregistré.", "35-carte-expire": "Ta carte | expire bientôt.", "36-inscription-tournoi": "C'est noté, | rendez-vous à [HEURE] !",
@@ -426,7 +429,7 @@ if MASC:
         for d in (OUT, APER): im.save(d / "img" / f"mascotte-{m}.png", optimize=True)
 # Valeurs d'exemple pour les aperçus (les fichiers livrés gardent les variables)
 EXEMPLES = {"PRENOM": "Léa", "DATE": "18 novembre", "HEURE": "20 h 30", "JOUR": "18", "MOIS_COURT": "nov.", "NOUVEAU_JOUR": "25", "NOUVEAU_MOIS_COURT": "nov.",
-    "NOUVELLE_DATE": "25 novembre", "THEME": "Les plans typiques du milieu de partie", "COACH": "Gata Kamsky", "TITRE_COACH": "GMI", "DUREE": "1 h 30", "NIVEAU": "1400 à 1800",
+    "NOUVELLE_DATE": "25 novembre", "THEME": "Les plans typiques du milieu de partie", "COACH": "Gata Kamsky", "TITRE_COACH": "GMI", "DUREE": "1 h 30", "DUREE_LECON": "15 min", "NIVEAU": "1400 à 1800",
     "DESCRIPTION_MASTERCLASS": "Comment choisir un plan à partir de la structure de pions, avec des parties commentées en direct.", "NOM_TOURNOI": "Blitz du samedi",
     "CADENCE": "3 min + 2 s", "NB_RONDES": "7", "PLACE": "4", "POINTS": "5", "NB_JOUEURS": "38", "VAINQUEUR": "Hugo M.", "DEUXIEME": "Camille R.", "TROISIEME": "Inès B.",
     "FORMULE": "Annuelle", "PRIX": "150,00 €", "DATE_PROCHAIN_PAIEMENT": "18 novembre 2027", "MOYEN_PAIEMENT": "Carte •••• 4242", "MOIS": "novembre",

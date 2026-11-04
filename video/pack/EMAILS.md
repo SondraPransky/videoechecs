@@ -146,7 +146,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `17-inactif-7-jours.html` | Abonné sans connexion depuis 7 jours | Ta prochaine leçon t’attend | On reprend là où tu t’es arrêté ? | Information (désinscription possible) |
+| `17-inactif-7-jours.html` | Abonné sans connexion depuis 7 jours | Ta prochaine leçon t’attend | On reprend là où tu en étais ? | Information (désinscription possible) |
 | `18-inactif-30-jours.html` | Abonné sans connexion depuis 30 jours | Tu nous manques, [PRENOM] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
 
 ### Événements
@@ -159,7 +159,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
-| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n°[NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
+| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
 | `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Changement d’horaire : masterclass [THEME] | Nouvelle date : [NOUVELLE_DATE]. | Compte (toujours envoyé) |
 
@@ -268,5 +268,6 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `[RECOMPENSE_PARRAIN]` | récompense du parrain, à définir |
 | `[URL_IMAGE_PUZZLE]` | adresse de l'image de l'échiquier du puzzle (carrée, 600 px) |
 | `[URL_PHOTO_COACH]` | adresse de la photo du coach (carrée, au moins 128 px) |
+| `[DUREE_LECON]` | durée de la leçon suivante, ex. « 15 min » |
 
 Les variables non décrites portent un nom explicite (dates, nombres, noms de coach, de tournoi, de cours…).
