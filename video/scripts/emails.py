@@ -60,16 +60,16 @@ def bouton(txt, lien):
 <a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:17px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'
-def encadre(t): return f'<div style="margin:22px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:15px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
+def encadre(t): return f'<div style="margin:22px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:16px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
 def liste(items): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 18px">' + "".join(
     f'<tr><td valign="top" style="padding:6px 12px 6px 0;font:bold 16px {SANS};color:{C["vert"]}">&#10003;</td><td style="padding:6px 0;font:16px/1.5 {SANS};color:{C["texte"]}">{i}</td></tr>' for i in items) + "</table>"
 def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:20px 0;background:' + C["fond"] + ';border-radius:12px">' + "".join(
     f'<tr><td style="padding:13px 18px;font-family:{SANS};font-weight:500;font-size:14px;color:{C["gris"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}width:42%">{k}</td>'
-    f'<td style="padding:13px 18px;font-family:{SANS};font-weight:800;font-size:15px;color:{C["texte"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}">{v}</td></tr>' for i, (k, v) in enumerate(rows)) + "</table>"
+    f'<td style="padding:13px 18px;font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]};{"" if i == len(rows) - 1 else "border-bottom:1px solid " + C["filet"] + ";"}">{v}</td></tr>' for i, (k, v) in enumerate(rows)) + "</table>"
 def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
     ok = f'<span style="color:{C["vert"]};font-weight:800">&#10003;</span>'; non = f'<span style="color:#b9b5aa">&mdash;</span>'
     cell = lambda v: ok if v is True else non if v is False else v
-    th = lambda t, bg, col: f'<td align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
+    th = lambda t, bg, col: f'<td align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
     h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate"><tr><td></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
     for i, (k, g, a) in enumerate(rows):
         last = i == len(rows) - 1; bb = "" if last else f"border-bottom:1px solid {C['filet']};"
@@ -81,7 +81,7 @@ def tuiles(items):   # chiffres clés : grandes valeurs en Fraunces, sur des tui
     w = 100 // len(items)
     return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border-collapse:separate;border-spacing:8px 0"><tr>' + "".join(
         f'<td width="{w}%" valign="top" style="background:{C["fond"]};border-radius:14px;padding:18px 12px 16px;text-align:center">'
-        f'<div style="font-family:{SERIF};font-weight:900;font-size:{30 if len(re.sub(r"<[^>]+>|&[a-z]+;", "x", v)) <= 6 else 21}px;line-height:1.1;color:{C["texte"]}">{v}</div>'
+        f'<div style="font-family:{SERIF};font-weight:900;font-size:{30 if len(re.sub(r"<[^>]+>|&[a-z]+;", "x", v)) <= 6 else 20}px;line-height:1.1;color:{C["texte"]}">{v}</div>'
         f'<div style="margin-top:8px;font-family:{SANS};font-weight:700;font-size:12px;line-height:1.35;color:{C["gris"]}">{k}</div></td>' for v, k in items) + "</tr></table>")
 def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement : bloc calendrier nuit + détails
     det = "".join(f'<div style="margin-top:7px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><b style="color:{C["texte"]};font-weight:800">{k}</b>&nbsp;&nbsp;{v}</div>' for k, v in lignes)
@@ -90,39 +90,39 @@ def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement :
             f'<div style="font-family:{SERIF};font-weight:900;font-size:36px;line-height:1;color:{C["jaune"]}">{jour}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f4f1ea">{mois}</div></td>'
             f'<td valign="middle" style="background:{C["fond"]};border-radius:0 14px 14px 0;padding:16px 18px">'
-            f'<div style="font-family:{SERIF};font-weight:900;font-size:19px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
+            f'<div style="font-family:{SERIF};font-weight:900;font-size:20px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
 def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total en gras
     rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:14px;color:{C["gris"]}">{k}</td><td align="right" style="padding:9px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]}">{v}</td></tr>' for k, v in lignes)
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0;border:1px solid {C["filet"]};border-radius:14px"><tr><td style="padding:16px 20px">'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
             f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
-            f'<tr><td style="font-family:{SANS};font-weight:800;font-size:15px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:26px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
+            f'<tr><td style="font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:30px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
 def coach():   # le coach de la masterclass : photo ronde, nom et titre
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px"><tr><td width="72" valign="middle"><img src="[URL_PHOTO_COACH]" width="64" height="64" alt="[COACH]" style="display:block;width:64px;height:64px;border-radius:50%;border:3px solid {C["jaune"]};object-fit:cover"></td>'
-            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:900;font-size:19px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
+            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
 def podium(p1, p2, p3):
-    col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:13px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
+    col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:14px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
         f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:900;font-size:30px;color:#111">{rang}</div></td>')
     return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0 6px"><tr>'
             + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
 def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
-    b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
+    b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
     return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:16px 12px" width="50%">{b}'
-            f'<div style="font-family:{SANS};font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
+            f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
             f'<div style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
-            f'<div style="margin-top:4px;font-family:{SANS};font-weight:700;font-size:13px;color:{C["gris"]}">{unite}</div>'
-            f'<div style="margin-top:6px;font-family:{SANS};font-size:13px;color:{C["gris"]}"><s>{barre}</s></div>'
-            f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:13px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
+            f'<div style="margin-top:4px;font-family:{SANS};font-weight:700;font-size:14px;color:{C["gris"]}">{unite}</div>'
+            f'<div style="margin-top:6px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><s>{barre}</s></div>'
+            f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:14px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
 def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise en avant
     return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
             + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
-            + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:13px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
+            + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:14px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
 def carte(img, titre, texte, lien, cta, src=None):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
 <tr><td{' style="background:#f1f0ea;padding:18px 18px 0"' if src else ""}><img src="{src or "{IMG}/" + img + ".jpg"}" width="{500 if src else 536}" alt="" style="display:block;width:100%;height:auto;border:0;{"border-radius:10px;" if src else ""}"></td></tr>
 <tr><td style="padding:18px 20px 20px"><div style="font:bold 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
-<div style="font:15px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 15px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
+<div style="font:16px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
 DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><style>
 @media (prefers-color-scheme: dark) {
@@ -139,6 +139,8 @@ DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-c
 def typo(h):   # espace insécable avant : ; ? ! » % et après «, entre un nombre et son unité ; seulement dans le texte, jamais dans les balises
     def t(x):
         x = re.sub(r" ([:;?!»%])", "\u00a0\\1", x); x = x.replace("« ", "«\u00a0")
+        x = re.sub(r"(?<=[A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])", "’", x)   # apostrophe typographique
+        x = re.sub(r"\b1(er|re)\b", r"1<sup>\1</sup>", x)
         x = re.sub(r"(\d) (h|min|€|s|jours?|leçons|exercices|points|ans?)\b", "\\1\u00a0\\2", x)
         return re.sub(r"(\d) (\d{3})\b", "\\1\u00a0\\2", x)
     return "".join(p if p.startswith("<") else t(p) for p in re.split(r"(<[^>]+>)", h))
@@ -167,7 +169,7 @@ def page(e):
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', "À très vite sur l'échiquier,<br><b>L'équipe de l'Académie echecs.com</b>")}</p>
 </td></tr>
-<tr><td style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:13px;color:{C['texte']}">
+<tr><td style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:14px;color:{C['texte']}">
 <a href="[LIEN_ACADEMIE]" style="color:{C['texte']};text-decoration:none">L'Académie</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_MASTERCLASSES]" style="color:{C['texte']};text-decoration:none">Masterclasses</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_TOURNOIS]" style="color:{C['texte']};text-decoration:none">Tournois</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_FORUM]" style="color:{C['texte']};text-decoration:none">Forum</a></td></tr>
 <tr><td style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C['gris']}">Suis-nous : <a href="[LIEN_INSTAGRAM]" style="color:{C['gris']}">Instagram</a> · <a href="[LIEN_FACEBOOK]" style="color:{C['gris']}">Facebook</a> · <a href="[LIEN_YOUTUBE]" style="color:{C['gris']}">YouTube</a> · <a href="[LIEN_X]" style="color:{C['gris']}">X</a> · <a href="[LIEN_LINKEDIN]" style="color:{C['gris']}">LinkedIn</a></td></tr>
 <tr><td style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>echecs.com · Europe Échecs · [ADRESSE_POSTALE]</td></tr>
@@ -288,7 +290,7 @@ mail(id="23-annonce-tournoi", cat="Événements", quand="5 jours avant un tourno
      corps=[para("Mesure-toi aux autres membres de l'Académie !"), billet("[NOM_TOURNOI]", [("Heure", "[HEURE] (heure de Paris)"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
             bouton("Je m'inscris", L("INSCRIPTION_TOURNOI"))])
 mail(id="24-resultats-tournoi", cat="Événements", quand="Le lendemain du tournoi, aux participants", img="tournois", alt="Résultats du tournoi",
-     objet="Résultats : [NOM_TOURNOI]", pre="Tu termines [PLACE]e sur [NB_JOUEURS] : bravo !", sur="Résultats", titre="Tu termines [PLACE]<sup>e</sup> !",
+     objet="Résultats : [NOM_TOURNOI]", pre="Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo !", sur="Résultats", titre="Tu termines [PLACE]<sup>e</sup> !",
      corps=[para("[PRENOM], merci d'avoir joué <b>[NOM_TOURNOI]</b>. Tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
             podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
             bouton("Analyser mes parties", L("MES_PARTIES"))])
@@ -379,7 +381,7 @@ mail(id="41-parrainage", cat="Engagement", quand="À J+30 d'abonnement, puis apr
      corps=[para("[PRENOM], tu connais quelqu'un qui veut progresser aux échecs ? Partage ton lien : ton ami reçoit <b>[OFFRE_FILLEUL]</b>, et toi <b>[RECOMPENSE_PARRAIN]</b> dès qu'il s'abonne."),
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:22px 0"><tr><td align="center" style="border:2px dashed {C["jaune"]};border-radius:14px;background:#fff6c2;padding:18px">'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:{C["gris"]}">Ton code</div>'
-            f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:28px;letter-spacing:.12em;color:#111">[CODE_PARRAINAGE]</div></td></tr></table>',
+            f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:30px;letter-spacing:.12em;color:#111">[CODE_PARRAINAGE]</div></td></tr></table>',
             bouton("Partager mon lien", L("PARRAINAGE")), para('<span style="color:#6b6b66;font-size:14px">Pas de limite : chaque ami abonné te rapporte [RECOMPENSE_PARRAIN].</span>')])
 mail(id="42-filleul-abonne", cat="Engagement", quand="Quand un ami parrainé s'abonne", img="b-filleul", alt="Ton ami est arrivé",
      objet="[PRENOM_FILLEUL] a rejoint l'Académie grâce à toi 🎉", pre="Ta récompense : [RECOMPENSE_PARRAIN].", sur="Parrainage", titre="Merci | pour l'invitation !",
@@ -409,7 +411,8 @@ ENTETES = {"02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "0
            "13": "communaute", "14": "bilan", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
            "32": "anniversaire", "36": "inscription", "38": "forum"}
-for e in E:
+for e in E:   # objet et pré-en-tête : apostrophe typographique aussi
+    for k in ("objet", "pre"): e[k] = re.sub(r"(?<=[A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])", "’", e[k])
     if e["id"][:2] in ENTETES: e["img"] = "b-" + ENTETES[e["id"][:2]]
     e["titre"] = TITRES.get(e["id"], e["titre"])
     if e["id"] in MASCOTTES: e["mascotte"] = MASCOTTES[e["id"]]
@@ -447,6 +450,7 @@ VARS = set()
 for e in E:
     h = page(e)
     h = h[:h.index("<body")] + typo(h[h.index("<body"):])
+    h = h.replace("<sup>", '<sup style="font-size:.7em;line-height:0;vertical-align:super">')   # exposants sans agrandir l'interligne
     VARS |= set(re.findall(r"\[[A-Z_0-9]+\]", h))
     (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
     # aperçu : la ligne de la boîte de réception (expéditeur, objet, pré-en-tête), comme sur un téléphone
@@ -454,7 +458,7 @@ for e in E:
              f'<div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:#0f1420;color:#fae361;font:900 16px/34px {SERIF};text-align:center">é</div>'
              f'<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:14px;color:#1d1d1b">Académie echecs.com <span style="float:right;font-weight:500;color:#6b6b66">09:41</span></div>'
              f'<div style="font-weight:700;font-size:14px;color:#1d1d1b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["objet"]}</div>'
-             f'<div style="font-size:13px;color:#6b6b66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["pre"]}</div></div></div></div>')
+             f'<div style="font-size:14px;color:#6b6b66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["pre"]}</div></div></div></div>')
     ha = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)
     ha = ha.replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
     (APER / f"{e['id']}.html").write_text(exemple(ha))

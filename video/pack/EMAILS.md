@@ -40,6 +40,10 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **En-têtes dédiés** (600×240) : un grand titre et la mascotte, dans les couleurs du pack, propres à chaque e-mail (dossier `images/00-emails/`).
 - **Photo du coach** dans l'annonce de masterclass (`[URL_PHOTO_COACH]`), **puzzle de la semaine** en image dans la lettre (`[URL_IMAGE_PUZZLE]`, l'échiquier du jour généré par le site).
 - **Mode sombre** : sur Apple Mail, l'iPhone et Outlook.com en thème sombre, l'e-mail passe en fond nuit (aperçus sur la page de validation). Gmail applique sa propre inversion.
+- **Échelle typographique** (8 tailles) : titres 32 px (Fraunces 900, suite en italique 400), chiffres et prix 30 à 36 px, titres de carte 20 px,
+  boutons 17 px (Manrope 800), texte 16 px, texte secondaire 14 px, étiquettes et mentions 12 px (majuscules espacées).
+- **Typographie française** : espaces insécables avant « : ; ? ! % » et dans les nombres (« 1 240 », « 20 h 30 », « 14,90 € »), apostrophe typographique (’),
+  exposants (1ᵉʳ, 4ᵉ). Appliquée automatiquement par le générateur.
 - **La mascotte** apparaît en tête des e-mails sans image (confirmation, mot de passe, paiement, résiliation…), sur le fond nuit de l'en-tête.
   Les autres e-mails ont une image tirée des visuels du pack (sans leur logo ni leur bouton, pour ne pas faire doublon).
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
@@ -93,7 +97,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `01-confirmation-adresse.html` | À la création du compte (transactionnel) | Confirme ton adresse e-mail | Un clic, et ton compte echecs.com est prêt. | Compte (toujours envoyé) |
-| `02-bienvenue-compte-gratuit.html` | Juste après la confirmation de l'adresse | Bienvenue sur echecs.com, [PRENOM] ♟️ | 6 leçons offertes, le forum et le puzzle du jour t'attendent. | Information (désinscription possible) |
+| `02-bienvenue-compte-gratuit.html` | Juste après la confirmation de l'adresse | Bienvenue sur echecs.com, [PRENOM] ♟️ | 6 leçons offertes, le forum et le puzzle du jour t’attendent. | Information (désinscription possible) |
 | `03-mot-de-passe.html` | Sur demande de réinitialisation (transactionnel) | Réinitialise ton mot de passe | Ce lien est valable 1 heure. | Compte (toujours envoyé) |
 | `40-suppression-compte.html` | À la suppression du compte (transactionnel, dernier e-mail envoyé) | Ton compte echecs.com est supprimé | Tes données personnelles ont été effacées. | Compte (toujours envoyé) |
 
@@ -101,17 +105,17 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `04-gratuit-j3-lecons.html` | J+3 après la création du compte, si pas abonné | Tes 6 leçons offertes t'attendent | Vidéo, cours, exercice, quiz : tu as essayé ? | Information (désinscription possible) |
-| `05-gratuit-j7-offre.html` | J+7 après la création du compte, si pas abonné | L'Académie complète à 14,90 €/mois | Prix de lancement, sans engagement en mensuel. | Information (désinscription possible) |
+| `04-gratuit-j3-lecons.html` | J+3 après la création du compte, si pas abonné | Tes 6 leçons offertes t’attendent | Vidéo, cours, exercice, quiz : tu as essayé ? | Information (désinscription possible) |
+| `05-gratuit-j7-offre.html` | J+7 après la création du compte, si pas abonné | L’Académie complète à 14,90 €/mois | Prix de lancement, sans engagement en mensuel. | Information (désinscription possible) |
 | `06-gratuit-j21-relance.html` | J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours | Tu hésites encore, [PRENOM] ? | Ce que les abonnés ont en plus, en 30 secondes. | Information (désinscription possible) |
-| `33-paiement-abandonne.html` | 2 heures après une page de paiement ouverte sans paiement | Ton abonnement n'est pas finalisé | Il ne manque qu'une étape. | Information (désinscription possible) |
+| `33-paiement-abandonne.html` | 2 heures après une page de paiement ouverte sans paiement | Ton abonnement n’est pas finalisé | Il ne manque qu’une étape. | Information (désinscription possible) |
 
 ### Abonnement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `07-confirmation-abonnement.html` | Au paiement du premier abonnement (transactionnel) | Bienvenue dans l'Académie, [PRENOM] ! | Ton abonnement est actif : voici ton récapitulatif. | Compte (toujours envoyé) |
-| `08-paiement-refuse.html` | Échec d'un prélèvement (transactionnel), relance à J+3 si non réglé | Ton paiement n'est pas passé | Mets à jour ta carte pour garder l'accès à l'Académie. | Compte (toujours envoyé) |
+| `07-confirmation-abonnement.html` | Au paiement du premier abonnement (transactionnel) | Bienvenue dans l’Académie, [PRENOM] ! | Ton abonnement est actif : voici ton récapitulatif. | Compte (toujours envoyé) |
+| `08-paiement-refuse.html` | Échec d'un prélèvement (transactionnel), relance à J+3 si non réglé | Ton paiement n’est pas passé | Mets à jour ta carte pour garder l’accès à l’Académie. | Compte (toujours envoyé) |
 | `09-paiement-recu.html` | À chaque renouvellement réussi (transactionnel) | Ton reçu echecs.com · [MOIS] | Merci ! Ton abonnement continue. | Compte (toujours envoyé) |
 | `34-changement-formule.html` | Au passage du mensuel à l'annuel (ou l'inverse), transactionnel | Ta nouvelle formule est enregistrée | Voici ce qui change pour toi. | Compte (toujours envoyé) |
 | `35-carte-expire.html` | 30 jours avant l'expiration de la carte enregistrée (transactionnel) | Ta carte bancaire expire bientôt | Mets-la à jour pour éviter une interruption. | Compte (toujours envoyé) |
@@ -123,26 +127,26 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 |---|---|---|---|---|
 | `10-demarrage-j1-parcours.html` | J+1 après l'abonnement | Par où commencer ? Ton parcours en 3 étapes | Initiation, 1400, 1600, 1800 : trouve ton niveau. | Information (désinscription possible) |
 | `11-demarrage-j3-exercices.html` | J+3 après l'abonnement | 10 minutes par jour suffisent | +2 000 exercices, rangés par thème et par niveau. | Information (désinscription possible) |
-| `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les grands maîtres t'attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
+| `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les grands maîtres t’attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
 | `13-demarrage-j10-communaute.html` | J+10 après l'abonnement | Joue, partage, mesure-toi | Tournois en ligne, forum, tes parties analysées. | Information (désinscription possible) |
 
 ### Engagement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois | [PRENOM], ton mois d'échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
+| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois | [PRENOM], ton mois d’échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
 | `15-objectif-atteint.html` | Quand l'abonné valide un module ou un parcours | Module validé : [MODULE] 🎉 | Une étape de plus vers ton objectif. | Information (désinscription possible) |
-| `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s'arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
-| `32-anniversaire.html` | À la date anniversaire de l'abonnement | Déjà [DUREE_ABONNEMENT] dans l'Académie 🎉 | Merci, [PRENOM] ! Voici ton parcours. | Information (désinscription possible) |
-| `38-reponse-forum.html` | Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t'a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
+| `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
+| `32-anniversaire.html` | À la date anniversaire de l'abonnement | Déjà [DUREE_ABONNEMENT] dans l’Académie 🎉 | Merci, [PRENOM] ! Voici ton parcours. | Information (désinscription possible) |
+| `38-reponse-forum.html` | Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t’a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
 | `41-parrainage.html` | À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre) | Invite un ami, et profitez-en tous les deux | Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
-| `42-filleul-abonne.html` | Quand un ami parrainé s'abonne | [PRENOM_FILLEUL] a rejoint l'Académie grâce à toi 🎉 | Ta récompense : [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
+| `42-filleul-abonne.html` | Quand un ami parrainé s'abonne | [PRENOM_FILLEUL] a rejoint l’Académie grâce à toi 🎉 | Ta récompense : [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
 
 ### Réactivation
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `17-inactif-7-jours.html` | Abonné sans connexion depuis 7 jours | Ta prochaine leçon t'attend | On reprend là où tu t'es arrêté ? | Information (désinscription possible) |
+| `17-inactif-7-jours.html` | Abonné sans connexion depuis 7 jours | Ta prochaine leçon t’attend | On reprend là où tu t’es arrêté ? | Information (désinscription possible) |
 | `18-inactif-30-jours.html` | Abonné sans connexion depuis 30 jours | Tu nous manques, [PRENOM] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
 
 ### Événements
@@ -154,25 +158,25 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `21-replay-masterclass.html` | Dès que le replay est en ligne | Le replay est en ligne : [THEME] | La masterclass de [COACH] en entier, et les positions en PGN. | Information (désinscription possible) |
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
-| `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]e sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
-| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n°[NUMERO] d'Europe Échecs est sorti | Toutes les parties en PGN interactif dans l'Académie. | Information (désinscription possible) |
+| `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
+| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n°[NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
-| `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Changement d'horaire : masterclass [THEME] | Nouvelle date : [NOUVELLE_DATE]. | Compte (toujours envoyé) |
+| `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Changement d’horaire : masterclass [THEME] | Nouvelle date : [NOUVELLE_DATE]. | Compte (toujours envoyé) |
 
 ### Lettre d'information
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `26-lettre-plusieurs-nouvelles.html` | Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés) | Cette semaine dans l'Académie : [TITRE_UNE] | Masterclass, tournoi, nouveau cours et le puzzle de la semaine. | Information (désinscription possible) |
+| `26-lettre-plusieurs-nouvelles.html` | Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés) | Cette semaine dans l’Académie : [TITRE_UNE] | Masterclass, tournoi, nouveau cours et le puzzle de la semaine. | Information (désinscription possible) |
 
 ### Fin d'abonnement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `27-renouvellement-annuel-j30.html` | 30 jours avant le renouvellement d'un abonnement annuel (obligatoire) | Ton abonnement annuel se renouvelle le [DATE_RENOUVELLEMENT] | Rien à faire si tu continues : voici le récapitulatif. | Compte (toujours envoyé) |
-| `28-passage-annuel.html` | Abonnés mensuels depuis 3 mois | Près de 2 mois offerts en passant à l'annuel | 150 €/an au lieu de 12 × 14,90 € : tu économises. | Information (désinscription possible) |
-| `29-fin-abonnement-j7.html` | 7 jours avant la fin d'un abonnement résilié (fin de période payée) | Ton accès à l'Académie se termine le [DATE_FIN] | Ta progression reste enregistrée. | Compte (toujours envoyé) |
-| `30-resiliation-confirmee.html` | À la résiliation (transactionnel) | Ta résiliation est confirmée | Tu gardes l'accès jusqu'au [DATE_FIN]. | Compte (toujours envoyé) |
+| `28-passage-annuel.html` | Abonnés mensuels depuis 3 mois | Près de 2 mois offerts en passant à l’annuel | 150 €/an au lieu de 12 × 14,90 € : tu économises. | Information (désinscription possible) |
+| `29-fin-abonnement-j7.html` | 7 jours avant la fin d'un abonnement résilié (fin de période payée) | Ton accès à l’Académie se termine le [DATE_FIN] | Ta progression reste enregistrée. | Compte (toujours envoyé) |
+| `30-resiliation-confirmee.html` | À la résiliation (transactionnel) | Ta résiliation est confirmée | Tu gardes l’accès jusqu’au [DATE_FIN]. | Compte (toujours envoyé) |
 | `31-reconquete-j30.html` | 30 jours après la fin de l'abonnement | Ton premier mois à 9,90 € pour revenir | Et tout ce qui a changé depuis ton départ. | Information (désinscription possible) |
 
 ## Variables
