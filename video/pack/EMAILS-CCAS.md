@@ -8,7 +8,7 @@ les images à héberger dans `emails-ccas/img/`. Même moteur et même design qu
 - **Aucun abonnement, aucun paiement** : pas d'offre, de prix, de reçu ni de relance de paiement. L'accès est offert par le partenariat et n'a pas de fin prévue.
 - **Marque** : logo des Activités Sociales de l'Énergie (CCAS) en en-tête, **pas de logo echecs.com**. Expéditeur « Europe Échecs · Activités Sociales » ;
   signature « L'équipe Europe Échecs, en partenariat avec les Activités Sociales de l'Énergie ». Pas de liens vers les réseaux d'echecs.com dans le pied de page.
-- **Contenu** : le **parcours Initiation** seulement (leçons et exercices), tournois en ligne, forum, et **cours en direct le lundi et le mercredi à 18 h 30** avec Éric et Florian.
+- **Contenu** : le **parcours Initiation** seulement (leçons et exercices), tournois en ligne, forum, et **cours en direct le lundi et le mercredi à 18 h 30** avec Éric et Florian, en visioconférence.
   Pas de masterclasses ni de revue.
 
 ## Le parcours d'un joueur
@@ -50,12 +50,16 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 - **Rappels de cours (07)** : seulement aux joueurs qui les ont activés (case à cocher dans les préférences), sinon c'est trop fréquent.
 - **Pas de relance d'inactivité** pendant les 5 premiers jours.
 
-## À confirmer
+## Décisions et points à suivre
 
-- La 2ᵉ étape de l'inscription (« Suivant » sur la page de création de compte) : si elle vérifie les droits CCAS, prévoir un e-mail « compte validé » ou « droits non reconnus ».
-- Qui peut s'inscrire dans la famille (e-mail 19 : « les membres de ta famille qui bénéficient des Activités Sociales »).
-- L'adresse de contact (`[EMAIL_CONTACT]`) et l'adresse postale de l'éditeur (`[ADRESSE_POSTALE]`).
-- Les noms complets d'Éric et Florian, si on veut les afficher.
+- **Pseudo** : le formulaire d'inscription ne demande qu'un pseudo ; les e-mails interpellent le joueur avec `[PSEUDO]` (pas de prénom).
+- **Cours en direct** : en visioconférence (Zoom, Teams…) ; `[LIEN_DIRECT]` est le lien de la visio, donné dans le rappel (07) et dans l'e-mail de report (09).
+- **Contact** : `[EMAIL_CONTACT]` = europe@echecs.com.
+- **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14 bilan du mois, 21 bilan de l'année),
+  série de jours (15, et la mention dans 05), parties sauvegardées (bouton « Analyser mes parties » du 12).
+- **Préférence « rappels de cours »** : pas encore dans les préférences ; en attendant, le rappel 07 part à tous (2 par semaine). À prévoir pour le réserver aux volontaires.
+- **À confirmer** : la 2ᵉ étape de l'inscription (« Suivant ») : si elle vérifie les droits CCAS, prévoir un e-mail « compte validé » ou « droits non reconnus » ;
+  qui peut s'inscrire dans la famille (e-mail 19) ; l'adresse postale de l'éditeur (`[ADRESSE_POSTALE]`) ; « Tes réponses restent anonymes » (20) à vérifier avec l'outil de questionnaire.
 
 ## Intégration
 
@@ -71,7 +75,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `01-confirmation-adresse.html` | À la création du compte (transactionnel) | Confirme ton adresse e-mail | Un clic, et ton compte est prêt. | Compte (toujours envoyé) |
-| `02-bienvenue.html` | Juste après la confirmation de l'adresse | Bienvenue sur ta plateforme d’échecs, [PRENOM] ♟️ | Parcours Initiation, cours en direct, tournois : tout est offert. | Information (désinscription possible) |
+| `02-bienvenue.html` | Juste après la confirmation de l'adresse | Bienvenue sur ta plateforme d’échecs, [PSEUDO] ♟️ | Parcours Initiation, cours en direct, tournois : tout est offert. | Information (désinscription possible) |
 | `03-mot-de-passe.html` | Sur demande de réinitialisation (transactionnel) | Réinitialise ton mot de passe | Ce lien est valable 1 heure. | Compte (toujours envoyé) |
 | `22-changement-acces.html` | Au moins 30 jours avant tout changement de la plateforme ou des conditions d'accès | Information importante sur ton accès | Ce qui change le [DATE_EFFET]. | Compte (toujours envoyé) |
 | `23-suppression-compte.html` | À la suppression du compte (transactionnel, dernier e-mail envoyé) | Ton compte est supprimé | Tes données personnelles ont été effacées. | Compte (toujours envoyé) |
@@ -88,8 +92,8 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `07-rappel-cours-direct.html` | Le lundi et le mercredi, vers 16 h (aux joueurs qui ont activé les rappels) | Ce soir 18 h 30 : [THEME_COURS] | Cours en direct avec [ANIMATEUR]. Prépare tes questions ! | Information (désinscription possible) |
-| `08-cours-de-la-semaine.html` | Chaque semaine, le jeudi (cours du lundi et du mercredi) | Les cours de la semaine : [THEME_LUNDI], [THEME_MERCREDI] | Tu les as manqués ? Revois-les en vidéo. | Information (désinscription possible) |
+| `07-rappel-cours-direct.html` | Le lundi et le mercredi, vers 16 h (à tous tant qu'il n'y a pas de case « rappels de cours » dans les préférences ; à prévoir) | Ce soir à 18 h 30, cours en direct avec [ANIMATEUR] | Au programme : [THEME_COURS]. Prépare tes questions ! | Information (désinscription possible) |
+| `08-cours-de-la-semaine.html` | Chaque semaine, le jeudi (cours du lundi et du mercredi) | Les cours de la semaine sont en vidéo 🎥 | Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI]. | Information (désinscription possible) |
 | `09-cours-deplace.html` | Si un cours est déplacé ou annulé (à tous les joueurs qui ont activé les rappels) | Cours du [DATE] déplacé au [NOUVELLE_DATE] | [THEME_COURS], avec [ANIMATEUR] : la nouvelle date. | Compte (toujours envoyé) |
 
 ### Tournois
@@ -98,7 +102,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 |---|---|---|---|---|
 | `10-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `11-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
-| `12-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
+| `12-resultats-tournoi.html` | Le lendemain du tournoi, aux participants (bouton « Analyser mes parties » : quand les parties seront sauvegardées) | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
 
 ### Lettre de la semaine
 
@@ -110,8 +114,8 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois | [PRENOM], ton mois d’échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
-| `15-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
+| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois (à activer avec les statistiques) | [PSEUDO], ton mois d’échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
+| `15-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre (à activer avec la série de jours) | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
 | `16-reponse-forum.html` | Quand quelqu'un répond à un sujet du joueur (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t’a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
 
 ### Réactivation
@@ -119,7 +123,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `17-inactif-7-jours.html` | Sans connexion depuis 7 jours | Ta prochaine leçon t’attend | On reprend là où tu en étais ? | Information (désinscription possible) |
-| `18-inactif-30-jours.html` | Sans connexion depuis 30 jours | Tu nous manques, [PRENOM] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
+| `18-inactif-30-jours.html` | Sans connexion depuis 30 jours | Tu nous manques, [PSEUDO] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
 
 ### Partenariat
 
@@ -127,7 +131,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 |---|---|---|---|---|
 | `19-echecs-en-famille.html` | J+14 après l'inscription | Et si tu jouais aux échecs en famille ? | Tes proches bénéficiaires peuvent aussi créer leur compte. | Information (désinscription possible) |
 | `20-questionnaire-satisfaction.html` | J+30 après l'inscription (une seule fois) | 2 minutes pour nous donner ton avis ? | Ce qui te plaît, ce qui manque : on t’écoute. | Information (désinscription possible) |
-| `21-bilan-annuel.html` | Un an après l'inscription | [PRENOM], ta première année d’échecs en chiffres | [NB_LECONS_ANNEE] leçons, [NB_COURS_ANNEE] cours en direct : merci ! | Information (désinscription possible) |
+| `21-bilan-annuel.html` | Un an après l'inscription (à activer avec les statistiques) | [PSEUDO], ta première année d’échecs en chiffres | [NB_LECONS_ANNEE] leçons, [NB_COURS_ANNEE] cours en direct : merci ! | Information (désinscription possible) |
 
 ## Variables
 

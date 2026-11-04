@@ -36,9 +36,9 @@ h1 em { font-style: italic; font-weight: 400; color: var(--brand); }
 .dot.ok { background: var(--ok); } .dot.todo { background: var(--todo); } .dot.new { background: var(--new); }
 .track { flex: 1 1 180px; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; display: flex; min-width: 120px; }
 .track i { display: block; height: 100%; }
-.filters { display: flex; gap: 6px; flex-wrap: wrap; }
-.filters button, .chip { font: 700 13px/1 var(--body); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
-.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters, .filters-theme { display: flex; gap: 6px; flex-wrap: wrap; }
+.filters button, .filters-theme button, .chip { font: 700 13px/1 var(--body); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.filters button[aria-pressed="true"], .filters-theme button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .status-note { color: var(--sub); font-size: 13px; }
 
 nav.toc { display: flex; gap: 8px; flex-wrap: wrap; padding-block: 16px 4px; }
@@ -93,6 +93,8 @@ footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
 .vue.mail { display: block; padding: 16px; min-height: 0; max-height: 78vh; overflow: auto; }
 .ecran { margin: 0 auto; overflow: hidden; border-radius: 10px; background: #f1f0ea; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
 .ecran iframe { border: 0; display: block; transform-origin: 0 0; background: #f1f0ea; }
+.ecran.sombre, .ecran.sombre iframe { background: #06080c; }
+.formats.theme { margin-top: 6px; } .formats.theme button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .cote .pre { font-size: 13px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
 .cote .pre b { display: block; font: 800 11px/1.4 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--sub); }
 
@@ -105,7 +107,7 @@ footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
 
 <header class="top wrap">
   <h1>Les e-mails de <em>l’Académie</em></h1>
-  <p class="intro">Les {{NB}} e-mails envoyés aux membres, de la création du compte à la fin d’abonnement, tels qu’ils seront reçus (remplis avec des exemples : Léa, 18 nov., Gata Kamsky). Change de largeur d’écran sous chaque e-mail, puis donne ton avis : « Validé » ou « À revoir », avec ce qu’il faut changer. Chacun a son propre avis, signé de son nom ; la décision finale de chaque fiche revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
+  <p class="intro">Les {{NB}} e-mails envoyés aux membres, de la création du compte à la fin d’abonnement, tels qu’ils seront reçus (remplis avec des exemples : Léa, 18 nov., Gata Kamsky). Change de largeur d’écran et passe du mode clair au mode sombre sous chaque e-mail (ou pour tous d’un coup), puis donne ton avis : « Validé » ou « À revoir », avec ce qu’il faut changer. Chacun a son propre avis, signé de son nom ; la décision finale de chaque fiche revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
 </header>
 
 <div class="bar">
@@ -121,6 +123,10 @@ footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
       <button type="button" data-f="reste" aria-pressed="false">À regarder</button>
       <button type="button" data-f="revoir" aria-pressed="false">À revoir</button>
       <button type="button" data-f="ok" aria-pressed="false">Validés</button>
+    </div>
+    <div class="filters-theme" role="group" aria-label="Thème de la messagerie, pour tous les e-mails">
+      <button type="button" data-tous="clair" aria-pressed="true">☀︎ Tous en clair</button>
+      <button type="button" data-tous="sombre" aria-pressed="false">☾ Tous en sombre</button>
     </div>
     <span class="status-note" id="etat">Chargement des avis…</span>
   </div>
@@ -169,8 +175,11 @@ function compte() {
 function badge(it) {
   return { ok: ["ok", "Validé"], revoir: ["revoir", "À revoir"], nouveau: ["new", "Nouvelle version à revoir"], reste: ["", "En attente de décision"] }[etat(it)];
 }
-function mediaHtml(m, titre) {
-  if (m.type === "html") return `<div class="ecran" data-w="${m.w}"><iframe src="${esc(m.src)}" title="${esc(titre + " · " + m.label)}" width="${m.w}" scrolling="no" loading="lazy"></iframe></div>`;
+// Mode clair ou sombre de la messagerie : la version sombre de l'e-mail (emails/sombre/), comme Apple Mail ou l'iPhone en thème sombre
+const SOMBRE = new Set();
+function mediaHtml(m, titre, id) {
+  const sb = id && SOMBRE.has(id);
+  if (m.type === "html") return `<div class="ecran${sb ? " sombre" : ""}" data-w="${m.w}"><iframe src="${esc(sb ? m.src.replace("emails/", "emails/sombre/") : m.src)}" title="${esc(titre + " · " + m.label + (sb ? " · mode sombre" : ""))}" width="${m.w}" scrolling="no" loading="lazy"></iframe></div>`;
   if (m.type === "video") return `<video src="${esc(m.src)}#t=0.8" controls playsinline preload="metadata" aria-label="${esc(titre + " · " + m.label)}"></video>`;
   return `<img src="${esc(m.src)}" alt="${esc(titre + " · " + m.label)}" loading="lazy" data-zoom>`;
 }
@@ -203,9 +212,10 @@ function fiche(it) {
   const [cls, txt] = badge(it);
   return `<article class="fiche" id="f-${esc(it.id)}" data-id="${esc(it.id)}" data-statut="${etat(it)}">
     <div class="scene">
-      <div class="vue${it.medias[0].type === "html" ? " mail" : ""}">${mediaHtml(it.medias[0], it.titre)}</div>
+      <div class="vue${it.medias[0].type === "html" ? " mail" : ""}">${mediaHtml(it.medias[0], it.titre, it.id)}</div>
       ${it.medias.length > 1 ? `<div class="formats" role="group" aria-label="Formats">${it.medias.map((m, i) =>
         `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${esc(m.label)}</button>`).join("")}</div>` : ""}
+      ${it.medias[0].type === "html" ? `<div class="formats theme" role="group" aria-label="Thème de la messagerie"><button type="button" data-t="clair" aria-pressed="${!SOMBRE.has(it.id)}">☀︎ Clair</button><button type="button" data-t="sombre" aria-pressed="${SOMBRE.has(it.id)}">☾ Sombre</button></div>` : ""}
     </div>
     <div class="cote">
       <span class="badge ${cls}">${txt}</span>
@@ -270,10 +280,28 @@ function enregistrer(id, patch) {
 document.addEventListener("click", e => {
   const f = e.target.closest(".filters button");
   if (f) { filtre = f.dataset.f; document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", b === f)); rendre(); return; }
-  const fm = e.target.closest(".formats button");
+  const th = e.target.closest(".formats.theme button");
+  if (th) {
+    const el = th.closest(".fiche"), it = ITEMS.get(el.dataset.id), i = +($(".formats:not(.theme) button[aria-pressed=true]", el)?.dataset.i || 0);
+    th.dataset.t === "sombre" ? SOMBRE.add(it.id) : SOMBRE.delete(it.id);
+    $(".vue", el).innerHTML = mediaHtml(it.medias[i], it.titre, it.id);
+    th.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === th)); return;
+  }
+  const tg = e.target.closest("[data-tous]");
+  if (tg) {
+    ITEMS.forEach((it, id) => { if (it.medias[0].type === "html") tg.dataset.tous === "sombre" ? SOMBRE.add(id) : SOMBRE.delete(id); });
+    document.querySelectorAll("[data-tous]").forEach(b => b.setAttribute("aria-pressed", b === tg));
+    document.querySelectorAll(".fiche").forEach(el => {
+      const it = ITEMS.get(el.dataset.id); if (!it || it.medias[0].type !== "html") return;
+      const i = +($(".formats:not(.theme) button[aria-pressed=true]", el)?.dataset.i || 0);
+      $(".vue", el).innerHTML = mediaHtml(it.medias[i], it.titre, it.id);
+      el.querySelectorAll(".formats.theme button").forEach(b => b.setAttribute("aria-pressed", (b.dataset.t === "sombre") === SOMBRE.has(it.id)));
+    }); return;
+  }
+  const fm = e.target.closest(".formats:not(.theme) button");
   if (fm) {
     const el = fm.closest(".fiche"), it = ITEMS.get(el.dataset.id);
-    $(".vue", el).innerHTML = mediaHtml(it.medias[+fm.dataset.i], it.titre);
+    $(".vue", el).innerHTML = mediaHtml(it.medias[+fm.dataset.i], it.titre, it.id);
     fm.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === fm)); return;
   }
   const z = e.target.closest("img[data-zoom]");

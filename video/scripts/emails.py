@@ -157,6 +157,7 @@ DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-c
   [style*="color:#1d1d1b"] { color:#f4f1ea !important; } [style*="color:#6b6b66"] { color:#a9b4c2 !important; }
   [style*="color:#2c4a6e"] { color:#93b9e2 !important; } [style*="color:#0066cc"] { color:#7db8f5 !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
   [style*="#e4e1d8"] { border-color:#2a3546 !important; }
+  td[style*="border-radius:14px 0 0 14px"] { background:#26324a !important; }
   [style*="background:#fff6c2"] [style*="color:#1d1d1b"], [style*="background:#fae361"] [style*="color:#1d1d1b"] { color:#111111 !important; }
   [style*="background:#fff6c2"] [style*="color:#6b6b66"] { color:#4a4636 !important; }
 }
@@ -184,7 +185,7 @@ MENTION = "echecs.com · Europe Échecs · [ADRESSE_POSTALE]"
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
     pied = (POURQUOI + " "
-            + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e-mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
+            + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e&#8209;mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
                else "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."))
     hero = f'<tr><td><img src="{{IMG}}/{e["img"]}.jpg" width="600" alt="{html.escape(e.get("alt", ""))}" style="display:block;width:100%;height:auto;border:0"></td></tr>' if e.get("img") else ""
     if not e.get("img") and e.get("mascotte"):   # pas d'image : la mascotte, sur le fond nuit de l'en-tête

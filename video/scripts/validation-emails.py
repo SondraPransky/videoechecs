@@ -10,6 +10,12 @@ PROFIL = sys.argv[2] if len(sys.argv) > 2 else "abonnes"; SUF = "" if PROFIL == 
 SRC = ICI / f"build/_emails{SUF}_artefact"
 DOC = ICI / ("pack/EMAILS.md" if PROFIL == "abonnes" else f"pack/EMAILS-{PROFIL.upper()}.md")
 shutil.rmtree(OUT / "emails", ignore_errors=True); shutil.copytree(SRC, OUT / "emails")
+# Version sombre de chaque e-mail (le bouton « Sombre » de la page) : les règles @media (prefers-color-scheme: dark) appliquées d'office,
+# comme Apple Mail, l'iPhone ou Outlook.com en thème sombre
+(OUT / "emails/sombre").mkdir()
+for f in SRC.glob("*.html"):
+    h = f.read_text().replace("@media (prefers-color-scheme: dark)", "@media all").replace('src="img/', 'src="../img/').replace('url(img/', 'url(../img/')
+    (OUT / "emails/sombre" / f.name).write_text(h)
 PRE = "email-" if PROFIL == "abonnes" else PROFIL + "-"
 NB = len(list(SRC.glob("*.html")))
 page = (ICI / "validation/emails.html").read_text().replace("{{NB}}", str(NB))
@@ -33,13 +39,7 @@ for l in DOC.read_text().splitlines():
         "pre": pre, "v": VERS.get(PRE + fid, 1),
         "medias": [{"type": "html", "src": src, "w": 375, "label": "Téléphone"}, {"type": "html", "src": src, "w": 320, "label": "Petit téléphone"},
                    {"type": "html", "src": src, "w": 768, "label": "Tablette"}, {"type": "html", "src": src, "w": 1280, "label": "Ordinateur"}]})
-sombre = sorted((ICI / f"build/pack/emails{SUF}/apercus/sombre").glob("*.jpg"))
-if sombre:
-    for f in sombre: shutil.copy(f, OUT / "media" / ("sombre-" + f.name))
-    sections.append({"id": "mode-sombre", "titre": "Mode sombre", "items": [{"id": PRE + "mode-sombre", "titre": "Mode sombre · exemples",
-        "sous": "Apple Mail, iPhone, Outlook.com en thème sombre (Gmail applique sa propre inversion)", "pre": "", "v": VERS.get(PRE + "mode-sombre", 1),
-        "medias": [{"type": "image", "src": "media/sombre-" + f.name, "label": "E-mail " + f.stem[:2]} for f in sombre]}]})
-for f in (OUT / "media").glob("sombre-*.jpg"):
-    if f not in [OUT / "media" / ("sombre-" + g.name) for g in sombre]: f.unlink()
+# Le mode sombre se voit sur chaque fiche (bouton Clair / Sombre) : plus de captures à part
+for f in (OUT / "media").glob("sombre-*.jpg"): f.unlink()
 (OUT / "media/manifest.json").write_text(json.dumps({"sections": sections}, ensure_ascii=False))
 print(len(sections), "rubriques,", sum(len(s["items"]) for s in sections), "fiches")
