@@ -33,6 +33,13 @@
     B("forum", "ciel", "Nouvelle", "réponse.", "discussion"),
     B("parrainage", "soleil", "Invite", "un ami.", "invite"),
     B("filleul", "menthe", "Ton ami", "est arrivé !", "fete"),
+    // Série CCAS (Activités Sociales de l'Énergie)
+    B("famille", "menthe", "Les échecs", "en famille.", "invite"),
+    B("avis", "soleil", "Ton avis", "compte.", "pancarte"),
+    B("plateforme", "ciel", "Bienvenue", "sur la plateforme !", "coucou"),
+    B("direct", "rose", "Lundi et mercredi,", "18\u00a0h\u00a030.", "prof"),
+    B("semaine", "nuit", "Les cours", "de la semaine.", "regarde"),
+    B("un-an", "menthe", "Un an", "ensemble !", "fete"),
     { id: "email-puzzle", dir: "00-emails", tpl: "plateau", theme: "craie",
       pos: { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" },
       only: [["1080x1080", 1080, 1080, "Puzzle de la lettre d'information (exemple)"]] },

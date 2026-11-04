@@ -1,6 +1,6 @@
 # E-mails de suivi des abonnés — Académie echecs.com
 
-42 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
+43 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
 dans `emails/img/`, et un aperçu de chaque e-mail (largeur téléphone) dans `emails/apercus/`.
 Tous en « tu », dans le style du pack (fond crème, en-tête nuit, bouton jaune), lisibles sur téléphone et dans les messageries
 qui bloquent les images (les textes ne sont jamais dans les images).
@@ -28,7 +28,7 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 Événements (à tous, selon l'actualité) : 19 Annonce de masterclass · 20 Rappel (veille / 1 h avant) · 21 Replay · 37 Report
                                         22 Nouveau cours / replay de cours · 23 Tournoi · 36 Inscription confirmée · 24 Résultats · 25 Revue
-                                        38 Réponse sur le forum
+                                        38 Réponse sur le forum · 43 Les cours de la semaine (vidéos YouTube, chaque semaine)
                                         26 Lettre d'information à plusieurs nouvelles (toutes les 1 à 2 semaines)
 ```
 
@@ -49,6 +49,9 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Lisible sans images** : tous les textes sont du vrai texte ; les images ont une description (alt).
 - **Tous les écrans** : colonne de 600 px centrée sur ordinateur (Gmail, Outlook.com, Apple Mail), pleine largeur sur téléphone ; boutons jaunes de 50 px de haut, faciles à toucher.
 - **Outlook sur PC** (moteur Word) : il affiche Arial et Georgia à la place des polices de l'Académie, des coins carrés au lieu d'arrondis ; les boutons gardent leur taille. Mise en page en tableaux, compatible.
+- **Bloc vidéo** (e-mail 43) : la miniature YouTube du cours (`[URL_MINIATURE_COURS_1]`, 16:9) avec un bouton lecture, cliquable vers YouTube ;
+  en dessous, le titre, le jour, l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon dans l'Académie) et « Sur YouTube ».
+  Les jours des cours sont en variables (`[JOUR_COURS_1]`, `[JOUR_COURS_2]`) tant qu'ils ne sont pas fixés.
 - **Composants** : chiffres clés en tuiles (bilans), bloc calendrier pour les événements (masterclass, tournoi), reçu avec total (paiements),
   podium (résultats de tournoi), cartes de prix avec l'ancien prix barré (offres), comparatif Gratuit / Abonné.
 - **Aperçus** : remplis avec des exemples réalistes (Léa, 18 nov., Gata Kamsky…) ; les fichiers HTML livrés gardent les variables.
@@ -159,9 +162,10 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
-| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
+| `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Echecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
 | `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Masterclass déplacée au [NOUVELLE_DATE] | [THEME], avec [COACH] : la nouvelle date. | Compte (toujours envoyé) |
+| `43-cours-de-la-semaine.html` | Chaque semaine, le lendemain du dernier cours (jours des cours à fixer) | Les cours de la semaine : [THEME_COURS_1], [THEME_COURS_2] | Tu les as manqués ? Revois-les en vidéo. | Information (désinscription possible) |
 
 ### Lettre d'information
 
@@ -182,6 +186,8 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 ## Variables
 
 **Liens** (adresse de la page correspondante sur le site, et des comptes de réseaux pour le pied de page) : `[LIEN_ABONNEMENT]`, `[LIEN_ABONNEMENT_GERER]`, `[LIEN_ACADEMIE]`, `[LIEN_CGV]`, `[LIEN_CONFIRMATION]`, `[LIEN_COURS]`, `[LIEN_DESINSCRIPTION]`, `[LIEN_DESINSCRIPTION_TOURNOI]`, `[LIEN_DIRECT]`, `[LIEN_EXERCICES]`, `[LIEN_EXERCICE_DU_JOUR]`, `[LIEN_FACEBOOK]`, `[LIEN_FACTURES]`, `[LIEN_FORUM]`, `[LIEN_INSCRIPTION_TOURNOI]`, `[LIEN_INSTAGRAM]`, `[LIEN_LECONS]`, `[LIEN_LECON_SUIVANTE]`, `[LIEN_LINKEDIN]`, `[LIEN_MASTERCLASSES]`, `[LIEN_MASTERCLASS]`, `[LIEN_MES_PARTIES]`, `[LIEN_MODULE_SUIVANT]`, `[LIEN_MOT_DE_PASSE]`, `[LIEN_PAIEMENT]`, `[LIEN_PARCOURS]`, `[LIEN_PARRAINAGE]`, `[LIEN_PASSAGE_ANNUEL]`, `[LIEN_PREFERENCES]`, `[LIEN_PREMIERE_LECON]`, `[LIEN_PROGRESSION]`, `[LIEN_PUZZLE]`, `[LIEN_QUESTIONNAIRE_DEPART]`, `[LIEN_REACTIVATION]`, `[LIEN_REPLAY]`, `[LIEN_REVUE]`, `[LIEN_SUJET_FORUM]`, `[LIEN_TEST_PLACEMENT]`, `[LIEN_THEME_FAIBLE]`, `[LIEN_TOURNOIS]`, `[LIEN_TOURNOI]`, `[LIEN_X]`, `[LIEN_YOUTUBE]`.
+
+**E-mail 43 (cours de la semaine)** : `[LIEN_COURS_1]`, `[LIEN_COURS_2]` (la leçon dans l'Académie), `[LIEN_YOUTUBE_COURS_1]`, `[LIEN_YOUTUBE_COURS_2]` (la vidéo), `[LIEN_COURS_VIDEOS]` (tous les cours) ; `[URL_MINIATURE_COURS_1]` et `_2` (miniature YouTube, ex. `https://i.ytimg.com/vi/<id>/maxresdefault.jpg`), `[THEME_COURS_1]`, `[JOUR_COURS_1]`, `[ANIMATEUR_COURS_1]`, `[DUREE_COURS_1]` (et `_2`), `[PROGRAMME_SEMAINE_PROCHAINE]`.
 
 | Variable | Contenu |
 |---|---|

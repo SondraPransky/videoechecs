@@ -5,10 +5,12 @@ Ce document dit ce que l'équipe technique doit brancher pour le lancement. Il v
 ```
 kit-developpeurs/
   DEVELOPPEURS.md        ce document
-  EMAILS.md              catalogue complet des 42 e-mails : quand les envoyer, objet, pré-en-tête, variables, règles
-  emails/                42 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS.md              catalogue complet des 43 e-mails : quand les envoyer, objet, pré-en-tête, variables, règles
+  emails/                43 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails/img/            images des e-mails, à héberger (≈ 2,5 Mo)
   emails/apercus/        aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
+  EMAILS-CCAS.md         les 25 e-mails de la plateforme CCAS (ccas.echecs.com/academy) : accès offert, sans paiement, logo des Activités Sociales
+  emails-ccas/           ces 25 e-mails en HTML, avec leurs images (img/) et leurs aperçus (apercus/)
   site/                  vidéo d'en-tête muette (boucle), image de partage du lien (Open Graph)
 ```
 
@@ -111,7 +113,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 ## 6. Liste de contrôle avant le lancement
 
 - [ ] SPF, DKIM, DMARC et désinscription en un clic en place
-- [ ] Les 42 e-mails intégrés, variables reliées, testés sur Gmail, iPhone et Outlook
+- [ ] Les 43 e-mails intégrés, variables reliées, testés sur Gmail, iPhone et Outlook
 - [ ] Déclencheurs priorité 1 branchés (compte, paiement, résiliation, renouvellement annuel, suppression)
 - [ ] Pages préférences, gestion d'abonnement, factures, CGV en ligne
 - [ ] Page d'arrivée avec l'offre, UTM conservés jusqu'au paiement, pixels Meta et TikTok, événements de conversion vérifiés
