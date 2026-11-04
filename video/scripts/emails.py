@@ -166,6 +166,7 @@ def typo(h):   # espace insécable avant : ; ? ! » % et après «, entre un nom
     def t(x):
         x = re.sub(r" ([:;?!»%])", "\u00a0\\1", x); x = x.replace("« ", "«\u00a0")
         x = re.sub(r"(?<=[A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])", "’", x)   # apostrophe typographique
+        x = re.sub(r"\be-mail", "e\u2011mail", x)   # « e-mail » jamais coupé au trait d'union
         x = re.sub(r"\b1(er|re)\b", r"1<sup>\1</sup>", x)
         x = re.sub(r"(\d) (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)", "\\1\u00a0\\2", x)   # 18 novembre
         x = re.sub(r"\b(Objectif|n°|N°|Calcul Gagnant) (\d)", "\\1\u00a0\\2", x)   # Objectif 1400, n° 780

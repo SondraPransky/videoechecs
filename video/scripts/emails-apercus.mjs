@@ -6,7 +6,7 @@ import fs from 'fs';
 const here = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const PROFIL = process.argv[2] || 'abonnes', SUF = PROFIL === 'abonnes' ? '' : '-' + PROFIL;
 const src = path.join(here, `build/_emails${SUF}_apercu`), out = path.join(here, `build/pack/emails${SUF}/apercus`);
-const SOMBRE = PROFIL === 'ccas' ? ['02-bienvenue', '08-cours-de-la-semaine', '12-resultats-tournoi'] : ['02-bienvenue-compte-gratuit', '07-confirmation-abonnement', '19-annonce-masterclass'];
+const SOMBRE = PROFIL === 'ccas' ? ['02-bienvenue', '07-programme-de-la-semaine', '08-cours-de-la-semaine'] : ['02-bienvenue-compte-gratuit', '07-confirmation-abonnement', '19-annonce-masterclass'];
 const ORDI = PROFIL === 'ccas' ? ['02-bienvenue', '08-cours-de-la-semaine', '13-lettre-de-la-semaine'] : ['02-bienvenue-compte-gratuit', '19-annonce-masterclass', '26-lettre-plusieurs-nouvelles'];
 fs.mkdirSync(path.join(out, 'sombre'), { recursive: true }); fs.mkdirSync(path.join(out, 'ordinateur'), { recursive: true });
 const b = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });

@@ -47,12 +47,13 @@ mail(id="06-demarrage-j6-communaute", cat="Démarrage", quand="J+6 après l'insc
             bouton("Voir le prochain tournoi", L("TOURNOIS"))])
 
 # ---------- 3. Cours en direct ----------
-mail(id="07-rappel-cours-direct", cat="Cours en direct", quand="Le lundi et le mercredi, vers 16 h (à tous tant qu'il n'y a pas de case « rappels de cours » dans les préférences ; à prévoir)", alt="Cours en direct à 18 h 30",
-     objet="Ce soir à 18 h 30, cours en direct avec [ANIMATEUR]", pre="Au programme : [THEME_COURS]. Prépare tes questions !", sur="Rappel", titre="Rendez-vous | à 18 h 30 !",
-     corps=[billet("[THEME_COURS]", [("Heure", "18 h 30 · Paris"), ("Avec", "[ANIMATEUR]"), ("Où", "en visioconférence")]),
-            para("[DESCRIPTION_COURS]"), bouton("Rejoindre le cours", L("DIRECT")),
-            para('<span style="color:#6b6b66;font-size:14px">Le lien ouvre la visioconférence : connecte-toi quelques minutes avant 18 h 30 pour vérifier ton son.</span>'),
-            para('<span style="color:#6b6b66;font-size:14px">Tu ne peux pas être là ? Le cours sera disponible en vidéo dans la semaine.</span>')])
+mail(id="07-programme-de-la-semaine", cat="Cours en direct", quand="Chaque lundi vers 10 h, à tous (les deux cours de la semaine)", alt="Cours en direct, lundi et mercredi à 18 h 30",
+     objet="Cette semaine : 2 cours en direct à 18 h 30", pre="Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI].", sur="Cette semaine", titre="Tes deux cours | de la semaine.",
+     corps=[para("[PSEUDO], voici le programme des cours en direct de cette semaine, en visioconférence :"),
+            billet("[THEME_LUNDI]", [("Lundi", "18 h 30 · Paris"), ("Avec", "[ANIMATEUR_LUNDI]")], "[JOUR_LUNDI]", "[MOIS_COURT]"),
+            billet("[THEME_MERCREDI]", [("Mercredi", "18 h 30 · Paris"), ("Avec", "[ANIMATEUR_MERCREDI]")], "[JOUR_MERCREDI]", "[MOIS_COURT]"),
+            bouton("Rejoindre le cours", L("DIRECT")),
+            para('<span style="color:#6b6b66;font-size:14px">Le même lien sert pour les deux cours : garde cet e-mail et connecte-toi quelques minutes avant 18 h 30 pour vérifier ton son. Tu ne peux pas être là ? Le cours sera disponible en vidéo jeudi.</span>')])
 mail(id="08-cours-de-la-semaine", cat="Cours en direct", quand="Chaque semaine, le jeudi (cours du lundi et du mercredi)", alt="Les cours de la semaine",
      objet="Les cours de la semaine sont en vidéo 🎥", pre="Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI].", sur="Cette semaine · [DATE]", titre="Les cours | de la semaine.",
      corps=[para("Bonjour [PSEUDO], voici les deux cours en direct de cette semaine, à revoir quand tu veux."),
@@ -115,8 +116,8 @@ mail(id="18-inactif-30-jours", cat="Réactivation", quand="Sans connexion depuis
 
 # ---------- 8. Partenariat ----------
 mail(id="19-echecs-en-famille", cat="Partenariat", quand="J+14 après l'inscription", alt="Les échecs en famille",
-     objet="Et si tu jouais aux échecs en famille ?", pre="Tes proches bénéficiaires peuvent aussi créer leur compte.", sur="En famille", titre="Les échecs | en famille.",
-     corps=[para("[PSEUDO], les membres de ta famille qui bénéficient des Activités Sociales de l'Énergie peuvent, eux aussi, créer leur compte gratuitement."),
+     objet="Et si tu jouais aux échecs en famille ?", pre="Tes ayants droit peuvent aussi créer leur compte, gratuitement.", sur="En famille", titre="Les échecs | en famille.",
+     corps=[para("[PSEUDO], tes ayants droit (conjoint, enfants…) bénéficient eux aussi des Activités Sociales de l'Énergie : ils peuvent créer leur propre compte, gratuitement."),
             liste(["Chacun avance à son rythme dans le parcours Initiation", "Les cours en direct sont ouverts à tous les niveaux, même aux débutants", "Les tournois en ligne : de quoi organiser des défis à la maison"]),
             bouton("Partager le lien d'inscription", L("INSCRIPTION")),
             para('<span style="color:#6b6b66;font-size:14px">Le lien à transmettre : <a href="https://ccas.echecs.com/academy/" style="color:#1f5fa8">ccas.echecs.com/academy</a></span>')])
@@ -144,10 +145,23 @@ mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la sup
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
      sign="Merci d'avoir joué avec nous,<br><b>L'équipe Europe Échecs</b><br><b style=\"color:#0066cc\">en partenariat avec les Activités Sociales de l'Énergie</b>")
 
+# ---------- 10. Vérification des droits (à activer si l'étape 2 de l'inscription contrôle les droits CCAS) ----------
+mail(id="24-verification-en-cours", cat="Vérification des droits", marketing=False, quand="À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits)",
+     objet="On vérifie ton accès", pre="Tu recevras un e-mail dès que c'est fait.", sur="Ton compte", titre="Vérification | en cours.",
+     corps=[para("[PSEUDO], merci pour ton inscription ! L'accès à la plateforme est réservé aux bénéficiaires des Activités Sociales de l'Énergie : on vérifie tes informations."),
+            encadre("<b>Dès que c'est bon</b>, tu reçois un e-mail de bienvenue et tu peux commencer le parcours Initiation. Ça prend en général [DELAI_VERIFICATION]."),
+            para('<span style="color:#6b6b66;font-size:14px">Une question ? Écris-nous à [EMAIL_CONTACT].</span>')])
+mail(id="25-droits-non-verifies", cat="Vérification des droits", marketing=False, quand="Si les droits n'ont pas pu être vérifiés (à activer si l'étape 2 contrôle les droits)",
+     objet="On n'a pas pu vérifier ton accès", pre="Vérifie tes informations, ou écris-nous.", sur="Ton compte", titre="Un petit souci | avec ton accès.",
+     corps=[para("[PSEUDO], les informations indiquées à l'inscription ne nous ont pas permis de vérifier que tu bénéficies des Activités Sociales de l'Énergie."),
+            liste(["Vérifie qu'il n'y a pas d'erreur de saisie", "Utilise les informations du bénéficiaire (l'ouvreur de droit) ou de l'ayant droit", "Si tout est juste, écris-nous : on regarde avec toi"]),
+            bouton("Vérifier mes informations", L("VERIFICATION")),
+            para('<span style="color:#6b6b66;font-size:14px">Besoin d\'aide ? Écris-nous à [EMAIL_CONTACT].</span>')])
+
 # Titres en deux temps : déjà dans chaque mail (« | »)
 TITRES = {}
 MASCOTTES = {}
-ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir'}
+ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits'}
 EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric", "NIVEAU": "tous niveaux",
     "DESCRIPTION_COURS": "Développer ses pièces, contrôler le centre, roquer : les trois règles d'or des débuts, avec des parties d'exemple commentées en direct.",
     "THEME_LUNDI": "Les principes des débuts", "ANIMATEUR_LUNDI": "Éric", "DUREE_LUNDI": "1 h",
@@ -160,4 +174,4 @@ EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric
     "CHANGEMENT": "les cours en direct du mercredi passeront à 19 h", "MOIS": "novembre", "PSEUDO": "LéaDame", "EMAIL_CONTACT": "europe@echecs.com",
     "THEME_FORT": "les mats élémentaires", "THEME_FAIBLE": "le clouage", "AUTEUR_REPONSE": "Florian", "TITRE_SUJET": "Comment mater avec Roi et Tour ?",
     "EXTRAIT_REPONSE": "Repousse le Roi adverse vers le bord avec ta Tour, puis rapproche ton Roi…", "DERNIERE_LECON": "Le mat du couloir", "LECON_SUIVANTE": "La fourchette",
-    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38"})
+    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})

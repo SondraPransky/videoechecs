@@ -1,19 +1,19 @@
 # Kit développeurs — lancement de l'Académie echecs.com
 
-Ce document dit ce que l'équipe technique doit brancher pour le lancement. Il va avec le **kit développeurs** (`kit-developpeurs.zip`) :
+Ce document dit ce que l'équipe technique doit brancher pour le lancement. Il va avec le **kit développeurs** (`kit-developpeurs-academie.zip`) :
 
 ```
-kit-developpeurs/
+kit-developpeurs-academie/
   DEVELOPPEURS.md        ce document
   EMAILS.md              catalogue complet des 43 e-mails : quand les envoyer, objet, pré-en-tête, variables, règles
   emails/                43 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails/img/            images des e-mails, à héberger (≈ 2,5 Mo)
   emails/apercus/        aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
-  EMAILS-CCAS.md         les 23 e-mails de la plateforme CCAS (ccas.echecs.com/academy) : accès offert, sans paiement, logo des Activités Sociales
-  emails-ccas/           ces 23 e-mails en HTML, avec leurs images (img/) et leurs aperçus (apercus/)
   miniature-mail.py      prépare la miniature YouTube d'un cours pour les e-mails (bouton lecture incrusté, 1072 × 603)
   site/                  vidéo d'en-tête muette (boucle), image de partage du lien (Open Graph)
 ```
+
+Les e-mails de la plateforme CCAS (Activités Sociales de l'Énergie) ont leur propre kit : `kit-developpeurs-ccas.zip`.
 
 Priorités : **(1) obligatoire avant le lancement**, (2) au lancement, (3) dans le mois qui suit.
 
@@ -21,7 +21,7 @@ Priorités : **(1) obligatoire avant le lancement**, (2) au lancement, (3) dans 
 
 ## 1. E-mails : intégration
 
-1. **Héberger `emails/img/`** sur un domaine echecs.com (ex. `https://echecs.com/mail/img/`) et remplacer `[URL_IMAGES]` par cette adresse dans les 42 fichiers.
+1. **Héberger `emails/img/`** sur un domaine echecs.com (ex. `https://echecs.com/mail/img/`) et remplacer `[URL_IMAGES]` par cette adresse dans les 43 fichiers.
 2. **Moteur de gabarits** : chaque `[VARIABLE]` est à remplacer par la donnée correspondante (liste au § 3). Aucune variable ne doit partir telle quelle :
    valeur par défaut ou pas d'envoi. Les textes et le HTML ne sont pas à retoucher (sinon nous redemander).
 3. **Polices** : Fraunces et Manrope sont chargées depuis Google Fonts dans l'en-tête de chaque e-mail ; Outlook sur PC bascule sur Arial et Georgia (déjà prévu).
@@ -59,6 +59,7 @@ Le détail de chaque e-mail (délai, condition) est dans `EMAILS.md`, section «
 | Date anniversaire d'abonnement | 32 | 3 |
 | Masterclass programmée (≥ 7 jours avant), veille 18 h et 1 h avant, replay en ligne, report | 19, 20, 21, 37 | 2 |
 | Nouveau cours en ligne | 22 | 2 |
+| Cours de la semaine en vidéo (le lendemain du dernier cours de la semaine ; miniature préparée avec `miniature-mail.py`) | 43 | 2 |
 | Tournoi programmé (5 jours avant, jour J), inscription, résultats le lendemain | 23, 36, 24 | 2 |
 | Sortie d'un numéro de la revue | 25 | 2 |
 | Lettre d'information (toutes les 1 à 2 semaines, envoyée à la main) | 26 | 2 |
