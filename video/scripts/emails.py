@@ -9,7 +9,8 @@ import html, pathlib, re, shutil
 
 ICI = pathlib.Path(__file__).resolve().parent.parent
 PACK = ICI / "build/pack"
-OUT = PACK / "emails"; APER = ICI / "build/_emails_apercu"
+OUT = PACK / "emails"; APER = ICI / "build/_emails_apercu"; ART = ICI / "build/_emails_artefact"
+shutil.rmtree(ART, ignore_errors=True); ART.mkdir(parents=True)
 for d in (OUT, APER):
     shutil.rmtree(d, ignore_errors=True); (d / "img").mkdir(parents=True)
 
@@ -109,7 +110,7 @@ def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
     b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
     return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:16px 12px" width="50%">{b}'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
-            f'<div style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
+            f'<div class="m-prix" style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
             f'<div style="margin-top:4px;font-family:{SANS};font-weight:700;font-size:14px;color:{C["gris"]}">{unite}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><s>{barre}</s></div>'
             f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:14px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
@@ -125,6 +126,8 @@ def carte(img, titre, texte, lien, cta, src=None):
 <div style="font:16px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
 DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><style>
+@media (max-width: 480px) { .m-pad { padding-left:20px !important; padding-right:20px !important; } .m-out { padding-left:0 !important; padding-right:0 !important; padding-top:0 !important; } h1 { font-size:28px !important; } }
+@media (max-width: 360px) { .m-prix { font-size:25px !important; } }
 @media (prefers-color-scheme: dark) {
   body, [style*="background:#f1f0ea"] { background:#06080c !important; }
   [style*="background:#ffffff"] { background:#121a25 !important; }
@@ -162,20 +165,20 @@ def page(e):
 <title>{html.escape(e["objet"])}</title>{{FONTS}}{DARK}</head>
 <body style="margin:0;padding:0;background:{C['fond']}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{html.escape(e["pre"])}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td class="m-out" align="center" style="padding:24px 12px">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:100%;max-width:600px;background:{C['carte']};border-radius:16px;overflow:hidden">
-<tr><td style="background:{C['nuit']};padding:22px 32px"><img src="{{IMG}}/logo.png" width="170" alt="echecs.com" style="display:block;border:0;width:170px;height:auto"></td></tr>
+<tr><td class="m-pad" style="background:{C['nuit']};padding:22px 32px"><img src="{{IMG}}/logo.png" width="170" alt="echecs.com" style="display:block;border:0;width:170px;height:auto"></td></tr>
 {hero}
-<tr><td style="padding:34px 32px 30px">
+<tr><td class="m-pad" style="padding:34px 32px 30px">
 <div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C['em']};margin:0 0 14px">&mdash;&nbsp;{e['sur']}</div>
 <h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1.15;color:{C['texte']}">{titre}</h1>
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', "À très vite sur l'échiquier,<br><b>L'équipe de l'Académie echecs.com</b>")}</p>
 </td></tr>
-<tr><td style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:14px;color:{C['texte']}">
-<a href="[LIEN_ACADEMIE]" style="color:{C['texte']};text-decoration:none">L'Académie</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_MASTERCLASSES]" style="color:{C['texte']};text-decoration:none">Masterclasses</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_TOURNOIS]" style="color:{C['texte']};text-decoration:none">Tournois</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="[LIEN_FORUM]" style="color:{C['texte']};text-decoration:none">Forum</a></td></tr>
-<tr><td style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C['gris']}">Suis-nous : <a href="[LIEN_INSTAGRAM]" style="color:{C['gris']}">Instagram</a> · <a href="[LIEN_FACEBOOK]" style="color:{C['gris']}">Facebook</a> · <a href="[LIEN_YOUTUBE]" style="color:{C['gris']}">YouTube</a> · <a href="[LIEN_X]" style="color:{C['gris']}">X</a> · <a href="[LIEN_LINKEDIN]" style="color:{C['gris']}">LinkedIn</a></td></tr>
-<tr><td style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>echecs.com · Europe Échecs · [ADRESSE_POSTALE]</td></tr>
+<tr><td class="m-pad" style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:14px;color:{C['texte']}">
+<a href="[LIEN_ACADEMIE]" style="color:{C['texte']};text-decoration:none">L'Académie</a>&nbsp;· <a href="[LIEN_MASTERCLASSES]" style="color:{C['texte']};text-decoration:none">Masterclasses</a>&nbsp;· <a href="[LIEN_TOURNOIS]" style="color:{C['texte']};text-decoration:none">Tournois</a>&nbsp;· <a href="[LIEN_FORUM]" style="color:{C['texte']};text-decoration:none">Forum</a></td></tr>
+<tr><td class="m-pad" style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C['gris']}">Suis-nous : <a href="[LIEN_INSTAGRAM]" style="color:{C['gris']}">Instagram</a> · <a href="[LIEN_FACEBOOK]" style="color:{C['gris']}">Facebook</a> · <a href="[LIEN_YOUTUBE]" style="color:{C['gris']}">YouTube</a> · <a href="[LIEN_X]" style="color:{C['gris']}">X</a> · <a href="[LIEN_LINKEDIN]" style="color:{C['gris']}">LinkedIn</a></td></tr>
+<tr><td class="m-pad" style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>echecs.com · Europe Échecs · [ADRESSE_POSTALE]</td></tr>
 </table></td></tr></table></body></html>'''
 
 L = lambda nom: f"[LIEN_{nom}]"
@@ -465,6 +468,9 @@ for e in E:
     ha = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)
     ha = ha.replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
     (APER / f"{e['id']}.html").write_text(exemple(ha))
+    # version pour la page de validation des e-mails (polices en ligne, exemples, ligne de boîte de réception)
+    hb = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_WEB).replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
+    (ART / f"{e['id']}.html").write_text(exemple(hb))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)
@@ -483,3 +489,4 @@ doc = ICI / "pack/EMAILS.md"
 if doc.exists():
     t = doc.read_text(); a, b = t.find("## Catalogue"), t.find("## Variables")
     if a >= 0 and b > a: doc.write_text(t[:a] + "## Catalogue\n" + "\n".join(lignes) + "\n\n" + t[b:])
+shutil.copytree(APER / "img", ART / "img")

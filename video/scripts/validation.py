@@ -95,13 +95,7 @@ CAR = sorted(d for d in I.iterdir() if d.is_dir() and d.name.startswith("carrous
 S.append({"id": "carrousels", "titre": "Carrousels pédagogiques", "items": [
     item("carrousel-" + d.name.split("-", 2)[2], f"Carrousel {d.name.split('-')[1]} · {d.name.split('-', 2)[2].replace('-', ' ').capitalize()}", f"{len(list(d.glob('*.jpg')))} diapositives · portrait 4:5 · Instagram, LinkedIn, Facebook",
          sorted(d.glob("*.jpg"), key=lambda f: int(f.name.split("-portrait")[0].rsplit("-", 1)[1])), "image") for d in CAR]})
-EM = PACK / "emails/apercus"
-S.append({"id": "emails", "titre": "E-mails de suivi des abonnés", "items": [
-    item("email-" + f.stem, f"{f.stem[:2]} · " + next((l.split("|")[3].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), f.stem),
-         next((l.split("|")[2].strip() for l in (ICI / "pack/EMAILS.md").read_text().splitlines() if l.startswith(f"| `{f.stem}.html`")), ""), [f], "image") for f in sorted(EM.glob("*.jpg"))]})
-if (EM / "sombre").exists():
-    S[-1]["items"].append(item("email-ordinateur", "Sur ordinateur · exemples", "Gmail, Outlook.com, Apple Mail : colonne de 600 px centrée", sorted((EM / "ordinateur").glob("*.jpg")), "image"))
-    S[-1]["items"].append(item("email-mode-sombre", "Mode sombre · exemples", "Apple Mail, iPhone, Outlook.com en thème sombre", sorted((EM / "sombre").glob("*.jpg")), "image"))
+# Les e-mails ont leur propre page de validation : scripts/validation-emails.py
 idt = I / "00-identite"
 S.append({"id": "identite", "titre": "Identité des comptes", "items": [
     item("id-avatars", "Photos de profil", "nuit et soleil", sorted(idt.glob("avatar-*.jpg")), "image"),
