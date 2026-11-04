@@ -107,13 +107,14 @@ def podium(p1, p2, p3):
             + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
 def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
     b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
-    return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:18px 16px">{b}'
+    return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:16px 12px" width="50%">{b}'
             f'<div style="font-family:{SANS};font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
-            f'<div style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:34px;line-height:1;color:{C["texte"]}">{prix}<span style="font-family:{SANS};font-weight:700;font-size:14px;color:{C["gris"]}">&nbsp;{unite}</span></div>'
+            f'<div style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
+            f'<div style="margin-top:4px;font-family:{SANS};font-weight:700;font-size:13px;color:{C["gris"]}">{unite}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-size:13px;color:{C["gris"]}"><s>{barre}</s></div>'
             f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:13px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
 def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise en avant
-    return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate;border-spacing:8px 0"><tr>'
+    return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:18px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
             + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
             + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:13px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
@@ -448,7 +449,15 @@ for e in E:
     h = h[:h.index("<body")] + typo(h[h.index("<body"):])
     VARS |= set(re.findall(r"\[[A-Z_0-9]+\]", h))
     (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
-    (APER / f"{e['id']}.html").write_text(exemple(h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)))
+    # aperçu : la ligne de la boîte de réception (expéditeur, objet, pré-en-tête), comme sur un téléphone
+    boite = (f'<div style="background:#ffffff;border-bottom:1px solid #e4e1d8;padding:14px 18px;font-family:{SANS}">'
+             f'<div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:#0f1420;color:#fae361;font:900 16px/34px {SERIF};text-align:center">é</div>'
+             f'<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:14px;color:#1d1d1b">Académie echecs.com <span style="float:right;font-weight:500;color:#6b6b66">09:41</span></div>'
+             f'<div style="font-weight:700;font-size:14px;color:#1d1d1b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["objet"]}</div>'
+             f'<div style="font-size:13px;color:#6b6b66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["pre"]}</div></div></div></div>')
+    ha = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)
+    ha = ha.replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
+    (APER / f"{e['id']}.html").write_text(exemple(ha))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)
