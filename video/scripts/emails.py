@@ -192,7 +192,7 @@ def typo(h):   # espace insécable avant : ; ? ! » % et après «, entre un nom
 EXPEDITEUR = "Académie echecs.com"
 AVATAR = "é"   # pastille de l'expéditeur dans l'aperçu de la boîte de réception
 POURQUOI = "Tu reçois cet e-mail car tu as un compte sur echecs.com."
-SIGNATURE = "À très vite sur l'échiquier,<br><b>L'équipe de l'Académie echecs.com</b>"
+SIGNATURE = "À très vite sur l'échiquier,<br><b>L'équipe echecs.com</b>"
 ENTETE = f'''<tr><td class="m-pad" style="background:{C['nuit']};padding:22px 32px"><img src="{{IMG}}/logo.png" width="170" alt="echecs.com" style="display:block;border:0;width:170px;height:auto"></td></tr>'''
 LIENS_PIED = [("L'Académie", "[LIEN_ACADEMIE]"), ("Masterclasses", "[LIEN_MASTERCLASSES]"), ("Tournois", "[LIEN_TOURNOIS]"), ("Forum", "[LIEN_FORUM]")]
 RESEAUX = [("Instagram", "[LIEN_INSTAGRAM]"), ("Facebook", "[LIEN_FACEBOOK]"), ("YouTube", "[LIEN_YOUTUBE]"), ("X", "[LIEN_X]"), ("LinkedIn", "[LIEN_LINKEDIN]")]
