@@ -80,7 +80,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 
 | Source | Variables |
 |---|---|
-| Compte | `[PRENOM]`, `[EMAIL_CONTACT]`, `[ADRESSE_POSTALE]` (fixe) |
+| Compte | `[PRENOM]`, `[EMAIL_CONTACT]` (europe@echecs.com), `[ADRESSE_POSTALE]` (fixe) |
 | Abonnement et paiement | `[FORMULE]`, `[PRIX]`, `[DATE]`, `[DATE_PROCHAIN_PAIEMENT]`, `[MOYEN_PAIEMENT]`, `[CARTE_4_CHIFFRES]`, `[MOIS_EXPIRATION]`, `[DATE_SUSPENSION]`, `[DATE_RENOUVELLEMENT]`, `[DATE_FIN]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DUREE_ABONNEMENT]`, `[MOIS]` |
 | Progression (statistiques de l'abonné) | `[SEMAINE]` (« du 9 au 15 nov. »), `[NB_JOURS_ACTIFS]`, `[NB_COURS_SUIVIS]`, `[NB_PARTIES]`, `[PARCOURS]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_NOUVELLES_LECONS]`, `[NB_VIDEOS_SEMAINE]`, `[NB_TOURNOIS_SEMAINE]`, `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[SERIE]`, `[SERIE_MAX]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[MODULE]`, `[MODULE_SUIVANT]`, `[NB_LECONS_MODULE]`, `[NB_EXERCICES_MODULE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_GRATUITES_RESTANTES]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_LECONS_TOTAL]`, `[NB_EXERCICES_TOTAL]`, `[NB_MODULES]` |
 | Masterclass | `[THEME]`, `[COACH]`, `[TITRE_COACH]`, `[URL_PHOTO_COACH]` (carrée, ≥ 128 px), `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[DUREE]`, `[NIVEAU]`, `[DESCRIPTION_MASTERCLASS]`, `[RESUME_MASTERCLASS]`, `[QUAND]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]` |

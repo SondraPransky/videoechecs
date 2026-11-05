@@ -185,7 +185,7 @@ mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la sup
      corps=[para("Ton compte et tes données personnelles ont été supprimés, comme tu l'as demandé. Tu ne recevras plus d'e-mails de notre part."),
             para("Si tu changes d'avis, tu pourras toujours créer un nouveau compte : l'accès reste offert par les Activités Sociales de l'Énergie."),
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
-     sign="Merci d'avoir joué avec nous,<br><b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
+     sign="<b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
 
 # ---------- 10. Vérification des droits (à activer si l'étape 2 de l'inscription contrôle les droits CCAS) ----------
 mail(id="24-verification-en-cours", cat="Vérification des droits", marketing=False, quand="À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits)",

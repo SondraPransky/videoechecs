@@ -20,12 +20,12 @@ mail(id="03-mot-de-passe", cat="Compte", marketing=False, quand="Sur demande de 
 # ---------- 2. Conversion du compte gratuit ----------
 mail(id="04-gratuit-j3-lecons", cat="Compte gratuit → abonnement", quand="J+3 après la création du compte, si pas abonné", img="lecons", alt="Les leçons interactives de l'Académie",
      objet="Tes 6 leçons offertes t'attendent", pre="Vidéo, cours, exercice, quiz : tu as essayé ?", sur="Ta découverte", titre="Tu as essayé une leçon ?",
-     corps=[para("[PRENOM], chaque leçon de l'Académie suit le même chemin : une <b>vidéo</b>, un <b>cours</b>, des <b>exercices</b> sur l'échiquier, puis un <b>quiz</b> pour valider. Tu as [NB_LECONS_GRATUITES_RESTANTES] leçons offertes à découvrir."),
+     corps=[para("[PRENOM], chaque leçon de l'Académie suit le même chemin : une <b>vidéo</b>, un <b>cours</b>, des <b>exercices</b> sur l'échiquier, puis un <b>quiz</b> pour valider. Tu as 6 leçons offertes à découvrir."),
             bouton("Reprendre mes leçons", L("LECONS")), para("Et chaque matin, un nouveau <b>puzzle du jour</b> t'attend pour garder la main.")])
 mail(id="05-gratuit-j7-offre", cat="Compte gratuit → abonnement", quand="J+7 après la création du compte, si pas abonné", img="progression", alt="Le parcours de progression de l'Académie",
      objet="L'Académie complète à 14,90 €/mois", pre="Prix de lancement, sans engagement en mensuel.", sur="Offre de lancement", titre="Passe à l'Académie complète.",
      corps=[para("Tu as goûté à la méthode, [PRENOM]. Avec l'abonnement, tu débloques tout :"),
-            liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéo Europe Échecs et la revue en PGN", "Tes parties analysées, les tournois en ligne"]),
+            liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéos et la revue Europe Échecs", "Tes parties analysées, les tournois en ligne"]),
             offre(), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours", img="exercices", alt="Les exercices de l'Académie",
      objet="Tu hésites encore, [PRENOM] ?", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
@@ -272,7 +272,7 @@ mail(id="40-suppression-compte", cat="Compte", marketing=False, quand="À la sup
      corps=[para("Ton compte echecs.com et tes données personnelles ont été supprimés, comme tu l'as demandé. Tu ne recevras plus d'e-mails de notre part."),
             para("Si tu changes d'avis, tu pourras toujours créer un nouveau compte : les 6 leçons, le forum et le puzzle du jour resteront gratuits."),
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
-     sign="Merci d'avoir joué avec nous,<br><b>L'équipe echecs.com</b>")
+     sign="<b>L'équipe echecs.com</b>")
 
 mail(id="41-parrainage", cat="Engagement", quand="À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre)", img="b-parrainage", alt="Invite un ami",
      objet="Invite un ami, et profitez-en tous les deux", pre="Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN].", sur="Parrainage", titre="Joue avec | tes amis.",

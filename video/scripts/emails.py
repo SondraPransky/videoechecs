@@ -83,8 +83,8 @@ def infos(rows): return '<table role="presentation" cellpadding="0" cellspacing=
 def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
     ok = f'<span style="color:{C["vert"]};font-weight:800">&#10003;</span>'; non = f'<span style="color:#b9b5aa">&mdash;</span>'
     cell = lambda v: ok if v is True else non if v is False else v
-    th = lambda t, bg, col: f'<td align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
-    h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr><td></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
+    th = lambda t, bg, col: f'<td width="30%" align="center" style="padding:12px 8px;background:{bg};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:{col};border-radius:10px 10px 0 0">{t}</td>'
+    h = f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;table-layout:fixed"><tr><td width="40%"></td>{th("Gratuit", C["fond"], C["gris"])}{th("Abonné", C["jaune"], "#111")}</tr>'
     for i, (k, g, a) in enumerate(rows):
         last = i == len(rows) - 1; bb = "" if last else f"border-bottom:1px solid {C['filet']};"
         h += (f'<tr><td style="padding:13px 10px 13px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]};{bb}">{k}</td>'
@@ -120,7 +120,8 @@ def podium(p1, p2, p3):
     return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 8px"><tr>'
             + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
 def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
-    b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
+    # pastille sur les deux cartes (claire pour la carte simple) : prix, unité et notes alignés d'une carte à l'autre
+    b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:{"#111" if mis_en_avant else "#e4e1d8"};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"] if mis_en_avant else C["texte"]}">{badge}</div><br>' if badge else ""
     return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:16px 12px" width="50%">{b}'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
             f'<div class="m-prix" style="margin-top:8px;font-family:{SERIF};font-weight:{GRAS};font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
@@ -129,7 +130,7 @@ def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
             f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:14px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
 def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise en avant
     return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
-            + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
+            + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Résiliable à tout moment", False, "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
             + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:14px;color:{C["gris"]}">Prix de lancement, garanti tant que ton abonnement reste actif.</p>')
 def carte(img, titre, texte, lien, cta, src=None):
@@ -249,7 +250,7 @@ EXEMPLES = {"PRENOM": "Léa", "DATE": "18 novembre", "HEURE": "20 h 30", "JOUR":
     "DATE_RENOUVELLEMENT": "18 décembre", "DATE_FIN": "30 novembre", "DATE_SUSPENSION": "25 novembre", "DATE_FIN_OFFRE": "15 décembre", "TITRE_UNE": "masterclass avec Gata Kamsky",
     "NB_LECONS_GRATUITES_RESTANTES": "4", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "AUTEUR_REPONSE": "Sylvain Ravot", "TITRE_SUJET": "Que jouer contre la Caro-Kann ?",
     "EXTRAIT_REPONSE": "Essaie la variante d'avance : 3.e5, avec un plan simple…", "DATE_EFFET": "1er février", "CHANGEMENT": "l'abonnement mensuel passera à 21,90 €",
-    "EMAIL_CONTACT": "contact@echecs.com", "RESUME_MASTERCLASS": "choisis ton plan d'après la structure de pions, pas d'après la position des pièces.", "URL_PHOTO_COACH": "img/coach-exemple.jpg", "URL_IMAGE_PUZZLE": "img/puzzle-exemple.jpg",
+    "EMAIL_CONTACT": "europe@echecs.com", "RESUME_MASTERCLASS": "choisis ton plan d'après la structure de pions, pas d'après la position des pièces.", "URL_PHOTO_COACH": "img/coach-exemple.jpg", "URL_IMAGE_PUZZLE": "img/puzzle-exemple.jpg",
     "CONSIGNE_PUZZLE": "Les Blancs jouent et font mat en 1.", "OFFRE_FILLEUL": "son premier mois à 9,90 €", "RECOMPENSE_PARRAIN": "un mois offert",
     "CODE_PARRAINAGE": "LEA-2026", "PRENOM_FILLEUL": "Thomas", "QUAND": "Demain", "ADRESSE_POSTALE": "Paris, France"}
 # Contenu de la série (mails, TITRES, MASCOTTES, ENTETES ; peut compléter EXEMPLES et changer les réglages ci-dessus)
