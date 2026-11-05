@@ -1,6 +1,6 @@
 # E-mails de suivi des abonnés — Académie echecs.com
 
-46 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
+52 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
 dans `emails/img/`, et un aperçu de chaque e-mail (largeur téléphone) dans `emails/apercus/`.
 Tous en « tu », dans le style du pack (fond crème, en-tête nuit, bouton jaune), lisibles sur téléphone et dans les messageries
 qui bloquent les images (les textes ne sont jamais dans les images).
@@ -14,6 +14,10 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (co
         │                                        J+7 ──► 05 L'Académie complète à 14,90 €
         │                                       J+21 ──► 06 Tu hésites encore ?
         │                            puis tous les 3 mois ──► 46 Les nouveautés du trimestre (+ offre)
+        │               6ᵉ leçon offerte validée ──► 47 Et maintenant, la suite ?
+        │         7 jours de suite au puzzle du jour ──► 48 Une semaine sans manquer un jour
+        │   ponctuel : 49 Replay de masterclass offert · 50 Tournoi ouvert à tous · 51 1 an avec echecs.com
+        │   saisonnier (tous les comptes) : 52 Offre l'Académie (carte cadeau, Noël)
         │                  paiement commencé, pas fini ──► 33 Ton abonnement n'est pas finalisé
         ▼
 Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours ──► J+3 11 Exercices ──► J+6 12 Masterclasses ──► J+10 13 Communauté
@@ -117,6 +121,17 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `06-gratuit-j21-relance.html` | J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours | Tu hésites encore, [PRENOM] ? | Ce que les abonnés ont en plus, en 30 secondes. | Information (désinscription possible) |
 | `33-paiement-abandonne.html` | 2 heures après une page de paiement ouverte sans paiement | Ton abonnement n’est pas finalisé | Il ne manque qu’une étape. | Information (désinscription possible) |
 | `46-gratuit-nouveautes-trimestre.html` | Tous les 3 mois, aux comptes gratuits qui acceptent les e-mails d'information (après le 06 ; pas dans les 30 jours qui suivent 05, 06, 31 ou 33) | [PRENOM], voici ce qui a changé dans l’Académie | [NB_NOUVELLES_LECONS_TRIMESTRE] nouvelles leçons, des masterclasses, des tournois… et ton prix de lancement t’attend. | Information (désinscription possible) |
+| `47-gratuit-lecons-terminees.html` | Dès que la 6ᵉ leçon offerte est validée (une seule fois) | Bravo, tes 6 leçons offertes sont bouclées 🎉 | La suite t’attend : [LECON_SUIVANTE] et +200 autres leçons. | Information (désinscription possible) |
+| `48-gratuit-serie-puzzles.html` | Le lendemain du 7ᵉ jour de suite sur le puzzle du jour (une seule fois) | 7 jours de suite sur le puzzle du jour 🔥 | Ta régularité paie. Et si tu passais à +2 000 exercices ? | Information (désinscription possible) |
+| `49-gratuit-replay-offert.html` | Quand un replay de masterclass est offert (au plus 1 par trimestre, pas le même mois que le 46) | Cadeau : la masterclass de [COACH] en replay 🎁 | [THEME], en accès libre pendant [DUREE_ACCES]. | Information (désinscription possible) |
+| `50-gratuit-tournoi-ouvert.html` | 5 jours avant un tournoi ouvert à tous, aux comptes gratuits (les abonnés reçoivent le 23) | Tournoi gratuit : [NOM_TOURNOI] le [DATE] | Ouvert à tous les comptes, cadence [CADENCE]. | Information (désinscription possible) |
+| `51-gratuit-anniversaire-compte.html` | À la date anniversaire du compte gratuit (chaque année) | 1 an avec echecs.com, [PRENOM] 🎉 | Ton année en chiffres : merci d’être là ! | Information (désinscription possible) |
+
+### Saisonnier
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `52-offrir-academie.html` | Fin novembre et mi-décembre, à tous les comptes qui acceptent les e-mails d'information (si la carte cadeau existe sur le site) | Et si tu offrais l’Académie à Noël ? 🎁 | Un abonnement en cadeau, à imprimer ou à envoyer par e-mail. | Information (désinscription possible) |
 
 ### Abonnement
 

@@ -47,6 +47,47 @@ mail(id="46-gratuit-nouveautes-trimestre", cat="Compte gratuit → abonnement",
             offre("Toujours au prix de lancement :"), bouton("Je m'abonne", L("ABONNEMENT")),
             para('<span style="color:#6b6b66;font-size:14px">Pas pour l\'instant ? Tes 6 leçons, le forum et le puzzle du jour restent gratuits, sans limite de temps.</span>')])
 
+mail(id="47-gratuit-lecons-terminees", cat="Compte gratuit → abonnement", quand="Dès que la 6ᵉ leçon offerte est validée (une seule fois)", alt="6 leçons bouclées",
+     objet="Bravo, tes 6 leçons offertes sont bouclées 🎉", pre="La suite t'attend : [LECON_SUIVANTE] et +200 autres leçons.", sur="Ta découverte", titre="Et maintenant, | la suite ?",
+     corps=[para("[PRENOM], tu as terminé les 6 leçons offertes de l'Académie : bravo, tu as pris le rythme !"),
+            tuiles([("6", "Leçons terminées"), ("[NB_EXERCICES]", "Exercices réussis"), ("[TAUX_REUSSITE]&nbsp;%", "Réussite")]),
+            encadre("<b>🔒 Ta prochaine leçon : [LECON_SUIVANTE]</b><br>[DESCRIPTION_LECON_SUIVANTE]"),
+            para("Avec l'abonnement, tu continues sans t'arrêter : <b>+200 leçons</b>, <b>+2 000 exercices</b>, les masterclasses et la revue en PGN."),
+            offre("Au prix de lancement :"), bouton("Débloquer la suite", L("ABONNEMENT"))])
+mail(id="48-gratuit-serie-puzzles", cat="Compte gratuit → abonnement", quand="Le lendemain du 7ᵉ jour de suite sur le puzzle du jour (une seule fois)", alt="7 puzzles d'affilée",
+     objet="7 jours de suite sur le puzzle du jour 🔥", pre="Ta régularité paie. Et si tu passais à +2 000 exercices ?", sur="Ta série", titre="Une semaine | sans manquer un jour.",
+     corps=[para("[PRENOM], tu as ouvert le puzzle du jour 7 jours de suite. C'est exactement comme ça qu'on progresse aux échecs."),
+            tuiles([("7", "Jours de suite"), ("[NB_PUZZLES_REUSSIS]", "Puzzles réussis")]),
+            para("Envie d'en faire plus ? Avec l'abonnement, des exercices à ton niveau sur chaque thème :"),
+            liste(["<b>Mat en 1, 2 et 3</b>, fourchettes, clouages, enfilades", "<b>Les finales</b> essentielles, pas à pas", "<b>Ta progression</b> par thème, pour savoir quoi travailler"]),
+            offre("Au prix de lancement :"), bouton("Débloquer les exercices", L("ABONNEMENT")),
+            para('<span style="color:#6b6b66;font-size:14px">Et demain, le puzzle du jour t\'attend : garde ta série !</span>')])
+mail(id="49-gratuit-replay-offert", cat="Compte gratuit → abonnement", quand="Quand un replay de masterclass est offert (au plus 1 par trimestre, pas le même mois que le 46)", alt="Un replay offert",
+     objet="Cadeau : la masterclass de [COACH] en replay 🎁", pre="[THEME], en accès libre pendant [DUREE_ACCES].", sur="Masterclass offerte", titre="Avec [COACH], | en accès libre.",
+     corps=[para("[PRENOM], pour te faire découvrir les masterclasses de l'Académie, on t'offre ce replay, en accès libre pendant <b>[DUREE_ACCES]</b> :"),
+            coach(), carte("b-masterclass", "[THEME]", "[DESCRIPTION_MASTERCLASS]", L("REPLAY_OFFERT"), "Regarder le replay"),
+            para("Avec l'abonnement, toutes les masterclasses sont incluses : en direct, avec tes questions, et en replay quand tu veux."),
+            offre("Au prix de lancement :"), bouton("Je m'abonne", L("ABONNEMENT"))])
+mail(id="50-gratuit-tournoi-ouvert", cat="Compte gratuit → abonnement", quand="5 jours avant un tournoi ouvert à tous, aux comptes gratuits (les abonnés reçoivent le 23)", alt="Tournoi en ligne",
+     exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"},
+     objet="Tournoi gratuit : [NOM_TOURNOI] le [DATE]", pre="Ouvert à tous les comptes, cadence [CADENCE].", sur="Tournoi ouvert à tous", titre="Ton compte gratuit | suffit pour jouer.",
+     corps=[para("[PRENOM], le prochain tournoi en ligne est ouvert à tous les membres d'echecs.com, abonnés ou non :"),
+            billet("[NOM_TOURNOI]", [("Heure", "[HEURE] · Paris"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
+            bouton("Je m'inscris", L("INSCRIPTION_TOURNOI")),
+            para('<span style="color:#6b6b66;font-size:14px">Les abonnés retrouvent en plus leurs parties analysées après le tournoi. <a href="[LIEN_ABONNEMENT]" style="color:#1f5fa8">Voir les formules</a></span>')])
+mail(id="51-gratuit-anniversaire-compte", cat="Compte gratuit → abonnement", quand="À la date anniversaire du compte gratuit (chaque année)", alt="Un an ensemble",
+     objet="1 an avec echecs.com, [PRENOM] 🎉", pre="Ton année en chiffres : merci d'être là !", sur="Anniversaire", titre="Merci d'être là | depuis 1 an.",
+     corps=[para("[PRENOM], ça fait 1 an que tu as créé ton compte echecs.com. Voici ton année :"),
+            tuiles([("[NB_PUZZLES_ANNEE]", "Puzzles résolus"), ("[NB_LECONS_GRATUITES_FAITES]", "Leçons offertes"), ("[NB_MESSAGES_FORUM]", "Messages au forum")]),
+            para("Et si cette deuxième année était celle où tu passes un cap ? L'Académie complète t'accompagne de l'initiation à 2000+."),
+            offre("Toujours au prix de lancement :"), bouton("Passer à l'Académie complète", L("ABONNEMENT"))])
+mail(id="52-offrir-academie", cat="Saisonnier", quand="Fin novembre et mi-décembre, à tous les comptes qui acceptent les e-mails d'information (si la carte cadeau existe sur le site)", alt="Offre l'Académie",
+     objet="Et si tu offrais l'Académie à Noël ? 🎁", pre="Un abonnement en cadeau, à imprimer ou à envoyer par e-mail.", sur="Idée cadeau", titre="Le cadeau | des joueurs d'échecs.",
+     corps=[para("[PRENOM], un proche joue aux échecs, ou rêve de s'y mettre ? Offre-lui l'Académie :"),
+            liste(["<b>Une carte cadeau</b> à imprimer ou à envoyer par e-mail, le jour de ton choix", "<b>L'accès complet</b> : +200 leçons, +2 000 exercices, les masterclasses, la revue en PGN", "<b>Activation en un clic</b>, sans moyen de paiement à fournir"]),
+            encadre("<b>[DUREES_CADEAU]</b>, à partir de <b>[PRIX_CADEAU]</b>."),
+            bouton("Offrir l'Académie", L("CADEAU"))])
+
 # ---------- 3. Abonnement ----------
 mail(id="07-confirmation-abonnement", cat="Abonnement", marketing=False, quand="Au paiement du premier abonnement (transactionnel)", img="objectif", alt="Objectif atteint",
      objet="Bienvenue dans l'Académie, [PRENOM] !", pre="Ton abonnement est actif : voici ton récapitulatif.", sur="Abonnement confirmé", titre="Tu fais partie de l'Académie.",
@@ -254,7 +295,7 @@ mail(id="43-cours-de-la-semaine", cat="Événements", quand="Chaque semaine, le 
             encadre("<b>La semaine prochaine :</b> [PROGRAMME_SEMAINE_PROCHAINE]."),
             bouton("Tous les cours en vidéo", L("COURS_VIDEOS")),
             para('<span style="color:#6b6b66;font-size:14px">Un seul cours cette semaine ? Supprime le second bloc vidéo.</span>')])
-EXEMPLES.update({"PERIODE": "cet automne", "NB_NOUVELLES_LECONS_TRIMESTRE": "24", "NB_MASTERCLASSES_TRIMESTRE": "6", "NB_VIDEOS_TRIMESTRE": "12", "NB_TOURNOIS_TRIMESTRE": "9", "DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
+EXEMPLES.update({"DESCRIPTION_LECON_SUIVANTE": "Le Roi et le pion contre le Roi : la règle du carré et l'opposition, pour gagner ta première finale.", "NB_PUZZLES_REUSSIS": "6", "DUREE_ACCES": "7 jours", "NB_PUZZLES_ANNEE": "214", "NB_LECONS_GRATUITES_FAITES": "6", "NB_MESSAGES_FORUM": "17", "DUREES_CADEAU": "3, 6 ou 12 mois", "PRIX_CADEAU": "44,70 €", "PERIODE": "cet automne", "NB_NOUVELLES_LECONS_TRIMESTRE": "24", "NB_MASTERCLASSES_TRIMESTRE": "6", "NB_VIDEOS_TRIMESTRE": "12", "NB_TOURNOIS_TRIMESTRE": "9", "DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
     "NB_NOUVELLES_LECONS": "6", "NB_VIDEOS_SEMAINE": "3", "NB_TOURNOIS_SEMAINE": "1"})
 EXEMPLES.update({"THEME_COURS_1": "Les principes des débuts", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
     "THEME_COURS_2": "La fourchette de Cavalier", "JOUR_COURS_2": "Jeudi", "ANIMATEUR_COURS_2": "Sylvain Ravot", "DUREE_COURS_2": "55 min",
@@ -281,7 +322,7 @@ MASCOTTES = {}
 ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merci", "27": "renouvellement", "30": "resiliation", "33": "etape", "34": "enregistre", "35": "carte", "37": "deplace", "39": "information", "40": "aurevoir", "02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
            "13": "communaute", "14": "semaine-bilan", "44": "bilan-debut", "45": "bilan-pause", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
-           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine", "46": "trimestre"}
+           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine", "46": "trimestre", "47": "lecons-finies", "48": "puzzles", "49": "replay-offert", "50": "tournoi", "51": "un-an", "52": "cadeau"}
 
 # Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
 TITRES.update({
