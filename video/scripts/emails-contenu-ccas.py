@@ -8,7 +8,7 @@ C["em"] = "#0066cc"   # bleu du logo des Activités Sociales (surtitre, suite du
 EXPEDITEUR = "Europe Échecs · Activités Sociales"
 AVATAR = '<img src="img/favicon.png" width="34" height="34" alt="" style="display:block;width:34px;height:34px;border-radius:50%;background:#ffffff">'
 POURQUOI = "Tu reçois cet e-mail car tu as un compte sur la plateforme d'échecs des Activités Sociales de l'Énergie."
-SIGNATURE = "À très vite sur l'échiquier,<br><b>L'équipe Europe Échecs</b><br><b style=\"color:#0066cc\">en partenariat avec les Activités Sociales de l'Énergie</b>"
+SIGNATURE = "À très vite sur l'échiquier,<br><b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>"
 ENTETE = f'''<tr><td class="m-pad" style="background:#fefefe;padding:24px 32px;border-bottom:1px solid {C['filet']}"><img src="{{IMG}}/logo.png" width="280" alt="activités sociales de l'énergie" style="display:block;border:0;width:280px;max-width:100%;height:auto"></td></tr>'''
 LIENS_PIED = [("La plateforme", "[LIEN_PLATEFORME]"), ("Cours en direct", "[LIEN_COURS_DIRECT]"), ("Tournois", "[LIEN_TOURNOIS]"), ("Forum", "[LIEN_FORUM]")]
 RESEAUX = []
@@ -167,7 +167,7 @@ mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la sup
      corps=[para("Ton compte et tes données personnelles ont été supprimés, comme tu l'as demandé. Tu ne recevras plus d'e-mails de notre part."),
             para("Si tu changes d'avis, tu pourras toujours créer un nouveau compte : l'accès reste offert par les Activités Sociales de l'Énergie."),
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
-     sign="Merci d'avoir joué avec nous,<br><b>L'équipe Europe Échecs</b><br><b style=\"color:#0066cc\">en partenariat avec les Activités Sociales de l'Énergie</b>")
+     sign="Merci d'avoir joué avec nous,<br><b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
 
 # ---------- 10. Vérification des droits (à activer si l'étape 2 de l'inscription contrôle les droits CCAS) ----------
 mail(id="24-verification-en-cours", cat="Vérification des droits", marketing=False, quand="À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits)",

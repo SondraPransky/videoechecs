@@ -7,7 +7,7 @@ les images à héberger dans `emails-ccas/img/`. Même moteur et même design qu
 **Ce qui change par rapport à l'Académie echecs.com :**
 - **Aucun abonnement, aucun paiement** : pas d'offre, de prix, de reçu ni de relance de paiement. L'accès est offert par le partenariat et n'a pas de fin prévue.
 - **Marque** : logo des Activités Sociales de l'Énergie (CCAS) en en-tête, **pas de logo echecs.com**. Expéditeur « Europe Échecs · Activités Sociales » ;
-  signature « L'équipe Europe Échecs, en partenariat avec les Activités Sociales de l'Énergie ». Pas de liens vers les réseaux d'echecs.com dans le pied de page.
+  signature « Les Activités Sociales de l'Énergie, en partenariat avec Europe Échecs ». Pas de liens vers les réseaux d'echecs.com dans le pied de page.
 - **Contenu** : le **parcours Initiation** seulement (leçons et exercices), tournois en ligne, forum, et **cours en direct le lundi et le mercredi à 18 h 30** avec Éric et Florian, en visioconférence.
   Pas de masterclasses ni de revue.
 
