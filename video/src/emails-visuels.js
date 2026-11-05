@@ -25,7 +25,7 @@
     B("resultats", "rose", "Les résultats", "sont là.", "champion"),
     B("revue", "craie", "Le nouveau", "numéro.", "lit-assise"),
     B("nouvelles", "soleil", "Les nouvelles", "de la semaine.", "megaphone"),
-    B("annuel", "nuit", "Passe", "à l'annuel.", "saut-etoile"),
+    B("annuel", "nuit", "Passe", "à l'annuel.", "hourra"),
     B("fin", "craie", "Plus que", "7 jours.", "pendule"),
     B("retour", "ciel", "Reviens", "quand tu veux.", "coucou-autre-main"),
     B("anniversaire", "rose", "Joyeux", "anniversaire !", "fete"),

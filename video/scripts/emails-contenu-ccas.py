@@ -106,7 +106,7 @@ mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche 
 mail(id="26-bilan-semaine-peu-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine (à activer avec les statistiques)", alt="Bon début, on continue ?",
      exemples={"NB_JOURS_ACTIFS": "2", "NB_LECONS": "3", "NB_EXERCICES": "21", "NB_PARTIES": "2", "PROGRESSION_PARCOURS": "34"},
      objet="[PSEUDO], ta semaine d'échecs : on continue ?", pre="[NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout.", sur="Ta semaine · [SEMAINE]", titre="Bon début, | on continue ?",
-     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Chaque séance compte !"),
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
             tuiles([("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis"), ("[NB_PARTIES]", "Parties jouées")]),
             progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
             encadre("<b>Le secret pour progresser :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]. Et lundi à 18 h 30, rejoins le cours en direct !"),
@@ -198,3 +198,15 @@ EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric
     "THEME_FORT": "les mats élémentaires", "THEME_FAIBLE": "le clouage", "AUTEUR_REPONSE": "Florian", "TITRE_SUJET": "Comment mater avec Roi et Tour ?",
     "EXTRAIT_REPONSE": "Repousse le Roi adverse vers le bord avec ta Tour, puis rapproche ton Roi…", "DERNIERE_LECON": "Le mat du couloir", "LECON_SUIVANTE": "La fourchette",
     "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})
+
+# Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
+TITRES.update({
+    "01-confirmation-adresse": "Confirme | ton adresse e-mail.", "03-mot-de-passe": "Un lien, | valable 1 heure.", "05-demarrage-j3-exercices": "La régularité | avant tout.",
+    "08-cours-de-la-semaine": "Tu les as manqués ? | Revois-les.", "13-lettre-de-la-semaine": "À la une : | [TITRE_UNE].", "15-serie-en-danger": "Un exercice | suffit.",
+    "16-reponse-forum": "[AUTEUR_REPONSE] | t'a répondu.", "17-inactif-7-jours": "Ta leçon | t'attend.", "18-inactif-30-jours": "Voici ce qui | a changé.",
+    "19-echecs-en-famille": "Invite | tes proches.", "20-questionnaire-satisfaction": "2 minutes | pour nous aider ?", "21-bilan-annuel": "Ta première année | en chiffres.",
+    "22-changement-acces": "À partir du | [DATE_EFFET].", "23-suppression-compte": "Ton compte | est supprimé.", "24-verification-en-cours": "Merci, | [PSEUDO] !",
+    "25-droits-non-verifies": "On n'a pas pu | vérifier ton accès.", "26-bilan-semaine-peu-actif": "Chaque séance | compte !", "27-bilan-semaine-sans-activite": "Une leçon | pour repartir ?",
+})
+for e in E:
+    if e["id"] == "13-lettre-de-la-semaine": e["sur"] = "La lettre · [DATE]"

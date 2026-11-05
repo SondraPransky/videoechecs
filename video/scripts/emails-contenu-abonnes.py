@@ -82,7 +82,7 @@ mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche 
 mail(id="44-bilan-semaine-peu-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine", alt="Bon début, on continue ?",
      exemples={"NB_JOURS_ACTIFS": "2", "NB_LECONS": "3", "NB_EXERCICES": "21", "NB_PARTIES": "2", "PROGRESSION_PARCOURS": "34"},
      objet="[PRENOM], ta semaine d'échecs : on continue ?", pre="[NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout.", sur="Ta semaine · [SEMAINE]", titre="Bon début, | on continue ?",
-     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Chaque séance compte !"),
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
             tuiles([("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis"), ("[NB_PARTIES]", "Parties jouées")]),
             progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
             encadre("<b>Le secret des joueurs qui progressent :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]."),
@@ -268,3 +268,20 @@ ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merc
            "13": "communaute", "14": "semaine-bilan", "44": "bilan-debut", "45": "bilan-pause", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
            "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine"}
+
+# Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
+TITRES.update({
+    "01-confirmation-adresse": "Confirme | ton adresse e-mail.", "03-mot-de-passe": "Un lien, | valable 1 heure.",
+    "05-gratuit-j7-offre": "Tout débloquer, | dès 14,90 €.", "08-paiement-refuse": "Mets ta carte | à jour.", "09-paiement-recu": "Ton paiement | est bien reçu.",
+    "11-demarrage-j3-exercices": "La régularité | avant tout.", "15-objectif-atteint": "Au suivant, | [PRENOM] !", "16-serie-en-danger": "Un exercice | suffit.",
+    "17-inactif-7-jours": "Ta leçon | t'attend.", "18-inactif-30-jours": "Voici ce qui | a changé.", "19-annonce-masterclass": "Avec [COACH], | en direct.",
+    "21-replay-masterclass": "Tu l'as manquée ? | Revois-la.", "22-nouveau-cours": "[TITRE_COURS], | par [AUTEUR].", "26-lettre-plusieurs-nouvelles": "À la une : | [TITRE_UNE].",
+    "27-renouvellement-annuel-j30": "Renouvellement | le [DATE_RENOUVELLEMENT].", "28-passage-annuel": "Économise | 28,80 € par an.",
+    "29-fin-abonnement-j7": "Ton accès s'arrête | le [DATE_FIN].", "30-resiliation-confirmee": "Ton accès reste ouvert | jusqu'au [DATE_FIN].",
+    "31-reconquete-j30": "Du nouveau | depuis ton départ.", "32-anniversaire": "[DUREE_ABONNEMENT] | à nos côtés.", "33-paiement-abandonne": "Ton abonnement | t'attend.",
+    "34-changement-formule": "Ta nouvelle formule : | [FORMULE].", "35-carte-expire": "Mets-la à jour | en 1 minute.", "38-reponse-forum": "[AUTEUR_REPONSE] | t'a répondu.",
+    "39-changement-tarif": "À partir du | [DATE_EFFET].", "40-suppression-compte": "Ton compte | est supprimé.", "43-cours-de-la-semaine": "Tu les as manqués ? | Revois-les.",
+    "44-bilan-semaine-peu-actif": "Chaque séance | compte !", "45-bilan-semaine-sans-activite": "Une leçon | pour repartir ?",
+})
+for e in E:
+    if e["id"] == "26-lettre-plusieurs-nouvelles": e["sur"] = "La lettre · [DATE]"
