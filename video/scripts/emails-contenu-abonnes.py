@@ -33,6 +33,20 @@ mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+
             comparatif([("Leçons", "6", "+200"), ("Exercices", "puzzle du jour", "+2 000"), ("Masterclasses", False, True), ("Revue en PGN", False, True), ("Tes parties analysées", False, True), ("Forum", True, True)]),
             offre("Toujours au prix de lancement :"), bouton("Choisir ma formule", L("ABONNEMENT"))])
 
+mail(id="46-gratuit-nouveautes-trimestre", cat="Compte gratuit → abonnement",
+     quand="Tous les 3 mois, aux comptes gratuits qui acceptent les e-mails d'information (après le 06 ; pas dans les 30 jours qui suivent 05, 06, 31 ou 33)",
+     alt="Quoi de neuf à l'Académie ?",
+     exemples={"TITRE_UNE": "Les finales de Tours, par Marc Quenehen", "DESCRIPTION_UNE": "Lucena, Philidor, la Tour active : 18 leçons pour sauver ou gagner les finales les plus fréquentes."},
+     objet="[PRENOM], voici ce qui a changé dans l'Académie", pre="[NB_NOUVELLES_LECONS_TRIMESTRE] nouvelles leçons, des masterclasses, des tournois… et ton prix de lancement t'attend.",
+     sur="Ton compte gratuit", titre="Du nouveau | [PERIODE] !",
+     corps=[para("[PRENOM], ces 3 derniers mois, l'Académie s'est encore enrichie :"),
+            nouveautes("Ces 3 derniers mois", [("Nouvelles leçons", "[NB_NOUVELLES_LECONS_TRIMESTRE]"), ("Masterclasses en direct", "[NB_MASTERCLASSES_TRIMESTRE]"), ("Cours en vidéo", "[NB_VIDEOS_TRIMESTRE]"), ("Tournois organisés", "[NB_TOURNOIS_TRIMESTRE]")]),
+            carte("b-cours", "À la une : [TITRE_UNE]", "[DESCRIPTION_UNE]", L("UNE"), "Découvrir"),
+            para("Avec ton compte gratuit, tu profites déjà de 6 leçons, du forum et du puzzle du jour. Avec l'abonnement, tu débloques tout :"),
+            liste(["<b>+200 leçons</b> et <b>+2 000 exercices</b>, de l'initiation à 2000+", "<b>Les masterclasses</b> en direct et leurs replays", "<b>La revue Europe Échecs</b> en PGN et tes parties analysées"]),
+            offre("Toujours au prix de lancement :"), bouton("Je m'abonne", L("ABONNEMENT")),
+            para('<span style="color:#6b6b66;font-size:14px">Pas pour l\'instant ? Tes 6 leçons, le forum et le puzzle du jour restent gratuits, sans limite de temps.</span>')])
+
 # ---------- 3. Abonnement ----------
 mail(id="07-confirmation-abonnement", cat="Abonnement", marketing=False, quand="Au paiement du premier abonnement (transactionnel)", img="objectif", alt="Objectif atteint",
      objet="Bienvenue dans l'Académie, [PRENOM] !", pre="Ton abonnement est actif : voici ton récapitulatif.", sur="Abonnement confirmé", titre="Tu fais partie de l'Académie.",
@@ -240,7 +254,7 @@ mail(id="43-cours-de-la-semaine", cat="Événements", quand="Chaque semaine, le 
             encadre("<b>La semaine prochaine :</b> [PROGRAMME_SEMAINE_PROCHAINE]."),
             bouton("Tous les cours en vidéo", L("COURS_VIDEOS")),
             para('<span style="color:#6b6b66;font-size:14px">Un seul cours cette semaine ? Supprime le second bloc vidéo.</span>')])
-EXEMPLES.update({"DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
+EXEMPLES.update({"PERIODE": "cet automne", "NB_NOUVELLES_LECONS_TRIMESTRE": "24", "NB_MASTERCLASSES_TRIMESTRE": "6", "NB_VIDEOS_TRIMESTRE": "12", "NB_TOURNOIS_TRIMESTRE": "9", "DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
     "NB_NOUVELLES_LECONS": "6", "NB_VIDEOS_SEMAINE": "3", "NB_TOURNOIS_SEMAINE": "1"})
 EXEMPLES.update({"THEME_COURS_1": "Les principes des débuts", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
     "THEME_COURS_2": "La fourchette de Cavalier", "JOUR_COURS_2": "Jeudi", "ANIMATEUR_COURS_2": "Sylvain Ravot", "DUREE_COURS_2": "55 min",
@@ -267,7 +281,7 @@ MASCOTTES = {}
 ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merci", "27": "renouvellement", "30": "resiliation", "33": "etape", "34": "enregistre", "35": "carte", "37": "deplace", "39": "information", "40": "aurevoir", "02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
            "13": "communaute", "14": "semaine-bilan", "44": "bilan-debut", "45": "bilan-pause", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
-           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine"}
+           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine", "46": "trimestre"}
 
 # Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
 TITRES.update({

@@ -20,7 +20,7 @@ images/
                      chaque quiz a aussi sa réponse : `…-reponse-story-1080x1920.jpg` et `…-reponse-carre-1080x1080.jpg`, à publier le lendemain
   carrousel-1-mat-du-couloir/, carrousel-2-regle-du-carre/, carrousel-3-fegatello/
                      3 carrousels pédagogiques de 7 diapositives (portrait 1080×1350, Instagram, LinkedIn, Facebook)
-emails/              45 e-mails de suivi des abonnés en HTML (img/ à héberger, apercus/ pour les voir)
+emails/              46 e-mails de suivi des abonnés en HTML (img/ à héberger, apercus/ pour les voir)
 apercu.html          planche de toutes les images
 TEXTES-PUBLICATIONS.md   textes prêts à publier, hashtags, calendrier type, liens de suivi (UTM)
 TEXTES-ALTERNATIFS.md    description de chaque image pour les lecteurs d'écran (accessibilité)
@@ -29,7 +29,7 @@ CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mai
 TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
 DEVELOPPEURS.md          ce que l'équipe technique doit brancher (e-mails, pages, suivi) ; va avec kit-developpeurs-academie.zip
 DEVELOPPEURS-CCAS.md     idem pour la plateforme CCAS (27 e-mails des bénéficiaires) ; va avec kit-developpeurs-ccas.zip
-EMAILS.md                parcours de l'abonné, catalogue des 45 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
+EMAILS.md                parcours de l'abonné, catalogue des 46 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
 ```
 
 ## Quel format pour quel réseau

@@ -5,8 +5,8 @@ Ce document dit ce que l'équipe technique doit brancher pour le lancement. Il v
 ```
 kit-developpeurs-academie/
   DEVELOPPEURS.md        ce document
-  EMAILS.md              catalogue complet des 45 e-mails : quand les envoyer, objet, pré-en-tête, variables, règles
-  emails/                45 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS.md              catalogue complet des 46 e-mails : quand les envoyer, objet, pré-en-tête, variables, règles
+  emails/                46 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails/img/            images des e-mails, à héberger (≈ 2,5 Mo)
   emails/apercus/        aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
   miniature-mail.py      prépare la miniature YouTube d'un cours pour les e-mails (bouton lecture incrusté, 1072 × 603)
@@ -40,6 +40,7 @@ Le détail de chaque e-mail (délai, condition) est dans `EMAILS.md`, section «
 | Création de compte | 01 confirmation d'adresse, puis 02 bienvenue | 1 |
 | Demande de nouveau mot de passe | 03 | 1 |
 | Compte gratuit sans abonnement à J+3, J+7, J+21 | 04, 05, 06 | 2 |
+| Compte gratuit : tous les 3 mois après le 06 (pas dans les 30 jours après 05, 06, 31, 33) | 46 nouveautés du trimestre | 2 |
 | Page de paiement ouverte sans paiement (2 h après) | 33 | 2 |
 | Premier paiement d'abonnement | 07, puis la série de démarrage 10 (J+1), 11 (J+3), 12 (J+6), 13 (J+10) | 1 |
 | Échec de prélèvement (+ relance à J+3) | 08 | 1 |
@@ -79,7 +80,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 | Masterclass | `[THEME]`, `[COACH]`, `[TITRE_COACH]`, `[URL_PHOTO_COACH]` (carrée, ≥ 128 px), `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[DUREE]`, `[NIVEAU]`, `[DESCRIPTION_MASTERCLASS]`, `[RESUME_MASTERCLASS]`, `[QUAND]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]` |
 | Tournoi | `[NOM_TOURNOI]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Cours, revue, forum | `[TITRE_COURS]`, `[AUTEUR]`, `[NB_LECONS_COURS]`, `[DESCRIPTION_COURS]`, `[NUMERO]`, `[SOMMAIRE_1..3]`, `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
-| Saisie éditoriale (lettre, réactivation) | `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[DATE_TOURNOI]`, `[HEURE_TOURNOI]` (tournoi de la lettre 26), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
+| Saisie éditoriale (lettre, réactivation) | `[PERIODE]` (« cet automne »), `[NB_NOUVELLES_LECONS_TRIMESTRE]`, `[NB_MASTERCLASSES_TRIMESTRE]`, `[NB_VIDEOS_TRIMESTRE]`, `[NB_TOURNOIS_TRIMESTRE]`, `[DESCRIPTION_UNE]`, `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[DATE_TOURNOI]`, `[HEURE_TOURNOI]` (tournoi de la lettre 26), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
 | Parrainage | `[CODE_PARRAINAGE]`, `[PRENOM_FILLEUL]`, `[OFFRE_FILLEUL]`, `[RECOMPENSE_PARRAIN]` |
 
 **Liens** (`[LIEN_…]`, une adresse de page du site par variable) : la liste complète est dans `EMAILS.md`. Ajouter à chaque lien
@@ -115,7 +116,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 ## 6. Liste de contrôle avant le lancement
 
 - [ ] SPF, DKIM, DMARC et désinscription en un clic en place
-- [ ] Les 45 e-mails intégrés, variables reliées, testés sur Gmail, iPhone et Outlook
+- [ ] Les 46 e-mails intégrés, variables reliées, testés sur Gmail, iPhone et Outlook
 - [ ] Déclencheurs priorité 1 branchés (compte, paiement, résiliation, renouvellement annuel, suppression)
 - [ ] Pages préférences, gestion d'abonnement, factures, CGV en ligne
 - [ ] Page d'arrivée avec l'offre, UTM conservés jusqu'au paiement, pixels Meta et TikTok, événements de conversion vérifiés

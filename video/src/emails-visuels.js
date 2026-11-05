@@ -53,6 +53,7 @@
     B("direct", "rose", "Lundi et mercredi,", "18\u00a0h\u00a030.", "prof"),
     B("semaine", "nuit", "Les cours", "de la semaine.", "regarde"),
     B("un-an", "menthe", "Un an", "ensemble !", "fete"),
+    B("trimestre", "soleil", "Quoi de neuf", "à l'Académie ?", "megaphone"),
     B("semaine-bilan", "nuit", "Ta semaine", "d'échecs.", "serie-reussie"),
     B("bilan-debut", "menthe", "Bon début,", "on continue ?", "marche"),
     B("bilan-pause", "ciel", "Ta place", "t'attend.", "cafe"),
