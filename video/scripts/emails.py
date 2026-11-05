@@ -62,12 +62,12 @@ C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", 
 SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
 # Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
 # fichiers locaux pour les aperçus.
-FONTS_WEB = '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet"><!--<![endif]-->'
+FONTS_WEB = '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@400;700;800&display=swap" rel="stylesheet"><!--<![endif]-->'
 # Outlook sur PC (moteur Word) : il ne charge pas les polices web et prendrait Times New Roman ; on impose Arial et Georgia
 FONTS_WEB += '<!--[if mso]><style>body,table,td,p,a,div,span,li{font-family:Arial,Helvetica,sans-serif !important} h1,h1 span{font-family:Georgia,serif !important}</style><![endif]-->'
 NM = ICI / "node_modules/@fontsource"
 FONTS_LOCAL = "<style>" + "".join(f'@font-face{{font-family:"{f}";font-weight:{w};font-style:{st};src:url("file://{NM}/{f.lower()}/files/{f.lower()}-latin-{w}-{st}.woff2") format("woff2")}}'
-    for f, w, st in (("Fraunces", 900, "normal"), ("Fraunces", 400, "italic"), ("Manrope", 500, "normal"), ("Manrope", 700, "normal"), ("Manrope", 800, "normal"))) + "</style>"
+    for f, w, st in (("Fraunces", 900, "normal"), ("Fraunces", 400, "italic"), ("Manrope", 400, "normal"), ("Manrope", 700, "normal"), ("Manrope", 800, "normal"))) + "</style>"
 
 def bouton(txt, lien):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td bgcolor="{C['jaune']}" style="border-radius:999px;background:{C['jaune']};mso-padding-alt:16px 28px">
@@ -131,17 +131,17 @@ def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise
     return ((para(intro) if intro else "") + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;border-spacing:6px 0;table-layout:fixed"><tr>'
             + carte_prix("Mensuel", "14,90&nbsp;€", "/mois", "19,90 €/mois", "Sans engagement")
             + carte_prix("Annuel", "150&nbsp;€", "/an", "179,90 €/an", "Soit 12,50 € par mois", True, "Le plus avantageux") + "</tr></table>"
-            + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:14px;color:{C["gris"]}">Prix de lancement, garanti tant que tu restes abonné.</p>')
+            + f'<p style="margin:0 0 6px;font-family:{SANS};font-size:14px;color:{C["gris"]}">Prix de lancement, garanti tant que ton abonnement reste actif.</p>')
 def carte(img, titre, texte, lien, cta, src=None):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
 <tr><td{' style="background:#f1f0ea;padding:18px 18px 0"' if src else ""}><img src="{src or "{IMG}/" + img + ".jpg"}" width="{500 if src else 536}" alt="" style="display:block;width:100%;height:auto;border:0;{"border-radius:10px;" if src else ""}"></td></tr>
-<tr><td style="padding:18px 20px 20px"><div style="font:bold 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
+<tr><td style="padding:18px 20px 20px"><div style="font:900 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
 <div style="font:16px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
 def video(miniature, titre, sous, lien_lecon, lien_youtube):   # cours filmé : miniature YouTube en entier (bouton lecture incrusté, scripts/miniature-mail.py), titre, liens
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C["filet"]};border-radius:12px;overflow:hidden">'
             f'<tr><td style="background:{C["nuit"]}"><a href="{lien_youtube}"><img src="{miniature}" width="536" alt="Regarder la vidéo : {titre}" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
-            f'<tr><td style="padding:16px 20px 18px"><div style="font:bold 20px/1.3 {SERIF};color:{C["texte"]};margin:0 0 6px">{titre}</div>'
+            f'<tr><td style="padding:16px 20px 18px"><div style="font:900 20px/1.3 {SERIF};color:{C["texte"]};margin:0 0 6px">{titre}</div>'
             f'<div style="font:14px/1.5 {SANS};color:{C["gris"]};margin:0 0 12px">{sous}</div>'
             f'<a href="{lien_lecon}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">Revoir le cours&nbsp;&rarr;</a>'
             f'<span style="font:16px {SANS};color:{C["filet"]}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>'
@@ -206,7 +206,8 @@ def page(e):
     if not e.get("img") and e.get("mascotte"):   # pas d'image : la mascotte, sur le fond nuit de l'en-tête
         hero = f'<tr><td align="center" style="background:{C["nuit"]};padding:4px 0 0"><img src="{{IMG}}/mascotte-{e["mascotte"]}.png" height="150" alt="" style="display:block;height:150px;width:auto;border:0;margin:6px auto 0"></td></tr>'
     t1, _, t2 = e["titre"].partition("|")
-    titre = t1.strip() + (f'<br><span style="font-family:{SERIF};font-style:italic;font-weight:400;color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
+    # deux temps sur la même ligne (la suite en italique bleu) : retour à la ligne seulement s'il manque de place
+    titre = t1.strip() + (f' <span style="font-family:{SERIF};font-style:italic;font-weight:400;color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
     corps = "".join(e["corps"])
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">

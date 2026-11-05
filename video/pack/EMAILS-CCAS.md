@@ -57,7 +57,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 - **Cours en direct** : en visioconférence (Zoom, Teams…) ; `[LIEN_DIRECT]` est le lien de la visio, donné dans le rappel (07) et dans l'e-mail de report (09).
 - **Contact** : `[EMAIL_CONTACT]` = europe@echecs.com.
 - **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14, 26, 27 bilan de la semaine ; 21 bilan de l'année),
-  série de jours (15, et la mention dans 05), parties sauvegardées (bouton « Analyser mes parties » du 12).
+  série de jours (15, et la mention dans 05), parties sauvegardées (à ajouter alors dans le 12 : « Analyser mes parties »).
 - **Bilan de la semaine** (3 versions, une seule part le dimanche vers 18 h, selon les jours d'entraînement de la semaine) : actif (≥ 3 jours), peu actif (1 ou 2 jours), sans activité (0 jour ; au plus 2 semaines de suite, et pas la semaine où part la relance d'inactivité 17). Chiffres présentés comme des compteurs (« Leçons : 3 ») : l'accord est juste quelle que soit la valeur. `[PROGRESSION_PARCOURS]` est un nombre de 0 à 100 (largeur de la barre).
 - **Rappel des cours** : un seul e-mail par semaine, le lundi (07), avec les deux cours ; à tous les joueurs qui acceptent les e-mails d'information.
 - **Famille** : les ayants droit (conjoint, enfants…) créent leur propre compte (e-mail 19).
@@ -107,7 +107,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 |---|---|---|---|---|
 | `10-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `11-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
-| `12-resultats-tournoi.html` | Le lendemain du tournoi, aux participants (bouton « Analyser mes parties » : quand les parties seront sauvegardées) | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
+| `12-resultats-tournoi.html` | Le lendemain du tournoi, aux participants (ajouter « Analyser mes parties » quand les parties seront sauvegardées) | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
 
 ### Lettre de la semaine
 

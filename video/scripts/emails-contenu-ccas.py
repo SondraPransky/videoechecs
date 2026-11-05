@@ -40,10 +40,10 @@ mail(id="04-demarrage-j1-cours-direct", cat="Démarrage", quand="J+1 après l'in
 mail(id="05-demarrage-j3-exercices", cat="Démarrage", quand="J+3 après l'inscription", alt="Les exercices",
      objet="10 minutes par jour suffisent", pre="Des exercices rangés par thème, pour bien démarrer.", sur="Exercices", titre="10 minutes | par jour.",
      corps=[para("La régularité fait plus que les longues séances. Chaque jour, quelques exercices à ton niveau : mat en 1, fourchette, clouage, finales…"),
-            para("Ta <b>série de jours</b> s'affiche sur ton tableau de bord : essaie de ne pas la casser !"), bouton("Faire mes exercices du jour", L("EXERCICES"))])
+            para("Le bon rythme : <b>un peu chaque jour</b>, plutôt que beaucoup une fois par semaine."), bouton("Faire mes exercices du jour", L("EXERCICES"))])
 mail(id="06-demarrage-j6-communaute", cat="Démarrage", quand="J+6 après l'inscription", alt="Joue, partage, mesure-toi",
      objet="Joue, partage, mesure-toi", pre="Tournois en ligne et forum : rejoins les autres joueurs.", sur="Communauté", titre="Rejoins | la communauté.",
-     corps=[liste(["<b>Les tournois en ligne</b>, ouverts à tous les niveaux", "<b>Le forum</b>, pour poser tes questions à Éric, à Florian et aux autres joueurs", "<b>Tes parties</b> : rejoue-les et analyse-les"]),
+     corps=[liste(["<b>Les tournois en ligne</b>, ouverts à tous les niveaux", "<b>Le forum</b>, pour poser tes questions à Éric, à Florian et aux autres joueurs", "<b>Les cours en direct</b>, pour progresser ensemble le lundi et le mercredi"]),
             bouton("Voir le prochain tournoi", L("TOURNOIS"))])
 
 # ---------- 3. Cours en direct ----------
@@ -55,7 +55,7 @@ mail(id="07-programme-de-la-semaine", cat="Cours en direct", quand="Chaque lundi
             bouton("Rejoindre le cours", L("DIRECT")),
             para('<span style="color:#6b6b66;font-size:14px">Le même lien sert pour les deux cours : garde cet e-mail et connecte-toi quelques minutes avant 18 h 30 pour vérifier ton son. Tu ne peux pas être là ? Le cours sera disponible en vidéo jeudi.</span>')])
 mail(id="08-cours-de-la-semaine", cat="Cours en direct", quand="Chaque semaine, le jeudi (cours du lundi et du mercredi)", alt="Les cours de la semaine",
-     objet="Les cours de la semaine sont en vidéo 🎥", pre="Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI].", sur="Cette semaine · [DATE]", titre="Les cours | de la semaine.",
+     objet="Les cours de la semaine sont en vidéo 🎥", pre="Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI].", sur="Cette semaine · [DATE_ENVOI]", titre="Les cours | de la semaine.",
      corps=[para("Bonjour [PSEUDO], voici les deux cours en direct de cette semaine, à revoir quand tu veux."),
             video("[URL_MINIATURE_LUNDI]", "[THEME_LUNDI]", "Lundi · avec [ANIMATEUR_LUNDI] · [DUREE_LUNDI]", L("COURS_LUNDI"), L("YOUTUBE_LUNDI")),
             video("[URL_MINIATURE_MERCREDI]", "[THEME_MERCREDI]", "Mercredi · avec [ANIMATEUR_MERCREDI] · [DUREE_MERCREDI]", L("COURS_MERCREDI"), L("YOUTUBE_MERCREDI")),
@@ -68,23 +68,23 @@ mail(id="09-cours-deplace", cat="Cours en direct", marketing=False, quand="Si un
             para("Désolés pour ce changement. Le cours sera, comme toujours, disponible en vidéo."), bouton("Voir les prochains cours", L("COURS_DIRECT"))])
 
 # ---------- 4. Tournois ----------
-mail(id="10-annonce-tournoi", cat="Tournois", quand="5 jours avant un tournoi, rappel le jour J (même modèle)", alt="Tournoi en ligne",
+mail(id="10-annonce-tournoi", exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"}, cat="Tournois", quand="5 jours avant un tournoi, rappel le jour J (même modèle)", alt="Tournoi en ligne",
      objet="Tournoi : [NOM_TOURNOI] le [DATE]", pre="Cadence [CADENCE], ouvert à tous les niveaux.", sur="Tournoi en ligne", titre="À toi | de jouer !",
      corps=[para("Mesure-toi aux autres joueurs de la plateforme !"), billet("[NOM_TOURNOI]", [("Heure", "[HEURE] · Paris"), ("Cadence", "[CADENCE]"), ("Rondes", "[NB_RONDES]"), ("Niveau", "ouvert à tous")]),
             bouton("Je m'inscris", L("INSCRIPTION_TOURNOI")), para('<span style="color:#6b6b66;font-size:14px">Gratuit, comme tout le reste : il suffit de t\'inscrire.</span>')])
-mail(id="11-inscription-tournoi", cat="Tournois", marketing=False, quand="À l'inscription à un tournoi (transactionnel)", alt="Inscription confirmée",
+mail(id="11-inscription-tournoi", exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"}, cat="Tournois", marketing=False, quand="À l'inscription à un tournoi (transactionnel)", alt="Inscription confirmée",
      objet="Inscription confirmée : [NOM_TOURNOI]", pre="Rendez-vous le [DATE] à [HEURE].", sur="Inscription confirmée", titre="C'est noté, | rendez-vous à [HEURE] !",
      corps=[billet("[NOM_TOURNOI]", [("Heure", "[HEURE] · Paris"), ("Cadence", "[CADENCE]")]),
             para("Connecte-toi 10 minutes avant le début : les appariements de la 1re ronde sont publiés à [HEURE]."), bouton("Voir le tournoi", L("TOURNOI")),
             para('<span style="color:#6b6b66;font-size:14px">Un empêchement ? <a href="[LIEN_DESINSCRIPTION_TOURNOI]" style="color:#1f5fa8">Libère ta place</a>.</span>')])
-mail(id="12-resultats-tournoi", cat="Tournois", quand="Le lendemain du tournoi, aux participants (bouton « Analyser mes parties » : quand les parties seront sauvegardées)", alt="Résultats du tournoi",
+mail(id="12-resultats-tournoi", cat="Tournois", quand="Le lendemain du tournoi, aux participants (ajouter « Analyser mes parties » quand les parties seront sauvegardées)", alt="Résultats du tournoi",
      objet="Résultats : [NOM_TOURNOI]", pre="Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo !", sur="Résultats", titre="Merci | d'avoir joué !",
      corps=[para("[PSEUDO], tu termines <b>[PLACE]<sup>e</sup> sur [NB_JOUEURS]</b> au <b>[NOM_TOURNOI]</b>, avec <b>[POINTS] points</b> sur [NB_RONDES]. Voici le podium :"),
-            podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Revois tes parties : elles sont déjà dans ton espace, prêtes à être analysées."),
-            bouton("Analyser mes parties", L("MES_PARTIES")), para('<a href="[LIEN_CLASSEMENT]" style="font-weight:800;color:#1f5fa8;text-decoration:none">Voir le classement complet&nbsp;&rarr;</a>')])
+            podium("[VAINQUEUR]", "[DEUXIEME]", "[TROISIEME]"), para("Bravo pour ta participation ! Le prochain tournoi est déjà au programme."),
+            bouton("Voir le classement complet", L("CLASSEMENT")), para('<a href="[LIEN_TOURNOIS]" style="font-weight:800;color:#1f5fa8;text-decoration:none">Voir le prochain tournoi&nbsp;&rarr;</a>')])
 
 # ---------- 5. Lettre de la semaine (plusieurs nouvelles) ----------
-mail(id="13-lettre-de-la-semaine", cat="Lettre de la semaine", quand="Les semaines où il y a 2 ou 3 nouvelles (remplace alors l'e-mail 08)", alt="Les nouvelles de la semaine",
+mail(id="13-lettre-de-la-semaine", exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"}, cat="Lettre de la semaine", quand="Les semaines où il y a 2 ou 3 nouvelles (remplace alors l'e-mail 08)", alt="Les nouvelles de la semaine",
      objet="Cette semaine : [TITRE_UNE]", pre="Le cours en vidéo, le prochain tournoi et les résultats du dernier.", sur="Les nouvelles · [DATE]", titre="Cette semaine | sur la plateforme.",
      corps=[para("Bonjour [PSEUDO], voici ce qu'il ne fallait pas manquer cette semaine."),
             video("[URL_MINIATURE_LUNDI]", "Le cours : [THEME_LUNDI]", "Avec [ANIMATEUR_LUNDI] · [DUREE_LUNDI]", L("COURS_LUNDI"), L("YOUTUBE_LUNDI")),
@@ -159,7 +159,7 @@ mail(id="21-bilan-annuel", cat="Partenariat", quand="Un an après l'inscription 
 # ---------- 9. Compte (informations) ----------
 mail(id="22-changement-acces", cat="Compte", marketing=False, quand="Au moins 30 jours avant tout changement de la plateforme ou des conditions d'accès",
      objet="Information importante sur ton accès", pre="Ce qui change le [DATE_EFFET].", sur="Information", titre="Ce qui change | pour ton accès.",
-     corps=[para("[PSEUDO], à partir du <b>[DATE_EFFET]</b>, [CHANGEMENT]."), para("Ton compte, ta progression et tes parties sont conservés."),
+     corps=[para("[PSEUDO], à partir du <b>[DATE_EFFET]</b>, [CHANGEMENT]."), para("Ton compte et ta progression sont conservés."),
             bouton("En savoir plus", L("INFORMATION")), para('<span style="color:#6b6b66;font-size:14px">Une question ? Écris-nous à [EMAIL_CONTACT].</span>')])
 mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la suppression du compte (transactionnel, dernier e-mail envoyé)",
      objet="Ton compte est supprimé", pre="Tes données personnelles ont été effacées.", sur="Ton compte", titre="Au revoir, | [PSEUDO].",
@@ -171,7 +171,7 @@ mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la sup
 # ---------- 10. Vérification des droits (à activer si l'étape 2 de l'inscription contrôle les droits CCAS) ----------
 mail(id="24-verification-en-cours", cat="Vérification des droits", marketing=False, quand="À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits)",
      objet="On vérifie ton accès", pre="Tu recevras un e-mail dès que c'est fait.", sur="Ton compte", titre="Vérification | en cours.",
-     corps=[para("[PSEUDO], merci pour ton inscription ! L'accès à la plateforme est réservé aux bénéficiaires des Activités Sociales de l'Énergie : on vérifie tes informations."),
+     corps=[para("Ton inscription est bien reçue. L'accès à la plateforme est réservé aux bénéficiaires des Activités Sociales de l'Énergie : on vérifie tes informations."),
             encadre("<b>Dès que c'est bon</b>, tu reçois un e-mail de bienvenue et tu peux commencer le parcours Initiation. Ça prend en général [DELAI_VERIFICATION]."),
             para('<span style="color:#6b6b66;font-size:14px">Une question ? Écris-nous à [EMAIL_CONTACT].</span>')])
 mail(id="25-droits-non-verifies", cat="Vérification des droits", marketing=False, quand="Si les droits n'ont pas pu être vérifiés (à activer si l'étape 2 contrôle les droits)",
@@ -209,4 +209,4 @@ TITRES.update({
     "25-droits-non-verifies": "On n'a pas pu | vérifier ton accès.", "26-bilan-semaine-peu-actif": "Chaque séance | compte !", "27-bilan-semaine-sans-activite": "Une leçon | pour repartir ?",
 })
 for e in E:
-    if e["id"] == "13-lettre-de-la-semaine": e["sur"] = "La lettre · [DATE]"
+    if e["id"] == "13-lettre-de-la-semaine": e["sur"] = "La lettre · [DATE_ENVOI]"

@@ -88,7 +88,7 @@ mail(id="44-bilan-semaine-peu-actif", cat="Bilan de la semaine", quand="Le diman
             encadre("<b>Le secret des joueurs qui progressent :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]."),
             NOUV_ACA, bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
 mail(id="45-bilan-semaine-sans-activite", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17)", alt="Ta place t'attend", exemples={"PROGRESSION_PARCOURS": "34"},
-     objet="Ce que tu as manqué cette semaine 👀", pre="Nouvelles leçons, cours en vidéo, tournoi : voici ce que tu as manqué.", sur="Ta semaine · [SEMAINE]", titre="Ta place | t'attend.",
+     objet="Ce que tu as manqué cette semaine 👀", pre="Nouvelles leçons, cours en vidéo, tournoi… et ta prochaine leçon t'attend.", sur="Ta semaine · [SEMAINE]", titre="Ta place | t'attend.",
      corps=[para("Pas d'échecs cette semaine ? Ça arrive à tout le monde. Voici ce qui s'est passé pendant ce temps :"),
             NOUV_ACA,
             progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
@@ -121,7 +121,7 @@ mail(id="20-rappel-masterclass", cat="Événements", quand="La veille, puis 1 he
      objet="[QUAND] : masterclass avec [COACH]", pre="[THEME], en direct à [HEURE].", sur="Rappel", titre="Rendez-vous à [HEURE] !",
      corps=[para("[PRENOM], la masterclass <b>[THEME]</b> avec <b>[COACH]</b> commence à <b>[HEURE]</b>. Prépare tes questions !"), bouton("Rejoindre le direct", L("DIRECT"))])
 mail(id="21-replay-masterclass", cat="Événements", quand="Dès que le replay est en ligne", img="masterclasses", alt="Replay de masterclass",
-     objet="Le replay est en ligne : [THEME]", pre="La masterclass de [COACH] en entier, et les positions en PGN.", sur="Replay disponible", titre="Tu l'as manquée ? Le replay est là.",
+     objet="Replay : [THEME]", pre="La masterclass de [COACH] en entier, et les positions en PGN.", sur="Replay disponible", titre="Tu l'as manquée ? Le replay est là.",
      corps=[para("La masterclass <b>[THEME]</b> avec <b>[COACH]</b> est disponible en replay."), encadre("<b>À retenir :</b> [RESUME_MASTERCLASS]"),
             bouton("Voir le replay", L("REPLAY")), para("Les positions étudiées sont aussi dans l'Académie, en PGN interactif.")])
 mail(id="22-nouveau-cours", cat="Événements", quand="À la mise en ligne d'un nouveau cours ou d'un replay de cours", img="videos", alt="Nouveau cours en ligne",
@@ -144,10 +144,10 @@ mail(id="25-sortie-revue", cat="Événements", quand="À la sortie de chaque num
 
 # ---------- 7. Lettre d'information (plusieurs nouvelles) ----------
 mail(id="26-lettre-plusieurs-nouvelles", cat="Lettre d'information", quand="Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés)", img="progression", alt="Les nouvelles de l'Académie",
-     objet="Cette semaine dans l'Académie : [TITRE_UNE]", pre="Masterclass, tournoi, nouveau cours et le puzzle de la semaine.", sur="Les nouvelles · [DATE]", titre="Cette semaine dans l'Académie",
+     objet="Cette semaine : [TITRE_UNE]", pre="Masterclass, tournoi, nouveau cours et le puzzle de la semaine.", sur="Les nouvelles · [DATE]", titre="Cette semaine dans l'Académie",
      corps=[para("Bonjour [PRENOM], voici ce qui t'attend cette semaine."),
             carte("b-masterclass", "Masterclass : [THEME]", "Avec [COACH], en direct le [DATE] à [HEURE].", L("MASTERCLASS"), "Voir la masterclass"),
-            carte("b-tournoi", "Tournoi : [NOM_TOURNOI]", "Le [DATE], cadence [CADENCE], ouvert à tous.", L("INSCRIPTION_TOURNOI"), "Je m'inscris"),
+            carte("b-tournoi", "Tournoi : [NOM_TOURNOI]", "Le [DATE_TOURNOI] à [HEURE_TOURNOI], cadence [CADENCE], ouvert à tous.", L("INSCRIPTION_TOURNOI"), "Je m'inscris"),
             carte("b-cours", "Nouveau cours : [TITRE_COURS]", "[NB_LECONS_COURS] leçons, niveau [NIVEAU].", L("COURS"), "Découvrir le cours"),
             carte("puzzle", "Le puzzle de la semaine", "[CONSIGNE_PUZZLE] Tu trouves ? La solution est en ligne.", L("PUZZLE"), "Voir la solution", src="[URL_IMAGE_PUZZLE]"),
             para('<span style="color:#6b6b66;font-size:14px">Les blocs sont indépendants : garde ceux qui ont une actualité et supprime les autres.</span>')])
@@ -161,7 +161,7 @@ mail(id="27-renouvellement-annuel-j30", cat="Fin d'abonnement", marketing=False,
 mail(id="28-passage-annuel", cat="Fin d'abonnement", quand="Abonnés mensuels depuis 3 mois", img="progression", alt="Ta progression",
      objet="Près de 2 mois offerts en passant à l'annuel", pre="150 €/an au lieu de 12 × 14,90 € : tu économises.", sur="Ton abonnement", titre="Passe à l'annuel.",
      corps=[para("[PRENOM], ça fait 3 mois que tu progresses avec l'Académie. En passant à l'abonnement annuel, tu paies <b>150&nbsp;€ par an</b>, soit 12,50&nbsp;€ par mois au lieu de 14,90&nbsp;€."),
-            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Annuel", "150&nbsp;€", "/an", "12 × 14,90 € = 178,80 €", "Soit 12,50 € par mois. Ton tarif reste garanti tant que tu restes abonné.", True, "Près de 2 mois offerts") + "</tr></table>"), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Annuel", "150&nbsp;€", "/an", "12 × 14,90 € = 178,80 €", "Soit 12,50 € par mois. Ton tarif reste garanti tant que ton abonnement reste actif.", True, "Près de 2 mois offerts") + "</tr></table>"), bouton("Passer à l'annuel", L("PASSAGE_ANNUEL"))])
 mail(id="29-fin-abonnement-j7", cat="Fin d'abonnement", marketing=False, quand="7 jours avant la fin d'un abonnement résilié (fin de période payée)", img="oups", alt="La mascotte, surprise",
      objet="Ton accès à l'Académie se termine le [DATE_FIN]", pre="Ta progression reste enregistrée.", sur="Fin d'abonnement", titre="Plus que 7 jours d'accès.",
      corps=[para("[PRENOM], ton abonnement se termine le <b>[DATE_FIN]</b>. Après cette date, tu gardes ton compte gratuit (6 leçons, forum, puzzle du jour), et ta progression reste enregistrée."),
@@ -174,7 +174,7 @@ mail(id="30-resiliation-confirmee", cat="Fin d'abonnement", marketing=False, qua
 mail(id="31-reconquete-j30", cat="Fin d'abonnement", quand="30 jours après la fin de l'abonnement", img="masterclasses", alt="Les nouveautés de l'Académie",
      objet="Ton premier mois à 9,90 € pour revenir", pre="Et tout ce qui a changé depuis ton départ.", sur="Quoi de neuf", titre="Reviens quand tu veux.",
      corps=[para("[PRENOM], l'Académie a continué d'avancer :"), liste(["[NOUVEAUTE_1]", "[NOUVEAUTE_2]", "[NOUVEAUTE_3]"]),
-            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Ton retour", "9,90&nbsp;€", "le 1er mois", "19,90 €/mois", "Puis 19,90 €/mois, sans engagement. Jusqu'au [DATE_FIN_OFFRE].", True, "Offre de retour") + "</tr></table>" + para("Ta progression t'attend là où tu l'as laissée.")), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
+            ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>' + carte_prix("Ton retour", "9,90&nbsp;€", "le 1er mois", "19,90 €/mois", "Puis 19,90 €/mois, sans engagement.", True, "Offre de retour") + "</tr></table>" + para("Ta progression t'attend là où tu l'as laissée.")), bouton("Revenir pour 9,90 €", L("REACTIVATION"))])
 mail(id="32-anniversaire", cat="Engagement", quand="À la date anniversaire de l'abonnement", img="progression", alt="Anniversaire",
      objet="Déjà [DUREE_ABONNEMENT] dans l'Académie 🎉", pre="Merci, [PRENOM] ! Voici ton parcours.", sur="Anniversaire", titre="Joyeux anniversaire d'abonnement !",
      corps=[para("[PRENOM], ça fait <b>[DUREE_ABONNEMENT]</b> que tu t'entraînes avec nous. Merci !"),
@@ -233,16 +233,16 @@ mail(id="42-filleul-abonne", cat="Engagement", quand="Quand un ami parrainé s'a
 
 # ---------- 10. Cours de la semaine ----------
 mail(id="43-cours-de-la-semaine", cat="Événements", quand="Chaque semaine, le lendemain du dernier cours (jours des cours à fixer)", alt="Les cours de la semaine",
-     objet="Les cours de la semaine : [THEME_COURS_1], [THEME_COURS_2]", pre="Tu les as manqués ? Revois-les en vidéo.", sur="Cette semaine · [DATE]", titre="Les cours | de la semaine.",
+     objet="Les cours de la semaine sont en vidéo 🎥", pre="[JOUR_COURS_1] : [THEME_COURS_1]. [JOUR_COURS_2] : [THEME_COURS_2].", sur="Cette semaine · [DATE_ENVOI]", titre="Les cours | de la semaine.",
      corps=[para("Bonjour [PRENOM], voici les cours de cette semaine, à revoir quand tu veux."),
             video("[URL_MINIATURE_COURS_1]", "[THEME_COURS_1]", "[JOUR_COURS_1] · avec [ANIMATEUR_COURS_1] · [DUREE_COURS_1]", L("COURS_1"), L("YOUTUBE_COURS_1")),
             video("[URL_MINIATURE_COURS_2]", "[THEME_COURS_2]", "[JOUR_COURS_2] · avec [ANIMATEUR_COURS_2] · [DUREE_COURS_2]", L("COURS_2"), L("YOUTUBE_COURS_2")),
             encadre("<b>La semaine prochaine :</b> [PROGRAMME_SEMAINE_PROCHAINE]."),
             bouton("Tous les cours en vidéo", L("COURS_VIDEOS")),
             para('<span style="color:#6b6b66;font-size:14px">Un seul cours cette semaine ? Supprime le second bloc vidéo.</span>')])
-EXEMPLES.update({"SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
+EXEMPLES.update({"DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
     "NB_NOUVELLES_LECONS": "6", "NB_VIDEOS_SEMAINE": "3", "NB_TOURNOIS_SEMAINE": "1"})
-EXEMPLES.update({"THEME_COURS_1": "Les débuts ouverts : les principes", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
+EXEMPLES.update({"THEME_COURS_1": "Les principes des débuts", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
     "THEME_COURS_2": "La fourchette de Cavalier", "JOUR_COURS_2": "Jeudi", "ANIMATEUR_COURS_2": "Sylvain Ravot", "DUREE_COURS_2": "55 min",
     "URL_MINIATURE_COURS_1": "img/miniature-exemple.jpg", "URL_MINIATURE_COURS_2": "img/miniature-exemple.jpg",
     "PROGRAMME_SEMAINE_PROCHAINE": "mardi, le mat du couloir ; jeudi, les finales de pions"})
@@ -277,11 +277,11 @@ TITRES.update({
     "17-inactif-7-jours": "Ta leçon | t'attend.", "18-inactif-30-jours": "Voici ce qui | a changé.", "19-annonce-masterclass": "Avec [COACH], | le [DATE].",
     "21-replay-masterclass": "Tu l'as manquée ? | Revois-la.", "22-nouveau-cours": "[TITRE_COURS], | par [AUTEUR].", "26-lettre-plusieurs-nouvelles": "À la une : | [TITRE_UNE].",
     "27-renouvellement-annuel-j30": "Renouvellement | le [DATE_RENOUVELLEMENT].", "28-passage-annuel": "Économise | 28,80 € par an.",
-    "29-fin-abonnement-j7": "Ton accès s'arrête | le [DATE_FIN].", "30-resiliation-confirmee": "Ton accès reste ouvert | jusqu'au [DATE_FIN].",
+    "29-fin-abonnement-j7": "Ton accès s'arrête | le [DATE_FIN].", "30-resiliation-confirmee": "Accès ouvert | jusqu'au [DATE_FIN].",
     "31-reconquete-j30": "Du nouveau | depuis ton départ.", "32-anniversaire": "[DUREE_ABONNEMENT] | à nos côtés.", "33-paiement-abandonne": "Ton abonnement | t'attend.",
     "34-changement-formule": "Ta nouvelle formule : | [FORMULE].", "35-carte-expire": "Mets-la à jour | en 1 minute.", "38-reponse-forum": "[AUTEUR_REPONSE] | t'a répondu.",
     "39-changement-tarif": "À partir du | [DATE_EFFET].", "40-suppression-compte": "Ton compte | est supprimé.", "43-cours-de-la-semaine": "Tu les as manqués ? | Revois-les.",
     "44-bilan-semaine-peu-actif": "Chaque séance | compte !", "45-bilan-semaine-sans-activite": "Une leçon | pour repartir ?",
 })
 for e in E:
-    if e["id"] == "26-lettre-plusieurs-nouvelles": e["sur"] = "La lettre · [DATE]"
+    if e["id"] == "26-lettre-plusieurs-nouvelles": e["sur"] = "La lettre · [DATE_ENVOI]"

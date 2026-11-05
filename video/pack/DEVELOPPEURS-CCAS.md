@@ -58,7 +58,7 @@ pas de relance d'inactivité les 5 premiers jours ; heure de Paris, envois entre
 | Tournoi | `[NOM_TOURNOI]`, `[NOM_TOURNOI_PRECEDENT]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Statistiques (à venir) | `[SEMAINE]`, `[NB_JOURS_ACTIFS]`, `[NB_PARTIES]`, `[SERIE]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_COURS_SEMAINE]`, `[NB_NOUVEAUX_EXERCICES]`, `[NB_TOURNOIS_SEMAINE]`, `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[NB_COURS_SUIVIS]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[SERIE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_COURS_ANNEE]`, `[NB_TOURNOIS_ANNEE]`, `[MOIS]` |
 | Forum | `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
-| Saisie éditoriale | `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DELAI_VERIFICATION]` |
+| Saisie éditoriale | `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DELAI_VERIFICATION]` |
 
 **Liens** (`[LIEN_…]`) : la liste complète est générée dans le catalogue (`EMAILS-CCAS.md`). `[LIEN_DIRECT]` = lien de la visioconférence (le même pour les deux cours),
 `[LIEN_YOUTUBE_LUNDI]` / `[LIEN_YOUTUBE_MERCREDI]` = vidéos, `[LIEN_COURS_LUNDI]` / `[LIEN_COURS_MERCREDI]` = leçons sur la plateforme, `[LIEN_QUESTIONNAIRE]` = formulaire anonyme (Google Forms…).

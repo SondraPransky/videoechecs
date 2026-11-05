@@ -36,12 +36,12 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 ## Design
 
 - **Polices de l'Académie** : Fraunces pour les titres (gras, avec une suite en italique bleu, comme sur les visuels), Manrope pour le texte.
-  Elles sont chargées depuis Google Fonts : Apple Mail, l'appli Mail de l'iPhone et Outlook.com les affichent ; Gmail et Outlook sur PC
+  Elles sont chargées depuis Google Fonts (Fraunces 900 et 400 italique, Manrope 400, 700 et 800 : exactement les graisses utilisées) : Apple Mail, l'appli Mail de l'iPhone et Outlook.com les affichent ; Gmail et Outlook sur PC
   affichent Georgia et Arial à la place, sans casser la mise en page.
 - **En-têtes dédiés** (600×240) : un grand titre et la mascotte, dans les couleurs du pack, propres à chaque e-mail (dossier `images/00-emails/`).
 - **Photo du coach** dans l'annonce de masterclass (`[URL_PHOTO_COACH]`), **puzzle de la semaine** en image dans la lettre (`[URL_IMAGE_PUZZLE]`, l'échiquier du jour généré par le site).
 - **Mode sombre** : sur Apple Mail, l'iPhone et Outlook.com en thème sombre, l'e-mail passe en fond nuit (aperçus sur la page de validation). Gmail applique sa propre inversion.
-- **Échelle typographique** (8 tailles) : titres 32 px (Fraunces 900, suite en italique 400), chiffres et prix 30 à 36 px, titres de carte 20 px,
+- **Échelle typographique** (8 tailles) : titres 32 px (Fraunces 900, suite en italique 400 sur la même ligne, retour à la ligne seulement s'il manque de place), chiffres et prix 30 à 36 px, titres de carte 20 px,
   boutons 17 px (Manrope 800), texte 16 px, texte secondaire 14 px, étiquettes et mentions 12 px (majuscules espacées).
 - **Typographie française** : espaces insécables avant « : ; ? ! % » et dans les nombres (« 1 240 », « 20 h 30 », « 14,90 € »), apostrophe typographique (’),
   exposants (1ᵉʳ, 4ᵉ). Appliquée automatiquement par le générateur.
@@ -142,7 +142,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 |---|---|---|---|---|
 | `14-bilan-semaine-actif.html` | Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
 | `44-bilan-semaine-peu-actif.html` | Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs : on continue ? | [NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout. | Information (désinscription possible) |
-| `45-bilan-semaine-sans-activite.html` | Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17) | Ce que tu as manqué cette semaine 👀 | Nouvelles leçons, cours en vidéo, tournoi : voici ce que tu as manqué. | Information (désinscription possible) |
+| `45-bilan-semaine-sans-activite.html` | Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17) | Ce que tu as manqué cette semaine 👀 | Nouvelles leçons, cours en vidéo, tournoi… et ta prochaine leçon t’attend. | Information (désinscription possible) |
 
 ### Engagement
 
@@ -168,20 +168,20 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 |---|---|---|---|---|
 | `19-annonce-masterclass.html` | Dès qu'une masterclass est programmée (au moins 7 jours avant) | Masterclass en direct avec [COACH] | [THEME], le [DATE] à [HEURE]. Pose tes questions ! | Information (désinscription possible) |
 | `20-rappel-masterclass.html` | La veille, puis 1 heure avant (même modèle) | [QUAND] : masterclass avec [COACH] | [THEME], en direct à [HEURE]. | Information (désinscription possible) |
-| `21-replay-masterclass.html` | Dès que le replay est en ligne | Le replay est en ligne : [THEME] | La masterclass de [COACH] en entier, et les positions en PGN. | Information (désinscription possible) |
+| `21-replay-masterclass.html` | Dès que le replay est en ligne | Replay : [THEME] | La masterclass de [COACH] en entier, et les positions en PGN. | Information (désinscription possible) |
 | `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
 | `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
 | `36-inscription-tournoi.html` | À l'inscription à un tournoi (transactionnel) | Inscription confirmée : [NOM_TOURNOI] | Rendez-vous le [DATE] à [HEURE]. | Compte (toujours envoyé) |
 | `37-masterclass-reportee.html` | Si une masterclass annoncée est déplacée ou annulée (aux inscrits) | Masterclass déplacée au [NOUVELLE_DATE] | [THEME], avec [COACH] : la nouvelle date. | Compte (toujours envoyé) |
-| `43-cours-de-la-semaine.html` | Chaque semaine, le lendemain du dernier cours (jours des cours à fixer) | Les cours de la semaine : [THEME_COURS_1], [THEME_COURS_2] | Tu les as manqués ? Revois-les en vidéo. | Information (désinscription possible) |
+| `43-cours-de-la-semaine.html` | Chaque semaine, le lendemain du dernier cours (jours des cours à fixer) | Les cours de la semaine sont en vidéo 🎥 | [JOUR_COURS_1] : [THEME_COURS_1]. [JOUR_COURS_2] : [THEME_COURS_2]. | Information (désinscription possible) |
 
 ### Lettre d'information
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `26-lettre-plusieurs-nouvelles.html` | Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés) | Cette semaine dans l’Académie : [TITRE_UNE] | Masterclass, tournoi, nouveau cours et le puzzle de la semaine. | Information (désinscription possible) |
+| `26-lettre-plusieurs-nouvelles.html` | Toutes les 1 à 2 semaines, à tous les comptes (gratuits et abonnés) | Cette semaine : [TITRE_UNE] | Masterclass, tournoi, nouveau cours et le puzzle de la semaine. | Information (désinscription possible) |
 
 ### Fin d'abonnement
 

@@ -79,7 +79,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 | Masterclass | `[THEME]`, `[COACH]`, `[TITRE_COACH]`, `[URL_PHOTO_COACH]` (carrée, ≥ 128 px), `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[DUREE]`, `[NIVEAU]`, `[DESCRIPTION_MASTERCLASS]`, `[RESUME_MASTERCLASS]`, `[QUAND]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]` |
 | Tournoi | `[NOM_TOURNOI]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Cours, revue, forum | `[TITRE_COURS]`, `[AUTEUR]`, `[NB_LECONS_COURS]`, `[DESCRIPTION_COURS]`, `[NUMERO]`, `[SOMMAIRE_1..3]`, `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
-| Saisie éditoriale (lettre, réactivation) | `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
+| Saisie éditoriale (lettre, réactivation) | `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[DATE_TOURNOI]`, `[HEURE_TOURNOI]` (tournoi de la lettre 26), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
 | Parrainage | `[CODE_PARRAINAGE]`, `[PRENOM_FILLEUL]`, `[OFFRE_FILLEUL]`, `[RECOMPENSE_PARRAIN]` |
 
 **Liens** (`[LIEN_…]`, une adresse de page du site par variable) : la liste complète est dans `EMAILS.md`. Ajouter à chaque lien
