@@ -72,8 +72,8 @@ mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+1
 # Bilan de la semaine : 3 versions selon l'activité de la semaine (une seule part, le dimanche vers 18 h)
 NOUV_ACA = nouveautes("Cette semaine dans l'Académie", [("Nouvelles leçons", "[NB_NOUVELLES_LECONS]"), ("Cours et masterclasses en vidéo", "[NB_VIDEOS_SEMAINE]"), ("Tournois organisés", "[NB_TOURNOIS_SEMAINE]")])
 mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine", alt="Ta semaine d'échecs",
-     objet="[PRENOM], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="Belle semaine, | [PRENOM] !",
-     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
+     objet="[PRENOM], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="[NB_JOURS_ACTIFS] jours sur 7, | bravo !",
+     corps=[para("[PRENOM], voici ton bilan de la semaine :"),
             tuiles([("[NB_COURS_SUIVIS]", "Cours suivis"), ("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis")]),
             tuiles([("[NB_PARTIES]", "Parties jouées"), ("[SERIE]", "Jours de série"), ("[TAUX_REUSSITE]&nbsp;%", "Réussite")]),
             progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
@@ -274,7 +274,7 @@ TITRES.update({
     "01-confirmation-adresse": "Confirme | ton adresse e-mail.", "03-mot-de-passe": "Un lien, | valable 1 heure.",
     "05-gratuit-j7-offre": "Tout débloquer, | dès 14,90 €.", "08-paiement-refuse": "Mets ta carte | à jour.", "09-paiement-recu": "Ton paiement | est bien reçu.",
     "11-demarrage-j3-exercices": "La régularité | avant tout.", "15-objectif-atteint": "Au suivant, | [PRENOM] !", "16-serie-en-danger": "Un exercice | suffit.",
-    "17-inactif-7-jours": "Ta leçon | t'attend.", "18-inactif-30-jours": "Voici ce qui | a changé.", "19-annonce-masterclass": "Avec [COACH], | en direct.",
+    "17-inactif-7-jours": "Ta leçon | t'attend.", "18-inactif-30-jours": "Voici ce qui | a changé.", "19-annonce-masterclass": "Avec [COACH], | le [DATE].",
     "21-replay-masterclass": "Tu l'as manquée ? | Revois-la.", "22-nouveau-cours": "[TITRE_COURS], | par [AUTEUR].", "26-lettre-plusieurs-nouvelles": "À la une : | [TITRE_UNE].",
     "27-renouvellement-annuel-j30": "Renouvellement | le [DATE_RENOUVELLEMENT].", "28-passage-annuel": "Économise | 28,80 € par an.",
     "29-fin-abonnement-j7": "Ton accès s'arrête | le [DATE_FIN].", "30-resiliation-confirmee": "Ton accès reste ouvert | jusqu'au [DATE_FIN].",

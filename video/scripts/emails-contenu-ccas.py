@@ -96,8 +96,8 @@ mail(id="13-lettre-de-la-semaine", cat="Lettre de la semaine", quand="Les semain
 # Bilan de la semaine : 3 versions selon l'activité de la semaine (une seule part, le dimanche vers 18 h ; à activer avec les statistiques)
 NOUV_CCAS = nouveautes("Cette semaine sur la plateforme", [("Cours en direct", "[NB_COURS_SEMAINE]"), ("Nouveaux exercices", "[NB_NOUVEAUX_EXERCICES]"), ("Tournois organisés", "[NB_TOURNOIS_SEMAINE]")])
 mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine (à activer avec les statistiques)", alt="Ta semaine d'échecs",
-     objet="[PSEUDO], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="Belle semaine, | [PSEUDO] !",
-     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
+     objet="[PSEUDO], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="[NB_JOURS_ACTIFS] jours sur 7, | bravo !",
+     corps=[para("[PSEUDO], voici ton bilan de la semaine :"),
             tuiles([("[NB_COURS_SUIVIS]", "Cours en direct"), ("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis")]),
             tuiles([("[NB_PARTIES]", "Parties jouées"), ("[SERIE]", "Jours de série"), ("[TAUX_REUSSITE]&nbsp;%", "Réussite")]),
             progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
