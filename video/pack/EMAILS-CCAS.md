@@ -1,6 +1,6 @@
 # E-mails des bénéficiaires CCAS — plateforme d'échecs des Activités Sociales de l'Énergie
 
-27 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
+29 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
 les images à héberger dans `emails-ccas/img/`. Même moteur et même design que les e-mails de l'Académie echecs.com
 (`scripts/emails.py ccas`, contenu dans `scripts/emails-contenu-ccas.py`).
 
@@ -20,7 +20,7 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (to
 Démarrage : J+1 04 Cours en direct ──► J+3 05 Exercices ──► J+6 06 Communauté
 Partenariat : J+14 19 Les échecs en famille ──► J+30 20 Questionnaire de satisfaction ──► 1 an 21 Bilan de l'année
         │
-        ├── cours en direct : 07 Programme de la semaine (lundi, les deux cours) · 08 Les cours de la semaine (jeudi, vidéos YouTube) · 09 Cours déplacé
+        ├── cours en direct : 07 Programme de la semaine (lundi, les deux cours) · 08 Les cours de la semaine (jeudi, vidéos YouTube) · 09 Cours déplacé · 28 Pause des vacances · 29 Reprise des cours
         ├── tournois        : 10 Annonce (J-5 et jour J) · 11 Inscription confirmée · 12 Résultats
         ├── lettre          : 13 Lettre de la semaine (2 ou 3 nouvelles mélangées : cours en vidéo, tournoi, résultats ; remplace alors le 08)
         ├── chaque dimanche : 14 / 26 / 27 Bilan de la semaine (actif / peu actif / sans activité)
@@ -100,6 +100,8 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | `07-programme-de-la-semaine.html` | Chaque lundi vers 10 h, à tous (les deux cours de la semaine) | Cette semaine : 2 cours en direct à 18 h 30 | Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI]. | Information (désinscription possible) |
 | `08-cours-de-la-semaine.html` | Chaque semaine, le jeudi (cours du lundi et du mercredi) | Les cours de la semaine sont en vidéo 🎥 | Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI]. | Information (désinscription possible) |
 | `09-cours-deplace.html` | Si un cours est déplacé ou annulé (à tous les joueurs qui ont activé les rappels) | Cours du [DATE] déplacé au [NOUVELLE_DATE] | [THEME_COURS], avec [ANIMATEUR] : la nouvelle date. | Compte (toujours envoyé) |
+| `28-pause-vacances.html` | Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année) | Pas de cours en direct jusqu’au [DATE_REPRISE] ☀️ | La plateforme reste ouverte : cours en vidéo, leçons, exercices. | Information (désinscription possible) |
+| `29-reprise-cours.html` | Le vendredi avant la reprise des cours en direct | Les cours en direct reprennent lundi à 18 h 30 ! | Au programme : [THEME_LUNDI] avec [ANIMATEUR_LUNDI]. | Information (désinscription possible) |
 
 ### Tournois
 

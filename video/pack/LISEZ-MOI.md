@@ -28,7 +28,7 @@ QUIZ-ACADEMIE.md         réponses et explications des 21 quiz tirés des leçon
 CALENDRIER-LANCEMENT.md  le lancement jour par jour : teasing, 4 semaines, e-mails, phases de la publicité payante
 TEXTES-PUBS-VARIANTES.md textes Meta et TikTok de chaque pub, en 3 angles à tester, aux bonnes longueurs
 DEVELOPPEURS.md          ce que l'équipe technique doit brancher (e-mails, pages, suivi) ; va avec kit-developpeurs-academie.zip
-DEVELOPPEURS-CCAS.md     idem pour la plateforme CCAS (27 e-mails des bénéficiaires) ; va avec kit-developpeurs-ccas.zip
+DEVELOPPEURS-CCAS.md     idem pour la plateforme CCAS (29 e-mails des bénéficiaires) ; va avec kit-developpeurs-ccas.zip
 EMAILS.md                parcours de l'abonné, catalogue des 52 e-mails (quand, objet, pré-en-tête), règles d'envoi, variables
 ```
 

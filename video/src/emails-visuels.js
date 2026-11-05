@@ -61,6 +61,8 @@
     B("semaine-bilan", "nuit", "Ta semaine", "d'échecs.", "serie-reussie"),
     B("bilan-debut", "menthe", "Bon début,", "on continue ?", "marche"),
     B("bilan-pause", "ciel", "Ta place", "t'attend.", "cafe"),
+    B("vacances", "nuit", "Pause", "vacances.", "sieste"),
+    B("reprise", "soleil", "C'est", "reparti !", "sprint"),
     B("verification", "ciel", "Vérification", "en cours.", "loupe"),
     B("droits", "rose", "Oups,", "un petit souci.", "oups"),
     { id: "email-puzzle", dir: "00-emails", tpl: "plateau", theme: "craie",

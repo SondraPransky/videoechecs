@@ -68,6 +68,24 @@ mail(id="09-cours-deplace", cat="Cours en direct", marketing=False, quand="Si un
             billet("[THEME_COURS]", [("Heure", "[HEURE] · Paris"), ("Avec", "[ANIMATEUR]"), ("Où", "en visioconférence, même lien")], "[NOUVEAU_JOUR]", "[NOUVEAU_MOIS_COURT]"),
             para("Désolés pour ce changement. Le cours sera, comme toujours, disponible en vidéo."), bouton("Voir les prochains cours", L("COURS_DIRECT"))])
 
+mail(id="28-pause-vacances", cat="Cours en direct", quand="Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année)", alt="Pause pendant les vacances",
+     exemples={"DATE_DEBUT_PAUSE": "21 décembre", "DATE_FIN_PAUSE": "4 janvier", "DATE_REPRISE": "lundi 5 janvier"},
+     objet="Pas de cours en direct jusqu'au [DATE_REPRISE] ☀️", pre="La plateforme reste ouverte : cours en vidéo, leçons, exercices.", sur="Vacances", titre="Reprise le | [DATE_REPRISE].",
+     corps=[para("[PSEUDO], les cours en direct font une pause pendant les vacances :"),
+            encadre("<b>Pas de cours du [DATE_DEBUT_PAUSE] au [DATE_FIN_PAUSE].</b><br>Reprise le <b>[DATE_REPRISE] à 18 h 30</b>, avec Éric et Florian."),
+            para("Pendant ce temps, la plateforme reste ouverte :"),
+            liste(["<b>Les cours en vidéo</b>, pour revoir ceux que tu as manqués", "<b>Le parcours Initiation</b> : quelques exercices par jour pour garder la main", "<b>Le forum</b>, pour échanger avec les autres joueurs"]),
+            bouton("Revoir les cours en vidéo", L("COURS_VIDEOS"))],
+     sign="Bonnes vacances !<br><b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
+mail(id="29-reprise-cours", cat="Cours en direct", quand="Le vendredi avant la reprise des cours en direct", alt="C'est reparti",
+     exemples={"JOUR_LUNDI": "5", "JOUR_MERCREDI": "7", "MOIS_COURT": "janv.", "THEME_LUNDI": "Les mats élémentaires", "THEME_MERCREDI": "Le clouage"},
+     objet="Les cours en direct reprennent lundi à 18 h 30 !", pre="Au programme : [THEME_LUNDI] avec [ANIMATEUR_LUNDI].", sur="Reprise des cours", titre="Rendez-vous lundi | à 18 h 30.",
+     corps=[para("[PSEUDO], les vacances sont finies : les cours en direct reprennent la semaine prochaine, en visioconférence :"),
+            billet("[THEME_LUNDI]", [("Lundi", "18 h 30 · Paris"), ("Avec", "[ANIMATEUR_LUNDI]")], "[JOUR_LUNDI]", "[MOIS_COURT]"),
+            billet("[THEME_MERCREDI]", [("Mercredi", "18 h 30 · Paris"), ("Avec", "[ANIMATEUR_MERCREDI]")], "[JOUR_MERCREDI]", "[MOIS_COURT]"),
+            bouton("Rejoindre le cours", L("DIRECT")),
+            para('<span style="color:#6b6b66;font-size:14px">Pour te remettre dans le bain d\'ici là : une leçon du parcours Initiation, <b>[LECON_SUIVANTE]</b>, environ [DUREE_LECON].</span>')])
+
 # ---------- 4. Tournois ----------
 mail(id="10-annonce-tournoi", exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"}, cat="Tournois", quand="5 jours avant un tournoi, rappel le jour J (même modèle)", alt="Tournoi en ligne",
      objet="Tournoi : [NOM_TOURNOI] le [DATE]", pre="Cadence [CADENCE], ouvert à tous les niveaux.", sur="Tournoi en ligne", titre="À toi | de jouer !",
@@ -185,7 +203,7 @@ mail(id="25-droits-non-verifies", cat="Vérification des droits", marketing=Fals
 # Titres en deux temps : déjà dans chaque mail (« | »)
 TITRES = {}
 MASCOTTES = {}
-ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'semaine-bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits', '26': 'bilan-debut', '27': 'bilan-pause'}
+ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'semaine-bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits', '26': 'bilan-debut', '27': 'bilan-pause', '28': 'vacances', '29': 'reprise'}
 EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric", "NIVEAU": "tous niveaux",
     "DESCRIPTION_COURS": "Développer ses pièces, contrôler le centre, roquer : les trois règles d'or des débuts, avec des parties d'exemple commentées en direct.",
     "THEME_LUNDI": "Les principes des débuts", "ANIMATEUR_LUNDI": "Éric", "DUREE_LUNDI": "1 h",
@@ -198,7 +216,7 @@ EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric
     "CHANGEMENT": "les cours en direct du mercredi passeront à 19 h", "MOIS": "novembre", "PSEUDO": "LéaDame", "EMAIL_CONTACT": "europe@echecs.com",
     "THEME_FORT": "les mats élémentaires", "THEME_FAIBLE": "le clouage", "AUTEUR_REPONSE": "Florian", "TITRE_SUJET": "Comment mater avec Roi et Tour ?",
     "EXTRAIT_REPONSE": "Repousse le Roi adverse vers le bord avec ta Tour, puis rapproche ton Roi…", "DERNIERE_LECON": "Le mat du couloir", "LECON_SUIVANTE": "La fourchette",
-    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})
+    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "DATE_ENVOI": "19 novembre", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})
 
 # Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
 TITRES.update({

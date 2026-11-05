@@ -6,8 +6,8 @@ Plateforme : https://ccas.echecs.com/academy/ — accès offert aux bénéficiai
 ```
 kit-developpeurs-ccas/
   DEVELOPPEURS-CCAS.md   ce document
-  EMAILS-CCAS.md         catalogue des 27 e-mails : quand les envoyer, objet, pré-en-tête, règles, décisions
-  emails-ccas/           27 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS-CCAS.md         catalogue des 29 e-mails : quand les envoyer, objet, pré-en-tête, règles, décisions
+  emails-ccas/           29 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails-ccas/img/       images des e-mails, à héberger (≈ 1 Mo)
   emails-ccas/apercus/   aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
   miniature-mail.py      prépare la miniature YouTube d'un cours pour les e-mails 08 et 13 (bouton lecture incrusté, 1072 × 603)
@@ -18,7 +18,7 @@ Priorités : **(1) obligatoire avant l'ouverture**, (2) à l'ouverture, (3) dans
 
 ## 1. Intégration
 
-1. **Héberger `emails-ccas/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 27 fichiers.
+1. **Héberger `emails-ccas/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 29 fichiers.
 2. **Variables** : chaque `[VARIABLE]` est remplacée par la donnée correspondante (§ 3). Aucune ne doit partir telle quelle : valeur par défaut ou pas d'envoi.
 3. **Expéditeur** : « Europe Échecs · Activités Sociales », adresse de réponse lue par une personne. Contact affiché : europe@echecs.com.
 4. **Délivrabilité (1)** : domaine d'envoi authentifié SPF, DKIM, DMARC ; en-têtes `List-Unsubscribe` et `List-Unsubscribe-Post` sur les e-mails d'information.
@@ -35,6 +35,7 @@ Priorités : **(1) obligatoire avant l'ouverture**, (2) à l'ouverture, (3) dans
 | Chaque lundi vers 10 h | 07 programme de la semaine (les deux cours, lien de la visio) | 1 |
 | Chaque jeudi (vidéos des cours en ligne) | 08 les cours de la semaine | 2 |
 | Cours déplacé ou annulé | 09 | 1 |
+| Dernier jour de cours avant les vacances / vendredi avant la reprise | 28 pause des vacances / 29 reprise des cours | 1 |
 | Tournoi (5 jours avant et jour J), inscription, résultats le lendemain | 10, 11, 12 | 2 |
 | Semaine chargée : lettre à plusieurs nouvelles (remplace le 08) | 13 | 3 |
 | Dimanche vers 18 h : bilan de la semaine selon les jours d'entraînement (≥ 3 / 1-2 / 0), avec les statistiques | 14 / 26 / 27 | 2 |
@@ -58,7 +59,7 @@ pas de relance d'inactivité les 5 premiers jours ; heure de Paris, envois entre
 | Tournoi | `[NOM_TOURNOI]`, `[NOM_TOURNOI_PRECEDENT]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Statistiques (à venir) | `[SEMAINE]`, `[NB_JOURS_ACTIFS]`, `[NB_PARTIES]`, `[SERIE]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_COURS_SEMAINE]`, `[NB_NOUVEAUX_EXERCICES]`, `[NB_TOURNOIS_SEMAINE]`, `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[NB_COURS_SUIVIS]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[SERIE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_COURS_ANNEE]`, `[NB_TOURNOIS_ANNEE]`, `[MOIS]` |
 | Forum | `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
-| Saisie éditoriale | `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DELAI_VERIFICATION]` |
+| Saisie éditoriale | `[DATE_DEBUT_PAUSE]`, `[DATE_FIN_PAUSE]`, `[DATE_REPRISE]` (« lundi 5 janvier »), `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DELAI_VERIFICATION]` |
 
 **Liens** (`[LIEN_…]`) : la liste complète est générée dans le catalogue (`EMAILS-CCAS.md`). `[LIEN_DIRECT]` = lien de la visioconférence (le même pour les deux cours),
 `[LIEN_YOUTUBE_LUNDI]` / `[LIEN_YOUTUBE_MERCREDI]` = vidéos, `[LIEN_COURS_LUNDI]` / `[LIEN_COURS_MERCREDI]` = leçons sur la plateforme, `[LIEN_QUESTIONNAIRE]` = formulaire anonyme (Google Forms…).
