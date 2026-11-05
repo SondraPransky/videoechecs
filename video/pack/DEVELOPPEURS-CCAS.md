@@ -6,8 +6,8 @@ Plateforme : https://ccas.echecs.com/academy/ — accès offert aux bénéficiai
 ```
 kit-developpeurs-ccas/
   DEVELOPPEURS-CCAS.md   ce document
-  EMAILS-CCAS.md         catalogue des 25 e-mails : quand les envoyer, objet, pré-en-tête, règles, décisions
-  emails-ccas/           25 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS-CCAS.md         catalogue des 27 e-mails : quand les envoyer, objet, pré-en-tête, règles, décisions
+  emails-ccas/           27 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails-ccas/img/       images des e-mails, à héberger (≈ 1 Mo)
   emails-ccas/apercus/   aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
   miniature-mail.py      prépare la miniature YouTube d'un cours pour les e-mails 08 et 13 (bouton lecture incrusté, 1072 × 603)
@@ -18,7 +18,7 @@ Priorités : **(1) obligatoire avant l'ouverture**, (2) à l'ouverture, (3) dans
 
 ## 1. Intégration
 
-1. **Héberger `emails-ccas/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 25 fichiers.
+1. **Héberger `emails-ccas/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 27 fichiers.
 2. **Variables** : chaque `[VARIABLE]` est remplacée par la donnée correspondante (§ 3). Aucune ne doit partir telle quelle : valeur par défaut ou pas d'envoi.
 3. **Expéditeur** : « Europe Échecs · Activités Sociales », adresse de réponse lue par une personne. Contact affiché : europe@echecs.com.
 4. **Délivrabilité (1)** : domaine d'envoi authentifié SPF, DKIM, DMARC ; en-têtes `List-Unsubscribe` et `List-Unsubscribe-Post` sur les e-mails d'information.
@@ -37,7 +37,7 @@ Priorités : **(1) obligatoire avant l'ouverture**, (2) à l'ouverture, (3) dans
 | Cours déplacé ou annulé | 09 | 1 |
 | Tournoi (5 jours avant et jour J), inscription, résultats le lendemain | 10, 11, 12 | 2 |
 | Semaine chargée : lettre à plusieurs nouvelles (remplace le 08) | 13 | 3 |
-| 1er du mois, si activité (avec les statistiques) | 14 | 3 |
+| Dimanche vers 18 h : bilan de la semaine selon les jours d'entraînement (≥ 3 / 1-2 / 0), avec les statistiques | 14 / 26 / 27 | 2 |
 | Série de jours (≥ 5) sur le point de s'arrêter (avec la série de jours) | 15 | 3 |
 | Réponse à un sujet du forum (au plus 1 par jour) | 16 | 3 |
 | Sans connexion depuis 7 / 30 jours | 17 / 18 | 2 |
@@ -56,7 +56,7 @@ pas de relance d'inactivité les 5 premiers jours ; heure de Paris, envois entre
 | Compte | `[PSEUDO]` (pas de prénom à l'inscription), `[EMAIL_CONTACT]` = europe@echecs.com, `[ADRESSE_POSTALE]` (fixe, à fournir) |
 | Cours en direct | `[THEME_LUNDI]`, `[THEME_MERCREDI]`, `[ANIMATEUR_LUNDI]`, `[ANIMATEUR_MERCREDI]`, `[JOUR_LUNDI]`, `[JOUR_MERCREDI]`, `[MOIS_COURT]`, `[DUREE_LUNDI]`, `[DUREE_MERCREDI]`, `[URL_MINIATURE_LUNDI]`, `[URL_MINIATURE_MERCREDI]`, `[THEME_PROCHAIN_LUNDI]`, `[THEME_PROCHAIN_MERCREDI]`, `[THEME_COURS]`, `[ANIMATEUR]`, `[DATE]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]`, `[HEURE]` |
 | Tournoi | `[NOM_TOURNOI]`, `[NOM_TOURNOI_PRECEDENT]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
-| Statistiques (à venir) | `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[NB_COURS_SUIVIS]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[SERIE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_COURS_ANNEE]`, `[NB_TOURNOIS_ANNEE]`, `[MOIS]` |
+| Statistiques (à venir) | `[SEMAINE]`, `[NB_JOURS_ACTIFS]`, `[NB_PARTIES]`, `[SERIE]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_COURS_SEMAINE]`, `[NB_NOUVEAUX_EXERCICES]`, `[NB_TOURNOIS_SEMAINE]`, `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[NB_COURS_SUIVIS]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[SERIE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_COURS_ANNEE]`, `[NB_TOURNOIS_ANNEE]`, `[MOIS]` |
 | Forum | `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
 | Saisie éditoriale | `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DELAI_VERIFICATION]` |
 
@@ -75,7 +75,7 @@ Chaque semaine, passer les deux miniatures YouTube (1280 × 720) dans le script,
 |---|---|---|
 | **Préférences e-mails + désinscription en un clic** (sans connexion) | RGPD, exigé par Gmail / Yahoo | 1 |
 | **Page « Cours en direct »** : programme, lien de la visio, vidéos des cours passés | E-mails 04, 07, 08, 09 | 1 |
-| **Statistiques, série de jours, parties sauvegardées** | E-mails 05, 12, 14, 15, 21 (à activer avec la fonction) | 3 |
+| **Statistiques, série de jours, parties sauvegardées** | E-mails 05, 12, 14, 15, 21, 26, 27 (à activer avec la fonction) | 3 |
 | **Vérification des droits** à l'étape 2 de l'inscription, si prévue | E-mails 24, 25 | à décider |
 
 ## 6. Liste de contrôle avant l'ouverture

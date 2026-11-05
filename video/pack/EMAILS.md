@@ -1,6 +1,6 @@
 # E-mails de suivi des abonnés — Académie echecs.com
 
-43 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
+45 e-mails prêts à intégrer dans l'outil d'envoi du site : **un fichier HTML par e-mail** dans `emails/`, les images à héberger
 dans `emails/img/`, et un aperçu de chaque e-mail (largeur téléphone) dans `emails/apercus/`.
 Tous en « tu », dans le style du pack (fond crème, en-tête nuit, bouton jaune), lisibles sur téléphone et dans les messageries
 qui bloquent les images (les textes ne sont jamais dans les images).
@@ -17,7 +17,8 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (co
         ▼
 Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours ──► J+3 11 Exercices ──► J+6 12 Masterclasses ──► J+10 13 Communauté
         │
-        ├── chaque mois : 09 Reçu (renouvellement) · 14 Bilan du mois · 32 Anniversaire (chaque année)
+        ├── chaque semaine : 14 / 44 / 45 Bilan de la semaine (actif / peu actif / sans activité, le dimanche)
+        ├── chaque mois : 09 Reçu (renouvellement) · 32 Anniversaire (chaque année)
         ├── parrainage  : 41 Invite un ami (J+30, après un module) · 42 Ton ami a rejoint l'Académie
         ├── en continu  : 15 Module validé · 16 Série en danger · 17 Inactif 7 j · 18 Inactif 30 j
         ├── à 3 mois    : 28 Passage à l'annuel (mensuels)
@@ -58,6 +59,8 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Pied de page** : liens vers l'Académie, les masterclasses, les tournois, le forum et les réseaux, puis la mention légale et l'adresse.
 
 ## Règles d'envoi
+
+- **Bilan de la semaine** (3 versions, une seule part le dimanche vers 18 h, selon les jours d'entraînement de la semaine) : actif (≥ 3 jours), peu actif (1 ou 2 jours), sans activité (0 jour ; au plus 2 semaines de suite, et pas la semaine où part la relance d'inactivité 7 jours). Chiffres présentés comme des compteurs (« Leçons : 3 ») : l'accord est juste quelle que soit la valeur. `[PROGRESSION_PARCOURS]` est un nombre de 0 à 100 (largeur de la barre).
 
 - **E-mails « Compte »** (confirmation, mot de passe, paiement, résiliation, renouvellement annuel) : envoyés à tous, même désinscrits
   des e-mails d'information. Pas de promotion dedans, hormis un rappel discret.
@@ -133,11 +136,18 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les grands maîtres t’attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
 | `13-demarrage-j10-communaute.html` | J+10 après l'abonnement | Joue, partage, mesure-toi | Tournois en ligne, forum, tes parties analysées. | Information (désinscription possible) |
 
+### Bilan de la semaine
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `14-bilan-semaine-actif.html` | Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
+| `44-bilan-semaine-peu-actif.html` | Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs : on continue ? | [NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout. | Information (désinscription possible) |
+| `45-bilan-semaine-sans-activite.html` | Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17) | Ce que tu as manqué cette semaine 👀 | Nouvelles leçons, cours en vidéo, tournoi : voici ce que tu as manqué. | Information (désinscription possible) |
+
 ### Engagement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois | [PRENOM], ton mois d’échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
 | `15-objectif-atteint.html` | Quand l'abonné valide un module ou un parcours | Module validé : [MODULE] 🎉 | Une étape de plus vers ton objectif. | Information (désinscription possible) |
 | `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
 | `32-anniversaire.html` | À la date anniversaire de l'abonnement | Déjà [DUREE_ABONNEMENT] dans l’Académie 🎉 | Merci, [PRENOM] ! Voici ton parcours. | Information (désinscription possible) |

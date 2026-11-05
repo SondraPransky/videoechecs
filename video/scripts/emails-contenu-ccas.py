@@ -93,10 +93,33 @@ mail(id="13-lettre-de-la-semaine", cat="Lettre de la semaine", quand="Les semain
             para('<span style="color:#6b6b66;font-size:14px">Les blocs sont indépendants : garde ceux qui ont une actualité et supprime les autres.</span>')])
 
 # ---------- 6. Engagement ----------
-mail(id="14-bilan-mensuel", cat="Engagement", quand="Le 1er de chaque mois, si au moins une activité dans le mois (à activer avec les statistiques)", alt="Ton mois d'échecs",
-     objet="[PSEUDO], ton mois d'échecs en chiffres", pre="[NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ton bilan de [MOIS]", titre="Ton mois | en chiffres.",
-     corps=[tuiles([("[NB_LECONS]", "leçons terminées"), ("[NB_EXERCICES]", "exercices réussis ([TAUX_REUSSITE] %)"), ("[NB_COURS_SUIVIS]", "cours en direct suivis")]),
-            para("Ton thème le plus travaillé : <b>[THEME_FORT]</b>. À renforcer : <b>[THEME_FAIBLE]</b>."), bouton("Travailler [THEME_FAIBLE]", L("THEME_FAIBLE"))])
+# Bilan de la semaine : 3 versions selon l'activité de la semaine (une seule part, le dimanche vers 18 h ; à activer avec les statistiques)
+NOUV_CCAS = nouveautes("Cette semaine sur la plateforme", [("Cours en direct", "[NB_COURS_SEMAINE]"), ("Nouveaux exercices", "[NB_NOUVEAUX_EXERCICES]"), ("Tournois organisés", "[NB_TOURNOIS_SEMAINE]")])
+mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine (à activer avec les statistiques)", alt="Ta semaine d'échecs",
+     objet="[PSEUDO], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="Belle semaine, | [PSEUDO] !",
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
+            tuiles([("[NB_COURS_SUIVIS]", "Cours en direct"), ("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis")]),
+            tuiles([("[NB_PARTIES]", "Parties jouées"), ("[SERIE]", "Jours de série"), ("[TAUX_REUSSITE]&nbsp;%", "Réussite")]),
+            progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>La régularité paie !</b> Ton point fort cette semaine : <b>[THEME_FORT]</b>. À travailler : <b>[THEME_FAIBLE]</b>."),
+            NOUV_CCAS, bouton("Continuer l'Initiation", L("PARCOURS"))])
+mail(id="26-bilan-semaine-peu-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine (à activer avec les statistiques)", alt="Bon début, on continue ?",
+     exemples={"NB_JOURS_ACTIFS": "2", "NB_LECONS": "3", "NB_EXERCICES": "21", "NB_PARTIES": "2", "PROGRESSION_PARCOURS": "34"},
+     objet="[PSEUDO], ta semaine d'échecs : on continue ?", pre="[NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout.", sur="Ta semaine · [SEMAINE]", titre="Bon début, | on continue ?",
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Chaque séance compte !"),
+            tuiles([("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis"), ("[NB_PARTIES]", "Parties jouées")]),
+            progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>Le secret pour progresser :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]. Et lundi à 18 h 30, rejoins le cours en direct !"),
+            NOUV_CCAS, bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
+mail(id="27-bilan-semaine-sans-activite", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17 ; à activer avec les statistiques)", alt="Ta place t'attend",
+     exemples={"PROGRESSION_PARCOURS": "34"},
+     objet="Ce que tu as manqué cette semaine 👀", pre="Cours en direct, nouveaux exercices, tournoi : ta place t'attend.", sur="Ta semaine · [SEMAINE]", titre="Ta place | t'attend.",
+     corps=[para("Pas d'échecs cette semaine ? Ça arrive à tout le monde. Voici ce qui s'est passé sur la plateforme :"),
+            NOUV_CCAS,
+            progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>Pour repartir en douceur :</b> rejoins le cours en direct de lundi, à 18 h 30 avec [ANIMATEUR_LUNDI], ou fais une seule leçon, <b>[LECON_SUIVANTE]</b> (environ [DUREE_LECON])."),
+            bouton("Faire une leçon", L("LECON_SUIVANTE")),
+            para('<span style="color:#6b6b66;font-size:14px">Ton accès est toujours ouvert, et toujours offert.</span>')])
 mail(id="15-serie-en-danger", cat="Engagement", quand="Le soir, si la série de jours (≥ 5 jours) va s'interrompre (à activer avec la série de jours)", alt="Ta série de jours",
      objet="Ta série de [SERIE] jours va s'arrêter ⏳", pre="Un exercice suffit pour la garder.", sur="Ta série", titre="Garde | ta série !",
      corps=[para("[PSEUDO], tu as joué [SERIE] jours d'affilée. Il te reste jusqu'à minuit pour la prolonger : <b>un seul exercice suffit</b>."), bouton("Faire un exercice", L("EXERCICE_DU_JOUR"))])
@@ -161,7 +184,7 @@ mail(id="25-droits-non-verifies", cat="Vérification des droits", marketing=Fals
 # Titres en deux temps : déjà dans chaque mail (« | »)
 TITRES = {}
 MASCOTTES = {}
-ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits'}
+ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'semaine-bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits', '26': 'bilan-debut', '27': 'bilan-pause'}
 EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric", "NIVEAU": "tous niveaux",
     "DESCRIPTION_COURS": "Développer ses pièces, contrôler le centre, roquer : les trois règles d'or des débuts, avec des parties d'exemple commentées en direct.",
     "THEME_LUNDI": "Les principes des débuts", "ANIMATEUR_LUNDI": "Éric", "DUREE_LUNDI": "1 h",
@@ -174,4 +197,4 @@ EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric
     "CHANGEMENT": "les cours en direct du mercredi passeront à 19 h", "MOIS": "novembre", "PSEUDO": "LéaDame", "EMAIL_CONTACT": "europe@echecs.com",
     "THEME_FORT": "les mats élémentaires", "THEME_FAIBLE": "le clouage", "AUTEUR_REPONSE": "Florian", "TITRE_SUJET": "Comment mater avec Roi et Tour ?",
     "EXTRAIT_REPONSE": "Repousse le Roi adverse vers le bord avec ta Tour, puis rapproche ton Roi…", "DERNIERE_LECON": "Le mat du couloir", "LECON_SUIVANTE": "La fourchette",
-    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})
+    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})

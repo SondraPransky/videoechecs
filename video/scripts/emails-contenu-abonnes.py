@@ -69,10 +69,32 @@ mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+1
             bouton("Voir le prochain tournoi", L("TOURNOIS"))])
 
 # ---------- 5. Engagement ----------
-mail(id="14-bilan-mensuel", cat="Engagement", quand="Le 1er de chaque mois, si au moins une activité dans le mois", img="progression", alt="La mascotte fête une victoire",
-     objet="[PRENOM], ton mois d'échecs en chiffres", pre="[NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ton bilan de [MOIS]", titre="Ton mois en chiffres.",
-     corps=[tuiles([("[NB_LECONS]", "leçons terminées"), ("[NB_EXERCICES]", "exercices réussis ([TAUX_REUSSITE] %)"), ("[SERIE_MAX]&nbsp;j", "meilleure série")]),
-            para("Ton thème le plus travaillé : <b>[THEME_FORT]</b>. À renforcer : <b>[THEME_FAIBLE]</b>."), bouton("Travailler [THEME_FAIBLE]", L("THEME_FAIBLE"))])
+# Bilan de la semaine : 3 versions selon l'activité de la semaine (une seule part, le dimanche vers 18 h)
+NOUV_ACA = nouveautes("Cette semaine dans l'Académie", [("Nouvelles leçons", "[NB_NOUVELLES_LECONS]"), ("Cours et masterclasses en vidéo", "[NB_VIDEOS_SEMAINE]"), ("Tournois organisés", "[NB_TOURNOIS_SEMAINE]")])
+mail(id="14-bilan-semaine-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine", alt="Ta semaine d'échecs",
+     objet="[PRENOM], ta semaine d'échecs en chiffres 🔥", pre="[NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo !", sur="Ta semaine · [SEMAINE]", titre="Belle semaine, | [PRENOM] !",
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Voici ton bilan :"),
+            tuiles([("[NB_COURS_SUIVIS]", "Cours suivis"), ("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis")]),
+            tuiles([("[NB_PARTIES]", "Parties jouées"), ("[SERIE]", "Jours de série"), ("[TAUX_REUSSITE]&nbsp;%", "Réussite")]),
+            progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>La régularité paie !</b> Ton point fort cette semaine : <b>[THEME_FORT]</b>. À travailler : <b>[THEME_FAIBLE]</b>."),
+            NOUV_ACA, bouton("Continuer mon parcours", L("PARCOURS"))])
+mail(id="44-bilan-semaine-peu-actif", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine", alt="Bon début, on continue ?",
+     exemples={"NB_JOURS_ACTIFS": "2", "NB_LECONS": "3", "NB_EXERCICES": "21", "NB_PARTIES": "2", "PROGRESSION_PARCOURS": "34"},
+     objet="[PRENOM], ta semaine d'échecs : on continue ?", pre="[NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout.", sur="Ta semaine · [SEMAINE]", titre="Bon début, | on continue ?",
+     corps=[para("Jours d'entraînement cette semaine : <b>[NB_JOURS_ACTIFS] sur 7</b>. Chaque séance compte !"),
+            tuiles([("[NB_LECONS]", "Leçons"), ("[NB_EXERCICES]", "Exercices réussis"), ("[NB_PARTIES]", "Parties jouées")]),
+            progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>Le secret des joueurs qui progressent :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]."),
+            NOUV_ACA, bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
+mail(id="45-bilan-semaine-sans-activite", cat="Bilan de la semaine", quand="Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17)", alt="Ta place t'attend", exemples={"PROGRESSION_PARCOURS": "34"},
+     objet="Ce que tu as manqué cette semaine 👀", pre="Nouvelles leçons, cours en vidéo, tournoi : voici ce que tu as manqué.", sur="Ta semaine · [SEMAINE]", titre="Ta place | t'attend.",
+     corps=[para("Pas d'échecs cette semaine ? Ça arrive à tout le monde. Voici ce qui s'est passé pendant ce temps :"),
+            NOUV_ACA,
+            progression("[PARCOURS]", "[PROGRESSION_PARCOURS]"),
+            encadre("<b>Pour repartir :</b> une seule leçon, <b>[LECON_SUIVANTE]</b>, environ [DUREE_LECON]. Ta série redémarre dès aujourd'hui."),
+            bouton("Faire une leçon", L("LECON_SUIVANTE")),
+            para('<span style="color:#6b6b66;font-size:14px">Ton abonnement est actif : toute l\'Académie t\'attend, quand tu veux.</span>')])
 mail(id="15-objectif-atteint", cat="Engagement", quand="Quand l'abonné valide un module ou un parcours", img="objectif", alt="Objectif atteint",
      objet="Module validé : [MODULE] 🎉", pre="Une étape de plus vers ton objectif.", sur="Bravo", titre="Module validé !",
      corps=[para("[PRENOM], tu viens de valider <b>[MODULE]</b>. Tu as passé [NB_LECONS_MODULE] leçons et réussi [NB_EXERCICES_MODULE] exercices."),
@@ -218,6 +240,8 @@ mail(id="43-cours-de-la-semaine", cat="Événements", quand="Chaque semaine, le 
             encadre("<b>La semaine prochaine :</b> [PROGRAMME_SEMAINE_PROCHAINE]."),
             bouton("Tous les cours en vidéo", L("COURS_VIDEOS")),
             para('<span style="color:#6b6b66;font-size:14px">Un seul cours cette semaine ? Supprime le second bloc vidéo.</span>')])
+EXEMPLES.update({"SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
+    "NB_NOUVELLES_LECONS": "6", "NB_VIDEOS_SEMAINE": "3", "NB_TOURNOIS_SEMAINE": "1"})
 EXEMPLES.update({"THEME_COURS_1": "Les débuts ouverts : les principes", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
     "THEME_COURS_2": "La fourchette de Cavalier", "JOUR_COURS_2": "Jeudi", "ANIMATEUR_COURS_2": "Sylvain Ravot", "DUREE_COURS_2": "55 min",
     "URL_MINIATURE_COURS_1": "img/miniature-exemple.jpg", "URL_MINIATURE_COURS_2": "img/miniature-exemple.jpg",
@@ -229,7 +253,7 @@ TITRES = {
     "03-mot-de-passe": "Nouveau | mot de passe.", "04-gratuit-j3-lecons": "Tu as essayé | une leçon ?", "05-gratuit-j7-offre": "Passe à | l'Académie complète.",
     "06-gratuit-j21-relance": "Tu hésites | encore ?", "07-confirmation-abonnement": "Tu fais partie | de l'Académie.", "08-paiement-refuse": "Ton paiement | n'est pas passé.",
     "09-paiement-recu": "Merci, | [PRENOM] !", "10-demarrage-j1-parcours": "Trouve | ton niveau.", "11-demarrage-j3-exercices": "10 minutes | par jour.",
-    "12-demarrage-j6-masterclasses": "Apprends | des meilleurs.", "13-demarrage-j10-communaute": "Rejoins | la communauté.", "14-bilan-mensuel": "Ton mois | en chiffres.",
+    "12-demarrage-j6-masterclasses": "Apprends | des meilleurs.", "13-demarrage-j10-communaute": "Rejoins | la communauté.",
     "15-objectif-atteint": "Module validé. | Au suivant !", "16-serie-en-danger": "Garde | ta série !", "17-inactif-7-jours": "On reprend | là où tu en étais ?",
     "18-inactif-30-jours": "Tu nous | manques !", "21-replay-masterclass": "Tu l'as manquée ? | Le replay est là.", "24-resultats-tournoi": "Merci | d'avoir joué !",
     "25-sortie-revue": "Le n° [NUMERO] | est là.", "26-lettre-plusieurs-nouvelles": "Cette semaine | dans l'Académie.", "27-renouvellement-annuel-j30": "Ton année d'Académie | se termine bientôt.",
@@ -241,6 +265,6 @@ TITRES = {
 }
 MASCOTTES = {}
 ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merci", "27": "renouvellement", "30": "resiliation", "33": "etape", "34": "enregistre", "35": "carte", "37": "deplace", "39": "information", "40": "aurevoir", "02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
-           "13": "communaute", "14": "bilan", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
+           "13": "communaute", "14": "semaine-bilan", "44": "bilan-debut", "45": "bilan-pause", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
            "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine"}

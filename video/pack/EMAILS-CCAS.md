@@ -1,6 +1,6 @@
 # E-mails des bénéficiaires CCAS — plateforme d'échecs des Activités Sociales de l'Énergie
 
-25 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
+27 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
 les images à héberger dans `emails-ccas/img/`. Même moteur et même design que les e-mails de l'Académie echecs.com
 (`scripts/emails.py ccas`, contenu dans `scripts/emails-contenu-ccas.py`).
 
@@ -23,7 +23,8 @@ Partenariat : J+14 19 Les échecs en famille ──► J+30 20 Questionnaire de 
         ├── cours en direct : 07 Programme de la semaine (lundi, les deux cours) · 08 Les cours de la semaine (jeudi, vidéos YouTube) · 09 Cours déplacé
         ├── tournois        : 10 Annonce (J-5 et jour J) · 11 Inscription confirmée · 12 Résultats
         ├── lettre          : 13 Lettre de la semaine (2 ou 3 nouvelles mélangées : cours en vidéo, tournoi, résultats ; remplace alors le 08)
-        ├── en continu      : 14 Bilan du mois · 15 Série en danger · 16 Réponse sur le forum
+        ├── chaque dimanche : 14 / 26 / 27 Bilan de la semaine (actif / peu actif / sans activité)
+        ├── en continu      : 15 Série en danger · 16 Réponse sur le forum
         ├── réactivation    : 17 Inactif 7 j · 18 Inactif 30 j
         ├── compte          : 22 Changement de la plateforme ou de l'accès (30 jours avant) · 23 Suppression du compte (RGPD)
         └── droits CCAS     : 24 Vérification en cours · 25 Droits non vérifiés (à activer si l'étape 2 de l'inscription contrôle les droits)
@@ -55,8 +56,9 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 - **Pseudo** : le formulaire d'inscription ne demande qu'un pseudo ; les e-mails interpellent le joueur avec `[PSEUDO]` (pas de prénom).
 - **Cours en direct** : en visioconférence (Zoom, Teams…) ; `[LIEN_DIRECT]` est le lien de la visio, donné dans le rappel (07) et dans l'e-mail de report (09).
 - **Contact** : `[EMAIL_CONTACT]` = europe@echecs.com.
-- **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14 bilan du mois, 21 bilan de l'année),
+- **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14, 26, 27 bilan de la semaine ; 21 bilan de l'année),
   série de jours (15, et la mention dans 05), parties sauvegardées (bouton « Analyser mes parties » du 12).
+- **Bilan de la semaine** (3 versions, une seule part le dimanche vers 18 h, selon les jours d'entraînement de la semaine) : actif (≥ 3 jours), peu actif (1 ou 2 jours), sans activité (0 jour ; au plus 2 semaines de suite, et pas la semaine où part la relance d'inactivité 17). Chiffres présentés comme des compteurs (« Leçons : 3 ») : l'accord est juste quelle que soit la valeur. `[PROGRESSION_PARCOURS]` est un nombre de 0 à 100 (largeur de la barre).
 - **Rappel des cours** : un seul e-mail par semaine, le lundi (07), avec les deux cours ; à tous les joueurs qui acceptent les e-mails d'information.
 - **Famille** : les ayants droit (conjoint, enfants…) créent leur propre compte (e-mail 19).
 - **Questionnaire** (20) : outil externe anonyme (Google Forms ou équivalent), `[LIEN_QUESTIONNAIRE]`.
@@ -113,11 +115,18 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 |---|---|---|---|---|
 | `13-lettre-de-la-semaine.html` | Les semaines où il y a 2 ou 3 nouvelles (remplace alors l'e-mail 08) | Cette semaine : [TITRE_UNE] | Le cours en vidéo, le prochain tournoi et les résultats du dernier. | Information (désinscription possible) |
 
+### Bilan de la semaine
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `14-bilan-semaine-actif.html` | Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine (à activer avec les statistiques) | [PSEUDO], ta semaine d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
+| `26-bilan-semaine-peu-actif.html` | Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine (à activer avec les statistiques) | [PSEUDO], ta semaine d’échecs : on continue ? | [NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout. | Information (désinscription possible) |
+| `27-bilan-semaine-sans-activite.html` | Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17 ; à activer avec les statistiques) | Ce que tu as manqué cette semaine 👀 | Cours en direct, nouveaux exercices, tournoi : ta place t’attend. | Information (désinscription possible) |
+
 ### Engagement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `14-bilan-mensuel.html` | Le 1er de chaque mois, si au moins une activité dans le mois (à activer avec les statistiques) | [PSEUDO], ton mois d’échecs en chiffres | [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
 | `15-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre (à activer avec la série de jours) | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
 | `16-reponse-forum.html` | Quand quelqu'un répond à un sujet du joueur (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t’a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
 

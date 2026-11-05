@@ -147,6 +147,20 @@ def video(miniature, titre, sous, lien_lecon, lien_youtube):   # cours filmé : 
             f'<span style="font:16px {SANS};color:{C["filet"]}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>'
             f'<a href="{lien_youtube}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">Sur YouTube&nbsp;&rarr;</a></td></tr></table>')
 
+def progression(titre, pct):   # avancement dans un parcours : titre, pourcentage, barre jaune sur fond crème (pct = nombre de 0 à 100, ou variable)
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:8px 0 24px"><tr>'
+            f'<td style="font-family:{SANS};font-weight:800;font-size:14px;color:{C["texte"]};padding:0 0 8px">{titre}</td>'
+            f'<td align="right" style="font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]};padding:0 0 8px;white-space:nowrap">{pct}&nbsp;%</td></tr>'
+            f'<tr><td colspan="2" style="background:{C["fond"]};border-radius:999px;padding:3px">'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="{pct}%" style="width:{pct}%"><tr><td height="12" bgcolor="{C["jaune"]}" style="height:12px;line-height:12px;font-size:0;background:{C["jaune"]};border-radius:999px">&nbsp;</td></tr></table>'
+            f'</td></tr></table>')
+def nouveautes(titre, items):   # ce qui s'est passé sur la plateforme : intitulé, puis « libellé : valeur » (accord toujours juste, quelle que soit la valeur)
+    rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:16px;color:{C["texte"]};border-top:1px solid {C["filet"]}">{k}</td>'
+                   f'<td align="right" style="padding:9px 0;font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]};border-top:1px solid {C["filet"]};white-space:nowrap">{v}</td></tr>' for k, v in items)
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr><td style="background:{C["fond"]};border-radius:14px;padding:16px 20px 8px">'
+            f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:{C["em"]};margin:0 0 8px">{titre}</div>'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}</table></td></tr></table>')
+
 DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><style>
 @media (max-width: 480px) { .m-pad { padding-left:20px !important; padding-right:20px !important; } .m-out { padding-left:0 !important; padding-right:0 !important; padding-top:0 !important; } h1 { font-size:28px !important; } }
 @media (max-width: 360px) { .m-prix { font-size:25px !important; } }
@@ -252,8 +266,9 @@ if MASC:
     for m in MASC:
         im = Image.open(ICI / f"build/_mascotte/{m}.png"); im = im.crop(im.getbbox())
         for d in (OUT, APER): im.save(d / "img" / f"mascotte-{m}.png", optimize=True)
-def exemple(h):
-    r = re.sub(r"\[([A-Z_0-9]+)\]", lambda m: EXEMPLES.get(m.group(1), m.group(0)) if not m.group(1).startswith("LIEN_") else "#", h)
+def exemple(h, propres=None):   # propres : exemples propres à un e-mail (ex. les chiffres d'une semaine peu active)
+    ex = {**EXEMPLES, **(propres or {})}
+    r = re.sub(r"\[([A-Z_0-9]+)\]", lambda m: ex.get(m.group(1), m.group(0)) if not m.group(1).startswith("LIEN_") else "#", h)
     return r[:r.index("<body")] + typo(r[r.index("<body"):])
 VARS = set()
 for e in E:
@@ -270,10 +285,10 @@ for e in E:
              f'<div style="font-size:14px;color:#6b6b66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["pre"]}</div></div></div></div>')
     ha = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)
     ha = ha.replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
-    (APER / f"{e['id']}.html").write_text(exemple(ha))
+    (APER / f"{e['id']}.html").write_text(exemple(ha, e.get("exemples")))
     # version pour la page de validation des e-mails (polices en ligne, exemples, ligne de boîte de réception)
     hb = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_WEB).replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
-    (ART / f"{e['id']}.html").write_text(exemple(hb))
+    (ART / f"{e['id']}.html").write_text(exemple(hb, e.get("exemples")))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)
