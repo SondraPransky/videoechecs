@@ -59,19 +59,19 @@ if not _ex.exists():
 _mm.miniature_mail(_ex, APER / "img/miniature-exemple.jpg")
 if PROFIL == "ccas": shutil.copy(ICI.parent / "assets/brand/ccas/ccas-favicon-72.png", APER / "img/favicon.png")   # pastille de l'expéditeur (aperçus)
 C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
-SERIF = "'Fraunces', Georgia, 'Times New Roman', serif"; SANS = "'Manrope', 'Helvetica Neue', Arial, sans-serif"
-# Polices de l'Académie : Google Fonts dans les e-mails envoyés (Apple Mail, iOS, Outlook.com les affichent ; Gmail garde Georgia / Arial),
-# fichiers locaux pour les aperçus.
-FONTS_WEB = '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,400&family=Manrope:wght@400;700;800&display=swap" rel="stylesheet"><!--<![endif]-->'
-# Outlook sur PC (moteur Word) : il ne charge pas les polices web et prendrait Times New Roman ; on impose Arial et Georgia
-FONTS_WEB += '<!--[if mso]><style>body,table,td,p,a,div,span,li{font-family:Arial,Helvetica,sans-serif !important} h1,h1 span{font-family:Georgia,serif !important}</style><![endif]-->'
+# Police des deux séries : Signika, celle des plateformes (titres en 600, texte en 400) ; Arial en secours sur Outlook PC.
+# Signika n'a pas d'italique : la suite du titre (après « | ») est en graisse normale, dans la couleur d'accent.
+GRAS = 600
+TITRE_SUITE = "font-weight:400"
+SERIF = SANS = "'Signika', 'Helvetica Neue', Arial, sans-serif"
+FONTS_WEB = ('<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet"><!--<![endif]-->'
+             '<!--[if mso]><style>body,table,td,p,a,div,span,li,h1{font-family:Arial,Helvetica,sans-serif !important}</style><![endif]-->')
 NM = ICI / "node_modules/@fontsource"
-FONTS_LOCAL = "<style>" + "".join(f'@font-face{{font-family:"{f}";font-weight:{w};font-style:{st};src:url("file://{NM}/{f.lower()}/files/{f.lower()}-latin-{w}-{st}.woff2") format("woff2")}}'
-    for f, w, st in (("Fraunces", 900, "normal"), ("Fraunces", 400, "italic"), ("Manrope", 400, "normal"), ("Manrope", 700, "normal"), ("Manrope", 800, "normal"))) + "</style>"
+FONTS_LOCAL = FONTS_WEB
 
 def bouton(txt, lien):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td bgcolor="{C['jaune']}" style="border-radius:999px;background:{C['jaune']};mso-padding-alt:16px 28px">
-<a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:17px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
+<a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:16px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'
 def encadre(t): return f'<div style="margin:24px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:16px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
@@ -91,39 +91,39 @@ def comparatif(rows):   # Gratuit / Abonné : la colonne abonné en jaune
               f'<td align="center" style="padding:13px 8px;background:{C["fond"]};font-family:{SANS};font-size:14px;color:{C["gris"]};{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(g)}</td>'
               f'<td align="center" style="padding:13px 8px;background:#fff6c2;font-family:{SANS};font-weight:800;font-size:14px;color:#111;{bb}{"border-radius:0 0 10px 10px;" if last else ""}">{cell(a)}</td></tr>')
     return h + "</table>"
-def tuiles(items):   # chiffres clés : grandes valeurs en Fraunces, sur des tuiles crème
+def tuiles(items):   # chiffres clés : grandes valeurs, sur des tuiles crème
     w = 100 // len(items)
     return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate;border-spacing:8px 0"><tr>' + "".join(
         f'<td width="{w}%" valign="top" style="background:{C["fond"]};border-radius:14px;padding:18px 12px 16px;text-align:center">'
-        f'<div style="font-family:{SERIF};font-weight:900;font-size:{30 if len(re.sub(r"<[^>]+>|&[a-z]+;", "x", v)) <= 6 else 20}px;line-height:1.1;color:{C["texte"]}">{v}</div>'
+        f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:{26 if len(re.sub(r"<[^>]+>|&[a-z]+;", "x", v)) <= 6 else 20}px;line-height:1.1;color:{C["texte"]}">{v}</div>'
         f'<div style="margin-top:8px;font-family:{SANS};font-weight:700;font-size:12px;line-height:1.35;color:{C["gris"]}">{k}</div></td>' for v, k in items) + "</tr></table>")
 def billet(titre, lignes, jour="[JOUR]", mois="[MOIS_COURT]"):   # événement : bloc calendrier nuit + détails
     det = "".join(f'<div style="margin-top:7px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><b style="color:{C["texte"]};font-weight:800">{k}</b>&nbsp;&nbsp;{v}</div>' for k, v in lignes)
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr>'
             f'<td width="88" valign="middle" align="center" style="background:{C["nuit"]};border-radius:14px 0 0 14px;padding:16px 6px">'
-            f'<div style="font-family:{SERIF};font-weight:900;font-size:36px;line-height:1;color:{C["jaune"]}">{jour}</div>'
+            f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:36px;line-height:1;color:{C["jaune"]}">{jour}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f4f1ea">{mois}</div></td>'
             f'<td valign="middle" style="background:{C["fond"]};border-radius:0 14px 14px 0;padding:16px 18px">'
-            f'<div style="font-family:{SERIF};font-weight:900;font-size:20px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
+            f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:{C["texte"]}">{titre}</div>{det}</td></tr></table>')
 def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total en gras
     rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:14px;color:{C["gris"]}">{k}</td><td align="right" style="padding:9px 0;font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]}">{v}</td></tr>' for k, v in lignes)
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border:1px solid {C["filet"]};border-radius:14px"><tr><td style="padding:16px 20px">'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
             f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
-            f'<tr><td style="font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:900;font-size:30px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
+            f'<tr><td style="font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:{GRAS};font-size:30px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
 def coach():   # le coach de la masterclass : photo ronde, nom et titre
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px"><tr><td width="72" valign="middle"><img src="[URL_PHOTO_COACH]" width="64" height="64" alt="[COACH]" style="display:block;width:64px;height:64px;border-radius:50%;border:3px solid {C["jaune"]};object-fit:cover"></td>'
-            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
+            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
 def podium(p1, p2, p3):
     col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:14px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
-        f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:900;font-size:30px;color:#111">{rang}</div></td>')
+        f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:{GRAS};font-size:30px;color:#111">{rang}</div></td>')
     return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0 8px"><tr>'
             + col(p2, "2", 70, "#dfe6ef") + col(p1, "1", 100, C["jaune"]) + col(p3, "3", 52, "#f0c9a0") + '</tr></table>')
 def carte_prix(titre, prix, unite, barre, note, mis_en_avant=False, badge=""):
     b = f'<div style="display:inline-block;margin-bottom:10px;padding:4px 10px;border-radius:999px;background:#111;font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:{C["jaune"]}">{badge}</div><br>' if badge else ""
     return (f'<td valign="top" style="background:{"#fff6c2" if mis_en_avant else C["fond"]};border:2px solid {C["jaune"] if mis_en_avant else C["fond"]};border-radius:16px;padding:16px 12px" width="50%">{b}'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["gris"]}">{titre}</div>'
-            f'<div class="m-prix" style="margin-top:8px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
+            f'<div class="m-prix" style="margin-top:8px;font-family:{SERIF};font-weight:{GRAS};font-size:32px;line-height:1;color:{C["texte"]};white-space:nowrap">{prix}</div>'
             f'<div style="margin-top:4px;font-family:{SANS};font-weight:700;font-size:14px;color:{C["gris"]}">{unite}</div>'
             f'<div style="margin-top:6px;font-family:{SANS};font-size:14px;color:{C["gris"]}"><s>{barre}</s></div>'
             f'<div style="margin-top:10px;font-family:{SANS};font-weight:700;font-size:14px;line-height:1.4;color:{C["texte"]}">{note}</div></td>')
@@ -135,34 +135,34 @@ def offre(intro=""):   # les deux formules au prix de lancement, l'annuelle mise
 def carte(img, titre, texte, lien, cta, src=None):
     return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C['filet']};border-radius:12px;overflow:hidden">
 <tr><td{' style="background:#f1f0ea;padding:18px 18px 0"' if src else ""}><img src="{src or "{IMG}/" + img + ".jpg"}" width="{500 if src else 536}" alt="" style="display:block;width:100%;height:auto;border:0;{"border-radius:10px;" if src else ""}"></td></tr>
-<tr><td style="padding:18px 20px 20px"><div style="font:900 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
+<tr><td style="padding:18px 20px 20px"><div style="font:{GRAS} 20px/1.3 {SERIF};color:{C['texte']};margin:0 0 8px">{titre}</div>
 <div style="font:16px/1.55 {SANS};color:{C['texte']};margin:0 0 12px">{texte}</div><a href="{lien}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a></td></tr></table>'''
 
-def video(miniature, titre, sous, lien_lecon, lien_youtube):   # cours filmé : miniature YouTube en entier (bouton lecture incrusté, scripts/miniature-mail.py), titre, liens
+def video(miniature, titre, sous, lien_lecon, lien_youtube, cta="Revoir le cours"):   # cours filmé : miniature YouTube en entier (bouton lecture incrusté, scripts/miniature-mail.py), titre, liens
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;border:1px solid {C["filet"]};border-radius:12px;overflow:hidden">'
             f'<tr><td style="background:{C["nuit"]}"><a href="{lien_youtube}"><img src="{miniature}" width="536" alt="Regarder la vidéo : {titre}" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
-            f'<tr><td style="padding:16px 20px 18px"><div style="font:900 20px/1.3 {SERIF};color:{C["texte"]};margin:0 0 6px">{titre}</div>'
+            f'<tr><td style="padding:16px 20px 18px"><div style="font:{GRAS} 20px/1.3 {SERIF};color:{C["texte"]};margin:0 0 6px">{titre}</div>'
             f'<div style="font:14px/1.5 {SANS};color:{C["gris"]};margin:0 0 12px">{sous}</div>'
-            f'<a href="{lien_lecon}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">Revoir le cours&nbsp;&rarr;</a>'
+            f'<a href="{lien_lecon}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">{cta}&nbsp;&rarr;</a>'
             f'<span style="font:16px {SANS};color:{C["filet"]}">&nbsp;&nbsp;|&nbsp;&nbsp;</span>'
             f'<a href="{lien_youtube}" style="font:bold 16px {SANS};color:#1f5fa8;text-decoration:none">Sur YouTube&nbsp;&rarr;</a></td></tr></table>')
 
 def progression(titre, pct):   # avancement dans un parcours : titre, pourcentage, barre jaune sur fond crème (pct = nombre de 0 à 100, ou variable)
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:8px 0 24px"><tr>'
             f'<td style="font-family:{SANS};font-weight:800;font-size:14px;color:{C["texte"]};padding:0 0 8px">{titre}</td>'
-            f'<td align="right" style="font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]};padding:0 0 8px;white-space:nowrap">{pct}&nbsp;%</td></tr>'
+            f'<td align="right" style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;color:{C["texte"]};padding:0 0 8px;white-space:nowrap">{pct}&nbsp;%</td></tr>'
             f'<tr><td colspan="2" style="background:{C["fond"]};border-radius:999px;padding:3px">'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="{pct}%" style="width:{pct}%"><tr><td height="12" bgcolor="{C["jaune"]}" style="height:12px;line-height:12px;font-size:0;background:{C["jaune"]};border-radius:999px">&nbsp;</td></tr></table>'
             f'</td></tr></table>')
 def nouveautes(titre, items):   # ce qui s'est passé sur la plateforme : intitulé, puis « libellé : valeur » (accord toujours juste, quelle que soit la valeur)
     rows = "".join(f'<tr><td style="padding:9px 0;font-family:{SANS};font-size:16px;color:{C["texte"]};border-top:1px solid {C["filet"]}">{k}</td>'
-                   f'<td align="right" style="padding:9px 0;font-family:{SERIF};font-weight:900;font-size:20px;color:{C["texte"]};border-top:1px solid {C["filet"]};white-space:nowrap">{v}</td></tr>' for k, v in items)
+                   f'<td align="right" style="padding:9px 0;font-family:{SERIF};font-weight:{GRAS};font-size:20px;color:{C["texte"]};border-top:1px solid {C["filet"]};white-space:nowrap">{v}</td></tr>' for k, v in items)
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;border-collapse:separate"><tr><td style="background:{C["fond"]};border-radius:14px;padding:16px 20px 8px">'
             f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:{C["em"]};margin:0 0 8px">{titre}</div>'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}</table></td></tr></table>')
 
 DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark"><style>
-@media (max-width: 480px) { .m-pad { padding-left:20px !important; padding-right:20px !important; } .m-out { padding-left:0 !important; padding-right:0 !important; padding-top:0 !important; } h1 { font-size:28px !important; } }
+@media (max-width: 480px) { .m-pad { padding-left:20px !important; padding-right:20px !important; } .m-out { padding-left:0 !important; padding-right:0 !important; padding-top:0 !important; } h1 { font-size:24px !important; } }
 @media (max-width: 360px) { .m-prix { font-size:25px !important; } }
 @media (prefers-color-scheme: dark) {
   body, [style*="background:#f1f0ea"] { background:#06080c !important; }
@@ -207,7 +207,7 @@ def page(e):
         hero = f'<tr><td align="center" style="background:{C["nuit"]};padding:4px 0 0"><img src="{{IMG}}/mascotte-{e["mascotte"]}.png" height="150" alt="" style="display:block;height:150px;width:auto;border:0;margin:6px auto 0"></td></tr>'
     t1, _, t2 = e["titre"].partition("|")
     # deux temps sur la même ligne (la suite en italique bleu) : retour à la ligne seulement s'il manque de place
-    titre = t1.strip() + (f' <span style="font-family:{SERIF};font-style:italic;font-weight:400;color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
+    titre = t1.strip() + (f' <span style="font-family:{SERIF};{TITRE_SUITE};color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
     corps = "".join(e["corps"])
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">
@@ -220,7 +220,7 @@ def page(e):
 {hero}
 <tr><td class="m-pad" style="padding:34px 32px 30px">
 <div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C['em']};margin:0 0 14px">&mdash;&nbsp;{e['sur']}</div>
-<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:900;font-size:32px;line-height:1.15;color:{C['texte']}">{titre}</h1>
+<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:{C['texte']}">{titre}</h1>
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', SIGNATURE)}</p>
 </td></tr>

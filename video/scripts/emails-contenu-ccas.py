@@ -4,6 +4,7 @@
 # Exécuté par scripts/emails.py (python3 scripts/emails.py ccas), qui fournit les composants et le design.
 
 # ---------- Réglages de la série ----------
+C["em"] = "#0066cc"   # bleu du logo des Activités Sociales (surtitre, suite du titre)
 EXPEDITEUR = "Europe Échecs · Activités Sociales"
 AVATAR = '<img src="img/favicon.png" width="34" height="34" alt="" style="display:block;width:34px;height:34px;border-radius:50%;background:#ffffff">'
 POURQUOI = "Tu reçois cet e-mail car tu as un compte sur la plateforme d'échecs des Activités Sociales de l'Énergie."

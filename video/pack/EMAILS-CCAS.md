@@ -32,7 +32,7 @@ Partenariat : J+14 19 Les échecs en famille ──► J+30 20 Questionnaire de 
 
 ## Design
 
-Identique aux e-mails de l'Académie (voir `EMAILS.md`), sauf l'en-tête : bande blanche avec le logo des Activités Sociales de l'Énergie
+Même mise en page que les e-mails de l'Académie (voir `EMAILS.md`), en **Signika** comme l'Académie et la plateforme CCAS, avec le bleu du logo (#0066cc) pour le surtitre et la suite des titres. L'en-tête : bande blanche avec le logo des Activités Sociales de l'Énergie
 (`img/logo.png`, tiré du logo web officiel « activités sociales de l'énergie », bleu #0066cc, 280 px de large), qui reste blanche en mode sombre pour garder le logo lisible.
 Le favicon CCAS (le soleil, `assets/brand/ccas/ccas-favicon-*.png`) peut servir d'image d'expéditeur (BIMI, avatar Gmail) si l'outil d'envoi le permet.
 

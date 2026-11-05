@@ -16,7 +16,7 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (co
         │                            puis tous les 3 mois ──► 46 Les nouveautés du trimestre (+ offre)
         │               6ᵉ leçon offerte validée ──► 47 Et maintenant, la suite ?
         │         7 jours de suite au puzzle du jour ──► 48 Une semaine sans manquer un jour
-        │   ponctuel : 49 Replay de masterclass offert · 50 Tournoi ouvert à tous · 51 1 an avec echecs.com
+        │   ponctuel : 49 Extrait de masterclass sur YouTube · 50 Tournoi ouvert à tous · 51 1 an avec echecs.com
         │   saisonnier (tous les comptes) : 52 Offre l'Académie (carte cadeau, Noël)
         │                  paiement commencé, pas fini ──► 33 Ton abonnement n'est pas finalisé
         ▼
@@ -40,14 +40,13 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 ## Design
 
-- **Polices de l'Académie** : Fraunces pour les titres (gras, avec une suite en italique bleu, comme sur les visuels), Manrope pour le texte.
-  Elles sont chargées depuis Google Fonts (Fraunces 900 et 400 italique, Manrope 400, 700 et 800 : exactement les graisses utilisées) : Apple Mail, l'appli Mail de l'iPhone et Outlook.com les affichent ; Gmail et Outlook sur PC
-  affichent Georgia et Arial à la place, sans casser la mise en page.
+- **Police : Signika**, celle des plateformes echecs.com (titres en 600, texte en 400, suite des titres en graisse normale bleue), chargée depuis Google Fonts ;
+  Gmail et Outlook sur PC affichent Arial à la place, sans casser la mise en page. Les bandeaux (images) sont aussi en Signika.
 - **En-têtes dédiés** (600×240) : un grand titre et la mascotte, dans les couleurs du pack, propres à chaque e-mail (dossier `images/00-emails/`).
 - **Photo du coach** dans l'annonce de masterclass (`[URL_PHOTO_COACH]`), **puzzle de la semaine** en image dans la lettre (`[URL_IMAGE_PUZZLE]`, l'échiquier du jour généré par le site).
 - **Mode sombre** : sur Apple Mail, l'iPhone et Outlook.com en thème sombre, l'e-mail passe en fond nuit (aperçus sur la page de validation). Gmail applique sa propre inversion.
-- **Échelle typographique** (8 tailles) : titres 32 px (Fraunces 900, suite en italique 400 sur la même ligne, retour à la ligne seulement s'il manque de place), chiffres et prix 30 à 36 px, titres de carte 20 px,
-  boutons 17 px (Manrope 800), texte 16 px, texte secondaire 14 px, étiquettes et mentions 12 px (majuscules espacées).
+- **Échelle typographique** : titres 26 px, 24 px sur téléphone (Signika 600, suite en 400 bleue sur la même ligne, retour à la ligne seulement s'il manque de place), chiffres 26 px, prix 32 px, titres de carte 20 px,
+  boutons 16 px (Signika gras), texte 16 px, texte secondaire 14 px, étiquettes et mentions 12 px (majuscules espacées).
 - **Typographie française** : espaces insécables avant « : ; ? ! % » et dans les nombres (« 1 240 », « 20 h 30 », « 14,90 € »), apostrophe typographique (’),
   exposants (1ᵉʳ, 4ᵉ). Appliquée automatiquement par le générateur.
 - **La mascotte** apparaît en tête des e-mails sans image (confirmation, mot de passe, paiement, résiliation…), sur le fond nuit de l'en-tête.
@@ -123,7 +122,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `46-gratuit-nouveautes-trimestre.html` | Tous les 3 mois, aux comptes gratuits qui acceptent les e-mails d'information (après le 06 ; pas dans les 30 jours qui suivent 05, 06, 31 ou 33) | [PRENOM], voici ce qui a changé dans l’Académie | [NB_NOUVELLES_LECONS_TRIMESTRE] nouvelles leçons, des masterclasses, des tournois… et ton prix de lancement t’attend. | Information (désinscription possible) |
 | `47-gratuit-lecons-terminees.html` | Dès que la 6ᵉ leçon offerte est validée (une seule fois) | Bravo, tes 6 leçons offertes sont bouclées 🎉 | La suite t’attend : [LECON_SUIVANTE] et +200 autres leçons. | Information (désinscription possible) |
 | `48-gratuit-serie-puzzles.html` | Le lendemain du 7ᵉ jour de suite sur le puzzle du jour (une seule fois) | 7 jours de suite sur le puzzle du jour 🔥 | Ta régularité paie. Et si tu passais à +2 000 exercices ? | Information (désinscription possible) |
-| `49-gratuit-replay-offert.html` | Quand un replay de masterclass est offert (au plus 1 par trimestre, pas le même mois que le 46) | Cadeau : la masterclass de [COACH] en replay 🎁 | [THEME], en accès libre pendant [DUREE_ACCES]. | Information (désinscription possible) |
+| `49-gratuit-extrait-masterclass.html` | Quand un extrait de masterclass est publié en libre accès sur YouTube (au plus 1 par trimestre, pas le même mois que le 46) | Cadeau : [DUREE_EXTRAIT] de masterclass avec [COACH] 🎁 | [THEME], en libre accès sur YouTube. | Information (désinscription possible) |
 | `50-gratuit-tournoi-ouvert.html` | 5 jours avant un tournoi ouvert à tous, aux comptes gratuits (les abonnés reçoivent le 23) | Tournoi gratuit : [NOM_TOURNOI] le [DATE] | Ouvert à tous les comptes, cadence [CADENCE]. | Information (désinscription possible) |
 | `51-gratuit-anniversaire-compte.html` | À la date anniversaire du compte gratuit (chaque année) | 1 an avec echecs.com, [PRENOM] 🎉 | Ton année en chiffres : merci d’être là ! | Information (désinscription possible) |
 

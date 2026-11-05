@@ -55,7 +55,7 @@
     B("un-an", "menthe", "Un an", "ensemble !", "fete"),
     B("lecons-finies", "menthe", "6 leçons", "bouclées !", "lecon-terminee"),
     B("puzzles", "ciel", "7 puzzles", "d'affilée !", "super"),
-    B("replay-offert", "rose", "Un replay", "offert.", "regarde"),
+    B("extrait-offert", "rose", "Un extrait", "offert.", "regarde"),
     B("cadeau", "rose", "Offre", "l'Académie.", "fete"),
     B("trimestre", "soleil", "Quoi de neuf", "à l'Académie ?", "megaphone"),
     B("semaine-bilan", "nuit", "Ta semaine", "d'échecs.", "serie-reussie"),

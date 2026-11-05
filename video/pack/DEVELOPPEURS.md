@@ -43,7 +43,7 @@ Le détail de chaque e-mail (délai, condition) est dans `EMAILS.md`, section «
 | Compte gratuit : tous les 3 mois après le 06 (pas dans les 30 jours après 05, 06, 31, 33) | 46 nouveautés du trimestre | 2 |
 | Compte gratuit : 6ᵉ leçon offerte validée (une fois) | 47 | 1 |
 | Compte gratuit : 7 jours de suite au puzzle du jour (une fois) | 48 | 2 |
-| Compte gratuit : replay de masterclass offert (au plus 1 par trimestre) | 49 | 3 |
+| Compte gratuit : extrait de masterclass publié en libre accès sur YouTube (au plus 1 par trimestre ; miniature préparée avec `miniature-mail.py`) | 49 | 3 |
 | Compte gratuit : tournoi ouvert à tous (5 jours avant) | 50 | 2 |
 | Compte gratuit : date anniversaire du compte | 51 | 3 |
 | Fin novembre et mi-décembre, à tous les comptes (si la carte cadeau existe) | 52 | 3 |
@@ -86,7 +86,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 | Masterclass | `[THEME]`, `[COACH]`, `[TITRE_COACH]`, `[URL_PHOTO_COACH]` (carrée, ≥ 128 px), `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[DUREE]`, `[NIVEAU]`, `[DESCRIPTION_MASTERCLASS]`, `[RESUME_MASTERCLASS]`, `[QUAND]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]` |
 | Tournoi | `[NOM_TOURNOI]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Cours, revue, forum | `[TITRE_COURS]`, `[AUTEUR]`, `[NB_LECONS_COURS]`, `[DESCRIPTION_COURS]`, `[NUMERO]`, `[SOMMAIRE_1..3]`, `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
-| Saisie éditoriale (lettre, réactivation) | `[DESCRIPTION_LECON_SUIVANTE]`, `[NB_PUZZLES_REUSSIS]`, `[DUREE_ACCES]` (« 7 jours »), `[NB_PUZZLES_ANNEE]`, `[NB_LECONS_GRATUITES_FAITES]`, `[NB_MESSAGES_FORUM]`, `[DUREES_CADEAU]`, `[PRIX_CADEAU]`, `[PERIODE]` (« cet automne »), `[NB_NOUVELLES_LECONS_TRIMESTRE]`, `[NB_MASTERCLASSES_TRIMESTRE]`, `[NB_VIDEOS_TRIMESTRE]`, `[NB_TOURNOIS_TRIMESTRE]`, `[DESCRIPTION_UNE]`, `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[DATE_TOURNOI]`, `[HEURE_TOURNOI]` (tournoi de la lettre 26), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
+| Saisie éditoriale (lettre, réactivation) | `[DESCRIPTION_LECON_SUIVANTE]`, `[NB_PUZZLES_REUSSIS]`, `[DUREE_EXTRAIT]` (« 12 min »), `[URL_MINIATURE_EXTRAIT]`, `[NB_PUZZLES_ANNEE]`, `[NB_LECONS_GRATUITES_FAITES]`, `[NB_MESSAGES_FORUM]`, `[DUREES_CADEAU]`, `[PRIX_CADEAU]`, `[PERIODE]` (« cet automne »), `[NB_NOUVELLES_LECONS_TRIMESTRE]`, `[NB_MASTERCLASSES_TRIMESTRE]`, `[NB_VIDEOS_TRIMESTRE]`, `[NB_TOURNOIS_TRIMESTRE]`, `[DESCRIPTION_UNE]`, `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[DATE_TOURNOI]`, `[HEURE_TOURNOI]` (tournoi de la lettre 26), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[CONSIGNE_PUZZLE]`, `[URL_IMAGE_PUZZLE]`, `[DATE_FIN_OFFRE]` |
 | Parrainage | `[CODE_PARRAINAGE]`, `[PRENOM_FILLEUL]`, `[OFFRE_FILLEUL]`, `[RECOMPENSE_PARRAIN]` |
 
 **Liens** (`[LIEN_…]`, une adresse de page du site par variable) : la liste complète est dans `EMAILS.md`. Ajouter à chaque lien
@@ -108,7 +108,6 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 | **Parrainage** : un code et un lien par abonné, suivi des filleuls, récompense | E-mails 41, 42 (offre à définir) | 3 |
 | **Ajout à l'agenda** (.ics) pour les masterclasses | Confort | 3 |
 | **Carte cadeau** (3, 6 ou 12 mois, à imprimer ou envoyer par e-mail, activation sans paiement) | E-mail 52 (Noël) | 3 |
-| **Replay offert** : une page de replay accessible aux comptes gratuits pendant une durée limitée | E-mail 49 | 3 |
 
 ## 5. Page d'arrivée `echecs.com/academie` et suivi (1)
 

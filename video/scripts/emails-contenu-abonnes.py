@@ -62,11 +62,11 @@ mail(id="48-gratuit-serie-puzzles", cat="Compte gratuit → abonnement", quand="
             liste(["<b>Mat en 1, 2 et 3</b>, fourchettes, clouages, enfilades", "<b>Les finales</b> essentielles, pas à pas", "<b>Ta progression</b> par thème, pour savoir quoi travailler"]),
             offre("Au prix de lancement :"), bouton("Débloquer les exercices", L("ABONNEMENT")),
             para('<span style="color:#6b6b66;font-size:14px">Et demain, le puzzle du jour t\'attend : garde ta série !</span>')])
-mail(id="49-gratuit-replay-offert", cat="Compte gratuit → abonnement", quand="Quand un replay de masterclass est offert (au plus 1 par trimestre, pas le même mois que le 46)", alt="Un replay offert",
-     objet="Cadeau : la masterclass de [COACH] en replay 🎁", pre="[THEME], en accès libre pendant [DUREE_ACCES].", sur="Masterclass offerte", titre="Avec [COACH], | en accès libre.",
-     corps=[para("[PRENOM], pour te faire découvrir les masterclasses de l'Académie, on t'offre ce replay, en accès libre pendant <b>[DUREE_ACCES]</b> :"),
-            coach(), carte("b-masterclass", "[THEME]", "[DESCRIPTION_MASTERCLASS]", L("REPLAY_OFFERT"), "Regarder le replay"),
-            para("Avec l'abonnement, toutes les masterclasses sont incluses : en direct, avec tes questions, et en replay quand tu veux."),
+mail(id="49-gratuit-extrait-masterclass", cat="Compte gratuit → abonnement", quand="Quand un extrait de masterclass est publié en libre accès sur YouTube (au plus 1 par trimestre, pas le même mois que le 46)", alt="Un extrait offert",
+     objet="Cadeau : [DUREE_EXTRAIT] de masterclass avec [COACH] 🎁", pre="[THEME], en libre accès sur YouTube.", sur="Masterclass", titre="[DUREE_EXTRAIT] avec | [COACH].",
+     corps=[para("[PRENOM], pour te faire découvrir les masterclasses de l'Académie, voici un extrait en libre accès :"),
+            coach(), video("[URL_MINIATURE_EXTRAIT]", "[THEME]", "Extrait · [DUREE_EXTRAIT] · avec [COACH]", L("MASTERCLASSES"), L("YOUTUBE_EXTRAIT"), "Les masterclasses"),
+            para("La masterclass complète, et toutes les autres, sont incluses dans l'abonnement : en direct, avec tes questions, et en replay quand tu veux."),
             offre("Au prix de lancement :"), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="50-gratuit-tournoi-ouvert", cat="Compte gratuit → abonnement", quand="5 jours avant un tournoi ouvert à tous, aux comptes gratuits (les abonnés reçoivent le 23)", alt="Tournoi en ligne",
      exemples={"DATE": "21 novembre", "JOUR": "21", "HEURE": "20 h"},
@@ -295,7 +295,7 @@ mail(id="43-cours-de-la-semaine", cat="Événements", quand="Chaque semaine, le 
             encadre("<b>La semaine prochaine :</b> [PROGRAMME_SEMAINE_PROCHAINE]."),
             bouton("Tous les cours en vidéo", L("COURS_VIDEOS")),
             para('<span style="color:#6b6b66;font-size:14px">Un seul cours cette semaine ? Supprime le second bloc vidéo.</span>')])
-EXEMPLES.update({"DESCRIPTION_LECON_SUIVANTE": "Le Roi et le pion contre le Roi : la règle du carré et l'opposition, pour gagner ta première finale.", "NB_PUZZLES_REUSSIS": "6", "DUREE_ACCES": "7 jours", "NB_PUZZLES_ANNEE": "214", "NB_LECONS_GRATUITES_FAITES": "6", "NB_MESSAGES_FORUM": "17", "DUREES_CADEAU": "3, 6 ou 12 mois", "PRIX_CADEAU": "44,70 €", "PERIODE": "cet automne", "NB_NOUVELLES_LECONS_TRIMESTRE": "24", "NB_MASTERCLASSES_TRIMESTRE": "6", "NB_VIDEOS_TRIMESTRE": "12", "NB_TOURNOIS_TRIMESTRE": "9", "DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
+EXEMPLES.update({"DESCRIPTION_LECON_SUIVANTE": "Le Roi et le pion contre le Roi : la règle du carré et l'opposition, pour gagner ta première finale.", "NB_PUZZLES_REUSSIS": "6", "DUREE_EXTRAIT": "12 min", "URL_MINIATURE_EXTRAIT": "img/miniature-exemple.jpg", "NB_PUZZLES_ANNEE": "214", "NB_LECONS_GRATUITES_FAITES": "6", "NB_MESSAGES_FORUM": "17", "DUREES_CADEAU": "3, 6 ou 12 mois", "PRIX_CADEAU": "44,70 €", "PERIODE": "cet automne", "NB_NOUVELLES_LECONS_TRIMESTRE": "24", "NB_MASTERCLASSES_TRIMESTRE": "6", "NB_VIDEOS_TRIMESTRE": "12", "NB_TOURNOIS_TRIMESTRE": "9", "DATE_ENVOI": "19 novembre", "DATE_TOURNOI": "21 novembre", "HEURE_TOURNOI": "20 h", "NOM_TOURNOI": "Blitz de novembre", "SEMAINE": "du 9 au 15 nov.", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PARCOURS": "Objectif 1400", "PROGRESSION_PARCOURS": "62",
     "NB_NOUVELLES_LECONS": "6", "NB_VIDEOS_SEMAINE": "3", "NB_TOURNOIS_SEMAINE": "1"})
 EXEMPLES.update({"THEME_COURS_1": "Les principes des débuts", "JOUR_COURS_1": "Mardi", "ANIMATEUR_COURS_1": "Fabien Libiszewski", "DUREE_COURS_1": "1 h",
     "THEME_COURS_2": "La fourchette de Cavalier", "JOUR_COURS_2": "Jeudi", "ANIMATEUR_COURS_2": "Sylvain Ravot", "DUREE_COURS_2": "55 min",
@@ -322,7 +322,7 @@ MASCOTTES = {}
 ENTETES = {"01": "confirme", "03": "mot-de-passe", "08": "paiement", "09": "merci", "27": "renouvellement", "30": "resiliation", "33": "etape", "34": "enregistre", "35": "carte", "37": "deplace", "39": "information", "40": "aurevoir", "02": "bienvenue", "04": "lecons", "05": "offre", "06": "hesites", "07": "abonne", "10": "parcours", "11": "exercices", "12": "masterclasses",
            "13": "communaute", "14": "semaine-bilan", "44": "bilan-debut", "45": "bilan-pause", "15": "module", "16": "serie", "17": "reprendre", "18": "manque", "19": "masterclass", "20": "masterclass",
            "21": "replay", "22": "cours", "23": "tournoi", "24": "resultats", "25": "revue", "26": "nouvelles", "28": "annuel", "29": "fin", "31": "retour",
-           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine", "46": "trimestre", "47": "lecons-finies", "48": "puzzles", "49": "replay-offert", "50": "tournoi", "51": "un-an", "52": "cadeau"}
+           "32": "anniversaire", "36": "inscription", "38": "forum", "43": "semaine", "46": "trimestre", "47": "lecons-finies", "48": "puzzles", "49": "extrait-offert", "50": "tournoi", "51": "un-an", "52": "cadeau"}
 
 # Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
 TITRES.update({
