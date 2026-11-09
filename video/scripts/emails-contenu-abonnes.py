@@ -28,7 +28,7 @@ mail(id="05-gratuit-j7-offre", cat="Compte gratuit → abonnement", quand="J+7 a
             liste(["+200 leçons interactives, de l'initiation à 2000+", "+2 000 exercices à ton niveau", "Les masterclasses en direct et leurs replays", "Tout le catalogue vidéos et la revue Europe Échecs", "Tes parties analysées, les tournois en ligne"]),
             offre(), bouton("Je m'abonne", L("ABONNEMENT"))])
 mail(id="06-gratuit-j21-relance", cat="Compte gratuit → abonnement", quand="J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours", img="exercices", alt="Les exercices de l'Académie",
-     objet="Tu n'as encore rien vu, [PRENOM] : il reste tant à découvrir !", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
+     objet="Tu n'as encore rien vu, [PRENOM] : il reste beaucoup à découvrir !", pre="Ce que les abonnés ont en plus, en 30 secondes.", sur="Ta découverte", titre="Tu hésites encore ?",
      corps=[para("Tu utilises déjà le puzzle du jour et les leçons offertes. Voici ce que l'abonnement ajoute, <b>sans engagement</b> :"),
             comparatif([("Leçons", "6", "+200"), ("Exercices", "puzzle du jour", "+2 000"), ("Masterclasses", False, True), ("Revue en PGN", False, True), ("Tes parties analysées", False, True), ("Forum", True, True)]),
             offre("Toujours au prix de lancement :"), bouton("Choisir ma formule", L("ABONNEMENT"))])
