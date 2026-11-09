@@ -111,9 +111,9 @@ def recu(lignes, total_k, total_v):   # reçu : lignes fines, pointillés, total
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">{rows}'
             f'<tr><td colspan="2" style="border-top:2px dashed {C["filet"]};font-size:0;line-height:0;padding-top:8px">&nbsp;</td></tr>'
             f'<tr><td style="font-family:{SANS};font-weight:800;font-size:16px;color:{C["texte"]}">{total_k}</td><td align="right" style="font-family:{SERIF};font-weight:{GRAS};font-size:30px;color:{C["texte"]}">{total_v}</td></tr></table></td></tr></table>')
-def coach():   # le coach de la masterclass : photo ronde, nom et titre
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px"><tr><td width="72" valign="middle"><img src="[URL_PHOTO_COACH]" width="64" height="64" alt="[COACH]" style="display:block;width:64px;height:64px;border-radius:50%;border:3px solid {C["jaune"]};object-fit:cover"></td>'
-            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;color:{C["texte"]}">[COACH]</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">[TITRE_COACH] · ton coach pour cette masterclass</div></td></tr></table>')
+def coach(nom="[COACH]", titre="[TITRE_COACH]", photo="[URL_PHOTO_COACH]", role="ton coach pour cette masterclass"):   # portrait : photo ronde, nom et titre
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px"><tr><td width="72" valign="middle"><img src="{photo}" width="64" height="64" alt="{nom}" style="display:block;width:64px;height:64px;border-radius:50%;border:3px solid {C["jaune"]};object-fit:cover"></td>'
+            f'<td valign="middle" style="padding-left:12px"><div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;color:{C["texte"]}">{nom}</div><div style="font-family:{SANS};font-size:14px;color:{C["gris"]}">{titre} · {role}</div></td></tr></table>')
 def podium(p1, p2, p3):
     col = lambda nom, rang, h, bg: (f'<td width="33%" valign="bottom" align="center" style="padding:0 4px"><div style="font-family:{SANS};font-weight:800;font-size:14px;line-height:1.3;color:{C["texte"]};margin-bottom:8px">{nom}</div>'
         f'<div style="background:{bg};border-radius:12px 12px 0 0;height:{h}px;line-height:{h}px;font-family:{SERIF};font-weight:{GRAS};font-size:30px;color:#111">{rang}</div></td>')

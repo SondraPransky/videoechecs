@@ -59,12 +59,12 @@ Le détail de chaque e-mail (délai, condition) est dans `EMAILS.md`, section «
 | Fin d'abonnement + 30 jours | 31 | 3 |
 | Changement de prix ou de conditions (30 jours avant) | 39 | 1 (obligatoire) |
 | Suppression du compte | 40 (dernier e-mail envoyé) | 1 |
-| Dimanche vers 18 h : bilan de la semaine selon les jours d'entraînement (≥ 3 / 1-2 / 0) | 14 / 44 / 45 | 2 |
+| 1er du mois : bilan du mois selon les jours d'entraînement (≥ 8 / 1 à 7) | 14 / 44 | 2 |
 | Module validé | 15 | 2 |
-| Série de jours (≥ 5) sur le point de s'arrêter, le soir | 16 | 3 |
-| Abonné sans connexion depuis 7 / 30 jours | 17 / 18 | 2 |
+| Série de jours (≥ 5) sur le point de s'arrêter, le soir (au plus 1 fois toutes les 4 semaines) | 16 | 3 |
+| Abonné sans activité depuis 1 / 3 / 6 semaines (chacun une seule fois) | 45 / 17 / 18 | 2 |
 | Date anniversaire d'abonnement | 32 | 3 |
-| Masterclass programmée (≥ 7 jours avant), veille 18 h et 1 h avant, replay en ligne, report | 19, 20, 21, 37 | 2 |
+| Masterclass programmée (≥ 7 jours avant), rappel la veille à 18 h avec le lien, replay en ligne, report | 19, 20, 21, 37 | 2 |
 | Nouveau cours en ligne | 22 | 2 |
 | Cours de la semaine en vidéo (le lendemain du dernier cours de la semaine ; miniature préparée avec `miniature-mail.py`) | 43 | 2 |
 | Tournoi programmé (5 jours avant, jour J), inscription, résultats le lendemain | 23, 36, 24 | 2 |
@@ -82,7 +82,7 @@ pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inac
 |---|---|
 | Compte | `[PRENOM]`, `[EMAIL_CONTACT]` (europe@echecs.com), `[ADRESSE_POSTALE]` (fixe) |
 | Abonnement et paiement | `[FORMULE]`, `[PRIX]`, `[DATE]`, `[DATE_PROCHAIN_PAIEMENT]`, `[MOYEN_PAIEMENT]`, `[CARTE_4_CHIFFRES]`, `[MOIS_EXPIRATION]`, `[DATE_SUSPENSION]`, `[DATE_RENOUVELLEMENT]`, `[DATE_FIN]`, `[DATE_EFFET]`, `[CHANGEMENT]`, `[DUREE_ABONNEMENT]`, `[MOIS]` |
-| Progression (statistiques de l'abonné) | `[SEMAINE]` (« du 9 au 15 nov. »), `[NB_JOURS_ACTIFS]`, `[NB_COURS_SUIVIS]`, `[NB_PARTIES]`, `[PARCOURS]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_NOUVELLES_LECONS]`, `[NB_VIDEOS_SEMAINE]`, `[NB_TOURNOIS_SEMAINE]`, `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[SERIE]`, `[SERIE_MAX]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[MODULE]`, `[MODULE_SUIVANT]`, `[NB_LECONS_MODULE]`, `[NB_EXERCICES_MODULE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_GRATUITES_RESTANTES]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_LECONS_TOTAL]`, `[NB_EXERCICES_TOTAL]`, `[NB_MODULES]` |
+| Progression (statistiques de l'abonné) | `[SEMAINE]` (« du 9 au 15 nov. »), `[NB_JOURS_ACTIFS]`, `[NB_COURS_SUIVIS]`, `[NB_PARTIES]`, `[PARCOURS]`, `[PROGRESSION_PARCOURS]` (0 à 100), `[NB_NOUVELLES_LECONS]`, `[NB_VIDEOS_SEMAINE]`, `[NB_TOURNOIS_SEMAINE]` (relance 45), `[NB_NOUVELLES_LECONS_MOIS]`, `[NB_VIDEOS_MOIS]`, `[NB_TOURNOIS_MOIS]` (bilan du mois), `[TITRE_AUTEUR]`, `[URL_PHOTO_AUTEUR]` (e-mail 22), `[NB_LECONS]`, `[NB_EXERCICES]`, `[TAUX_REUSSITE]`, `[SERIE]`, `[SERIE_MAX]`, `[THEME_FORT]`, `[THEME_FAIBLE]`, `[MODULE]`, `[MODULE_SUIVANT]`, `[NB_LECONS_MODULE]`, `[NB_EXERCICES_MODULE]`, `[DERNIERE_LECON]`, `[LECON_SUIVANTE]`, `[DUREE_LECON]`, `[NB_LECONS_GRATUITES_RESTANTES]`, `[NB_LECONS_ANNEE]`, `[NB_EXERCICES_ANNEE]`, `[NB_LECONS_TOTAL]`, `[NB_EXERCICES_TOTAL]`, `[NB_MODULES]` |
 | Masterclass | `[THEME]`, `[COACH]`, `[TITRE_COACH]`, `[URL_PHOTO_COACH]` (carrée, ≥ 128 px), `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[DUREE]`, `[NIVEAU]`, `[DESCRIPTION_MASTERCLASS]`, `[RESUME_MASTERCLASS]`, `[QUAND]`, `[NOUVELLE_DATE]`, `[NOUVEAU_JOUR]`, `[NOUVEAU_MOIS_COURT]` |
 | Tournoi | `[NOM_TOURNOI]`, `[DATE]`, `[JOUR]`, `[MOIS_COURT]`, `[HEURE]`, `[CADENCE]`, `[NB_RONDES]`, `[PLACE]`, `[POINTS]`, `[NB_JOUEURS]`, `[VAINQUEUR]`, `[DEUXIEME]`, `[TROISIEME]` |
 | Cours, revue, forum | `[TITRE_COURS]`, `[AUTEUR]`, `[NB_LECONS_COURS]`, `[DESCRIPTION_COURS]`, `[NUMERO]`, `[SOMMAIRE_1..3]`, `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |

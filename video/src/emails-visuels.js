@@ -4,7 +4,7 @@
   const B = (id, theme, t, e, pose) => ({ id: "email-" + id, dir: "00-emails", tpl: "bandeau", theme, t, e, pose,
     only: [["1200x480", 1200, 480, "En-tête d'e-mail (affiché en 600×240)"]] });
   const L = [
-    B("bienvenue", "ciel", "Bienvenue", "dans l'Académie !", "coucou"),
+    B("bienvenue", "ciel", "Tes progrès", "commencent ici !", "coucou"),
     B("lecons", "soleil", "6 leçons", "offertes.", "lecture"),
     B("offre", "nuit", "L'Académie", "complète.", "niveau-superieur"),
     B("hesites", "rose", "Et si", "tu essayais ?", "haussement"),
@@ -38,7 +38,7 @@
     B("mot-de-passe", "craie", "Nouveau", "mot de passe.", "loupe"),
     B("paiement", "rose", "Un souci", "de paiement ?", "parapluie"),
     B("merci", "menthe", "Merci", "pour ta confiance !", "coeur"),
-    B("renouvellement", "craie", "Ton année", "se renouvelle.", "pendule"),
+    B("renouvellement", "craie", "On repart", "pour un an ?", "pendule"),
     B("resiliation", "ciel", "C'est", "noté.", "coucou-autre-main"),
     B("etape", "soleil", "Plus qu'une", "étape.", "idee"),
     B("enregistre", "menthe", "C'est", "enregistré.", "super"),

@@ -22,17 +22,18 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (co
         ▼
 Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours ──► J+3 11 Exercices ──► J+6 12 Masterclasses ──► J+10 13 Communauté
         │
-        ├── chaque semaine : 14 / 44 / 45 Bilan de la semaine (actif / peu actif / sans activité, le dimanche)
+        ├── chaque mois : 14 / 44 Bilan du mois (actif / peu actif, le 1er du mois)
         ├── chaque mois : 09 Reçu (renouvellement) · 32 Anniversaire (chaque année)
         ├── parrainage  : 41 Invite un ami (J+30, après un module) · 42 Ton ami a rejoint l'Académie
-        ├── en continu  : 15 Module validé · 16 Série en danger · 17 Inactif 7 j · 18 Inactif 30 j
+        ├── en continu  : 15 Module validé · 16 Série en danger (1 fois par mois au plus)
+        ├── inactivité  : 45 après 1 semaine · 17 après 3 semaines · 18 après 6 semaines (chacun une seule fois)
         ├── à 3 mois    : 28 Passage à l'annuel (mensuels)
         ├── paiement    : 08 Paiement refusé (relance J+3) · 35 Carte bientôt expirée · 34 Changement de formule
         ├── obligatoire : 39 Changement de tarif ou de conditions (30 jours avant)
         └── fin         : 27 Renouvellement annuel J-30 · 30 Résiliation confirmée · 29 Fin d'accès J-7 · 31 Reconquête J+30
                           40 Suppression du compte (RGPD)
 
-Événements (à tous, selon l'actualité) : 19 Annonce de masterclass · 20 Rappel (veille / 1 h avant) · 21 Replay · 37 Report
+Événements (à tous, selon l'actualité) : 19 Annonce de masterclass · 20 Rappel (la veille, avec le lien) · 21 Replay · 37 Report
                                         22 Nouveau cours / replay de cours · 23 Tournoi · 36 Inscription confirmée · 24 Résultats · 25 Revue
                                         38 Réponse sur le forum · 43 Les cours de la semaine (vidéos YouTube, chaque semaine)
                                         26 Lettre d'information à plusieurs nouvelles (toutes les 1 à 2 semaines)
@@ -64,8 +65,8 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 
 ## Règles d'envoi
 
-- **Bilan de la semaine** (3 versions, une seule part le dimanche vers 18 h, selon les jours d'entraînement de la semaine) : actif (≥ 3 jours), peu actif (1 ou 2 jours), sans activité (0 jour ; au plus 2 semaines de suite, et pas la semaine où part la relance d'inactivité 7 jours). Chiffres présentés comme des compteurs (« Leçons : 3 ») : l'accord est juste quelle que soit la valeur. `[PROGRESSION_PARCOURS]` est un nombre de 0 à 100 (largeur de la barre).
-
+- **Bilan du mois** (le 1er du mois) : actif (≥ 8 jours d'entraînement dans le mois, 14) ou peu actif (1 à 7 jours, 44). Chiffres présentés comme des compteurs (« Leçons : 3 ») : l'accord est juste quelle que soit la valeur. `[PROGRESSION_PARCOURS]` est un nombre de 0 à 100 (largeur de la barre).
+- **Inactivité** : 45 après 1 semaine sans activité (ce qui s'est passé, une leçon pour repartir), 17 après 3 semaines (plus insistant), 18 après 6 semaines (dernière relance). Chacun une seule fois par période d'inactivité ; rien de plus ensuite.
 - **E-mails « Compte »** (confirmation, mot de passe, paiement, résiliation, renouvellement annuel) : envoyés à tous, même désinscrits
   des e-mails d'information. Pas de promotion dedans, hormis un rappel discret.
 - **E-mails d'information** (tout le reste) : seulement aux personnes qui ont accepté de les recevoir, avec les liens
@@ -73,8 +74,23 @@ Abonnement payé ──► 07 Confirmation + reçu ──► J+1 10 Ton parcours
 - **Pression** : au maximum 3 e-mails d'information par semaine et par personne. Si plusieurs tombent le même jour, garder le plus
   important (ordre : rappel de masterclass, tournoi, démarrage, lettre d'information) et regrouper le reste dans la lettre `26`.
 - **Exclusions** : pas d'e-mail de conversion (04, 05, 06, 33) aux abonnés ; pas de relance d'inactivité pendant les 5 premiers jours.
-- **Heures conseillées** : 18 h-20 h en semaine, 9 h-11 h le week-end. Rappels de masterclass : la veille à 18 h et 1 h avant.
+- **Heures conseillées** : 18 h-20 h en semaine, 9 h-11 h le week-end. Rappel de masterclass : la veille à 18 h, un seul, avec le lien du direct (annoncé dans le 19).
 - **Expéditeur** : « Académie echecs.com », adresse de réponse lue par quelqu'un (les réponses aux e-mails sont un bon signal).
+
+## Variantes pour la lettre (26)
+
+La lettre part souvent : pour éviter la lassitude, changer d'objet et de titre à chaque envoi (garder `[TITRE_UNE]` quand il y a une grande nouvelle).
+
+| Objet | Titre (avec la suite en couleur après « | ») |
+|---|---|
+| Cette semaine : [TITRE_UNE] | À la une : \| [TITRE_UNE]. |
+| [PRENOM], voici ton programme de la semaine | Ton programme \| de la semaine. |
+| Ne manque pas [TITRE_UNE] | Le rendez-vous \| à ne pas manquer. |
+| Du neuf à l'Académie cette semaine ♟️ | Quoi de neuf \| cette semaine ? |
+| Masterclass, tournoi, puzzle : ta semaine d'échecs | Ta semaine \| d'échecs. |
+| [PRENOM], on a préparé ta semaine | On a préparé \| ta semaine. |
+| Le puzzle de la semaine t'attend (et pas que) | Un puzzle, \| et bien plus. |
+| Ce qui t'attend dans l'Académie | Ce qui t'attend \| cette semaine. |
 
 ## Parrainage : à définir
 
@@ -116,12 +132,12 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `04-gratuit-j3-lecons.html` | J+3 après la création du compte, si pas abonné | Tes 6 leçons offertes t’attendent | Vidéo, cours, exercice, quiz : tu as essayé ? | Information (désinscription possible) |
-| `05-gratuit-j7-offre.html` | J+7 après la création du compte, si pas abonné | L’Académie complète à 14,90 €/mois | Prix de lancement, sans engagement en mensuel. | Information (désinscription possible) |
-| `06-gratuit-j21-relance.html` | J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours | Tu hésites encore, [PRENOM] ? | Ce que les abonnés ont en plus, en 30 secondes. | Information (désinscription possible) |
+| `05-gratuit-j7-offre.html` | J+7 après la création du compte, si pas abonné | On continue ? Des centaines de leçons t’attendent ! | Prix de lancement, sans engagement en mensuel. | Information (désinscription possible) |
+| `06-gratuit-j21-relance.html` | J+21 après la création du compte, si pas abonné et actif dans les 14 derniers jours | Tu n’as encore rien vu, [PRENOM] : il reste tant à découvrir ! | Ce que les abonnés ont en plus, en 30 secondes. | Information (désinscription possible) |
 | `33-paiement-abandonne.html` | 2 heures après une page de paiement ouverte sans paiement | Ton abonnement n’est pas finalisé | Il ne manque qu’une étape. | Information (désinscription possible) |
-| `46-gratuit-nouveautes-trimestre.html` | Tous les 3 mois, aux comptes gratuits qui acceptent les e-mails d'information (après le 06 ; pas dans les 30 jours qui suivent 05, 06, 31 ou 33) | [PRENOM], voici ce qui a changé dans l’Académie | [NB_NOUVELLES_LECONS_TRIMESTRE] nouvelles leçons, des masterclasses, des tournois… et ton prix de lancement t’attend. | Information (désinscription possible) |
-| `47-gratuit-lecons-terminees.html` | Dès que la 6ᵉ leçon offerte est validée (une seule fois) | Bravo, tes 6 leçons offertes sont bouclées 🎉 | La suite t’attend : [LECON_SUIVANTE] et +200 autres leçons. | Information (désinscription possible) |
-| `48-gratuit-serie-puzzles.html` | Le lendemain du 7ᵉ jour de suite sur le puzzle du jour (une seule fois) | 7 jours de suite sur le puzzle du jour 🔥 | Ta régularité paie. Et si tu passais à +2 000 exercices ? | Information (désinscription possible) |
+| `46-gratuit-nouveautes-trimestre.html` | Tous les 3 mois, aux comptes gratuits qui acceptent les e-mails d'information (après le 06 ; pas dans les 30 jours qui suivent 05, 06, 31 ou 33) | Il y a du nouveau dans l’Académie, [PRENOM] ! | [NB_NOUVELLES_LECONS_TRIMESTRE] nouvelles leçons, des masterclasses, des tournois… et ton prix de lancement t’attend. | Information (désinscription possible) |
+| `47-gratuit-lecons-terminees.html` | Dès que la 6ᵉ leçon offerte est validée (une seule fois) | Bravo, tu as réussi les 6 leçons offertes de l’Académie 🎉 | La suite t’attend : [LECON_SUIVANTE] et +200 autres leçons. | Information (désinscription possible) |
+| `48-gratuit-serie-puzzles.html` | Le lendemain du 7ᵉ jour de suite sur le puzzle du jour (une seule fois) | 7 puzzles de suite : belle série, [PRENOM] 🔥 | Ta régularité paie. Et si tu passais à +2 000 exercices ? | Information (désinscription possible) |
 | `49-gratuit-extrait-masterclass.html` | Quand un extrait de masterclass est publié en libre accès sur YouTube (au plus 1 par trimestre, pas le même mois que le 46) | Cadeau : [DUREE_EXTRAIT] de masterclass avec [COACH] 🎁 | [THEME], en libre accès sur YouTube. | Information (désinscription possible) |
 | `50-gratuit-tournoi-ouvert.html` | 5 jours avant un tournoi ouvert à tous, aux comptes gratuits (les abonnés reçoivent le 23) | Tournoi gratuit : [NOM_TOURNOI] le [DATE] | Ouvert à tous les comptes, cadence [CADENCE]. | Information (désinscription possible) |
 | `51-gratuit-anniversaire-compte.html` | À la date anniversaire du compte gratuit (chaque année) | 1 an avec echecs.com, [PRENOM] 🎉 | Ton année en chiffres : merci d’être là ! | Information (désinscription possible) |
@@ -152,40 +168,40 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les grands maîtres t’attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
 | `13-demarrage-j10-communaute.html` | J+10 après l'abonnement | Joue, partage, mesure-toi | Tournois en ligne, forum, tes parties analysées. | Information (désinscription possible) |
 
-### Bilan de la semaine
+### Bilan du mois
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `14-bilan-semaine-actif.html` | Le dimanche vers 18 h, si au moins 3 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours sur 7, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
-| `44-bilan-semaine-peu-actif.html` | Le dimanche vers 18 h, si 1 ou 2 jours d'entraînement dans la semaine | [PRENOM], ta semaine d’échecs : on continue ? | [NB_LECONS] leçons cette semaine. 10 minutes de plus, et ça change tout. | Information (désinscription possible) |
-| `45-bilan-semaine-sans-activite.html` | Le dimanche vers 18 h, si aucune activité dans la semaine (au plus 2 semaines de suite ; pas la semaine où part l'e-mail 17) | Ce que tu as manqué cette semaine 👀 | Nouvelles leçons, cours en vidéo, tournoi… et ta prochaine leçon t’attend. | Information (désinscription possible) |
+| `14-bilan-mois-actif.html` | Le 1er du mois, si au moins 8 jours d'entraînement dans le mois écoulé | [PRENOM], ton mois d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours d’entraînement, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
+| `44-bilan-mois-peu-actif.html` | Le 1er du mois, si 1 à 7 jours d'entraînement dans le mois écoulé | [PRENOM], ton mois d’échecs : on continue ? | [NB_LECONS] leçons ce mois-ci. 10 minutes de plus par semaine, et ça change tout. | Information (désinscription possible) |
+
+### Réactivation
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `17-inactif-3-semaines.html` | Après 3 semaines sans activité (une seule fois par période d'inactivité ; le 45 est parti à 1 semaine) | Ta progression t’attend, [PRENOM] | 3 semaines sans échecs : on reprend avant de perdre le fil ? | Information (désinscription possible) |
+| `18-inactif-6-semaines.html` | Après 6 semaines sans activité (une seule fois par période d'inactivité ; dernière relance) | Tu nous manques, [PRENOM] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
+| `45-inactif-1-semaine.html` | Après 7 jours sans activité (une seule fois par période d'inactivité ; puis 17 à 3 semaines et 18 à 6 semaines) | Ce que tu as manqué cette semaine 👀 | Nouvelles leçons, cours en vidéo, tournoi… et ta prochaine leçon t’attend. | Information (désinscription possible) |
 
 ### Engagement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `15-objectif-atteint.html` | Quand l'abonné valide un module ou un parcours | Module validé : [MODULE] 🎉 | Une étape de plus vers ton objectif. | Information (désinscription possible) |
-| `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
+| `16-serie-en-danger.html` | Le soir, si la série de jours (≥ 5 jours) va s'interrompre (au plus une fois toutes les 4 semaines par joueur) | Ta série de [SERIE] jours va s’arrêter ⏳ | Un exercice suffit pour la garder. | Information (désinscription possible) |
 | `32-anniversaire.html` | À la date anniversaire de l'abonnement | Déjà [DUREE_ABONNEMENT] dans l’Académie 🎉 | Merci, [PRENOM] ! Voici ton parcours. | Information (désinscription possible) |
 | `38-reponse-forum.html` | Quand quelqu'un répond à un sujet de l'abonné (au plus 1 par jour, regroupé) | [AUTEUR_REPONSE] t’a répondu sur le forum | « [EXTRAIT_REPONSE] » | Information (désinscription possible) |
 | `41-parrainage.html` | À J+30 d'abonnement, puis après un module validé (au plus une fois par trimestre) | Invite un ami, et profitez-en tous les deux | Ton ami reçoit [OFFRE_FILLEUL], toi [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
 | `42-filleul-abonne.html` | Quand un ami parrainé s'abonne | [PRENOM_FILLEUL] a rejoint l’Académie grâce à toi 🎉 | Ta récompense : [RECOMPENSE_PARRAIN]. | Information (désinscription possible) |
-
-### Réactivation
-
-| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
-|---|---|---|---|---|
-| `17-inactif-7-jours.html` | Abonné sans connexion depuis 7 jours | Ta prochaine leçon t’attend | On reprend là où tu en étais ? | Information (désinscription possible) |
-| `18-inactif-30-jours.html` | Abonné sans connexion depuis 30 jours | Tu nous manques, [PRENOM] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
 
 ### Événements
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `19-annonce-masterclass.html` | Dès qu'une masterclass est programmée (au moins 7 jours avant) | Masterclass en direct avec [COACH] | [THEME], le [DATE] à [HEURE]. Pose tes questions ! | Information (désinscription possible) |
-| `20-rappel-masterclass.html` | La veille, puis 1 heure avant (même modèle) | [QUAND] : masterclass avec [COACH] | [THEME], en direct à [HEURE]. | Information (désinscription possible) |
+| `20-rappel-masterclass.html` | La veille à 18 h (un seul rappel), avec le lien du direct | Demain : masterclass avec [COACH] | [THEME], en direct à [HEURE]. Ton lien est dans cet e-mail. | Information (désinscription possible) |
 | `21-replay-masterclass.html` | Dès que le replay est en ligne | Replay : [THEME] | La masterclass de [COACH] en entier, et les positions en PGN. | Information (désinscription possible) |
-| `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
+| `22-nouveau-cours.html` | À la mise en ligne d'un nouveau cours ou d'un replay de cours | Ton nouveau cours : [TITRE_COURS] | [NB_LECONS_COURS] leçons, niveau [NIVEAU]. | Information (désinscription possible) |
 | `23-annonce-tournoi.html` | 5 jours avant un tournoi, rappel le jour J (même modèle) | Tournoi : [NOM_TOURNOI] le [DATE] | Cadence [CADENCE], ouvert à tous les niveaux. | Information (désinscription possible) |
 | `24-resultats-tournoi.html` | Le lendemain du tournoi, aux participants | Résultats : [NOM_TOURNOI] | Tu termines [PLACE]ᵉ sur [NB_JOUEURS] : bravo ! | Information (désinscription possible) |
 | `25-sortie-revue.html` | À la sortie de chaque numéro | Le n° [NUMERO] d’Europe Échecs est sorti | Toutes les parties en PGN interactif dans l’Académie. | Information (désinscription possible) |
