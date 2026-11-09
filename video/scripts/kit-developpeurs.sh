@@ -11,13 +11,13 @@ cd "$(dirname "$0")/.."
 rm -rf build/kit-developpeurs build/kit-developpeurs.zip build/kit-developpeurs-academie build/kit-developpeurs-academie.zip build/kit-developpeurs-ccas build/kit-developpeurs-ccas.zip
 # Académie echecs.com
 K=build/kit-developpeurs-academie; mkdir -p "$K/site"
-cp pack/DEVELOPPEURS.md pack/EMAILS.md scripts/miniature-mail.py "$K/"
+cp pack/DEVELOPPEURS.md pack/EMAILS.md pack/STATISTIQUES.md scripts/miniature-mail.py "$K/"
 cp -r build/pack/emails "$K/emails"
 cp build/pack/videos/00-general/boucle-entete-site-muette-1920x1080.mp4 build/pack/videos/00-general/boucle-entete-site-muette-1280x720.mp4 "$K/site/"
 cp build/pack/images/00-general/partage-lien-1200x630.jpg "$K/site/"
 # Plateforme CCAS
 C=build/kit-developpeurs-ccas; mkdir -p "$C/marque"
-cp pack/DEVELOPPEURS-CCAS.md pack/EMAILS-CCAS.md scripts/miniature-mail.py "$C/"
+cp pack/DEVELOPPEURS-CCAS.md pack/EMAILS-CCAS.md pack/STATISTIQUES.md scripts/miniature-mail.py "$C/"
 cp -r build/pack/emails-ccas "$C/emails-ccas"
 cp ../assets/brand/ccas/logo-activites-sociales-energie-web.svg ../assets/brand/ccas/ccas-favicon-*.png "$C/marque/"
 (cd build && zip -qr kit-developpeurs-academie.zip kit-developpeurs-academie && zip -qr kit-developpeurs-ccas.zip kit-developpeurs-ccas)
