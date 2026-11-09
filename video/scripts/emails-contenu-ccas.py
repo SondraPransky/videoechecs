@@ -68,7 +68,7 @@ mail(id="09-cours-deplace", cat="Cours en direct", marketing=False, quand="Si un
             billet("[THEME_COURS]", [("Heure", "[HEURE] · Paris"), ("Avec", "[ANIMATEUR]"), ("Où", "en visioconférence, même lien")], "[NOUVEAU_JOUR]", "[NOUVEAU_MOIS_COURT]"),
             para("Désolés pour ce changement. Le cours sera, comme toujours, disponible en vidéo."), bouton("Voir les prochains cours", L("COURS_DIRECT"))])
 
-mail(id="28-pause-vacances", cat="Cours en direct", quand="Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année)", alt="Pause pendant les vacances",
+mail(id="26-pause-vacances", cat="Cours en direct", quand="Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année)", alt="Pause pendant les vacances",
      exemples={"DATE_DEBUT_PAUSE": "21 décembre", "DATE_FIN_PAUSE": "4 janvier", "DATE_REPRISE": "lundi 5 janvier"},
      objet="Pas de cours en direct jusqu'au [DATE_REPRISE] ☀️", pre="La plateforme reste ouverte : cours en vidéo, leçons, exercices.", sur="Vacances", titre="Reprise le | [DATE_REPRISE].",
      corps=[para("[PSEUDO], les cours en direct font une pause pendant les vacances :"),
@@ -77,7 +77,7 @@ mail(id="28-pause-vacances", cat="Cours en direct", quand="Le dernier jour de co
             liste(["<b>Les cours en vidéo</b>, pour revoir ceux que tu as manqués", "<b>Le parcours Initiation</b> : quelques exercices par jour pour garder la main", "<b>Le forum</b>, pour échanger avec les autres joueurs"]),
             bouton("Revoir les cours en vidéo", L("COURS_VIDEOS"))],
      sign="Bonnes vacances !<br><b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
-mail(id="29-reprise-cours", cat="Cours en direct", quand="Le vendredi avant la reprise des cours en direct", alt="C'est reparti",
+mail(id="27-reprise-cours", cat="Cours en direct", quand="Le vendredi avant la reprise des cours en direct", alt="C'est reparti",
      exemples={"JOUR_LUNDI": "5", "JOUR_MERCREDI": "7", "MOIS_COURT": "janv.", "THEME_LUNDI": "Les mats élémentaires", "THEME_MERCREDI": "Le clouage"},
      objet="Les cours en direct reprennent lundi à 18 h 30 !", pre="Au programme : [THEME_LUNDI] avec [ANIMATEUR_LUNDI].", sur="Reprise des cours", titre="Rendez-vous lundi | à 18 h 30.",
      corps=[para("[PSEUDO], les vacances sont finies : les cours en direct reprennent la semaine prochaine, en visioconférence :"),
@@ -124,7 +124,7 @@ mail(id="14-bilan-mois-actif", cat="Bilan du mois", quand="Le 1er du mois, si au
             progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
             encadre("<b>La régularité paie !</b> Ton point fort ce mois-ci : <b>[THEME_FORT]</b>. À travailler : <b>[THEME_FAIBLE]</b>."),
             NOUV_MOIS, bouton("Continuer l'Initiation", L("PARCOURS"))])
-mail(id="26-bilan-mois-peu-actif", cat="Bilan du mois", quand="Le 1er du mois, si 1 à 7 jours d'entraînement dans le mois écoulé (à activer avec les statistiques)", alt="Bon début, on continue ?",
+mail(id="24-bilan-mois-peu-actif", cat="Bilan du mois", quand="Le 1er du mois, si 1 à 7 jours d'entraînement dans le mois écoulé (à activer avec les statistiques)", alt="Bon début, on continue ?",
      exemples={"NB_JOURS_ACTIFS": "4", "NB_LECONS": "6", "NB_EXERCICES": "52", "NB_PARTIES": "5", "PROGRESSION_PARCOURS": "34"},
      objet="[PSEUDO], ton mois d'échecs : on continue ?", pre="[NB_LECONS] leçons ce mois-ci. 10 minutes de plus par semaine, et ça change tout.", sur="Ton bilan de [MOIS]", titre="Chaque séance | compte !",
      corps=[para("Jours d'entraînement ce mois-ci : <b>[NB_JOURS_ACTIFS]</b>. Voici ton bilan :"),
@@ -132,7 +132,7 @@ mail(id="26-bilan-mois-peu-actif", cat="Bilan du mois", quand="Le 1er du mois, s
             progression("Parcours Initiation", "[PROGRESSION_PARCOURS]"),
             encadre("<b>Le secret pour progresser :</b> 10 minutes, 3 fois par semaine. Ta prochaine leçon, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]. Et lundi à 18 h 30, rejoins le cours en direct !"),
             NOUV_MOIS, bouton("Reprendre ma leçon", L("LECON_SUIVANTE"))])
-mail(id="27-inactif-1-semaine", cat="Réactivation", quand="Après 7 jours sans activité (une seule fois par période d'inactivité ; puis 17 à 3 semaines et 18 à 6 semaines ; à activer avec les statistiques)", alt="Ta place t'attend",
+mail(id="25-inactif-1-semaine", cat="Réactivation", quand="Après 7 jours sans activité (une seule fois par période d'inactivité ; puis 17 à 3 semaines et 18 à 6 semaines ; à activer avec les statistiques)", alt="Ta place t'attend",
      exemples={"PROGRESSION_PARCOURS": "34"},
      objet="Ce que tu as manqué cette semaine 👀", pre="Cours en direct, nouveaux exercices, tournoi : ta place t'attend.", sur="On reprend ?", titre="Ta place | t'attend.",
      corps=[para("Pas d'échecs cette semaine ? Ça arrive à tout le monde. Voici ce qui s'est passé sur la plateforme :"),
@@ -149,7 +149,7 @@ mail(id="16-reponse-forum", cat="Engagement", quand="Quand quelqu'un répond à 
      corps=[para("<b>[AUTEUR_REPONSE]</b> a répondu à ton sujet « [TITRE_SUJET] » :"), encadre("« [EXTRAIT_REPONSE] »"), bouton("Lire et répondre", L("SUJET_FORUM"))])
 
 # ---------- 7. Réactivation ----------
-mail(id="17-inactif-3-semaines", cat="Réactivation", quand="Après 3 semaines sans activité (une seule fois par période d'inactivité ; le 27 est parti à 1 semaine)", alt="On reprend ensemble ?",
+mail(id="17-inactif-3-semaines", cat="Réactivation", quand="Après 3 semaines sans activité (une seule fois par période d'inactivité ; le 25 est parti à 1 semaine)", alt="On reprend ensemble ?",
      objet="Ta progression t'attend, [PSEUDO]", pre="3 semaines sans échecs : on reprend avant de perdre le fil ?", sur="On reprend ?", titre="On reprend | là où tu en étais ?",
      corps=[para("[PSEUDO], 3 semaines sans échecs : c'est le bon moment pour reprendre, avant de perdre le fil."), para("Ta dernière leçon était <b>[DERNIERE_LECON]</b>. La suivante, <b>[LECON_SUIVANTE]</b>, prend environ [DUREE_LECON]."),
             bouton("Reprendre ma leçon", L("LECON_SUIVANTE")), para(f'<span style="color:#6b6b66;font-size:14px">Et pour reprendre en douceur, rejoins un cours en direct, {DIRECT}.</span>')])
@@ -189,23 +189,10 @@ mail(id="23-suppression-compte", cat="Compte", marketing=False, quand="À la sup
             para('<span style="color:#6b6b66;font-size:14px">Tu n\'es pas à l\'origine de cette demande ? Écris-nous vite à [EMAIL_CONTACT].</span>')],
      sign="<b style=\"color:#0066cc\">Les Activités Sociales de l'Énergie</b><br><b>en partenariat avec Europe Échecs</b>")
 
-# ---------- 10. Vérification des droits (à activer si l'étape 2 de l'inscription contrôle les droits CCAS) ----------
-mail(id="24-verification-en-cours", cat="Vérification des droits", marketing=False, quand="À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits)",
-     objet="On vérifie ton accès", pre="Tu recevras un e-mail dès que c'est fait.", sur="Ton compte", titre="Vérification | en cours.",
-     corps=[para("Ton inscription est bien reçue. L'accès à la plateforme est réservé aux bénéficiaires des Activités Sociales de l'Énergie : on vérifie tes informations."),
-            encadre("<b>Dès que c'est bon</b>, tu reçois un e-mail de bienvenue et tu peux commencer le parcours Initiation. Ça prend en général [DELAI_VERIFICATION]."),
-            para('<span style="color:#6b6b66;font-size:14px">Une question ? Écris-nous à [EMAIL_CONTACT].</span>')])
-mail(id="25-droits-non-verifies", cat="Vérification des droits", marketing=False, quand="Si les droits n'ont pas pu être vérifiés (à activer si l'étape 2 contrôle les droits)",
-     objet="On n'a pas pu vérifier ton accès", pre="Vérifie tes informations, ou écris-nous.", sur="Ton compte", titre="Un petit souci | avec ton accès.",
-     corps=[para("[PSEUDO], les informations indiquées à l'inscription ne nous ont pas permis de vérifier que tu bénéficies des Activités Sociales de l'Énergie."),
-            liste(["Vérifie qu'il n'y a pas d'erreur de saisie", "Utilise les informations du bénéficiaire (l'ouvreur de droit) ou de l'ayant droit", "Si tout est juste, écris-nous : on regarde avec toi"]),
-            bouton("Vérifier mes informations", L("VERIFICATION")),
-            para('<span style="color:#6b6b66;font-size:14px">Besoin d\'aide ? Écris-nous à [EMAIL_CONTACT].</span>')])
-
 # Titres en deux temps : déjà dans chaque mail (« | »)
 TITRES = {}
 MASCOTTES = {}
-ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'verification', '25': 'droits', '26': 'bilan-debut', '27': 'bilan-pause', '28': 'vacances', '29': 'reprise'}
+ENTETES = {'01': 'confirme', '02': 'plateforme', '03': 'mot-de-passe', '04': 'direct', '05': 'exercices', '06': 'communaute', '07': 'direct', '08': 'semaine', '09': 'deplace', '10': 'tournoi', '11': 'inscription', '12': 'resultats', '13': 'nouvelles', '14': 'bilan', '15': 'serie', '16': 'forum', '17': 'reprendre', '18': 'manque', '19': 'famille', '20': 'avis', '21': 'un-an', '22': 'information', '23': 'aurevoir', '24': 'bilan-debut', '25': 'bilan-pause', '26': 'vacances', '27': 'reprise'}
 EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric", "NIVEAU": "tous niveaux",
     "DESCRIPTION_COURS": "Développer ses pièces, contrôler le centre, roquer : les trois règles d'or des débuts, avec des parties d'exemple commentées en direct.",
     "THEME_LUNDI": "Les principes des débuts", "ANIMATEUR_LUNDI": "Éric", "DUREE_LUNDI": "1 h",
@@ -218,7 +205,7 @@ EXEMPLES.update({"THEME_COURS": "Les principes des débuts", "ANIMATEUR": "Éric
     "CHANGEMENT": "les cours en direct du mercredi passeront à 19 h", "MOIS": "novembre", "PSEUDO": "LéaDame", "EMAIL_CONTACT": "europe@echecs.com",
     "THEME_FORT": "les mats élémentaires", "THEME_FAIBLE": "le clouage", "AUTEUR_REPONSE": "Florian", "TITRE_SUJET": "Comment mater avec Roi et Tour ?",
     "EXTRAIT_REPONSE": "Repousse le Roi adverse vers le bord avec ta Tour, puis rapproche ton Roi…", "DERNIERE_LECON": "Le mat du couloir", "LECON_SUIVANTE": "La fourchette",
-    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "DATE_ENVOI": "19 novembre", "NB_COURS_MOIS": "8", "NB_NOUVEAUX_EXERCICES_MOIS": "45", "NB_TOURNOIS_MOIS": "4", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18", "DELAI_VERIFICATION": "moins de 48 heures"})
+    "VAINQUEUR": "Hugo M.", "NB_JOUEURS": "38", "SEMAINE": "du 9 au 15 nov.", "DATE_ENVOI": "19 novembre", "NB_COURS_MOIS": "8", "NB_NOUVEAUX_EXERCICES_MOIS": "45", "NB_TOURNOIS_MOIS": "4", "NB_JOURS_ACTIFS": "5", "NB_COURS_SUIVIS": "2", "NB_PARTIES": "14", "PROGRESSION_PARCOURS": "62", "NB_LECONS": "8", "NB_EXERCICES": "96", "NB_COURS_SEMAINE": "2", "NB_NOUVEAUX_EXERCICES": "12", "NB_TOURNOIS_SEMAINE": "1", "SERIE": "5", "JOUR_LUNDI": "16", "JOUR_MERCREDI": "18"})
 
 # Titres : le bandeau donne l'accroche, le titre l'information concrète (jamais la même phrase deux fois)
 TITRES.update({
@@ -226,8 +213,8 @@ TITRES.update({
     "08-cours-de-la-semaine": "Tu les as manqués ? | Revois-les.", "13-lettre-de-la-semaine": "À la une : | [TITRE_UNE].", "15-serie-en-danger": "Un exercice | suffit.",
     "16-reponse-forum": "[AUTEUR_REPONSE] | t'a répondu.", "17-inactif-3-semaines": "Ta leçon | t'attend.", "18-inactif-6-semaines": "Il y a du nouveau | sur la plateforme.",
     "19-echecs-en-famille": "Invite | tes proches.", "20-questionnaire-satisfaction": "2 minutes | pour nous aider ?", "21-bilan-annuel": "Ta première année | en chiffres.",
-    "22-changement-acces": "À partir du | [DATE_EFFET].", "23-suppression-compte": "Ton compte | est supprimé.", "24-verification-en-cours": "Merci, | [PSEUDO] !",
-    "25-droits-non-verifies": "On n'a pas pu | vérifier ton accès.", "26-bilan-mois-peu-actif": "Chaque séance | compte !", "27-inactif-1-semaine": "Une leçon | pour repartir ?",
+    "22-changement-acces": "À partir du | [DATE_EFFET].", "23-suppression-compte": "Ton compte | est supprimé.",
+    "24-bilan-mois-peu-actif": "Chaque séance | compte !", "25-inactif-1-semaine": "Une leçon | pour repartir ?",
 })
 for e in E:
     if e["id"] == "13-lettre-de-la-semaine": e["sur"] = "La lettre · [DATE_ENVOI]"

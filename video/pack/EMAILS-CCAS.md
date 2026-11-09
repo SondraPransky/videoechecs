@@ -1,6 +1,6 @@
 # E-mails des bénéficiaires CCAS — plateforme d'échecs des Activités Sociales de l'Énergie
 
-29 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
+27 e-mails pour les joueurs de https://ccas.echecs.com/academy/ : **un fichier HTML par e-mail** dans `emails-ccas/`,
 les images à héberger dans `emails-ccas/img/`. Même moteur et même design que les e-mails de l'Académie echecs.com
 (`scripts/emails.py ccas`, contenu dans `scripts/emails-contenu-ccas.py`).
 
@@ -20,14 +20,13 @@ Création du compte ──► 01 Confirme ton adresse ──► 02 Bienvenue (to
 Démarrage : J+1 04 Cours en direct ──► J+3 05 Exercices ──► J+6 06 Communauté
 Partenariat : J+14 19 Les échecs en famille ──► J+30 20 Questionnaire de satisfaction ──► 1 an 21 Bilan de l'année
         │
-        ├── cours en direct : 07 Programme de la semaine (lundi, les deux cours) · 08 Les cours de la semaine (jeudi, vidéos YouTube) · 09 Cours déplacé · 28 Pause des vacances · 29 Reprise des cours
+        ├── cours en direct : 07 Programme de la semaine (lundi, les deux cours) · 08 Les cours de la semaine (jeudi, vidéos YouTube) · 09 Cours déplacé · 26 Pause des vacances · 27 Reprise des cours
         ├── tournois        : 10 Annonce (J-5 et jour J) · 11 Inscription confirmée · 12 Résultats
         ├── lettre          : 13 Lettre de la semaine (2 ou 3 nouvelles mélangées : cours en vidéo, tournoi, résultats ; remplace alors le 08)
-        ├── chaque mois     : 14 / 26 Bilan du mois (actif / peu actif, le 1er du mois)
+        ├── chaque mois     : 14 / 24 Bilan du mois (actif / peu actif, le 1er du mois)
         ├── en continu      : 15 Série en danger (1 fois par mois au plus) · 16 Réponse sur le forum
-        ├── réactivation    : 27 après 1 semaine · 17 après 3 semaines · 18 après 6 semaines (chacun une seule fois)
-        ├── compte          : 22 Changement de la plateforme ou de l'accès (30 jours avant) · 23 Suppression du compte (RGPD)
-        └── droits CCAS     : 24 Vérification en cours · 25 Droits non vérifiés (à activer si l'étape 2 de l'inscription contrôle les droits)
+        ├── réactivation    : 25 après 1 semaine · 17 après 3 semaines · 18 après 6 semaines (chacun une seule fois)
+        └── compte          : 22 Changement de la plateforme ou de l'accès (30 jours avant) · 23 Suppression du compte (RGPD)
 ```
 
 ## Design
@@ -45,7 +44,7 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 
 ## Règles d'envoi
 
-- **E-mails « Compte »** (01, 03, 09, 11, 22, 23, 24, 25) : envoyés à tous, même désinscrits des e-mails d'information.
+- **E-mails « Compte »** (01, 03, 09, 11, 22, 23) : envoyés à tous, même désinscrits des e-mails d'information.
 - **E-mails d'information** (tout le reste) : seulement aux personnes qui ont accepté de les recevoir, avec `[LIEN_PREFERENCES]` et `[LIEN_DESINSCRIPTION]`.
 - **Pression** : au maximum 3 e-mails d'information par semaine. Une semaine type : programme lundi (07), cours en vidéo jeudi (08).
   Les semaines chargées, la lettre 13 remplace le 08 et regroupe le tournoi et les résultats.
@@ -56,15 +55,14 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 - **Pseudo** : le formulaire d'inscription ne demande qu'un pseudo ; les e-mails interpellent le joueur avec `[PSEUDO]` (pas de prénom).
 - **Cours en direct** : en visioconférence (Zoom, Teams…) ; `[LIEN_DIRECT]` est le lien de la visio, donné dans le rappel (07) et dans l'e-mail de report (09).
 - **Contact** : `[EMAIL_CONTACT]` = europe@echecs.com.
-- **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14, 26 bilan du mois ; 27 relance à 1 semaine ; 21 bilan de l'année),
+- **Fonctions à venir** (les e-mails sont prêts, à activer quand la fonction existera) : statistiques (14, 24 bilan du mois ; 25 relance à 1 semaine ; 21 bilan de l'année),
   série de jours (15, et la mention dans 05), parties sauvegardées (à ajouter alors dans le 12 : « Analyser mes parties »).
-- **Bilan du mois** (le 1er du mois) : actif (≥ 8 jours d'entraînement, 14) ou peu actif (1 à 7 jours, 26). Chiffres présentés comme des compteurs : l'accord est juste quelle que soit la valeur.
-- **Inactivité** : 27 après 1 semaine sans activité, 17 après 3 semaines, 18 après 6 semaines ; chacun une seule fois par période d'inactivité.
+- **Bilan du mois** (le 1er du mois) : actif (≥ 8 jours d'entraînement, 14) ou peu actif (1 à 7 jours, 24). Chiffres présentés comme des compteurs : l'accord est juste quelle que soit la valeur.
+- **Inactivité** : 25 après 1 semaine sans activité, 17 après 3 semaines, 18 après 6 semaines ; chacun une seule fois par période d'inactivité.
 - **Rappel des cours** : un seul e-mail par semaine, le lundi (07), avec les deux cours ; à tous les joueurs qui acceptent les e-mails d'information.
 - **Famille** : les ayants droit (conjoint, enfants…) créent leur propre compte (e-mail 19).
 - **Questionnaire** (20) : outil externe anonyme (Google Forms ou équivalent), `[LIEN_QUESTIONNAIRE]`.
-- **Étape 2 de l'inscription** (« Suivant ») : si elle contrôle les droits CCAS, activer 24 (vérification à la main, `[DELAI_VERIFICATION]`) et 25 (droits non vérifiés, `[LIEN_VERIFICATION]`) ;
-  sinon, ne pas les brancher.
+- **Inscription** : l'étape 2 (« Suivant ») ne vérifie pas les droits CCAS ; pas d'e-mail de vérification.
 - **À fournir** : l'adresse postale de l'éditeur (`[ADRESSE_POSTALE]`).
 
 ## Intégration
@@ -101,8 +99,8 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | `07-programme-de-la-semaine.html` | Chaque lundi vers 10 h, à tous (les deux cours de la semaine) | Cette semaine : 2 cours en direct à 18 h 30 | Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI]. | Information (désinscription possible) |
 | `08-cours-de-la-semaine.html` | Chaque semaine, le jeudi (cours du lundi et du mercredi) | Les cours de la semaine sont en vidéo 🎥 | Lundi : [THEME_LUNDI]. Mercredi : [THEME_MERCREDI]. | Information (désinscription possible) |
 | `09-cours-deplace.html` | Si un cours est déplacé ou annulé (à tous les joueurs qui ont activé les rappels) | Cours du [DATE] déplacé au [NOUVELLE_DATE] | [THEME_COURS], avec [ANIMATEUR] : la nouvelle date. | Compte (toujours envoyé) |
-| `28-pause-vacances.html` | Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année) | Pas de cours en direct jusqu’au [DATE_REPRISE] ☀️ | La plateforme reste ouverte : cours en vidéo, leçons, exercices. | Information (désinscription possible) |
-| `29-reprise-cours.html` | Le vendredi avant la reprise des cours en direct | Les cours en direct reprennent lundi à 18 h 30 ! | Au programme : [THEME_LUNDI] avec [ANIMATEUR_LUNDI]. | Information (désinscription possible) |
+| `26-pause-vacances.html` | Le dernier jour de cours avant une pause (vacances scolaires, été, fin d'année) | Pas de cours en direct jusqu’au [DATE_REPRISE] ☀️ | La plateforme reste ouverte : cours en vidéo, leçons, exercices. | Information (désinscription possible) |
+| `27-reprise-cours.html` | Le vendredi avant la reprise des cours en direct | Les cours en direct reprennent lundi à 18 h 30 ! | Au programme : [THEME_LUNDI] avec [ANIMATEUR_LUNDI]. | Information (désinscription possible) |
 
 ### Tournois
 
@@ -123,15 +121,15 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `14-bilan-mois-actif.html` | Le 1er du mois, si au moins 8 jours d'entraînement dans le mois écoulé (à activer avec les statistiques) | [PSEUDO], ton mois d’échecs en chiffres 🔥 | [NB_JOURS_ACTIFS] jours d’entraînement, [NB_LECONS] leçons, [NB_EXERCICES] exercices : bravo ! | Information (désinscription possible) |
-| `26-bilan-mois-peu-actif.html` | Le 1er du mois, si 1 à 7 jours d'entraînement dans le mois écoulé (à activer avec les statistiques) | [PSEUDO], ton mois d’échecs : on continue ? | [NB_LECONS] leçons ce mois-ci. 10 minutes de plus par semaine, et ça change tout. | Information (désinscription possible) |
+| `24-bilan-mois-peu-actif.html` | Le 1er du mois, si 1 à 7 jours d'entraînement dans le mois écoulé (à activer avec les statistiques) | [PSEUDO], ton mois d’échecs : on continue ? | [NB_LECONS] leçons ce mois-ci. 10 minutes de plus par semaine, et ça change tout. | Information (désinscription possible) |
 
 ### Réactivation
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `17-inactif-3-semaines.html` | Après 3 semaines sans activité (une seule fois par période d'inactivité ; le 27 est parti à 1 semaine) | Ta progression t’attend, [PSEUDO] | 3 semaines sans échecs : on reprend avant de perdre le fil ? | Information (désinscription possible) |
+| `17-inactif-3-semaines.html` | Après 3 semaines sans activité (une seule fois par période d'inactivité ; le 25 est parti à 1 semaine) | Ta progression t’attend, [PSEUDO] | 3 semaines sans échecs : on reprend avant de perdre le fil ? | Information (désinscription possible) |
 | `18-inactif-6-semaines.html` | Après 6 semaines sans activité (une seule fois par période d'inactivité ; dernière relance) | Tu nous manques, [PSEUDO] | Voici ce qui est nouveau depuis ta dernière visite. | Information (désinscription possible) |
-| `27-inactif-1-semaine.html` | Après 7 jours sans activité (une seule fois par période d'inactivité ; puis 17 à 3 semaines et 18 à 6 semaines ; à activer avec les statistiques) | Ce que tu as manqué cette semaine 👀 | Cours en direct, nouveaux exercices, tournoi : ta place t’attend. | Information (désinscription possible) |
+| `25-inactif-1-semaine.html` | Après 7 jours sans activité (une seule fois par période d'inactivité ; puis 17 à 3 semaines et 18 à 6 semaines ; à activer avec les statistiques) | Ce que tu as manqué cette semaine 👀 | Cours en direct, nouveaux exercices, tournoi : ta place t’attend. | Information (désinscription possible) |
 
 ### Engagement
 
@@ -147,13 +145,6 @@ l'animateur, la durée, et deux liens : « Revoir le cours » (la leçon sur la 
 | `19-echecs-en-famille.html` | J+14 après l'inscription | Et si tu jouais aux échecs en famille ? | Tes ayants droit peuvent aussi créer leur compte, gratuitement. | Information (désinscription possible) |
 | `20-questionnaire-satisfaction.html` | J+30 après l'inscription (une seule fois) | 2 minutes pour nous donner ton avis ? | Ce qui te plaît, ce qui manque : on t’écoute. | Information (désinscription possible) |
 | `21-bilan-annuel.html` | Un an après l'inscription (à activer avec les statistiques) | [PSEUDO], ta première année d’échecs en chiffres | [NB_LECONS_ANNEE] leçons, [NB_COURS_ANNEE] cours en direct : merci ! | Information (désinscription possible) |
-
-### Vérification des droits
-
-| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
-|---|---|---|---|---|
-| `24-verification-en-cours.html` | À l'inscription, si les droits sont vérifiés à la main (à activer si l'étape 2 contrôle les droits) | On vérifie ton accès | Tu recevras un e-mail dès que c’est fait. | Compte (toujours envoyé) |
-| `25-droits-non-verifies.html` | Si les droits n'ont pas pu être vérifiés (à activer si l'étape 2 contrôle les droits) | On n’a pas pu vérifier ton accès | Vérifie tes informations, ou écris-nous. | Compte (toujours envoyé) |
 
 ## Variables
 
