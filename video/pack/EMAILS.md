@@ -316,6 +316,6 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 | `[RECOMPENSE_PARRAIN]` | récompense du parrain, à définir |
 | `[URL_IMAGE_PUZZLE]` | adresse de l'image de l'échiquier du puzzle (carrée, 600 px) |
 | `[URL_PHOTO_COACH]` | adresse de la photo du coach (carrée, au moins 128 px) |
-| `[DUREE_LECON]` | durée de la leçon suivante, ex. « 15 min » |
+| `[DUREE_LECON]` | durée de la leçon suivante, ex. « 15 min » : médiane du temps passé par les élèves, affichée à partir de 30 leçons terminées ; sinon retirer « environ [DUREE_LECON] » (voir `DEVELOPPEURS.md`) |
 
 Les variables non décrites portent un nom explicite (dates, nombres, noms de coach, de tournoi, de cours…).

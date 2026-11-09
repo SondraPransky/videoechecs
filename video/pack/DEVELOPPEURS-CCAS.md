@@ -60,6 +60,8 @@ pas de relance d'inactivité les 5 premiers jours ; heure de Paris, envois entre
 | Forum | `[AUTEUR_REPONSE]`, `[TITRE_SUJET]`, `[EXTRAIT_REPONSE]` |
 | Saisie éditoriale | `[DATE_DEBUT_PAUSE]`, `[DATE_FIN_PAUSE]`, `[DATE_REPRISE]` (« lundi 5 janvier »), `[DATE_ENVOI]` (date de la lettre et du récapitulatif des cours), `[TITRE_UNE]`, `[NOUVEAUTE_1..3]`, `[DATE_EFFET]`, `[CHANGEMENT]` |
 
+**Durée des leçons (`[DUREE_LECON]`)** : elle n'existe pas pour toutes les leçons et ne sera pas saisie à la main. Au lancement, si la durée manque, retirer « environ [DUREE_LECON] » de la phrase (ex. « La suivante, **[LECON_SUIVANTE]**. »), sans valeur par défaut. Ensuite, elle est calculée à partir des données des élèves : médiane du temps réellement passé sur la leçon (début → fin), arrondie à 5 minutes, recalculée chaque mois. Seuil : affichée seulement après au moins 30 leçons terminées ; on écarte les sessions de moins d'1 minute et celles de plus de 2 heures (onglet resté ouvert). **À faire dès le lancement** : enregistrer l'heure de début et de fin de chaque leçon, sinon il n'y aura pas d'historique pour le calcul.
+
 **Liens** (`[LIEN_…]`) : la liste complète est générée dans le catalogue (`EMAILS-CCAS.md`). `[LIEN_DIRECT]` = lien de la visioconférence (le même pour les deux cours),
 `[LIEN_YOUTUBE_LUNDI]` / `[LIEN_YOUTUBE_MERCREDI]` = vidéos, `[LIEN_COURS_LUNDI]` / `[LIEN_COURS_MERCREDI]` = leçons sur la plateforme, `[LIEN_QUESTIONNAIRE]` = formulaire anonyme (Google Forms…).
 Ajouter `utm_source=email&utm_medium=email&utm_campaign=ccas-<nom du fichier>`.
