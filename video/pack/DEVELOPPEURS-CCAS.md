@@ -38,10 +38,10 @@ Priorités : **(1) obligatoire avant l'ouverture**, (2) à l'ouverture, (3) dans
 | Dernier jour de cours avant les vacances / vendredi avant la reprise | 28 pause des vacances / 29 reprise des cours | 1 |
 | Tournoi (5 jours avant et jour J), inscription, résultats le lendemain | 10, 11, 12 | 2 |
 | Semaine chargée : lettre à plusieurs nouvelles (remplace le 08) | 13 | 3 |
-| Dimanche vers 18 h : bilan de la semaine selon les jours d'entraînement (≥ 3 / 1-2 / 0), avec les statistiques | 14 / 26 / 27 | 2 |
+| 1er du mois : bilan du mois selon les jours d'entraînement (≥ 8 / 1 à 7), avec les statistiques | 14 / 26 | 2 |
 | Série de jours (≥ 5) sur le point de s'arrêter (avec la série de jours) | 15 | 3 |
 | Réponse à un sujet du forum (au plus 1 par jour) | 16 | 3 |
-| Sans connexion depuis 7 / 30 jours | 17 / 18 | 2 |
+| Sans activité depuis 1 / 3 / 6 semaines (chacun une seule fois) | 27 / 17 / 18 | 2 |
 | J+14 / J+30 / 1 an après l'inscription | 19 famille / 20 questionnaire / 21 bilan de l'année | 3 |
 | Changement de la plateforme ou de l'accès (30 jours avant) | 22 | 1 |
 | Suppression du compte | 23 (dernier e-mail envoyé) | 1 |

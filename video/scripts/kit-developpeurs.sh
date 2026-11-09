@@ -5,6 +5,9 @@
 # Prérequis : python3 scripts/emails.py, python3 scripts/emails.py ccas, node scripts/emails-apercus.mjs [ccas], et le pack déjà générés.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Aperçus absents (scripts/emails.py vide build/pack/emails*) : on les refait avant d'assembler les kits
+[ -d build/pack/emails/apercus ] || node scripts/emails-apercus.mjs >/dev/null
+[ -d build/pack/emails-ccas/apercus ] || node scripts/emails-apercus.mjs ccas >/dev/null
 rm -rf build/kit-developpeurs build/kit-developpeurs.zip build/kit-developpeurs-academie build/kit-developpeurs-academie.zip build/kit-developpeurs-ccas build/kit-developpeurs-ccas.zip
 # Académie echecs.com
 K=build/kit-developpeurs-academie; mkdir -p "$K/site"
