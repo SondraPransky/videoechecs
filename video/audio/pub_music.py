@@ -256,11 +256,12 @@ def common_transitions(final_notes, cut=5000):
     st(T_DROP - .9, reverse_cymbal(.9), .25)
     st(T_DROP, impact(), .55)
     st(T_SOL, impact(), .25)
-    st(T_FINAL - .7, reverse_cymbal(.7), .2)
-    st(T_FINAL, impact(), .7)
+    st(T_FINAL - .7, reverse_cymbal(.7), .12)
+    st(T_FINAL, impact(), .25)   # appel final adouci : le son ne doit pas monter d'un coup sur le logo
     for nn in final_notes:
         s = supersaw([nn], 3.4) * .9
-        st(T_FINAL, filt(s, "lowpass", cut) * np.exp(-np.arange(len(s)) / SR * .8), .42)
+        att = np.clip(np.arange(len(s)) / (SR * .35), 0, 1)
+        st(T_FINAL, filt(s, "lowpass", min(cut, 3500)) * att * np.exp(-np.arange(len(s)) / SR * .8), .2)
 
 
 def style1():   # électro-pop, la mineur
@@ -358,15 +359,16 @@ def longue(prog, final_notes):
         st(t + beat / 4, hat(), .045, .3)
         st(t + beat * .75, hat(), .045, -.2)
     for i in range(16):   # roulement + montée avant l'appel final
-        st(t_rise + (T_FINAL - t_rise) * i / 16, clap(), .12 + .3 * i / 16)
-    st(t_rise, riser(T_FINAL - t_rise), .35)
+        st(t_rise + (T_FINAL - t_rise) * i / 16, clap(), .1 + .16 * i / 16)
+    st(t_rise, riser(T_FINAL - t_rise), .2)
     st(T_DROP - .45, riser(.45), .3)
     st(T_DROP, impact(), .32)
     st(T_SOL, impact(), .25)
-    st(T_FINAL, impact(), .36)
+    st(T_FINAL, impact(), .14)
     for nn in final_notes:   # accord final tenu
         s = supersaw([nn], 3.4) * .9
-        st(T_FINAL, filt(s, "lowpass", 5000) * np.exp(-np.arange(len(s)) / SR * .9), .3)
+        att = np.clip(np.arange(len(s)) / (SR * .35), 0, 1)
+        st(T_FINAL, filt(s, "lowpass", 3500) * att * np.exp(-np.arange(len(s)) / SR * .9), .13)
 
 
 def style3():   # électro-pop de la vidéo longue, ré mineur : Dm – B♭ – F – C (on stagne… puis tout s'ouvre)
@@ -426,6 +428,10 @@ def room(x):
 
 L = .8 * L + .2 * room(L)
 R = .8 * R + .2 * room(R)
+# Passage du logo 6 dB plus bas : le son ne doit pas monter d'un coup quand le logo apparaît
+_t = np.arange(len(L)) / SR
+_g = 1 - .5 * np.clip((_t - T_FINAL + .1) / .3, 0, 1)
+L, R = L * _g, R * _g
 L, R = np.tanh(L * 1.3), np.tanh(R * 1.3)
 nn = int(DURATION * SR)
 L, R = L[:nn], R[:nn]
