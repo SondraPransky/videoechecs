@@ -137,17 +137,17 @@ const tx = s => esc(nb(s));
 
 /* ---------- Fonds ---------- */
 const FONDS = {
-  nuit:      { nom: "Nuit",      bg: "#0f1420", fg: "#ffffff", sub: "#c3c8d2", panel: "#2c4a6e", logo: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#262e40", cell: "#1c2436", eyebrow: "#93b9e2", ok: "#7bd88f", stk: "#fae361", stkTxt: "#111111" },
-  creme:     { nom: "Crème",     bg: "#f1f0ea", fg: "#1d1d1b", sub: "#4a4a45", panel: "#2c4a6e", logo: "img/logo-noir.png",  btn: "#fae361", btnTxt: "#111111", acc: "#2c4a6e", track: "#e1ddd1", cell: "#ffffff", eyebrow: "#2c4a6e", ok: "#237a35", stk: "#fae361", stkTxt: "#111111" },
-  bleu:      { nom: "Bleu nuit", bg: "#2c4a6e", fg: "#ffffff", sub: "#dbe5f1", panel: "#0f1420", logo: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#203a58", cell: "#24405f", eyebrow: "#fae361", ok: "#9be3a9", stk: "#fae361", stkTxt: "#111111" },
-  ciel:      { nom: "Bleu ciel", bg: "#93b9e2", fg: "#0f1420", sub: "#1f2f45", panel: "#2c4a6e", logo: "img/logo-noir.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#7aa4d1", cell: "#c9dcf1", eyebrow: "#0f1420", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
-  jaune:     { nom: "Jaune",     bg: "#fae361", fg: "#111111", sub: "#3d3a26", panel: "#2c4a6e", logo: "img/logo-noir.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#e9cf3f", cell: "#fff3b0", eyebrow: "#2c4a6e", ok: "#1d6b2e", stk: "#0f1420", stkTxt: "#fae361" },
-  rose:      { nom: "Rose",      bg: "#ffd6e2", fg: "#2a1520", sub: "#5c3a47", panel: "#c2185b", logo: "img/logo-noir.png",  btn: "#2a1520", btnTxt: "#ffffff", acc: "#c2185b", track: "#f4b9cb", cell: "#fff0f4", eyebrow: "#a3154d", ok: "#1d6b2e", stk: "#fae361", stkTxt: "#111111" },
-  framboise: { nom: "Framboise", bg: "#c2185b", fg: "#ffffff", sub: "#ffe1ec", panel: "#7a0f3a", logo: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#9c1249", cell: "#a8154f", eyebrow: "#ffd6e2", ok: "#c8f5d2", stk: "#fae361", stkTxt: "#111111" },
-  vert:      { nom: "Vert",      bg: "#217a35", fg: "#ffffff", sub: "#e1f5e6", panel: "#14532d", logo: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#1a612a", cell: "#1b6a2e", eyebrow: "#c8f5d2", ok: "#fae361", stk: "#fae361", stkTxt: "#111111" },
-  menthe:    { nom: "Menthe",    bg: "#d5f2de", fg: "#10301a", sub: "#2f5539", panel: "#217a35", logo: "img/logo-noir.png",  btn: "#10301a", btnTxt: "#ffffff", acc: "#217a35", track: "#b4e3c2", cell: "#ffffff", eyebrow: "#17652b", ok: "#17652b", stk: "#fae361", stkTxt: "#111111" },
-  violet:    { nom: "Violet",    bg: "#4b3aa8", fg: "#ffffff", sub: "#e4e0ff", panel: "#2e2370", logo: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#3d2f8f", cell: "#3f3196", eyebrow: "#c9c1ff", ok: "#b6f0c2", stk: "#fae361", stkTxt: "#111111" },
-  corail:    { nom: "Corail",    bg: "#ff8a6a", fg: "#1d1d1b", sub: "#3b1d12", panel: "#9a3412", logo: "img/logo-noir.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#f27352", cell: "#ffd2c4", eyebrow: "#5a1d08", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
+  nuit:      { nom: "Nuit",      bg: "#0f1420", fg: "#ffffff", sub: "#c3c8d2", panel: "#2c4a6e", logo: "img/aca-jaune.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#262e40", cell: "#1c2436", eyebrow: "#93b9e2", ok: "#7bd88f", stk: "#fae361", stkTxt: "#111111" },
+  creme:     { nom: "Crème",     bg: "#f1f0ea", fg: "#1d1d1b", sub: "#4a4a45", panel: "#2c4a6e", logo: "img/logo-marine.png", logoP: "img/aca-jaune.png",  btn: "#fae361", btnTxt: "#111111", acc: "#2c4a6e", track: "#e1ddd1", cell: "#ffffff", eyebrow: "#2c4a6e", ok: "#237a35", stk: "#fae361", stkTxt: "#111111" },
+  bleu:      { nom: "Bleu nuit", bg: "#2c4a6e", fg: "#ffffff", sub: "#dbe5f1", panel: "#0f1420", logo: "img/aca-jaune.png", logoP: "img/logo-bleu.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#203a58", cell: "#24405f", eyebrow: "#fae361", ok: "#9be3a9", stk: "#fae361", stkTxt: "#111111" },
+  ciel:      { nom: "Bleu ciel", bg: "#93b9e2", fg: "#0f1420", sub: "#1f2f45", panel: "#2c4a6e", logo: "img/aca-nuit.png", logoP: "img/logo-blanc.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#7aa4d1", cell: "#c9dcf1", eyebrow: "#0f1420", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
+  jaune:     { nom: "Jaune",     bg: "#fae361", fg: "#111111", sub: "#3d3a26", panel: "#2c4a6e", logo: "img/aca-nuit.png", logoP: "img/aca-jaune.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#e9cf3f", cell: "#fff3b0", eyebrow: "#2c4a6e", ok: "#1d6b2e", stk: "#0f1420", stkTxt: "#fae361" },
+  rose:      { nom: "Rose",      bg: "#ffd6e2", fg: "#2a1520", sub: "#5c3a47", panel: "#c2185b", logo: "img/aca-framboise.png", logoP: "img/logo-blanc.png",  btn: "#2a1520", btnTxt: "#ffffff", acc: "#c2185b", track: "#f4b9cb", cell: "#fff0f4", eyebrow: "#a3154d", ok: "#1d6b2e", stk: "#fae361", stkTxt: "#111111" },
+  framboise: { nom: "Framboise", bg: "#c2185b", fg: "#ffffff", sub: "#ffe1ec", panel: "#7a0f3a", logo: "img/aca-jaune.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#9c1249", cell: "#a8154f", eyebrow: "#ffd6e2", ok: "#c8f5d2", stk: "#fae361", stkTxt: "#111111" },
+  vert:      { nom: "Vert",      bg: "#217a35", fg: "#ffffff", sub: "#e1f5e6", panel: "#14532d", logo: "img/aca-jaune.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#1a612a", cell: "#1b6a2e", eyebrow: "#c8f5d2", ok: "#fae361", stk: "#fae361", stkTxt: "#111111" },
+  menthe:    { nom: "Menthe",    bg: "#d5f2de", fg: "#10301a", sub: "#2f5539", panel: "#217a35", logo: "img/aca-vert.png", logoP: "img/logo-blanc.png",  btn: "#10301a", btnTxt: "#ffffff", acc: "#217a35", track: "#b4e3c2", cell: "#ffffff", eyebrow: "#17652b", ok: "#17652b", stk: "#fae361", stkTxt: "#111111" },
+  violet:    { nom: "Violet",    bg: "#4b3aa8", fg: "#ffffff", sub: "#e4e0ff", panel: "#2e2370", logo: "img/aca-jaune.png", logoP: "img/logo-bleu.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#3d2f8f", cell: "#3f3196", eyebrow: "#c9c1ff", ok: "#b6f0c2", stk: "#fae361", stkTxt: "#111111" },
+  corail:    { nom: "Corail",    bg: "#ff8a6a", fg: "#1d1d1b", sub: "#3b1d12", panel: "#9a3412", logo: "img/logo-noir.png", logoP: "img/aca-jaune.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#f27352", cell: "#ffd2c4", eyebrow: "#5a1d08", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
 };
 const PRIX = {
   mois:    { big: "14,90 €/mois", old: "19,90 €", small: "Prix de lancement · sans engagement", stk: ["−25 %", "prix de lancement"] },
@@ -335,10 +335,21 @@ function barres(t, fs) {
   return `<div style="display:flex;flex-direction:column;gap:6px">${l("Compte gratuit", "4%", t.sub, "6")}${l("Académie complète", "100%", t.acc, "+200")}</div>`;
 }
 function comparatif(t, fs, n) {
-  const td = (s, extra) => `<span style="padding:5px 4px;text-align:center;${extra}">${T(s)}</span>`;
-  return `<div style="display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr);font-size:${fs}px;line-height:1.2;border-radius:8px;overflow:hidden">
-    <span></span>${td("Gratuit", `font-weight:700;color:${t.sub};background:${t.cell}`)}${td("Abonné", `font-weight:700;color:${t.btnTxt};background:${t.btn}`)}
-    ${COMP.slice(0, n).map(([k, g, a]) => `<span style="padding:5px 6px 5px 0;font-weight:600">${T(k)}</span>${td(g, `color:${t.sub};background:${t.cell}`)}${td(a, `font-weight:700;${a === "Oui" ? "color:" + t.ok : ""}`)}`).join("")}</div>`;
+  const band = `color-mix(in srgb, ${t.btn} 16%, transparent)`, pad = r(fs * .5);
+  const ok = `<svg aria-label="oui" width="${r(fs * 1.25)}" height="${r(fs * 1.25)}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="${t.ok}"/><path d="M6.8 12.4l3.4 3.4 7-7.2" fill="none" stroke="${t.bg}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const non = `<span aria-label="non" style="display:inline-block;width:${r(fs * .8)}px;height:2px;border-radius:2px;background:${t.sub};opacity:.45"></span>`;
+  const val = (v, abo) => v === "Oui" ? ok : v === "—" ? non : `<b style="font-weight:${abo ? 700 : 500};color:${abo ? t.fg : t.sub}">${T(v)}</b>`;
+  const rows = COMP.slice(0, n), last = rows.length - 1;
+  return `<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.9fr) minmax(0,1fr);font-size:${fs}px;line-height:1.15;align-items:stretch">
+    <span></span><span style="padding:${pad}px 4px;text-align:center;font-size:${r(fs * .85)}px;font-weight:700;color:${t.sub};letter-spacing:.04em;text-transform:uppercase">Gratuit</span>
+    <span style="padding:${pad}px 4px;text-align:center;font-size:${r(fs * .85)}px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:${t.btn};color:${t.btnTxt};border-radius:${r(fs * .8)}px ${r(fs * .8)}px 0 0">Abonné</span>
+    ${rows.map(([k, g, a], i) => { const line = i < last ? `border-bottom:1px solid color-mix(in srgb, ${t.fg} 12%, transparent);` : "";
+      return `<span style="padding:${pad}px 6px ${pad}px 0;font-weight:600;${line}">${T(k)}</span><span style="padding:${pad}px 4px;display:flex;align-items:center;justify-content:center;${line}">${val(g)}</span><span style="padding:${pad}px 4px;display:flex;align-items:center;justify-content:center;background:${band};${i === last ? `border-radius:0 0 ${r(fs * .8)}px ${r(fs * .8)}px;` : ""}">${val(a, true)}</span>`; }).join("")}</div>`;
+}
+// Logo : « echecs académie » (plus haut) ou echecs.com, couleur selon le fond ; surPanneau : posé sur le panneau coloré
+function logo(t, h, style, surPanneau) {
+  const src = surPanneau ? t.logoP : t.logo, aca = src.includes("/aca-");
+  return img(src, aca ? "echecs académie" : "echecs.com", `height:${r(aca ? h * 1.45 : h)}px;width:auto;flex:none;${style || ""}`);
 }
 function niveaux(t, fs) {
   return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:${r(fs * .4)}px">${NIVEAUX.map((n, i) => `<span style="font-size:${fs}px;font-weight:700;line-height:1;padding:${r(fs * .45)}px ${r(fs * .7)}px;border-radius:999px;background:${i === NIVEAUX.length - 1 ? t.btn : t.cell};color:${i === NIVEAUX.length - 1 ? t.btnTxt : t.fg};white-space:nowrap">${T(n)}</span>`).join(`<span aria-hidden="true" style="font-size:${fs}px;color:${t.sub}">›</span>`)}</div>`;
@@ -426,7 +437,7 @@ const FAM = {
         ${eyebrow(c, t, P(13))}
         <div class="t" style="font-size:${P(34)}px;line-height:1.1;font-weight:600">${T(c.h)}</div>
         ${mid}
-        <div style="display:flex;align-items:center;gap:${P(20)}px;margin-top:2px">${btn(t, f.w < 700 && c.cta.length > 18 ? c.ctas : c.cta, P(46), P(17))}${c.x === "prix" && large ? "" : prixBloc(c, t, P(19), { compact: !large })}${large ? img(t.logo, "echecs.com", `height:${P(20)}px;width:auto;margin-left:auto;margin-right:${P(8)}px`) : ""}</div>
+        <div style="display:flex;align-items:center;gap:${P(20)}px;margin-top:2px">${btn(t, f.w < 700 && c.cta.length > 18 ? c.ctas : c.cta, P(46), P(17))}${c.x === "prix" && large ? "" : prixBloc(c, t, P(19), { compact: !large })}${large ? logo(t, P(28), `margin-left:auto;margin-right:${P(8)}px`) : ""}</div>
       </div>
       <div style="width:${P(270)}px;flex:none;position:relative;display:flex;align-items:${surDisque(c) ? "flex-end" : "center"};justify-content:center">${side}</div>
     </div>`, P(12));
@@ -442,7 +453,7 @@ const FAM = {
         ${H >= 80 ? `<div style="font-size:14px;line-height:1.3;color:${t.sub};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${T(c.sub2)}</div>` : ""}
       </div>
       ${large ? prixBloc(c, t, 17, { compact: true, stack: true, right: true }) : ""}
-      ${f.w >= 900 ? img(t.logo, "echecs.com", "height:18px;width:auto;flex:none") : ""}
+      ${f.w >= 900 ? logo(t, 24) : ""}
       ${btn(t, c.ctas, Math.max(30, r(H * .47)), Math.max(12, r(15 * s)))}
     </div>`, Math.max(6, r(10 * s)));
   },
@@ -450,6 +461,7 @@ const FAM = {
   barre(c, t, f) {
     const p = PRIX[c.prix];
     return root(f, t, `<div data-fit data-min="13" style="height:100%;display:flex;align-items:center;justify-content:center;gap:18px;padding:0 20px;overflow:hidden;white-space:nowrap">
+      ${logo(t, 24)}
       ${c.eyebrow ? pill(c, t, 12) : ""}
       <span class="t" style="font-size:18px;font-weight:600">${T(c.hs)}</span>
       <span style="font-size:15px;color:${t.sub}">${T(c.sub2)}</span>
@@ -475,7 +487,7 @@ const FAM = {
     if (c.x === "comparatif" && !petit) return root(f, t, `<div data-fit data-min="${P(16)}" style="height:100%;padding:${P(16)}px;display:flex;flex-direction:column;gap:${P(9)}px;overflow:hidden">
         ${popup ? croix(t) : ""}
         <div class="t" style="font-size:${P(20)}px;line-height:1.15;font-weight:600;padding-right:${popup ? 30 : 0}px">${T(f.h >= 350 ? c.h : c.hs)}</div>
-        ${comparatif(t, P(13), f.h >= 350 ? 5 : 3)}
+        ${comparatif(t, P(13), f.h >= 350 ? 4 : 3)}
         <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px">${prixBloc(c, t, P(17), { compact: true, stack: true })}${btn(t, c.ctas, P(42), P(15))}</div>
       </div>`, P(12));
     const grand = f.h >= 350;
@@ -488,7 +500,7 @@ const FAM = {
     return root(f, t, `${deco}
       <div data-fit data-min="${P(16)}" style="position:relative;height:100%;padding:${P(18)}px;display:flex;flex-direction:column;gap:${P(9)}px;overflow:hidden">
         ${popup ? croix(t) : ""}
-        <div style="display:flex;align-items:center;gap:10px;justify-content:space-between;padding-right:${popup ? 34 : 0}px">${img(t.logo, "echecs.com", `height:${P(16)}px;width:auto`)}${grand ? pill(c, t, P(11)) : ""}</div>
+        <div style="display:flex;align-items:center;gap:10px;justify-content:space-between;padding-right:${popup ? 34 : 0}px">${logo(t, P(22))}${grand ? pill(c, t, P(11)) : ""}</div>
         ${!grand ? eyebrow(c, t, P(11)) : ""}
         <div class="t" style="font-size:${P(23)}px;line-height:1.12;font-weight:600;max-width:${P(264)}px">${T(c.x === "prix" || petit ? c.hs : c.h)}</div>
         ${corps}
@@ -499,16 +511,16 @@ const FAM = {
   // Verticaux : 300×600, 300×1050
   haut(c, t, f) {
     const long = f.h >= 1000, PH = long ? 330 : 190;
-    const mid = c.x === "niveaux" ? niveaux(t, 13) : c.x === "comparatif" ? comparatif(t, 13, long ? 7 : 5) : c.x === "barres" ? barres(t, 12) : c.x === "tuiles" ? (long ? tuiles(t, 20, true) : liste(c, t, 15))
+    const mid = c.x === "niveaux" ? niveaux(t, 13) : c.x === "comparatif" ? comparatif(t, 13, long ? 7 : 4) : c.x === "barres" ? barres(t, 12) : c.x === "tuiles" ? (long ? tuiles(t, 20, true) : liste(c, t, 15))
       : c.x === "liste" ? liste(c, t, 15) : c.x === "prix" ? grosPrix(c, t, 52) : `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>`;
     const extra = long ? (c.x && c.x !== "prix" ? `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>` : c.x === "prix" ? liste(c, t, 15) : tuiles(t, 20, true)) : "";
     const panneau = `<div style="height:${PH}px;flex:none;position:relative;overflow:hidden;background:${t.panel};box-sizing:border-box;padding-top:${c.deco === "ui" || c.deco === "plateau" ? r(PH * .12) : 0}px;display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center">
-        ${c.inv ? "" : img("img/logo-blanc.png", "echecs.com", "position:absolute;top:14px;left:16px;height:14px;width:auto")}
+        ${c.inv ? "" : `<span style="position:absolute;top:14px;left:16px;display:flex">${logo(t, 20, "", true)}</span>`}
         ${vis(c, t, c.deco === "mascotte" ? r(PH * .78) : c.deco === "plateau" ? r(PH * .62) : c.deco === "ui" ? r(PH * .6) : r(PH * .7), true)}</div>`;
     return root(f, t, `<div style="display:flex;flex-direction:column;height:100%">
       ${c.inv ? "" : panneau}
       <div data-fit data-min="20" style="flex:1;min-height:0;padding:20px 20px 22px;display:flex;flex-direction:column;gap:${long ? 18 : 12}px;overflow:hidden">
-        ${c.inv ? img(t.logo, "echecs.com", "height:16px;width:auto;align-self:flex-start") : ""}
+        ${c.inv ? logo(t, 22, "align-self:flex-start") : ""}
         ${eyebrow(c, t, 12)}
         <div class="t" style="font-size:${long ? 32 : 27}px;line-height:1.1;font-weight:600">${T(c.x === "prix" ? c.hs : c.h)}</div>
         ${mid}${extra}
@@ -527,7 +539,7 @@ const FAM = {
     if (f.w < 160) c = sansMaquette(c);
     const zone = surDisque(c) ? `${cercle(t, P(124), `left:50%;margin-left:${P(-62)}px;bottom:0`)}${vis(c, t, P(118))}` : vis(c, t, c.deco === "sticker" ? P(118) : c.deco === "chiffre" ? P(110) : c.deco === "ui" ? P(96) : P(112));
     return root(f, t, `<div data-fit data-min="${P(14)}" style="height:100%;padding:${P(16)}px ${P(12)}px ${P(18)}px;display:flex;flex-direction:column;gap:${P(12)}px;overflow:hidden">
-      ${img(t.logo, "echecs.com", `height:${P(14)}px;width:auto;align-self:flex-start`)}
+      ${logo(t, P(19), "align-self:flex-start;max-width:100%;object-fit:contain;object-position:left")}
       ${f.w >= 160 ? eyebrow(c, t, 11) : ""}
       <div class="t" style="font-size:${P(22)}px;line-height:1.12;font-weight:600;overflow-wrap:normal">${T(c.hs)}</div>
       ${f.w >= 160 ? `<div style="font-size:14px;line-height:1.35;color:${t.sub}">${T(c.sub2)}</div>` : ""}
