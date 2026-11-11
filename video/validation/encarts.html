@@ -174,7 +174,7 @@ const FORMATS = [
   { id: "320x100",  nom: "Grande bannière mobile 320×100", w: 320, h: 100, fam: "mobile" },
   { id: "320x50",   nom: "Bannière mobile 320×50", w: 320, h: 50, fam: "bande" },
 ];
-const VISUELS = { mascotte: "la mascotte", piece: "une pièce d’échecs", damier: "un échiquier", sticker: "une pastille prix", chiffre: "un gros chiffre" };
+const VISUELS = { mascotte: "la mascotte", plateau: "un échiquier (mat du couloir)", ui: "une maquette de l’Académie", sticker: "une pastille prix", chiffre: "un gros chiffre" };
 
 /* ---------- Les propositions ---------- */
 const TUILES = [["Parcours", "par niveau"], ["Masterclasses", "en direct"], ["Revue", "en PGN"]];
@@ -192,7 +192,7 @@ const C = [
     sub: "Au lieu de 19,90 €. Leçons, vidéos, masterclasses, revue, tournois : tout est inclus. Sans engagement.", sub2: "Au lieu de 19,90 € · tout inclus · sans engagement",
     liste: ["Leçons et parcours par niveau", "Masterclasses et vidéos Europe Échecs", "La revue en PGN et les tournois"],
     cta: "J'en profite", ctas: "J'en profite" },
-  { id: "v03", v: 2, aud: "v", nom: "Tout au même endroit", angle: "Montrer l’étendue de l’Académie : tout ce dont un joueur a besoin, réuni.", fond: "bleu", deco: "piece", piece: "wN", pose: "super", x: "tuiles", prix: "mois",
+  { id: "v03", v: 3, aud: "v", nom: "Tout au même endroit", angle: "Montrer l’étendue de l’Académie : tout ce dont un joueur a besoin, réuni.", fond: "bleu", deco: "mascotte", pose: "super", x: "tuiles", prix: "mois",
     h: "Leçons, masterclasses, revue, tournois : tout au même endroit.", hs: "Tout au même endroit", hm: "Tout pour progresser",
     sub: "Le parcours, les vidéos Europe Échecs, la revue en PGN, le forum et les tournois : une seule Académie.", sub2: "Leçons, vidéos, revue, forum et tournois",
     liste: ["Leçons et parcours par niveau", "Masterclasses et vidéos Europe Échecs", "Revue en PGN, forum et tournois"],
@@ -202,7 +202,7 @@ const C = [
     sub: "Crée ton compte gratuit : 6 leçons, le puzzle du jour, le forum et la zone de jeu.", sub2: "6 leçons, le puzzle du jour et le forum",
     liste: ["6 leçons de l'Académie", "Le puzzle du jour", "Le forum", "La zone de jeu"],
     cta: "Créer mon compte gratuit", ctas: "Essayer" },
-  { id: "v05", v: 2, aud: "v", nom: "Des grands maîtres en direct", angle: "Les masterclasses avec des grands maîtres, et la possibilité de leur poser ses questions.", fond: "violet", deco: "mascotte", pose: "pancarte", x: "liste", prix: "mois", eyebrow: "Masterclasses",
+  { id: "v05", v: 3, aud: "v", nom: "Des grands maîtres en direct", angle: "Les masterclasses avec des grands maîtres, et la possibilité de leur poser ses questions.", fond: "violet", deco: "ui", ui: "direct", pose: "pancarte", x: "liste", prix: "mois", eyebrow: "Masterclasses",
     h: "Pose tes questions à des grands maîtres, en direct.", hs: "Masterclasses en direct", hm: "Masterclasses en direct",
     sub: "Gata Kamsky, Fabien Libiszewski et nos coachs t'expliquent leurs plans. Tu poses tes questions dans le chat.", sub2: "Avec Gata Kamsky, Fabien Libiszewski et nos coachs",
     liste: ["En direct avec des grands maîtres", "Tes questions dans le chat", "Incluses dans l'abonnement"],
@@ -211,16 +211,16 @@ const C = [
     h: "10 minutes, 3 fois par semaine : tu progresses.", hs: "10 minutes suffisent", hm: "10 min pour progresser",
     sub: "Une leçon, un exercice, un quiz : le parcours reprend là où tu t'es arrêté, sans rien perdre.", sub2: "Le parcours reprend là où tu t'es arrêté",
     cta: "Commencer", ctas: "Commencer" },
-  { id: "v07", v: 2, aud: "v", nom: "Tes parties", angle: "Parler aux joueurs qui jouent déjà et veulent comprendre leurs parties.", fond: "ciel", deco: "piece", piece: "wQ", pose: "loupe", x: "liste", prix: "mois",
+  { id: "v07", v: 3, aud: "v", nom: "Tes parties", angle: "Parler aux joueurs qui jouent déjà et veulent comprendre leurs parties.", fond: "ciel", deco: "plateau", pose: "loupe", x: "liste", prix: "mois",
     h: "Revois tes parties pour comprendre tes erreurs.", hs: "Analyse tes parties", hm: "Analyse tes parties",
     sub: "Saisis tes parties coup par coup ou importe ton PGN, analyse-les et partage-les avec d'autres membres.", sub2: "Saisis, importe, analyse et partage tes parties",
     liste: ["Saisie coup par coup ou import PGN", "Analyse dans le lecteur Europe Échecs", "Partage avec les autres membres"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v08", v: 2, aud: "v", nom: "Un parcours pour chaque niveau", angle: "Rassurer sur le niveau : de l’Initiation à plus de 2000, il y a un parcours pour chacun.", fond: "framboise", deco: "damier", piece: "wN", pose: "idee", x: "niveaux", prix: "mois",
+  { id: "v08", v: 3, aud: "v", nom: "Un parcours pour chaque niveau", angle: "Rassurer sur le niveau : de l’Initiation à plus de 2000, il y a un parcours pour chacun.", fond: "framboise", deco: "ui", ui: "lecon", pose: "idee", x: "niveaux", prix: "mois",
     h: "Du premier coup à plus de 2000 : ton parcours t'attend.", hs: "Un parcours pour toi", hm: "Un parcours pour toi",
     sub: "Initiation, Objectif 1400, 1600, 1800, jusqu'à 2000 et plus : chaque module validé te mène au suivant.", sub2: "De l'Initiation à 2000 et plus, module après module",
     cta: "Trouver mon parcours", ctas: "C'est parti" },
-  { id: "v09", v: 2, aud: "v", nom: "La méthode Europe Échecs", angle: "S’appuyer sur la marque, la revue et le catalogue vidéo, pour ceux qui les connaissent.", fond: "creme", deco: "piece", piece: "wK", pose: "reflexion", x: "liste", prix: "mois", inv: true,
+  { id: "v09", v: 3, aud: "v", nom: "La méthode Europe Échecs", angle: "S’appuyer sur la marque, la revue et le catalogue vidéo, pour ceux qui les connaissent.", fond: "creme", deco: "ui", ui: "revue", pose: "reflexion", x: "liste", prix: "mois", inv: true,
     h: "La méthode Europe Échecs, maintenant en ligne.", hs: "La méthode Europe Échecs", hm: "La méthode Europe Échecs",
     sub: "Tout le catalogue vidéo, la revue en PGN interactif et les leçons de nos auteurs, réunis dans une Académie.", sub2: "Catalogue vidéo, revue en PGN et leçons",
     liste: ["Tout le catalogue vidéo Europe Échecs", "La revue en PGN interactif", "Les leçons de nos auteurs et coachs"],
@@ -229,7 +229,7 @@ const C = [
     h: "150 € par an : près de 2 mois offerts.", hs: "Près de 2 mois offerts", hm: "150 €/an",
     sub: "Au lieu de 179,90 €. Toute l'Académie pendant un an, au prix de lancement.", sub2: "Au lieu de 179,90 € · prix de lancement",
     cta: "Choisir l'annuel", ctas: "J'en profite" },
-  { id: "v11", v: 2, aud: "v", nom: "Un tournoi chaque semaine", angle: "Le jeu et la compétition : mettre en pratique ce qu’on apprend.", fond: "nuit", deco: "damier", piece: "wQ", pose: "pendule", x: "", prix: "mois", eyebrow: "Tournois",
+  { id: "v11", v: 3, aud: "v", nom: "Un tournoi chaque semaine", angle: "Le jeu et la compétition : mettre en pratique ce qu’on apprend.", fond: "nuit", deco: "ui", ui: "classement", pose: "pendule", x: "", prix: "mois", eyebrow: "Tournois",
     h: "Un tournoi en ligne chaque semaine, tous niveaux.", hs: "Un tournoi par semaine", hm: "Un tournoi par semaine",
     sub: "Mets en pratique ce que tu apprends et mesure-toi aux autres membres de l'Académie.", sub2: "Mesure-toi aux autres membres de l'Académie",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
@@ -237,12 +237,12 @@ const C = [
     h: "Tu aimes les échecs ? Progresse avec d'autres passionnés.", hs: "Progresse en communauté", hm: "Rejoins la communauté",
     sub: "Une question sur la Sicilienne, une partie à faire commenter ? Sur le forum, membres et coachs te répondent.", sub2: "Sur le forum, membres et coachs te répondent",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v13", v: 1, aud: "v", nom: "Le catalogue vidéo", angle: "Tout le catalogue vidéo Europe Échecs, inclus dans l’abonnement.", fond: "creme", deco: "mascotte", pose: "idee", x: "liste", prix: "mois", eyebrow: "Vidéos Europe Échecs",
+  { id: "v13", v: 2, aud: "v", nom: "Le catalogue vidéo", angle: "Tout le catalogue vidéo Europe Échecs, inclus dans l’abonnement.", fond: "creme", deco: "ui", ui: "video", pose: "idee", x: "liste", prix: "mois", eyebrow: "Vidéos Europe Échecs",
     h: "Tout le catalogue vidéo Europe Échecs, en HD.", hs: "Le catalogue vidéo", hm: "Les vidéos Europe Échecs",
     sub: "Calcul Gagnant, la Minute Finale, les ouvertures en vogue… toutes les séries sont incluses.", sub2: "Calcul Gagnant, la Minute Finale, les ouvertures…",
     liste: ["Calcul Gagnant", "La Minute Finale", "Les ouvertures en vogue"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v14", v: 1, aud: "v", nom: "Mesure tes progrès", angle: "Rendre la progression visible : modules validés, étoiles, courbe Elo.", fond: "violet", deco: "mascotte", pose: "super", x: "niveaux", prix: "mois", eyebrow: "Ta progression",
+  { id: "v14", v: 2, aud: "v", nom: "Mesure tes progrès", angle: "Rendre la progression visible : modules validés, étoiles, courbe Elo.", fond: "violet", deco: "ui", ui: "elo", pose: "super", x: "niveaux", prix: "mois", eyebrow: "Ta progression",
     h: "Valide chaque module et regarde ton Elo monter.", hs: "Mesure tes progrès", hm: "Mesure tes progrès",
     sub: "Chaque module validé te rapproche du suivant, et ta courbe Elo le montre.", sub2: "Modules validés et courbe Elo",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
@@ -255,7 +255,7 @@ const C = [
     h: "Gratuit ou Académie complète ? Compare.", hs: "Gratuit ou abonné ?", hm: "Gratuit ou abonné ?",
     sub: "Parcours, masterclasses, vidéos, revue en PGN, analyse de tes parties : tout ce que l'abonnement débloque.", sub2: "Tout ce que l'abonnement débloque",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g03", v: 2, aud: "g", nom: "Débloque la suite", angle: "À afficher au bout des 6 leçons offertes, sur la leçon suivante verrouillée.", fond: "violet", deco: "damier", piece: "wK", pose: "drapeau", x: "niveaux", prix: "mois", eyebrow: "Leçon suivante",
+  { id: "g03", v: 3, aud: "g", nom: "Débloque la suite", angle: "À afficher au bout des 6 leçons offertes, sur la leçon suivante verrouillée.", fond: "violet", deco: "ui", ui: "verrou", pose: "drapeau", x: "niveaux", prix: "mois", eyebrow: "Leçon suivante",
     h: "La suite de ton parcours est réservée aux abonnés.", hs: "Débloque la suite", hm: "Débloque la suite",
     sub: "Tu as fini tes leçons offertes ? Continue le parcours, module après module, jusqu'à 2000 et plus.", sub2: "Continue le parcours, module après module",
     cta: "Débloquer la suite", ctas: "Débloquer" },
@@ -281,11 +281,11 @@ const C = [
     h: "Passe à l'annuel : près de 2 mois offerts.", hs: "Près de 2 mois offerts", hm: "150 €/an",
     sub: "150 € par an au lieu de 179,90 €, soit 12,50 € par mois.", sub2: "150 €/an, soit 12,50 € par mois",
     cta: "Choisir l'annuel", ctas: "J'en profite" },
-  { id: "g09", v: 2, aud: "g", nom: "Tes parties", angle: "Pour les comptes gratuits qui jouent dans la zone de jeu.", fond: "menthe", deco: "mascotte", pose: "loupe", x: "", prix: "mois",
+  { id: "g09", v: 3, aud: "g", nom: "Tes parties", angle: "Pour les comptes gratuits qui jouent dans la zone de jeu.", fond: "menthe", deco: "plateau", pose: "loupe", x: "", prix: "mois",
     h: "Et si tu revoyais tes parties pour comprendre tes erreurs ?", hs: "Analyse tes parties", hm: "Analyse tes parties",
     sub: "Avec l'abonnement, importe tes parties en PGN, analyse-les et partage-les avec d'autres membres.", sub2: "Importe, analyse et partage tes parties",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g10", v: 1, aud: "g", nom: "La revue en PGN", angle: "La revue Europe Échecs en PGN, incluse dans l’abonnement.", fond: "bleu", deco: "piece", piece: "wR", pose: "cafe", x: "", prix: "mois", eyebrow: "La revue Europe Échecs",
+  { id: "g10", v: 2, aud: "g", nom: "La revue en PGN", angle: "La revue Europe Échecs en PGN, incluse dans l’abonnement.", fond: "bleu", deco: "ui", ui: "revue", pose: "cafe", x: "", prix: "mois", eyebrow: "La revue Europe Échecs",
     h: "La revue Europe Échecs, à rejouer en PGN.", hs: "La revue en PGN", hm: "La revue en PGN",
     sub: "Chaque numéro de la revue, avec ses parties à rejouer sur l'échiquier, inclus dans l'abonnement.", sub2: "Incluse dans l'abonnement",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
@@ -349,17 +349,54 @@ function grosPrix(c, t, fs) {
 }
 const cercle = (t, d, pos) => `<div style="position:absolute;width:${d}px;height:${d}px;border-radius:50%;background:${t.panel};${pos}"></div>`;
 const root = (f, t, inner, rad) => `<div class="ad-root" style="width:${f.w}px;height:${f.h}px;box-sizing:border-box;background:${t.bg};color:${t.fg};${FONT};overflow:hidden;position:relative;border-radius:${rad}px">${inner}</div>`;
-const surDisque = c => c.deco === "mascotte" || c.deco === "piece";
+const surDisque = c => c.deco === "mascotte";
+const sansMaquette = c => c.deco === "ui" ? { ...c, deco: "mascotte" } : c;   // petits formats : la maquette serait illisible, on garde la mascotte
+
+// Échiquier : mat du couloir (♖d1-d8#), flèche du coup gagnant
+function plateau(H) {
+  const cs = H / 8, P = [["bK", 6, 0], ["bP", 5, 1], ["bP", 6, 1], ["bP", 7, 1], ["wR", 3, 0], ["wP", 5, 6], ["wP", 6, 6], ["wP", 7, 6], ["wK", 6, 7]];
+  const cases = Array.from({ length: 64 }, (_, i) => { const x = i % 8, y = i >> 3, hl = x === 3 && (y === 7 || y === 0);
+    return `<i style="position:absolute;left:${x * cs}px;top:${y * cs}px;width:${cs + .5}px;height:${cs + .5}px;background:${hl ? "rgba(250,227,97,.85)" : (x + y) % 2 ? "#93b9e2" : "#e4ecf6"}"></i>`; }).join("");
+  const pcs = P.map(([p, x, y]) => `<img src="img/p-${p}.png" alt="" style="position:absolute;left:${x * cs + cs * .06}px;top:${y * cs + cs * .06}px;width:${cs * .88}px;height:${cs * .88}px">`).join("");
+  const fl = `<svg viewBox="0 0 8 8" style="position:absolute;inset:0;width:100%;height:100%"><line x1="3.5" y1="7.3" x2="3.5" y2="1.05" stroke="#2f9e44" stroke-width=".22" stroke-linecap="round" opacity=".85"/><path d="M3.08 1.3 L3.5 .6 L3.92 1.3 Z" fill="#2f9e44" opacity=".9"/></svg>`;
+  return `<div role="img" aria-label="Échiquier : le mat du couloir" style="position:relative;flex:none;width:${r(H)}px;height:${r(H)}px;border-radius:${r(H * .04)}px;overflow:hidden;box-shadow:0 0 0 ${Math.max(2, r(H * .025))}px #ffffff,0 ${r(H * .05)}px ${r(H * .14)}px rgba(0,0,0,.3)">${cases}${pcs}${fl}</div>`;
+}
+
+// Maquettes de l’Académie (dessinées en 200×150, mises à l’échelle)
+const MAQ = {
+  lecon: (verrou) => `<div style="background:#fff;color:#121821;border-radius:14px;padding:14px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:9px;font-weight:700;letter-spacing:.06em;color:#5a6574">OBJECTIF 1400 · MODULE ${verrou ? 4 : 3}</span>${verrou ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2c4a6e" stroke-width="2.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>` : ""}</div>
+    <div style="font-size:16px;font-weight:700;line-height:1.1">${verrou ? "Les finales de Tours" : "Les clouages"}</div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:7px;border-radius:9px;background:#e4ecf6;overflow:hidden"><div style="width:${verrou ? 0 : 62}%;height:100%;background:linear-gradient(90deg,#93b9e2,#fae361)"></div></div><b style="font-size:10px">${verrou ? "0" : "62"} %</b></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:auto">${["Vidéo", "Cours", "Exercice", "Quiz"].map((n, i) => `<span style="font-size:10px;font-weight:700;padding:5px 6px;border-radius:7px;background:${!verrou && i < 2 ? "#e3f4e8" : "#f3f5f8"};color:${!verrou && i < 2 ? "#1f8a43" : "#5a6574"}">${!verrou && i < 2 ? "✓ " : ""}${n}</span>`).join("")}</div></div>`,
+  direct: () => `<div style="background:#141c28;color:#fff;border-radius:14px;padding:13px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;box-shadow:inset 0 0 0 1px rgba(147,185,226,.2)">
+    <div style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;font-weight:700;letter-spacing:.06em;background:#ff5a6a;color:#fff;border-radius:99px;padding:3px 7px">● EN DIRECT</span><span style="font-size:9px;color:#9aa6b6">Masterclass</span></div>
+    <div style="display:flex;align-items:center;gap:9px"><span style="width:34px;height:34px;border-radius:50%;background:#fae361;color:#111;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none">GK</span><span style="line-height:1.15"><b style="font-size:14px;display:block">Gata Kamsky</b><span style="font-size:9.5px;color:#9aa6b6">Grand maître international</span></span></div>
+    <div style="margin-top:auto;background:#1f2a3a;border-radius:10px 10px 10px 2px;padding:7px 9px;font-size:10px;line-height:1.3;color:#dbe5f1"><b style="color:#93b9e2">Léa</b> Comment jouer contre la Sicilienne ?</div></div>`,
+  classement: () => `<div style="background:#fff;color:#121821;border-radius:14px;padding:12px 13px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:5px">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.06em;color:#5a6574;margin-bottom:2px">TOURNOI DU WEEK-END · 10′+5″</div>
+    ${[["1", "Toi", "4,5"], ["2", "Marc", "4"], ["3", "Sofia", "3,5"], ["4", "Hugo", "3"]].map(([n, p, s], i) => `<div style="display:flex;align-items:center;gap:8px;font-size:11.5px;padding:4px 7px;border-radius:7px;${i ? "" : "background:#fae361;font-weight:700"}"><b style="width:12px;color:${i ? "#5a6574" : "#111"}">${n}</b><span style="flex:1">${p}</span><b>${s}</b></div>`).join("")}</div>`,
+  revue: () => `<div style="background:linear-gradient(160deg,#2c4a6e,#0f1420);color:#fff;border-radius:12px;padding:13px;height:100%;box-sizing:border-box;display:flex;flex-direction:column">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.14em">EUROPE ÉCHECS</div><div style="font-size:9px;color:#fae361;font-weight:700;margin-top:2px">N° 779 · OCTOBRE 2026</div>
+    <div style="font-size:18px;font-weight:700;line-height:1.05;margin-top:12px">Milliet<br>&amp; Bacrot</div>
+    <span style="margin-top:auto;align-self:flex-start;font-size:9.5px;font-weight:700;background:#fae361;color:#111;border-radius:99px;padding:3px 8px">PGN interactif</span></div>`,
+  video: () => `<div style="background:#fff;border-radius:12px;overflow:hidden;height:100%;display:flex;flex-direction:column">
+    <div style="flex:1;background:linear-gradient(135deg,#2c4a6e,#0f1420);display:grid;place-items:center;position:relative"><span style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="#2c4a6e"/></svg></span><span style="position:absolute;right:7px;bottom:6px;font-size:8.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);border-radius:4px;padding:1px 5px">HD</span></div>
+    <div style="padding:8px 11px;color:#121821;line-height:1.2"><b style="font-size:12.5px">Calcul Gagnant</b><div style="font-size:9.5px;color:#5a6574">Série vidéo Europe Échecs</div></div></div>`,
+  elo: () => `<div style="background:#fff;color:#121821;border-radius:14px;padding:12px 13px;height:100%;box-sizing:border-box;display:flex;flex-direction:column">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.06em;color:#5a6574">TON ELO</div>
+    <div style="display:flex;align-items:baseline;gap:7px"><b style="font-size:24px;line-height:1.1">1480</b><span style="font-size:11px;font-weight:700;color:#1f8a43">+330</span></div>
+    <svg viewBox="0 0 170 60" style="width:100%;margin-top:auto" preserveAspectRatio="none"><defs><linearGradient id="ge" x1="0" x2="1"><stop offset="0" stop-color="#93b9e2"/><stop offset="1" stop-color="#2f9e44"/></linearGradient></defs><path d="M0,55 L20,50 L40,52 L60,42 L80,40 L100,30 L120,27 L140,16 L170,6" fill="none" stroke="url(#ge)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="170" cy="6" r="4" fill="#2f9e44"/></svg></div>`,
+};
+function maquette(c, H) {
+  const s = H / 150, inner = MAQ[c.ui === "verrou" ? "lecon" : c.ui](c.ui === "verrou");
+  return `<div role="img" aria-label="Aperçu de l’Académie" style="position:relative;flex:none;width:${r(200 * s)}px;height:${r(150 * s)}px;filter:drop-shadow(0 ${r(8 * s)}px ${r(18 * s)}px rgba(0,0,0,.28))"><div style="position:absolute;left:0;top:0;width:200px;height:150px;transform:scale(${s});transform-origin:0 0;${FONT}">${inner}</div></div>`;
+}
 
 // Le visuel de la proposition, haut de H px. surFond : posé sur le panneau coloré (sinon sur le fond de l’encart)
 function vis(c, t, H, surFond) {
-  const pc = c.piece || "wN";
-  if (c.deco === "piece") return img(`img/piece-${pc}.png`, "Une pièce d’échecs", `position:relative;height:${r(H * .82)}px;width:auto;max-width:${r(H)}px;object-fit:contain;filter:drop-shadow(0 ${r(H * .03)}px ${r(H * .06)}px rgba(0,0,0,.35))`);
-  if (c.deco === "damier") {
-    const cs = Math.max(6, r(H / 4)), noir = { wN: "bN", wK: "bK", wQ: "bQ" }[pc] || "bN";
-    const cases = Array.from({ length: 16 }, (_, i) => `<i style="display:block;background:${(i + (i >> 2)) % 2 ? t.panel : "#f1f0ea"}"></i>`).join("");
-    return `<div aria-hidden="true" style="position:relative;flex:none;width:${cs * 4}px;height:${cs * 4}px;display:grid;grid-template-columns:repeat(4,${cs}px);grid-template-rows:repeat(4,${cs}px);border-radius:${r(cs * .2)}px;overflow:visible;box-shadow:0 ${r(H * .04)}px ${r(H * .12)}px rgba(0,0,0,.28);transform:rotate(-7deg);outline:${Math.max(2, r(cs * .12))}px solid ${surFond ? "#f1f0ea" : t.panel}">${cases}<img src="img/piece-${noir}.png" alt="" style="position:absolute;left:50%;top:50%;height:${r(cs * 2.4)}px;width:auto;transform:translate(-50%,-56%) rotate(7deg);filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))"></div>`;
-  }
+  if (c.deco === "plateau") return plateau(H);
+  if (c.deco === "ui") return maquette(c, H);
   if (c.deco === "sticker") {
     const [a, b] = PRIX[c.prix].stk;
     return `<div style="position:relative;flex:none;width:${H}px;height:${H}px;border-radius:50%;background:${t.stk};color:${t.stkTxt};display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-10deg);box-shadow:0 ${r(H * .04)}px ${r(H * .12)}px rgba(0,0,0,.25);text-align:center;line-height:1">
@@ -382,8 +419,8 @@ const FAM = {
       : c.x === "liste" ? `<div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:${P(15)}px">${(c.liste || []).slice(0, 3).map(i => `<span style="display:inline-flex;gap:6px">${check(t.acc, P(16))}${T(i)}</span>`).join("")}</div>`
       : c.x === "prix" ? prixBloc(c, t, P(30)) : `<p style="margin:0;font-size:${P(16)}px;line-height:1.4;color:${t.sub};max-width:${P(600)}px">${T(c.sub)}</p>`;
     const side = surDisque(c)
-      ? `${cercle(t, P(250), `${c.inv ? "left" : "right"}:${P(10)}px;bottom:${P(-70)}px`)}${vis(c, t, c.deco === "piece" ? P(200) : P(205))}`
-      : vis(c, t, c.deco === "sticker" ? P(170) : c.deco === "chiffre" ? P(200) : P(150));
+      ? `${cercle(t, P(250), `${c.inv ? "left" : "right"}:${P(10)}px;bottom:${P(-70)}px`)}${vis(c, t, P(205))}`
+      : vis(c, t, c.deco === "sticker" ? P(170) : c.deco === "chiffre" ? P(200) : c.deco === "ui" ? P(160) : P(165));
     return root(f, t, `<div style="display:flex;height:100%;${c.inv ? "flex-direction:row-reverse;" : ""}">
       <div data-fit data-min="${P(20)}" style="flex:1;min-width:0;padding:${P(22)}px ${c.inv ? P(34) : 0}px ${P(22)}px ${c.inv ? 0 : P(34)}px;display:flex;flex-direction:column;justify-content:center;gap:${P(12)}px;overflow:hidden">
         ${eyebrow(c, t, P(13))}
@@ -396,9 +433,10 @@ const FAM = {
   },
   // Bandes fines : 970×90, 728×90, 468×60, 320×50
   bande(c, t, f) {
+    c = sansMaquette(c);
     const H = f.h, s = H / 90, large = f.w >= 700, titre = large ? c.hs : c.hm;
     return root(f, t, `<div style="display:flex;align-items:center;gap:${r(16 * s)}px;height:100%;padding-right:${r(14 * s)}px">
-      <div style="width:${r(H * .92)}px;height:${H}px;flex:none;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center;overflow:hidden">${vis(c, t, c.deco === "mascotte" ? r(H * .85) : c.deco === "damier" ? r(H * .6) : r(H * .78), true)}</div>
+      <div style="width:${r(H * .92)}px;height:${H}px;flex:none;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center;overflow:hidden">${vis(c, t, c.deco === "mascotte" ? r(H * .85) : c.deco === "plateau" ? r(H * .72) : r(H * .78), true)}</div>
       <div data-fit data-min="${Math.max(11, r(14 * s))}" style="flex:1;min-width:0;height:${H}px;display:flex;flex-direction:column;justify-content:center;gap:3px;overflow:hidden">
         <div class="t" style="font-size:${Math.max(13, r(21 * s))}px;line-height:1.15;font-weight:600">${T(titre)}</div>
         ${H >= 80 ? `<div style="font-size:14px;line-height:1.3;color:${t.sub};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${T(c.sub2)}</div>` : ""}
@@ -421,8 +459,9 @@ const FAM = {
   },
   // Grande bannière mobile 320×100
   mobile(c, t, f) {
+    c = sansMaquette(c);
     return root(f, t, `<div style="display:flex;height:100%">
-      <div style="width:76px;flex:none;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center;overflow:hidden">${vis(c, t, c.deco === "mascotte" ? 80 : c.deco === "damier" ? 46 : 66, true)}</div>
+      <div style="width:76px;flex:none;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center;overflow:hidden">${vis(c, t, c.deco === "mascotte" ? 80 : c.deco === "plateau" ? 56 : 66, true)}</div>
       <div data-fit data-min="13" style="flex:1;min-width:0;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
         <div class="t" style="font-size:16px;line-height:1.2;font-weight:600">${T(c.hs)}</div>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">${c.prix ? `<span style="font-size:13px;line-height:1.2;color:${t.sub};white-space:nowrap">${T(PRIX[c.prix].big)}</span>` : "<span></span>"}${btn(t, c.ctas, 38, 14)}</div>
@@ -432,6 +471,7 @@ const FAM = {
   // Rectangles et carrés : 480×360, 400×400, 336×280, 300×250, 250×250
   rect(c, t, f) {
     const s = Math.min(f.w, f.h) / 300, P = n => r(n * s), petit = f.w < 300, popup = f.w === 480;
+    if (f.w < 400) c = sansMaquette(c);   // maquette lisible seulement dans les grands pavés
     if (c.x === "comparatif" && !petit) return root(f, t, `<div data-fit data-min="${P(16)}" style="height:100%;padding:${P(16)}px;display:flex;flex-direction:column;gap:${P(9)}px;overflow:hidden">
         ${popup ? croix(t) : ""}
         <div class="t" style="font-size:${P(20)}px;line-height:1.15;font-weight:600;padding-right:${popup ? 30 : 0}px">${T(f.h >= 350 ? c.h : c.hs)}</div>
@@ -440,8 +480,8 @@ const FAM = {
       </div>`, P(12));
     const grand = f.h >= 350;
     const deco = surDisque(c)
-      ? `${cercle(t, P(170), `right:${P(-40)}px;bottom:${P(-50)}px`)}<div style="position:absolute;right:${P(6)}px;bottom:0">${vis(c, t, c.deco === "piece" ? P(120) : P(112))}</div>`
-      : `<div style="position:absolute;right:${P(c.deco === "chiffre" ? 14 : 18)}px;bottom:${P(c.deco === "chiffre" ? 14 : 18)}px">${vis(c, t, c.deco === "sticker" ? P(96) : c.deco === "chiffre" ? P(100) : P(84))}</div>`;
+      ? `${cercle(t, P(170), `right:${P(-40)}px;bottom:${P(-50)}px`)}<div style="position:absolute;right:${P(6)}px;bottom:0">${vis(c, t, P(112))}</div>`
+      : `<div style="position:absolute;right:${P(c.deco === "chiffre" ? 14 : 18)}px;bottom:${P(c.deco === "chiffre" ? 14 : 18)}px">${vis(c, t, c.deco === "sticker" ? P(96) : c.deco === "chiffre" ? P(100) : c.deco === "ui" ? P(92) : P(100))}</div>`;
     const corps = c.x === "prix" ? grosPrix(c, t, P(40)) : grand && c.x === "barres" ? `<div style="max-width:${P(250)}px">${barres(t, P(11))}</div>`
       : grand && c.x === "niveaux" ? `<div style="max-width:${P(260)}px">${niveaux(t, P(11))}</div>`
       : grand ? `<p style="margin:0;font-size:${P(14)}px;line-height:1.4;color:${t.sub};max-width:${P(215)}px">${T(c.sub)}</p>` : "";
@@ -452,7 +492,7 @@ const FAM = {
         ${!grand ? eyebrow(c, t, P(11)) : ""}
         <div class="t" style="font-size:${P(23)}px;line-height:1.12;font-weight:600;max-width:${P(264)}px">${T(c.x === "prix" || petit ? c.hs : c.h)}</div>
         ${corps}
-        ${c.x === "prix" ? "" : prixBloc(c, t, P(17), { compact: petit })}
+        ${c.x === "prix" ? "" : prixBloc(c, t, P(17), { compact: petit || c.deco === "ui" || c.deco === "plateau" })}
         <div style="margin-top:auto">${btn(t, petit || c.cta.length > 16 ? c.ctas : c.cta, P(42), P(15))}</div>
       </div>`, P(12));
   },
@@ -462,9 +502,9 @@ const FAM = {
     const mid = c.x === "niveaux" ? niveaux(t, 13) : c.x === "comparatif" ? comparatif(t, 13, long ? 7 : 5) : c.x === "barres" ? barres(t, 12) : c.x === "tuiles" ? (long ? tuiles(t, 20, true) : liste(c, t, 15))
       : c.x === "liste" ? liste(c, t, 15) : c.x === "prix" ? grosPrix(c, t, 52) : `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>`;
     const extra = long ? (c.x && c.x !== "prix" ? `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>` : c.x === "prix" ? liste(c, t, 15) : tuiles(t, 20, true)) : "";
-    const panneau = `<div style="height:${PH}px;flex:none;position:relative;overflow:hidden;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center">
-        ${c.inv ? "" : img("img/logo-blanc.png", "echecs.com", "position:absolute;top:16px;left:18px;height:16px;width:auto")}
-        ${vis(c, t, c.deco === "mascotte" ? r(PH * .78) : c.deco === "damier" ? r(PH * .55) : r(PH * .7), true)}</div>`;
+    const panneau = `<div style="height:${PH}px;flex:none;position:relative;overflow:hidden;background:${t.panel};box-sizing:border-box;padding-top:${c.deco === "ui" || c.deco === "plateau" ? r(PH * .12) : 0}px;display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center">
+        ${c.inv ? "" : img("img/logo-blanc.png", "echecs.com", "position:absolute;top:14px;left:16px;height:14px;width:auto")}
+        ${vis(c, t, c.deco === "mascotte" ? r(PH * .78) : c.deco === "plateau" ? r(PH * .62) : c.deco === "ui" ? r(PH * .6) : r(PH * .7), true)}</div>`;
     return root(f, t, `<div style="display:flex;flex-direction:column;height:100%">
       ${c.inv ? "" : panneau}
       <div data-fit data-min="20" style="flex:1;min-height:0;padding:20px 20px 22px;display:flex;flex-direction:column;gap:${long ? 18 : 12}px;overflow:hidden">
@@ -484,7 +524,8 @@ const FAM = {
   // Colonnes étroites : 160×600, 120×600
   colonne(c, t, f) {
     const s = f.w / 160, P = n => r(n * s);
-    const zone = surDisque(c) ? `${cercle(t, P(124), `left:50%;margin-left:${P(-62)}px;bottom:0`)}${vis(c, t, P(118))}` : vis(c, t, c.deco === "sticker" ? P(118) : c.deco === "chiffre" ? P(110) : P(90));
+    if (f.w < 160) c = sansMaquette(c);
+    const zone = surDisque(c) ? `${cercle(t, P(124), `left:50%;margin-left:${P(-62)}px;bottom:0`)}${vis(c, t, P(118))}` : vis(c, t, c.deco === "sticker" ? P(118) : c.deco === "chiffre" ? P(110) : c.deco === "ui" ? P(96) : P(112));
     return root(f, t, `<div data-fit data-min="${P(14)}" style="height:100%;padding:${P(16)}px ${P(12)}px ${P(18)}px;display:flex;flex-direction:column;gap:${P(12)}px;overflow:hidden">
       ${img(t.logo, "echecs.com", `height:${P(14)}px;width:auto;align-self:flex-start`)}
       ${f.w >= 160 ? eyebrow(c, t, 11) : ""}
