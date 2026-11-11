@@ -100,7 +100,7 @@ footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
 
 <header class="top wrap">
   <h1>Les encarts pub de <em>l’Académie</em></h1>
-  <p class="intro">24 propositions d’encarts à placer sur le site pour donner envie de s’abonner : d’abord pour les visiteurs sans compte, puis pour les joueurs qui ont un compte gratuit. Chaque proposition existe en 18 formats (bandeaux, bannières, pavés, carrés, pop-up, colonnes, mobiles) et sur 11 fonds de couleur, avec des visuels différents (mascotte, pièces, échiquier, pastille prix, gros chiffres). Le fond proposé est indiqué ; essaie les autres d’un clic. Donne ton avis sur chaque fiche : « Validé » ou « À revoir », avec ce qu’il faut changer (format, texte, fond). Chacun a son propre avis, signé de son nom ; la décision finale revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
+  <p class="intro">27 propositions d’encarts à placer sur le site pour donner envie de s’abonner : d’abord pour les visiteurs sans compte, puis pour les joueurs qui ont un compte gratuit. Chaque proposition existe en 18 formats (bandeaux, bannières, pavés, carrés, pop-up, colonnes, mobiles) et sur 11 fonds de couleur, avec des visuels différents (mascotte, pièces, échiquier, pastille prix, gros chiffres). Le fond proposé est indiqué ; essaie les autres d’un clic. Donne ton avis sur chaque fiche : « Validé » ou « À revoir », avec ce qu’il faut changer (format, texte, fond). Chacun a son propre avis, signé de son nom ; la décision finale revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
 </header>
 
 <div class="bar">
@@ -177,112 +177,131 @@ const FORMATS = [
 const VISUELS = { mascotte: "la mascotte", piece: "une pièce d’échecs", damier: "un échiquier", sticker: "une pastille prix", chiffre: "un gros chiffre" };
 
 /* ---------- Les propositions ---------- */
-const TUILES = [["+200", "leçons"], ["+2 000", "exercices"], ["Masterclasses", "avec nos coachs"]];
-const COMP = [["Leçons", "6", "+200"], ["Exercices", "1 par jour", "+2 000"], ["Masterclasses", "—", "Oui"], ["Revue en PGN", "—", "Oui"], ["Tes parties analysées", "—", "Oui"]];
+const TUILES = [["Parcours", "par niveau"], ["Masterclasses", "en direct"], ["Revue", "en PGN"]];
+const COMP = [["Leçons", "6", "+200"], ["Exercices et quiz", "1 par jour", "+2 000"], ["Parcours par niveau", "—", "Oui"], ["Masterclasses en direct", "—", "Oui"], ["Vidéos Europe Échecs", "—", "Oui"], ["Revue en PGN", "—", "Oui"], ["Tes parties analysées", "—", "Oui"]];
+const NIVEAUX = ["Initiation", "1400", "1600", "1800", "2000 +"];
 const C = [
   // ---- Visiteurs sans compte ----
-  { id: "v01", aud: "v", nom: "Progresse à ton rythme", angle: "L’accroche générale : la promesse et les chiffres clés.", fond: "nuit", deco: "mascotte", pose: "porte-echiquier", x: "tuiles", prix: "mois",
+  { id: "v01", v: 2, aud: "v", nom: "Progresse à ton rythme", angle: "L’accroche générale : un parcours par niveau, des leçons en 4 formats, des grands maîtres.", fond: "nuit", deco: "mascotte", pose: "porte-echiquier", x: "liste", prix: "mois",
     h: "Progresse aux échecs, à ton rythme.", hs: "Progresse aux échecs", hm: "Progresse aux échecs",
-    sub: "Plus de 200 leçons interactives, plus de 2 000 exercices et des masterclasses avec nos coachs.", sub2: "+200 leçons · +2 000 exercices · masterclasses",
+    sub: "Un parcours par niveau, des leçons en vidéo, cours, exercices et quiz, et des masterclasses avec des grands maîtres.", sub2: "Parcours par niveau · leçons · masterclasses",
+    liste: ["Un parcours par niveau, de l'Initiation à 2000 et plus", "Chaque leçon en vidéo, cours, exercice et quiz", "Des masterclasses avec des grands maîtres"],
     cta: "Je m'abonne", ctas: "Je m'abonne", lien: "ou essaie gratuitement : 6 leçons offertes" },
-  { id: "v02", aud: "v", nom: "Prix de lancement", angle: "Tout sur le prix : la pastille « −25 % » et le prix barré attirent l’œil.", fond: "jaune", deco: "sticker", pose: "hourra", x: "prix", prix: "mois", eyebrow: "Offre de lancement",
+  { id: "v02", v: 2, aud: "v", nom: "Prix de lancement", angle: "Tout sur le prix : la pastille « −25 % » et le prix barré attirent l’œil.", fond: "jaune", deco: "sticker", pose: "hourra", x: "prix", prix: "mois", eyebrow: "Offre de lancement",
     h: "Prix de lancement : 14,90 € par mois.", hs: "Prix de lancement", hm: "14,90 €/mois",
-    sub: "Au lieu de 19,90 €. Toute l'Académie : leçons, exercices, masterclasses. Sans engagement.", sub2: "Au lieu de 19,90 € · sans engagement",
+    sub: "Au lieu de 19,90 €. Leçons, vidéos, masterclasses, revue, tournois : tout est inclus. Sans engagement.", sub2: "Au lieu de 19,90 € · tout inclus · sans engagement",
+    liste: ["Leçons et parcours par niveau", "Masterclasses et vidéos Europe Échecs", "La revue en PGN et les tournois"],
     cta: "J'en profite", ctas: "J'en profite" },
-  { id: "v03", aud: "v", nom: "Les chiffres", angle: "Le chiffre « +200 » en très gros, pour impressionner.", fond: "bleu", deco: "chiffre", big: ["+200", "leçons"], pose: "super", x: "tuiles", prix: "mois",
-    h: "+200 leçons, +2 000 exercices. Une seule Académie.", hs: "+200 leçons, +2 000 exercices", hm: "+200 leçons d'échecs",
-    sub: "Des leçons interactives pour tous les niveaux : vidéo, cours, exercices et quiz.", sub2: "Pour tous les niveaux, du premier coup au tournoi",
+  { id: "v03", v: 2, aud: "v", nom: "Tout au même endroit", angle: "Montrer l’étendue de l’Académie : tout ce dont un joueur a besoin, réuni.", fond: "bleu", deco: "piece", piece: "wN", pose: "super", x: "tuiles", prix: "mois",
+    h: "Leçons, masterclasses, revue, tournois : tout au même endroit.", hs: "Tout au même endroit", hm: "Tout pour progresser",
+    sub: "Le parcours, les vidéos Europe Échecs, la revue en PGN, le forum et les tournois : une seule Académie.", sub2: "Leçons, vidéos, revue, forum et tournois",
+    liste: ["Leçons et parcours par niveau", "Masterclasses et vidéos Europe Échecs", "Revue en PGN, forum et tournois"],
     cta: "Découvrir l'Académie", ctas: "Découvrir" },
-  { id: "v04", aud: "v", nom: "Essai gratuit", angle: "Faire créer un compte gratuit d’abord : la suite (e-mails et encarts « compte gratuit ») pousse ensuite vers l’abonnement.", fond: "menthe", deco: "mascotte", pose: "coucou", x: "liste", prix: "gratuit", eyebrow: "Gratuit",
+  { id: "v04", v: 2, aud: "v", nom: "Essai gratuit", angle: "Faire créer un compte gratuit d’abord : la suite (e-mails et encarts « compte gratuit ») pousse ensuite vers l’abonnement.", fond: "menthe", deco: "mascotte", pose: "coucou", x: "liste", prix: "gratuit", eyebrow: "Gratuit",
     h: "Essaie l'Académie : 6 leçons offertes.", hs: "6 leçons offertes", hm: "6 leçons offertes",
-    sub: "Crée ton compte gratuit et découvre la méthode : vidéo, cours, exercices et quiz.", sub2: "Crée ton compte gratuit et découvre la méthode",
+    sub: "Crée ton compte gratuit : 6 leçons, le puzzle du jour, le forum et la zone de jeu.", sub2: "6 leçons, le puzzle du jour et le forum",
     liste: ["6 leçons de l'Académie", "Le puzzle du jour", "Le forum", "La zone de jeu"],
     cta: "Créer mon compte gratuit", ctas: "Essayer" },
-  { id: "v05", aud: "v", nom: "Masterclasses", angle: "Mettre en avant les coachs et les masterclasses en direct.", fond: "violet", deco: "mascotte", pose: "pancarte", x: "liste", prix: "mois", eyebrow: "Masterclasses",
-    h: "Apprends avec nos coachs, en masterclass.", hs: "Les masterclasses", hm: "Masterclasses d'échecs",
-    sub: "Des masterclasses en direct avec nos coachs, incluses dans l'abonnement.", sub2: "En direct avec nos coachs, incluses dans l'abonnement",
-    liste: ["Masterclasses en direct", "+200 leçons interactives", "+2 000 exercices"],
+  { id: "v05", v: 2, aud: "v", nom: "Des grands maîtres en direct", angle: "Les masterclasses avec des grands maîtres, et la possibilité de leur poser ses questions.", fond: "violet", deco: "mascotte", pose: "pancarte", x: "liste", prix: "mois", eyebrow: "Masterclasses",
+    h: "Pose tes questions à des grands maîtres, en direct.", hs: "Masterclasses en direct", hm: "Masterclasses en direct",
+    sub: "Gata Kamsky, Fabien Libiszewski et nos coachs t'expliquent leurs plans. Tu poses tes questions dans le chat.", sub2: "Avec Gata Kamsky, Fabien Libiszewski et nos coachs",
+    liste: ["En direct avec des grands maîtres", "Tes questions dans le chat", "Incluses dans l'abonnement"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v06", aud: "v", nom: "10 minutes, 3 fois par semaine", angle: "Lever le frein du temps : quelques minutes suffisent.", fond: "corail", deco: "mascotte", pose: "sprint", x: "", prix: "mois", inv: true,
+  { id: "v06", v: 2, aud: "v", nom: "10 minutes, 3 fois par semaine", angle: "Lever le frein du temps : quelques minutes suffisent.", fond: "corail", deco: "mascotte", pose: "sprint", x: "", prix: "mois", inv: true,
     h: "10 minutes, 3 fois par semaine : tu progresses.", hs: "10 minutes suffisent", hm: "10 min pour progresser",
-    sub: "Un parcours qui te guide leçon après leçon, et des exercices pour ancrer chaque idée.", sub2: "Un parcours qui te guide, leçon après leçon",
+    sub: "Une leçon, un exercice, un quiz : le parcours reprend là où tu t'es arrêté, sans rien perdre.", sub2: "Le parcours reprend là où tu t'es arrêté",
     cta: "Commencer", ctas: "Commencer" },
-  { id: "v07", aud: "v", nom: "Tes parties analysées", angle: "Parler aux joueurs qui jouent déjà en ligne et veulent comprendre leurs erreurs.", fond: "ciel", deco: "piece", piece: "wQ", pose: "loupe", x: "liste", prix: "mois",
-    h: "Comprends enfin tes erreurs.", hs: "Tes parties analysées", hm: "Tes parties analysées",
-    sub: "Avec l'Académie, tes parties sont analysées : tu sais enfin quoi travailler.", sub2: "Tes parties analysées, pour savoir quoi travailler",
-    liste: ["Tes parties analysées", "+200 leçons interactives", "+2 000 exercices"],
+  { id: "v07", v: 2, aud: "v", nom: "Tes parties", angle: "Parler aux joueurs qui jouent déjà et veulent comprendre leurs parties.", fond: "ciel", deco: "piece", piece: "wQ", pose: "loupe", x: "liste", prix: "mois",
+    h: "Revois tes parties pour comprendre tes erreurs.", hs: "Analyse tes parties", hm: "Analyse tes parties",
+    sub: "Saisis tes parties coup par coup ou importe ton PGN, analyse-les et partage-les avec d'autres membres.", sub2: "Saisis, importe, analyse et partage tes parties",
+    liste: ["Saisie coup par coup ou import PGN", "Analyse dans le lecteur Europe Échecs", "Partage avec les autres membres"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v08", aud: "v", nom: "Débutant ou joueur de club", angle: "Rassurer sur le niveau : il y a un parcours pour chacun.", fond: "framboise", deco: "damier", piece: "wN", pose: "idee", x: "", prix: "mois",
-    h: "Débutant ou joueur de club ? Ton parcours t'attend.", hs: "Un parcours pour toi", hm: "Un parcours pour toi",
-    sub: "Choisis ton objectif : l'Académie te propose les leçons dans le bon ordre.", sub2: "Choisis ton objectif, on te guide leçon après leçon",
+  { id: "v08", v: 2, aud: "v", nom: "Un parcours pour chaque niveau", angle: "Rassurer sur le niveau : de l’Initiation à plus de 2000, il y a un parcours pour chacun.", fond: "framboise", deco: "damier", piece: "wN", pose: "idee", x: "niveaux", prix: "mois",
+    h: "Du premier coup à plus de 2000 : ton parcours t'attend.", hs: "Un parcours pour toi", hm: "Un parcours pour toi",
+    sub: "Initiation, Objectif 1400, 1600, 1800, jusqu'à 2000 et plus : chaque module validé te mène au suivant.", sub2: "De l'Initiation à 2000 et plus, module après module",
     cta: "Trouver mon parcours", ctas: "C'est parti" },
-  { id: "v09", aud: "v", nom: "La méthode Europe Échecs", angle: "S’appuyer sur la marque et la revue, pour les lecteurs qui la connaissent.", fond: "creme", deco: "piece", piece: "wK", pose: "reflexion", x: "liste", prix: "mois", inv: true,
+  { id: "v09", v: 2, aud: "v", nom: "La méthode Europe Échecs", angle: "S’appuyer sur la marque, la revue et le catalogue vidéo, pour ceux qui les connaissent.", fond: "creme", deco: "piece", piece: "wK", pose: "reflexion", x: "liste", prix: "mois", inv: true,
     h: "La méthode Europe Échecs, maintenant en ligne.", hs: "La méthode Europe Échecs", hm: "La méthode Europe Échecs",
-    sub: "Leçons, exercices, masterclasses et la revue Europe Échecs en PGN : tout dans une seule Académie.", sub2: "Leçons, exercices, masterclasses et la revue en PGN",
-    liste: ["+200 leçons interactives", "Masterclasses avec nos coachs", "La revue Europe Échecs en PGN"],
+    sub: "Tout le catalogue vidéo, la revue en PGN interactif et les leçons de nos auteurs, réunis dans une Académie.", sub2: "Catalogue vidéo, revue en PGN et leçons",
+    liste: ["Tout le catalogue vidéo Europe Échecs", "La revue en PGN interactif", "Les leçons de nos auteurs et coachs"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v10", aud: "v", nom: "Abonnement annuel", angle: "Pousser l’annuel : meilleur prix, engagement plus long.", fond: "vert", deco: "sticker", pose: "saut-etoile", x: "prix", prix: "an", eyebrow: "Abonnement annuel",
+  { id: "v10", v: 1, aud: "v", nom: "Abonnement annuel", angle: "Pousser l’annuel : meilleur prix, engagement plus long.", fond: "vert", deco: "sticker", pose: "saut-etoile", x: "prix", prix: "an", eyebrow: "Abonnement annuel",
     h: "150 € par an : près de 2 mois offerts.", hs: "Près de 2 mois offerts", hm: "150 €/an",
     sub: "Au lieu de 179,90 €. Toute l'Académie pendant un an, au prix de lancement.", sub2: "Au lieu de 179,90 € · prix de lancement",
     cta: "Choisir l'annuel", ctas: "J'en profite" },
-  { id: "v11", aud: "v", nom: "Ta prochaine partie", angle: "Un bénéfice concret et immédiat : mieux jouer.", fond: "nuit", deco: "damier", piece: "wQ", pose: "pendule", x: "", prix: "mois",
-    h: "Joue mieux dès ta prochaine partie.", hs: "Joue mieux, vite", hm: "Joue mieux aux échecs",
-    sub: "Ouvertures, tactique, finales : des leçons concrètes pour gagner plus de parties.", sub2: "Ouvertures, tactique, finales : des leçons concrètes",
+  { id: "v11", v: 2, aud: "v", nom: "Un tournoi chaque semaine", angle: "Le jeu et la compétition : mettre en pratique ce qu’on apprend.", fond: "nuit", deco: "damier", piece: "wQ", pose: "pendule", x: "", prix: "mois", eyebrow: "Tournois",
+    h: "Un tournoi en ligne chaque semaine, tous niveaux.", hs: "Un tournoi par semaine", hm: "Un tournoi par semaine",
+    sub: "Mets en pratique ce que tu apprends et mesure-toi aux autres membres de l'Académie.", sub2: "Mesure-toi aux autres membres de l'Académie",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "v12", aud: "v", nom: "La passion", angle: "Parler aux passionnés qui n’ont jamais vraiment appris.", fond: "rose", deco: "mascotte", pose: "coeur", x: "", prix: "mois",
-    h: "Tu aimes les échecs ? Apprends-les vraiment.", hs: "Apprends-les vraiment", hm: "Apprends vraiment",
-    sub: "Une Académie complète pour passer de passionné à joueur aguerri, à ton rythme.", sub2: "Une Académie complète, à ton rythme",
+  { id: "v12", v: 2, aud: "v", nom: "Une communauté", angle: "Parler aux passionnés : on ne progresse pas seul.", fond: "rose", deco: "mascotte", pose: "coeur", x: "", prix: "mois",
+    h: "Tu aimes les échecs ? Progresse avec d'autres passionnés.", hs: "Progresse en communauté", hm: "Rejoins la communauté",
+    sub: "Une question sur la Sicilienne, une partie à faire commenter ? Sur le forum, membres et coachs te répondent.", sub2: "Sur le forum, membres et coachs te répondent",
+    cta: "Je m'abonne", ctas: "Je m'abonne" },
+  { id: "v13", v: 1, aud: "v", nom: "Le catalogue vidéo", angle: "Tout le catalogue vidéo Europe Échecs, inclus dans l’abonnement.", fond: "creme", deco: "mascotte", pose: "idee", x: "liste", prix: "mois", eyebrow: "Vidéos Europe Échecs",
+    h: "Tout le catalogue vidéo Europe Échecs, en HD.", hs: "Le catalogue vidéo", hm: "Les vidéos Europe Échecs",
+    sub: "Calcul Gagnant, la Minute Finale, les ouvertures en vogue… toutes les séries sont incluses.", sub2: "Calcul Gagnant, la Minute Finale, les ouvertures…",
+    liste: ["Calcul Gagnant", "La Minute Finale", "Les ouvertures en vogue"],
+    cta: "Je m'abonne", ctas: "Je m'abonne" },
+  { id: "v14", v: 1, aud: "v", nom: "Mesure tes progrès", angle: "Rendre la progression visible : modules validés, étoiles, courbe Elo.", fond: "violet", deco: "mascotte", pose: "super", x: "niveaux", prix: "mois", eyebrow: "Ta progression",
+    h: "Valide chaque module et regarde ton Elo monter.", hs: "Mesure tes progrès", hm: "Mesure tes progrès",
+    sub: "Chaque module validé te rapproche du suivant, et ta courbe Elo le montre.", sub2: "Modules validés et courbe Elo",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
   // ---- Comptes gratuits ----
-  { id: "g01", aud: "g", nom: "Un début", angle: "Montrer l’écart entre 6 leçons et toute l’Académie.", fond: "creme", deco: "mascotte", pose: "idee", x: "barres", prix: "mois", eyebrow: "Ton compte gratuit",
-    h: "Tes 6 leçons offertes ne sont qu'un début.", hs: "Débloque +200 leçons", hm: "Débloque +200 leçons",
-    sub: "Avec l'Académie complète, plus de 200 leçons et 2 000 exercices t'attendent.", sub2: "+200 leçons et +2 000 exercices t'attendent",
+  { id: "g01", v: 2, aud: "g", nom: "Un début", angle: "Montrer l’écart entre les 6 leçons offertes et toute l’Académie.", fond: "creme", deco: "mascotte", pose: "idee", x: "barres", prix: "mois", eyebrow: "Ton compte gratuit",
+    h: "Tes 6 leçons offertes ne sont qu'un début.", hs: "Débloque toute l'Académie", hm: "Débloque la suite",
+    sub: "Avec l'Académie complète : tout le parcours, les masterclasses, les vidéos Europe Échecs et la revue.", sub2: "Parcours, masterclasses, vidéos et revue",
     cta: "Passer à l'Académie complète", ctas: "Je débloque" },
-  { id: "g02", aud: "g", nom: "Gratuit ou abonné", angle: "Le comparatif, comme dans l’e-mail J+7.", fond: "ciel", deco: "mascotte", pose: "super", x: "comparatif", prix: "mois",
+  { id: "g02", v: 2, aud: "g", nom: "Gratuit ou abonné", angle: "Le comparatif, comme dans l’e-mail J+7.", fond: "ciel", deco: "mascotte", pose: "super", x: "comparatif", prix: "mois",
     h: "Gratuit ou Académie complète ? Compare.", hs: "Gratuit ou abonné ?", hm: "Gratuit ou abonné ?",
-    sub: "Leçons, exercices, masterclasses, revue en PGN, analyses : tout ce que l'abonnement débloque.", sub2: "Tout ce que l'abonnement débloque",
+    sub: "Parcours, masterclasses, vidéos, revue en PGN, analyse de tes parties : tout ce que l'abonnement débloque.", sub2: "Tout ce que l'abonnement débloque",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g03", aud: "g", nom: "Débloque la suite", angle: "À afficher au bout des 6 leçons offertes, sur la leçon suivante verrouillée.", fond: "violet", deco: "damier", piece: "wK", pose: "drapeau", x: "", prix: "mois", eyebrow: "Leçon suivante",
-    h: "La leçon suivante est réservée aux abonnés.", hs: "Débloque la suite", hm: "Débloque la suite",
-    sub: "Tu as fini tes leçons offertes ? Continue ton parcours sans t'arrêter en si bon chemin.", sub2: "Continue ton parcours sans t'arrêter",
+  { id: "g03", v: 2, aud: "g", nom: "Débloque la suite", angle: "À afficher au bout des 6 leçons offertes, sur la leçon suivante verrouillée.", fond: "violet", deco: "damier", piece: "wK", pose: "drapeau", x: "niveaux", prix: "mois", eyebrow: "Leçon suivante",
+    h: "La suite de ton parcours est réservée aux abonnés.", hs: "Débloque la suite", hm: "Débloque la suite",
+    sub: "Tu as fini tes leçons offertes ? Continue le parcours, module après module, jusqu'à 2000 et plus.", sub2: "Continue le parcours, module après module",
     cta: "Débloquer la suite", ctas: "Débloquer" },
-  { id: "g04", aud: "g", nom: "Après le puzzle du jour", angle: "À placer près du puzzle du jour : du puzzle quotidien aux 2 000 exercices.", fond: "vert", deco: "chiffre", big: ["+2 000", "exercices"], pose: "menton", x: "", prix: "mois", eyebrow: "Puzzle du jour",
+  { id: "g04", v: 2, aud: "g", nom: "Après le puzzle du jour", angle: "À placer près du puzzle du jour : du puzzle quotidien aux exercices classés par niveau.", fond: "vert", deco: "chiffre", big: ["+2 000", "exercices"], pose: "menton", x: "", prix: "mois", eyebrow: "Puzzle du jour",
     h: "Un puzzle par jour, c'est bien. 2 000, c'est mieux.", hs: "+2 000 exercices", hm: "+2 000 exercices",
-    sub: "Entraîne-toi sur tous les thèmes : mats, fourchettes, clouages, finales.", sub2: "Mats, fourchettes, clouages, finales…",
+    sub: "Exercices et quiz classés par niveau, du mat en 1 aux finales de Tours.", sub2: "Du mat en 1 aux finales, classés par niveau",
     cta: "Débloquer les exercices", ctas: "Débloquer" },
-  { id: "g05", aud: "g", nom: "Masterclasses", angle: "Les masterclasses, réservées aux abonnés.", fond: "nuit", deco: "mascotte", pose: "montre-le-ciel", x: "liste", prix: "mois", eyebrow: "Masterclasses", inv: true,
-    h: "Les masterclasses sont réservées aux abonnés.", hs: "Rejoins les masterclasses", hm: "Les masterclasses",
-    sub: "En direct avec nos coachs, chaque masterclass approfondit un thème : ouvertures, plans, finales.", sub2: "En direct avec nos coachs",
-    liste: ["Masterclasses en direct avec nos coachs", "+200 leçons interactives", "+2 000 exercices"],
+  { id: "g05", v: 2, aud: "g", nom: "Masterclasses", angle: "Les masterclasses avec des grands maîtres, réservées aux abonnés.", fond: "nuit", deco: "mascotte", pose: "montre-le-ciel", x: "liste", prix: "mois", eyebrow: "Masterclasses", inv: true,
+    h: "Les masterclasses des grands maîtres t'attendent.", hs: "Rejoins les masterclasses", hm: "Les masterclasses",
+    sub: "Gata Kamsky, Fabien Libiszewski et nos coachs, en direct : tu poses tes questions dans le chat.", sub2: "En direct, avec tes questions dans le chat",
+    liste: ["En direct avec des grands maîtres", "Tes questions dans le chat", "Ouvertures, plans, finales"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g06", aud: "g", nom: "Personnalisé au prénom", angle: "Encart personnalisé avec le prénom du joueur connecté ([PRENOM]).", fond: "rose", deco: "mascotte", pose: "coucou", x: "", prix: "mois",
+  { id: "g06", v: 2, aud: "g", nom: "Personnalisé au prénom", angle: "Encart personnalisé avec le prénom du joueur connecté ([PRENOM]).", fond: "rose", deco: "mascotte", pose: "coucou", x: "", prix: "mois",
     h: "[PRENOM], on passe à la suite ?", hs: "[PRENOM], on continue ?", hm: "On continue, [PRENOM] ?",
-    sub: "Ton compte gratuit t'a donné un aperçu. L'Académie complète t'emmène beaucoup plus loin.", sub2: "L'Académie complète t'emmène plus loin",
+    sub: "Tout le parcours, les masterclasses, les vidéos et la revue : l'Académie complète t'emmène beaucoup plus loin.", sub2: "L'Académie complète t'emmène plus loin",
     cta: "Passer à l'Académie complète", ctas: "Je m'abonne" },
-  { id: "g07", aud: "g", nom: "Ton prix de lancement", angle: "Rappeler que le prix de lancement est toujours là.", fond: "jaune", deco: "mascotte", pose: "hourra", x: "prix", prix: "mois", eyebrow: "Prix de lancement",
+  { id: "g07", v: 1, aud: "g", nom: "Ton prix de lancement", angle: "Rappeler que le prix de lancement est toujours là.", fond: "jaune", deco: "mascotte", pose: "hourra", x: "prix", prix: "mois", eyebrow: "Prix de lancement",
     h: "Ton prix de lancement t'attend : 14,90 €/mois.", hs: "Ton prix de lancement", hm: "14,90 €/mois",
     sub: "Au lieu de 19,90 €, sans engagement en mensuel.", sub2: "Au lieu de 19,90 € · sans engagement",
+    liste: ["Tout le parcours débloqué", "Masterclasses et vidéos Europe Échecs", "La revue en PGN et les tournois"],
     cta: "J'en profite", ctas: "J'en profite" },
-  { id: "g08", aud: "g", nom: "L’annuel", angle: "Proposer directement l’annuel aux comptes gratuits.", fond: "framboise", deco: "sticker", pose: "saut-etoile", x: "prix", prix: "an", eyebrow: "Abonnement annuel",
+  { id: "g08", v: 1, aud: "g", nom: "L’annuel", angle: "Proposer directement l’annuel aux comptes gratuits.", fond: "framboise", deco: "sticker", pose: "saut-etoile", x: "prix", prix: "an", eyebrow: "Abonnement annuel",
     h: "Passe à l'annuel : près de 2 mois offerts.", hs: "Près de 2 mois offerts", hm: "150 €/an",
     sub: "150 € par an au lieu de 179,90 €, soit 12,50 € par mois.", sub2: "150 €/an, soit 12,50 € par mois",
     cta: "Choisir l'annuel", ctas: "J'en profite" },
-  { id: "g09", aud: "g", nom: "Tes parties analysées", angle: "Pour les comptes gratuits qui jouent dans la zone de jeu.", fond: "menthe", deco: "mascotte", pose: "loupe", x: "", prix: "mois",
-    h: "Et si tu savais pourquoi tu perds tes parties ?", hs: "Tes parties analysées", hm: "Tes parties analysées",
-    sub: "Avec l'abonnement, tes parties sont analysées : tu sais enfin quoi travailler.", sub2: "Tu sais enfin quoi travailler",
+  { id: "g09", v: 2, aud: "g", nom: "Tes parties", angle: "Pour les comptes gratuits qui jouent dans la zone de jeu.", fond: "menthe", deco: "mascotte", pose: "loupe", x: "", prix: "mois",
+    h: "Et si tu revoyais tes parties pour comprendre tes erreurs ?", hs: "Analyse tes parties", hm: "Analyse tes parties",
+    sub: "Avec l'abonnement, importe tes parties en PGN, analyse-les et partage-les avec d'autres membres.", sub2: "Importe, analyse et partage tes parties",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g10", aud: "g", nom: "La revue en PGN", angle: "La revue Europe Échecs en PGN, incluse dans l’abonnement.", fond: "bleu", deco: "piece", piece: "wR", pose: "cafe", x: "", prix: "mois", eyebrow: "La revue Europe Échecs",
+  { id: "g10", v: 1, aud: "g", nom: "La revue en PGN", angle: "La revue Europe Échecs en PGN, incluse dans l’abonnement.", fond: "bleu", deco: "piece", piece: "wR", pose: "cafe", x: "", prix: "mois", eyebrow: "La revue Europe Échecs",
     h: "La revue Europe Échecs, à rejouer en PGN.", hs: "La revue en PGN", hm: "La revue en PGN",
     sub: "Chaque numéro de la revue, avec ses parties à rejouer sur l'échiquier, inclus dans l'abonnement.", sub2: "Incluse dans l'abonnement",
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g11", aud: "g", nom: "Sans engagement", angle: "Lever la peur de s’engager.", fond: "corail", deco: "mascotte", pose: "cafe", x: "liste", prix: "mois",
+  { id: "g11", v: 1, aud: "g", nom: "Sans engagement", angle: "Lever la peur de s’engager.", fond: "corail", deco: "mascotte", pose: "cafe", x: "liste", prix: "mois",
     h: "Sans engagement : tu arrêtes quand tu veux.", hs: "Sans engagement", hm: "Sans engagement",
     sub: "Abonnement mensuel résiliable à tout moment, au prix de lancement.", sub2: "Résiliable à tout moment",
     liste: ["Résiliable à tout moment", "14,90 €/mois au prix de lancement", "Toute l'Académie débloquée"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
-  { id: "g12", aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé avec les puzzles réussis du joueur ([NB_PUZZLES_REUSSIS]).", fond: "nuit", deco: "chiffre", big: ["[NB_PUZZLES_REUSSIS]", "puzzles réussis"], pose: "sprint", x: "", prix: "mois", eyebrow: "Ta progression",
+  { id: "g12", v: 2, aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé avec les puzzles réussis du joueur ([NB_PUZZLES_REUSSIS]).", fond: "nuit", deco: "chiffre", big: ["[NB_PUZZLES_REUSSIS]", "puzzles réussis"], pose: "sprint", x: "", prix: "mois", eyebrow: "Ta progression",
     h: "Déjà [NB_PUZZLES_REUSSIS] puzzles réussis : va plus loin.", hs: "Va plus loin", hm: "Va plus loin",
-    sub: "Avec l'abonnement, plus de 2 000 exercices pour continuer sur ta lancée.", sub2: "+2 000 exercices pour continuer sur ta lancée",
+    sub: "Avec l'abonnement, un parcours complet par niveau et des exercices pour continuer sur ta lancée.", sub2: "Un parcours complet pour continuer sur ta lancée",
+    cta: "Je m'abonne", ctas: "Je m'abonne" },
+  { id: "g13", v: 1, aud: "g", nom: "Le catalogue vidéo", angle: "Pour les comptes gratuits : tout le catalogue vidéo Europe Échecs est inclus dans l’abonnement.", fond: "ciel", deco: "mascotte", pose: "reflexion", x: "liste", prix: "mois", eyebrow: "Vidéos Europe Échecs",
+    h: "Débloque tout le catalogue vidéo Europe Échecs.", hs: "Le catalogue vidéo", hm: "Les vidéos Europe Échecs",
+    sub: "Calcul Gagnant, la Minute Finale, les ouvertures en vogue… en HD, dans l'abonnement.", sub2: "Calcul Gagnant, la Minute Finale…",
+    liste: ["Calcul Gagnant", "La Minute Finale", "Les ouvertures en vogue"],
     cta: "Je m'abonne", ctas: "Je m'abonne" },
 ];
 const EXEMPLES = { "[PRENOM]": "Léa", "[NB_PUZZLES_REUSSIS]": "37" };
@@ -321,6 +340,9 @@ function comparatif(t, fs, n) {
     <span></span>${td("Gratuit", `font-weight:700;color:${t.sub};background:${t.cell}`)}${td("Abonné", `font-weight:700;color:${t.btnTxt};background:${t.btn}`)}
     ${COMP.slice(0, n).map(([k, g, a]) => `<span style="padding:5px 6px 5px 0;font-weight:600">${T(k)}</span>${td(g, `color:${t.sub};background:${t.cell}`)}${td(a, `font-weight:700;${a === "Oui" ? "color:" + t.ok : ""}`)}`).join("")}</div>`;
 }
+function niveaux(t, fs) {
+  return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:${r(fs * .4)}px">${NIVEAUX.map((n, i) => `<span style="font-size:${fs}px;font-weight:700;line-height:1;padding:${r(fs * .45)}px ${r(fs * .7)}px;border-radius:999px;background:${i === NIVEAUX.length - 1 ? t.btn : t.cell};color:${i === NIVEAUX.length - 1 ? t.btnTxt : t.fg};white-space:nowrap">${T(n)}</span>`).join(`<span aria-hidden="true" style="font-size:${fs}px;color:${t.sub}">›</span>`)}</div>`;
+}
 function grosPrix(c, t, fs) {
   const p = PRIX[c.prix];
   return `<div style="display:flex;flex-direction:column;line-height:1"><span style="font-size:${fs}px;font-weight:700;white-space:nowrap">${T(p.big.split("/")[0])}</span><span style="font-size:${r(fs * .36)}px;font-weight:600;margin-top:4px">${T(c.prix === "an" ? "par an" : "par mois")}</span><span style="font-size:${Math.max(12, r(fs * .3))}px;color:${t.sub};margin-top:6px;line-height:1.3">${T("au lieu de " + p.old)}</span></div>`;
@@ -356,7 +378,7 @@ const FAM = {
   // Grands bandeaux horizontaux : 970×250, 1200×300, 640×200
   large(c, t, f) {
     const s = f.h / 250, P = n => r(n * s), large = f.w >= 900;
-    const mid = !large ? "" : c.x === "tuiles" ? `<div style="max-width:${P(560)}px">${tuiles(t, P(18))}</div>` : c.x === "barres" ? `<div style="max-width:${P(520)}px">${barres(t, P(14))}</div>`
+    const mid = !large ? "" : c.x === "tuiles" ? `<div style="max-width:${P(560)}px">${tuiles(t, P(18))}</div>` : c.x === "niveaux" ? niveaux(t, P(14)) : c.x === "barres" ? `<div style="max-width:${P(520)}px">${barres(t, P(14))}</div>`
       : c.x === "liste" ? `<div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:${P(15)}px">${(c.liste || []).slice(0, 3).map(i => `<span style="display:inline-flex;gap:6px">${check(t.acc, P(16))}${T(i)}</span>`).join("")}</div>`
       : c.x === "prix" ? prixBloc(c, t, P(30)) : `<p style="margin:0;font-size:${P(16)}px;line-height:1.4;color:${t.sub};max-width:${P(600)}px">${T(c.sub)}</p>`;
     const side = surDisque(c)
@@ -421,6 +443,7 @@ const FAM = {
       ? `${cercle(t, P(170), `right:${P(-40)}px;bottom:${P(-50)}px`)}<div style="position:absolute;right:${P(6)}px;bottom:0">${vis(c, t, c.deco === "piece" ? P(120) : P(112))}</div>`
       : `<div style="position:absolute;right:${P(c.deco === "chiffre" ? 14 : 18)}px;bottom:${P(c.deco === "chiffre" ? 14 : 18)}px">${vis(c, t, c.deco === "sticker" ? P(96) : c.deco === "chiffre" ? P(100) : P(84))}</div>`;
     const corps = c.x === "prix" ? grosPrix(c, t, P(40)) : grand && c.x === "barres" ? `<div style="max-width:${P(250)}px">${barres(t, P(11))}</div>`
+      : grand && c.x === "niveaux" ? `<div style="max-width:${P(260)}px">${niveaux(t, P(11))}</div>`
       : grand ? `<p style="margin:0;font-size:${P(14)}px;line-height:1.4;color:${t.sub};max-width:${P(215)}px">${T(c.sub)}</p>` : "";
     return root(f, t, `${deco}
       <div data-fit data-min="${P(16)}" style="position:relative;height:100%;padding:${P(18)}px;display:flex;flex-direction:column;gap:${P(9)}px;overflow:hidden">
@@ -436,7 +459,7 @@ const FAM = {
   // Verticaux : 300×600, 300×1050
   haut(c, t, f) {
     const long = f.h >= 1000, PH = long ? 330 : 190;
-    const mid = c.x === "comparatif" ? comparatif(t, 13, 5) : c.x === "barres" ? barres(t, 12) : c.x === "tuiles" ? (long ? tuiles(t, 20, true) : liste(c, t, 15))
+    const mid = c.x === "niveaux" ? niveaux(t, 13) : c.x === "comparatif" ? comparatif(t, 13, long ? 7 : 5) : c.x === "barres" ? barres(t, 12) : c.x === "tuiles" ? (long ? tuiles(t, 20, true) : liste(c, t, 15))
       : c.x === "liste" ? liste(c, t, 15) : c.x === "prix" ? grosPrix(c, t, 52) : `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>`;
     const extra = long ? (c.x && c.x !== "prix" ? `<p style="margin:0;font-size:16px;line-height:1.45;color:${t.sub}">${T(c.sub)}</p>` : c.x === "prix" ? liste(c, t, 15) : tuiles(t, 20, true)) : "";
     const panneau = `<div style="height:${PH}px;flex:none;position:relative;overflow:hidden;background:${t.panel};display:flex;align-items:${c.deco === "mascotte" ? "flex-end" : "center"};justify-content:center">
@@ -465,7 +488,7 @@ const FAM = {
     return root(f, t, `<div data-fit data-min="${P(14)}" style="height:100%;padding:${P(16)}px ${P(12)}px ${P(18)}px;display:flex;flex-direction:column;gap:${P(12)}px;overflow:hidden">
       ${img(t.logo, "echecs.com", `height:${P(14)}px;width:auto;align-self:flex-start`)}
       ${f.w >= 160 ? eyebrow(c, t, 11) : ""}
-      <div class="t" style="font-size:${P(22)}px;line-height:1.12;font-weight:600;overflow-wrap:break-word;hyphens:auto">${T(c.hs)}</div>
+      <div class="t" style="font-size:${P(22)}px;line-height:1.12;font-weight:600;overflow-wrap:normal">${T(c.hs)}</div>
       ${f.w >= 160 ? `<div style="font-size:14px;line-height:1.35;color:${t.sub}">${T(c.sub2)}</div>` : ""}
       <div style="position:relative;flex:1;min-height:${P(110)}px;display:flex;align-items:${surDisque(c) ? "flex-end" : "center"};justify-content:center">${zone}</div>
       ${prixBloc(c, t, P(16), { compact: true, stack: true })}
@@ -491,7 +514,7 @@ const SECTIONS = [
   { id: "visiteurs", titre: "1. Visiteurs sans compte", intro: "Affichés à tous ceux qui ne sont pas connectés : page d’accueil, articles, pages de la revue, zone de jeu en invité.", items: C.filter(c => c.aud === "v") },
   { id: "gratuits", titre: "2. Comptes gratuits", intro: "Affichés aux joueurs connectés sans abonnement : tableau de bord, fin de leçon offerte, puzzle du jour, forum, zone de jeu.", items: C.filter(c => c.aud === "g") },
 ];
-const ITEMS = new Map(C.map(c => [c.id, { ...c, v: 1 }]));
+const ITEMS = new Map(C.map(c => [c.id, { ...c, v: c.v || 1 }]));
 const VUE = {};    // par fiche : { f: "tous" | id de format, fond }
 let DECISIONS = {}, PERSONNES = {}, NOMS = {};
 let filtre = "tout", db = null, user = null, moi = null, proprio = false, peutEcrire = true, monDocExiste = false;
