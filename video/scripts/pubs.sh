@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publicités « v2 » de 16 s (src/pub.html) : question en grand, « Nous avons la solution ! »,
+# Publicités « v2 » de 17,2 s (src/pub.html) : question en grand, « Nous avons la solution ! »,
 # la réponse propre à chaque question, l'appel final. Une musique différente par question (audio/pub_music.py) ;
 # MUSIQUE=longue pour reprendre la musique de la vidéo longue (audio/music.py), calée sur les scènes de la pub.
 # Formats : story 9:16, feed 4:5, carré 1:1 et 16:9 en thème nuit, plus une story en thème soleil (fond jaune).
@@ -15,7 +15,7 @@ declare -A SIZE=([story]=1080x1920 [feed]=1080x1350 [carre]=1080x1080 [wide]=192
 declare -A NOM=([story]=story-9x16 [feed]=feed-4x5 [carre]=carre-1x1 [wide]=16x9)
 NUMS=${*:-1 2 3 4 5}
 for q in $NUMS; do
-  DR=$([ "$q" = 1 ] && echo 1.2 || echo 0)   # pub 1 : « Nous avons la solution » plus long
+  DR=1.2   # « Nous avons la solution » 1,2 s plus long (pubs de 17,2 s)
   DUR=$(python3 -c "print(16 + $DR)")
   python3 -c "import json;d=$DR;json.dump({'total':16+d,'scenes':[{'id':'q','start':0},{'id':'r','start':3.9},{'id':'s','start':6.4+d},{'id':'c','start':12.6+d}]},open('$T/timing.json','w'))"
   if [ "${MUSIQUE:-styles}" = styles ]; then python3 audio/pub_music.py "$q" "$T/music-$q.wav" >/dev/null

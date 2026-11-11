@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>echecs.com — Publicités</title>
 <!--
-  Publicités de 16 s construites pour les réseaux (pas de reprise du motion) :
+  Publicités de 17,2 s construites pour les réseaux (pas de reprise du motion) :
   question en très grand, « Nous avons la solution ! », la réponse propre à chaque question, l'appel final.
   Paramètres : ?q=1..5 (question) &fmt=story|feed|carre|wide (1080×1920, 1080×1350, 1080×1080, 1920×1080) &theme=nuit|soleil
   Rendu : scripts/pubs.sh (render.mjs --page pub.html).
@@ -233,7 +233,7 @@ body.carre #pc { left: 840px; top: 790px; width: 180px; height: 220px; }
 
   <section class="scene" id="r">
     <div class="a big center r" id="rt"></div>
-    <div class="a center rs" id="rs">Découvre l'<b>Académie</b>.</div>
+    <div class="a center rs" id="rs">Découvre l'<b>Académie echecs.com</b>.</div>
     <div class="pose" id="pr" data-pose="hourra"></div>
     <div class="confetti" id="confR"></div>
   </section>
@@ -393,7 +393,6 @@ const words = (txt, cls) => nb(txt).split(" ").map(w => `<span class="wd ${cls}"
 $("#qt").innerHTML = words(AD.q[0], "") + "<br>" + `<span class="e">${words(AD.q[1], "")}</span>`;
 $("#pv").innerHTML = AD.pv;
 $("#pq").innerHTML = window.MASCOT_POSES[AD.pose + (FMT === "wide" ? "" : "-miroir")];
-if (Q === 1) $("#rs").innerHTML = "Découvre l'<b>Académie echecs.com</b>.";
 $("#rt").innerHTML = `Nous avons<br><span class="e">${Q % 2 ? "la solution !" : "pensé à toi !"}</span>`;
 $("#sk").textContent = AD.sk;
 
@@ -442,7 +441,7 @@ const confR = confetti($("#confR"), 60, 7), confC = confetti($("#confC"), 60, 19
 // ---------- Timeline ----------
 gsap.defaults({ ease: "expo.out" });
 const tl = gsap.timeline({ paused: true });
-const DR = Q === 1 ? 1.2 : 0;   // pub 1 : « Nous avons la solution » plus long (remarque de relecture)
+const DR = 1.2;   // « Nous avons la solution » 1,2 s plus long (remarque de relecture)
 const SC = [["q", 0, 3.9], ["r", 3.9, 2.5 + DR], ["s", 6.4 + DR, 6.2], ["c", 12.6 + DR, 3.4]];   // « Nous avons la solution » : 2,5 s pour avoir le temps de lire
 const TOTAL = 16 + DR;
 const SFX = [];

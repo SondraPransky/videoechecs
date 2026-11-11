@@ -19,7 +19,7 @@ from scipy.signal import butter, sosfilt
 SR = 48000
 STYLE = int(sys.argv[1])
 OUT = sys.argv[2]
-DR = 1.2 if STYLE == 1 else 0.0   # pub 1 : « Nous avons la solution » plus long
+DR = 1.2   # « Nous avons la solution » 1,2 s plus long
 DURATION = 16.0 + DR
 T_DROP, T_SOL, T_FINAL = 3.9, 6.4 + DR, 12.6 + DR
 N = int(SR * (DURATION + .5))

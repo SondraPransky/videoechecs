@@ -7,7 +7,7 @@ import fs from 'fs';
 
 const here = path.dirname(path.dirname(new URL(import.meta.url).pathname));
 const OUT = path.join(here, 'build/pack/images/00-publicites');
-const VUES = [['1-question', 3.5], ['2-reponse', 11.9], ['3-final', 15.6]];
+const VUES = [['1-question', 3.5], ['2-reponse', 13.1], ['3-final', 16.8]];   // pubs de 17,2 s
 // suffixe, fmt de la page, viewport, échelle (taille finale = viewport × échelle), thèmes
 const FORMATS = [
   ['story-1080x1920', 'story', [1080, 1920], 1, ['nuit', 'soleil']],
