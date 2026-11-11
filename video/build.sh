@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 # Chaîne complète : voix off → découpage des scènes → musique → rendu image par image → mixage → MP4.
-# Options : --music-only (sans voix off), --skip-voice (garde voice/out), --skip-render (garde la vidéo muette déjà rendue),
+# Par défaut : musique seule, sans voix off (décision de relecture : la voix IA n'est pas assez bonne).
+# Options : --voix (avec voix off, maquette), --skip-voice (avec la voix déjà générée dans voice/out), --skip-render (garde la vidéo muette déjà rendue),
 #           --edition court|boucle (déclinaison en musique seule, voir scripts/timing.py ; la boucle est muette)
 set -euo pipefail
 cd "$(dirname "$0")"
 FFMPEG=$(python3 -c 'import imageio_ffmpeg as f;print(f.get_ffmpeg_exe())')
 mkdir -p build
-SKIP_VOICE=0; SKIP_RENDER=0; MUSIC_ONLY=0; EDITION=long
+SKIP_VOICE=1; SKIP_RENDER=0; MUSIC_ONLY=1; EDITION=long
 args=("$@")
 for ((k = 0; k < ${#args[@]}; k++)); do case "${args[k]}" in
-  --skip-voice) SKIP_VOICE=1;; --skip-render) SKIP_RENDER=1;; --music-only) MUSIC_ONLY=1; SKIP_VOICE=1;;
+  --voix) MUSIC_ONLY=0; SKIP_VOICE=0;;
+  --skip-voice) MUSIC_ONLY=0; SKIP_VOICE=1;; --skip-render) SKIP_RENDER=1;; --music-only) MUSIC_ONLY=1; SKIP_VOICE=1;;
   --edition) EDITION="${args[k+1]}"; MUSIC_ONLY=1; SKIP_VOICE=1;;
 esac; done
 case "$EDITION" in

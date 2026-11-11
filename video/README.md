@@ -33,11 +33,11 @@ npm install
 pip install piper-tts imageio-ffmpeg numpy scipy
 ```
 
-La commande suivante enchaîne voix off, découpage, musique, rendu et mixage :
+La commande suivante enchaîne découpage, musique, rendu et mixage. Par défaut, la vidéo est **sans voix off** (décision de relecture : la voix IA avait trop de défauts de prononciation et d'intonation) :
 
 ```bash
-bash build.sh --music-only   # version actuelle, sans voix off
-bash build.sh                # avec voix off
+bash build.sh          # version actuelle, musique seule
+bash build.sh --voix   # maquette avec voix off (à ne pas diffuser)
 ```
 
 ### Voix ElevenLabs
@@ -48,9 +48,9 @@ bash build.sh                # avec voix off
    python3 voice/elevenlabs.py --list
    ```
    Cette commande liste les voix françaises masculines.
-3. Exportez `ELEVENLABS_VOICE_ID=<id>` puis lancez `bash build.sh`.
+3. Exportez `ELEVENLABS_VOICE_ID=<id>` puis lancez `bash build.sh --voix`.
 
-Sans ces deux variables, `build.sh` utilise la voix libre Piper, qui sert de maquette.
+Sans ces deux variables, `build.sh --voix` utilise la voix libre Piper, qui sert de maquette.
 
 ## Modifier
 
@@ -67,7 +67,7 @@ Pour vérifier une scène sans tout rendre :
 node render.mjs build/apercu --frames 5,20,38
 ```
 
-Pour refaire seulement le mixage, sans nouveau rendu de l'image :
+Pour refaire seulement le mixage de la version avec voix, sans nouveau rendu de l'image :
 
 ```bash
 bash build.sh --skip-voice --skip-render
