@@ -207,8 +207,8 @@ const C = [
     t: ["Un tournoi", "chaque semaine."], court: "Un tournoi par semaine", sub: "En ligne et ouvert à tous les niveaux.", cta: "Je m'abonne" },
   { id: "v12", v: 4, aud: "v", nom: "Une communauté", angle: "La mascotte et deux bulles du forum.", fond: "rose", pose: "coeur", scene: { type: "forum", pose: "coeur" }, prix: "mois",
     t: ["Progresse avec", "d’autres passionnés."], court: "Rejoins la communauté", sub: "Sur le forum, membres et coachs te répondent.", cta: "Je rejoins la communauté", ctas: "Rejoindre" },
-  { id: "v13", v: 4, aud: "v", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo : l’échiquier et le coach à l’écran.", fond: "bleu", pose: "idee", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
-    t: ["Toutes les vidéos", "Europe Échecs, en HD."], court: "Les vidéos Europe Échecs", sub: "Calcul Gagnant, la Minute Finale… à regarder quand tu veux.", cta: "Je m'abonne" },
+  { id: "v13", v: 5, aud: "v", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo : l’échiquier et le coach à l’écran.", fond: "bleu", pose: "idee", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
+    t: ["Plus de 1 000 vidéos", "Europe Échecs, en HD."], court: "+1 000 vidéos", sub: "Calcul Gagnant, la Minute Finale… à regarder quand tu veux.", cta: "Je m'abonne" },
   { id: "v14", v: 4, aud: "v", nom: "Mesure tes progrès", angle: "La mascotte au bout d’une courbe Elo qui monte franchement.", fond: "nuit", pose: "hourra", scene: { type: "elo", pose: "hourra" }, prix: "mois",
     t: ["Valide tes modules,", "ton Elo monte !"], court: "Mesure tes progrès", cta: "Je m'abonne" },
   // ---- Comptes gratuits ----
@@ -236,8 +236,8 @@ const C = [
     t: ["Sans engagement :", "tu arrêtes quand tu veux."], court: "Sans engagement", sub: "Abonnement mensuel résiliable à tout moment.", cta: "Je m'abonne" },
   { id: "g12", v: 4, aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé ([NB_PUZZLES_REUSSIS]) : une position de mat, cochée en vert.", fond: "nuit", pose: "menton", scene: { type: "board", pos: "mat" }, prix: "mois",
     t: ["Déjà [NB_PUZZLES_REUSSIS] puzzles réussis !", "Va plus loin."], court: "Va plus loin", cta: "Je m'abonne" },
-  { id: "g13", v: 3, aud: "g", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo avec le coach à l’écran.", fond: "ciel", pose: "reflexion", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
-    t: ["Débloque toutes les vidéos", "Europe Échecs."], court: "Les vidéos Europe Échecs", sub: "Calcul Gagnant, la Minute Finale… avec nos coachs.", cta: "Je m'abonne" },
+  { id: "g13", v: 4, aud: "g", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo avec le coach à l’écran.", fond: "ciel", pose: "reflexion", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
+    t: ["Débloque plus de", "1 000 vidéos Europe Échecs."], court: "+1 000 vidéos", sub: "Calcul Gagnant, la Minute Finale… avec nos coachs.", cta: "Je m'abonne" },
 ];
 const EXEMPLES = { "[PRENOM]": "Léa", "[NB_PUZZLES_REUSSIS]": "37" };
 const ex = s => String(s).replace(/\[[A-Z_]+\]/g, v => EXEMPLES[v] || v);
