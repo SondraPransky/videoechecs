@@ -285,7 +285,7 @@ function sticker(t, kind, D, style) {
     <div style="position:absolute;inset:${r(D * .06)}px;border-radius:50%;border:${Math.max(1, r(D * .014))}px dashed ${t.stkTxt};opacity:.45"></div>
     <span style="font-size:${r(D * (a.length > 5 ? .24 : .33))}px;font-weight:700;white-space:nowrap">${T(a)}</span><span style="font-size:${Math.max(8, r(D * .105))}px;font-weight:600;margin-top:${r(D * .04)}px;max-width:${r(D * .72)}px">${T(b)}</span></div>`;
 }
-const bulle = (txt, fs, style, queue) => `<span style="position:absolute;${style};background:#fff;color:#121821;font:700 ${fs}px/1.15 'Signika',Arial,sans-serif;padding:${r(fs * .45)}px ${r(fs * .7)}px;border-radius:${r(fs * .8)}px ${r(fs * .8)}px ${queue === "g" ? 2 : r(fs * .8)}px ${queue === "g" ? r(fs * .8) : 2}px;box-shadow:0 ${r(fs * .2)}px ${r(fs * .6)}px rgba(0,0,0,.22);white-space:nowrap;z-index:2">${T(txt)}</span>`;
+const bulle = (txt, fs, style, queue) => `<span style="position:absolute;background:#fff;color:#121821;font:700 ${fs}px/1.15 'Signika',Arial,sans-serif;padding:${r(fs * .45)}px ${r(fs * .7)}px;border-radius:${r(fs * .8)}px ${r(fs * .8)}px ${queue === "g" ? 2 : r(fs * .8)}px ${queue === "g" ? r(fs * .8) : 2}px;box-shadow:0 ${r(fs * .2)}px ${r(fs * .6)}px rgba(0,0,0,.22);white-space:nowrap;z-index:2;${style}">${T(txt)}</span>`;
 const ICONES = {
   lecons: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v6"/>',
   videos: '<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/>',
@@ -357,7 +357,7 @@ function scene(c, t, W, H) {
     }
     case "forum":
       return box(`${disque(m * .95, `left:${r(W * .3 - m * .47)}px;bottom:${r(-m * .3)}px`)}<div style="position:absolute;bottom:0;left:${r(W * .3)}px;transform:translateX(-50%)">${masc(S.pose, H * .78)}</div>
-        ${bulle("Comment contrer la Sicilienne ?", r(m * .066), `right:${r(W * .05)}px;top:${r(H * .14)}px`, "d")}${bulle("Essaie 2.c3 !", r(m * .066), `right:${r(W * .12)}px;top:${r(H * .38)}px`, "g")}`);
+        ${bulle("Que jouer contre la Sicilienne ?", r(m * .066), `right:${r(W * .05)}px;top:${r(H * .1)}px;max-width:${r(W * .62)}px;white-space:normal`, "d")}${bulle("Essaie 2.c3 !", r(m * .066), `right:${r(W * .1)}px;top:${r(H * .42)}px;max-width:${r(W * .62)}px`, "g")}`);
     case "check": {
       const s = Math.min(W * .19, H * .3), cell = (i) => { const ok = i < 6; return `<div style="width:${r(s)}px;height:${r(s)}px;border-radius:${r(s * .2)}px;background:${ok ? "#2f9e44" : "rgba(255,255,255,.16)"};display:grid;place-items:center;box-shadow:${ok ? "0 3px 10px rgba(0,0,0,.2)" : "inset 0 0 0 2px rgba(255,255,255,.35)"}">${icone(ok ? "coche" : "cadenas", s * .52, ok ? "#fff" : "#fae361", ok ? 3.2 : 2.6)}</div>`; };
       return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(4,${r(s)}px);gap:${r(s * .16)}px">${Array.from({ length: 8 }, (_, i) => cell(i)).join("")}</div>`);
