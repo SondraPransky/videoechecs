@@ -307,7 +307,10 @@ function scene(c, t, W, H) {
       return box(`${disque(m * 1.02, `left:50%;bottom:${r(-m * .3)}px;margin-left:${r(-m * .51)}px`)}<div style="position:absolute;bottom:0;${cx}">${masc(S.pose, h)}</div>${acc}`);
     }
     case "mascStk":
-      return box(`${disque(m * 1.02, `left:${r(W * .42 - m * .51)}px;bottom:${r(-m * .3)}px`)}<div style="position:absolute;bottom:0;left:${r(W * .42)}px;transform:translateX(-50%)">${masc(S.pose, H * .8)}</div>${sticker(t, S.stk, m * .5, `right:${r(W * .06)}px;top:${r(H * .08)}px`)}`);
+    {
+      const h = Math.min(H * .78, W * .62 / 1.15), cx = Math.max(h * .55, W * .34), D = Math.min(m * .42, W - cx - h * .55 + m * .05);
+      return box(`${disque(m * .95, `left:${r(cx - m * .47)}px;bottom:${r(-m * .3)}px`)}<div style="position:absolute;bottom:0;left:${r(cx)}px;transform:translateX(-50%)">${masc(S.pose, h)}</div>${sticker(t, S.stk, Math.max(m * .3, D), `right:${r(W * .04)}px;top:${r(H * .08)}px`)}`);
+    }
     case "board": {
       const b = m * .82, leg = POS[S.pos].legende;
       return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-${leg ? 56 : 50}%)">${board(S.pos, leg ? b * .88 : b)}</div>${leg ? `<span style="position:absolute;bottom:${r(H * .04)}px;${cx};white-space:nowrap;font:700 ${r(m * .065)}px/1 'Signika',Arial,sans-serif;color:#111;background:#fae361;border-radius:99px;padding:${r(m * .025)}px ${r(m * .05)}px">${T(leg)}</span>` : ""}`);
@@ -381,7 +384,6 @@ function vignette(c, t, s) {
   if (S.type === "coach") return wrap(`<img src="img/coach-kamsky.jpg" alt="Gata Kamsky" style="width:100%;height:100%;object-fit:cover">`);
   if (S.type === "video" || S.type === "videos") return wrap(`<img src="img/${S.img || "video-calcul-gagnant"}.jpg" alt="" style="width:100%;height:100%;object-fit:cover">`);
   if (S.type === "check") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center">${icone("cadenas", s * .5, "#fae361", 2.6)}</div>`);
-  if (S.type === "mascStk") return wrap(`${masc(S.pose, s * .86)}${sticker(t, S.stk, s * .5, "right:2px;top:2px")}`.replace("transform:rotate(-10deg)", "transform:rotate(-10deg) scale(.95)"));
   return wrap(masc(S.pose || c.pose, s * .86));
 }
 const MAQ_PGN = () => `<div style="background:#fff;color:#121821;border-radius:14px;padding:9px;height:150px;box-sizing:border-box;display:flex;gap:8px">
