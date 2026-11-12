@@ -201,7 +201,7 @@ const C = [
     t: ["Du premier coup", "à 2000 et plus."], court: "Un parcours pour toi", sub: "Un parcours par niveau, module après module.", cta: "Trouver mon parcours", ctas: "C'est parti" },
   { id: "v09", v: 4, aud: "v", nom: "La méthode Europe Échecs", angle: "Les vraies séries vidéo Europe Échecs en éventail.", fond: "creme", pose: "reflexion", scene: { type: "videos" }, prix: "mois",
     t: ["La méthode Europe Échecs,", "en ligne."], court: "La méthode Europe Échecs", sub: "Les séries vidéo, la revue et les leçons de nos auteurs.", cta: "Je m'abonne" },
-  { id: "v10", v: 4, aud: "v", nom: "Une offre spéciale", angle: "Le « bon plan » : la mascotte et son ampoule, la pastille « 2 mois offerts ».", fond: "vert", pose: "idee", scene: { type: "mascStk", pose: "idee", stk: "an" }, prix: "an",
+  { id: "v10", v: 4, aud: "v", nom: "Une offre spéciale", angle: "Le « bon plan » : la mascotte et son ampoule, la pastille « 2 mois offerts ».", fond: "vert", pose: "idee", scene: { type: "mascStk", pose: "idee", stk: "an" },
     t: ["On a une offre", "spéciale pour toi !"], court: "Offre spéciale", sub: "L’abonnement annuel : près de 2 mois offerts.", cta: "J'en profite !" },
   { id: "v11", v: 4, aud: "v", nom: "Un tournoi chaque semaine", angle: "La mascotte à la pendule, devant un échiquier en début de partie : l’envie de jouer.", fond: "nuit", pose: "pendule", scene: { type: "mascBoard", pose: "pendule", pos: "partie" }, prix: "mois",
     t: ["Un tournoi", "chaque semaine."], court: "Un tournoi par semaine", sub: "En ligne et ouvert à tous les niveaux.", cta: "Je m'abonne" },
@@ -210,7 +210,7 @@ const C = [
   { id: "v13", v: 4, aud: "v", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo : l’échiquier et le coach à l’écran.", fond: "bleu", pose: "idee", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
     t: ["Toutes les vidéos", "Europe Échecs, en HD."], court: "Les vidéos Europe Échecs", sub: "Calcul Gagnant, la Minute Finale… à regarder quand tu veux.", cta: "Je m'abonne" },
   { id: "v14", v: 4, aud: "v", nom: "Mesure tes progrès", angle: "La mascotte au bout d’une courbe Elo qui monte franchement.", fond: "nuit", pose: "hourra", scene: { type: "elo", pose: "hourra" }, prix: "mois",
-    t: ["Valide tes modules,", "regarde ton Elo monter."], court: "Mesure tes progrès", cta: "Je m'abonne" },
+    t: ["Valide tes modules,", "ton Elo monte !"], court: "Mesure tes progrès", cta: "Je m'abonne" },
   // ---- Comptes gratuits ----
   { id: "g01", v: 4, aud: "g", nom: "Un début", angle: "Six leçons cochées en vert, puis les cadenas : le reste est à débloquer.", fond: "creme", pose: "idee", scene: { type: "check" }, prix: "mois",
     t: ["Tes 6 leçons offertes", "ne sont qu’un début !"], court: "Ce n’est qu’un début !", sub: "Débloque tout le parcours, jusqu’à 2000 et plus.", cta: "Je débloque la suite", ctas: "Je débloque" },
@@ -251,9 +251,9 @@ const btn = (t, label, h, fs, full) => `<span style="display:${full ? "flex" : "
 function logo(t, h, style, surPanneau) { return img(surPanneau ? t.logoP : t.logo, "echecs.com", `height:${r(h)}px;width:auto;flex:none;${style || ""}`); }
 function prixChip(c, t, fs, old) {
   const p = PRIX[c.prix]; if (!p) return "";
-  return `<span style="display:inline-flex;align-items:baseline;gap:${r(fs * .4)}px;flex:none;white-space:nowrap;font-size:${fs}px;font-weight:700">${T(p.big)}${old && p.old ? `<s style="font-size:${r(fs * .72)}px;font-weight:400;color:${t.sub}">${T(p.old)}</s>` : ""}</span>`;
+  return `<span style="display:inline-flex;align-items:baseline;gap:${r(fs * .4)}px;flex:none;white-space:nowrap;font-size:${fs}px;font-weight:700">${T(p.big)}${old && p.old && c.prix !== "an" ? `<s style="font-size:${r(fs * .72)}px;font-weight:400;color:${t.sub}">${T(p.old)}</s>` : ""}</span>`;
 }
-const titre = (c, sep) => c.t.map(T).join(sep);
+const titre = (c, sep) => sep === "<br>" ? c.t.map(l => `<span style="display:block;white-space:nowrap">${T(l)}</span>`).join("") : c.t.map(T).join(sep);
 
 /* ---------- Échiquiers ---------- */
 const POS = {
@@ -406,7 +406,7 @@ const FAM = {
         <div data-fit data-min="${r(H * .1)}" style="flex:1;min-width:0;padding:${r(H * .1)}px ${r(H * .12)}px;display:flex;flex-direction:column;justify-content:center;gap:${r(H * .065)}px;overflow:hidden">
           <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;letter-spacing:-.01em">${titre(c, "<br>")}</div>
           ${large && H >= 200 && c.sub ? `<div style="font-size:${r(H * .08)}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
-          <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || (trapu && c.cta.length > 16) || c.cta.length > 20 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large && !trapu)}${large && !trapu ? logo(t, H * .11, "margin-left:auto") : ""}</div>
+          <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || (trapu && c.cta.length > 16) || c.cta.length > 24 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large && !trapu)}${large && !trapu && c.cta.length <= 20 ? logo(t, H * .11, "margin-left:auto") : ""}</div>
         </div></div>`, r(H * .05));
     }
     if (f.w >= 1100) {   // barre d'annonce
@@ -441,7 +441,7 @@ const FAM = {
   },
 };
 FAM.carre = function (c, t, f) {
-  const W = f.w, H = f.h, m = Math.min(W, H), pad = r(m * .07), fsT = r(m * .088), cta = c.cta.length > (W >= 400 ? 22 : 13) ? (c.ctas || "Je m'abonne") : c.cta;
+  const W = f.w, H = f.h, m = Math.min(W, H), pad = r(m * .07), fsT = r(m * .088), cta = c.cta.length > (m >= 600 ? 30 : W >= 400 ? 22 : 13) ? (c.ctas || "Je m'abonne") : c.cta;
   const bh = Math.max(36, r(m * .13)), bfs = Math.max(13, r(m * .05));
   if (W / H > 1.25) {   // pop-up paysage : visuel à gauche
     const sw = r(W * .46);
@@ -468,7 +468,13 @@ function fit(scope) {
     const t = col.querySelector(".t"); if (!t) return;
     let fs = parseFloat(t.style.fontSize); const min = +col.dataset.min || 12;
     while ((col.scrollHeight > col.clientHeight + 1 || col.scrollWidth > col.clientWidth + 1) && fs > min) { fs -= 1; t.style.fontSize = fs + "px"; }
-    col.dataset.over = (col.scrollHeight > col.clientHeight + 1 || col.scrollWidth > col.clientWidth + 1) ? "1" : "";
+    const deborde = () => col.scrollHeight > col.clientHeight + 1 || col.scrollWidth > col.clientWidth + 1;
+    if (deborde() && t.querySelector("span")) {   // dernier recours : les lignes du titre peuvent se couper
+      t.querySelectorAll("span").forEach(sp => { sp.style.whiteSpace = "normal"; });
+      fs = parseFloat(t.style.fontSize);
+      while (deborde() && fs > min) { fs -= 1; t.style.fontSize = fs + "px"; }
+    }
+    col.dataset.over = deborde() ? "1" : "";
   });
 }
 
