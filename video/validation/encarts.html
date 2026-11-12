@@ -100,7 +100,7 @@ footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
 
 <header class="top wrap">
   <h1>Les encarts pub de <em>l’Académie</em></h1>
-  <p class="intro">27 propositions d’encarts à placer sur le site pour donner envie de s’abonner : d’abord pour les visiteurs sans compte, puis pour les joueurs qui ont un compte gratuit. Chaque proposition existe en 18 formats, avec deux modèles distincts : un pour les formats horizontaux (bandeaux, bannières), un pour les formats carrés et en hauteur (pavés, carrés, colonnes). Peu de texte, en gros, et un visuel qui prend la moitié de l’encart. Le fond proposé est indiqué ; essaie les autres d’un clic. Donne ton avis sur chaque fiche : « Validé » ou « À revoir », avec ce qu’il faut changer (format, texte, fond). Chacun a son propre avis, signé de son nom ; la décision finale revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
+  <p class="intro">27 propositions d’encarts à placer sur le site pour donner envie de s’abonner : d’abord pour les visiteurs sans compte, puis pour les joueurs qui ont un compte gratuit. Chaque proposition est montrée d’abord dans vos 4 emplacements (smartphone 1000×391, desktop 960×250, header small 960×150, carré 1000×1000), puis dans 18 formats standards, avec deux modèles distincts : un pour les formats horizontaux (bandeaux, bannières), un pour les formats carrés et en hauteur (pavés, carrés, colonnes). Peu de texte, en gros, et un visuel qui prend la moitié de l’encart. Le fond proposé est indiqué ; essaie les autres d’un clic. Donne ton avis sur chaque fiche : « Validé » ou « À revoir », avec ce qu’il faut changer (format, texte, fond). Chacun a son propre avis, signé de son nom ; la décision finale revient à la responsable du pack. Tout est enregistré au fur et à mesure.</p>
 </header>
 
 <div class="bar">
@@ -155,6 +155,10 @@ const PRIX = {
   gratuit: { big: "Gratuit", old: "", small: "6 leçons offertes", stk: ["6", "leçons offertes"] },
 };
 const FORMATS = [
+  { id: "1000x391", nom: "Smartphone 1000×391", w: 1000, h: 391, emp: true },
+  { id: "960x250",  nom: "Desktop 960×250", w: 960, h: 250, emp: true },
+  { id: "960x150",  nom: "Header small 960×150", w: 960, h: 150, emp: true },
+  { id: "1000x1000", nom: "Carré 1000×1000", w: 1000, h: 1000, emp: true },
   { id: "970x250",  nom: "Billboard 970×250", w: 970, h: 250 },
   { id: "1200x300", nom: "Bandeau d’accueil 1200×300", w: 1200, h: 300 },
   { id: "640x200",  nom: "Encart dans un article 640×200", w: 640, h: 200 },
@@ -183,7 +187,7 @@ const C = [
     t: ["Progresse aux échecs,", "à ton rythme."], court: "Progresse aux échecs", sub: "Leçons, exercices et masterclasses, de l’Initiation à 2000 et plus.", cta: "Je m'abonne" },
   { id: "v02", v: 4, aud: "v", nom: "Prix de lancement", angle: "Tout sur le prix, avec la mascotte qui saute de joie et la pastille « −25 % ».", fond: "jaune", pose: "hourra", scene: { type: "mascStk", pose: "hourra", stk: "mois" },
     t: ["Prix de lancement :", "14,90 € par mois"], court: "14,90 €/mois", sub: "Au lieu de 19,90 €, sans engagement.", cta: "J'en profite !" },
-  { id: "v03", v: 4, aud: "v", nom: "Tout au même endroit", angle: "L’étendue de l’Académie en quatre pictos.", fond: "bleu", pose: "super", scene: { type: "pictos" }, prix: "mois",
+  { id: "v03", v: 4, aud: "v", nom: "Tout au même endroit", angle: "L’étendue de l’Académie en quatre pictos.", fond: "bleu", pose: "hourra", scene: { type: "pictos" }, prix: "mois",
     t: ["Leçons, vidéos, tournois :", "tout au même endroit."], court: "Tout pour progresser", sub: "Une seule Académie pour apprendre, t’entraîner et jouer.", cta: "Découvrir" },
   { id: "v04", v: 4, aud: "v", nom: "Essai gratuit", angle: "Faire créer un compte gratuit d’abord ; le chiffre 6 reste sur la pastille.", fond: "menthe", pose: "coucou", scene: { type: "mascStk", pose: "coucou", stk: "gratuit" },
     t: ["Essaie l’Académie", "et profite de tes leçons offertes."], court: "Tes leçons offertes", cta: "Essayer gratuitement", ctas: "Essayer" },
@@ -205,24 +209,24 @@ const C = [
     t: ["Progresse avec", "d’autres passionnés."], court: "Rejoins la communauté", sub: "Sur le forum, membres et coachs te répondent.", cta: "Je rejoins la communauté", ctas: "Rejoindre" },
   { id: "v13", v: 4, aud: "v", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo : l’échiquier et le coach à l’écran.", fond: "bleu", pose: "idee", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
     t: ["Toutes les vidéos", "Europe Échecs, en HD."], court: "Les vidéos Europe Échecs", sub: "Calcul Gagnant, la Minute Finale… à regarder quand tu veux.", cta: "Je m'abonne" },
-  { id: "v14", v: 4, aud: "v", nom: "Mesure tes progrès", angle: "La mascotte au bout d’une courbe Elo qui monte franchement.", fond: "nuit", pose: "super", scene: { type: "elo", pose: "super" }, prix: "mois",
+  { id: "v14", v: 4, aud: "v", nom: "Mesure tes progrès", angle: "La mascotte au bout d’une courbe Elo qui monte franchement.", fond: "nuit", pose: "hourra", scene: { type: "elo", pose: "hourra" }, prix: "mois",
     t: ["Valide tes modules,", "regarde ton Elo monter."], court: "Mesure tes progrès", cta: "Je m'abonne" },
   // ---- Comptes gratuits ----
   { id: "g01", v: 4, aud: "g", nom: "Un début", angle: "Six leçons cochées en vert, puis les cadenas : le reste est à débloquer.", fond: "creme", pose: "idee", scene: { type: "check" }, prix: "mois",
     t: ["Tes 6 leçons offertes", "ne sont qu’un début !"], court: "Ce n’est qu’un début !", sub: "Débloque tout le parcours, jusqu’à 2000 et plus.", cta: "Je débloque la suite", ctas: "Je débloque" },
-  { id: "g02", v: 4, aud: "g", nom: "Gratuit ou abonné", angle: "6 leçons contre plus de 200, côte à côte.", fond: "ciel", pose: "super", scene: { type: "versus" }, prix: "mois",
+  { id: "g02", v: 4, aud: "g", nom: "Gratuit ou abonné", angle: "6 leçons contre plus de 200, côte à côte.", fond: "ciel", pose: "coucou", scene: { type: "versus" }, prix: "mois",
     t: ["Gratuit ou abonné ?", "Compare."], court: "Gratuit ou abonné ?", cta: "Je compare !" },
   { id: "g03", v: 4, aud: "g", nom: "Débloque la suite", angle: "L’escalier des niveaux : la première marche validée, la suivante sous cadenas.", fond: "violet", pose: "drapeau", scene: { type: "escalier", verrou: true }, prix: "mois",
     t: ["Débloque la suite", "de ton parcours."], court: "Débloque la suite", cta: "Débloquer" },
   { id: "g04", v: 4, aud: "g", nom: "Après le puzzle du jour", angle: "Un vrai puzzle très simple : les Blancs matent en 1.", fond: "vert", pose: "menton", scene: { type: "board", pos: "puzzle" }, prix: "mois",
     t: ["Un puzzle par jour, c’est bien.", "2 000, c’est mieux !"], court: "+2 000 exercices", cta: "Débloquer les exercices", ctas: "Débloquer" },
-  { id: "g05", v: 4, aud: "g", nom: "Masterclasses", angle: "Les photos des grands maîtres, en direct.", fond: "nuit", pose: "montre-le-ciel", scene: { type: "coach" }, prix: "mois",
+  { id: "g05", v: 4, aud: "g", nom: "Masterclasses", angle: "Les photos des grands maîtres, en direct.", fond: "nuit", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
     t: ["Les grands maîtres", "t’attendent en direct."], court: "Les masterclasses", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs.", cta: "Je m'abonne" },
   { id: "g06", v: 3, aud: "g", nom: "Personnalisé au prénom", angle: "Encart personnalisé avec le prénom du joueur connecté ([PRENOM]).", fond: "rose", pose: "coucou", scene: { type: "masc", pose: "coucou" }, prix: "mois",
     t: ["[PRENOM], on passe", "à la suite ?"], court: "On continue, [PRENOM] ?", sub: "L’Académie complète t’emmène beaucoup plus loin.", cta: "Passer à l'Académie complète", ctas: "Je m'abonne" },
   { id: "g07", v: 2, aud: "g", nom: "Ton prix de lancement", angle: "Rappeler que le prix de lancement est toujours là.", fond: "jaune", pose: "hourra", scene: { type: "mascStk", pose: "hourra", stk: "mois" },
     t: ["Ton prix de lancement", "t’attend."], court: "14,90 €/mois", sub: "14,90 €/mois au lieu de 19,90 €, sans engagement.", cta: "J'en profite !" },
-  { id: "g08", v: 2, aud: "g", nom: "L’abonnement annuel", angle: "Proposer l’annuel aux comptes gratuits, avec la pastille « 2 mois offerts ».", fond: "framboise", pose: "saut-etoile", scene: { type: "mascStk", pose: "saut-etoile", stk: "an" }, prix: "an",
+  { id: "g08", v: 2, aud: "g", nom: "L’abonnement annuel", angle: "Proposer l’annuel aux comptes gratuits, avec la pastille « 2 mois offerts ».", fond: "framboise", pose: "hourra", scene: { type: "mascStk", pose: "hourra", stk: "an" }, prix: "an",
     t: ["Choisis l’abonnement annuel", "et profite de près de 2 mois offerts !"], court: "Près de 2 mois offerts", cta: "J'en profite !" },
   { id: "g09", v: 4, aud: "g", nom: "Apprends de tes erreurs", angle: "Une Dame lâchée en h5 : flèche rouge et « ?? ».", fond: "menthe", pose: "loupe", scene: { type: "board", pos: "erreur" }, prix: "mois",
     t: ["Apprends", "de tes erreurs."], court: "Apprends de tes erreurs", sub: "Analyse tes parties pour repérer tes erreurs et les corriger.", cta: "Je m'abonne" },
@@ -230,7 +234,7 @@ const C = [
     t: ["Rejoue les parties", "de la revue, coup par coup."], court: "La revue, coup par coup", sub: "Chaque numéro de la revue Europe Échecs en PGN interactif.", cta: "Lire la revue", ctas: "Je m'abonne" },
   { id: "g11", v: 2, aud: "g", nom: "Sans engagement", angle: "Lever la peur de s’engager.", fond: "corail", pose: "cafe", scene: { type: "masc", pose: "cafe" }, prix: "mois",
     t: ["Sans engagement :", "tu arrêtes quand tu veux."], court: "Sans engagement", sub: "Abonnement mensuel résiliable à tout moment.", cta: "Je m'abonne" },
-  { id: "g12", v: 4, aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé ([NB_PUZZLES_REUSSIS]) : une position de mat, cochée en vert.", fond: "nuit", pose: "sprint", scene: { type: "board", pos: "mat" }, prix: "mois",
+  { id: "g12", v: 4, aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé ([NB_PUZZLES_REUSSIS]) : une position de mat, cochée en vert.", fond: "nuit", pose: "menton", scene: { type: "board", pos: "mat" }, prix: "mois",
     t: ["Déjà [NB_PUZZLES_REUSSIS] puzzles réussis !", "Va plus loin."], court: "Va plus loin", cta: "Je m'abonne" },
   { id: "g13", v: 3, aud: "g", nom: "Les vidéos Europe Échecs", angle: "Une vraie vidéo avec le coach à l’écran.", fond: "ciel", pose: "reflexion", scene: { type: "video", img: "video-lecteur" }, prix: "mois",
     t: ["Débloque toutes les vidéos", "Europe Échecs."], court: "Les vidéos Europe Échecs", sub: "Calcul Gagnant, la Minute Finale… avec nos coachs.", cta: "Je m'abonne" },
@@ -396,13 +400,13 @@ const FAM = {
   horizontal(c, t, f) {
     const H = f.h;
     if (H >= 150) {   // grands bandeaux
-      const sw = r(H * 1.3), large = f.w >= 900, fsT = r(H * .158);
+      const trapu = f.w / H < 3, sw = r(Math.min(H * 1.3, f.w * .4)), large = f.w >= 900, fsT = r(H * .158);   // trapu : le format smartphone 1000×391
       return root(f, t, `<div style="display:flex;height:100%">
-        <div style="width:${sw}px;flex:none;background:${t.panel}">${scene(c, t, sw, H)}</div>
+        <div style="width:${sw}px;flex:none;position:relative;background:${t.panel}">${scene(c, t, sw, H)}${trapu ? `<span style="position:absolute;top:${r(H * .06)}px;left:${r(H * .07)}px;display:flex">${logo(t, H * .075, "", true)}</span>` : ""}</div>
         <div data-fit data-min="${r(H * .1)}" style="flex:1;min-width:0;padding:${r(H * .1)}px ${r(H * .12)}px;display:flex;flex-direction:column;justify-content:center;gap:${r(H * .065)}px;overflow:hidden">
           <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;letter-spacing:-.01em">${titre(c, "<br>")}</div>
-          ${large && c.sub ? `<div style="font-size:${r(H * .08)}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
-          <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || c.cta.length > 20 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large)}${large ? logo(t, H * .11, "margin-left:auto") : ""}</div>
+          ${large && H >= 200 && c.sub ? `<div style="font-size:${r(H * .08)}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
+          <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || (trapu && c.cta.length > 16) || c.cta.length > 20 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large && !trapu)}${large && !trapu ? logo(t, H * .11, "margin-left:auto") : ""}</div>
         </div></div>`, r(H * .05));
     }
     if (f.w >= 1100) {   // barre d'annonce
@@ -437,8 +441,8 @@ const FAM = {
   },
 };
 FAM.carre = function (c, t, f) {
-  const W = f.w, H = f.h, m = Math.min(W, H), pad = r(m * .07), fsT = Math.min(40, r(m * .088)), cta = c.cta.length > (W >= 400 ? 22 : 13) ? (c.ctas || "Je m'abonne") : c.cta;
-  const bh = Math.min(52, Math.max(36, r(m * .13))), bfs = Math.max(13, Math.min(19, r(m * .05)));
+  const W = f.w, H = f.h, m = Math.min(W, H), pad = r(m * .07), fsT = r(m * .088), cta = c.cta.length > (W >= 400 ? 22 : 13) ? (c.ctas || "Je m'abonne") : c.cta;
+  const bh = Math.max(36, r(m * .13)), bfs = Math.max(13, r(m * .05));
   if (W / H > 1.25) {   // pop-up paysage : visuel à gauche
     const sw = r(W * .46);
     return root(f, t, `<div style="display:flex;height:100%"><div style="width:${sw}px;flex:none;position:relative;background:${t.panel}">${scene(c, t, sw, H)}</div>
@@ -474,7 +478,7 @@ const SECTIONS = [
   { id: "gratuits", titre: "2. Comptes gratuits", intro: "Affichés aux joueurs connectés sans abonnement : tableau de bord, fin de leçon offerte, puzzle du jour, forum, zone de jeu.", items: C.filter(c => c.aud === "g") },
 ];
 const ITEMS = new Map(C.map(c => [c.id, { ...c, v: c.v || 1 }]));
-const VUE = {};    // par fiche : { f: "tous" | id de format, fond }
+const VUE = {};    // par fiche : { f: "emp" (vos emplacements) | "tous" | id de format, fond }
 let DECISIONS = {}, PERSONNES = {}, NOMS = {};
 let filtre = "tout", db = null, user = null, moi = null, proprio = false, peutEcrire = true, monDocExiste = false;
 
@@ -496,7 +500,7 @@ function compte() {
 function badge(it) { return { ok: ["ok", "Validé"], revoir: ["revoir", "À revoir"], nouveau: ["new", "Nouvelle version à revoir"], reste: ["", "En attente de décision"] }[etat(it)]; }
 
 function sceneHtml(it) {
-  const v = VUE[it.id], fs = v.f === "tous" ? FORMATS : FORMATS.filter(f => f.id === v.f);
+  const v = VUE[it.id], fs = v.f === "tous" ? FORMATS : v.f === "emp" ? FORMATS.filter(f => f.emp) : FORMATS.filter(f => f.id === v.f);
   return fs.map(f => `<figure class="pub" style="margin:0"><div class="ecran" data-w="${f.w}" data-h="${f.h}"><div class="ad">${adHtml(it, f.id, v.fond)}</div></div><figcaption>${esc(f.nom)}</figcaption></figure>`).join("");
 }
 function ajusteVue(vue) {
@@ -536,7 +540,7 @@ function fiche(it) {
   return `<article class="fiche" id="f-${esc(it.id)}" data-id="${esc(it.id)}" data-statut="${etat(it)}">
     <div class="scene">
       <div class="vue">${sceneHtml(it)}</div>
-      <div class="formats" role="group" aria-label="Formats"><button type="button" data-fmt="tous" aria-pressed="${v.f === "tous"}">Tous les formats</button>${FORMATS.map(f => `<button type="button" data-fmt="${f.id}" aria-pressed="${v.f === f.id}">${esc(f.nom)}</button>`).join("")}</div>
+      <div class="formats" role="group" aria-label="Formats"><button type="button" data-fmt="emp" aria-pressed="${v.f === "emp"}">Vos emplacements</button><button type="button" data-fmt="tous" aria-pressed="${v.f === "tous"}">Tous les formats</button>${FORMATS.map(f => `<button type="button" data-fmt="${f.id}" aria-pressed="${v.f === f.id}">${esc(f.nom)}</button>`).join("")}</div>
       <div class="formats fonds" role="group" aria-label="Fond"><span>Fond</span>${Object.entries(FONDS).map(([k, t]) => `<button type="button" data-fond="${k}" aria-pressed="${v.fond === k}"><i style="background:${t.bg}"></i>${esc(t.nom)}${k === it.fond ? " (proposé)" : ""}</button>`).join("")}</div>
     </div>
     <div class="cote">
@@ -625,7 +629,7 @@ document.addEventListener("input", e => {
 });
 document.addEventListener("focusout", e => { if (e.target.tagName === "TEXTAREA") setTimeout(() => majFiche(e.target.closest(".fiche").dataset.id), 0); });
 
-ITEMS.forEach(it => { VUE[it.id] = { f: "tous", fond: it.fond }; });
+ITEMS.forEach(it => { VUE[it.id] = { f: "emp", fond: it.fond }; });
 rendre();
 document.fonts.ready.then(() => document.querySelectorAll(".vue").forEach(ajusteVue));
 
