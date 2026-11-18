@@ -90,6 +90,11 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 
 /* Scène 3 : leçons */
 .counter { font: 900 300px/0.85 "Fraunces"; letter-spacing: -.04em; }
+.clc { position: relative; height: 250px; border-radius: 26px; padding: 30px 34px; background: linear-gradient(160deg, #131b26, #0b1017); box-shadow: 0 30px 70px rgba(0,0,0,.4), inset 0 0 0 1px rgba(147,185,226,.16); display: flex; flex-direction: column; gap: 16px; }
+.clc .chip { align-self: flex-start; font: 800 22px/1 "Manrope"; padding: 9px 16px; border-radius: 99px; color: #111; }
+.clc .tt { font: 700 44px/1.08 "Fraunces", Georgia, serif; color: #f4f1ea; }
+.clc .fm { margin-top: auto; display: flex; gap: 10px; font: 700 20px/1 "Manrope"; color: #93a2b6; }
+.clc .ok { position: absolute; right: 26px; top: 26px; width: 50px; height: 50px; border-radius: 50%; background: #2f9e44; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(47,158,68,.45); }
 .card { position: absolute; width: 380px; height: 420px; border-radius: 28px; padding: 34px; background: linear-gradient(160deg, #131b26, #0b1017);
   box-shadow: 0 40px 80px rgba(0,0,0,.5), inset 0 0 0 1px rgba(147,185,226,.16); }
 .card .ic { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 26px; }
@@ -543,6 +548,16 @@ html.v #grain { width: 100%; height: 100%; }
   </section>
 
   <!-- Revue Europe Échecs en PGN -->
+  <!-- Campagne « Jusqu'à 2000 et plus » : les leçons de niveau 1800 (accroche-6) -->
+  <section class="scene" id="club">
+    <div style="position:absolute;left:150px;top:96px">
+      <div class="kicker cl-k">Objectif 1800</div>
+      <div class="h2" style="margin-top:26px"><span class="line"><span class="cl-w">Des leçons</span></span><span class="line"><span class="cl-w em">de joueur de club.</span></span></div>
+    </div>
+    <div id="clgrid" style="position:absolute;left:150px;top:420px;width:1620px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px"></div>
+    <div class="pose" id="pcl" data-pose="reflexion" style="left:1500px;top:40px;width:300px;height:367px"></div>
+  </section>
+
   <section class="scene" id="revue">
     <div style="position:absolute;left:150px;top:110px">
       <div class="kicker rv-k">La revue Europe Échecs</div>
@@ -958,7 +973,7 @@ const ACCROCHES = {
   3: { t: "Tu as l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
   4: { t: "Tu regardes des vidéos d'échecs,", e: "mais tu ne progresses pas ?", pose: "menton", vis: "videos" },
   5: { t: "Tu veux progresser aux échecs,", e: "mais tu ne sais pas par où commencer ?", pose: "haussement", vis: "commencer" },
-  6: { t: "Tu joues déjà bien,", e: "et tu vises les 2000 ?", pose: "menton", vis: "objectif" },   // campagne « Jusqu'à 2000 et plus » : les joueurs confirmés
+  6: { t: "Tu plafonnes à 1700", e: "depuis des mois ?", pose: "menton", vis: "plafond" },   // campagne « Jusqu'à 2000 et plus » : les joueurs confirmés
 };
 window.ACCROCHES = ACCROCHES;
 const ACC = ACCROCHES[HOOK] || ACCROCHES[1];
@@ -981,6 +996,8 @@ $("#hk-vis").innerHTML = {
   elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
     <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
   parties: `<small>Parties jouées ce mois-ci</small><div class="big" id="hk-n">0</div><div class="hk-games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="hk-g"><b>${r}</b></div>`).join("")}</div>`,
+  plafond: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 702</div><span class="tag">± 0 en 6 mois</span>
+    <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
   objectif: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 600</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag" style="background:rgba(250,227,97,.16);color:#fae361">Objectif : 2000 +</span>`,
   stagne: `<small>Objectif 1400</small><div class="hk-cal">${["Janvier", "Mars", "Juin"].map(m => `<div class="hk-m">${m}</div>`).join("")}</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag">Toujours 40 %</span>`,
   videos: `<small>Vidéos regardées</small><div class="big" id="hk-h">0 h</div><div class="hk-vids">${["p-calcul-gagnant", "p-minute-finale", "p-ouvertures-vogue"].map(v => `<div class="hk-v"><img src="../assets/captures/ee/hd/${v}.jpg"><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg></span></div>`).join("")}</div><span class="tag">Classement : inchangé</span>`,
@@ -997,10 +1014,10 @@ scene("hook", ({ st, from, at, lines, dur }) => {
   at("#hk-vis", 1, { rotateY: -1, duration: dur - 1, ease: "sine.inOut" });
   from("#phk", .6, { y: 440 }, { y: 0, duration: .55, ease: "back.out(1.4)" });
   playPose(st, "#phk", .6);
-  if (ACC.vis === "elo") {
+  if (ACC.vis === "elo" || ACC.vis === "plafond") {
     at("#hk-line", .8, { strokeDashoffset: 0, duration: 1.8, ease: "none" });
     const v = { k: 0 };
-    st.to(v, { k: 1, duration: 2.4, ease: "none", onUpdate: () => { $("#hk-elo").textContent = ["1 201", "1 203", "1 198", "1 202", "1 199", "1 201"][Math.floor(v.k * 5.99)]; } }, .9);
+    st.to(v, { k: 1, duration: 2.4, ease: "none", onUpdate: () => { $("#hk-elo").textContent = (ACC.vis === "plafond" ? ["1 702", "1 706", "1 698", "1 703", "1 697", "1 702"] : ["1 201", "1 203", "1 198", "1 202", "1 199", "1 201"])[Math.floor(v.k * 5.99)]; } }, .9);
     sfx(st, "tick", 1.2, { g: .3 }); sfx(st, "tick", 1.7, { g: .3, p: .9 }); sfx(st, "tick", 2.2, { g: .3 });
   } else if (ACC.vis === "parties") {
     from(".hk-g", .7, { opacity: 0, scale: .5, y: -40 }, { opacity: 1, scale: 1, y: 0, duration: .3, stagger: .18, ease: "back.out(2)" });
@@ -1089,6 +1106,21 @@ scene("s1", ({ st, from, at, lines, dur }) => {
 });
 if (S.s1) tl.fromTo("#flash", { opacity: 0 }, { opacity: .2, duration: .06, ease: "none" }, S.s1.start + S1_T0 + S1_TRAVEL + .05)
   .to("#flash", { opacity: 0, duration: .4, ease: "power2.out" }, ">");
+
+// ===== Campagne « Jusqu'à 2000 et plus » : six leçons de niveau 1600-1800 de l'Académie
+const CL_LECONS = [["Objectif 1800", "La triangulation"], ["Objectif 1800", "L’initiative"], ["Objectif 1800", "Sauver la partie : pat et matériel"],
+  ["Objectif 1800", "La défense de Vancura"], ["Objectif 1600", "Le sacrifice du Fou en h7"], ["Objectif 1600", "Le Roi, cible de l’attaque"]];
+$("#clgrid").innerHTML = CL_LECONS.map(([n, t]) => `<div class="clc"><span class="chip" style="background:${n.endsWith("1800") ? "#fae361" : "#93b9e2"}">${n}</span><div class="tt">${t}</div><div class="fm">Vidéo · Cours · Exercices · Quiz</div><span class="ok"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>`).join("");
+scene("club", ({ st, from, at, lines, dur }) => {
+  from(".cl-k", .05, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4 });
+  lines(".cl-w", .1, .12);
+  from(".clc", .45, { opacity: 0, y: 70, rotateX: -18, transformPerspective: 1400 }, { opacity: 1, y: 0, rotateX: 0, duration: .5, stagger: .16, ease: "back.out(1.4)" });
+  from(".clc .ok", 1.6, { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .35, stagger: .32, ease: "back.out(3)" });
+  [0, 1, 2, 3, 4, 5].forEach(k => sfx(st, "ding", 1.65 + k * .32, { p: 1 + k * .06, g: .35 }));
+  from("#pcl", .5, { y: 420 }, { y: 0, duration: .55, ease: "back.out(1.4)" });
+  playPose(st, "#pcl", .5);
+  exitZoom(st, "club", dur, { scale: .96 });
+});
 
 // ===== Mesure tes progrès : barre de validation, étoiles, courbe Elo
 // Points de la courbe Elo (repère du SVG 738×320 : 1500 en y=40, 1100 en y=260)

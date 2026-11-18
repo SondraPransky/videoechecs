@@ -32,7 +32,7 @@ SCENES = [
 ]
 # Mode --music-only : durées fixes (secondes, multiples d'un temps)
 MUSIC_ONLY = {"hook": 4.0, "sol": 2.5, "s1": 6.0, "prog": 5.0, "s3": 4.0, "revue": 5.0, "videos": 6.0,
-              "s4": 5.0, "s5": 6.0, "s6": 5.0, "forum": 5.0, "s7": 4.0, "s8": 5.5}
+              "s4": 5.0, "club": 5.5, "s5": 6.0, "s6": 5.0, "forum": 5.0, "s7": 4.0, "s8": 5.5}
 # Déclinaisons courtes (toujours en musique seule) : sous-ensembles de scènes
 EDITIONS = {
     "court": ["s1", "s3", "prog", "s4", "forum", "s8"],   # ~30 s pour les réseaux
@@ -50,7 +50,7 @@ EDITIONS = {
     # Publicités : une question-accroche, la réponse, puis l'essentiel de l'académie (~31 s)
     **{f"accroche-{k}": ["hook", "sol", "s3", "prog", "s4", "forum", "s8"] for k in range(1, 6)},
     # Campagne « Jusqu'à 2000 et plus » : la question aux joueurs confirmés, puis le parcours jusqu'à 2000, les GMI, la revue
-    "accroche-6": ["hook", "sol", "s1", "s4", "revue", "prog", "s8"],
+    "accroche-6": ["hook", "sol", "s1", "club", "s4", "prog", "s8"],
 }
 music_only = "--music-only" in sys.argv
 edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"
