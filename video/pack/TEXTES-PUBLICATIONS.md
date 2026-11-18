@@ -78,6 +78,38 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 
 ---
 
+## Campagne « Jusqu'à 2000 et plus » : l'Académie aussi pour les joueurs confirmés
+*Images : `90-jusqu-a-2000/` à `95-solution-fou-h7/` · Vidéo : `00-accroches/accroche-6-*` (« Tu joues déjà bien, et tu vises les 2000 ? »)*
+
+Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne aussi les amateurs confirmés et les joueurs de club, jusqu'à 2000 et plus.
+
+**2000 et plus** (`90-jusqu-a-2000/`)
+> 2000 et plus : on t'y emmène. ♟️
+> L'Académie, ce n'est pas que pour apprendre les règles : les parcours Objectif 1600, 1800 et 2000 et plus sont faits pour les joueurs de club.
+> 👉 echecs.com/academie
+
+**Pas seulement pour débuter** (`91-pas-que-pour-debuter/`)
+> Tu crois que l'Académie, c'est pour les débutants ? 🤔
+> Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de grands maîtres : de quoi progresser jusqu'à 2000 et plus.
+
+**Joueur de club ?** (`92-joueur-de-club/`)
+> Joueur de club ? L'Académie aussi. 🏆
+> Des leçons au niveau des tournois, des exercices classés jusqu'à l'Objectif 2000, et un tournoi en ligne chaque semaine pour mettre tout ça en pratique.
+
+**Le cap des 2000** (`93-cap-des-2000/`)
+> Fais sauter le cap des 2000. 📈
+> Chaque module validé te rapproche du suivant, et ta courbe Elo le montre.
+
+**Problème, puis solution le lendemain** (`94-probleme-fou-h7/`, puis `95-solution-fou-h7/`)
+> Objectif 1800 : les Blancs jouent et gagnent. Tu vois le coup ? Réponse en commentaire 👇
+
+> Solution : 1.Fxh7+ ! Rxh7 2.Cg5+ et la Dame arrive en h5. C'est le sacrifice grec, un grand classique des attaques sur le Roque. On le travaille dans l'Académie, avec beaucoup d'autres.
+
+**Vidéo** (`accroche-6`)
+> Tu joues déjà bien, et tu vises les 2000 ? Nous avons pensé à toi : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
+
+---
+
 ## Publicités de 16 s (`00-publicites/`)
 
 Texte principal, à adapter à chaque question :

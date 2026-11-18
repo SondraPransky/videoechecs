@@ -49,6 +49,8 @@ EDITIONS = {
     "pan-tournois": ["s7", "s8"],
     # Publicités : une question-accroche, la réponse, puis l'essentiel de l'académie (~31 s)
     **{f"accroche-{k}": ["hook", "sol", "s3", "prog", "s4", "forum", "s8"] for k in range(1, 6)},
+    # Campagne « Jusqu'à 2000 et plus » : la question aux joueurs confirmés, puis le parcours jusqu'à 2000, les GMI, la revue
+    "accroche-6": ["hook", "sol", "s1", "s4", "revue", "prog", "s8"],
 }
 music_only = "--music-only" in sys.argv
 edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"

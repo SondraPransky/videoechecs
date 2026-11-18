@@ -1,0 +1,646 @@
+<title>Campagne Jusqu’à 2000 et plus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,800;1,9..144,400&family=Manrope:wght@500;700;800&family=Signika:wght@400;600;700&display=swap">
+<style>
+/* Table de relecture des encarts : une fiche par proposition, tous les formats, avis de chacun */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #121821; --sub: #5a6574; --line: #dfe4eb;
+  --stage: #0b0f15; --brand: #2c4a6e; --blue: #93b9e2; --yellow: #fae361;
+  --ok: #1f8a43; --ok-bg: #e3f4e8; --todo: #b4570f; --todo-bg: #fbeee2; --new: #6a4bc4; --new-bg: #ece7fa;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0f15; --surface: #141b25; --ink: #eef1f5; --sub: #9aa6b6; --line: #273141;
+  --stage: #06080c; --brand: #93b9e2; --ok: #6bdc7d; --ok-bg: #16301f; --todo: #ffaf6b; --todo-bg: #3a2616; --new: #b9a4ff; --new-bg: #261f3d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0f15; --surface: #141b25; --ink: #eef1f5; --sub: #9aa6b6; --line: #273141;
+  --stage: #06080c; --brand: #93b9e2; --ok: #6bdc7d; --ok-bg: #16301f; --todo: #ffaf6b; --todo-bg: #3a2616; --new: #b9a4ff; --new-bg: #261f3d; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 500 15px/1.5 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { padding-block: 28px 8px; }
+h1 { font: 800 clamp(28px, 4vw, 40px)/1.05 var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 em { font-style: italic; font-weight: 400; color: var(--brand); }
+.intro { color: var(--sub); max-width: 70ch; margin: 10px 0 0; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 10px; }
+.counts { display: flex; gap: 14px; font-weight: 800; font-variant-numeric: tabular-nums; flex-wrap: wrap; }
+.counts span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.dot.ok { background: var(--ok); } .dot.todo { background: var(--todo); }
+.track { flex: 1 1 180px; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; display: flex; min-width: 120px; }
+.track i { display: block; height: 100%; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filters button { font: 700 13px/1 var(--body); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.status-note { color: var(--sub); font-size: 13px; }
+
+nav.toc { display: flex; gap: 8px; flex-wrap: wrap; padding-block: 16px 4px; }
+nav.toc a { text-decoration: none; color: var(--ink); font: 700 13px/1 var(--body); padding: 9px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); display: inline-flex; gap: 8px; align-items: center; }
+nav.toc a b { font-variant-numeric: tabular-nums; color: var(--sub); font-weight: 700; }
+
+section.rub { padding-block: 26px 6px; }
+section.rub > h2 { font: 800 24px/1.1 var(--display); margin: 0 0 6px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+section.rub > h2 small { font: 700 13px/1 var(--body); color: var(--sub); }
+section.rub > p { color: var(--sub); margin: 0 0 14px; max-width: 75ch; }
+
+.fiche { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin-bottom: 18px; display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); overflow: hidden; }
+.fiche[data-statut="ok"] { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.fiche[data-statut="revoir"] { border-color: color-mix(in srgb, var(--todo) 55%, var(--line)); }
+.scene { background: var(--stage); display: flex; flex-direction: column; min-width: 0; }
+.vue { flex: 1; padding: 18px 16px; min-height: 280px; display: flex; flex-wrap: wrap; gap: 18px 16px; align-content: center; justify-content: center; align-items: flex-end; }
+.pub { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.pub figcaption { font: 700 11px/1 var(--body); color: #9aa6b6; letter-spacing: .04em; }
+.ecran { position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.ecran > .ad { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.formats { display: flex; gap: 6px; overflow-x: auto; padding: 10px 12px; border-top: 1px solid rgba(255,255,255,.08); }
+.formats button { flex: none; font: 700 12px/1 var(--body); padding: 7px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,.18); background: transparent; color: #c9d1dc; cursor: pointer; white-space: nowrap; }
+.formats button[aria-pressed="true"] { background: var(--yellow); color: #111; border-color: var(--yellow); }
+.formats.fonds { padding-top: 0; border-top: 0; }
+.formats.fonds span { font: 700 12px/26px var(--body); color: #9aa6b6; margin-right: 2px; }
+.formats.fonds button i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(255,255,255,.4); }
+.formats.fonds button[aria-pressed="true"] { background: #fff; color: #111; border-color: #fff; }
+.cote { padding: 18px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.cote h3 { margin: 0; font: 800 19px/1.2 var(--display); text-wrap: balance; }
+.cote .sous { color: var(--sub); font-size: 13px; margin-top: -6px; }
+.textes { font-size: 13px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; }
+.textes dt { font: 800 11px/1.6 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--sub); }
+.textes dd { margin: 0; overflow-wrap: anywhere; }
+.badge { align-self: flex-start; font: 800 12px/1 var(--body); letter-spacing: .04em; padding: 6px 10px; border-radius: 999px; background: var(--line); color: var(--sub); }
+.badge.ok { background: var(--ok-bg); color: var(--ok); } .badge.revoir { background: var(--todo-bg); color: var(--todo); } .badge.new { background: var(--new-bg); color: var(--new); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions button { flex: 1 1 120px; font: 800 14px/1 var(--body); padding: 12px 14px; border-radius: 12px; cursor: pointer; border: 2px solid var(--line); background: var(--surface); color: var(--ink); }
+.actions .b-ok[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: #fff; }
+.actions .b-revoir[aria-pressed="true"] { background: var(--todo); border-color: var(--todo); color: #fff; }
+.actions button:disabled { opacity: .45; cursor: not-allowed; }
+label.lab { font: 700 13px/1 var(--body); color: var(--sub); }
+textarea { width: 100%; min-height: 92px; resize: vertical; font: 500 14px/1.45 var(--body); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.saved { font-size: 12px; color: var(--sub); min-height: 1em; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.vide { padding: 40px 0; color: var(--sub); }
+.equipe { border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.equipe h4, .panneau h4 { margin: 0; font: 800 13px/1.2 var(--body); color: var(--sub); text-transform: uppercase; letter-spacing: .06em; }
+.equipe ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.equipe li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: start; font-size: 13px; }
+.equipe li img { width: 26px; height: 26px; border-radius: 50%; }
+.equipe li b { font-weight: 800; } .equipe li .st-ok { color: var(--ok); font-weight: 800; } .equipe li .st-revoir { color: var(--todo); font-weight: 800; }
+.equipe li p { margin: 2px 0 0; overflow-wrap: anywhere; } .equipe li .old { color: var(--sub); font-style: italic; }
+.equipe .rien { color: var(--sub); font-size: 13px; margin: 0; }
+.panneau { display: flex; flex-direction: column; gap: 10px; }
+footer { color: var(--sub); font-size: 13px; padding-block: 24px 40px; }
+@media (max-width: 900px) { .fiche { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: no-preference) { .fiche { transition: border-color .2s; } }
+</style>
+
+<header class="top wrap">
+  <h1>Campagne <em>« Jusqu’à 2000 et plus »</em></h1>
+  <p class="intro">Tout ce qu’il faut pour faire comprendre que l’Académie n’est pas que pour apprendre les bases : elle accompagne aussi les amateurs confirmés et les joueurs de club, jusqu’à 2000 et plus. D’abord les encarts pour le site (dans vos 4 emplacements, puis tous les formats), puis les posts réseaux et la vidéo, tous formats. Donne ton avis sur chaque fiche : « Validé » ou « À revoir », avec ce qu’il faut changer.</p>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="counts" aria-live="polite">
+      <span><i class="dot ok"></i><b id="n-ok">0</b> validés (décision finale)</span>
+      <span><i class="dot todo"></i><b id="n-revoir">0</b> à revoir</span>
+      <span><i class="dot"></i><b id="n-reste">0</b> à regarder</span>
+    </div>
+    <div class="track" aria-hidden="true"><i id="t-ok" style="background:var(--ok)"></i><i id="t-revoir" style="background:var(--todo)"></i></div>
+    <div class="filters" role="group" aria-label="Afficher">
+      <button type="button" data-f="tout" aria-pressed="true">Tout</button>
+      <button type="button" data-f="reste" aria-pressed="false">À regarder</button>
+      <button type="button" data-f="revoir" aria-pressed="false">À revoir</button>
+      <button type="button" data-f="ok" aria-pressed="false">Validés</button>
+    </div>
+    <span class="status-note" id="etat">Chargement des avis…</span>
+  </div>
+</div>
+
+<main class="wrap">
+  <nav class="toc" id="toc" aria-label="Rubriques"></nav>
+  <div id="liste"><p class="vide">Chargement des encarts…</p></div>
+</main>
+<footer class="wrap">Les encarts sont affichés à leur taille réelle, réduits si besoin pour tenir dans la fiche. Prix affichés : prix de lancement (14,90 €/mois au lieu de 19,90 €, 150 €/an au lieu de 179,90 €). [PRENOM] et [NB_PUZZLES_REUSSIS] sont remplacés par les données du joueur connecté. Les boutons mèneront à la page d’abonnement (ou d’inscription pour l’essai gratuit).</footer>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const quand = iso => iso ? new Date(iso).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) : "";
+// Typographie française : espaces insécables avant ? ! : ; € et dans les milliers
+const nb = s => String(s ?? "").replace(/'/g, "’").replace(/ ([?!:;])/g, " $1").replace(/ €/g, " €").replace(/(\d) (\d{3})/g, "$1 $2");
+const tx = s => esc(nb(s));
+
+/* ---------- Fonds ---------- */
+const FONDS = {
+  nuit:      { nom: "Nuit",      bg: "#0f1420", fg: "#ffffff", sub: "#c3c8d2", panel: "#2c4a6e", logo: "img/logo-bleu.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#262e40", cell: "#1c2436", eyebrow: "#93b9e2", ok: "#7bd88f", stk: "#fae361", stkTxt: "#111111" },
+  creme:     { nom: "Crème",     bg: "#f1f0ea", fg: "#1d1d1b", sub: "#4a4a45", panel: "#2c4a6e", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#fae361", btnTxt: "#111111", acc: "#2c4a6e", track: "#e1ddd1", cell: "#ffffff", eyebrow: "#2c4a6e", ok: "#237a35", stk: "#fae361", stkTxt: "#111111" },
+  bleu:      { nom: "Bleu nuit", bg: "#2c4a6e", fg: "#ffffff", sub: "#dbe5f1", panel: "#0f1420", logo: "img/logo-blanc.png", logoP: "img/logo-bleu.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#203a58", cell: "#24405f", eyebrow: "#fae361", ok: "#9be3a9", stk: "#fae361", stkTxt: "#111111" },
+  ciel:      { nom: "Bleu ciel", bg: "#93b9e2", fg: "#0f1420", sub: "#1f2f45", panel: "#2c4a6e", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#7aa4d1", cell: "#c9dcf1", eyebrow: "#0f1420", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
+  jaune:     { nom: "Jaune",     bg: "#fae361", fg: "#111111", sub: "#3d3a26", panel: "#2c4a6e", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#e9cf3f", cell: "#fff3b0", eyebrow: "#2c4a6e", ok: "#1d6b2e", stk: "#0f1420", stkTxt: "#fae361" },
+  rose:      { nom: "Rose",      bg: "#ffd6e2", fg: "#2a1520", sub: "#5c3a47", panel: "#c2185b", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#2a1520", btnTxt: "#ffffff", acc: "#c2185b", track: "#f4b9cb", cell: "#fff0f4", eyebrow: "#a3154d", ok: "#1d6b2e", stk: "#fae361", stkTxt: "#111111" },
+  framboise: { nom: "Framboise", bg: "#c2185b", fg: "#ffffff", sub: "#ffe1ec", panel: "#7a0f3a", logo: "img/logo-blanc.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#9c1249", cell: "#a8154f", eyebrow: "#ffd6e2", ok: "#c8f5d2", stk: "#fae361", stkTxt: "#111111" },
+  vert:      { nom: "Vert",      bg: "#217a35", fg: "#ffffff", sub: "#e1f5e6", panel: "#14532d", logo: "img/logo-blanc.png", logoP: "img/logo-blanc.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#1a612a", cell: "#1b6a2e", eyebrow: "#c8f5d2", ok: "#fae361", stk: "#fae361", stkTxt: "#111111" },
+  menthe:    { nom: "Menthe",    bg: "#d5f2de", fg: "#10301a", sub: "#2f5539", panel: "#217a35", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#10301a", btnTxt: "#ffffff", acc: "#217a35", track: "#b4e3c2", cell: "#ffffff", eyebrow: "#17652b", ok: "#17652b", stk: "#fae361", stkTxt: "#111111" },
+  violet:    { nom: "Violet",    bg: "#4b3aa8", fg: "#ffffff", sub: "#e4e0ff", panel: "#2e2370", logo: "img/logo-blanc.png", logoP: "img/logo-bleu.png", btn: "#fae361", btnTxt: "#111111", acc: "#fae361", track: "#3d2f8f", cell: "#3f3196", eyebrow: "#c9c1ff", ok: "#b6f0c2", stk: "#fae361", stkTxt: "#111111" },
+  corail:    { nom: "Corail",    bg: "#ff8a6a", fg: "#1d1d1b", sub: "#3b1d12", panel: "#9a3412", logo: "img/logo-noir.png", logoP: "img/logo-blanc.png",  btn: "#0f1420", btnTxt: "#ffffff", acc: "#0f1420", track: "#f27352", cell: "#ffd2c4", eyebrow: "#5a1d08", ok: "#14532d", stk: "#fae361", stkTxt: "#111111" },
+};
+const PRIX = {
+  mois:    { big: "14,90 €/mois", old: "19,90 €", small: "Prix de lancement · sans engagement", stk: ["−25 %", "prix de lancement"] },
+  an:      { big: "150 €/an", old: "179,90 €", small: "Près de 2 mois offerts", stk: ["2 mois", "offerts"] },
+  gratuit: { big: "Gratuit", old: "", small: "6 leçons offertes", stk: ["6", "leçons offertes"] },
+};
+const FORMATS = [
+  { id: "1000x391", nom: "Smartphone 1000×391", w: 1000, h: 391, emp: true },
+  { id: "960x250",  nom: "Desktop 960×250", w: 960, h: 250, emp: true },
+  { id: "960x150",  nom: "Header small 960×150", w: 960, h: 150, emp: true },
+  { id: "1000x1000", nom: "Carré 1000×1000", w: 1000, h: 1000, emp: true },
+  { id: "970x250",  nom: "Billboard 970×250", w: 970, h: 250 },
+  { id: "1200x300", nom: "Bandeau d’accueil 1200×300", w: 1200, h: 300 },
+  { id: "640x200",  nom: "Encart dans un article 640×200", w: 640, h: 200 },
+  { id: "1200x60",  nom: "Barre d’annonce 1200×60", w: 1200, h: 60 },
+  { id: "970x90",   nom: "Grand leaderboard 970×90", w: 970, h: 90 },
+  { id: "728x90",   nom: "Leaderboard 728×90", w: 728, h: 90 },
+  { id: "468x60",   nom: "Bannière 468×60", w: 468, h: 60 },
+  { id: "320x100",  nom: "Grande bannière mobile 320×100", w: 320, h: 100 },
+  { id: "320x50",   nom: "Bannière mobile 320×50", w: 320, h: 50 },
+  { id: "480x360",  nom: "Fenêtre pop-up 480×360", w: 480, h: 360 },
+  { id: "400x400",  nom: "Carré 400×400", w: 400, h: 400 },
+  { id: "336x280",  nom: "Grand pavé 336×280", w: 336, h: 280 },
+  { id: "300x250",  nom: "Pavé 300×250", w: 300, h: 250 },
+  { id: "250x250",  nom: "Petit carré 250×250", w: 250, h: 250 },
+  { id: "300x1050", nom: "Portrait 300×1050", w: 300, h: 1050 },
+  { id: "300x600",  nom: "Demi-page 300×600", w: 300, h: 600 },
+  { id: "160x600",  nom: "Skyscraper 160×600", w: 160, h: 600 },
+  { id: "120x600",  nom: "Skyscraper étroit 120×600", w: 120, h: 600 },
+].map(f => ({ ...f, fam: f.w / f.h >= 1.5 ? "horizontal" : "vertical" }));
+const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", revue: "le lecteur PGN de la revue" };
+
+/* ---------- Les propositions ---------- */
+const C = [
+  // ---- Joueurs de club et confirmés : l'Académie n'est pas que pour débuter
+  { id: "c01", v: 1, aud: "c", nom: "Jusqu’à 2000 et plus", angle: "L’accroche de la campagne : l’Académie accompagne aussi les joueurs confirmés, jusqu’en haut de l’escalier.", fond: "nuit", pose: "drapeau", scene: { type: "escalier", pose: "drapeau" }, prix: "mois",
+    t: ["On t’emmène", "jusqu’à 2000 et plus."], court: "Jusqu’à 2000 et plus", sub: "Objectif 1600, 1800, 2000 : le parcours continue.", cta: "Je m'abonne" },
+  { id: "c02", v: 1, aud: "c", nom: "Joueur de club ?", angle: "Un sacrifice du Fou en h7 marqué « !! » : une position de joueur de club, pas de débutant.", fond: "framboise", pose: "reflexion", scene: { type: "board", pos: "fouh7" }, prix: "mois",
+    t: ["Joueur de club ?", "L’Académie est pour toi."], court: "Joueur de club ?", sub: "Attaques, sacrifices, plans : des leçons au niveau des tournois.", cta: "Je m'abonne" },
+  { id: "c03", v: 1, aud: "c", nom: "Le cap des 2000", angle: "La mascotte au bout d’une courbe qui franchit les 2000.", fond: "violet", pose: "hourra", scene: { type: "elo", pose: "hourra", label: "Elo <span style=\"color:#fae361\">2000 +</span>" }, prix: "mois",
+    t: ["Fais sauter", "le cap des 2000."], court: "Passe les 2000", sub: "Les modules Objectif 1800 et 2000 et plus, avec leurs exercices.", cta: "Je m'abonne" },
+  { id: "c04", v: 1, aud: "c", nom: "Avec des grands maîtres", angle: "Les grands maîtres en direct, pour les joueurs qui préparent leurs tournois.", fond: "bleu", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
+    t: ["Prépare tes tournois", "avec des grands maîtres."], court: "Masterclasses de GMI", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs, en direct.", cta: "Je m'abonne" },
+  { id: "c05", v: 1, aud: "c", nom: "Pas seulement pour débuter", angle: "Casser l’idée d’une Académie pour débutants, avec les séries vidéo des maîtres.", fond: "corail", pose: "idee", scene: { type: "videos" }, prix: "mois",
+    t: ["Pas seulement", "pour débuter."], court: "Pas que pour débuter", sub: "Ouvertures, plans, finales : de quoi progresser jusqu’à 2000 et plus.", cta: "Découvrir" },
+  { id: "c06", v: 1, aud: "c", nom: "Les parties des champions", angle: "La revue Europe Échecs en PGN, la lecture des joueurs confirmés.", fond: "creme", pose: "cafe", scene: { type: "revue" }, prix: "mois",
+    t: ["Les parties des champions,", "commentées coup par coup."], court: "La revue en PGN", sub: "Chaque numéro de la revue Europe Échecs en PGN interactif.", cta: "Je m'abonne" },
+];
+const EXEMPLES = { "[PRENOM]": "Léa", "[NB_PUZZLES_REUSSIS]": "37" };
+const ex = s => String(s).replace(/\[[A-Z_]+\]/g, v => EXEMPLES[v] || v);
+const T = s => tx(ex(s));
+
+/* ---------- Briques ---------- */
+const r = Math.round;
+const FONT = "font-family:'Signika',Arial,sans-serif";
+const img = (src, alt, style) => `<img src="${esc(src)}" alt="${esc(alt)}" style="${style}">`;
+const btn = (t, label, h, fs, full) => `<span style="display:${full ? "flex" : "inline-flex"};align-items:center;justify-content:center;height:${h}px;padding:0 ${full ? 8 : r(h * .55)}px;border-radius:999px;background:${t.btn};color:${t.btnTxt};font-weight:700;font-size:${fs}px;white-space:nowrap;flex:none">${T(label)}</span>`;
+function logo(t, h, style, surPanneau) { return img(surPanneau ? t.logoP : t.logo, "echecs.com", `height:${r(h)}px;width:auto;flex:none;${style || ""}`); }
+function prixChip(c, t, fs, old) {
+  const p = PRIX[c.prix]; if (!p) return "";
+  return `<span style="display:inline-flex;align-items:baseline;gap:${r(fs * .4)}px;flex:none;white-space:nowrap;font-size:${fs}px;font-weight:700">${T(p.big)}${old && p.old && c.prix !== "an" ? `<s style="font-size:${r(fs * .72)}px;font-weight:400;color:${t.sub}">${T(p.old)}</s>` : ""}</span>`;
+}
+const titre = (c, sep) => sep === "<br>" ? c.t.map(l => `<span style="display:block;white-space:nowrap">${T(l)}</span>`).join("") : c.t.map(T).join(sep);
+
+/* ---------- Échiquiers ---------- */
+const POS = {
+  couloir: { p: "bK:g8 bP:f7 bP:g7 bP:h7 wR:d1 wK:g1 wP:f2 wP:g2 wP:h2", m: [] },
+  mat:     { p: "bK:g8 bP:f7 bP:g7 bP:h7 wR:d8 wK:g1 wP:f2 wP:g2 wP:h2", m: [{ fl: ["d1", "d8"], col: "#2f9e44" }, { rond: "d8", col: "#2f9e44", badge: "✓" }] },
+  puzzle:  { p: "bK:g8 bP:f7 bP:g7 bP:h7 bR:a8 wR:d1 wK:g1 wP:f2 wP:g2 wP:h2", m: [], legende: "Les Blancs matent en 1" },
+  brillant:{ p: "bK:e8 bR:a8 bP:a7 bP:b7 bP:f7 bP:g7 bB:f8 wN:c7 wK:g1 wP:f2 wP:g2 wP:h2 wR:d1", m: [{ fl: ["b5", "c7"], col: "#2f9e44" }, { rond: "c7", col: "#2f9e44", badge: "!!" }] },
+  erreur:  { p: "bK:g8 bQ:d8 bN:f6 bP:f7 bP:g7 bP:h7 wQ:h5 wK:g1 wP:f2 wP:g2 wP:h2 wB:c4", m: [{ fl: ["d1", "h5"], col: "#e03131" }, { rond: "h5", col: "#e03131", badge: "??" }] },
+  fouh7:   { p: "bK:g8 bR:f8 bQ:d8 bB:e7 bN:d7 bP:f7 bP:g7 bP:e6 bP:d5 bP:a7 bP:b6 wB:h7 wN:f3 wQ:d1 wP:e5 wP:d4 wK:g1 wR:f1 wP:f2 wP:g2 wP:h2 wP:a2 wP:b2", m: [{ fl: ["d3", "h7"], col: "#2f9e44" }, { rond: "h7", col: "#2f9e44", badge: "!!" }] },
+  partie:  { p: "bR:a8 bN:b8 bB:c8 bQ:d8 bK:e8 bB:f8 bN:g6 bR:h8 bP:a7 bP:b7 bP:c7 bP:d7 bP:f7 bP:g7 bP:h7 bP:e5 wP:e4 wN:f3 wP:a2 wP:b2 wP:c2 wP:d2 wP:f2 wP:g2 wP:h2 wR:a1 wN:b1 wB:c1 wQ:d1 wK:e1 wB:f1 wR:h1", m: [] },
+};
+const sq = s => ["abcdefgh".indexOf(s[0]), 8 - +s[1]];
+function board(nom, H) {
+  const P = POS[nom], cs = H / 8;
+  const cases = Array.from({ length: 64 }, (_, i) => `<i style="position:absolute;left:${(i % 8) * cs}px;top:${(i >> 3) * cs}px;width:${cs + .5}px;height:${cs + .5}px;background:${((i % 8) + (i >> 3)) % 2 ? "#93b9e2" : "#e4ecf6"}"></i>`).join("");
+  const rond = P.m.filter(m => m.rond).map(m => { const [x, y] = sq(m.rond); return `<i style="position:absolute;left:${x * cs + cs * .04}px;top:${y * cs + cs * .04}px;width:${cs * .92}px;height:${cs * .92}px;border-radius:50%;box-shadow:inset 0 0 0 ${Math.max(2, cs * .09)}px ${m.col}"></i>`; }).join("");
+  const pcs = P.p.split(" ").map(e => { const [p, s] = e.split(":"), [x, y] = sq(s); return `<img src="img/p-${p}.png" alt="" style="position:absolute;left:${x * cs + cs * .07}px;top:${y * cs + cs * .07}px;width:${cs * .86}px;height:${cs * .86}px">`; }).join("");
+  const fl = P.m.filter(m => m.fl).map(m => { const [a, b] = m.fl.map(sq), ax = a[0] + .5, ay = a[1] + .5, bx = b[0] + .5, by = b[1] + .5, L = Math.hypot(bx - ax, by - ay), ux = (bx - ax) / L, uy = (by - ay) / L, ex2 = bx - ux * .45, ey = by - uy * .45;
+    return `<svg viewBox="0 0 8 8" style="position:absolute;inset:0;width:100%;height:100%"><line x1="${ax}" y1="${ay}" x2="${ex2}" y2="${ey}" stroke="${m.col}" stroke-width=".2" stroke-linecap="round" opacity=".9"/><path d="M${bx - ux * .2} ${by - uy * .2} L${ex2 - uy * .28 - ux * .1} ${ey + ux * .28 - uy * .1} L${ex2 + uy * .28 - ux * .1} ${ey - ux * .28 - uy * .1} Z" fill="${m.col}" opacity=".95"/></svg>`; }).join("");
+  const badge = P.m.filter(m => m.badge).map(m => { const [x, y] = sq(m.rond), d = cs * .78; return `<span style="position:absolute;left:${(x + 1) * cs - d * .55}px;top:${y * cs - d * .45}px;width:${d}px;height:${d}px;border-radius:50%;background:${m.col};color:#fff;display:grid;place-items:center;font:700 ${r(d * .5)}px/1 'Signika',Arial,sans-serif;box-shadow:0 0 0 ${Math.max(1.5, cs * .06)}px #fff;z-index:2">${m.badge}</span>`; }).join("");
+  return `<div role="img" aria-label="Échiquier" style="position:relative;flex:none;width:${r(H)}px;height:${r(H)}px"><div style="position:absolute;inset:0;border-radius:${r(H * .03)}px;overflow:hidden;box-shadow:0 0 0 ${Math.max(2, r(H * .022))}px #fff,0 ${r(H * .04)}px ${r(H * .12)}px rgba(0,0,0,.3)">${cases}${rond}${pcs}${fl}</div>${badge}</div>`;
+}
+function plateau(H) { return board("couloir", H); }
+
+/* ---------- Éléments des scènes ---------- */
+const masc = (pose, h, style) => img(`img/${pose}.png`, "La mascotte echecs.com", `height:${r(h)}px;width:auto;max-width:${r(h * 1.2)}px;object-fit:contain;object-position:bottom;${style || ""}`);
+function sticker(t, kind, D, style) {
+  const [a, b] = PRIX[kind].stk;
+  return `<div style="position:absolute;${style};width:${r(D)}px;height:${r(D)}px;border-radius:50%;background:${t.stk};color:${t.stkTxt};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1;transform:rotate(-10deg);box-shadow:0 ${r(D * .05)}px ${r(D * .14)}px rgba(0,0,0,.28);z-index:2">
+    <div style="position:absolute;inset:${r(D * .06)}px;border-radius:50%;border:${Math.max(1, r(D * .014))}px dashed ${t.stkTxt};opacity:.45"></div>
+    <span style="font-size:${r(D * (a.length > 5 ? .24 : .33))}px;font-weight:700;white-space:nowrap">${T(a)}</span><span style="font-size:${Math.max(8, r(D * .105))}px;font-weight:600;margin-top:${r(D * .04)}px;max-width:${r(D * .72)}px">${T(b)}</span></div>`;
+}
+const bulle = (txt, fs, style, queue) => `<span style="position:absolute;background:#fff;color:#121821;font:700 ${fs}px/1.15 'Signika',Arial,sans-serif;padding:${r(fs * .45)}px ${r(fs * .7)}px;border-radius:${r(fs * .8)}px ${r(fs * .8)}px ${queue === "g" ? 2 : r(fs * .8)}px ${queue === "g" ? r(fs * .8) : 2}px;box-shadow:0 ${r(fs * .2)}px ${r(fs * .6)}px rgba(0,0,0,.22);white-space:nowrap;z-index:2;${style}">${T(txt)}</span>`;
+const ICONES = {
+  lecons: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v6"/>',
+  videos: '<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/>',
+  masterclasses: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/><path d="M17.5 4.5l1.5-1.5M19.5 7h2"/>',
+  tournois: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7"/>',
+  cadenas: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  coche: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+};
+const icone = (n, s, col, w = 2.2) => `<svg aria-hidden="true" width="${r(s)}" height="${r(s)}" viewBox="0 0 24 24" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" style="color:${col};flex:none">${ICONES[n]}</svg>`;
+
+// Une scène dans une boîte W×H (le fond du panneau est posé par le gabarit)
+function scene(c, t, W, H) {
+  const S = c.scene, m = Math.min(W, H), cx = "left:50%;transform:translateX(-50%)";
+  const box = inner => `<div style="position:relative;width:${r(W)}px;height:${r(H)}px;overflow:hidden">${inner}</div>`;
+  const disque = (d, pos) => `<div style="position:absolute;width:${r(d)}px;height:${r(d)}px;border-radius:50%;background:rgba(255,255,255,.13);${pos}"></div>`;
+  switch (S.type) {
+    case "masc": {
+      const h = H * .86, acc = S.acc ? `<span style="position:absolute;left:58%;top:${r(H * .04)}px;font:700 ${r(m * .2)}px/1 'Signika',Arial,sans-serif;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.25);transform:rotate(12deg)">${S.acc}</span>` : "";
+      return box(`${disque(m * 1.02, `left:50%;bottom:${r(-m * .3)}px;margin-left:${r(-m * .51)}px`)}<div style="position:absolute;bottom:0;${cx}">${masc(S.pose, h)}</div>${acc}`);
+    }
+    case "mascStk":
+    {
+      const h = Math.min(H * .78, W * .62 / 1.15), cx = Math.max(h * .55, W * .34), D = Math.min(m * .42, W - cx - h * .55 + m * .05);
+      return box(`${disque(m * .95, `left:${r(cx - m * .47)}px;bottom:${r(-m * .3)}px`)}<div style="position:absolute;bottom:0;left:${r(cx)}px;transform:translateX(-50%)">${masc(S.pose, h)}</div>${sticker(t, S.stk, Math.max(m * .3, D), `right:${r(W * .04)}px;top:${r(H * .08)}px`)}`);
+    }
+    case "board": {
+      const b = m * .82, leg = POS[S.pos].legende;
+      return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-${leg ? 56 : 50}%)">${board(S.pos, leg ? b * .88 : b)}</div>${leg ? `<span style="position:absolute;bottom:${r(H * .04)}px;${cx};white-space:nowrap;font:700 ${r(m * .065)}px/1 'Signika',Arial,sans-serif;color:#111;background:#fae361;border-radius:99px;padding:${r(m * .025)}px ${r(m * .05)}px">${T(leg)}</span>` : ""}`);
+    }
+    case "mascBoard": {
+      const b = Math.min(H * .78, W * .62);
+      return box(`<div style="position:absolute;left:${r(W * .08)}px;top:50%;transform:translateY(-50%) rotate(-4deg)">${board(S.pos, b)}</div><div style="position:absolute;right:${r(W * .02)}px;bottom:0">${masc(S.pose, H * .7)}</div>`);
+    }
+    case "coach": {
+      const d = m * .52, ring = Math.max(2, r(d * .05));
+      const ph = (n, x, y) => `<img src="img/coach-${n}.jpg" alt="${n === "kamsky" ? "Gata Kamsky" : "Fabien Libiszewski"}" style="position:absolute;left:${r(x)}px;top:${r(y)}px;width:${r(d)}px;height:${r(d)}px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 ${ring}px #fff,0 ${r(d * .06)}px ${r(d * .2)}px rgba(0,0,0,.3)">`;
+      const x0 = W / 2 - d * .9, y0 = H * .22;
+      return box(`${ph("libiszewski", x0 + d * .8, y0 + d * .18)}${ph("kamsky", x0, y0)}
+        <span style="position:absolute;left:${r(x0)}px;top:${r(y0 - m * .12)}px;font:700 ${r(m * .06)}px/1 'Signika',Arial,sans-serif;letter-spacing:.06em;background:#ff4757;color:#fff;border-radius:99px;padding:${r(m * .022)}px ${r(m * .045)}px;z-index:2">● EN DIRECT</span>
+        ${bulle("Une question ?", r(m * .068), `left:${r(x0 + d * .55)}px;top:${r(y0 + d * 1.12)}px`, "g")}`);
+    }
+    case "video": {
+      const w = Math.min(W * .86, H * .78 * 16 / 9), h = w * 9 / 16;
+      return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:${r(w)}px;height:${r(h)}px;border-radius:${r(w * .03)}px;overflow:hidden;box-shadow:0 0 0 ${Math.max(2, r(w * .012))}px #fff,0 ${r(w * .03)}px ${r(w * .08)}px rgba(0,0,0,.35)">
+        <img src="img/${S.img}.jpg" alt="Une vidéo Europe Échecs" style="width:100%;height:100%;object-fit:cover;display:block">
+        <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:${r(w * .16)}px;height:${r(w * .16)}px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.35)"><svg width="${r(w * .06)}" height="${r(w * .06)}" viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z" fill="#2c4a6e"/></svg></span>
+        <span style="position:absolute;right:${r(w * .03)}px;top:${r(w * .03)}px;font:700 ${r(w * .045)}px/1 'Signika',Arial,sans-serif;background:rgba(0,0,0,.65);color:#fff;border-radius:4px;padding:${r(w * .01)}px ${r(w * .02)}px">HD</span></div>`);
+    }
+    case "videos": {
+      const w = Math.min(W * .62, H * .62 * 16 / 9), h = w * 9 / 16, card = (n, x, y, rot, z) => `<img src="img/video-${n}.jpg" alt="" style="position:absolute;left:${r(x)}px;top:${r(y)}px;width:${r(w)}px;height:${r(h)}px;object-fit:cover;border-radius:${r(w * .03)}px;transform:rotate(${rot}deg);box-shadow:0 0 0 ${Math.max(2, r(w * .012))}px #fff,0 ${r(w * .03)}px ${r(w * .08)}px rgba(0,0,0,.35);z-index:${z}">`;
+      return box(`${card("minute-finale", W / 2 - w * .82, H / 2 - h * .72, -8, 1)}${card("masterclass", W / 2 - w * .18, H / 2 - h * .62, 7, 2)}${card("calcul-gagnant", W / 2 - w * .5, H / 2 - h * .3, -1, 3)}`);
+    }
+    case "pictos": {
+      const L = [["lecons", "Leçons"], ["videos", "Vidéos"], ["masterclasses", "Masterclasses"], ["tournois", "Tournois"]], s = Math.min(W * .4, H * .4);
+      return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(2,${r(s)}px);gap:${r(s * .1)}px">${L.map(([n, l]) => `<div style="height:${r(s * .92)}px;border-radius:${r(s * .14)}px;background:#fff;color:#121821;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${r(s * .06)}px;box-shadow:0 ${r(s * .04)}px ${r(s * .12)}px rgba(0,0,0,.2)">${icone(n, s * .38, "#2c4a6e")}<span style="font:700 ${r(s * .12)}px/1 'Signika',Arial,sans-serif">${l}</span></div>`).join("")}</div>`);
+    }
+    case "escalier": {
+      const N = ["Initiation", "1400", "1600", "1800", "2000 +"], n = N.length, sw = W * .84 / n, x0 = W * .08, top = H * .3, base = H * .96;
+      const marches = N.map((l, i) => { const hh = (base - top) * ((S.verrou ? .34 : .22) + (S.verrou ? .66 : .78) * i / (n - 1)), fait = S.verrou ? i === 0 : true, lock = S.verrou && i === 1, last = !S.verrou && i === n - 1;
+        return `<div style="position:absolute;left:${r(x0 + i * sw)}px;width:${r(sw - Math.max(2, sw * .06))}px;bottom:${r(H - base)}px;height:${r(hh)}px;border-radius:${r(sw * .1)}px ${r(sw * .1)}px 0 0;background:${last ? "#fae361" : S.verrou && !fait ? "rgba(255,255,255,.18)" : "#fff"};display:flex;flex-direction:column;align-items:center;padding-top:${r(sw * .08)}px;gap:${r(sw * .06)}px;color:#121821">
+          <span style="font:700 ${r(Math.min(sw * .15, H * .06))}px/1 'Signika',Arial,sans-serif;white-space:nowrap;margin-top:${S.verrou && fait ? r(sw * .22) : 0}px;color:${S.verrou && !fait ? "#fff" : "#121821"}">${l}</span>${lock ? icone("cadenas", sw * .42, "#fae361", 2.6) : ""}${S.verrou && fait ? `<span style="position:absolute;left:50%;transform:translateX(-50%);top:${r(-sw * .22)}px;width:${r(sw * .4)}px;height:${r(sw * .4)}px;border-radius:50%;background:#2f9e44;display:grid;place-items:center;box-shadow:0 0 0 ${Math.max(2, r(sw * .03))}px #fff,0 3px 8px rgba(0,0,0,.25)">${icone("coche", sw * .26, "#fff", 3.4)}</span>` : ""}</div>`; }).join("");
+      const perso = !S.verrou ? `<div style="position:absolute;left:${r(x0 + (n - 1) * sw + sw / 2)}px;bottom:${r(H - top)}px;transform:translateX(-50%)">${masc(S.pose, H * .3)}</div>` : "";
+      return box(marches + perso);
+    }
+    case "elo": {
+      const pts = [[0, .9], [.12, .84], [.24, .86], [.36, .7], [.48, .66], [.6, .48], [.72, .42], [.84, .24], [1, .1]], pw = W * .62, ph = H * .7, ox = W * .06, oy = H * .16;
+      const d = pts.map(([x, y], i) => `${i ? "L" : "M"}${(ox + x * pw).toFixed(1)},${(oy + y * ph).toFixed(1)}`).join(" ");
+      const fin = [ox + pw, oy + .1 * ph];
+      return box(`<svg width="${r(W)}" height="${r(H)}" style="position:absolute;inset:0"><path d="${d} L${ox + pw},${oy + ph} L${ox},${oy + ph} Z" fill="#fae361" opacity=".18"/><path d="${d}" fill="none" stroke="#fae361" stroke-width="${Math.max(4, r(m * .035))}" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${fin[0]}" cy="${fin[1]}" r="${Math.max(5, r(m * .04))}" fill="#fae361" stroke="#fff" stroke-width="${Math.max(2, r(m * .012))}"/></svg>
+        <span style="position:absolute;left:${r(ox)}px;top:${r(oy - m * .02)}px;font:700 ${r(m * .1)}px/1 'Signika',Arial,sans-serif;color:#fff">${S.label || 'Elo <span style="color:#9be3a9">+330</span>'}</span>
+        <div style="position:absolute;right:${r(W * .02)}px;bottom:0">${masc(S.pose, H * .62)}</div>`);
+    }
+    case "forum":
+      return box(`${disque(m * .95, `left:${r(W * .3 - m * .47)}px;bottom:${r(-m * .3)}px`)}<div style="position:absolute;bottom:0;left:${r(W * .3)}px;transform:translateX(-50%)">${masc(S.pose, H * .78)}</div>
+        ${bulle("Que jouer contre la Sicilienne ?", r(m * .066), `right:${r(W * .05)}px;top:${r(H * .1)}px;max-width:${r(W * .62)}px;white-space:normal`, "d")}${bulle("Essaie 2.c3 !", r(m * .066), `right:${r(W * .1)}px;top:${r(H * .42)}px;max-width:${r(W * .62)}px`, "g")}`);
+    case "check": {
+      const s = Math.min(W * .19, H * .3), cell = (i) => { const ok = i < 6; return `<div style="width:${r(s)}px;height:${r(s)}px;border-radius:${r(s * .2)}px;background:${ok ? "#2f9e44" : "rgba(255,255,255,.16)"};display:grid;place-items:center;box-shadow:${ok ? "0 3px 10px rgba(0,0,0,.2)" : "inset 0 0 0 2px rgba(255,255,255,.35)"}">${icone(ok ? "coche" : "cadenas", s * .52, ok ? "#fff" : "#fae361", ok ? 3.2 : 2.6)}</div>`; };
+      return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(4,${r(s)}px);gap:${r(s * .16)}px">${Array.from({ length: 8 }, (_, i) => cell(i)).join("")}</div>`);
+    }
+    case "versus": {
+      const s = Math.min(W * .36, H * .66), col = (lab, n, sous, hl) => `<div style="width:${r(s)}px;height:${r(s * 1.1)}px;border-radius:${r(s * .12)}px;background:${hl ? "#fae361" : "rgba(255,255,255,.14)"};color:${hl ? "#111" : "#fff"};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${r(s * .04)}px;${hl ? "box-shadow:0 6px 18px rgba(0,0,0,.25);transform:scale(1.06)" : ""}">
+        <span style="font:700 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.85">${lab}</span><span style="font:700 ${r(s * .36)}px/1 'Signika',Arial,sans-serif">${T(n)}</span><span style="font:600 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;opacity:.85">${sous}</span></div>`;
+      return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:${r(s * .14)}px">${col("Gratuit", "6", "leçons", false)}<span style="font:700 ${r(s * .14)}px/1 'Signika',Arial,sans-serif;color:#fff;opacity:.8">vs</span>${col("Abonné", "+200", "leçons", true)}</div>`);
+    }
+    case "revue": {
+      const s = Math.min(W * .9 / 200, H * .86 / 150);
+      return box(`<div style="position:absolute;left:50%;top:50%;width:${r(200 * s)}px;height:${r(150 * s)}px;transform:translate(-50%,-50%)"><div style="position:absolute;left:0;top:0;width:200px;height:150px;transform:scale(${s});transform-origin:0 0;${FONT};filter:drop-shadow(0 8px 18px rgba(0,0,0,.28))">${MAQ_PGN()}</div></div>`);
+    }
+  }
+  return box("");
+}
+// Petite vignette pour les bannières fines (H ≤ 100 px)
+function vignette(c, t, s) {
+  const S = c.scene, wrap = inner => `<div style="width:${r(s)}px;height:${r(s)}px;flex:none;position:relative;overflow:hidden;background:${t.panel};display:flex;align-items:flex-end;justify-content:center">${inner}</div>`;
+  if (S.type === "board") return wrap(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">${board(S.pos, s * .78)}</div>`);
+  if (S.type === "coach") return wrap(`<img src="img/coach-kamsky.jpg" alt="Gata Kamsky" style="width:100%;height:100%;object-fit:cover">`);
+  if (S.type === "video" || S.type === "videos") return wrap(`<img src="img/${S.img || "video-calcul-gagnant"}.jpg" alt="" style="width:100%;height:100%;object-fit:cover">`);
+  if (S.type === "check") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center">${icone("cadenas", s * .5, "#fae361", 2.6)}</div>`);
+  return wrap(masc(S.pose || c.pose, s * .86));
+}
+const MAQ_PGN = () => `<div style="background:#fff;color:#121821;border-radius:14px;padding:9px;height:150px;box-sizing:border-box;display:flex;gap:8px">
+    <div style="flex:none;align-self:center">${board("mat", 104)}</div>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+      <div style="font-size:8px;font-weight:700;letter-spacing:.06em;color:#5a6574">N° 779 · PARTIE 3</div>
+      ${[["24.", "♖a1", "♔f8"], ["25.", "♖d1", "♔g8"], ["26.", "♖d8 #", ""]].map(([n, b, w], i) => `<div style="display:flex;gap:4px;font-size:10px;padding:3px 5px;border-radius:5px;${i === 2 ? "background:#fae361;font-weight:700" : ""}"><span style="color:#5a6574">${n}</span><span>${b}</span><span>${w}</span></div>`).join("")}
+      <div style="font-size:8.5px;line-height:1.3;color:#5a6574;font-style:italic">Le Roi noir est enfermé par ses propres pions.</div>
+      <div style="margin-top:auto;display:flex;gap:4px">${["◀", "▶"].map(x => `<span style="flex:1;text-align:center;font-size:9px;padding:3px 0;border-radius:5px;background:#2c4a6e;color:#fff">${x}</span>`).join("")}</div>
+    </div></div>`;
+
+/* ---------- Les deux modèles ---------- */
+const root = (f, t, inner, rad) => `<div class="ad-root" style="width:${f.w}px;height:${f.h}px;box-sizing:border-box;background:${t.bg};color:${t.fg};${FONT};overflow:hidden;position:relative;border-radius:${rad}px">${inner}</div>`;
+const FAM = {
+  // Horizontal : le visuel à gauche, un titre court et un bouton
+  horizontal(c, t, f) {
+    const H = f.h;
+    if (H >= 150) {   // grands bandeaux
+      const trapu = f.w / H < 3, sw = r(Math.min(H * 1.3, f.w * .4)), large = f.w >= 900, fsT = r(H * .158);   // trapu : le format smartphone 1000×391
+      return root(f, t, `<div style="display:flex;height:100%">
+        <div style="width:${sw}px;flex:none;position:relative;background:${t.panel}">${trapu ? `<div style="height:${r(H * .19)}px;display:flex;align-items:center;padding-left:${r(H * .07)}px">${logo(t, H * .075, "", true)}</div>${scene(c, t, sw, H - r(H * .19))}` : scene(c, t, sw, H)}</div>
+        <div data-fit data-min="${r(H * .1)}" style="flex:1;min-width:0;padding:${r(H * .1)}px ${r(H * .12)}px;display:flex;flex-direction:column;justify-content:center;gap:${r(H * .065)}px;overflow:hidden">
+          <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;letter-spacing:-.01em">${titre(c, "<br>")}</div>
+          ${large && H >= 200 && c.sub ? `<div style="font-size:${r(H * .08)}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
+          <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || (trapu && c.cta.length > 16) || c.cta.length > 24 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large && !trapu)}${large && !trapu && c.cta.length <= 20 ? logo(t, H * .11, "margin-left:auto") : ""}</div>
+        </div></div>`, r(H * .05));
+    }
+    if (f.w >= 1100) {   // barre d'annonce
+      return root(f, t, `<div data-fit data-min="14" style="height:100%;display:flex;align-items:center;justify-content:center;gap:22px;padding:0 24px;overflow:hidden;white-space:nowrap">
+        ${logo(t, 26)}<span class="t" style="font-size:24px;font-weight:700">${T(c.court)}</span>${prixChip(c, t, 20, true)}${btn(t, c.ctas || c.cta, 40, 17)}</div>`, 0);
+    }
+    const s = H, fs = r(H * (f.w >= 700 ? .3 : .32));   // bannières fines
+    if (f.w < 400 && H >= 90) return root(f, t, `<div style="display:flex;height:100%">${vignette(c, t, H)}
+      <div data-fit data-min="13" style="flex:1;min-width:0;padding:${r(H * .1)}px ${r(H * .14)}px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+        <div class="t" style="font-size:19px;line-height:1.1;font-weight:700">${T(c.court)}</div>
+        <div style="display:flex;justify-content:flex-end">${btn(t, c.ctas || (c.cta.length > 14 ? "J'en profite" : c.cta), 36, 15)}</div></div></div>`, 10);
+    return root(f, t, `<div style="display:flex;align-items:center;height:100%;gap:${r(H * .2)}px;padding-right:${r(H * .16)}px">
+      ${vignette(c, t, s)}
+      <div data-fit data-min="${Math.max(12, r(fs * .6))}" style="flex:1;min-width:0;height:${H}px;display:flex;align-items:center;overflow:hidden"><div class="t" style="font-size:${fs}px;line-height:1.1;font-weight:700">${T(c.court)}</div></div>
+      ${f.w >= 700 ? prixChip(c, t, r(H * .24), false) : ""}${f.w >= 900 ? logo(t, H * .3) : ""}
+      ${btn(t, c.ctas || (c.cta.length > 14 ? "J'en profite" : c.cta), r(H * .5), r(H * (H > 70 ? .19 : .24)))}
+    </div>`, r(H * .1));
+  },
+  // Carré et portrait : le visuel en haut, le titre en gros, le bouton en bas
+  vertical(c, t, f) {
+    if (f.h / f.w < 1.3) return FAM.carre(c, t, f);
+    const W = f.w, ratio = f.h / W, sh = r(f.h * (ratio >= 3 ? .42 : ratio >= 1.8 ? .46 : .52)), pad = r(W * .065);
+    const fsT = Math.min(44, r(W * (W >= 300 ? .095 : W >= 160 ? .12 : .13))), avecSub = c.sub && f.h >= 360 && W >= 300;
+    const etroit = W < 200, cta = etroit || c.cta.length > (W >= 400 ? 24 : 14) ? (c.ctas || "Je m'abonne") : c.cta;
+    return root(f, t, `<div style="display:flex;flex-direction:column;height:100%">
+      <div style="height:${sh}px;flex:none;position:relative;background:${t.panel}"><div style="height:${r(Math.max(14, W * .065) + pad * 1.2)}px;display:flex;align-items:center;padding-left:${r(pad * .8)}px">${logo(t, Math.max(14, W * .065), "", true)}</div>${scene(c, t, W, sh - r(Math.max(14, W * .065) + pad * 1.2))}</div>
+      <div data-fit data-min="${r(fsT * .6)}" style="flex:1;min-height:0;padding:${pad}px;display:flex;flex-direction:column;gap:${r(pad * .55)}px;overflow:hidden">
+        <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;letter-spacing:-.01em">${etroit ? T(c.court) : titre(c, "<br>")}</div>
+        ${avecSub ? `<div style="font-size:${Math.max(15, r(W * .045))}px;line-height:1.35;color:${t.sub}">${T(c.sub)}</div>` : ""}
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:${r(pad * .5)}px">${W >= 250 ? prixChip(c, t, Math.max(15, r(W * .052)), W >= 300) : ""}${btn(t, cta, Math.min(58, Math.max(36, r(W * .14))), Math.max(13, Math.min(20, r(W * .055))), true)}</div>
+      </div></div>`, r(Math.min(W, f.h) * .045));
+  },
+};
+FAM.carre = function (c, t, f) {
+  const W = f.w, H = f.h, m = Math.min(W, H), pad = r(m * .07), fsT = r(m * .088), cta = c.cta.length > (m >= 600 ? 30 : W >= 400 ? 22 : 13) ? (c.ctas || "Je m'abonne") : c.cta;
+  const bh = Math.max(36, r(m * .13)), bfs = Math.max(13, r(m * .05));
+  if (W / H > 1.25) {   // pop-up paysage : visuel à gauche
+    const sw = r(W * .46);
+    return root(f, t, `<div style="display:flex;height:100%"><div style="width:${sw}px;flex:none;position:relative;background:${t.panel}">${scene(c, t, sw, H)}</div>
+      <div data-fit data-min="${r(fsT * .6)}" style="flex:1;min-width:0;padding:${pad}px;display:flex;flex-direction:column;gap:${r(pad * .6)}px;overflow:hidden">
+        ${logo(t, Math.max(16, m * .055), "align-self:flex-start")}
+        <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;margin-top:auto">${titre(c, "<br>")}</div>
+        ${prixChip(c, t, Math.max(15, r(m * .05)), true)}
+        <div style="margin-top:auto">${btn(t, cta, bh, bfs, true)}</div></div></div>`, r(m * .045));
+  }
+  const sh = r(H * .52);
+  return root(f, t, `<div style="display:flex;flex-direction:column;height:100%">
+    <div style="height:${sh}px;flex:none;position:relative;background:${t.panel}"><div style="height:${r(Math.max(14, m * .055) + pad * 1.1)}px;display:flex;align-items:center;padding-left:${r(pad * .7)}px">${logo(t, Math.max(14, m * .055), "", true)}</div>${scene(c, t, W, sh - r(Math.max(14, m * .055) + pad * 1.1))}</div>
+    <div data-fit data-min="${r(fsT * .62)}" style="flex:1;min-height:0;padding:${pad}px;display:flex;flex-direction:column;justify-content:space-between;gap:${r(pad * .5)}px;overflow:hidden">
+      <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700">${titre(c, "<br>")}</div>
+      ${btn(t, cta, bh, bfs, true)}</div></div>`, r(m * .045));
+};
+function adHtml(c, fid, fond) { const f = FORMATS.find(x => x.id === fid); return FAM[f.fam](c, FONDS[fond], f); }
+
+
+// Ajuste le titre quand le texte déborde (le plus long des textes)
+function fit(scope) {
+  scope.querySelectorAll("[data-fit]").forEach(col => {
+    const t = col.querySelector(".t"); if (!t) return;
+    let fs = parseFloat(t.style.fontSize); const min = +col.dataset.min || 12;
+    while ((col.scrollHeight > col.clientHeight + 1 || col.scrollWidth > col.clientWidth + 1) && fs > min) { fs -= 1; t.style.fontSize = fs + "px"; }
+    const deborde = () => col.scrollHeight > col.clientHeight + 1 || col.scrollWidth > col.clientWidth + 1;
+    if (deborde() && t.querySelector("span")) {   // dernier recours : les lignes du titre peuvent se couper
+      t.querySelectorAll("span").forEach(sp => { sp.style.whiteSpace = "normal"; });
+      fs = parseFloat(t.style.fontSize);
+      while (deborde() && fs > min) { fs -= 1; t.style.fontSize = fs + "px"; }
+    }
+    col.dataset.over = deborde() ? "1" : "";
+  });
+}
+
+/* ---------- Fiches ---------- */
+const MEDIA = [{"id": "p90", "v": 1, "kind": "media", "aud": "p", "nom": "2000 et plus : on t’y emmène", "angle": "Le chiffre de la campagne, avec la mascotte et son drapeau.", "legende": "2000 et plus : on t'y emmène. ♟️ L'Académie, ce n'est pas que pour apprendre les règles : les parcours Objectif 1600, 1800 et 2000 et plus sont faits pour les joueurs de club. 👉 echecs.com/academie", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/90-jusqu-a-2000-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/90-jusqu-a-2000-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/90-jusqu-a-2000-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/90-jusqu-a-2000-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/90-jusqu-a-2000-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/90-jusqu-a-2000-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "p91", "v": 1, "kind": "media", "aud": "p", "nom": "Pas seulement pour débuter", "angle": "Casser l’idée d’une Académie pour débutants, avec une masterclass en image.", "legende": "Tu crois que l'Académie, c'est pour les débutants ? 🤔 Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de grands maîtres : de quoi progresser jusqu'à 2000 et plus.", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/91-pas-que-pour-debuter-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/91-pas-que-pour-debuter-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/91-pas-que-pour-debuter-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/91-pas-que-pour-debuter-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/91-pas-que-pour-debuter-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/91-pas-que-pour-debuter-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "p92", "v": 1, "kind": "media", "aud": "p", "nom": "Joueur de club ? L’Académie aussi", "angle": "Parler directement aux joueurs de club, avec les exercices de niveau 1600.", "legende": "Joueur de club ? L'Académie aussi. 🏆 Des leçons au niveau des tournois, des exercices classés jusqu'à l'Objectif 2000, et un tournoi en ligne chaque semaine pour mettre tout ça en pratique.", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/92-joueur-de-club-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/92-joueur-de-club-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/92-joueur-de-club-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/92-joueur-de-club-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/92-joueur-de-club-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/92-joueur-de-club-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "p93", "v": 1, "kind": "media", "aud": "p", "nom": "Fais sauter le cap des 2000", "angle": "La mascotte qui célèbre le cap.", "legende": "Fais sauter le cap des 2000. 📈 Chaque module validé te rapproche du suivant, et ta courbe Elo le montre.", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/93-cap-des-2000-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/93-cap-des-2000-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/93-cap-des-2000-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/93-cap-des-2000-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/93-cap-des-2000-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/93-cap-des-2000-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "p94", "v": 1, "kind": "media", "aud": "p", "nom": "Problème : les Blancs jouent et gagnent", "angle": "Un problème de niveau 1800 (le sacrifice grec), pour faire réagir en commentaire.", "legende": "Objectif 1800 : les Blancs jouent et gagnent. Tu vois le coup ? Réponse en commentaire 👇", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/94-probleme-fou-h7-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/94-probleme-fou-h7-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/94-probleme-fou-h7-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/94-probleme-fou-h7-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/94-probleme-fou-h7-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/94-probleme-fou-h7-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "p95", "v": 1, "kind": "media", "aud": "p", "nom": "La solution : le sacrifice grec", "angle": "À publier le lendemain, en post ou en story.", "legende": "Solution : 1.Fxh7+ ! Rxh7 2.Cg5+ et la Dame arrive en h5. C'est le sacrifice grec, un grand classique des attaques sur le Roque. On le travaille dans l'Académie, avec beaucoup d'autres.", "medias": [{"label": "Carré 1080×1080", "src": "campagne-2000/media/95-solution-fou-h7-carre-1080x1080.jpg", "type": "image"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/95-solution-fou-h7-portrait-1080x1350.jpg", "type": "image"}, {"label": "Story 9:16", "src": "campagne-2000/media/95-solution-fou-h7-story-1080x1920.jpg", "type": "image"}, {"label": "X 1600×900", "src": "campagne-2000/media/95-solution-fou-h7-x-1600x900.jpg", "type": "image"}, {"label": "Lien partagé 1200×630", "src": "campagne-2000/media/95-solution-fou-h7-lien-1200x630.jpg", "type": "image"}, {"label": "Pinterest 1000×1500", "src": "campagne-2000/media/95-solution-fou-h7-pinterest-1000x1500.jpg", "type": "image"}]}, {"id": "vid1", "v": 1, "kind": "media", "aud": "vid", "nom": "Tu vises les 2000 ?", "angle": "33 s, sans voix : « Tu joues déjà bien, et tu vises les 2000 ? », puis « Nous avons pensé à toi ! On t’emmène jusqu’à 2000 et plus. », le parcours jusqu’à 2000, les grands maîtres, la revue et la progression.", "legende": "Tu joues déjà bien, et tu vises les 2000 ? Nous avons pensé à toi : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie", "medias": [{"label": "16:9 (YouTube, LinkedIn, X, site)", "src": "campagne-2000/media/jusqu-a-2000-16x9.mp4", "type": "video"}, {"label": "Story 9:16", "src": "campagne-2000/media/jusqu-a-2000-story-9x16.mp4", "type": "video"}, {"label": "Portrait 4:5", "src": "campagne-2000/media/jusqu-a-2000-feed-4x5.mp4", "type": "video"}, {"label": "Carré 1:1", "src": "campagne-2000/media/jusqu-a-2000-carre-1x1.mp4", "type": "video"}]}];
+const SECTIONS = [
+  { id: "confirmes", titre: "1. Encarts pour le site", intro: "La campagne « Jusqu’à 2000 et plus » : faire comprendre que l’Académie n’est pas que pour apprendre les bases, mais aussi pour les amateurs confirmés et les joueurs de club. À afficher partout, en alternance avec les autres.", items: C.filter(c => c.aud === "c") },
+  { id: "posts", titre: "2. Posts réseaux sociaux", intro: "Chaque visuel dans tous les formats des réseaux : carré, portrait 4:5, story 9:16, X, lien partagé et Pinterest. Les textes à publier sont sous chaque fiche.", items: MEDIA.filter(m => m.aud === "p") },
+  { id: "video", titre: "3. Vidéo", intro: "Une accroche pour les joueurs confirmés, en 16:9, story 9:16, portrait 4:5 et carré 1:1, sans voix off.", items: MEDIA.filter(m => m.aud === "vid") },
+];
+const ITEMS = new Map([...C, ...MEDIA].map(c => [c.id, { ...c, v: c.v || 1 }]));
+const VUE = {};    // par fiche : { f: "emp" (vos emplacements) | "tous" | id de format, fond }
+let DECISIONS = {}, PERSONNES = {}, NOMS = {};
+let filtre = "tout", db = null, user = null, moi = null, proprio = false, peutEcrire = true, monDocExiste = false;
+
+function etat(it) { const d = DECISIONS[it.id]; if (!d || !d.statut) return "reste"; if ((d.v || 1) < it.v) return "nouveau"; return d.statut; }
+function monAvis(id) { return (PERSONNES[moi]?.avis || {})[id] || {}; }
+function avisEquipe(it) {
+  const out = [];
+  for (const [pid, doc] of Object.entries(PERSONNES)) { const a = (doc.avis || {})[it.id]; if (!a || !a.statut && !a.note) continue; out.push({ pid, ...a, ancien: (a.v || 1) < it.v }); }
+  return out.sort((a, b) => String(b.maj).localeCompare(String(a.maj)));
+}
+function compte() {
+  let ok = 0, rev = 0, reste = 0;
+  ITEMS.forEach(it => { const s = etat(it); if (s === "ok") ok++; else if (s === "revoir") rev++; else reste++; });
+  const n = ITEMS.size || 1;
+  $("#n-ok").textContent = ok; $("#n-revoir").textContent = rev; $("#n-reste").textContent = reste;
+  $("#t-ok").style.width = (ok / n * 100) + "%"; $("#t-revoir").style.width = (rev / n * 100) + "%";
+  $("#toc").innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${esc(s.titre)} <b>${s.items.filter(c => etat(ITEMS.get(c.id)) === "ok").length}/${s.items.length}</b></a>`).join("");
+}
+function badge(it) { return { ok: ["ok", "Validé"], revoir: ["revoir", "À revoir"], nouveau: ["new", "Nouvelle version à revoir"], reste: ["", "En attente de décision"] }[etat(it)]; }
+
+function sceneHtml(it) {
+  const v = VUE[it.id], fs = v.f === "tous" ? FORMATS : v.f === "emp" ? FORMATS.filter(f => f.emp) : FORMATS.filter(f => f.id === v.f);
+  return fs.map(f => `<figure class="pub" style="margin:0"><div class="ecran" data-w="${f.w}" data-h="${f.h}"><div class="ad">${adHtml(it, f.id, v.fond)}</div></div><figcaption>${esc(f.nom)}</figcaption></figure>`).join("");
+}
+function ajusteVue(vue) {
+  const place = vue.clientWidth - 32;
+  vue.querySelectorAll(".ecran").forEach(e => {
+    const w = +e.dataset.w, h = +e.dataset.h, s = Math.min(1, place / w);
+    e.style.width = w * s + "px"; e.style.height = h * s + "px"; e.firstElementChild.style.transform = `scale(${s})`;
+  });
+  fit(vue);
+}
+function panneau(it) {
+  const a = proprio ? (DECISIONS[it.id] || {}) : monAvis(it.id);
+  const actif = a.statut && (a.v || 1) >= it.v ? a.statut : null;
+  const dis = peutEcrire && db && moi ? "" : "disabled";
+  return `<div class="panneau">
+    <h4>${proprio ? "Ta décision finale" : "Ton avis"}</h4>
+    <div class="actions">
+      <button type="button" class="b-ok" aria-pressed="${actif === "ok"}" ${dis}>Validé</button>
+      <button type="button" class="b-revoir" aria-pressed="${actif === "revoir"}" ${dis}>À revoir</button>
+    </div>
+    <label class="lab" for="note-${esc(it.id)}">${proprio ? "Ce qu'il faut changer (Claude corrige à partir de ce texte)" : "Ta remarque (format, texte, fond…)"}</label>
+    <textarea id="note-${esc(it.id)}" ${dis ? "readonly" : ""} placeholder="Ex. : garder seulement le fond bleu ; en 320×50 le texte est trop petit">${esc(a.note || "")}</textarea>
+    <div class="saved" aria-live="polite">${a.maj ? "Enregistré le " + quand(a.maj) : ""}</div>
+  </div>`;
+}
+function equipeHtml(it) {
+  const liste = avisEquipe(it).filter(a => !(a.pid === moi && !proprio));
+  const ok = liste.filter(a => a.statut === "ok" && !a.ancien).length, rev = liste.filter(a => a.statut === "revoir" && !a.ancien).length;
+  return `<div class="equipe"><h4>Avis de l'équipe${liste.length ? ` · ${ok} validé${ok > 1 ? "s" : ""}, ${rev} à revoir` : ""}</h4>
+    ${liste.length ? `<ul>${liste.map(a => `<li data-pid="${esc(a.pid)}"><img alt="" src="${esc(NOMS[a.pid]?.avatarUrl || "")}"><div>
+      <b class="nom">${esc(NOMS[a.pid]?.name || "Quelqu'un")}</b> · ${a.statut === "ok" ? '<span class="st-ok">Validé</span>' : a.statut === "revoir" ? '<span class="st-revoir">À revoir</span>' : "Remarque"}
+      ${a.ancien ? '<span class="old"> · sur la version précédente</span>' : ""}${a.note ? `<p>${esc(a.note)}</p>` : ""}</div></li>`).join("")}</ul>` : `<p class="rien">Pas encore d'avis.</p>`}
+  </div>`;
+}
+function mediaHtml(m) {
+  return m.type === "video" ? `<video src="${esc(m.src)}#t=0.8" controls playsinline preload="metadata" style="max-width:100%;max-height:70vh;border-radius:8px;background:#000"></video>`
+    : `<img src="${esc(m.src)}" alt="${esc(m.label)}" loading="lazy" style="max-width:100%;max-height:70vh;border-radius:8px;display:block">`;
+}
+function ficheMedia(it) {
+  const [cls, txt] = badge(it), i = VUE[it.id].f;
+  return `<article class="fiche" id="f-${esc(it.id)}" data-id="${esc(it.id)}" data-statut="${etat(it)}">
+    <div class="scene">
+      <div class="vue">${mediaHtml(it.medias[i])}</div>
+      <div class="formats" role="group" aria-label="Formats">${it.medias.map((m, k) => `<button type="button" data-mi="${k}" aria-pressed="${k === i}">${esc(m.label)}</button>`).join("")}</div>
+    </div>
+    <div class="cote">
+      <span class="badge ${cls}">${txt}</span>
+      <h3>${esc(it.id.toUpperCase())} · ${tx(it.nom)}</h3>
+      <div class="sous">${tx(it.angle)}</div>
+      ${it.legende ? `<dl class="textes"><dt>Texte</dt><dd>${tx(it.legende)}</dd></dl>` : ""}
+      <div class="zone-panneau">${panneau(it)}</div>
+      <div class="zone-equipe">${equipeHtml(it)}</div>
+    </div>
+  </article>`;
+}
+function fiche(it) {
+  if (it.kind === "media") return ficheMedia(it);
+  const [cls, txt] = badge(it), v = VUE[it.id];
+  return `<article class="fiche" id="f-${esc(it.id)}" data-id="${esc(it.id)}" data-statut="${etat(it)}">
+    <div class="scene">
+      <div class="vue">${sceneHtml(it)}</div>
+      <div class="formats" role="group" aria-label="Formats"><button type="button" data-fmt="emp" aria-pressed="${v.f === "emp"}">Vos emplacements</button><button type="button" data-fmt="tous" aria-pressed="${v.f === "tous"}">Tous les formats</button>${FORMATS.map(f => `<button type="button" data-fmt="${f.id}" aria-pressed="${v.f === f.id}">${esc(f.nom)}</button>`).join("")}</div>
+      <div class="formats fonds" role="group" aria-label="Fond"><span>Fond</span>${Object.entries(FONDS).map(([k, t]) => `<button type="button" data-fond="${k}" aria-pressed="${v.fond === k}"><i style="background:${t.bg}"></i>${esc(t.nom)}${k === it.fond ? " (proposé)" : ""}</button>`).join("")}</div>
+    </div>
+    <div class="cote">
+      <span class="badge ${cls}">${txt}</span>
+      <h3>${esc(it.id.toUpperCase())} · ${tx(it.nom)}</h3>
+      <div class="sous">${tx(it.angle)}</div>
+      <dl class="textes"><dt>Titre</dt><dd>${it.t.map(tx).join(" / ")}</dd><dt>Court</dt><dd>${tx(it.court)}</dd>${it.sub ? `<dt>Texte</dt><dd>${tx(it.sub)}</dd>` : ""}<dt>Visuel</dt><dd>${esc(VISUELS[it.scene.type] || "")}</dd><dt>Bouton</dt><dd>${tx(it.cta)}${it.ctas && it.ctas !== it.cta ? " / " + tx(it.ctas) : ""}</dd></dl>
+      <div class="zone-panneau">${panneau(it)}</div>
+      <div class="zone-equipe">${equipeHtml(it)}</div>
+    </div>
+  </article>`;
+}
+function rendre() {
+  const garde = it => filtre === "tout" || etat(it) === filtre || (filtre === "reste" && etat(it) === "nouveau");
+  $("#liste").innerHTML = SECTIONS.map(s => {
+    const items = s.items.map(c => ITEMS.get(c.id)).filter(garde);
+    if (!items.length) return "";
+    return `<section class="rub" id="${esc(s.id)}"><h2>${esc(s.titre)} <small>${s.items.length} propositions</small></h2><p>${tx(s.intro)}</p>${items.map(fiche).join("")}</section>`;
+  }).join("") || `<p class="vide">Aucune fiche dans ce filtre.</p>`;
+  document.querySelectorAll(".vue").forEach(ajusteVue);
+  compte(); noms();
+}
+function majFiche(id) {
+  const el = document.getElementById("f-" + id), it = ITEMS.get(id); if (!el || !it) return;
+  const [cls, txt] = badge(it); el.dataset.statut = etat(it);
+  const b = $(".badge", el); b.className = "badge " + cls; b.textContent = txt;
+  const ta = $("textarea", el);
+  if (document.activeElement !== ta) $(".zone-panneau", el).innerHTML = panneau(it);
+  else { const a = proprio ? (DECISIONS[id] || {}) : monAvis(id), actif = a.statut && (a.v || 1) >= it.v ? a.statut : null;
+    $(".b-ok", el).setAttribute("aria-pressed", actif === "ok"); $(".b-revoir", el).setAttribute("aria-pressed", actif === "revoir"); }
+  $(".zone-equipe", el).innerHTML = equipeHtml(it);
+}
+function toutMaj() { ITEMS.forEach((_, id) => majFiche(id)); compte(); noms(); }
+async function noms() {
+  if (!user) return;
+  const ids = Object.keys(PERSONNES); if (!ids.length) return;
+  NOMS = await user.profiles(ids);
+  document.querySelectorAll(".equipe li[data-pid]").forEach(li => { const p = NOMS[li.dataset.pid]; if (!p) return; $(".nom", li).textContent = p.name || "Quelqu'un"; $("img", li).src = p.avatarUrl; });
+}
+let file = Promise.resolve();
+function enregistrer(id, patch) {
+  const it = ITEMS.get(id), el = document.getElementById("f-" + id);
+  const ancien = proprio ? (DECISIONS[id] || {}) : monAvis(id);
+  const val = { statut: ancien.statut ?? null, note: ancien.note ?? "", ...patch, v: it.v, maj: new Date().toISOString() };
+  if (proprio) DECISIONS[id] = val;
+  else { PERSONNES[moi] = PERSONNES[moi] || { avis: {} }; PERSONNES[moi] = { ...PERSONNES[moi], avis: { ...(PERSONNES[moi].avis || {}), [id]: val } }; }
+  majFiche(id); compte();
+  if (!db || !moi) return;
+  file = file.then(async () => {
+    if (proprio) return db.collection("decisions").doc(id).set(val);
+    const ref = db.collection("personnes").doc(moi);
+    if (monDocExiste) return ref.update({ avis: { [id]: val } });
+    await ref.set({ avis: { ...(PERSONNES[moi].avis || {}) } }); monDocExiste = true;
+  }).catch(e => {
+    if (e && e.code === "invalid_argument") { peutEcrire = false; $("#etat").textContent = "Lecture seule : ton accès à cette page ne permet pas d'enregistrer d'avis."; toutMaj(); }
+    else if (el) $(".saved", el).textContent = "Échec de l'enregistrement, réessaie dans un instant.";
+  });
+}
+
+document.addEventListener("click", e => {
+  const f = e.target.closest(".filters button");
+  if (f) { filtre = f.dataset.f; document.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", b === f)); rendre(); return; }
+  const mi = e.target.closest("[data-mi]");
+  if (mi) {
+    const el = mi.closest(".fiche"), it = ITEMS.get(el.dataset.id); VUE[it.id].f = +mi.dataset.mi;
+    mi.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === mi));
+    $(".vue", el).innerHTML = mediaHtml(it.medias[+mi.dataset.mi]); return;
+  }
+  const fm = e.target.closest("[data-fmt], [data-fond]");
+  if (fm) {
+    const el = fm.closest(".fiche"), it = ITEMS.get(el.dataset.id), v = VUE[it.id];
+    if (fm.dataset.fmt) v.f = fm.dataset.fmt; else v.fond = fm.dataset.fond;
+    fm.parentElement.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === fm));
+    const vue = $(".vue", el); vue.innerHTML = sceneHtml(it); ajusteVue(vue); return;
+  }
+  const bt = e.target.closest(".b-ok, .b-revoir");
+  if (bt && !bt.disabled) {
+    const el = bt.closest(".fiche"), id = el.dataset.id, ta = $("textarea", el), it = ITEMS.get(id);
+    const st = bt.classList.contains("b-ok") ? "ok" : "revoir";
+    const a = proprio ? (DECISIONS[id] || {}) : monAvis(id);
+    const deja = a.statut === st && (a.v || 1) >= it.v;
+    enregistrer(id, { statut: deja ? null : st, note: ta.value });
+    if (st === "revoir" && !deja && !ta.value.trim()) $("textarea", el).focus();
+  }
+});
+let tempo; window.addEventListener("resize", () => { clearTimeout(tempo); tempo = setTimeout(() => document.querySelectorAll(".vue").forEach(ajusteVue), 150); });
+const minuteries = new Map();
+document.addEventListener("input", e => {
+  if (e.target.tagName !== "TEXTAREA") return;
+  const id = e.target.closest(".fiche").dataset.id;
+  clearTimeout(minuteries.get(id)); minuteries.set(id, setTimeout(() => enregistrer(id, { note: e.target.value }), 900));
+});
+document.addEventListener("focusout", e => { if (e.target.tagName === "TEXTAREA") setTimeout(() => majFiche(e.target.closest(".fiche").dataset.id), 0); });
+
+ITEMS.forEach(it => { VUE[it.id] = it.kind === "media" ? { f: 0 } : { f: "emp", fond: it.fond }; });
+rendre();
+document.fonts.ready.then(() => document.querySelectorAll(".vue").forEach(ajusteVue));
+
+(async () => {
+  if (typeof claude === "undefined" || !claude.use) { $("#etat").textContent = "Aperçu hors de claude.ai : les avis ne sont pas disponibles."; peutEcrire = false; return; }
+  [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+  if (user) { proprio = await user.isOwner(); moi = await user.id(); if (await user.can("data.write") === false) peutEcrire = false; }
+  if (!db) { $("#etat").textContent = "Connecte-toi à claude.ai pour voir et donner les avis."; toutMaj(); return; }
+  if (!moi) peutEcrire = false;
+  $("#etat").textContent = peutEcrire ? "Chargement des avis…" : "Lecture seule : tu vois les avis sans pouvoir en donner.";
+  toutMaj();
+  let pret = 0; const minuterie = setTimeout(() => { $("#etat").textContent = "Les avis enregistrés ne répondent pas encore…"; }, 10000);
+  const charge = snap => { if (!snap.metadata.fromCache && ++pret >= 2) { clearTimeout(minuterie); if (peutEcrire) $("#etat").textContent = proprio ? "Tu as la décision finale sur chaque fiche." : "Ton avis est enregistré automatiquement."; } };
+  const echec = () => { clearTimeout(minuterie); $("#etat").textContent = "Les avis ne peuvent pas être chargés pour le moment."; };
+  db.collection("decisions").onSnapshot(snap => { const n = {}; snap.docs.forEach(d => { n[d.id] = d.data(); }); DECISIONS = n; charge(snap); toutMaj(); }, echec);
+  db.collection("personnes").onSnapshot(snap => { const n = {}; snap.docs.forEach(d => { n[d.id] = d.data(); }); PERSONNES = n; if (moi && n[moi]) monDocExiste = true; charge(snap); toutMaj(); }, echec);
+})();
+</script>

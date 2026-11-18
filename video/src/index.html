@@ -955,16 +955,19 @@ const ACCROCHES = {
   3: { t: "Tu as l'impression", e: "de stagner depuis quelque temps ?", pose: "assoupie", vis: "stagne" },
   4: { t: "Tu regardes des vidéos d'échecs,", e: "mais tu ne progresses pas ?", pose: "menton", vis: "videos" },
   5: { t: "Tu veux progresser aux échecs,", e: "mais tu ne sais pas par où commencer ?", pose: "haussement", vis: "commencer" },
+  6: { t: "Tu joues déjà bien,", e: "et tu vises les 2000 ?", pose: "menton", vis: "objectif" },   // campagne « Jusqu'à 2000 et plus » : les joueurs confirmés
 };
 window.ACCROCHES = ACCROCHES;
 const ACC = ACCROCHES[HOOK] || ACCROCHES[1];
 $("#hk-t").textContent = ACC.t; $("#hk-e").textContent = ACC.e.replace(/ ([?!])/g, "\u00a0$1");
 $("#phk").dataset.pose = ACC.pose + "-miroir"; $("#phk").innerHTML = window.MASCOT_POSES[ACC.pose + "-miroir"];   // tournée vers le visuel
 $("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à toi\u00a0!</span>';
+if (HOOK === 6) $("#sol-s").innerHTML = "On t'emmène <b>jusqu'à 2000 et plus</b>.";
 $("#hk-vis").innerHTML = {
   elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
     <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
   parties: `<small>Parties jouées ce mois-ci</small><div class="big" id="hk-n">0</div><div class="hk-games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="hk-g"><b>${r}</b></div>`).join("")}</div>`,
+  objectif: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 600</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag" style="background:rgba(250,227,97,.16);color:#fae361">Objectif : 2000 +</span>`,
   stagne: `<small>Objectif 1400</small><div class="hk-cal">${["Janvier", "Mars", "Juin"].map(m => `<div class="hk-m">${m}</div>`).join("")}</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag">Toujours 40 %</span>`,
   videos: `<small>Vidéos regardées</small><div class="big" id="hk-h">0 h</div><div class="hk-vids">${["p-calcul-gagnant", "p-minute-finale", "p-ouvertures-vogue"].map(v => `<div class="hk-v"><img src="../assets/captures/ee/hd/${v}.jpg"><span><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#111"/></svg></span></div>`).join("")}</div><span class="tag">Classement : inchangé</span>`,
   commencer: `<div class="hk-sign"></div>${[["Ouvertures ?", 90, 150, -6, "#93b9e2"], ["Tactique ?", 330, 210, 5, "#fae361"], ["Finales ?", 60, 290, -4, "#6bdc7d"], ["Stratégie ?", 320, 370, 6, "#f06b8a"]].map(([l, x, y, r, c], i) => `<div class="hk-arrow hk-a" style="left:${x}px;top:${y}px;background:${c};transform:rotate(${r}deg);clip-path:polygon(${i % 2 ? "0 0,88% 0,100% 50%,88% 100%,0 100%" : "12% 0,100% 0,100% 100%,12% 100%,0 50%"});padding-${i % 2 ? "right" : "left"}:44px">${l}</div>`).join("")}`,
@@ -990,6 +993,11 @@ scene("hook", ({ st, from, at, lines, dur }) => {
     const v = { n: 0 };
     st.to(v, { n: 247, duration: 2.2, ease: "power1.in", onUpdate: () => { $("#hk-n").textContent = Math.round(v.n); } }, .7);
     [0, 1, 2, 3, 4, 5].forEach(k => sfx(st, "pop", .75 + k * .36, { p: .9 + k * .05, g: .3 }));
+  } else if (ACC.vis === "objectif") {
+    st.fromTo("#hk-bar", { width: "8%" }, { width: "62%", duration: 2, ease: "power2.out" }, .8);
+    const v = { e: 1600 };
+    st.to(v, { e: 1650, duration: 2, ease: "power2.out", onUpdate: () => { $("#hk-elo").textContent = "1 " + String(Math.round(v.e) - 1000).padStart(3, "0"); } }, .8);
+    sfx(st, "tick", 1.1, { g: .3 }); sfx(st, "tick", 1.6, { g: .3, p: 1.1 }); sfx(st, "ding", 2.6, { g: .35, p: 1.2 });
   } else if (ACC.vis === "stagne") {
     from(".hk-m", .7, { opacity: 0, rotateX: -90, transformPerspective: 800 }, { opacity: 1, rotateX: 0, duration: .4, stagger: .55 });
     st.fromTo("#hk-bar", { width: "36%" }, { width: "41%", duration: .5, yoyo: true, repeat: 4, ease: "sine.inOut" }, .8);

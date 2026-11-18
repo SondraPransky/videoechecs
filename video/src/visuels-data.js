@@ -18,6 +18,11 @@ const START = { a1: "wR", b1: "wN", c1: "wB", d1: "wQ", e1: "wK", f1: "wB", g1: 
 const MAT1 = { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" };
 const MAT1_OK = Object.assign({}, MAT1, { d8: "wR" }); delete MAT1_OK.d1;
 
+// Sacrifice du Fou en h7 (le « sacrifice grec ») : position d'avant, puis après 1.Fxh7+
+const FOUH7 = { g1: "wK", f1: "wR", d1: "wQ", f3: "wN", d3: "wB", c1: "wB", e5: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
+  g8: "bK", f8: "bR", d8: "bQ", b7: "bB", d7: "bN", f7: "bP", g7: "bP", h7: "bP", e6: "bP", d5: "bP", a7: "bP", b6: "bP" };
+const FOUH7_OK = Object.assign({}, FOUH7, { h7: "wB" }); delete FOUH7_OK.d3;
+
 const ICON = {
   lecons: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"/></svg>',
   videos: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>',
@@ -103,6 +108,14 @@ window.VISUELS = [
   { id: "62-quiz-tata-steel", tpl: "quiz", theme: "ciel", k: "Quiz · Vidéos", q: "Dans quel pays se joue le tournoi Tata Steel Chess ?", opts: ["Aux Pays-Bas", "En Inde", "En Norvège"], s: "Réponds en commentaire : A, B ou C ?", pose: "regarde" },
   { id: "63-quiz-candidats", tpl: "quiz", theme: "nuit", k: "Quiz · Le Récap'", q: "Que désigne le Tournoi des candidats ?", opts: ["le champion d'Europe", "le meilleur jeune joueur", "le challenger du champion du monde"], s: "Réponds en commentaire : A, B ou C ?", pose: "menton" },
   { id: "64-quiz-karpov", tpl: "quiz", theme: "rose", k: "Quiz · Culture échecs", q: "Qui succède à Bobby Fischer comme champion du monde en 1975 ?", opts: ["Garry Kasparov", "Anatoli Karpov", "Boris Spassky"], s: "Réponds en commentaire : A, B ou C ?", pose: "prof" },
+
+  // ---- Campagne « Jusqu'à 2000 et plus » : l'Académie n'est pas que pour débuter
+  { id: "90-jusqu-a-2000", tpl: "chiffre", theme: "nuit", k: "Joueurs de club", n: "2000<b>&#8239;</b>+", t: "On t'y emmène.", e: "Pas à pas.", s: "L'Académie, de l'initiation aux joueurs confirmés.", pose: "drapeau" },
+  { id: "91-pas-que-pour-debuter", tpl: "accroche", theme: "soleil", k: "Joueurs confirmés", t: "Pas seulement", e: "pour débuter.", s: "Ouvertures, plans, finales : jusqu'à 2000 et plus.", shot: "masterclasses", pose: "idee" },
+  { id: "92-joueur-de-club", tpl: "accroche", theme: "rose", k: "Joueurs de club", t: "Joueur de club ?", e: "L'Académie aussi.", s: "Des leçons au niveau des tournois.", shot: "exercices", pose: "reflexion" },
+  { id: "93-cap-des-2000", tpl: "mascotte", theme: "ciel", k: "Objectif 2000", t: "Fais sauter", e: "le cap des 2000 !", pose: "hourra" },
+  { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1800", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Ta réponse en commentaire.", pos: FOUH7, pose: "menton" },
+  { id: "95-solution-fou-h7", tpl: "puzzle", theme: "menthe", k: "La solution", t: "1.Fxh7+ !", e: "le sacrifice grec.", s: "Après 1…Rxh7 2.Cg5+, la Dame arrive en h5.", pos: FOUH7_OK, hl: ["d3", "h7"], arrow: ["d3", "h7"], pose: "hourra" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },
