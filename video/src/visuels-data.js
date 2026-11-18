@@ -117,8 +117,8 @@ window.VISUELS = [
   { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1800", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Ta réponse en commentaire.", pos: FOUH7, pose: "menton" },
   { id: "95-solution-fou-h7", tpl: "puzzle", theme: "menthe", k: "La solution", t: "1.Fxh7+ !", e: "le sacrifice grec.", s: "Après 1…Rxh7 2.Cg5+, la Dame arrive en h5.", pos: FOUH7_OK, hl: ["d3", "h7"], arrow: ["d3", "h7"], pose: "hourra" },
 
-  { id: "96-plafond-1700", tpl: "chiffre", theme: "rose", k: "Joueurs de club", n: "1700", t: "depuis des mois ?", e: "On débloque ça.", s: "Leçons Objectif 1800 et masterclasses de grands maîtres.", pose: "menton" },
-  { id: "97-lecons-1800", tpl: "event", theme: "nuit", k: "Objectif 1800", t: "Des leçons", e: "de joueur de club.", facts: ["La triangulation", "La défense de Vancura", "L’initiative"], pose: "reflexion" },
+  { id: "96-plafond-1700", btn: "Je passe un cap", tpl: "chiffre", theme: "rose", k: "Joueurs de club", n: "1700", t: "depuis des mois ?", e: "On débloque ça.", s: "Leçons Objectif 1800 et masterclasses de grands maîtres.", pose: "menton" },
+  { id: "97-lecons-1800", btn: "Je passe un cap", tpl: "event", theme: "nuit", k: "Objectif 1800", t: "Des leçons", e: "de joueur de club.", facts: ["La triangulation", "La défense de Vancura", "L’initiative"], pose: "reflexion" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },

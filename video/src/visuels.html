@@ -255,7 +255,7 @@ const T = {
   // Accroche d'un pan de l'académie, avec le visuel du motion recadré
   accroche: it => head(it.k) + `<main class="${land || tall ? "" : "serre"}"><div class="txt">${title(it)}</div><div class="vis">${shot(it.shot)}</div></main>` + foot(),   // pas de mascotte en plus : la capture du motion en a souvent déjà une
   // Gros chiffre
-  chiffre: it => head(it.k) + `<main><div class="txt"><div class="big" style="${it.n.replace(/<[^>]+>|&#8239;/g, "").length > 4 ? `font-size:${tall ? 24 : 17}rem` : ""}">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot()
+  chiffre: it => head(it.k) + `<main><div class="txt"><div class="big" style="${it.n.replace(/<[^>]+>|&#8239;/g, "").length > 4 ? `font-size:${tall ? 24 : 17}rem` : ""}">${it.n}</div><div class="t" style="font-size:9rem;margin-top:2rem">${it.t}<span class="e" style="font-size:9.6rem">${it.e}</span></div>${it.s ? `<div class="s">${it.s}</div>` : ""}</div></main>` + foot(it.btn)
     + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : `right:5rem;bottom:${15 + PB}rem;`)),
   // Problème d'échecs (engagement)
   puzzle: it => head(it.k) + `<main class="${land || tall ? "" : "serre"}"><div class="txt">${title(it)}</div><div class="vis">${board(it.pos, { arrow: it.arrow, hl: it.hl, coords: true, style: "height:100%" })}</div></main>` + foot(it.arrow ? "Je m'entraîne" : "Voir la solution")
@@ -274,7 +274,7 @@ const T = {
   // Sortie de la revue
   revue: it => head(it.k) + `<main><div class="txt">${title(it)}</div><div class="vis"><img class="cover" src="../assets/captures/ee/revue-779-couv.png" style="${land ? "" : tall ? "height:90rem" : "height:56rem"}"><div class="badge" style="${land ? "right:4rem;top:0" : "right:8rem;top:0"}"><small>Numéro</small><b>779</b><small>Octobre 2026</small></div></div></main>` + foot("Lire la revue"),
   // Tournois
-  event: it => head(it.k) + `<main><div class="txt">${title(it)}<div class="facts">${it.facts.map(f => `<span>${f}</span>`).join("")}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot("Je m'inscris")
+  event: it => head(it.k) + `<main><div class="txt">${title(it)}<div class="facts">${it.facts.map(f => `<span>${f}</span>`).join("")}</div></div>${land ? `<div class="vis"></div>` : ""}</main>` + foot(it.btn || "Je m'inscris")
     + pose(it.pose, mSize(1.05) + (land ? "right:8rem;bottom:15rem;" : `right:5rem;bottom:${15 + PB}rem;`), it.white),
   // Identité : avatar
   "id-avatar": it => `<div class="avatar"><img src="${MARK}"></div>`,
