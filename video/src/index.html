@@ -735,7 +735,10 @@ function splitChars(el) {
 
 
 // ---------- Construction des scènes ----------
-const b1 = makeBoard($("#b1"), START);
+// Campagne « Jusqu'à 2000 et plus » (accroche-6) : une position de joueur de club, le sacrifice du Fou en h7
+const CLUB_POS = { g1: "wK", f1: "wR", d1: "wQ", f3: "wN", d3: "wB", c1: "wB", e5: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
+  g8: "bK", f8: "bR", d8: "bQ", b7: "bB", d7: "bN", f7: "bP", g7: "bP", h7: "bP", e6: "bP", d5: "bP", a7: "bP", b6: "bP" };
+const b1 = makeBoard($("#b1"), /accroche-6/.test(location.search) ? CLUB_POS : START);
 
 // S2
 const stops = ["Initiation", "Objectif 1400", "Objectif 1600", "Objectif 1800", "2000 et +"];
@@ -963,6 +966,17 @@ $("#hk-t").textContent = ACC.t; $("#hk-e").textContent = ACC.e.replace(/ ([?!])/
 $("#phk").dataset.pose = ACC.pose + "-miroir"; $("#phk").innerHTML = window.MASCOT_POSES[ACC.pose + "-miroir"];   // tournée vers le visuel
 $("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à toi\u00a0!</span>';
 if (HOOK === 6) $("#sol-s").innerHTML = "On t'emmène <b>jusqu'à 2000 et plus</b>.";
+// Campagne « Jusqu'à 2000 et plus » (accroche-6) : la suite de la vidéo parle aux joueurs de club
+const CLUB = HOOK === 6;
+if (CLUB) {
+  $$(".s1-w")[0].textContent = "Passe un cap,"; $$(".s1-w")[1].textContent = "vise les 2000.";
+  $(".s1-l").innerHTML = "De l'Objectif 1600 à <b style=\"color:var(--yellow)\">2000 et plus.</b>";
+  $(".pg-k").textContent = "Objectif 2000"; $$(".pg-w")[0].textContent = "Passe la barre"; $$(".pg-w")[1].textContent = "des 2000.";
+  $("#vcard .lchip").textContent = "Objectif 1800"; $("#vcard .ltype").textContent = "Module 9 / 12"; $("#vcard .ltitle").textContent = "Les finales de Tours";
+  $("#elov").textContent = "1650"; $("#eloup").textContent = "▲ +430";
+  [...$$("#elosvg .gt")].forEach((g, i) => { g.textContent = ["2100", "1900", "1700"][i]; });
+  $("#eloMk").insertAdjacentHTML("beforebegin", '<line x1="0" x2="690" y1="95" y2="95" stroke="#fae361" stroke-width="3" stroke-dasharray="12 10" opacity=".8"/><text x="0" y="83" fill="#fae361" style="font:800 24px Manrope">2000</text>');
+}
 $("#hk-vis").innerHTML = {
   elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
     <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
@@ -1035,8 +1049,13 @@ scene("s1", ({ st, from, at, lines, dur }) => {
   from(".s1-k", .1, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .6 });
   lines(".s1-w", .15, .22);
   from(".s1-l", .9, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
-  at(b1.e2, 1.3, { top: "50%", duration: .35, ease: "power3.inOut" });
-  at(b1.e7, 1.75, { top: "37.5%", duration: .35, ease: "power3.inOut" });
+  if (CLUB) {   // 1.Fxh7+ : le Fou part de d3 et prend en h7
+    at(b1.d3, 1.3, { ...sqPos("h7"), duration: .5, ease: "power3.inOut" });
+    at(b1.h7, 1.65, { opacity: 0, scale: .4, duration: .25 });
+  } else {
+    at(b1.e2, 1.3, { top: "50%", duration: .35, ease: "power3.inOut" });
+    at(b1.e7, 1.75, { top: "37.5%", duration: .35, ease: "power3.inOut" });
+  }
   sfx(st, "move", 1.62); sfx(st, "move", 2.07, { p: .9 });
   from("#b1", 1.1, { rotateY: 0, rotateX: 0, scale: 1, transformPerspective: 1600 }, { rotateY: -12, rotateX: 8, scale: 1.04, duration: dur - 1.1, ease: "sine.inOut" });
   from("#m1", .7, { y: 460 }, { y: 0, duration: .7, ease: "back.out(1.4)" });
@@ -1045,14 +1064,16 @@ scene("s1", ({ st, from, at, lines, dur }) => {
   from("#path", .9, { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: .7 });
   from(".stop", 1.0, { scale: 0 }, { scale: 1, duration: .4, stagger: .05, ease: "back.out(3)" });
   from(".stop b", 1.1, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .4, stagger: .05 });
-  from("#trav", 1.2, { left: 180, opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .35 });
+  from("#trav", 1.2, { left: CLUB ? 960 : 180, opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .35 });
+  if (CLUB) st.set("#path .fill", { scaleX: .5 }, 1.0);   // joueurs de club : départ à l'Objectif 1600
   const t0 = S1_T0, travel = S1_TRAVEL;
   at("#trav", t0, { left: 1740, duration: travel, ease: "power2.inOut" });
   at("#path .fill", t0, { scaleX: 1, duration: travel, ease: "power2.inOut" });
   // Instant où le pion atteint chaque étape (inverse de power2.inOut)
   const reach = f => f < .5 ? Math.sqrt(f / 2) : 1 - Math.sqrt((1 - f) / 2);
   $$(".stop").forEach((s, i) => {
-    const ti = t0 + travel * reach(i / ($$(".stop").length - 1));
+    const f = i / ($$(".stop").length - 1), fc = CLUB ? (f - .5) / .5 : f;
+    const ti = fc <= 0 ? 1.1 : t0 + travel * reach(fc);
     st.set(s, { backgroundColor: "#fae361", borderColor: "#fae361" }, ti);
     from(s, ti, { scale: 1.7 }, { scale: 1, duration: .4 });
     at($$(".stop b")[i], ti, { color: "#f4f1ea", duration: .2 });
@@ -1095,7 +1116,7 @@ scene("prog", ({ st, from, at, lines, dur }) => {
   from("#elo", .2, { opacity: 0, x: 200, rotateY: -18, transformPerspective: 1800 }, { opacity: 1, x: 0, rotateY: -5, duration: .7 });
   at("#elo", .9, { rotateY: -1, duration: dur - .9, ease: "sine.inOut" });
   // Courbe dessinée de gauche à droite, compteur Elo synchronisé
-  const T0 = .6, TD = 2.2, ELO = { v: 1150 }, dotX = { x: 0 };
+  const T0 = .6, TD = 2.2, E0 = CLUB ? 1650 : 1150, E1 = CLUB ? 2080 : 1480, ELO = { v: E0 }, dotX = { x: 0 };
   const yAt = x => { // interpolation linéaire sur les points, suffisante pour le point lumineux
     for (let i = 1; i < ELO_PTS.length; i++) if (x <= ELO_PTS[i][0]) { const [a, b] = [ELO_PTS[i - 1], ELO_PTS[i]]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
     return ELO_PTS.at(-1)[1];
@@ -1105,7 +1126,7 @@ scene("prog", ({ st, from, at, lines, dur }) => {
     $("#eloDot").setAttribute("cx", dotX.x); $("#eloDot").setAttribute("cy", yAt(dotX.x));
   } }, T0);
   from("#eloDot", T0, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: .3, ease: "back.out(3)" });
-  st.fromTo(ELO, { v: 1150 }, { v: 1480, duration: TD, ease: "power1.inOut", onUpdate: () => { $("#elov").textContent = Math.round(ELO.v); } }, T0);
+  st.fromTo(ELO, { v: E0 }, { v: E1, duration: TD, ease: "power1.inOut", onUpdate: () => { $("#elov").textContent = Math.round(ELO.v); } }, T0);
   sfxCount(st, T0, TD, 7, "power1.inOut", { g: .3 });
   sfx(st, "ding", T0 + TD - .15, { p: 1.2, g: .6 });
   from("#eloup", T0 + TD - .2, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .4, ease: "back.out(2.5)" });
