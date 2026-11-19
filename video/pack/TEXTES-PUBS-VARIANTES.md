@@ -54,10 +54,10 @@ Bouton conseillé : **S'inscrire** pour les angles B et C, **En savoir plus** po
 
 | | Angle A · Le problème | Angle B · L'offre | Angle C · La relance |
 |---|---|---|---|
-| **Meta · texte principal** | Tu stagnes ? Pour passer un cap, apprends des meilleurs : masterclasses en direct avec Gata Kamsky et d'autres GMI. | Masterclasses en direct et en replay, avec des maîtres et grands maîtres. Dès 14,90 €/mois au lancement. | Les masterclasses en direct avec des grands maîtres, dans l'Académie à 14,90 €/mois pour son lancement. Sans engagement. |
+| **Meta · texte principal** | Tu stagnes ? Pour passer un cap, apprends des meilleurs : masterclasses en direct avec Gata Kamsky et d'autres GMI. | Masterclasses en direct et en replay, avec des Maîtres et Grands Maîtres. Dès 14,90 €/mois au lancement. | Les masterclasses en direct avec des Grands Maîtres, dans l'Académie à 14,90 €/mois pour son lancement. Sans engagement. |
 | **Meta · titre** | Apprends des meilleurs | Masterclasses en direct | 14,90 €/mois au lieu de 19,90 € |
-| **Meta · description** | Maîtres et grands maîtres | En direct et en replay | Offre de lancement |
-| **TikTok · texte** | Tu stagnes ? Apprends des grands maîtres, en direct et en replay. ♟️ | Masterclasses en direct et en replay avec des GMI, dans l'Académie. | Les masterclasses des GMI à 14,90 €/mois pour le lancement ♟️ |
+| **Meta · description** | Maîtres et Grands Maîtres | En direct et en replay | Offre de lancement |
+| **TikTok · texte** | Tu stagnes ? Apprends des Grands Maîtres, en direct et en replay. ♟️ | Masterclasses en direct et en replay avec des GMI, dans l'Académie. | Les masterclasses des GMI à 14,90 €/mois pour le lancement ♟️ |
 
 ## Pub 4 · « Tu regardes des vidéos d'échecs, mais tu ne progresses pas ? »
 

@@ -14,7 +14,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 *Vidéo : `00-general/presentation-*` · Images : `00-general/`*
 
 > Progresse à ton rythme. ♟️
-> Leçons interactives, +2 000 exercices, masterclasses avec des maîtres et grands maîtres, tournois en ligne, la revue Europe Échecs en PGN… Tout est au même endroit.
+> Leçons interactives, +2 000 exercices, masterclasses avec des Maîtres et Grands Maîtres, tournois en ligne, la revue Europe Échecs en PGN… Tout est au même endroit.
 > Du premier coup à plus de 2000 : c'est sur echecs.com/academie
 > 🎁 Offre de lancement : 14,90 €/mois au lieu de 19,90 €, ou 150 €/an au lieu de 179,90 €. Et pour essayer : 6 leçons, le forum et le puzzle du jour, gratuits.
 
@@ -46,7 +46,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 ## 05 · Masterclasses
 *Vidéo : `05-masterclasses/` · Images : `06-masterclasses/`, `17-` à `20-coach-*`*
 
-> Des masterclasses en direct avec des maîtres et grands maîtres, en direct et en replay.
+> Des masterclasses en direct avec des Maîtres et Grands Maîtres, en direct et en replay.
 > Tu poses tes questions dans le chat, ils te répondent en direct. 🎓
 
 **Série « Nos coachs »** (un portrait par semaine) :
@@ -90,7 +90,7 @@ Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne au
 
 **Pas seulement pour débuter** (`91-pas-que-pour-debuter/`)
 > Tu crois que l'Académie, c'est pour les débutants ? 🤔
-> Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de grands maîtres : de quoi progresser jusqu'à 2000 et plus.
+> Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de Grands Maîtres : de quoi progresser jusqu'à 2000 et plus.
 
 **Joueur de club ?** (`92-joueur-de-club/`)
 > Joueur de club ? L'Académie aussi. 🏆
@@ -106,13 +106,13 @@ Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne au
 > Solution : 1.Fxh7+ ! Rxh7 2.Cg5+ et la Dame arrive en h5. C'est le sacrifice grec, un grand classique des attaques sur le Roque. On le travaille dans l'Académie, avec beaucoup d'autres.
 
 **1700 depuis des mois ?** (`96-plafond-1700/`)
-> 1700 depuis des mois ? 😤 Leçons Objectif 1800, masterclasses de grands maîtres, exercices : on débloque ça ensemble. 👉 echecs.com/academie
+> 1700 depuis des mois ? 😤 Leçons Objectif 1800, masterclasses de Grands Maîtres, exercices : on débloque ça ensemble. 👉 echecs.com/academie
 
 **Des leçons de joueur de club** (`97-lecons-1800/`)
 > Triangulation, défense de Vancura, initiative… L'Académie, ce sont aussi des leçons de joueur de club, niveau 1800, avec vidéos, exercices et quiz. 👉 echecs.com/academie
 
 **Vidéo** (`accroche-6`)
-> Tu plafonnes à 1700 depuis des mois ? Triangulation, défense de Vancura, initiative, masterclasses de grands maîtres : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
+> Tu plafonnes à 1700 depuis des mois ? Triangulation, défense de Vancura, initiative, masterclasses de Grands Maîtres : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
 
 ---
 
@@ -121,7 +121,7 @@ Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne au
 Texte principal, à adapter à chaque question :
 > 1 · Tu enchaînes les parties sans que ton Elo bouge ? Jouer ne suffit pas : un programme par niveau, de l'initiation à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 > 2 · Beaucoup de parties, peu de progrès ? Analyse tes parties et corrige tes points faibles avec +2 000 exercices. 👉 lien tagué (voir Liens de suivi)
-> 3 · Tu stagnes ? Passe un cap avec les masterclasses en direct de maîtres et grands maîtres. 👉 lien tagué (voir Liens de suivi)
+> 3 · Tu stagnes ? Passe un cap avec les masterclasses en direct de Maîtres et Grands Maîtres. 👉 lien tagué (voir Liens de suivi)
 > 4 · Des heures de vidéos, toujours le même classement ? Avec l'Académie, chaque leçon se termine sur l'échiquier. 👉 lien tagué (voir Liens de suivi)
 > 5 · Tu ne sais pas par où commencer ? Suis le parcours, étape par étape, du premier coup à plus de 2000. 👉 lien tagué (voir Liens de suivi)
 

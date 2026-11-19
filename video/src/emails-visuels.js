@@ -11,7 +11,7 @@
     B("abonne", "nuit", "Bienvenue", "parmi nous !", "hourra"),
     B("parcours", "ciel", "Ton parcours", "commence ici.", "marche"),
     B("exercices", "craie", "10 minutes", "par jour.", "pendule"),
-    B("masterclasses", "rose", "Les grands maîtres", "t'attendent.", "prof"),
+    B("masterclasses", "rose", "Les Grands Maîtres", "t'attendent.", "prof"),
     B("communaute", "menthe", "Joue, partage,", "mesure-toi.", "discute"),
     B("bilan", "nuit", "Ton mois", "d'échecs.", "serie-reussie"),
     B("module", "nuit", "Module", "validé !", "drapeau"),

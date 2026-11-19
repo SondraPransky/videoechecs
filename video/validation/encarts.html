@@ -178,7 +178,7 @@ const FORMATS = [
   { id: "160x600",  nom: "Skyscraper 160×600", w: 160, h: 600 },
   { id: "120x600",  nom: "Skyscraper étroit 120×600", w: 120, h: 600 },
 ].map(f => ({ ...f, fam: f.w / f.h >= 1.5 ? "horizontal" : "vertical" }));
-const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", parties: "la liste de tes parties de tournoi, prêtes à analyser", revue: "le lecteur PGN de la revue" };
+const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des Grands Maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", parties: "la liste de tes parties de tournoi, prêtes à analyser", revue: "le lecteur PGN de la revue" };
 
 /* ---------- Les propositions ---------- */
 const C = [
@@ -191,8 +191,8 @@ const C = [
     t: ["Leçons, vidéos, tournois :", "tout au même endroit."], court: "Tout pour progresser", sub: "Une seule Académie pour apprendre, t’entraîner et jouer.", cta: "Découvrir" },
   { id: "v04", v: 4, aud: "v", nom: "Essai gratuit", angle: "Faire créer un compte gratuit d’abord ; le chiffre 6 reste sur la pastille.", fond: "menthe", pose: "coucou", scene: { type: "mascStk", pose: "coucou", stk: "gratuit" },
     t: ["Essaie l’Académie", "et profite de tes leçons offertes."], court: "Tes leçons offertes", cta: "Essayer gratuitement", ctas: "Essayer" },
-  { id: "v05", v: 4, aud: "v", nom: "Des grands maîtres en direct", angle: "Les photos des grands maîtres et le direct, avec la question d’un élève.", fond: "violet", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
-    t: ["Pose tes questions", "à des grands maîtres."], court: "Masterclasses en direct", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs, en direct.", cta: "Je m'abonne" },
+  { id: "v05", v: 5, aud: "v", nom: "Des Grands Maîtres en direct", angle: "Les photos des Grands Maîtres et le direct, avec la question d’un élève.", fond: "violet", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
+    t: ["Pose tes questions", "à des Grands Maîtres."], court: "Masterclasses en direct", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs, en direct.", cta: "Je m'abonne" },
   { id: "v06", v: 4, aud: "v", nom: "10 minutes, 3 fois par semaine", angle: "La mascotte et sa pendule, avec deux points d’exclamation : l’idée de progression.", fond: "corail", pose: "pendule", scene: { type: "masc", pose: "pendule", acc: "!!" }, prix: "mois",
     t: ["10 minutes,", "3 fois par semaine."], court: "10 min pour progresser", sub: "Et ta progression avance à chaque visite.", cta: "Commencer" },
   { id: "v07", v: 4, aud: "v", nom: "Les coups qui font gagner", angle: "Une fourchette de Cavalier marquée « !! » : un coup brillant, pas une position de débutant.", fond: "ciel", pose: "loupe", scene: { type: "board", pos: "brillant" }, prix: "mois",
@@ -220,8 +220,8 @@ const C = [
     t: ["Débloque la suite", "de ton parcours."], court: "Débloque la suite", cta: "Débloquer" },
   { id: "g04", v: 4, aud: "g", nom: "Après le puzzle du jour", angle: "Un vrai puzzle très simple : les Blancs matent en 1.", fond: "vert", pose: "menton", scene: { type: "board", pos: "puzzle" }, prix: "mois",
     t: ["Un puzzle par jour, c’est bien.", "2 000, c’est mieux !"], court: "+2 000 exercices", cta: "Débloquer les exercices", ctas: "Débloquer" },
-  { id: "g05", v: 4, aud: "g", nom: "Masterclasses", angle: "Les photos des grands maîtres, en direct.", fond: "nuit", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
-    t: ["Les grands maîtres", "t’attendent en direct."], court: "Les masterclasses", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs.", cta: "Je m'abonne" },
+  { id: "g05", v: 5, aud: "g", nom: "Masterclasses", angle: "Les photos des Grands Maîtres, en direct.", fond: "nuit", pose: "pancarte", scene: { type: "coach" }, prix: "mois",
+    t: ["Les Grands Maîtres", "t’attendent en direct."], court: "Les masterclasses", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs.", cta: "Je m'abonne" },
   { id: "g06", v: 3, aud: "g", nom: "Personnalisé au prénom", angle: "Encart personnalisé avec le prénom du joueur connecté ([PRENOM]).", fond: "rose", pose: "coucou", scene: { type: "masc", pose: "coucou" }, prix: "mois",
     t: ["[PRENOM], on passe", "à la suite ?"], court: "On continue, [PRENOM] ?", sub: "L’Académie complète t’emmène beaucoup plus loin.", cta: "Passer à l'Académie complète", ctas: "Je m'abonne" },
   { id: "g07", v: 2, aud: "g", nom: "Ton prix de lancement", angle: "Rappeler que le prix de lancement est toujours là.", fond: "jaune", pose: "hourra", scene: { type: "mascStk", pose: "hourra", stk: "mois" },

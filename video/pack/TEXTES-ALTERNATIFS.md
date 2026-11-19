@@ -61,10 +61,10 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Nos coachs : portrait de Marc Quenehen, entraîneur.
 
 **`19-coach-fabien-libiszewski/`**
-> Nos coachs : portrait de Fabien Libiszewski, grand maître. En masterclass sur echecs.com.
+> Nos coachs : portrait de Fabien Libiszewski, Grand Maître. En masterclass sur echecs.com.
 
 **`20-coach-gata-kamsky/`**
-> Nos coachs : portrait de Gata Kamsky, grand maître. En masterclass sur echecs.com.
+> Nos coachs : portrait de Gata Kamsky, Grand Maître. En masterclass sur echecs.com.
 
 **`21-humeur-serie/`**
 > echecs.com — Ta série : « 7 jours de suite. Ne lâche rien ! » La mascotte jaune d'echecs.com coche les jours d'une série.
@@ -492,7 +492,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > « Tu as l'impression de stagner depuis quelque temps ? » La mascotte jaune d'echecs.com, perplexe, à côté d'une barre de progression bloquée à 40 % de janvier à juin.
 
 **`pub-3-2-reponse`**
-> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et grands maîtres, en direct et en replay.
+> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et Grands Maîtres, en direct et en replay.
 
 **`pub-3-3-final`**
 > Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».

@@ -165,7 +165,7 @@ Il faut aussi que le site gère un code ou un lien de parrainage par abonné (`[
 |---|---|---|---|---|
 | `10-demarrage-j1-parcours.html` | J+1 après l'abonnement | Par où commencer ? Ton parcours en 3 étapes | Initiation, 1400, 1600, 1800 : trouve ton niveau. | Information (désinscription possible) |
 | `11-demarrage-j3-exercices.html` | J+3 après l'abonnement | 10 minutes par jour suffisent | +2 000 exercices, rangés par thème et par niveau. | Information (désinscription possible) |
-| `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les grands maîtres t’attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
+| `12-demarrage-j6-masterclasses.html` | J+6 après l'abonnement | Les Grands Maîtres t’attendent | Masterclasses en direct et replays, inclus dans ton abonnement. | Information (désinscription possible) |
 | `13-demarrage-j10-communaute.html` | J+10 après l'abonnement | Joue, partage, mesure-toi | Tournois en ligne, forum, tes parties analysées. | Information (désinscription possible) |
 
 ### Bilan du mois
