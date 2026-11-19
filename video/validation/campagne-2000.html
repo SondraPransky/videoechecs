@@ -178,7 +178,7 @@ const FORMATS = [
   { id: "160x600",  nom: "Skyscraper 160×600", w: 160, h: 600 },
   { id: "120x600",  nom: "Skyscraper étroit 120×600", w: 120, h: 600 },
 ].map(f => ({ ...f, fam: f.w / f.h >= 1.5 ? "horizontal" : "vertical" }));
-const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", revue: "la couverture de la revue et ses auteurs", lecons: "trois leçons Objectif 1800 cochées" };
+const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", parties: "la liste de tes parties de tournoi, prêtes à analyser", revue: "la couverture de la revue et ses auteurs", lecons: "trois leçons Objectif 1800 cochées" };
 
 /* ---------- Les propositions ---------- */
 const C = [
@@ -193,8 +193,8 @@ const C = [
     t: ["Prépare tes tournois", "avec des grands maîtres."], court: "Masterclasses de GMI", sub: "Gata Kamsky, Fabien Libiszewski et nos coachs, en direct.", cta: "Je m'abonne" },
   { id: "c05", v: 1, aud: "c", nom: "Pas seulement pour débuter", angle: "Casser l’idée d’une Académie pour débutants, avec les séries vidéo des maîtres.", fond: "corail", pose: "idee", scene: { type: "videos" }, prix: "mois",
     t: ["Pas seulement", "pour débuter."], court: "Pas que pour débuter", sub: "Ouvertures, plans, finales : de quoi progresser jusqu’à 2000 et plus.", cta: "Découvrir" },
-  { id: "c06", v: 3, aud: "c", nom: "Les parties des champions", angle: "La revue Europe Échecs en PGN, la lecture des joueurs confirmés.", fond: "creme", pose: "cafe", scene: { type: "revue" }, prix: "mois",
-    t: ["Les parties des champions,", "commentées coup par coup."], court: "La revue en PGN", sub: "Bacrot, Milliet, Wesley So, Ivanchuk : la revue Europe Échecs en PGN interactif.", cta: "Je m'abonne" },
+  { id: "c06", v: 4, aud: "c", nom: "Ton dernier tournoi, décortiqué", angle: "Les parties du joueur de club, importées en PGN et analysées : là où on progresse vraiment.", fond: "nuit", pose: "loupe", scene: { type: "parties" }, prix: "mois",
+    t: ["Ton dernier tournoi,", "décortiqué coup par coup."], court: "Analyse tes parties", sub: "Importe ton PGN, analyse tes parties de tournoi et partage-les avec les membres.", cta: "Je passe un cap", ctas: "Go !" },
   { id: "c07", v: 2, aud: "c", nom: "Tu plafonnes à 1700 ?", angle: "Appuyer là où ça fait mal : le joueur de club bloqué depuis des mois, puis la courbe qui repart vers 2000.", fond: "framboise", pose: "menton", scene: { type: "elo", plat: true, pose: "hourra", label: "1700 → <span style=\"color:#fae361\">2000 +</span>" }, prix: "mois",
     t: ["Tu plafonnes à 1700", "depuis des mois ?"], court: "Bloqué à 1700 ?", sub: "Leçons Objectif 1800, masterclasses de grands maîtres : on débloque ça.", cta: "Je passe un cap", ctas: "Go !" },
   { id: "c08", v: 2, aud: "c", nom: "Objectif 1800", angle: "Les vraies leçons de niveau 1800 de l’Académie, cochées une à une.", fond: "nuit", pose: "reflexion", scene: { type: "lecons" }, prix: "mois",
@@ -341,6 +341,15 @@ function scene(c, t, W, H) {
         <span style="font:700 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.85">${lab}</span><span style="font:700 ${r(s * .36)}px/1 'Signika',Arial,sans-serif">${T(n)}</span><span style="font:600 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;opacity:.85">${sous}</span></div>`;
       return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:${r(s * .14)}px">${col("Gratuit", "6", "leçons", false)}<span style="font:700 ${r(s * .14)}px/1 'Signika',Arial,sans-serif;color:#fff;opacity:.8">vs</span>${col("Abonné", "+200", "leçons", true)}</div>`);
     }
+    case "parties": {
+      const L = [["Open de la ville", "Ronde 5", "1-0", "#2f9e44"], ["Interclubs", "Ronde 3", "½-½", "#8a94a3"], ["Championnat du club", "Ronde 2", "0-1", "#d9485f"]];
+      const w = Math.min(W * .86, H * 1.55), hd = Math.min(H * .1, w * .07), h = Math.min(H * .19, w * .17), g = h * .16, tot = hd + 3 * h + 2 * g + h * .3, y0 = (H - tot) / 2, x0 = (W - w) / 2;
+      const fs = Math.min(h * .3, w * (w > 420 ? .052 : .07));
+      return box(`<div style="position:absolute;left:${r(x0)}px;top:${r(y0)}px;width:${r(w)}px;font:800 ${r(hd * .62)}px/1 'Signika',Arial,sans-serif;letter-spacing:.08em;color:#fae361">MES PARTIES</div>` + L.map(([ev, ro, res, col], i) => `<div style="position:absolute;left:${r(x0)}px;top:${r(y0 + hd + h * .3 + i * (h + g))}px;width:${r(w)}px;height:${r(h)}px;border-radius:${r(h * .22)}px;background:#fff;color:#121821;display:flex;align-items:center;gap:${r(h * .22)}px;padding:0 ${r(h * .26)}px;box-sizing:border-box;box-shadow:0 ${r(h * .08)}px ${r(h * .3)}px rgba(0,0,0,.25);white-space:nowrap">
+        <span style="flex:none;min-width:${r(fs * 2.3)}px;text-align:center;font:800 ${r(fs * .82)}px/1 'Signika',Arial,sans-serif;color:#fff;background:${col};border-radius:${r(h * .14)}px;padding:${r(h * .1)}px ${r(h * .08)}px">${res}</span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis"><b style="font:700 ${r(fs)}px/1.1 'Signika',Arial,sans-serif">${ev}</b>${w > 420 ? ` <span style="font:600 ${r(fs * .72)}px/1 'Signika',Arial,sans-serif;color:#5a6574">· ${ro}</span>` : ""}</span>
+        ${i === 0 ? `<span style="flex:none;font:800 ${r(fs * .74)}px/1 'Signika',Arial,sans-serif;background:#fae361;color:#111;border-radius:99px;padding:${r(h * .12)}px ${r(h * .2)}px">Analyser</span>` : ""}</div>`).join(""));
+    }
     case "revue": {
       const s = Math.min(W * .9 / 200, H * .86 / 150);
       return box(`<div style="position:absolute;left:50%;top:50%;width:${r(200 * s)}px;height:${r(150 * s)}px;transform:translate(-50%,-50%)"><div style="position:absolute;left:0;top:0;width:200px;height:150px;transform:scale(${s});transform-origin:0 0;${FONT};filter:drop-shadow(0 8px 18px rgba(0,0,0,.28))">${MAQ_PGN()}</div></div>`);
@@ -354,6 +363,7 @@ function vignette(c, t, s) {
   if (S.type === "board") return wrap(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">${board(S.pos, s * .78)}</div>`);
   if (S.type === "coach") return wrap(`<img src="img/coach-kamsky.jpg" alt="Gata Kamsky" style="width:100%;height:100%;object-fit:cover">`);
   if (S.type === "video" || S.type === "videos") return wrap(`<img src="img/${S.img || "video-calcul-gagnant"}.jpg" alt="" style="width:100%;height:100%;object-fit:cover">`);
+  if (S.type === "parties") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center;font:800 ${r(s * .2)}px/1 Signika,Arial,sans-serif;color:#fae361">PGN</div>`);
   if (S.type === "revue") return wrap(`<img src="img/revue-779.jpg" alt="Revue Europe Échecs n° 779" style="width:100%;height:100%;object-fit:cover;object-position:top">`);
   if (S.type === "check") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center">${icone("cadenas", s * .5, "#fae361", 2.6)}</div>`);
   return wrap(masc(S.pose || c.pose, s * .86));

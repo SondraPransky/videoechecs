@@ -178,7 +178,7 @@ const FORMATS = [
   { id: "160x600",  nom: "Skyscraper 160×600", w: 160, h: 600 },
   { id: "120x600",  nom: "Skyscraper étroit 120×600", w: 120, h: 600 },
 ].map(f => ({ ...f, fam: f.w / f.h >= 1.5 ? "horizontal" : "vertical" }));
-const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", revue: "le lecteur PGN de la revue" };
+const VISUELS = { masc: "la mascotte", mascStk: "la mascotte et une pastille", board: "un échiquier annoté", mascBoard: "la mascotte devant un échiquier", coach: "les photos des grands maîtres", video: "une vraie vidéo Europe Échecs", videos: "les séries vidéo Europe Échecs", pictos: "des pictos", escalier: "l’escalier des niveaux", elo: "la mascotte et la courbe Elo", forum: "la mascotte et des bulles du forum", check: "les leçons cochées puis le cadenas", versus: "6 leçons contre +200", parties: "la liste de tes parties de tournoi, prêtes à analyser", revue: "le lecteur PGN de la revue" };
 
 /* ---------- Les propositions ---------- */
 const C = [
@@ -230,8 +230,8 @@ const C = [
     t: ["Choisis l’abonnement annuel", "et profite de près de 2 mois offerts !"], court: "Près de 2 mois offerts", cta: "J'en profite !" },
   { id: "g09", v: 4, aud: "g", nom: "Apprends de tes erreurs", angle: "Une Dame lâchée en h5 : flèche rouge et « ?? ».", fond: "menthe", pose: "loupe", scene: { type: "board", pos: "erreur" }, prix: "mois",
     t: ["Apprends", "de tes erreurs."], court: "Apprends de tes erreurs", sub: "Analyse tes parties pour repérer tes erreurs et les corriger.", cta: "Je m'abonne" },
-  { id: "g10", v: 6, aud: "g", nom: "La revue, coup par coup", angle: "La revue Europe Échecs du mois en PGN interactif.", fond: "jaune", pose: "cafe", scene: { type: "revue" }, prix: "mois",
-    t: ["Rejoue les parties", "de la revue, coup par coup."], court: "La revue, coup par coup", sub: "Chaque numéro de la revue Europe Échecs en PGN interactif.", cta: "Lire la revue", ctas: "Je m'abonne" },
+  { id: "g10", v: 7, aud: "g", nom: "Tes parties, analysées", angle: "Les parties du joueur, importées en PGN et analysées dans l’Académie.", fond: "nuit", pose: "loupe", scene: { type: "parties" }, prix: "mois",
+    t: ["Tes parties de tournoi,", "analysées coup par coup."], court: "Analyse tes parties", sub: "Importe ton PGN, analyse et partage tes parties avec les membres.", cta: "Je m'abonne" },
   { id: "g11", v: 2, aud: "g", nom: "Sans engagement", angle: "Lever la peur de s’engager.", fond: "corail", pose: "cafe", scene: { type: "masc", pose: "cafe" }, prix: "mois",
     t: ["Sans engagement :", "tu arrêtes quand tu veux."], court: "Sans engagement", sub: "Abonnement mensuel résiliable à tout moment.", cta: "Je m'abonne" },
   { id: "g12", v: 4, aud: "g", nom: "Tes puzzles réussis", angle: "Personnalisé ([NB_PUZZLES_REUSSIS]) : une position de mat, cochée en vert.", fond: "nuit", pose: "menton", scene: { type: "board", pos: "mat" }, prix: "mois",
@@ -372,6 +372,15 @@ function scene(c, t, W, H) {
         <span style="font:700 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.85">${lab}</span><span style="font:700 ${r(s * .36)}px/1 'Signika',Arial,sans-serif">${T(n)}</span><span style="font:600 ${r(s * .11)}px/1 'Signika',Arial,sans-serif;opacity:.85">${sous}</span></div>`;
       return box(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:${r(s * .14)}px">${col("Gratuit", "6", "leçons", false)}<span style="font:700 ${r(s * .14)}px/1 'Signika',Arial,sans-serif;color:#fff;opacity:.8">vs</span>${col("Abonné", "+200", "leçons", true)}</div>`);
     }
+    case "parties": {
+      const L = [["Open de la ville", "Ronde 5", "1-0", "#2f9e44"], ["Interclubs", "Ronde 3", "½-½", "#8a94a3"], ["Championnat du club", "Ronde 2", "0-1", "#d9485f"]];
+      const w = Math.min(W * .86, H * 1.55), hd = Math.min(H * .1, w * .07), h = Math.min(H * .19, w * .17), g = h * .16, tot = hd + 3 * h + 2 * g + h * .3, y0 = (H - tot) / 2, x0 = (W - w) / 2;
+      const fs = Math.min(h * .3, w * (w > 420 ? .052 : .07));
+      return box(`<div style="position:absolute;left:${r(x0)}px;top:${r(y0)}px;width:${r(w)}px;font:800 ${r(hd * .62)}px/1 'Signika',Arial,sans-serif;letter-spacing:.08em;color:#fae361">MES PARTIES</div>` + L.map(([ev, ro, res, col], i) => `<div style="position:absolute;left:${r(x0)}px;top:${r(y0 + hd + h * .3 + i * (h + g))}px;width:${r(w)}px;height:${r(h)}px;border-radius:${r(h * .22)}px;background:#fff;color:#121821;display:flex;align-items:center;gap:${r(h * .22)}px;padding:0 ${r(h * .26)}px;box-sizing:border-box;box-shadow:0 ${r(h * .08)}px ${r(h * .3)}px rgba(0,0,0,.25);white-space:nowrap">
+        <span style="flex:none;min-width:${r(fs * 2.3)}px;text-align:center;font:800 ${r(fs * .82)}px/1 'Signika',Arial,sans-serif;color:#fff;background:${col};border-radius:${r(h * .14)}px;padding:${r(h * .1)}px ${r(h * .08)}px">${res}</span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis"><b style="font:700 ${r(fs)}px/1.1 'Signika',Arial,sans-serif">${ev}</b>${w > 420 ? ` <span style="font:600 ${r(fs * .72)}px/1 'Signika',Arial,sans-serif;color:#5a6574">· ${ro}</span>` : ""}</span>
+        ${i === 0 ? `<span style="flex:none;font:800 ${r(fs * .74)}px/1 'Signika',Arial,sans-serif;background:#fae361;color:#111;border-radius:99px;padding:${r(h * .12)}px ${r(h * .2)}px">Analyser</span>` : ""}</div>`).join(""));
+    }
     case "revue": {
       const s = Math.min(W * .9 / 200, H * .86 / 150);
       return box(`<div style="position:absolute;left:50%;top:50%;width:${r(200 * s)}px;height:${r(150 * s)}px;transform:translate(-50%,-50%)"><div style="position:absolute;left:0;top:0;width:200px;height:150px;transform:scale(${s});transform-origin:0 0;${FONT};filter:drop-shadow(0 8px 18px rgba(0,0,0,.28))">${MAQ_PGN()}</div></div>`);
@@ -385,6 +394,7 @@ function vignette(c, t, s) {
   if (S.type === "board") return wrap(`<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">${board(S.pos, s * .78)}</div>`);
   if (S.type === "coach") return wrap(`<img src="img/coach-kamsky.jpg" alt="Gata Kamsky" style="width:100%;height:100%;object-fit:cover">`);
   if (S.type === "video" || S.type === "videos") return wrap(`<img src="img/${S.img || "video-calcul-gagnant"}.jpg" alt="" style="width:100%;height:100%;object-fit:cover">`);
+  if (S.type === "parties") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center;font:800 ${r(s * .2)}px/1 Signika,Arial,sans-serif;color:#fae361">PGN</div>`);
   if (S.type === "revue") return wrap(`<img src="img/revue-779.jpg" alt="Revue Europe Échecs n° 779" style="width:100%;height:100%;object-fit:cover;object-position:top">`);
   if (S.type === "check") return wrap(`<div style="position:absolute;inset:0;display:grid;place-items:center">${icone("cadenas", s * .5, "#fae361", 2.6)}</div>`);
   return wrap(masc(S.pose || c.pose, s * .86));
