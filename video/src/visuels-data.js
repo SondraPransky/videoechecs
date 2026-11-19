@@ -113,8 +113,8 @@ window.VISUELS = [
   { id: "90-jusqu-a-2000", tpl: "chiffre", theme: "nuit", k: "Joueurs de club", n: "2000<b>&#8239;</b>+", t: "On t'y emmène.", e: "Pas à pas.", s: "L'Académie, de l'initiation aux joueurs confirmés.", pose: "drapeau" },
   { id: "91-pas-que-pour-debuter", tpl: "accroche", theme: "soleil", k: "Joueurs confirmés", t: "Pas seulement", e: "pour débuter.", s: "Ouvertures, plans, finales : jusqu'à 2000 et plus.", shot: "masterclasses", pose: "idee" },
   { id: "92-joueur-de-club", tpl: "accroche", theme: "rose", k: "Joueurs de club", t: "Joueur de club ?", e: "L'Académie aussi.", s: "Des leçons au niveau des tournois.", shot: "exercices", pose: "reflexion" },
-  { id: "93-cap-des-2000", tpl: "mascotte", theme: "ciel", k: "Objectif 2000", t: "Fais sauter", e: "le cap des 2000 !", pose: "hourra" },
-  { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1800", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Ta réponse en commentaire.", pos: FOUH7, pose: "menton" },
+  { id: "93-cap-des-2000", tpl: "mascotte", theme: "ciel", k: "Joueurs de club", t: "Fais sauter", e: "le cap des 2000 !", pose: "hourra" },
+  { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1600", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Ta réponse en commentaire.", pos: FOUH7, pose: "menton" },
   { id: "95-solution-fou-h7", tpl: "puzzle", theme: "menthe", k: "La solution", t: "1.Fxh7+ !", e: "le sacrifice grec.", s: "Après 1…Rxh7 2.Cg5+, la Dame arrive en h5.", pos: FOUH7_OK, hl: ["d3", "h7"], arrow: ["d3", "h7"], pose: "hourra" },
 
   { id: "96-plafond-1700", btn: "Je passe un cap", tpl: "chiffre", theme: "rose", k: "Joueurs de club", n: "1700", t: "depuis des mois ?", e: "On débloque ça.", s: "Leçons Objectif 1800 et masterclasses de grands maîtres.", pose: "menton" },
