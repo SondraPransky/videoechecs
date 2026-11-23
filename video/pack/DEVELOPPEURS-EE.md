@@ -6,8 +6,8 @@ Ce document dit ce que l'équipe technique doit brancher. Il va avec le kit `kit
 ```
 kit-developpeurs-ee/
   DEVELOPPEURS-EE.md   ce document
-  EMAILS-EE.md         catalogue des 30 e-mails : quand les envoyer, objet, pré-en-tête, tarifs, règles, décisions
-  emails-ee/           30 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS-EE.md         catalogue des 31 e-mails : quand les envoyer, objet, pré-en-tête, tarifs, règles, décisions
+  emails-ee/           31 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails-ee/img/       les 3 logos utilisés par les e-mails, à héberger
   emails-ee/apercus/   aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
   miniature-mail.py    prépare la miniature d'une vidéo pour l'e-mail 28 (1072 × 603, bouton lecture incrusté)
@@ -15,11 +15,11 @@ kit-developpeurs-ee/
 ```
 
 Priorités : **(1) avant la mise en service**, (2) au lancement des nouvelles formules, (3) dans le mois qui suit.
-Les e-mails 01 à 17, 29 et 30 remplacent des modèles existants du site (correspondance dans `EMAILS-EE.md`) ; 18 à 28 sont nouveaux.
+Les e-mails 01 à 17, 29 et 30 remplacent des modèles existants du site (correspondance dans `EMAILS-EE.md`) ; 18 à 28 et 31 sont nouveaux.
 
 ## 1. Intégration
 
-1. **Héberger `emails-ee/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 30 fichiers.
+1. **Héberger `emails-ee/img/`** et remplacer `[URL_IMAGES]` par son adresse dans les 31 fichiers.
 2. **Variables** : chaque `[VARIABLE]` est remplacée par la donnée correspondante (§ 3). Aucune ne doit partir telle quelle : valeur par défaut ou pas d'envoi.
 3. **Expéditeur** : « Europe Échecs » ; « Le service abonnement » signe les e-mails 10, 16, 29 et 30. Adresse de réponse lue par une personne.
 4. **Délivrabilité (1)** : domaine d'envoi authentifié SPF, DKIM, DMARC ; en-têtes `List-Unsubscribe` et `List-Unsubscribe-Post`
@@ -47,7 +47,7 @@ Les e-mails 01 à 17, 29 et 30 remplacent des modèles existants du site (corres
 | Fin d'un ancien Pack Progresser / Pack Jeu | 14 / 15 | 2 |
 | Fin d'un abonnement à la revue papier | 16 (1re relance), puis 30 (2e relance) | 1 |
 | Achat d'un Pack cadeau | 17 | 1 |
-| Échec d'un prélèvement mensuel (relance à J+3) | 18 | 1 |
+| Échec d'un prélèvement mensuel | 18, puis 31 à J+3 si la carte n'est pas mise à jour | 1 |
 | 30 jours avant l'expiration de la carte (formules au mois) | 19 | 2 |
 | Chaque prélèvement mensuel | 20 | 1 |
 | 30 jours après une fin d'abonnement ou une annulation | 21 | 3 |
@@ -76,7 +76,7 @@ après le 27 sans clic sur « Oui, je reste », plus d'e-mails d'information (le
 **Liens** (`[LIEN_…]`) : `ACTIVATION`, `MOT_DE_PASSE`, `CONNEXION`, `MON_COMPTE`, `MES_SERVICES`, `MOYEN_PAIEMENT` (mise à jour de la carte), `ABONNEMENTS` (page des formules),
 `ZONE_DE_JEU`, `ENTRAINEMENT_TACTIQUE`, `VIDEOS`, `VIDEO_1..3`, `REVUE`, `AIDE`, `CARTE_CADEAU_PDF`, `PREFERENCES`, `DESINSCRIPTION`, `RESTER_ABONNE` (27 : confirme l'envoi des e-mails).
 Liens fixes déjà écrits : page des tarifs, tarifs de la revue, activation d'un code cadeau, boutique.echecs.com.
-Ajouter `utm_source=email&utm_medium=email&utm_campaign=ee-<nom du fichier>`. Ces tableaux couvrent toutes les variables des 30 e-mails.
+Ajouter `utm_source=email&utm_medium=email&utm_campaign=ee-<nom du fichier>`. Ces tableaux couvrent toutes les variables des 31 e-mails.
 
 ## 4. Miniatures des vidéos (e-mail 28)
 

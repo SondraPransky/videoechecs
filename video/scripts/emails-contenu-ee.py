@@ -215,7 +215,7 @@ def video_semaine(n):   # une vidéo de la semaine : miniature cliquable, série
             f'<div style="margin-top:4px;font:14px/1.5 {SANS};color:{C["gris"]}">Avec [AUTEUR_{n}]</div></td></tr></table>')
 
 # Paiement mensuel
-mail(id="18-paiement-refuse", cat=P_PAIEMENT, marketing=False, quand="Échec d'un prélèvement mensuel, relance à J+3 si rien n'a changé (même modèle)" + INFO_PROPOSITION,
+mail(id="18-paiement-refuse", cat=P_PAIEMENT, marketing=False, quand="Échec d'un prélèvement mensuel (1er avis ; si rien n'a changé à J+3 : e-mail 31)" + INFO_PROPOSITION,
      objet="Le paiement de votre [SERVICE] n'a pas abouti", pre="Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption.", sur="Votre abonnement", titre="Un souci | avec votre paiement.",
      corps=[para("Bonjour [PSEUDO], le prélèvement de <b>[MONTANT]</b> pour votre abonnement <b>[SERVICE]</b> n'a pas pu être effectué. Cela arrive par exemple avec une carte expirée ou un plafond atteint."),
             infos([("Formule", "[SERVICE]"), ("Montant", "[MONTANT]"), ("Accès garanti jusqu'au", "[DATE_SUSPENSION]")]),
@@ -233,6 +233,13 @@ mail(id="20-recu-renouvellement", cat=P_PAIEMENT, marketing=False, quand="À cha
             bouton("Gérer mon abonnement", L("MES_SERVICES")),
             para(petit("Facture téléchargeable dans « Mon compte ». Vous pouvez arrêter le renouvellement à tout moment."))],
      sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
+
+mail(id="31-paiement-refuse-relance", cat=P_PAIEMENT, marketing=False, quand="J+3 après l'e-mail 18, si la carte n'a toujours pas été mise à jour (2e et dernier avis avant la fin de l'accès)" + INFO_PROPOSITION,
+     objet="Votre accès [SERVICE] s'arrête le [DATE_SUSPENSION]", pre="Le paiement n'est toujours pas passé. Une minute suffit pour mettre votre carte à jour et garder votre accès.", sur="Votre abonnement", titre="Votre accès | s'arrête bientôt.",
+     corps=[para("Bonjour [PSEUDO], le paiement de <b>[MONTANT]</b> pour votre <b>[SERVICE]</b> n'est toujours pas passé. Sans mise à jour de votre carte, votre accès s'arrêtera le <b>[DATE_SUSPENSION]</b>."),
+            infos([("Formule", "[SERVICE]"), ("Montant", "[MONTANT]"), ("Fin de l'accès", "[DATE_SUSPENSION]")]),
+            bouton("Garder mon accès", L("MOYEN_PAIEMENT")),
+            para(petit("Vous préférez changer de formule ? Toutes nos formules, au mois sans engagement ou pour 1 ou 2 ans, sont sur <a href=\"" + TARIFS + "\" style=\"color:#6b6b66\">la page des tarifs</a>. Si votre carte est déjà à jour, ne tenez pas compte de cet e-mail."))])
 
 # Reconquête et montée en gamme
 mail(id="21-reconquete-j30", cat=P_FIDELITE, quand="30 jours après une fin d'abonnement ou une annulation, une seule fois" + INFO_PROPOSITION,

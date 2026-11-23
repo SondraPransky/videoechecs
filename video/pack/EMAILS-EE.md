@@ -69,7 +69,7 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 
 - **Un e-mail, une tâche** : un seul bouton principal ; pas de liens inutiles avant l'action attendue (01 : rien à cliquer avant l'activation).
 - **Objet** de 35 à 55 caractères, clair avant d'être malin ; **pré-en-tête** de 60 à 95 caractères qui complète l'objet sans le répéter.
-- **Chaque relance apporte un angle nouveau** (méthode des relances de prospection) : jamais le même texte renvoyé. 10 puis 29 : renouveler, puis économiser avec 2 ans ou passer au mois ; 16 puis 30 : se réabonner, puis le tarif pack ; 25, 26, 27 : une partie, les nouveautés, puis « on continue ? » (dernier message, respecté : sans clic, plus d'e-mails d'information). Pour le 18, la relance à J+3 devrait aussi changer d'angle (par exemple rappeler ce que l'accès comprend).
+- **Chaque relance apporte un angle nouveau** (méthode des relances de prospection) : jamais le même texte renvoyé. 10 puis 29 : renouveler, puis économiser avec 2 ans ou passer au mois ; 16 puis 30 : se réabonner, puis le tarif pack ; 25, 26, 27 : une partie, les nouveautés, puis « on continue ? » (dernier message, respecté : sans clic, plus d'e-mails d'information). 18 puis 31 : un souci de paiement, puis la date de fin d'accès.
 - **Ouverture directe** : la raison de l'e-mail dès la première phrase (pas de « Bonne nouvelle : », « Rassurez-vous : », « Nous sommes ravis… »).
 - **Pas de formule d'aide en fin d'e-mail** (« N'hésitez pas à nous contacter… ») : le lien « Aide » est dans le pied de page ; une demande précise si besoin (11 : « Pourquoi partez-vous ? »).
 - **Boutons** : action + résultat, à la première personne (« Profiter de −25 % », « Me réabonner », « Choisir ma formule »).
@@ -97,7 +97,8 @@ Rédigées d'après la liste de contrôle du cycle de vie. **Rien n'y est invent
 
 | E-mail | Quand | À fournir avant l'envoi |
 |---|---|---|
-| 18 Paiement refusé | Échec d'un prélèvement mensuel, relance à J+3 | `[DATE_SUSPENSION]` : jusqu'à quand l'accès est garanti ; lien de mise à jour de la carte |
+| 18 Paiement refusé | Échec d'un prélèvement mensuel (1er avis) | `[DATE_SUSPENSION]` : jusqu'à quand l'accès est garanti ; lien de mise à jour de la carte |
+| 31 Paiement refusé, 2e avis | J+3 après le 18, si la carte n'est pas à jour : la date de fin d'accès, un bouton « Garder mon accès », les autres formules | Même `[DATE_SUSPENSION]` que le 18 |
 | 19 Carte bientôt expirée | 30 jours avant l'expiration de la carte | Rien de plus (données de paiement) |
 | 20 Reçu de renouvellement | À chaque prélèvement d'une formule au mois | Le reçu ou la facture dans « Mon compte » |
 | 21 Reconquête | 30 jours après une fin d'abonnement ou une annulation | Trois nouveautés du mois ; `[OFFRE_RETOUR]` ou retrait du bloc |
@@ -174,9 +175,10 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `18-paiement-refuse.html` | Échec d'un prélèvement mensuel, relance à J+3 si rien n'a changé (même modèle) · proposition, à valider | Le paiement de votre [SERVICE] n’a pas abouti | Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption. | Compte (toujours envoyé) |
+| `18-paiement-refuse.html` | Échec d'un prélèvement mensuel (1er avis ; si rien n'a changé à J+3 : e-mail 31) · proposition, à valider | Le paiement de votre [SERVICE] n’a pas abouti | Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption. | Compte (toujours envoyé) |
 | `19-carte-bientot-expiree.html` | 30 jours avant l'expiration de la carte enregistrée (abonnements au mois) · proposition, à valider | Votre carte expire bientôt : pensez à la mettre à jour | La carte •••• [CARTE_4_CHIFFRES] expire fin [MOIS_EXPIRATION]. Une minute suffit pour la remplacer. | Compte (toujours envoyé) |
 | `20-recu-renouvellement.html` | À chaque prélèvement d'une formule au mois (seule formule renouvelée automatiquement ; 1 an et 2 ans se renouvellent à la main) · proposition, à valider | Votre reçu Europe Échecs : [SERVICE], [MOIS] | Paiement de [MONTANT] reçu. Prochain prélèvement le [DATE_PROCHAIN_PAIEMENT]. | Compte (toujours envoyé) |
+| `31-paiement-refuse-relance.html` | J+3 après l'e-mail 18, si la carte n'a toujours pas été mise à jour (2e et dernier avis avant la fin de l'accès) · proposition, à valider | Votre accès [SERVICE] s’arrête le [DATE_SUSPENSION] | Le paiement n’est toujours pas passé. Une minute suffit pour mettre votre carte à jour et garder votre accès. | Compte (toujours envoyé) |
 
 ### Propositions · reconquête et montée en gamme
 
