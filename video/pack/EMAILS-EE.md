@@ -50,8 +50,20 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 
 ## Décisions et points à suivre
 
-- **Mot de passe en clair (02, 07)** : les modèles actuels envoient le mot de passe dans l'e-mail ; il est conservé pour rester fidèle, mais il vaut mieux
-  le remplacer par un lien « Choisir mon mot de passe » (comme le 03).
+Réponses de l'équipe (23 novembre 2026), confirmées par Raph :
+
+- **Mot de passe** : l'utilisateur le choisit à la création du compte ; il n'apparaît plus dans aucun e-mail (02 et 07 n'affichent que le pseudo).
+  À confirmer pour le 02 (compte créé par un gestionnaire) : comment le membre choisit-il son mot de passe ?
+- **Paiement refusé (18, 31)** : l'accès est bloqué tout de suite, sans délai de grâce. Le 18 l'annonce, le 31 (J+3) invite à le retrouver.
+- **Relances** : packs web à J-15 (10, `relance1web`) et J-3 (29, `relance2web`) ; revue le 25 (16, `relance1ee`) puis le 8 (30, `relance2ee`)
+  pour un abonnement qui se termine le mois suivant (mois exact de chaque envoi à confirmer).
+- **Contact de la revue (16, 30)** : le support, par la page d'aide.
+- **Éditeur (pied de page)** : IDEAL SAS, 114 quai Louis Blériot, 75016 Paris.
+- **Vidéos de la semaine (28)** : lundi La Minute Stratégie, mardi Coup de Légende, mercredi Calcul Gagnant, vendredi La Minute Finale ;
+  le dimanche, une ou deux vidéos par mois (les semaines concernées, ajouter une 5e carte identique). Jour d'envoi à fixer.
+- **Pack Jeu+ → Pack Intégral (22)** : pas en place aujourd'hui ; proposition à décider.
+- **Reconquête (21)** : pas d'offre de retour pour l'instant ; l'encadré est retiré.
+- **Abonnement expiré** : nouvel e-mail 32 à J+1 après la fin d'un abonnement de 1 ou 2 ans (avant la reconquête à J+30).
 - **Objets** : les modèles d'origine utilisent « Bienvenue sur [nom du site] ! » pour trois e-mails différents ; 01 et 02 ont désormais leur propre objet.
 - **01** : le modèle d'origine a plusieurs variantes (connexion par un fournisseur externe, mot de passe fourni, code d'activation) ; l'e-mail montre la
   version avec activation. Sans activation, retirer le bouton et la ligne du code ; avec un fournisseur externe, ajouter : « Vous avez décidé de vous
@@ -60,10 +72,7 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
   tant que la série n'est pas définie.
 - **06** : le code est à saisir dans le panier, offre valable 48 heures après réception, -25 % sur les Packs Web 1 et 2 ans (selon le modèle). À vérifier :
   ces Packs existent-ils encore avec les nouvelles formules (Pack Jeu+, Pack Intégral) ?
-- **10 et 16** : les délais des deux relances ne sont pas indiqués dans les modèles ; à fixer.
 - **Paiement mensuel (10, 11)** : la relance d'échéance et l'annulation rappellent que le paiement au mois est possible (nouveauté annoncée avec le Pack Jeu+ et le Pack Intégral). À retirer si la relance concerne une formule sans paiement mensuel.
-- **Prix** : aucun tarif n'est écrit dans les e-mails ; ils restent sur la page des abonnements. Dans les aperçus, les montants restent affichés comme variables.
-- **[EMAIL_CONTACT]** : adresse du service abonnement de la revue, à renseigner.
 
 ## Règles de rédaction de la série
 
@@ -97,18 +106,19 @@ Rédigées d'après la liste de contrôle du cycle de vie. **Rien n'y est invent
 
 | E-mail | Quand | À fournir avant l'envoi |
 |---|---|---|
-| 18 Paiement refusé | Échec d'un prélèvement mensuel (1er avis) | `[DATE_SUSPENSION]` : jusqu'à quand l'accès est garanti ; lien de mise à jour de la carte |
-| 31 Paiement refusé, 2e avis | J+3 après le 18, si la carte n'est pas à jour : la date de fin d'accès, un bouton « Garder mon accès », les autres formules | Même `[DATE_SUSPENSION]` que le 18 |
+| 18 Paiement refusé | Échec d'un prélèvement mensuel : accès suspendu tout de suite (1er avis) | Lien de mise à jour de la carte |
+| 31 Paiement refusé, 2e avis | J+3 après le 18, si la carte n'est pas à jour : « Retrouver mon accès », et les autres formules | Rien de plus |
 | 19 Carte bientôt expirée | 30 jours avant l'expiration de la carte | Rien de plus (données de paiement) |
 | 20 Reçu de renouvellement | À chaque prélèvement d'une formule au mois | Le reçu ou la facture dans « Mon compte » |
-| 21 Reconquête | 30 jours après une fin d'abonnement ou une annulation | Trois nouveautés du mois ; `[OFFRE_RETOUR]` ou retrait du bloc |
-| 22 Pack Jeu+ → Pack Intégral | Abonnés Pack Jeu+, après `[NB_SEMAINES]` semaines | Le délai (prix intégrés) |
+| 32 Abonnement expiré | J+1 après la fin d'un abonnement de 1 ou 2 ans non renouvelé | Rien de plus |
+| 21 Reconquête | 30 jours après une fin d'abonnement ou une annulation | Trois nouveautés du mois (pas d'offre de retour pour l'instant) |
+| 22 Pack Jeu+ → Pack Intégral | Pas en place aujourd'hui : abonnés Pack Jeu+, après un délai à fixer | La décision et le délai |
 | 23 Mensuel → annuel | Au 3ᵉ prélèvement mensuel | Rien : valeurs par formule dans le tableau des tarifs |
 | 24 Rappel de l'offre de bienvenue | 24 h après le 06, sans achat | Confirmer que les Packs Web 1 et 2 ans existent encore |
 | 25 Gratuit inactif 7 jours | 7 jours sans connexion | Rien de plus |
 | 26 Gratuit inactif 21 jours | 21 jours sans connexion | Trois nouveautés |
 | 27 Gratuit inactif 45 jours | 45 jours sans connexion, dernière relance | Lien « Je reste » (`[LIEN_RESTER_ABONNE]`) ; sans clic, arrêt des e-mails d'information |
-| 28 Les vidéos de la semaine | Chaque semaine | Titre, série, auteur, jour et miniature de chaque vidéo (exemples des aperçus : vraies séries du catalogue) |
+| 28 Les vidéos de la semaine | Chaque semaine, après la Minute Finale du vendredi | Titre, auteur et miniature de chaque vidéo (séries et jours fixés : lundi, mardi, mercredi, vendredi) |
 
 Règles d'envoi proposées : 25, 26 et 27 une seule fois par période d'inactivité ; 22 et 23 une seule fois par abonné ; 21 une seule fois par départ ;
 pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte qui l'ouvre.
@@ -127,7 +137,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `01-activation-compte.html` | À la création du compte, si une activation est nécessaire (modèle account_confirmation) | Bienvenue ! Activez votre compte Europe Échecs | Un clic pour activer votre compte : zone de jeu, vidéos, revue et livres vous attendent. | Compte (toujours envoyé) |
-| `02-compte-multicompte.html` | À la création d'un compte par le gestionnaire d'une offre multicompte (modèle account_confirmation, variante multicompte) | Votre compte Europe Échecs est prêt | Créé par [GESTIONNAIRE] dans une offre multicompte : vos identifiants et vos services. | Compte (toujours envoyé) |
+| `02-compte-multicompte.html` | À la création d'un compte par le gestionnaire d'une offre multicompte (modèle account_confirmation, variante multicompte) | Votre compte Europe Échecs est prêt | Créé par [GESTIONNAIRE] dans une offre multicompte : votre pseudo et vos services. | Compte (toujours envoyé) |
 | `03-mot-de-passe.html` | Sur demande de réinitialisation (modèle resetpass) | Réinitialisez votre mot de passe Europe Échecs | Ce lien est valable 1 heure. Vous n’avez rien demandé ? Ignorez simplement cet e-mail. | Compte (toujours envoyé) |
 | `04-suppression-compte.html` | Après la suppression du compte (modèle deletion_request_perform) | Suppression de votre compte Europe Échecs | Votre compte [PSEUDO] et ses données ont été supprimés, comme vous l’avez demandé. | Compte (toujours envoyé) |
 
@@ -142,12 +152,12 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `07-bienvenue-abonnement.html` | À la création du compte lors d'un abonnement (modèle welcome_subscription) | Bienvenue ! Vos identifiants Europe Échecs | Merci pour votre abonnement. Voici de quoi vous connecter tout de suite. | Compte (toujours envoyé) |
+| `07-bienvenue-abonnement.html` | À la création du compte lors d'un abonnement (modèle welcome_subscription) | Bienvenue ! Votre compte Europe Échecs est prêt | Merci pour votre abonnement. Connectez-vous avec le pseudo et le mot de passe que vous avez choisis. | Compte (toujours envoyé) |
 | `08-abonnement-mis-en-place.html` | À la mise en place d'un abonnement à paiement récurrent (modèle recurpmt_created) | Mise en place de votre abonnement [SERVICE] | Votre abonnement récurrent est en place. Vous le gérez à tout moment depuis « Mon compte ». | Compte (toujours envoyé) |
 | `09-paiement-recu.html` | À la réception d'un paiement de commande (modèle cmdpmtreceived) | Votre commande n° [NUMERO_COMMANDE] | Paiement reçu, commande traitée : le détail de votre commande. | Compte (toujours envoyé) |
-| `10-abonnement-echeance.html` | Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re relance (modèle relance1web ; la 2e est l'e-mail 29) | Votre abonnement Europe Échecs arrive à échéance | [PACK] jusqu’au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption. | Information (désinscription possible) |
+| `10-abonnement-echeance.html` | Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re relance à J-15 (modèle relance1web ; la 2e, à J-3, est l'e-mail 29) | Votre abonnement Europe Échecs arrive à échéance | [PACK] jusqu’au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption. | Information (désinscription possible) |
 | `11-abonnement-annule.html` | À l'annulation d'un abonnement récurrent (modèle recurpmt_cancelled) | Annulation de votre abonnement [SERVICE] | Plus aucune facturation à partir d’aujourd’hui. Vous pouvez revenir quand vous voulez. | Compte (toujours envoyé) |
-| `29-abonnement-echeance-relance-2.html` | 2e relance avant l'échéance d'un abonnement de 1 ou 2 ans, si l'abonnement n'est pas renouvelé (modèle relance2web, réécrit) | Votre abonnement s’arrête le [DATE_FIN] | Prolongez pour 2 ans et économisez jusqu’à 49,90 €, ou passez au mois, sans engagement. | Information (désinscription possible) |
+| `29-abonnement-echeance-relance-2.html` | 2e relance à J-3 avant l'échéance d'un abonnement de 1 ou 2 ans, si l'abonnement n'est pas renouvelé (modèle relance2web, réécrit) | Votre abonnement s’arrête le [DATE_FIN] | Prolongez pour 2 ans et économisez jusqu’à 49,90 €, ou passez au mois, sans engagement. | Information (désinscription possible) |
 
 ### Nouvelles formules
 
@@ -162,8 +172,8 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re relance (modèle relance1ee ; la 2e est l'e-mail 30) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
-| `30-revue-echeance-relance-2.html` | 2e relance avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit) | Votre revue Europe Échecs pour 50 € de plus | Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime. | Information (désinscription possible) |
+| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re relance le 25 du mois (modèle relance1ee ; la 2e, le 8, est l'e-mail 30) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
+| `30-revue-echeance-relance-2.html` | 2e relance le 8 du mois, avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit) | Votre revue Europe Échecs pour 50 € de plus | Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime. | Information (désinscription possible) |
 
 ### Cadeaux
 
@@ -175,18 +185,19 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `18-paiement-refuse.html` | Échec d'un prélèvement mensuel (1er avis ; si rien n'a changé à J+3 : e-mail 31) · proposition, à valider | Le paiement de votre [SERVICE] n’a pas abouti | Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption. | Compte (toujours envoyé) |
+| `18-paiement-refuse.html` | Échec d'un prélèvement mensuel : l'accès est suspendu tout de suite (1er avis ; si rien n'a changé à J+3 : e-mail 31) · proposition, à valider | Votre accès [SERVICE] est suspendu | Le prélèvement de [MONTANT] n’a pas abouti. Mettez à jour votre carte pour retrouver votre accès. | Compte (toujours envoyé) |
 | `19-carte-bientot-expiree.html` | 30 jours avant l'expiration de la carte enregistrée (abonnements au mois) · proposition, à valider | Votre carte expire bientôt : pensez à la mettre à jour | La carte •••• [CARTE_4_CHIFFRES] expire fin [MOIS_EXPIRATION]. Une minute suffit pour la remplacer. | Compte (toujours envoyé) |
 | `20-recu-renouvellement.html` | À chaque prélèvement d'une formule au mois (seule formule renouvelée automatiquement ; 1 an et 2 ans se renouvellent à la main) · proposition, à valider | Votre reçu Europe Échecs : [SERVICE], [MOIS] | Paiement de [MONTANT] reçu. Prochain prélèvement le [DATE_PROCHAIN_PAIEMENT]. | Compte (toujours envoyé) |
-| `31-paiement-refuse-relance.html` | J+3 après l'e-mail 18, si la carte n'a toujours pas été mise à jour (2e et dernier avis avant la fin de l'accès) · proposition, à valider | Votre accès [SERVICE] s’arrête le [DATE_SUSPENSION] | Le paiement n’est toujours pas passé. Une minute suffit pour mettre votre carte à jour et garder votre accès. | Compte (toujours envoyé) |
+| `31-paiement-refuse-relance.html` | J+3 après l'e-mail 18, si la carte n'a toujours pas été mise à jour (2e et dernier avis) · proposition, à valider | Votre accès [SERVICE] est toujours suspendu | Une minute pour mettre votre carte à jour, ou une autre formule dès 4,90 € par mois, sans engagement. | Compte (toujours envoyé) |
 
 ### Propositions · reconquête et montée en gamme
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `21-reconquete-j30.html` | 30 jours après une fin d'abonnement ou une annulation, une seule fois · proposition, à valider | Depuis votre départ, sur Europe Échecs | [NOUVEAUTE_1], et d’autres nouveautés. Votre compte vous attend, à l’année ou au mois. | Information (désinscription possible) |
-| `22-jeu-plus-vers-integral.html` | Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois · proposition, à valider | Le Pack Intégral : vidéos, leçons et revue en plus | Pour 7 € de plus par mois : vidéos à la demande, leçons, revue en ligne et plus de 4 nouvelles vidéos par semaine. | Information (désinscription possible) |
+| `22-jeu-plus-vers-integral.html` | Nouveau (pas en place aujourd'hui) : abonnés Pack Jeu+ actifs, après un délai à fixer, une seule fois · proposition, à valider | Le Pack Intégral : vidéos, leçons et revue en plus | Pour 7 € de plus par mois : vidéos à la demande, leçons, revue en ligne et plus de 4 nouvelles vidéos par semaine. | Information (désinscription possible) |
 | `23-mensuel-vers-annuel.html` | Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois · proposition, à valider | Passez à l’année : [ECONOMIE] d’économie sur votre [SERVICE] | Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement. | Information (désinscription possible) |
+| `32-abonnement-expire.html` | J+1 après la fin d'un abonnement de 1 ou 2 ans non renouvelé (après les relances 10 et 29 ; puis 21 à J+30) · proposition, à valider | Votre [PACK] est arrivé à échéance | Votre abonnement s’est terminé le [DATE_FIN]. Reprenez en un clic, au mois dès 4,90 € ou pour 1 ou 2 ans. | Information (désinscription possible) |
 
 ### Propositions · comptes gratuits
 
@@ -196,7 +207,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `25-gratuit-inactif-7j.html` | Comptes gratuits, 7 jours sans connexion, une seule fois par période d'inactivité · proposition, à valider | [PSEUDO], une partie sur Europe Échecs ? | Choisissez votre cadence et la force de votre adversaire : la partie commence en un clic. | Information (désinscription possible) |
 | `26-gratuit-inactif-21j.html` | Comptes gratuits, 21 jours sans connexion, une seule fois · proposition, à valider | Ce qui s’est passé sur Europe Échecs ces 3 semaines | [NOUVEAUTE_1], et ce qui vous attend sur la zone de jeu. | Information (désinscription possible) |
 | `27-gratuit-inactif-45j.html` | Comptes gratuits, 45 jours sans connexion, dernière relance (ensuite, plus d'e-mails d'information) · proposition, à valider | On continue à vous écrire, [PSEUDO] ? | Dites-nous si nos e-mails vous intéressent encore. Sinon, nous arrêtons de vous écrire. | Information (désinscription possible) |
-| `28-videos-de-la-semaine.html` | Chaque semaine, à tous les comptes qui l'acceptent (gratuits et abonnés) · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | [SERIE_1], [SERIE_2], [SERIE_3] : les nouveautés de la semaine. | Information (désinscription possible) |
+| `28-videos-de-la-semaine.html` | Chaque semaine, après la Minute Finale du vendredi (jour et heure à fixer), à tous les comptes qui l'acceptent · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | Stratégie, légende, calcul et finale : vos quatre rendez-vous de la semaine, à voir quand vous voulez. | Information (désinscription possible) |
 
 ## Variables
 
