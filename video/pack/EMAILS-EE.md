@@ -57,6 +57,7 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 - **06** : le code est à saisir dans le panier, offre valable 48 heures après réception, -25 % sur les Packs Web 1 et 2 ans (selon le modèle). À vérifier :
   ces Packs existent-ils encore avec les nouvelles formules (Pack Jeu+, Pack Intégral) ?
 - **10 et 16** : les délais des deux relances ne sont pas indiqués dans les modèles ; à fixer.
+- **Paiement mensuel (10, 11)** : la relance d'échéance et l'annulation rappellent que le paiement au mois est possible (nouveauté annoncée avec le Pack Jeu+ et le Pack Intégral). À retirer si la relance concerne une formule sans paiement mensuel.
 - **Prix** : aucun tarif n'est écrit dans les e-mails ; ils restent sur la page des abonnements. Dans les aperçus, les montants restent affichés comme variables.
 - **[EMAIL_CONTACT]** : adresse du service abonnement de la revue, à renseigner.
 
@@ -66,9 +67,9 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `01-activation-compte.html` | À la création du compte, si une activation est nécessaire (modèle account_confirmation) | Bienvenue ! Activez votre compte Europe Échecs | Un clic, et vous pouvez commencer à jouer. | Compte (toujours envoyé) |
-| `02-compte-multicompte.html` | À la création d'un compte par le gestionnaire d'une offre multicompte (modèle account_confirmation, variante multicompte) | [GESTIONNAIRE] vous a créé un compte Europe Échecs | Vos identifiants et les services de votre offre. | Compte (toujours envoyé) |
-| `03-mot-de-passe.html` | Sur demande de réinitialisation (modèle resetpass) | Réinitialisation de votre mot de passe Europe Échecs | Ce lien est valable 1 heure. | Compte (toujours envoyé) |
+| `01-activation-compte.html` | À la création du compte, si une activation est nécessaire (modèle account_confirmation) | Bienvenue ! Activez votre compte Europe Échecs | Un clic, et la partie peut commencer. | Compte (toujours envoyé) |
+| `02-compte-multicompte.html` | À la création d'un compte par le gestionnaire d'une offre multicompte (modèle account_confirmation, variante multicompte) | Votre compte Europe Échecs est prêt | Créé par [GESTIONNAIRE] : vos identifiants et vos services. | Compte (toujours envoyé) |
+| `03-mot-de-passe.html` | Sur demande de réinitialisation (modèle resetpass) | Réinitialisez votre mot de passe Europe Échecs | Ce lien est valable 1 heure. | Compte (toujours envoyé) |
 | `04-suppression-compte.html` | Après la suppression du compte (modèle deletion_request_perform) | Suppression de votre compte Europe Échecs | Votre compte et ses données ont été supprimés. | Compte (toujours envoyé) |
 
 ### Découverte
@@ -76,13 +77,13 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `05-decouverte-zone-de-jeu.html` | Après la première connexion à la zone de jeu SimpleChess (modèle welcome_directplay) | Bienvenue sur la zone de jeu ! | Cadences, tournois, analyse : ce que vous pouvez y faire. | Information (désinscription possible) |
-| `06-offre-de-bienvenue.html` | Offre de bienvenue après l'inscription, valable 48 h (modèle welcome_subscription_48h) | Votre offre de bienvenue : -25 % pendant 48 h | Sur tous nos Packs Web 1 et 2 ans, avec votre code. | Information (désinscription possible) |
+| `06-offre-de-bienvenue.html` | Offre de bienvenue après l'inscription, valable 48 h (modèle welcome_subscription_48h) | Votre offre de bienvenue : −25 % pendant 48 h | Sur tous nos Packs Web 1 et 2 ans, avec votre code. | Information (désinscription possible) |
 
 ### Abonnement
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `07-bienvenue-abonnement.html` | À la création du compte lors d'un abonnement (modèle welcome_subscription) | Bienvenue sur Europe Échecs ! | Vos identifiants de connexion. | Compte (toujours envoyé) |
+| `07-bienvenue-abonnement.html` | À la création du compte lors d'un abonnement (modèle welcome_subscription) | Bienvenue sur Europe Échecs ! | Vos identifiants, et par où commencer. | Compte (toujours envoyé) |
 | `08-abonnement-mis-en-place.html` | À la mise en place d'un abonnement à paiement récurrent (modèle recurpmt_created) | Mise en place de votre abonnement [SERVICE] | Votre abonnement récurrent est en place. | Compte (toujours envoyé) |
 | `09-paiement-recu.html` | À la réception d'un paiement de commande (modèle cmdpmtreceived) | Votre commande n° [NUMERO_COMMANDE] | Paiement reçu : votre commande est traitée. | Compte (toujours envoyé) |
 | `10-abonnement-echeance.html` | Avant l'échéance d'un abonnement web, 1re et 2e relance (modèles relance1web et relance2web, identiques) | Votre abonnement Europe Échecs arrive à échéance | [PACK] : jusqu’au [DATE_FIN]. | Information (désinscription possible) |
@@ -93,21 +94,21 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `12-pack-jeu-devient-jeu-plus.html` | Une fois, aux abonnés du Pack Jeu en cours (passage gratuit au Pack Jeu+) | Votre Pack Jeu devient gratuitement le Pack Jeu+ | L’entraînement tactique en illimité est inclus dès maintenant. | Compte (toujours envoyé) |
-| `13-pack-progresser-en-cours.html` | Une fois, aux abonnés du Pack Progresser en cours | Votre Pack Progresser : ce qui change | Rien ne change avant la fin de votre abonnement. | Compte (toujours envoyé) |
-| `14-pack-progresser-expire.html` | À l'échéance d'un abonnement Pack Progresser | Votre Pack Progresser est arrivé à échéance | Deux nouvelles formules pour continuer : Pack Jeu+ et Pack Intégral. | Information (désinscription possible) |
-| `15-pack-jeu-expire.html` | À l'échéance d'un abonnement Pack Jeu | Votre Pack Jeu est arrivé à échéance | Deux nouvelles formules pour continuer : Pack Jeu+ et Pack Intégral. | Information (désinscription possible) |
+| `13-pack-progresser-en-cours.html` | Une fois, aux abonnés du Pack Progresser en cours | Votre Pack Progresser : ce qui change | Et deux nouvelles formules pour la suite. | Compte (toujours envoyé) |
+| `14-pack-progresser-expire.html` | À l'échéance d'un abonnement Pack Progresser | Votre Pack Progresser est arrivé à échéance | Pack Jeu+ ou Pack Intégral : à vous de choisir. | Information (désinscription possible) |
+| `15-pack-jeu-expire.html` | À l'échéance d'un abonnement Pack Jeu | Votre Pack Jeu est arrivé à échéance | Pack Jeu+ ou Pack Intégral : à vous de choisir. | Information (désinscription possible) |
 
 ### Revue
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re et 2e relance (modèles relance1ee et relance2ee, identiques) | Votre abonnement au magazine Europe Échecs | Votre dernier numéro arrive en [ECHEANCE]. | Information (désinscription possible) |
+| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re et 2e relance (modèles relance1ee et relance2ee, identiques) | Votre abonnement à la revue Europe Échecs se termine | Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
 
 ### Cadeaux
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `17-carte-cadeau.html` | Après l'achat d'un Pack cadeau (modèle gift_code) | Votre commande cadeau | Votre code cadeau et la carte à imprimer. | Compte (toujours envoyé) |
+| `17-carte-cadeau.html` | Après l'achat d'un Pack cadeau (modèle gift_code) | Votre commande cadeau | Le code à offrir, et la carte cadeau à imprimer. | Compte (toujours envoyé) |
 
 ## Variables
 
