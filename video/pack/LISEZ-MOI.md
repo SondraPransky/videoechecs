@@ -16,7 +16,7 @@ images/
   00-publicites/     les 5 pubs en images fixes : question, réponse, appel final (seules ou en carrousel), tous formats
   00-identite/       photos de profil, bannières X / LinkedIn / Facebook / YouTube, couvertures de stories à la une
   00-general/        affiche de la vidéo et visuels généraux
-  01-progression/ … 85-academie-…/   un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'Académie)
+  01-progression/ … 97-lecons-1800/  un dossier par visuel, dans 6 formats (dont 41 quiz : 16, 39 à 64 (sauf 46, 47, 53, 55, 56, 60 et 61), et 65 à 85 tirés des leçons de l'Académie)
                      chaque quiz a aussi sa réponse : `…-reponse-story-1080x1920.jpg` et `…-reponse-carre-1080x1080.jpg`, à publier le lendemain
   carrousel-1-mat-du-couloir/, carrousel-2-regle-du-carre/, carrousel-3-fegatello/
                      3 carrousels pédagogiques de 7 diapositives (portrait 1080×1350, Instagram, LinkedIn, Facebook)
@@ -92,6 +92,19 @@ Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons l
 
 `*-story-9x16.mp4` pour les pubs Instagram (Stories, Reels), `*-16x9.mp4` pour YouTube, X, LinkedIn. En story, la question s'affiche en grand en haut de l'écran pendant l'accroche. Idéal pour un test A/B : même budget sur les 5 versions, puis garder celle qui convertit le mieux.
 
+## Campagne « Jusqu'à 2000 et plus »
+
+Faire comprendre que l'Académie n'est pas que pour débuter : elle accompagne aussi les joueurs de club de 1600-1800, jusqu'à 2000 et plus.
+Tout est sur la page de validation `validation/campagne-2000.html` (artefact partageable et commentable), fichiers dans `validation/campagne-2000/media/`.
+
+| Élément | Contenu |
+|---|---|
+| Vidéo `jusqu-a-2000-*.mp4` (33,5 s, sans voix) | « Tu plafonnes à 1700 depuis des mois ? » sur un Elo qui ne bouge plus, « On t'emmène jusqu'à 2000 et plus », sacrifice du Fou en h7, six vraies leçons Objectif 1600 et 1800 cochées, Maîtres et Grands Maîtres, la défense de Vancura validée, Elo qui passe les 2000. Formats 16:9, story 9:16, 4:5 et 1:1 (le cadre reprend en gros « Bloqué à 1700 ? Vise les 2000 + »). Se refait avec `bash build.sh --edition accroche-6`. |
+| Posts 90 à 97 | 2000 et plus · Pas seulement pour débuter · Joueur de club ? · Le cap des 2000 · Problème puis solution du sacrifice en h7 (Objectif 1600) · 1700 depuis des mois ? · Des leçons de joueur de club. Six formats chacun ; textes dans TEXTES-PUBLICATIONS.md. |
+| Encarts du site C01 à C08 | Escalier des niveaux, sacrifice en h7, courbe Elo, Grands Maîtres, séries vidéo, analyse de tes parties, « Tu plafonnes à 1700 ? » (courbe qui stagne puis repart), « Ton prochain palier : l'Objectif 1800 ». Dans les 4 emplacements du site. |
+
+Les encarts généraux (visiteurs sans compte, comptes gratuits) sont sur `validation/encarts.html`.
+
 ## Bon à savoir
 
 - Toutes les vidéos se terminent par l'écran « Commencer maintenant ». L'adresse n'est pas écrite sur les visuels : le logo echecs.com suffit,
@@ -99,4 +112,5 @@ Cinq versions de 31 s : une question au spectateur, la réponse (« Nous avons l
 - Musique et bruitages sont générés par code : libres de droits, utilisables partout.
 - Sur TikTok et les Reels, l'interface de l'application recouvre le bas et le côté droit : le titre et le logo sont en haut exprès.
 - Le pack se régénère après toute modification : `bash scripts/pack.sh` dans le dossier `video/` (voir le README).
+- Règles de rédaction et visuelles (Grand Maître, niveaux, mascotte, logo) : voir `CLAUDE.md` à la racine du dépôt.
 - Photos de Fabien Libiszewski et Gata Kamsky : Wikimedia Commons (CC BY 2.0 / CC BY-SA 3.0), crédits dans le README du projet. Les remplacer par des portraits officiels si possible.

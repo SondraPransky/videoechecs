@@ -105,4 +105,25 @@ bash build.sh --edition boucle   # boucle muette
 bash scripts/social.sh           # kit réseaux sociaux
 ```
 
-Les scènes de chaque déclinaison sont définies dans `scripts/timing.py` (`EDITIONS`). Les visuels sont dans `src/social.html` (un format par `?fmt=`). Les vidéos 9:16 et 1:1 placent la vidéo 16:9 dans un cadre aux couleurs de la marque, avec le logo, l'accroche et l'appel à l'action.
+Les scènes de chaque déclinaison sont définies dans `scripts/timing.py` (`EDITIONS`).
+
+### Édition « accroche-6 » (campagne « Jusqu'à 2000 et plus »)
+
+`bash build.sh --edition accroche-6` produit `build/echecs-academie-accroche-6.mp4` (33,5 s) : accroche 6 « Tu plafonnes à 1700 depuis des mois ? »
+(visuel `plafond`), puis `sol`, `s1`, `club`, `s4`, `prog`, `s8`. Le drapeau `CLUB` de `src/index.html` (actif quand `HOOK === 6`) adapte les scènes
+aux joueurs de club : position du sacrifice grec (`CLUB_POS`), parcours de l'Objectif 1600 à 2000 et plus, carte « La défense de Vancura »,
+courbe Elo de 1650 à 2080 avec la barre des 2000. La scène `club` montre six vraies leçons Objectif 1600 et 1800 (`CL_LECONS`).
+Les cadres des formats 9:16, 4:5 et 1:1 se font avec `node scripts/social.mjs DOSSIER --cadres "Bloqué à 1700 ?|Vise les 2000 +"`.
+
+## Pages de validation (encarts et campagne)
+
+- `validation/encarts.html` : les encarts publicitaires du site (visiteurs sans compte, comptes gratuits), dans les 4 emplacements
+  (Smartphone 1000×391, Desktop 960×250, Header small 960×150, Carré 1000×1000) et d'autres formats, avec avis de l'équipe.
+- `validation/campagne-2000.html` : la campagne « Jusqu'à 2000 et plus » (encarts C01 à C08, posts 90 à 97, vidéo).
+- Images des encarts : `validation/encarts/img/`. Changer le numéro `v` d'une fiche la fait repasser en « à revoir ».
+
+## Skills marketing
+
+Le dossier `.claude/skills/` (à la racine du dépôt) contient les 53 skills de [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+(licence MIT) : copywriting, copy-editing, social, ad-creative, ads, emails, launch, referrals, pricing… Ils se chargent au démarrage d'une session
+ouverte sur une branche qui les contient. Les consignes propres au projet sont dans `CLAUDE.md` à la racine. Les visuels sont dans `src/social.html` (un format par `?fmt=`). Les vidéos 9:16 et 1:1 placent la vidéo 16:9 dans un cadre aux couleurs de la marque, avec le logo, l'accroche et l'appel à l'action.

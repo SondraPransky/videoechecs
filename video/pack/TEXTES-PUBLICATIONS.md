@@ -79,7 +79,7 @@ Sur X, couper au premier paragraphe ; sur LinkedIn, garder la version longue et 
 ---
 
 ## Campagne « Jusqu'à 2000 et plus » : l'Académie aussi pour les joueurs confirmés
-*Images : `90-jusqu-a-2000/` à `97-lecons-1800/` · Vidéo : `00-accroches/accroche-6-*` (« Tu plafonnes à 1700 depuis des mois ? »)*
+*Images : `90-jusqu-a-2000/` à `97-lecons-1800/` · Vidéo : `validation/campagne-2000/media/jusqu-a-2000-*.mp4` (« Tu plafonnes à 1700 depuis des mois ? »)*
 
 Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne aussi les amateurs confirmés et les joueurs de club, jusqu'à 2000 et plus.
 
