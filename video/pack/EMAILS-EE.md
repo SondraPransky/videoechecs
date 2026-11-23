@@ -15,6 +15,10 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 - **Vouvoiement**, comme sur le site europe-echecs.com et dans ses modèles.
 - **Marque** : logo officiel Europe Échecs (bleu `#93B9E2`, tiré de la planche `assets/brand/logos-reference.png`) sur l'en-tête marine `#191F38` du site ;
   boutons bleus `#1F6FC0` à texte blanc, comme sur le site ; pas de mascotte ni de bandeaux illustrés (ils appartiennent à l'Académie).
+- **Palette déclinée de la charte du site** : surtitre et titre en blanc sur un bandeau marine sous le logo (la suite du titre en bleu de marque `#58ACFF`),
+  filet bleu de 4 px sous le bandeau ; fond et encadrés gris-bleu `#EDF1F8`, texte marine `#1A2140`, texte secondaire `#5D6480`, filets `#DFE4EE` ;
+  Pack Jeu+ sur fond bleu clair `#E6F1FF`, Pack Intégral mis en avant sur fond marine avec sa pastille « Le choix des passionnés ».
+  Les teintes crème de l'Académie sont remplacées partout (`REMAP` dans `scripts/emails-contenu-ee.py`), mode sombre compris.
 - Expéditeur « Europe Échecs » ; signature « L'équipe d'Europe Échecs » ou « Le service abonnement » (relances), comme dans les modèles.
 - Pied de page : Jouer · Vidéos · La revue · Livres (boutique.echecs.com) · Aide. Pas de liens vers les réseaux : ils ne figurent pas dans les modèles.
 

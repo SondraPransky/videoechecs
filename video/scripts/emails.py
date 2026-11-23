@@ -202,6 +202,8 @@ RESEAUX = [("Instagram", "[LIEN_INSTAGRAM]"), ("Facebook", "[LIEN_FACEBOOK]"), (
 MENTION = "echecs.com · Europe Échecs · [ADRESSE_POSTALE]"
 PIED_COMPTE = "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."
 SUIS = "Suis-nous"
+TITRE_SUR_NUIT = False   # True : surtitre et titre dans un bandeau sur le fond nuit de l'en-tête (série ee)
+REMAP = {}   # teintes propres à une série : chaque couleur de base remplacée partout (styles et mode sombre), voir emails-contenu-ee.py
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
     pied = (POURQUOI + " "
@@ -214,6 +216,16 @@ def page(e):
     # deux temps sur la même ligne (la suite en italique bleu) : retour à la ligne seulement s'il manque de place
     titre = t1.strip() + (f' <span style="font-family:{SERIF};{TITRE_SUITE};color:{C["em"]}">{t2.strip()}</span>' if t2 else "")
     corps = "".join(e["corps"])
+    sur = f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C["em"]};margin:0 0 14px">&mdash;&nbsp;{e["sur"]}</div>'
+    h1 = f'<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:{C["texte"]}">{titre}</h1>'
+    bandeau = ""
+    if TITRE_SUR_NUIT:   # le titre passe dans l'en-tête, en blanc, la suite et le surtitre dans le bleu clair de la série
+        t_nuit = t1.strip() + (f' <span style="font-family:{SERIF};{TITRE_SUITE};color:{C["clair"]}">{t2.strip()}</span>' if t2 else "")
+        bandeau = (f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:4px 32px 30px">'
+                   f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C["clair"]};margin:0 0 12px">&mdash;&nbsp;{e["sur"]}</div>'
+                   f'<h1 style="margin:0;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:#ffffff">{t_nuit}</h1></td></tr>'
+                   f'<tr><td height="4" style="height:4px;background:{C["clair"]};font-size:0;line-height:0">&nbsp;</td></tr>')
+        sur = h1 = ""
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">
 <title>{html.escape(e["objet"])}</title>{{FONTS}}{DARK}</head>
@@ -222,10 +234,10 @@ def page(e):
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td class="m-out" align="center" style="padding:24px 12px">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:100%;max-width:600px;background:{C['carte']};border-radius:16px;overflow:hidden">
 {ENTETE}
+{bandeau}
 {hero}
 <tr><td class="m-pad" style="padding:34px 32px 30px">
-<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C['em']};margin:0 0 14px">&mdash;&nbsp;{e['sur']}</div>
-<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:{C['texte']}">{titre}</h1>
+{sur}{h1}
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', SIGNATURE)}</p>
 </td></tr>
@@ -276,13 +288,16 @@ def exemple(h, propres=None):   # propres : exemples propres à un e-mail (ex. l
     ex = {**EXEMPLES, **(propres or {})}
     r = re.sub(r"\[([A-Z_0-9]+)\]", lambda m: ex.get(m.group(1), m.group(0)) if not m.group(1).startswith("LIEN_") else "#", h)
     return r[:r.index("<body")] + typo(r[r.index("<body"):])
+def teinte(s):
+    for a, b in REMAP.items(): s = s.replace(a, b)
+    return s
 VARS = set()
 for e in E:
     h = page(e)
     h = h[:h.index("<body")] + typo(h[h.index("<body"):])
     h = h.replace("<sup>", '<sup style="font-size:.7em;line-height:0;vertical-align:super">')   # exposants sans agrandir l'interligne
     VARS |= set(re.findall(r"\[[A-Z_0-9]+\]", h))
-    (OUT / f"{e['id']}.html").write_text(h.replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
+    (OUT / f"{e['id']}.html").write_text(teinte(h).replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
     # aperçu : la ligne de la boîte de réception (expéditeur, objet, pré-en-tête), comme sur un téléphone
     boite = (f'<div style="background:#ffffff;border-bottom:1px solid #e4e1d8;padding:14px 18px;font-family:{SANS}">'
              f'<div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:#0f1420;color:#fae361;font:900 16px/34px {SERIF};text-align:center">{AVATAR}</div>'
@@ -291,10 +306,10 @@ for e in E:
              f'<div style="font-size:14px;color:#6b6b66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{e["pre"]}</div></div></div></div>')
     ha = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_LOCAL)
     ha = ha.replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
-    (APER / f"{e['id']}.html").write_text(exemple(ha, e.get("exemples")))
+    (APER / f"{e['id']}.html").write_text(teinte(exemple(ha, e.get("exemples"))))
     # version pour la page de validation des e-mails (polices en ligne, exemples, ligne de boîte de réception)
     hb = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_WEB).replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
-    (ART / f"{e['id']}.html").write_text(exemple(hb, e.get("exemples")))
+    (ART / f"{e['id']}.html").write_text(teinte(exemple(hb, e.get("exemples"))))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)

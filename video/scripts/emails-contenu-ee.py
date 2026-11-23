@@ -9,6 +9,20 @@ C["em"] = "#1f6fc0"                 # bleu d'action du site (surtitre, suite du 
 C["nuit"] = "#191f38"               # marine du site (en-tête, bloc calendrier)
 C["bouton"] = "#1f6fc0"; C["bouton_texte"] = "#ffffff"   # boutons du site : bleu d'action, texte blanc
 C["jaune"] = "#58acff"              # accent (filets d'encadré) : bleu de marque du site
+C["clair"] = "#58acff"              # bleu de marque : surtitre et suite du titre sur le bandeau marine, filet sous l'en-tête
+TITRE_SUR_NUIT = True                # surtitre et titre dans le bandeau marine, sous le logo
+# Palette déclinée de la charte du site (marine #191F38, bleu de marque #58ACFF, bleu d'action #1F6FC0, gris-bleu #6C7497) :
+# les teintes crème de l'Académie deviennent des gris-bleus froids, partout (styles et règles du mode sombre)
+REMAP = {"#f1f0ea": "#edf1f8",   # fond de page, encadrés, tuiles, tableaux
+         "#1d1d1b": "#1a2140",   # texte : marine
+         "#6b6b66": "#5d6480",   # texte secondaire : gris-bleu du site
+         "#e4e1d8": "#dfe4ee",   # filets
+         "#f4f1ea": "#eef1f7"}   # texte en mode sombre
+DARK = DARK.replace("</style>", """@media (prefers-color-scheme: dark) {
+  [style*="background:#e6f1ff"] { background:#1b2a44 !important; }
+  [style*="border:1px solid #2c3658"] { border-color:#3a4670 !important; }
+}
+</style>""")
 EXPEDITEUR = "Europe Échecs"
 AVATAR = '<img src="img/favicon.png" width="34" height="34" alt="" style="display:block;width:34px;height:34px;border-radius:50%">'
 POURQUOI = "Vous recevez cet e-mail car vous avez un compte sur europe-echecs.com."
@@ -24,14 +38,20 @@ TARIFS = "https://www.europe-echecs.com/abonnement.html#table-rates-title"
 TARIFS_REVUE = "https://www.europe-echecs.com/abonnement.html#price-revue"
 petit = lambda t: f'<span style="color:#6b6b66;font-size:14px">{t}</span>'
 
-def formule(nom, accroche, texte):   # une formule proposée : nom, accroche bleue, description (sans prix : ils restent sur la page des abonnements)
+def formule(nom, accroche, texte, phare=False):   # une formule proposée (sans prix : ils restent sur la page des abonnements) ; phare : sur fond marine, avec sa pastille
+    if phare:
+        return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border-collapse:separate"><tr>'
+                f'<td bgcolor="{C["nuit"]}" style="background:{C["nuit"]};border:1px solid #2c3658;border-radius:14px;padding:18px 20px">'
+                f'<div style="display:inline-block;margin:0 0 10px;padding:4px 10px;border-radius:999px;background:{C["clair"]};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#0d1430">{accroche}</div>'
+                f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:#ffffff">{nom}</div>'
+                f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:#d3d8e6">{texte}</div></td></tr></table>')
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border-collapse:separate"><tr>'
-            f'<td style="background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:12px;padding:16px 20px">'
+            f'<td bgcolor="#e6f1ff" style="background:#e6f1ff;border-left:5px solid {C["clair"]};border-radius:14px;padding:18px 20px">'
             f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:{C["texte"]}">{nom}'
             + (f' <span style="font-weight:400;color:{C["em"]}">· {accroche}</span>' if accroche else "") + '</div>'
             f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:{C["texte"]}">{texte}</div></td></tr></table>')
 JEU_PLUS = formule("Pack Jeu+", "", "Accédez à toutes les fonctionnalités premium de la zone de jeu et à la zone d'entraînement tactique en illimité. Idéal pour jouer et progresser chaque jour !")
-INTEGRAL = formule("Pack Intégral", "le choix des passionnés", "Débloquez l'ensemble de nos contenus : vidéos en VOD, leçons, revue en ligne… et plus de 4 nouvelles vidéos chaque semaine pour continuer votre progression.")
+INTEGRAL = formule("Pack Intégral", "Le choix des passionnés", "Débloquez l'ensemble de nos contenus : vidéos en VOD, leçons, revue en ligne… et plus de 4 nouvelles vidéos chaque semaine pour continuer votre progression.", phare=True)
 def identifiants(): return infos([("Pseudo", "[PSEUDO]"), ("Mot de passe", "[MOT_DE_PASSE]")])
 
 # ---------- 1. Compte ----------
