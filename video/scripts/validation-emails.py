@@ -2,7 +2,7 @@
 """Page de validation des e-mails, séparée de celle du pack (publicités, vidéos, visuels).
 Chaque fiche affiche le vrai e-mail (HTML), en largeur téléphone, tablette ou ordinateur, avec les avis et la décision finale.
 Lit build/_emails_artefact/ (généré par scripts/emails.py) et pack/EMAILS.md (catalogue).
-Usage : python3 scripts/validation-emails.py DOSSIER_SORTIE [abonnes|ccas]   (le gabarit de page est validation/emails.html)"""
+Usage : python3 scripts/validation-emails.py DOSSIER_SORTIE [abonnes|ccas|ee]   (le gabarit de page est validation/emails.html)"""
 import json, re, shutil, sys, pathlib
 ICI = pathlib.Path(__file__).resolve().parent.parent
 OUT = pathlib.Path(sys.argv[1]); (OUT / "media").mkdir(parents=True, exist_ok=True)
@@ -24,6 +24,11 @@ if PROFIL == "ccas":   # page des bénéficiaires des Activités Sociales de l'�
                 .replace("<h1>Les e-mails de <em>l’Académie</em></h1>", "<h1>Les e-mails <em>CCAS</em></h1>")
                 .replace("envoyés aux membres, de la création du compte à la fin d’abonnement", "envoyés aux bénéficiaires des Activités Sociales de l’Énergie (accès offert, sans abonnement ni paiement), de la création du compte au bilan de l’année")
                 .replace("Léa, 18 nov., Gata Kamsky", "Léa, 18 nov., Éric et Florian"))
+if PROFIL == "ee":   # site europe-echecs.com
+    page = (page.replace("<title>E-mails de l’Académie</title>", "<title>E-mails Europe Échecs</title>")
+                .replace("<h1>Les e-mails de <em>l’Académie</em></h1>", "<h1>Les e-mails <em>Europe Échecs</em></h1>")
+                .replace("envoyés aux membres, de la création du compte à la fin d’abonnement", "d’europe-echecs.com (compte, abonnements, nouvelles formules, revue papier, cartes cadeaux), réécrits à partir des modèles actuels du site")
+                .replace("Léa, 18 nov., Gata Kamsky", "LéaDame, Pack Intégral, commande n° 245871 ; les prix et montants restent en variables, aucun tarif n’est inventé"))
 (OUT / "index.html").write_text(page)
 VERS = json.loads((ICI / "pack/validation-versions.json").read_text())
 

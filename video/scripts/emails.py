@@ -4,9 +4,10 @@
 Écrit build/pack/emails/ : un fichier HTML par e-mail (images en [URL_IMAGES]/…, variables entre crochets),
 le dossier img/ à héberger, et build/_emails_apercu/ (mêmes e-mails avec les images locales, pour les captures).
 Le catalogue (déclencheur, objet, pré-en-tête, variables) est dans pack/EMAILS.md.
-Deux séries : « abonnes » (par défaut) et « ccas » (bénéficiaires des Activités Sociales de l'Énergie, accès offert, sans paiement).
+Trois séries : « abonnes » (par défaut), « ccas » (bénéficiaires des Activités Sociales de l'Énergie, accès offert, sans paiement)
+et « ee » (site europe-echecs.com : compte, Packs, revue papier, cartes cadeaux ; vouvoiement).
 Le contenu de chaque série est dans scripts/emails-contenu-<série>.py ; ce fichier fournit le design et les composants.
-Usage : python3 scripts/emails.py [abonnes|ccas]"""
+Usage : python3 scripts/emails.py [abonnes|ccas|ee]"""
 import html, pathlib, re, shutil, sys
 PROFIL = sys.argv[1] if len(sys.argv) > 1 else "abonnes"
 SUF = "" if PROFIL == "abonnes" else "-" + PROFIL
@@ -20,7 +21,7 @@ for d in (OUT, APER):
 
 # Images utilisées (copiées dans img/, à héberger à l'adresse [URL_IMAGES])
 IMG = {
-    "logo": ICI.parent / ("assets/brand/ccas/logo-email-560.png" if PROFIL == "ccas" else "assets/brand/logo-echecs-com-blanc.png"),
+    "logo": ICI.parent / {"ccas": "assets/brand/ccas/logo-email-560.png", "ee": "assets/brand/europe-echecs/logo-europe-echecs-bleu.png"}.get(PROFIL, "assets/brand/logo-echecs-com-blanc.png"),
     "progression": PACK / "images/01-progression/01-progression-lien-1200x630.jpg",
     "etapes": PACK / "images/02-valide-chaque-etape/02-valide-chaque-etape-lien-1200x630.jpg",
     "lecons": PACK / "images/03-lecons/03-lecons-lien-1200x630.jpg",
@@ -37,7 +38,8 @@ IMG = {
     "oups": PACK / "images/37-oups/37-oups-lien-1200x630.jpg",
     "puzzle": PACK / "images/14-probleme-mat-en-1/14-probleme-mat-en-1-lien-1200x630.jpg",
 }
-BANDEAUX = sorted(f.name[6:-13] for f in (PACK / "images/00-emails").glob("email-*-1200x480.jpg"))
+if PROFIL == "ee": IMG = {"logo": IMG["logo"]}   # série Europe Échecs : sans les visuels du pack Académie
+BANDEAUX = [] if PROFIL == "ee" else sorted(f.name[6:-13] for f in (PACK / "images/00-emails").glob("email-*-1200x480.jpg"))
 for b in BANDEAUX: IMG["b-" + b] = PACK / f"images/00-emails/email-{b}-1200x480.jpg"
 from PIL import Image
 for k, f in IMG.items():
@@ -47,17 +49,17 @@ for k, f in IMG.items():
         im = Image.open(f).convert("RGB"); w, h = im.size   # sans le logo ni le bouton du visuel réseau (doublons dans un e-mail)
         im.crop((0, int(h * .14), w, int(h * .85))).save(d / "img" / (k + ".jpg"), quality=86, optimize=True)
 
-for src, nom in ((ICI / "assets/captures/ee/hd/auth-kamsky.jpg", "coach-exemple.jpg"), (PACK / "images/00-emails/email-puzzle-1080x1080.jpg", "puzzle-exemple.jpg")):
+for src, nom in (() if PROFIL == "ee" else ((ICI / "assets/captures/ee/hd/auth-kamsky.jpg", "coach-exemple.jpg"), (PACK / "images/00-emails/email-puzzle-1080x1080.jpg", "puzzle-exemple.jpg"))):
     im = Image.open(src).convert("RGB"); im.thumbnail((600, 600)); im.save(APER / "img" / nom, quality=86)
 # Miniature d'exemple pour les aperçus (vraie miniature de cours si présente, sinon l'échiquier du puzzle), bouton lecture incrusté
 import importlib.util
 _spec = importlib.util.spec_from_file_location("miniature_mail", ICI / "scripts/miniature-mail.py"); _mm = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_mm)
 _ex = ICI / "assets/exemples/miniature-cours-youtube.jpg"
-if not _ex.exists():
+if PROFIL != "ee" and not _ex.exists():
     _m = Image.new("RGB", (1280, 720), (15, 20, 32)); _m.paste(Image.open(PACK / "images/00-emails/email-puzzle-1080x1080.jpg").convert("RGB").resize((620, 620), Image.LANCZOS), (330, 50))
     _ex = APER / "_miniature-source.jpg"; _m.save(_ex, quality=90)
-_mm.miniature_mail(_ex, APER / "img/miniature-exemple.jpg")
-if PROFIL == "ccas": shutil.copy(ICI.parent / "assets/brand/ccas/ccas-favicon-72.png", APER / "img/favicon.png")   # pastille de l'expéditeur (aperçus)
+if PROFIL != "ee": _mm.miniature_mail(_ex, APER / "img/miniature-exemple.jpg")
+if PROFIL in ("ccas", "ee"): shutil.copy(ICI.parent / ("assets/brand/ccas/ccas-favicon-72.png" if PROFIL == "ccas" else "assets/brand/europe-echecs/ee-favicon-72.png"), APER / "img/favicon.png")   # pastille de l'expéditeur (aperçus)
 C = {"em": "#2c4a6e", "fond": "#f1f0ea", "nuit": "#0f1420", "texte": "#1d1d1b", "gris": "#6b6b66", "jaune": "#fae361", "bleu": "#93b9e2", "vert": "#2f9e44", "carte": "#ffffff", "filet": "#e4e1d8"}
 # Police des deux séries : Signika, celle des plateformes (titres en 600, texte en 400) ; Arial en secours sur Outlook PC.
 # Signika n'a pas d'italique : la suite du titre (après « | ») est en graisse normale, dans la couleur d'accent.
@@ -70,8 +72,8 @@ NM = ICI / "node_modules/@fontsource"
 FONTS_LOCAL = FONTS_WEB
 
 def bouton(txt, lien):
-    return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td bgcolor="{C['jaune']}" style="border-radius:999px;background:{C['jaune']};mso-padding-alt:16px 28px">
-<a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:16px;color:#111111;text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
+    return f'''<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px"><tr><td bgcolor="{C.get('bouton', C['jaune'])}" style="border-radius:999px;background:{C.get('bouton', C['jaune'])};mso-padding-alt:16px 28px">
+<a href="{lien}" style="display:inline-block;padding:16px 28px;font-family:{SANS};font-weight:800;font-size:16px;color:{C.get("bouton_texte", "#111111")};text-decoration:none;border-radius:999px">{txt}&nbsp;&rarr;</a></td></tr></table>'''
 
 def para(t): return f'<p style="margin:0 0 16px;font:16px/1.6 {SANS};color:{C["texte"]}">{t}</p>'
 def encadre(t): return f'<div style="margin:24px 0;padding:18px 20px;background:{C["fond"]};border-left:5px solid {C["jaune"]};border-radius:8px;font:16px/1.55 {SANS};color:{C["texte"]}">{t}</div>'
@@ -170,7 +172,7 @@ DARK = """<meta name="color-scheme" content="light dark"><meta name="supported-c
   [style*="background:#ffffff"] { background:#121a25 !important; }
   td[style*="background:#f1f0ea"], div[style*="background:#f1f0ea"] { background:#1b2533 !important; }
   [style*="color:#1d1d1b"] { color:#f4f1ea !important; } [style*="color:#6b6b66"] { color:#a9b4c2 !important; }
-  [style*="color:#2c4a6e"] { color:#93b9e2 !important; } [style*="color:#0066cc"] { color:#7db8f5 !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
+  [style*="color:#2c4a6e"] { color:#93b9e2 !important; } [style*="color:#0066cc"] { color:#7db8f5 !important; } [style*="color:#1f6fc0"] { color:#8cc4ff !important; } a[style*="color:#1f5fa8"] { color:#93b9e2 !important; }
   [style*="#e4e1d8"] { border-color:#2a3546 !important; }
   td[style*="border-radius:14px 0 0 14px"] { background:#26324a !important; }
   [style*="background:#fff6c2"] [style*="color:#1d1d1b"], [style*="background:#fae361"] [style*="color:#1d1d1b"] { color:#111111 !important; }
@@ -198,11 +200,13 @@ ENTETE = f'''<tr><td class="m-pad" style="background:{C['nuit']};padding:22px 32
 LIENS_PIED = [("L'Académie", "[LIEN_ACADEMIE]"), ("Masterclasses", "[LIEN_MASTERCLASSES]"), ("Tournois", "[LIEN_TOURNOIS]"), ("Forum", "[LIEN_FORUM]")]
 RESEAUX = [("Instagram", "[LIEN_INSTAGRAM]"), ("Facebook", "[LIEN_FACEBOOK]"), ("YouTube", "[LIEN_YOUTUBE]"), ("X", "[LIEN_X]"), ("LinkedIn", "[LIEN_LINKEDIN]")]
 MENTION = "echecs.com · Europe Échecs · [ADRESSE_POSTALE]"
+PIED_COMPTE = "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."
+SUIS = "Suis-nous"
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
     pied = (POURQUOI + " "
             + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e&#8209;mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
-               else "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."))
+               else PIED_COMPTE))
     hero = f'<tr><td><img src="{{IMG}}/{e["img"]}.jpg" width="600" alt="{html.escape(e.get("alt", ""))}" style="display:block;width:100%;height:auto;border:0"></td></tr>' if e.get("img") else ""
     if not e.get("img") and e.get("mascotte"):   # pas d'image : la mascotte, sur le fond nuit de l'en-tête
         hero = f'<tr><td align="center" style="background:{C["nuit"]};padding:4px 0 0"><img src="{{IMG}}/mascotte-{e["mascotte"]}.png" height="150" alt="" style="display:block;height:150px;width:auto;border:0;margin:6px auto 0"></td></tr>'
@@ -227,7 +231,7 @@ def page(e):
 </td></tr>
 <tr><td class="m-pad" style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:14px;color:{C['texte']}">
 {"&nbsp;· ".join(f'<a href="{l}" style="color:{C['texte']};text-decoration:none">{t}</a>' for t, l in LIENS_PIED)}</td></tr>
-{f'<tr><td class="m-pad" style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C["gris"]}">Suis-nous : ' + " · ".join(f'<a href="{l}" style="color:{C["gris"]}">{t}</a>' for t, l in RESEAUX) + '</td></tr>' if RESEAUX else ""}
+{f'<tr><td class="m-pad" style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C["gris"]}">' + SUIS + ' : ' + " · ".join(f'<a href="{l}" style="color:{C["gris"]}">{t}</a>' for t, l in RESEAUX) + '</td></tr>' if RESEAUX else ""}
 <tr><td class="m-pad" style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>{MENTION}</td></tr>
 </table></td></tr></table></body></html>'''
 
