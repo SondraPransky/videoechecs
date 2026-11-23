@@ -46,7 +46,7 @@ Les e-mails 01 à 17, 29 et 30 remplacent des modèles existants du site (corres
 | Annulation d'un abonnement au mois | 11 | 1 |
 | Lancement des nouvelles formules, une fois : abonnés Pack Jeu en cours / Pack Progresser en cours | 12 / 13 | 2 |
 | Fin d'un ancien Pack Progresser / Pack Jeu | 14 / 15 | 2 |
-| Fin d'un abonnement à la revue papier (le mois suivant) | 16 le 25, puis 30 le 8 si rien n'est renouvelé | 1 |
+| Fin prochaine d'un abonnement à la revue papier | 16 le 25, puis 30 le 8 du mois suivant si rien n'est renouvelé | 1 |
 | Achat d'un Pack cadeau | 17 | 1 |
 | Échec d'un prélèvement mensuel (accès suspendu tout de suite) | 18, puis 31 à J+3 si la carte n'est pas mise à jour | 1 |
 | 30 jours avant l'expiration de la carte (formules au mois) | 19 | 2 |
@@ -88,7 +88,7 @@ Chaque semaine, passer la miniature de chaque vidéo (1280 × 720 ou 1000 × 563
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?
 - **01** : version avec activation. Sans activation, retirer le bouton et la ligne du code ; connexion par un fournisseur externe : ajouter « Vous avez décidé de vous connecter avec votre compte [FOURNISSEUR]. Vous pouvez aussi vous connecter avec votre pseudo et un mot de passe. »
 - **Tarif pack de la revue** (+ 60 € / + 50 €, 14, 15, 30) : à confirmer pour les formules au mois.
-- **Revue** : mois exact des relances du 25 (16) et du 8 (30) à confirmer. **22** : à décider. **28** : jour d'envoi à fixer.
+- **22** : à décider. **28** : jour d'envoi à fixer. **02** : comment le membre d'une offre multicompte choisit son mot de passe.
 - **Tarifs** : écrits en clair dans les e-mails (relevés le 23 novembre 2026, tableau dans `EMAILS-EE.md`). Si un prix change, prévenir pour mettre les e-mails à jour.
 
 ## 6. Liste de contrôle avant la mise en service

@@ -166,7 +166,7 @@ mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 
 # ---------- 5. Revue ----------
-mail(id="16-revue-echeance", cat="Revue", quand="Avant la fin d'un abonnement à la revue papier, 1re relance le 25 du mois (modèle relance1ee ; la 2e, le 8, est l'e-mail 30)",
+mail(id="16-revue-echeance", cat="Revue", quand="Avant la fin d'un abonnement à la revue papier, 1re relance le 25 du mois (modèle relance1ee ; la 2e, le 8 du mois suivant, est l'e-mail 30)",
      objet="Votre abonnement à la revue Europe Échecs se termine", pre="Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro.", sur="La revue", titre="Votre dernier numéro | arrive en [ECHEANCE].",
      corps=[para("Bonjour [PSEUDO], votre abonnement à la revue <i>Europe Échecs</i> arrive à échéance en <b>[ECHEANCE]</b> : c'est ce mois-là que vous recevrez le dernier numéro de votre abonnement en cours."),
             para("Pour ne pas en interrompre l'envoi, réabonnez-vous dès maintenant :"),
@@ -182,7 +182,7 @@ mail(id="29-abonnement-echeance-relance-2", cat="Abonnement", quand="2e relance 
             bouton("Prolonger mon abonnement", L("ABONNEMENTS")),
             para(petit("Vous préférez ne pas vous engager ? La formule au mois est sans engagement : 4,90 € (Pack Jeu+) ou 11,90 € (Pack Intégral)."))],
      sign="Merci de votre fidélité,<br><b>Le service abonnement</b>")
-mail(id="30-revue-echeance-relance-2", cat="Revue", quand="2e relance le 8 du mois, avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit)",
+mail(id="30-revue-echeance-relance-2", cat="Revue", quand="2e relance le 8 du mois qui suit la 1re (16, le 25), avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit)",
      objet="Votre revue Europe Échecs pour 50 € de plus", pre="Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime.", sur="La revue", titre="La revue, | et bien plus.",
      corps=[para("Bonjour [PSEUDO], votre dernier numéro de la revue <i>Europe Échecs</i> arrive en <b>[ECHEANCE]</b>. Avant de vous réabonner, comparez :"),
             infos([("La revue seule", "79,95 €"), ("Avec un Pack Jeu+", "39,90 € + 60 €"), ("Avec un Pack Intégral", "99,90 € + 50 €")]),

@@ -55,8 +55,7 @@ Réponses de l'équipe (23 novembre 2026), confirmées par Raph :
 - **Mot de passe** : l'utilisateur le choisit à la création du compte ; il n'apparaît plus dans aucun e-mail (02 et 07 n'affichent que le pseudo).
   À confirmer pour le 02 (compte créé par un gestionnaire) : comment le membre choisit-il son mot de passe ?
 - **Paiement refusé (18, 31)** : l'accès est bloqué tout de suite, sans délai de grâce. Le 18 l'annonce, le 31 (J+3) invite à le retrouver.
-- **Relances** : packs web à J-15 (10, `relance1web`) et J-3 (29, `relance2web`) ; revue le 25 (16, `relance1ee`) puis le 8 (30, `relance2ee`)
-  pour un abonnement qui se termine le mois suivant (mois exact de chaque envoi à confirmer).
+- **Relances** : packs web à J-15 (10, `relance1web`) et J-3 (29, `relance2web`) ; revue le 25 (16, `relance1ee`) puis le 8 du mois suivant (30, `relance2ee`).
 - **Contact de la revue (16, 30)** : le support, par la page d'aide.
 - **Éditeur (pied de page)** : IDEAL SAS, 114 quai Louis Blériot, 75016 Paris.
 - **Vidéos de la semaine (28)** : lundi La Minute Stratégie, mardi Coup de Légende, mercredi Calcul Gagnant, vendredi La Minute Finale ;
@@ -172,8 +171,8 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re relance le 25 du mois (modèle relance1ee ; la 2e, le 8, est l'e-mail 30) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
-| `30-revue-echeance-relance-2.html` | 2e relance le 8 du mois, avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit) | Votre revue Europe Échecs pour 50 € de plus | Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime. | Information (désinscription possible) |
+| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re relance le 25 du mois (modèle relance1ee ; la 2e, le 8 du mois suivant, est l'e-mail 30) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
+| `30-revue-echeance-relance-2.html` | 2e relance le 8 du mois qui suit la 1re (16, le 25), avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit) | Votre revue Europe Échecs pour 50 € de plus | Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime. | Information (désinscription possible) |
 
 ### Cadeaux
 
