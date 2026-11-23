@@ -6,21 +6,21 @@
 
 # ---------- Réglages de la série ----------
 C["em"] = "#1f6fc0"                 # bleu d'action du site (surtitre, suite du titre)
-C["nuit"] = "#191f38"               # marine du site (en-tête, bloc calendrier)
-C["bouton"] = "#fae361"; C["bouton_texte"] = "#191f38"   # boutons : jaune Europe Échecs, texte marine
-C["jaune"] = "#fae361"              # jaune Europe Échecs (#FAE361, celui des pages de la revue) : filets d'encadré
-C["clair"] = "#fae361"              # jaune : surtitre et suite du titre sur le bandeau marine, filet sous l'en-tête, pastille du Pack Intégral
+C["nuit"] = "#02263d"               # marine de la page des abonnements du site (en-tête, Pack Intégral)
+C["bouton"] = "#ffd30e"; C["bouton_texte"] = "#02263d"   # boutons « Je m'abonne » du site : jaune, texte marine
+C["jaune"] = "#ffd30e"              # jaune Europe Échecs (#FFD30E, relevé sur la page des abonnements) : filets d'encadré
+C["clair"] = "#ffd30e"              # jaune : surtitre et suite du titre sur le bandeau marine, filet sous l'en-tête, pastille du Pack Intégral
 TITRE_SUR_NUIT = True                # surtitre et titre dans le bandeau marine, sous le logo
 # Palette déclinée de la charte du site (marine #191F38, bleu de marque #58ACFF, bleu d'action #1F6FC0, gris-bleu #6C7497) :
 # les teintes crème de l'Académie deviennent des gris-bleus froids, partout (styles et règles du mode sombre)
 REMAP = {"#f1f0ea": "#edf1f8",   # fond de page, encadrés, tuiles, tableaux
-         "#1d1d1b": "#1a2140",   # texte : marine
+         "#1d1d1b": "#0b2235",   # texte : marine
          "#6b6b66": "#5d6480",   # texte secondaire : gris-bleu du site
          "#e4e1d8": "#dfe4ee",   # filets
          "#f4f1ea": "#eef1f7"}   # texte en mode sombre
 DARK = DARK.replace("</style>", """@media (prefers-color-scheme: dark) {
   [style*="background:#e6f1ff"] { background:#1b2a44 !important; }
-  [style*="border:1px solid #2c3658"] { border-color:#3a4670 !important; }
+  [style*="border:1px solid #1d4563"] { border-color:#2b5a7d !important; }
   table[style*="background:#f1f0ea;border-radius:12px"] { background:#1b2533 !important; }
 }
 </style>""")
@@ -39,20 +39,22 @@ TARIFS = "https://www.europe-echecs.com/abonnement.html#table-rates-title"
 TARIFS_REVUE = "https://www.europe-echecs.com/abonnement.html#price-revue"
 petit = lambda t: f'<span style="color:#6b6b66;font-size:14px">{t}</span>'
 
-def formule(nom, accroche, texte, phare=False):   # une formule proposée (sans prix : ils restent sur la page des abonnements) ; phare : sur fond marine, avec sa pastille
+def formule(nom, accroche, texte, prix="", phare=False):   # une formule : accroche et tarifs de la page des abonnements ; phare : sur fond marine, avec sa pastille
     if phare:
         return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border-collapse:separate"><tr>'
-                f'<td bgcolor="{C["nuit"]}" style="background:{C["nuit"]};border:1px solid #2c3658;border-radius:14px;padding:18px 20px">'
+                f'<td bgcolor="{C["nuit"]}" style="background:{C["nuit"]};border:1px solid #1d4563;border-radius:14px;padding:18px 20px">'
                 f'<div style="display:inline-block;margin:0 0 10px;padding:4px 10px;border-radius:999px;background:{C["clair"]};font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#0d1430">{accroche}</div>'
                 f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:#ffffff">{nom}</div>'
-                f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:#d3d8e6">{texte}</div></td></tr></table>')
+                f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:#d3d8e6">{texte}</div>'
+                + (f'<div style="margin-top:10px;font-family:{SANS};font-weight:800;font-size:14px;line-height:1.5;color:{C["clair"]}">{prix}</div>' if prix else "") + '</td></tr></table>')
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border-collapse:separate"><tr>'
-            f'<td bgcolor="#e6f1ff" style="background:#e6f1ff;border-left:5px solid #58acff;border-radius:14px;padding:18px 20px">'
+            f'<td bgcolor="#e6f1ff" style="background:#e6f1ff;border-left:5px solid #65afff;border-radius:14px;padding:18px 20px">'
             f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:{C["texte"]}">{nom}'
             + (f' <span style="font-weight:400;color:{C["em"]}">· {accroche}</span>' if accroche else "") + '</div>'
-            f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:{C["texte"]}">{texte}</div></td></tr></table>')
-JEU_PLUS = formule("Pack Jeu+", "", "Accédez à toutes les fonctionnalités premium de la zone de jeu et à la zone d'entraînement tactique en illimité. Idéal pour jouer et progresser chaque jour !")
-INTEGRAL = formule("Pack Intégral", "Le choix des passionnés", "Débloquez l'ensemble de nos contenus : vidéos à la demande, leçons, revue en ligne… et plus de 4 nouvelles vidéos chaque semaine pour continuer votre progression.", phare=True)
+            f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:{C["texte"]}">{texte}</div>'
+            + (f'<div style="margin-top:10px;font-family:{SANS};font-weight:800;font-size:14px;line-height:1.5;color:{C["em"]}">{prix}</div>' if prix else "") + '</td></tr></table>')
+JEU_PLUS = formule("Pack Jeu+", "Le plaisir de jouer et progresser", "Accédez à toutes les fonctionnalités premium de la zone de jeu et à la zone d'entraînement tactique en illimité. Idéal pour jouer et progresser chaque jour !", prix="4,90 € par mois, sans engagement · 39,90 € pour 1 an · 59,90 € pour 2 ans")
+INTEGRAL = formule("Pack Intégral", "Le choix des passionnés", "Débloquez l'ensemble de nos contenus : vidéos à la demande, leçons, revue en ligne… et plus de 4 nouvelles vidéos chaque semaine pour continuer votre progression.", prix="11,90 € par mois, sans engagement · 99,90 € pour 1 an · 149,90 € pour 2 ans", phare=True)
 def identifiants(): return infos([("Pseudo", "[PSEUDO]"), ("Mot de passe", "[MOT_DE_PASSE]")])
 
 # ---------- 1. Compte ----------
@@ -118,17 +120,17 @@ mail(id="09-paiement-recu", cat="Abonnement", marketing=False, quand="À la réc
             recu([("[PRODUIT] · Qté [QUANTITE]", "[PRIX_LIGNE]"), ("Participation aux frais de port et d'emballage", "[FRAIS_PORT]")], "Total TTC", "[TOTAL]"),
             para(petit("Une ligne par produit commandé. La ligne des frais de port n'apparaît que s'ils sont supérieurs à zéro."))],
      sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
-mail(id="10-abonnement-echeance", cat="Abonnement", quand="Avant l'échéance d'un abonnement web, 1re et 2e relance (modèles relance1web et relance2web, identiques)",
+mail(id="10-abonnement-echeance", cat="Abonnement", quand="Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re et 2e relance (modèles relance1web et relance2web, identiques)",
      objet="Votre abonnement Europe Échecs arrive à échéance", pre="[PACK] jusqu'au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption.", sur="Votre abonnement", titre="Continuez | sans interruption.",
      corps=[para("Votre abonnement arrive bientôt à échéance (compte <b>[PSEUDO]</b>). Renouvelez-le, et continuez de profiter de vos services sans interruption !"),
             infos([("Formule", "[PACK]"), ("Fin de l'abonnement", "[DATE_FIN]")]),
             bouton("Renouveler mon abonnement", L("ABONNEMENTS")),
-            para(petit("Nouveau : vous pouvez aussi opter pour le paiement mensuel, plus souple et sans engagement."))],
+            para(petit("Nouveau : le paiement au mois, sans engagement, dès 4,90 € par mois (Pack Jeu+) ou 11,90 € par mois (Pack Intégral)."))],
      sign="Merci de votre fidélité,<br><b>Le service abonnement</b>")
 mail(id="11-abonnement-annule", cat="Abonnement", marketing=False, quand="À l'annulation d'un abonnement récurrent (modèle recurpmt_cancelled)",
      objet="Annulation de votre abonnement [SERVICE]", pre="Plus aucune facturation à partir d'aujourd'hui. Vous pouvez revenir quand vous voulez.", sur="Votre abonnement", titre="Votre abonnement | est annulé.",
      corps=[para("Votre abonnement <b>[SERVICE]</b> a été annulé pour votre compte <b>[PSEUDO]</b>. À partir d'aujourd'hui, il ne fera plus l'objet d'aucune facturation."),
-            para("Vous pouvez vous réabonner à tout moment depuis la page des tarifs, à l'année ou au mois."), bouton("Me réabonner", TARIFS),
+            para("Vous pouvez vous réabonner à tout moment depuis la page des tarifs, à l'année, pour 2 ans, ou au mois sans engagement dès 4,90 €."), bouton("Me réabonner", TARIFS),
             para(petit("Pourquoi partez-vous ? Dites-le-nous en une ligne sur <a href=\"[LIEN_AIDE]\" style=\"color:#6b6b66\">la page d'aide</a> : vos réponses guident nos prochaines formules."))],
      sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
 
@@ -139,20 +141,20 @@ mail(id="12-pack-jeu-devient-jeu-plus", cat="Nouvelles formules", marketing=Fals
             para("En plus de toutes les fonctionnalités premium de la zone de jeu, vous bénéficiez dès maintenant d'un accès illimité à notre module d'entraînement tactique :"),
             liste(["<b>Des milliers d'exercices</b>", "<b>Un mode challenge</b>, pour vous tester et tenter de battre votre record"]),
             bouton("Découvrir l'entraînement tactique", L("ENTRAINEMENT_TACTIQUE")),
-            para("Le Pack Jeu+ remplace désormais le Pack Jeu. À la fin de votre abonnement, vous pourrez le prolonger à l'année, ou avec notre nouvelle formule mensuelle.")])
+            para("Le Pack Jeu+ remplace désormais le Pack Jeu. À la fin de votre abonnement, vous pourrez le prolonger pour 1 an (39,90 €), 2 ans (59,90 €) ou au mois, sans engagement (4,90 € par mois).")])
 mail(id="13-pack-progresser-en-cours", cat="Nouvelles formules", marketing=False, quand="Une fois, aux abonnés du Pack Progresser en cours",
      objet="Votre Pack Progresser : ce qui change", pre="Vous gardez les mêmes services jusqu'à la fin. Ensuite, deux nouvelles formules au choix.", sur="Nouvelles formules", titre="Rien ne change | pour l'instant.",
      corps=[para("Bonjour [PSEUDO], merci pour votre fidélité ! Le Pack Progresser n'existe plus : il a été remplacé par d'autres offres, mieux adaptées aux besoins exprimés par les utilisateurs que nous avons interrogés."),
             para("Jusqu'à la fin de votre abonnement, vous profitez des mêmes services. Ensuite, deux formules vous seront proposées :"),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>Nouveauté :</b> vous pourrez opter pour le paiement mensuel, plus souple et sans engagement."),
+            encadre("<b>Nouveauté :</b> vous pourrez opter pour le paiement au mois, sans engagement, dès 4,90 € par mois."),
             bouton("Découvrir les deux formules", L("ABONNEMENTS"))])
 mail(id="14-pack-progresser-expire", cat="Nouvelles formules", quand="À l'échéance d'un abonnement Pack Progresser",
      objet="Votre Pack Progresser est arrivé à échéance", pre="Pack Jeu+ ou Pack Intégral, à l'année ou au mois : à vous de choisir.", sur="Nouvelles formules", titre="Choisissez | votre nouvelle formule.",
      corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Progresser est arrivé à échéance. Cette formule n'existe plus : elle a été remplacée par d'autres offres, mieux adaptées aux besoins exprimés par les utilisateurs que nous avons interrogés."),
             para("Pour continuer à vivre votre passion sur Europe Échecs, deux formules vous attendent :"),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>Nouveauté :</b> vous pouvez désormais opter pour le paiement mensuel, plus souple et sans engagement."),
+            encadre("<b>Nouveauté :</b> vous pouvez désormais payer au mois, sans engagement, dès 4,90 € par mois. Et la revue papier ne coûte que 60 € de plus avec le Pack Jeu+, 50 € avec le Pack Intégral (79,95 € seule)."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d'un abonnement Pack Jeu",
@@ -160,7 +162,7 @@ mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d
      corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Jeu est arrivé à échéance. Cette formule n'existe plus : elle a été remplacée par d'autres offres, mieux adaptées aux besoins exprimés par les utilisateurs que nous avons interrogés."),
             para("Pour continuer à vivre votre passion sur Europe Échecs, deux formules vous attendent :"),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>Nouveauté :</b> vous pouvez désormais opter pour le paiement mensuel, plus souple et sans engagement."),
+            encadre("<b>Nouveauté :</b> vous pouvez désormais payer au mois, sans engagement, dès 4,90 € par mois. Et la revue papier ne coûte que 60 € de plus avec le Pack Jeu+, 50 € avec le Pack Intégral (79,95 € seule)."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 
@@ -170,6 +172,7 @@ mail(id="16-revue-echeance", cat="Revue", quand="Avant la fin d'un abonnement à
      corps=[para("Bonjour [PSEUDO], votre abonnement à la revue <i>Europe Échecs</i> arrive à échéance en <b>[ECHEANCE]</b> : c'est ce mois-là que vous recevrez le dernier numéro de votre abonnement en cours."),
             para("Pour ne pas en interrompre l'envoi, réabonnez-vous dès maintenant :"),
             bouton("Me réabonner", TARIFS_REVUE),
+            encadre("<b>Tarif pack :</b> la revue est à <b>79,95 €</b> seule, ou à <b>+ 50 €</b> avec un Pack Intégral (vidéos, leçons, revue en ligne), <b>+ 60 €</b> avec un Pack Jeu+."),
             para(petit("Une question ? Écrivez-nous à <a href=\"mailto:[EMAIL_CONTACT]?subject=Abonnement%20Europe%20Echecs%20n%C2%B0%20[NUMERO_ABONNE]\" style=\"color:#6b6b66\">[EMAIL_CONTACT]</a>, en rappelant votre numéro d'abonné ([NUMERO_ABONNE]). Si ce message a croisé votre règlement, merci de ne pas en tenir compte."))],
      sign="Merci de votre fidélité,<br><b>Le service abonnement</b>")
 
@@ -207,7 +210,7 @@ mail(id="19-carte-bientot-expiree", cat=P_PAIEMENT, marketing=False, quand="30 j
      corps=[para("Bonjour [PSEUDO], la carte qui règle votre abonnement <b>[SERVICE]</b> expire à la fin du mois de <b>[MOIS_EXPIRATION]</b>. Remplacez-la dès maintenant pour que votre prochain paiement passe sans encombre."),
             infos([("Carte", "•••• [CARTE_4_CHIFFRES]"), ("Expire", "fin [MOIS_EXPIRATION]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")]),
             bouton("Mettre à jour ma carte", L("MOYEN_PAIEMENT"))])
-mail(id="20-recu-renouvellement", cat=P_PAIEMENT, marketing=False, quand="À chaque prélèvement d'un abonnement (mensuel ou annuel)" + INFO_PROPOSITION,
+mail(id="20-recu-renouvellement", cat=P_PAIEMENT, marketing=False, quand="À chaque prélèvement d'une formule au mois (seule formule renouvelée automatiquement ; 1 an et 2 ans se renouvellent à la main)" + INFO_PROPOSITION,
      objet="Votre reçu Europe Échecs : [SERVICE], [MOIS]", pre="Paiement de [MONTANT] reçu. Prochain prélèvement le [DATE_PROCHAIN_PAIEMENT].", sur="Votre reçu", titre="Paiement reçu, | merci !",
      corps=[para("Bonjour [PSEUDO], votre abonnement <b>[SERVICE]</b> est renouvelé. Voici votre reçu."),
             recu([("[SERVICE] · [MOIS]", "[MONTANT]"), ("Moyen de paiement", "[MOYEN_PAIEMENT]"), ("Prochain prélèvement", "[DATE_PROCHAIN_PAIEMENT]")], "Total TTC", "[MONTANT]"),
@@ -223,20 +226,20 @@ mail(id="21-reconquete-j30", cat=P_FIDELITE, quand="30 jours après une fin d'ab
             JEU_PLUS, INTEGRAL,
             encadre("<b>[OFFRE_RETOUR]</b><br>Bloc à retirer s'il n'y a pas d'offre de retour."),
             bouton("Revenir sur Europe Échecs", L("ABONNEMENTS")),
-            para(petit("Le paiement au mois est désormais possible, sans engagement."))])
+            para(petit("Le paiement au mois est désormais possible, sans engagement, dès 4,90 € par mois."))])
 mail(id="22-jeu-plus-vers-integral", cat=P_FIDELITE, quand="Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois" + INFO_PROPOSITION,
-     objet="Le Pack Intégral : vidéos, leçons et revue en plus", pre="Gardez la zone de jeu et l'entraînement tactique, et ajoutez plus de 4 nouvelles vidéos chaque semaine.", sur="Pack Intégral", titre="Et si vous passiez | à l'Intégral ?",
+     objet="Le Pack Intégral : vidéos, leçons et revue en plus", pre="Pour 7 € de plus par mois : vidéos à la demande, leçons, revue en ligne et plus de 4 nouvelles vidéos par semaine.", sur="Pack Intégral", titre="Et si vous passiez | à l'Intégral ?",
      corps=[para("Bonjour [PSEUDO], avec le Pack Jeu+, vous jouez et vous vous entraînez. Le Pack Intégral garde tout cela et ajoute l'ensemble de nos contenus :"),
             INTEGRAL,
-            infos([("Pack Jeu+", "[PRIX_JEU_PLUS]"), ("Pack Intégral", "[PRIX_INTEGRAL]")]),
+            para("Du Pack Jeu+ au Pack Intégral :"),
+            infos([("Au mois", "4,90 € → 11,90 €"), ("Pour 1 an", "39,90 € → 99,90 €"), ("Pour 2 ans", "59,90 € → 149,90 €")]),
             bouton("Passer au Pack Intégral", L("ABONNEMENTS"))])
 mail(id="23-mensuel-vers-annuel", cat=P_FIDELITE, quand="Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois" + INFO_PROPOSITION,
      objet="Passez à l'année : [ECONOMIE] d'économie sur [SERVICE]", pre="Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement.", sur="Votre abonnement", titre="Passez | à l'année.",
      corps=[para("Bonjour [PSEUDO], cela fait trois mois que vous réglez votre abonnement <b>[SERVICE]</b> au mois. En passant à l'année, vous gardez exactement les mêmes services :"),
             infos([("Aujourd'hui, au mois", "[PRIX_MENSUEL]"), ("À l'année", "[PRIX_ANNUEL]")]),
-            liste(["<b>[ECONOMIE] d'économie</b> sur un an", "<b>Un seul paiement</b> par an au lieu de douze"]),
-            bouton("Passer à l'année", L("ABONNEMENTS")),
-            para(petit("Le changement prend effet à la fin de votre mois en cours."))])
+            liste(["<b>[ECONOMIE] d'économie</b> sur un an", "<b>Un seul paiement</b>, sans renouvellement automatique : vous décidez à l'échéance", "Ou <b>2 ans</b> pour [PRIX_2ANS]"]),
+            bouton("Passer à l'année", L("ABONNEMENTS"))])
 
 # Offre de bienvenue
 mail(id="24-offre-bienvenue-rappel", cat=P_GRATUITS, quand="24 h après l'e-mail 06, si aucun achat avec le code (fin de l'offre dans 24 h)" + INFO_PROPOSITION,
@@ -276,12 +279,14 @@ from PIL import Image as _I
 for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant")):
     _im = _I.open(ICI / f"assets/captures/ee/hd/{_f}.jpg").convert("RGB"); _im.thumbnail((1072, 603)); _im.save(APER / f"img/video-exemple-{_n}.jpg", quality=84)
 EXEMPLES.update({"DATE_SUSPENSION": "25/12/2026", "MOIS": "décembre 2026", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "DATE_PROCHAIN_PAIEMENT": "18/01/2027",
-    "MOYEN_PAIEMENT": "Carte •••• 4242", "NB_SEMAINES": "[NB_SEMAINES]", "DATE_ENVOI": "23 novembre",
+    "MOYEN_PAIEMENT": "Carte •••• 4242", "PRIX_MENSUEL": "11,90 € par mois", "PRIX_ANNUEL": "99,90 € pour 1 an", "PRIX_2ANS": "149,90 €", "ECONOMIE": "42,90 €", "MONTANT": "11,90 €", "NB_SEMAINES": "[NB_SEMAINES]", "DATE_ENVOI": "23 novembre",
     "SERIE_1": "La Minute Stratégie", "AUTEUR_1": "Marc Quenehen", "URL_MINIATURE_1": "img/video-exemple-1.jpg",
     "SERIE_2": "Coup de Légende", "AUTEUR_2": "Romuald De Labaca (MF)", "URL_MINIATURE_2": "img/video-exemple-2.jpg",
     "SERIE_3": "Calcul Gagnant", "AUTEUR_3": "Sylvain Ravot (MF)", "URL_MINIATURE_3": "img/video-exemple-3.jpg"})
 for _k in ("NOUVEAUTE_1", "NOUVEAUTE_2", "NOUVEAUTE_3"): EXEMPLES[_k] = "[" + _k + "]"   # aucune nouveauté inventée
 
+for e in E:   # exemples propres à un e-mail
+    if e["id"] == "09-paiement-recu": e["exemples"] = {"PRODUIT": "Pack Intégral · 1 an", "MONTANT": "99,90 €", "PRIX_LIGNE": "99,90 €", "TOTAL": "99,90 €"}
 TITRES = {}
 MASCOTTES = {}
 ENTETES = {}

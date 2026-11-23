@@ -187,7 +187,7 @@ def typo(h):   # espace insécable avant : ; ? ! » % et après «, entre un nom
         x = re.sub(r"\b1(er|re)\b", r"1<sup>\1</sup>", x)
         x = re.sub(r"(\d) (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)", "\\1\u00a0\\2", x)   # 18 novembre
         x = re.sub(r"\b(Objectif|n°|N°|Calcul Gagnant) (\d)", "\\1\u00a0\\2", x)   # Objectif 1400, n° 780
-        x = re.sub(r"(\d) (h|min|€|s|jours?|leçons|exercices|points|ans?)\b", "\\1\u00a0\\2", x)
+        x = re.sub(r"(\d) (h|min|€|s|jours?|leçons|exercices|points|ans?|semaines?|mois|heures?|vidéos)(?!\w)", "\\1\u00a0\\2", x)   # (?!\w) et non \b : « € » n\'est pas une lettre
         x = re.sub(r"(\d\u00a0h) (\d)", "\\1\u00a0\\2", x)   # 20 h 30
         return re.sub(r"(\d) (\d{3})\b", "\\1\u00a0\\2", x)
     return "".join(p if p.startswith("<") else t(p) for p in re.split(r"(<[^>]+>)", h))
