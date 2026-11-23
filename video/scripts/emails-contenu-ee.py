@@ -183,6 +183,105 @@ mail(id="17-carte-cadeau", cat="Cadeaux", marketing=False, quand="Après l'achat
             para('Pour activer le code, rendez-vous sur <a href="https://www.europe-echecs.com/activer-mon-code-cadeau.html" style="color:#1f6fc0;font-weight:700">europe-echecs.com/activer-mon-code-cadeau</a>.'),
             para(petit(f'Plusieurs codes ? Ils sont listés un par un, et un bouton permet de les télécharger tous dans un seul PDF. Le contenu de chaque Pack est détaillé sur notre <a href="{TARIFS}" style="color:#6b6b66">page des tarifs</a>.'))])
 
+# ---------- 7. Propositions : e-mails qui manquent (à valider) ----------
+# Rien n'est inventé : prix, délais, offre de retour et nouveautés restent des variables, à remplir avant l'envoi.
+INFO_PROPOSITION = " · proposition, à valider"
+P_PAIEMENT, P_FIDELITE, P_GRATUITS = "Propositions · paiement mensuel", "Propositions · reconquête et montée en gamme", "Propositions · comptes gratuits"
+
+def video_semaine(n):   # une vidéo de la semaine : miniature cliquable, série, titre, auteur, jour
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;border:1px solid #e4e1d8;border-radius:12px;overflow:hidden">'
+            f'<tr><td style="background:{C["nuit"]}"><a href="[LIEN_VIDEO_{n}]"><img src="[URL_MINIATURE_{n}]" width="536" alt="Regarder : [TITRE_VIDEO_{n}]" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
+            f'<tr><td style="padding:14px 18px 16px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]}">[SERIE_{n}] · [JOUR_VIDEO_{n}]</div>'
+            f'<div style="margin-top:6px;font:{GRAS} 18px/1.3 {SERIF};color:{C["texte"]}">[TITRE_VIDEO_{n}]</div>'
+            f'<div style="margin-top:4px;font:14px/1.5 {SANS};color:{C["gris"]}">Avec [AUTEUR_{n}]</div></td></tr></table>')
+
+# Paiement mensuel
+mail(id="18-paiement-refuse", cat=P_PAIEMENT, marketing=False, quand="Échec d'un prélèvement mensuel, relance à J+3 si rien n'a changé (même modèle)" + INFO_PROPOSITION,
+     objet="Le paiement de votre [SERVICE] n'a pas abouti", pre="Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption.", sur="Votre abonnement", titre="Un souci | avec votre paiement.",
+     corps=[para("Bonjour [PSEUDO], le prélèvement de <b>[MONTANT]</b> pour votre abonnement <b>[SERVICE]</b> n'a pas pu être effectué. Cela arrive par exemple avec une carte expirée ou un plafond atteint."),
+            infos([("Formule", "[SERVICE]"), ("Montant", "[MONTANT]"), ("Accès garanti jusqu'au", "[DATE_SUSPENSION]")]),
+            bouton("Mettre à jour ma carte", L("MOYEN_PAIEMENT")),
+            para(petit("Une fois la carte mise à jour, le paiement est relancé automatiquement. Si c'est déjà fait, ne tenez pas compte de cet e-mail."))])
+mail(id="19-carte-bientot-expiree", cat=P_PAIEMENT, marketing=False, quand="30 jours avant l'expiration de la carte enregistrée (abonnements au mois)" + INFO_PROPOSITION,
+     objet="Votre carte expire bientôt : pensez à la mettre à jour", pre="La carte •••• [CARTE_4_CHIFFRES] expire fin [MOIS_EXPIRATION]. Une minute suffit pour la remplacer.", sur="Votre abonnement", titre="Votre carte | expire bientôt.",
+     corps=[para("Bonjour [PSEUDO], la carte qui règle votre abonnement <b>[SERVICE]</b> expire à la fin du mois de <b>[MOIS_EXPIRATION]</b>. Remplacez-la dès maintenant pour que votre prochain paiement passe sans encombre."),
+            infos([("Carte", "•••• [CARTE_4_CHIFFRES]"), ("Expire", "fin [MOIS_EXPIRATION]"), ("Prochain paiement", "[DATE_PROCHAIN_PAIEMENT]")]),
+            bouton("Mettre à jour ma carte", L("MOYEN_PAIEMENT"))])
+mail(id="20-recu-renouvellement", cat=P_PAIEMENT, marketing=False, quand="À chaque prélèvement d'un abonnement (mensuel ou annuel)" + INFO_PROPOSITION,
+     objet="Votre reçu Europe Échecs : [SERVICE], [MOIS]", pre="Paiement de [MONTANT] reçu. Prochain prélèvement le [DATE_PROCHAIN_PAIEMENT].", sur="Votre reçu", titre="Paiement reçu, | merci !",
+     corps=[para("Bonjour [PSEUDO], votre abonnement <b>[SERVICE]</b> est renouvelé. Voici votre reçu."),
+            recu([("[SERVICE] · [MOIS]", "[MONTANT]"), ("Moyen de paiement", "[MOYEN_PAIEMENT]"), ("Prochain prélèvement", "[DATE_PROCHAIN_PAIEMENT]")], "Total TTC", "[MONTANT]"),
+            bouton("Gérer mon abonnement", L("MES_SERVICES")),
+            para(petit("Facture téléchargeable dans « Mon compte ». Vous pouvez arrêter le renouvellement à tout moment."))],
+     sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
+
+# Reconquête et montée en gamme
+mail(id="21-reconquete-j30", cat=P_FIDELITE, quand="30 jours après une fin d'abonnement ou une annulation, une seule fois" + INFO_PROPOSITION,
+     objet="Depuis votre départ, sur Europe Échecs", pre="[NOUVEAUTE_1], et d'autres nouveautés. Votre compte vous attend, à l'année ou au mois.", sur="Quoi de neuf", titre="Ce que vous avez | manqué.",
+     corps=[para("Bonjour [PSEUDO], votre abonnement s'est arrêté il y a un mois. Voici ce qui a changé depuis :"),
+            nouveautes("Ce mois-ci sur Europe Échecs", [("[NOUVEAUTE_1]", ""), ("[NOUVEAUTE_2]", ""), ("[NOUVEAUTE_3]", "")]),
+            JEU_PLUS, INTEGRAL,
+            encadre("<b>[OFFRE_RETOUR]</b><br>Bloc à retirer s'il n'y a pas d'offre de retour."),
+            bouton("Revenir sur Europe Échecs", L("ABONNEMENTS")),
+            para(petit("Le paiement au mois est désormais possible, sans engagement."))])
+mail(id="22-jeu-plus-vers-integral", cat=P_FIDELITE, quand="Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois" + INFO_PROPOSITION,
+     objet="Le Pack Intégral : vidéos, leçons et revue en plus", pre="Gardez la zone de jeu et l'entraînement tactique, et ajoutez plus de 4 nouvelles vidéos chaque semaine.", sur="Pack Intégral", titre="Et si vous passiez | à l'Intégral ?",
+     corps=[para("Bonjour [PSEUDO], avec le Pack Jeu+, vous jouez et vous vous entraînez. Le Pack Intégral garde tout cela et ajoute l'ensemble de nos contenus :"),
+            INTEGRAL,
+            infos([("Pack Jeu+", "[PRIX_JEU_PLUS]"), ("Pack Intégral", "[PRIX_INTEGRAL]")]),
+            bouton("Passer au Pack Intégral", L("ABONNEMENTS"))])
+mail(id="23-mensuel-vers-annuel", cat=P_FIDELITE, quand="Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois" + INFO_PROPOSITION,
+     objet="Passez à l'année : [ECONOMIE] d'économie sur [SERVICE]", pre="Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement.", sur="Votre abonnement", titre="Passez | à l'année.",
+     corps=[para("Bonjour [PSEUDO], cela fait trois mois que vous réglez votre abonnement <b>[SERVICE]</b> au mois. En passant à l'année, vous gardez exactement les mêmes services :"),
+            infos([("Aujourd'hui, au mois", "[PRIX_MENSUEL]"), ("À l'année", "[PRIX_ANNUEL]")]),
+            liste(["<b>[ECONOMIE] d'économie</b> sur un an", "<b>Un seul paiement</b> par an au lieu de douze"]),
+            bouton("Passer à l'année", L("ABONNEMENTS")),
+            para(petit("Le changement prend effet à la fin de votre mois en cours."))])
+
+# Offre de bienvenue
+mail(id="24-offre-bienvenue-rappel", cat=P_GRATUITS, quand="24 h après l'e-mail 06, si aucun achat avec le code (fin de l'offre dans 24 h)" + INFO_PROPOSITION,
+     objet="Plus que 24 heures pour votre −25 %", pre="Votre code de bienvenue s'arrête demain, sur tous nos Packs Web 1 et 2 ans.", sur="Offre de bienvenue", titre="Plus que | 24 heures.",
+     corps=[para("Bonjour [PSEUDO], votre offre de bienvenue s'arrête demain. Il vous reste 24 heures pour profiter de <b>−25 %</b> sur tous nos Packs Web 1 et 2 ans."),
+            infos([("Votre code", "[CODE_PROMO]")]),
+            bouton("Profiter de −25 %", TARIFS),
+            para(petit("Code à saisir dans votre panier. Offre valable jusqu'à 48 heures après la réception du premier e-mail."))])
+
+# Comptes gratuits inactifs
+mail(id="25-gratuit-inactif-7j", cat=P_GRATUITS, quand="Comptes gratuits, 7 jours sans connexion, une seule fois par période d'inactivité" + INFO_PROPOSITION,
+     objet="[PSEUDO], une partie sur Europe Échecs ?", pre="Choisissez votre cadence et la force de votre adversaire : la partie commence en un clic.", sur="Zone de jeu", titre="Une partie, | [PSEUDO] ?",
+     corps=[para("Une semaine sans partie : la zone de jeu vous attend. Choisissez votre cadence et la force de votre adversaire. Gagner contre plus fort que vous rapporte plus de points."),
+            liste(["<b>Jouez</b> une partie à la cadence de votre choix", "<b>Observez</b> les parties de joueurs plus forts", "<b>Analysez</b> vos parties pour progresser"]),
+            bouton("Jouer une partie", L("ZONE_DE_JEU"))])
+mail(id="26-gratuit-inactif-21j", cat=P_GRATUITS, quand="Comptes gratuits, 21 jours sans connexion, une seule fois" + INFO_PROPOSITION,
+     objet="Ce qui s'est passé sur Europe Échecs ces 3 semaines", pre="[NOUVEAUTE_1], et ce qui vous attend sur la zone de jeu.", sur="Quoi de neuf", titre="Trois semaines | de nouveautés.",
+     corps=[para("Bonjour [PSEUDO], depuis votre dernière visite :"),
+            nouveautes("Sur Europe Échecs", [("[NOUVEAUTE_1]", ""), ("[NOUVEAUTE_2]", ""), ("[NOUVEAUTE_3]", "")]),
+            para("Et pour aller plus loin, le <b>Pack Jeu+</b> ouvre la zone d'entraînement tactique en illimité : des milliers d'exercices et un mode challenge pour battre votre record."),
+            bouton("Revenir sur Europe Échecs", L("ZONE_DE_JEU"))])
+mail(id="27-gratuit-inactif-45j", cat=P_GRATUITS, quand="Comptes gratuits, 45 jours sans connexion, dernière relance (ensuite, plus d'e-mails d'information)" + INFO_PROPOSITION,
+     objet="On continue à vous écrire, [PSEUDO] ?", pre="Dites-nous si nos e-mails vous intéressent encore. Sinon, nous arrêtons de vous écrire.", sur="Vos e-mails", titre="On continue | à vous écrire ?",
+     corps=[para("Bonjour [PSEUDO], votre dernière connexion remonte à plus d'un mois. Nous ne voulons pas encombrer votre boîte : si nos e-mails ne vous servent plus, nous arrêtons."),
+            bouton("Oui, je reste", L("RESTER_ABONNE")),
+            para(f'<a href="{L("DESINSCRIPTION")}" style="color:#1f6fc0;font-weight:700">Non merci, ne plus recevoir ces e-mails</a>'),
+            para(petit("Votre compte reste ouvert dans tous les cas : vous pouvez revenir jouer quand vous voulez."))])
+mail(id="28-videos-de-la-semaine", cat=P_GRATUITS, quand="Chaque semaine, à tous les comptes qui l'acceptent (gratuits et abonnés)" + INFO_PROPOSITION,
+     objet="Les vidéos de la semaine sur Europe Échecs", pre="[SERIE_1], [SERIE_2], [SERIE_3] : les nouveautés de la semaine.", sur="Cette semaine · [DATE_ENVOI]", titre="Les vidéos | de la semaine.",
+     corps=[para("Bonjour [PSEUDO], voici les nouvelles vidéos de la semaine."),
+            video_semaine(1), video_semaine(2), video_semaine(3),
+            bouton("Voir toutes les vidéos", L("VIDEOS")),
+            para(petit("Toutes les vidéos sont incluses dans le Pack Intégral."))])
+
+# Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
+from PIL import Image as _I
+for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant")):
+    _im = _I.open(ICI / f"assets/captures/ee/hd/{_f}.jpg").convert("RGB"); _im.thumbnail((1072, 603)); _im.save(APER / f"img/video-exemple-{_n}.jpg", quality=84)
+EXEMPLES.update({"DATE_SUSPENSION": "25/12/2026", "MOIS": "décembre 2026", "CARTE_4_CHIFFRES": "4242", "MOIS_EXPIRATION": "décembre", "DATE_PROCHAIN_PAIEMENT": "18/01/2027",
+    "MOYEN_PAIEMENT": "Carte •••• 4242", "NB_SEMAINES": "[NB_SEMAINES]", "DATE_ENVOI": "23 novembre",
+    "SERIE_1": "La Minute Stratégie", "AUTEUR_1": "Marc Quenehen", "URL_MINIATURE_1": "img/video-exemple-1.jpg",
+    "SERIE_2": "Coup de Légende", "AUTEUR_2": "Romuald De Labaca (MF)", "URL_MINIATURE_2": "img/video-exemple-2.jpg",
+    "SERIE_3": "Calcul Gagnant", "AUTEUR_3": "Sylvain Ravot (MF)", "URL_MINIATURE_3": "img/video-exemple-3.jpg"})
+for _k in ("NOUVEAUTE_1", "NOUVEAUTE_2", "NOUVEAUTE_3"): EXEMPLES[_k] = "[" + _k + "]"   # aucune nouveauté inventée
+
 TITRES = {}
 MASCOTTES = {}
 ENTETES = {}
@@ -193,5 +292,5 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
-LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune"}
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune"}
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]

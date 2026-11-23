@@ -72,21 +72,27 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 - **Boutons** : action + résultat, à la première personne (« Profiter de −25 % », « Me réabonner », « Choisir ma formule »).
 - Longueur : 50 à 125 mots pour les e-mails transactionnels, jusqu'à 250 pour la découverte de la zone de jeu (05).
 
-## Audit du cycle de vie : e-mails qui manquent
+## Propositions : les e-mails qui manquaient (18 à 28, à valider)
 
-Comparée à la liste de contrôle du cycle de vie (et aux 52 e-mails de l'Académie), la série Europe Échecs n'a pas encore :
+Rédigées d'après la liste de contrôle du cycle de vie. **Rien n'y est inventé** : les prix, délais, offres et nouveautés restent des variables
+à remplir avant l'envoi. Dans les aperçus, ces variables restent visibles entre crochets.
 
-| Manque | Quand | Pourquoi | Ce qu'il faut pour l'écrire |
-|---|---|---|---|
-| Paiement refusé (relance J+3) | Échec d'un prélèvement mensuel | Le paiement mensuel arrive : sans relance, les abonnés partent sans le vouloir | Le délai de suspension de l'accès |
-| Carte bientôt expirée | 30 jours avant | Même raison, en prévention | Rien de plus |
-| Reçu de renouvellement | À chaque prélèvement | Obligatoire en pratique pour le mensuel | Le format du reçu |
-| Reconquête | 30 jours après une fin d'abonnement ou une annulation | Seul e-mail qui ramène un ancien abonné | Une offre de retour, si elle existe |
-| Pack Jeu+ → Pack Intégral | Après quelques semaines d'usage du Pack Jeu+ | Montée en gamme vers la formule mise en avant | Les prix des deux formules |
-| Mensuel → annuel | Au 3ᵉ mois de paiement mensuel | Fidélise et réduit les échecs de paiement | L'écart de prix entre les deux |
-| Rappel de l'offre de bienvenue | 24 h avant la fin des 48 h (06) | Le rappel « dernières heures » convertit souvent autant que l'e-mail d'origine | Confirmer que les Packs Web 1 et 2 ans existent encore |
-| Comptes gratuits inactifs | 7, 21 et 45 jours sans connexion | Rien ne relance un compte gratuit après le 05 et le 06 | Ce qui est nouveau sur le site (vidéos de la semaine, tournois) |
-| Les vidéos de la semaine | Chaque semaine | Rendez-vous régulier, à l'image de l'e-mail 43 de l'Académie | Le programme réel des séries vidéo |
+| E-mail | Quand | À fournir avant l'envoi |
+|---|---|---|
+| 18 Paiement refusé | Échec d'un prélèvement mensuel, relance à J+3 | `[DATE_SUSPENSION]` : jusqu'à quand l'accès est garanti ; lien de mise à jour de la carte |
+| 19 Carte bientôt expirée | 30 jours avant l'expiration de la carte | Rien de plus (données de paiement) |
+| 20 Reçu de renouvellement | À chaque prélèvement | Le reçu ou la facture dans « Mon compte » |
+| 21 Reconquête | 30 jours après une fin d'abonnement ou une annulation | Trois nouveautés du mois ; `[OFFRE_RETOUR]` ou retrait du bloc |
+| 22 Pack Jeu+ → Pack Intégral | Abonnés Pack Jeu+, après `[NB_SEMAINES]` semaines | `[PRIX_JEU_PLUS]`, `[PRIX_INTEGRAL]`, le délai |
+| 23 Mensuel → annuel | Au 3ᵉ prélèvement mensuel | `[PRIX_MENSUEL]`, `[PRIX_ANNUEL]`, `[ECONOMIE]` |
+| 24 Rappel de l'offre de bienvenue | 24 h après le 06, sans achat | Confirmer que les Packs Web 1 et 2 ans existent encore |
+| 25 Gratuit inactif 7 jours | 7 jours sans connexion | Rien de plus |
+| 26 Gratuit inactif 21 jours | 21 jours sans connexion | Trois nouveautés |
+| 27 Gratuit inactif 45 jours | 45 jours sans connexion, dernière relance | Lien « Je reste » (`[LIEN_RESTER_ABONNE]`) ; sans clic, arrêt des e-mails d'information |
+| 28 Les vidéos de la semaine | Chaque semaine | Titre, série, auteur, jour et miniature de chaque vidéo (exemples des aperçus : vraies séries du catalogue) |
+
+Règles d'envoi proposées : 25, 26 et 27 une seule fois par période d'inactivité ; 22 et 23 une seule fois par abonné ; 21 une seule fois par départ ;
+pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte qui l'ouvre.
 
 ## Mesures
 
@@ -143,6 +149,32 @@ Comparée à la liste de contrôle du cycle de vie (et aux 52 e-mails de l'Acad�
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `17-carte-cadeau.html` | Après l'achat d'un Pack cadeau (modèle gift_code) | Votre carte cadeau Europe Échecs est prête | Le code à offrir, et la carte au format PDF à imprimer ou à envoyer. | Compte (toujours envoyé) |
+
+### Propositions · paiement mensuel
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `18-paiement-refuse.html` | Échec d'un prélèvement mensuel, relance à J+3 si rien n'a changé (même modèle) · proposition, à valider | Le paiement de votre [SERVICE] n’a pas abouti | Mettez à jour votre carte avant le [DATE_SUSPENSION] pour garder votre accès sans interruption. | Compte (toujours envoyé) |
+| `19-carte-bientot-expiree.html` | 30 jours avant l'expiration de la carte enregistrée (abonnements au mois) · proposition, à valider | Votre carte expire bientôt : pensez à la mettre à jour | La carte •••• [CARTE_4_CHIFFRES] expire fin [MOIS_EXPIRATION]. Une minute suffit pour la remplacer. | Compte (toujours envoyé) |
+| `20-recu-renouvellement.html` | À chaque prélèvement d'un abonnement (mensuel ou annuel) · proposition, à valider | Votre reçu Europe Échecs : [SERVICE], [MOIS] | Paiement de [MONTANT] reçu. Prochain prélèvement le [DATE_PROCHAIN_PAIEMENT]. | Compte (toujours envoyé) |
+
+### Propositions · reconquête et montée en gamme
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `21-reconquete-j30.html` | 30 jours après une fin d'abonnement ou une annulation, une seule fois · proposition, à valider | Depuis votre départ, sur Europe Échecs | [NOUVEAUTE_1], et d’autres nouveautés. Votre compte vous attend, à l’année ou au mois. | Information (désinscription possible) |
+| `22-jeu-plus-vers-integral.html` | Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois · proposition, à valider | Le Pack Intégral : vidéos, leçons et revue en plus | Gardez la zone de jeu et l’entraînement tactique, et ajoutez plus de 4 nouvelles vidéos chaque semaine. | Information (désinscription possible) |
+| `23-mensuel-vers-annuel.html` | Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois · proposition, à valider | Passez à l’année : [ECONOMIE] d’économie sur [SERVICE] | Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement. | Information (désinscription possible) |
+
+### Propositions · comptes gratuits
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `24-offre-bienvenue-rappel.html` | 24 h après l'e-mail 06, si aucun achat avec le code (fin de l'offre dans 24 h) · proposition, à valider | Plus que 24 heures pour votre −25 % | Votre code de bienvenue s’arrête demain, sur tous nos Packs Web 1 et 2 ans. | Information (désinscription possible) |
+| `25-gratuit-inactif-7j.html` | Comptes gratuits, 7 jours sans connexion, une seule fois par période d'inactivité · proposition, à valider | [PSEUDO], une partie sur Europe Échecs ? | Choisissez votre cadence et la force de votre adversaire : la partie commence en un clic. | Information (désinscription possible) |
+| `26-gratuit-inactif-21j.html` | Comptes gratuits, 21 jours sans connexion, une seule fois · proposition, à valider | Ce qui s’est passé sur Europe Échecs ces 3 semaines | [NOUVEAUTE_1], et ce qui vous attend sur la zone de jeu. | Information (désinscription possible) |
+| `27-gratuit-inactif-45j.html` | Comptes gratuits, 45 jours sans connexion, dernière relance (ensuite, plus d'e-mails d'information) · proposition, à valider | On continue à vous écrire, [PSEUDO] ? | Dites-nous si nos e-mails vous intéressent encore. Sinon, nous arrêtons de vous écrire. | Information (désinscription possible) |
+| `28-videos-de-la-semaine.html` | Chaque semaine, à tous les comptes qui l'acceptent (gratuits et abonnés) · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | [SERIE_1], [SERIE_2], [SERIE_3] : les nouveautés de la semaine. | Information (désinscription possible) |
 
 ## Variables
 
