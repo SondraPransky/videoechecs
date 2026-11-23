@@ -86,7 +86,7 @@ mail(id="05-decouverte-zone-de-jeu", cat="Découverte", quand="Après la premiè
      corps=[para("Bonjour [PSEUDO] ! Vous avez effectué votre première connexion à notre zone de jeu SimpleChess : nous espérons que l'expérience vous a plu. Voici ce que vous pouvez y faire en tant que membre."),
             liste(["<b>Cadences et force de l'adversaire</b> : choisissez vos cadences et la force de votre adversaire. Gagner contre plus fort que vous rapporte plus de points.",
                    "<b>La discussion</b> : échangez en direct avec vos amis ou n'importe quel joueur, dans le respect de la charte de la zone de jeu.",
-                   "<b>Vos listes de joueurs</b> : cliquez sur un pseudo pour l'ajouter à vos amis (vous êtes prévenu de son arrivée) ou à votre liste noire (il ne peut plus vous écrire ni vous défier).",
+                   "<b>Vos listes de joueurs</b> : cliquez sur un pseudo pour l'ajouter à vos amis (une alerte signale son arrivée) ou à votre liste noire (il ne peut plus vous écrire ni vous défier).",
                    "<b>Les parties des plus forts</b> : observez les parties en cours, et retrouvez les 10 dernières parties de chaque joueur sur son profil.",
                    "<b>L'analyse</b> : à la fin de chaque partie, revoyez-la avec un regard critique ; vous pouvez aussi analyser celles que vous observez.",
                    "<b>Les tournois</b> : participez, ou créez votre petit tournoi et invitez vos amis.",
@@ -118,7 +118,7 @@ mail(id="09-paiement-recu", cat="Abonnement", marketing=False, quand="À la réc
      objet="Votre commande n° [NUMERO_COMMANDE]", pre="Paiement reçu, commande traitée : le détail de votre commande.", sur="Commande n° [NUMERO_COMMANDE]", titre="Paiement reçu, | merci !",
      corps=[para("Nous avons bien reçu votre paiement de <b>[MONTANT]</b> pour la commande n° [NUMERO_COMMANDE], et nous vous en remercions. Votre commande a été traitée : si vous avez souscrit des services, ils sont activés."),
             recu([("[PRODUIT] · Qté [QUANTITE]", "[PRIX_LIGNE]"), ("Participation aux frais de port et d'emballage", "[FRAIS_PORT]")], "Total TTC", "[TOTAL]"),
-            para(petit("Une ligne par produit commandé. La ligne des frais de port n'apparaît que s'ils sont supérieurs à zéro."))],
+            ],
      sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
 mail(id="10-abonnement-echeance", cat="Abonnement", quand="Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re relance (modèle relance1web ; la 2e est l'e-mail 29)",
      objet="Votre abonnement Europe Échecs arrive à échéance", pre="[PACK] jusqu'au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption.", sur="Votre abonnement", titre="Continuez | sans interruption.",
@@ -144,23 +144,23 @@ mail(id="12-pack-jeu-devient-jeu-plus", cat="Nouvelles formules", marketing=Fals
             para("Le Pack Jeu+ remplace désormais le Pack Jeu. À la fin de votre abonnement, vous pourrez le prolonger pour 1 an (39,90 €), 2 ans (59,90 €) ou au mois, sans engagement (4,90 € par mois).")])
 mail(id="13-pack-progresser-en-cours", cat="Nouvelles formules", marketing=False, quand="Une fois, aux abonnés du Pack Progresser en cours",
      objet="Votre Pack Progresser : ce qui change", pre="Vous gardez les mêmes services jusqu'à la fin. Ensuite, deux nouvelles formules au choix.", sur="Nouvelles formules", titre="Rien ne change | pour l'instant.",
-     corps=[para("Bonjour [PSEUDO], merci pour votre fidélité ! Le Pack Progresser laisse la place à deux nouvelles formules, conçues à partir des réponses des joueurs que nous avons interrogés."),
-            para("Jusqu'à la fin de votre abonnement, vous profitez des mêmes services. Ensuite, deux formules vous seront proposées :"),
+     corps=[para("Bonjour [PSEUDO], merci pour votre fidélité ! Le Pack Progresser laisse la place à deux nouvelles offres, conçues à partir des réponses des joueurs que nous avons interrogés."),
+            para("Jusqu'à la fin de votre abonnement, vous profitez des mêmes services. Ensuite, vous aurez le choix entre :"),
             JEU_PLUS, INTEGRAL,
             encadre("<b>Nouveauté :</b> vous pourrez opter pour le paiement au mois, sans engagement, dès 4,90 € par mois."),
             bouton("Découvrir les deux formules", L("ABONNEMENTS"))])
 mail(id="14-pack-progresser-expire", cat="Nouvelles formules", quand="À l'échéance d'un abonnement Pack Progresser",
      objet="Votre Pack Progresser est arrivé à échéance", pre="Pack Jeu+ ou Pack Intégral, à l'année ou au mois : à vous de choisir.", sur="Nouvelles formules", titre="Choisissez | votre nouvelle formule.",
-     corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Progresser est arrivé à échéance. Cette formule laisse la place à deux nouvelles formules, conçues à partir des réponses des joueurs que nous avons interrogés."),
-            para("Pour continuer à vivre votre passion sur Europe Échecs, deux formules vous attendent :"),
+     corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Progresser est arrivé à échéance. Elle laisse la place à deux nouvelles offres, conçues à partir des réponses des joueurs que nous avons interrogés."),
+            para("Pour continuer à vivre votre passion sur Europe Échecs, choisissez :"),
             JEU_PLUS, INTEGRAL,
             encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d'un abonnement Pack Jeu",
      objet="Votre Pack Jeu est arrivé à échéance", pre="Pack Jeu+ ou Pack Intégral, à l'année ou au mois : à vous de choisir.", sur="Nouvelles formules", titre="Choisissez | votre nouvelle formule.",
-     corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Jeu est arrivé à échéance. Cette formule laisse la place à deux nouvelles formules, conçues à partir des réponses des joueurs que nous avons interrogés."),
-            para("Pour continuer à vivre votre passion sur Europe Échecs, deux formules vous attendent :"),
+     corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Jeu est arrivé à échéance. Elle laisse la place à deux nouvelles offres, conçues à partir des réponses des joueurs que nous avons interrogés."),
+            para("Pour continuer à vivre votre passion sur Europe Échecs, choisissez :"),
             JEU_PLUS, INTEGRAL,
             encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
@@ -200,7 +200,7 @@ mail(id="17-carte-cadeau", cat="Cadeaux", marketing=False, quand="Après l'achat
             bouton("Télécharger la carte cadeau", L("CARTE_CADEAU_PDF")),
             para("La carte cadeau au format PDF est prête à imprimer ou à envoyer. Pour la télécharger, connectez-vous avec le compte qui a servi à passer la commande."),
             para('Pour activer le code, rendez-vous sur <a href="https://www.europe-echecs.com/activer-mon-code-cadeau.html" style="color:#1f6fc0;font-weight:700">europe-echecs.com/activer-mon-code-cadeau</a>.'),
-            para(petit(f'Plusieurs codes ? Ils sont listés un par un, et un bouton permet de les télécharger tous dans un seul PDF. Le contenu de chaque Pack est détaillé sur notre <a href="{TARIFS}" style="color:#6b6b66">page des tarifs</a>.'))])
+            para(petit(f'Le contenu de chaque Pack est détaillé sur notre <a href="{TARIFS}" style="color:#6b6b66">page des tarifs</a>.'))])
 
 # ---------- 7. Propositions : e-mails qui manquent (à valider) ----------
 # Rien n'est inventé : prix, délais, offre de retour et nouveautés restent des variables, à remplir avant l'envoi.
@@ -240,18 +240,18 @@ mail(id="21-reconquete-j30", cat=P_FIDELITE, quand="30 jours après une fin d'ab
      corps=[para("Bonjour [PSEUDO], votre abonnement s'est arrêté il y a un mois. Voici ce qui a changé depuis :"),
             nouveautes("Ce mois-ci sur Europe Échecs", [("[NOUVEAUTE_1]", ""), ("[NOUVEAUTE_2]", ""), ("[NOUVEAUTE_3]", "")]),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>[OFFRE_RETOUR]</b><br>Bloc à retirer s'il n'y a pas d'offre de retour."),
+            encadre("<b>[OFFRE_RETOUR]</b>"),
             bouton("Revenir sur Europe Échecs", L("ABONNEMENTS")),
             para(petit("Le paiement au mois est désormais possible, sans engagement, dès 4,90 € par mois."))])
 mail(id="22-jeu-plus-vers-integral", cat=P_FIDELITE, quand="Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois" + INFO_PROPOSITION,
      objet="Le Pack Intégral : vidéos, leçons et revue en plus", pre="Pour 7 € de plus par mois : vidéos à la demande, leçons, revue en ligne et plus de 4 nouvelles vidéos par semaine.", sur="Pack Intégral", titre="Et si vous passiez | à l'Intégral ?",
-     corps=[para("Bonjour [PSEUDO], avec le Pack Jeu+, vous jouez et vous vous entraînez. Le Pack Intégral garde tout cela et ajoute l'ensemble de nos contenus :"),
+     corps=[para("Bonjour [PSEUDO], avec le Pack Jeu+, vous jouez et vous vous entraînez. Le Pack Intégral garde tout cela, et ajoute le reste :"),
             INTEGRAL,
             para("Du Pack Jeu+ au Pack Intégral :"),
             infos([("Au mois", "4,90 € → 11,90 €"), ("Pour 1 an", "39,90 € → 99,90 €"), ("Pour 2 ans", "59,90 € → 149,90 €")]),
             bouton("Passer au Pack Intégral", L("ABONNEMENTS"))])
 mail(id="23-mensuel-vers-annuel", cat=P_FIDELITE, quand="Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois" + INFO_PROPOSITION,
-     objet="Passez à l'année : [ECONOMIE] d'économie sur [SERVICE]", pre="Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement.", sur="Votre abonnement", titre="Passez | à l'année.",
+     objet="Passez à l'année : [ECONOMIE] d'économie sur votre [SERVICE]", pre="Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement.", sur="Votre abonnement", titre="Passez | à l'année.",
      corps=[para("Bonjour [PSEUDO], cela fait trois mois que vous réglez votre abonnement <b>[SERVICE]</b> au mois. En passant à l'année, vous gardez exactement les mêmes services :"),
             infos([("Aujourd'hui, au mois", "[PRIX_MENSUEL]"), ("À l'année", "[PRIX_ANNUEL]")]),
             liste(["<b>[ECONOMIE] d'économie</b> sur un an", "<b>Un seul paiement</b>, sans renouvellement automatique : vous décidez à l'échéance", "Ou <b>2 ans</b> pour [PRIX_2ANS]"]),

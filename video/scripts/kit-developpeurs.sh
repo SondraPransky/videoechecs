@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
-# Deux kits pour les équipes techniques :
+# Kits pour les équipes techniques :
+#   build/kit-developpeurs-ee.zip       : site europe-echecs.com (e-mails Europe Échecs) — à part : bash scripts/kit-developpeurs.sh ee
 #   build/kit-developpeurs-academie.zip : Académie echecs.com (e-mails des abonnés, fichiers du site)
 #   build/kit-developpeurs-ccas.zip     : plateforme CCAS (e-mails des bénéficiaires des Activités Sociales de l'Énergie)
 # Prérequis : python3 scripts/emails.py, python3 scripts/emails.py ccas, node scripts/emails-apercus.mjs [ccas], et le pack déjà générés.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# Kit Europe Échecs seul (python3 scripts/emails.py ee d'abord)
+if [ "${1:-}" = ee ]; then
+  node scripts/emails-apercus.mjs ee >/dev/null
+  rm -rf build/kit-developpeurs-ee build/kit-developpeurs-ee.zip
+  E=build/kit-developpeurs-ee; mkdir -p "$E/marque"
+  cp pack/DEVELOPPEURS-EE.md pack/EMAILS-EE.md scripts/miniature-mail.py "$E/"
+  cp -r build/pack/emails-ee "$E/emails-ee"
+  cp ../assets/brand/europe-echecs/logo-europe-echecs-*.png ../assets/brand/europe-echecs/ee-favicon-72.png "$E/marque/"
+  (cd build && zip -qr kit-developpeurs-ee.zip kit-developpeurs-ee)
+  du -sh build/kit-developpeurs-ee.zip; exit 0
+fi
 # Aperçus absents (scripts/emails.py vide build/pack/emails*) : on les refait avant d'assembler les kits
 [ -d build/pack/emails/apercus ] || node scripts/emails-apercus.mjs >/dev/null
 [ -d build/pack/emails-ccas/apercus ] || node scripts/emails-apercus.mjs ccas >/dev/null

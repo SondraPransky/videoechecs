@@ -184,7 +184,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 |---|---|---|---|---|
 | `21-reconquete-j30.html` | 30 jours après une fin d'abonnement ou une annulation, une seule fois · proposition, à valider | Depuis votre départ, sur Europe Échecs | [NOUVEAUTE_1], et d’autres nouveautés. Votre compte vous attend, à l’année ou au mois. | Information (désinscription possible) |
 | `22-jeu-plus-vers-integral.html` | Abonnés Pack Jeu+ actifs, après [NB_SEMAINES] semaines d'abonnement (délai à fixer), une seule fois · proposition, à valider | Le Pack Intégral : vidéos, leçons et revue en plus | Pour 7 € de plus par mois : vidéos à la demande, leçons, revue en ligne et plus de 4 nouvelles vidéos par semaine. | Information (désinscription possible) |
-| `23-mensuel-vers-annuel.html` | Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois · proposition, à valider | Passez à l’année : [ECONOMIE] d’économie sur [SERVICE] | Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement. | Information (désinscription possible) |
+| `23-mensuel-vers-annuel.html` | Au 3ᵉ prélèvement d'un abonnement au mois, une seule fois · proposition, à valider | Passez à l’année : [ECONOMIE] d’économie sur votre [SERVICE] | Un seul paiement par an au lieu de douze, et le même accès à tout votre abonnement. | Information (désinscription possible) |
 
 ### Propositions · comptes gratuits
 
