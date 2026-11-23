@@ -37,13 +37,15 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 | 07 Bienvenue après abonnement | `welcome_subscription` | 07 (partiel) |
 | 08 Abonnement mis en place | `recurpmt_created` | 07 |
 | 09 Paiement reçu | `cmdpmtreceived` | 09 |
-| 10 Échéance de l'abonnement web | `relance1web`, `relance2web` (identiques) | 27, 29 |
+| 10 Échéance de l'abonnement web, 1re relance | `relance1web` | 27, 29 |
+| 29 Échéance de l'abonnement web, 2e relance | `relance2web`, réécrit : nouvel angle (formule 2 ans, formule au mois) | 27, 29 |
 | 11 Abonnement annulé | `recurpmt_cancelled` | 30 |
 | 12 Le Pack Jeu devient le Pack Jeu+ | texte fourni (nouvelles formules) | — |
 | 13 Pack Progresser en cours | texte fourni (nouvelles formules) | — |
 | 14 Fin du Pack Progresser | texte fourni (nouvelles formules) | — |
 | 15 Fin du Pack Jeu | texte fourni (nouvelles formules) | — |
-| 16 Échéance de la revue papier | `relance1ee`, `relance2ee` (identiques) | — |
+| 16 Échéance de la revue papier, 1re relance | `relance1ee` | — |
+| 30 Échéance de la revue papier, 2e relance | `relance2ee`, réécrit : nouvel angle (tarif pack avec un Pack) | — |
 | 17 Carte cadeau | `gift_code` | 52 (partiel) |
 
 ## Décisions et points à suivre
@@ -67,6 +69,7 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 
 - **Un e-mail, une tâche** : un seul bouton principal ; pas de liens inutiles avant l'action attendue (01 : rien à cliquer avant l'activation).
 - **Objet** de 35 à 55 caractères, clair avant d'être malin ; **pré-en-tête** de 60 à 95 caractères qui complète l'objet sans le répéter.
+- **Chaque relance apporte un angle nouveau** (méthode des relances de prospection) : jamais le même texte renvoyé. 10 puis 29 : renouveler, puis économiser avec 2 ans ou passer au mois ; 16 puis 30 : se réabonner, puis le tarif pack ; 25, 26, 27 : une partie, les nouveautés, puis « on continue ? » (dernier message, respecté : sans clic, plus d'e-mails d'information). Pour le 18, la relance à J+3 devrait aussi changer d'angle (par exemple rappeler ce que l'accès comprend).
 - **Ouverture directe** : la raison de l'e-mail dès la première phrase (pas de « Bonne nouvelle : », « Rassurez-vous : », « Nous sommes ravis… »).
 - **Pas de formule d'aide en fin d'e-mail** (« N'hésitez pas à nous contacter… ») : le lien « Aide » est dans le pied de page ; une demande précise si besoin (11 : « Pourquoi partez-vous ? »).
 - **Boutons** : action + résultat, à la première personne (« Profiter de −25 % », « Me réabonner », « Choisir ma formule »).
@@ -141,8 +144,9 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `07-bienvenue-abonnement.html` | À la création du compte lors d'un abonnement (modèle welcome_subscription) | Bienvenue ! Vos identifiants Europe Échecs | Merci pour votre abonnement. Voici de quoi vous connecter tout de suite. | Compte (toujours envoyé) |
 | `08-abonnement-mis-en-place.html` | À la mise en place d'un abonnement à paiement récurrent (modèle recurpmt_created) | Mise en place de votre abonnement [SERVICE] | Votre abonnement récurrent est en place. Vous le gérez à tout moment depuis « Mon compte ». | Compte (toujours envoyé) |
 | `09-paiement-recu.html` | À la réception d'un paiement de commande (modèle cmdpmtreceived) | Votre commande n° [NUMERO_COMMANDE] | Paiement reçu, commande traitée : le détail de votre commande. | Compte (toujours envoyé) |
-| `10-abonnement-echeance.html` | Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re et 2e relance (modèles relance1web et relance2web, identiques) | Votre abonnement Europe Échecs arrive à échéance | [PACK] jusqu’au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption. | Information (désinscription possible) |
+| `10-abonnement-echeance.html` | Avant l'échéance d'un abonnement web de 1 ou 2 ans (paiement unique, renouvellement manuel), 1re relance (modèle relance1web ; la 2e est l'e-mail 29) | Votre abonnement Europe Échecs arrive à échéance | [PACK] jusqu’au [DATE_FIN] : renouvelez-le pour garder vos services sans interruption. | Information (désinscription possible) |
 | `11-abonnement-annule.html` | À l'annulation d'un abonnement récurrent (modèle recurpmt_cancelled) | Annulation de votre abonnement [SERVICE] | Plus aucune facturation à partir d’aujourd’hui. Vous pouvez revenir quand vous voulez. | Compte (toujours envoyé) |
+| `29-abonnement-echeance-relance-2.html` | 2e relance avant l'échéance d'un abonnement de 1 ou 2 ans, si l'abonnement n'est pas renouvelé (modèle relance2web, réécrit) | Votre abonnement s’arrête le [DATE_FIN] | Prolongez pour 2 ans et économisez jusqu’à 49,90 €, ou passez au mois, sans engagement. | Information (désinscription possible) |
 
 ### Nouvelles formules
 
@@ -157,7 +161,8 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re et 2e relance (modèles relance1ee et relance2ee, identiques) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
+| `16-revue-echeance.html` | Avant la fin d'un abonnement à la revue papier, 1re relance (modèle relance1ee ; la 2e est l'e-mail 30) | Votre abonnement à la revue Europe Échecs se termine | Votre dernier numéro arrive en [ECHEANCE]. Réabonnez-vous pour ne manquer aucun numéro. | Information (désinscription possible) |
+| `30-revue-echeance-relance-2.html` | 2e relance avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit) | Votre revue Europe Échecs pour 50 € de plus | Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime. | Information (désinscription possible) |
 
 ### Cadeaux
 
