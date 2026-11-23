@@ -115,7 +115,7 @@ mail(id="11-demarrage-j3-exercices", cat="Démarrage de l'abonné", quand="J+3 a
      corps=[para("La régularité fait plus que les longues séances. Chaque jour, quelques exercices à ton niveau : mat en 1, fourchette, clouage, finales…"),
             para("Ta <b>série de jours</b> s'affiche sur ton tableau de bord : essaie de ne pas la casser !"), bouton("Faire mes exercices du jour", L("EXERCICES"))])
 mail(id="12-demarrage-j6-masterclasses", cat="Démarrage de l'abonné", quand="J+6 après l'abonnement", img="masterclasses", alt="Les masterclasses en direct",
-     objet="Les grands maîtres t'attendent", pre="Masterclasses en direct et replays, inclus dans ton abonnement.", sur="Masterclasses", titre="Apprends des meilleurs.",
+     objet="Les Grands Maîtres t'attendent", pre="Masterclasses en direct et replays, inclus dans ton abonnement.", sur="Masterclasses", titre="Apprends des meilleurs.",
      corps=[para("Gata Kamsky, Fabien Libiszewski, Sylvain Ravot, Marc Quenehen… Les masterclasses sont <b>incluses</b> dans ton abonnement, en direct et en replay."),
             para("Tu peux poser tes questions pendant le direct. Une occasion à ne pas rater !"), bouton("Voir les masterclasses", L("MASTERCLASSES"))])
 mail(id="13-demarrage-j10-communaute", cat="Démarrage de l'abonné", quand="J+10 après l'abonnement", img="tournois", alt="Les tournois en ligne",
