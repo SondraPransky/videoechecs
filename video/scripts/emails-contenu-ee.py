@@ -7,9 +7,9 @@
 # ---------- Réglages de la série ----------
 C["em"] = "#1f6fc0"                 # bleu d'action du site (surtitre, suite du titre)
 C["nuit"] = "#191f38"               # marine du site (en-tête, bloc calendrier)
-C["bouton"] = "#1f6fc0"; C["bouton_texte"] = "#ffffff"   # boutons du site : bleu d'action, texte blanc
-C["jaune"] = "#58acff"              # accent (filets d'encadré) : bleu de marque du site
-C["clair"] = "#58acff"              # bleu de marque : surtitre et suite du titre sur le bandeau marine, filet sous l'en-tête
+C["bouton"] = "#fae361"; C["bouton_texte"] = "#191f38"   # boutons : jaune Europe Échecs, texte marine
+C["jaune"] = "#fae361"              # jaune Europe Échecs (#FAE361, celui des pages de la revue) : filets d'encadré
+C["clair"] = "#fae361"              # jaune : surtitre et suite du titre sur le bandeau marine, filet sous l'en-tête, pastille du Pack Intégral
 TITRE_SUR_NUIT = True                # surtitre et titre dans le bandeau marine, sous le logo
 # Palette déclinée de la charte du site (marine #191F38, bleu de marque #58ACFF, bleu d'action #1F6FC0, gris-bleu #6C7497) :
 # les teintes crème de l'Académie deviennent des gris-bleus froids, partout (styles et règles du mode sombre)
@@ -46,7 +46,7 @@ def formule(nom, accroche, texte, phare=False):   # une formule proposée (sans 
                 f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:#ffffff">{nom}</div>'
                 f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:#d3d8e6">{texte}</div></td></tr></table>')
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border-collapse:separate"><tr>'
-            f'<td bgcolor="#e6f1ff" style="background:#e6f1ff;border-left:5px solid {C["clair"]};border-radius:14px;padding:18px 20px">'
+            f'<td bgcolor="#e6f1ff" style="background:#e6f1ff;border-left:5px solid #58acff;border-radius:14px;padding:18px 20px">'
             f'<div style="font-family:{SERIF};font-weight:{GRAS};font-size:20px;line-height:1.25;color:{C["texte"]}">{nom}'
             + (f' <span style="font-weight:400;color:{C["em"]}">· {accroche}</span>' if accroche else "") + '</div>'
             f'<div style="margin-top:6px;font:16px/1.55 {SANS};color:{C["texte"]}">{texte}</div></td></tr></table>')
