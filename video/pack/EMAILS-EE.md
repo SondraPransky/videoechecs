@@ -15,6 +15,8 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 - **Vouvoiement**, comme sur le site europe-echecs.com et dans ses modèles.
 - **Marque** : logo officiel Europe Échecs (bleu `#93B9E2`, tiré de la planche `assets/brand/logos-reference.png`) sur l'en-tête marine `#191F38` du site ;
   boutons jaunes `#FAE361` à texte marine ; pas de mascotte ni de bandeaux illustrés (ils appartiennent à l'Académie).
+- **Logo décliné par rubrique** (forme officielle, seule la couleur change ; fichiers dans `assets/brand/europe-echecs/`) : blanc pour Compte et Revue,
+  jaune `#FAE361` pour Découverte, Nouvelles formules et Cadeaux, bleu officiel `#93B9E2` pour Abonnement. Trois images à héberger : `logo.png`, `logo-blanc.png`, `logo-jaune.png`.
 - **Palette déclinée de la charte du site, avec le jaune Europe Échecs `#FAE361`** : surtitre et titre en blanc sur un bandeau marine sous le logo (surtitre et suite du titre en jaune),
   filet jaune de 4 px sous le bandeau, boutons et pastille du Pack Intégral en jaune, filets d'encadré jaunes ; le bleu reste pour le logo, les liens et le Pack Jeu+ ; fond et encadrés gris-bleu `#EDF1F8`, texte marine `#1A2140`, texte secondaire `#5D6480`, filets `#DFE4EE` ;
   Pack Jeu+ sur fond bleu clair `#E6F1FF`, Pack Intégral mis en avant sur fond marine avec sa pastille « Le choix des passionnés ».

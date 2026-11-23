@@ -193,3 +193,7 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "DATE_SUPPRESSION": "18/11/2026", "HEURE_SUPPRESSION": "14:32", "CODE_PROMO": "EE25-8XK2", "SERVICE": "Pack Intégral", "PACK": "Pack Intégral",
     "DATE_FIN": "18/12/2026", "NUMERO_COMMANDE": "245871", "PRODUIT": "Pack Jeu+", "QUANTITE": "1", "ECHEANCE": "janvier 2027", "NUMERO_ABONNE": "10427",
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
+
+# Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune"}
+for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]

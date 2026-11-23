@@ -38,7 +38,7 @@ IMG = {
     "oups": PACK / "images/37-oups/37-oups-lien-1200x630.jpg",
     "puzzle": PACK / "images/14-probleme-mat-en-1/14-probleme-mat-en-1-lien-1200x630.jpg",
 }
-if PROFIL == "ee": IMG = {"logo": IMG["logo"]}   # série Europe Échecs : sans les visuels du pack Académie
+if PROFIL == "ee": IMG = {"logo": IMG["logo"], **{f"logo-{c}": ICI.parent / f"assets/brand/europe-echecs/logo-europe-echecs-{c}.png" for c in ("blanc", "jaune")}}   # série Europe Échecs : sans les visuels du pack Académie
 BANDEAUX = [] if PROFIL == "ee" else sorted(f.name[6:-13] for f in (PACK / "images/00-emails").glob("email-*-1200x480.jpg"))
 for b in BANDEAUX: IMG["b-" + b] = PACK / f"images/00-emails/email-{b}-1200x480.jpg"
 from PIL import Image
@@ -219,6 +219,7 @@ def page(e):
     sur = f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C["em"]};margin:0 0 14px">&mdash;&nbsp;{e["sur"]}</div>'
     h1 = f'<h1 style="margin:0 0 22px;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:{C["texte"]}">{titre}</h1>'
     bandeau = ""
+    entete = ENTETE.replace("{IMG}/logo.png", "{IMG}/" + e.get("logo", "logo") + ".png")   # logo décliné par e-mail (série ee)
     if TITRE_SUR_NUIT:   # le titre passe dans l'en-tête, en blanc, la suite et le surtitre dans le bleu clair de la série
         t_nuit = t1.strip() + (f' <span style="font-family:{SERIF};{TITRE_SUITE};color:{C["clair"]}">{t2.strip()}</span>' if t2 else "")
         bandeau = (f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:4px 32px 30px">'
@@ -233,7 +234,7 @@ def page(e):
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{html.escape(e["pre"])}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:{C['fond']}"><tr><td class="m-out" align="center" style="padding:24px 12px">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:100%;max-width:600px;background:{C['carte']};border-radius:16px;overflow:hidden">
-{ENTETE}
+{entete}
 {bandeau}
 {hero}
 <tr><td class="m-pad" style="padding:34px 32px 30px">
