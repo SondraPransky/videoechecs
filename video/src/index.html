@@ -755,9 +755,9 @@ function splitChars(el) {
 
 
 // ---------- Construction des scènes ----------
-// Campagne « Jusqu'à 2000 et plus » (accroche-6) : une position de joueur de club, le sacrifice du Fou en h7
-const CLUB_POS = { g1: "wK", f1: "wR", d1: "wQ", f3: "wN", d3: "wB", c1: "wB", e5: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
-  g8: "bK", f8: "bR", d8: "bQ", b7: "bB", d7: "bN", f7: "bP", g7: "bP", h7: "bP", e6: "bP", d5: "bP", a7: "bP", b6: "bP" };
+// Campagne « Jusqu'à 2000 et plus » : la position de la leçon Objectif 1800 « La triangulation » (quiz 82) ;
+// les Blancs perdent un temps par d5-d4-c4-d5 pour laisser le trait aux Noirs, en zugzwang
+const CLUB_POS = { d5: "wK", b6: "wP", c5: "wP", d7: "bK", b7: "bP" };
 const b1 = makeBoard($("#b1"), /accroche-([6-9]|1\d)\b/.test(location.search) ? CLUB_POS : START);   // campagne « Jusqu'à 2000 et plus » : accroche-6 à 10
 
 // S2
@@ -845,16 +845,16 @@ for (let i = 0; i < 42; i++) {
   makeBoard(d, pl);
   $("#minis").appendChild(d);
 }
-// Campagne « Jusqu'à 2000 et plus » (accroche-6 à 10) : un exercice de joueur de club, pas un mat en 1 de débutant
+// Campagne « Jusqu'à 2000 et plus » (accroche-6 à 10) : un exercice Objectif 1800 (leçon « Sauver la partie »), pas un mat en 1 de débutant
 const CLUB6 = /accroche-([6-9]|1\d)\b/.test(location.search);
-const b6 = makeBoard($("#b6"), CLUB6 ? CLUB_POS : { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
+const b6 = makeBoard($("#b6"), CLUB6 ? { a6: "wK", b1: "wR", a8: "bR", d8: "bK", a7: "bN", c6: "bN" } : { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
 coords($("#b6"));
-const a6 = CLUB6 ? arrow($("#b6"), "d3", "h7") : arrow($("#b6"), "d1", "d8");
-const h6 = highlight($("#b6"), CLUB6 ? "h7" : "d8");
+const a6 = CLUB6 ? arrow($("#b6"), "b1", "b8") : arrow($("#b6"), "d1", "d8");
+const h6 = highlight($("#b6"), CLUB6 ? "b8" : "d8");
 if (CLUB6) {
-  $("#ex1400 .lchip").textContent = "Objectif 1600"; $("#ex1400 .lchip").style.background = "#93b9e2";
-  $("#ex1400 .ltitle").textContent = "Les Blancs jouent et gagnent. Quel coup ?";
-  $("#res6 span").innerHTML = '1.<img class="fig" src="../assets/pieces/wB.png">xh7+ ! — le sacrifice grec';
+  $("#ex1400 .lchip").textContent = "Objectif 1800"; $("#ex1400 .lchip").style.background = "#fae361";
+  $("#ex1400 .ltitle").textContent = "Les Blancs jouent et annulent. Quel coup ?";
+  $("#res6 span").innerHTML = '1.<img class="fig" src="../assets/pieces/wR.png">b8+ ! — et …<img class="fig" src="../assets/pieces/bR.png">xb8 est pat';
   $("#qz1600 .lchip").textContent = "Objectif 1800";
   $("#qz1600 .ltitle").textContent = "Défense de Vancura : où place-t-on la Tour ?";
   $("#qa").firstChild.textContent = "A · Sur la sixième rangée";
@@ -1009,7 +1009,7 @@ if (SOL_S[HOOK]) $("#sol-s").innerHTML = SOL_S[HOOK];
 const CLUB = HOOK >= 6;
 if (CLUB) {
   $$(".s1-w")[0].textContent = "Passe un cap,"; $$(".s1-w")[1].textContent = "vise les 2000.";
-  $(".s1-l").innerHTML = "De l'Objectif 1600 à <b style=\"color:var(--yellow)\">2000 et plus.</b>";
+  $(".s1-l").innerHTML = "De l'Objectif 1800 à <b style=\"color:var(--yellow)\">2000 et plus.</b>";
   $(".pg-k").textContent = "2000 et plus"; $$(".pg-w")[0].textContent = "Passe la barre"; $$(".pg-w")[1].textContent = "des 2000.";
   $("#vcard .lchip").textContent = "Objectif 1800"; $("#vcard .lchip").style.background = "#fae361"; $("#vcard .ltype").textContent = "Finales de Tours"; $("#vcard .ltitle").textContent = "La défense de Vancura";
   $("#elov").textContent = "1650"; $("#eloup").textContent = "▲ +430";
@@ -1102,14 +1102,14 @@ scene("s1", ({ st, from, at, lines, dur }) => {
   from(".s1-k", .1, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .6 });
   lines(".s1-w", .15, .22);
   from(".s1-l", .9, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 });
-  if (CLUB) {   // 1.Fxh7+ : le Fou part de d3 et prend en h7
-    at(b1.d3, 1.3, { ...sqPos("h7"), duration: .5, ease: "power3.inOut" });
-    at(b1.h7, 1.65, { opacity: 0, scale: .4, duration: .25 });
+  if (CLUB) {   // la triangulation : 1.Rd4 Rc6 2.Rc4 Rd7 3.Rd5, même position mais trait aux Noirs
+    [["d5", "d4", 1.3], ["d7", "c6", 1.65], ["d5", "c4", 2.0], ["d7", "d7", 2.35], ["d5", "d5", 2.7]].forEach(([p, c, t]) => at(b1[p], t, { ...sqPos(c), duration: .28, ease: "power3.inOut" }));
   } else {
     at(b1.e2, 1.3, { top: "50%", duration: .35, ease: "power3.inOut" });
     at(b1.e7, 1.75, { top: "37.5%", duration: .35, ease: "power3.inOut" });
   }
-  sfx(st, "move", 1.62); sfx(st, "move", 2.07, { p: .9 });
+  if (CLUB) [1.58, 1.93, 2.28, 2.63, 2.98].forEach((t, i) => sfx(st, "move", t, { p: i % 2 ? .9 : 1 }));
+  else { sfx(st, "move", 1.62); sfx(st, "move", 2.07, { p: .9 }); }
   from("#b1", 1.1, { rotateY: 0, rotateX: 0, scale: 1, transformPerspective: 1600 }, { rotateY: -12, rotateX: 8, scale: 1.04, duration: dur - 1.1, ease: "sine.inOut" });
   from("#m1", .7, { y: 460 }, { y: 0, duration: .7, ease: "back.out(1.4)" });
   playMascot(st, "m1", .7, dur);
@@ -1394,7 +1394,7 @@ scene("s6", ({ st, from, at, dur }) => {
   at(["#ex1400", "#qz1600"], .9, { rotateY: -2, duration: dur - .9, ease: "sine.inOut" });
   at(a6.line, 1.0, { strokeDashoffset: 0, duration: .35, ease: "power2.out" });
   from(a6.head, 1.3, { opacity: 0 }, { opacity: 1, duration: .1 });
-  if (CLUB6) { at(b6.d3, 1.45, { ...sqPos("h7"), duration: .35, ease: "power3.inOut" }); at(b6.h7, 1.7, { opacity: 0, scale: .4, duration: .2 }); }
+  if (CLUB6) at(b6.b1, 1.45, { ...sqPos("b8"), duration: .35, ease: "power3.inOut" });
   else at(b6.d1, 1.45, { top: "0%", duration: .3, ease: "power3.inOut" });
   at(a6.g, 1.5, { opacity: 0, duration: .2 });
   at(h6, 1.7, { opacity: 1, duration: .2 });
