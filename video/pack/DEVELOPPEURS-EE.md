@@ -122,6 +122,18 @@ Les données ci-dessous sont à créer côté site si elles n'existent pas encor
 | Abonnés à la revue papier sans abonnement web, date de début de l'abonnement revue | (segment) | 50 |
 | Page à partager « Mon année » | `[LIEN_PARTAGE_ANNEE]` | 49 |
 
+## 4 quater. Boutique : suivi de commande (51 à 57)
+
+Envoyés par la boutique (boutique.echecs.com), à la place de ses e-mails actuels : commande confirmée (51), expédiée (52), livrée (53),
+avis 10 jours après la livraison (54), remboursement (55), retour en stock (56), panier oublié (57). 51, 52, 53 et 55 sont des e-mails de commande (toujours envoyés) ;
+54, 56 et 57 respectent le refus des e-mails d'information.
+
+- Une ligne `<!-- PRODUIT n -->` par article commandé (vignette, nom, quantité, prix) : la dupliquer ou la supprimer.
+- Si la boutique tourne sous PrestaShop (les adresses le laissent penser, à confirmer) : `[PRENOM_CLIENT]` = `{firstname}`, `[NUMERO_COMMANDE]` = `{order_name}`,
+  `[TOTAL]` = `{total_paid}`, `[FRAIS_PORT]` = `{total_shipping}`, `[MODE_PAIEMENT]` = `{payment}`, `[ADRESSE_LIVRAISON]` = `{delivery_block_html}`,
+  `[LIEN_SUIVI]` = `{followup}`, `[LIEN_COMMANDE]` = `{history_url}`. Les modèles correspondants : `order_conf`, `shipped`, `refund`, `order_canceled`.
+- 54 (avis) et 57 (panier) demandent un module d'avis et un module de relance de panier ; 56 un module d'alerte de retour en stock (« Prévenez-moi »).
+
 ## 5. Points à trancher avant la mise en service
 
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?

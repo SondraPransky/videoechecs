@@ -520,6 +520,88 @@ EXEMPLES.update({"NB_PARTIES": "42", "VARIATION_ELO": "+38", "NB_EXERCICES": "15
     "CAP_FRANCHI": "votre 100ᵉ partie", "CHIFFRE_CAP": "100", "UNITE_CAP": "parties", "DETAIL_CAP": "vous venez de jouer votre 100ᵉ partie sur Europe Échecs", "RECORD": "1612 Elo", "DATE_CAP": "24 novembre",
     "NB_PARTIES_AN": "318", "NB_VIDEOS_AN": "64", "NB_EXERCICES_AN": "1 240", "ELO_MAX": "1648", "CADENCE_PREFEREE": "blitz 5 min", "MOIS_ACTIF": "mars"})
 
+# ---------- 11. Boutique : suivi de commande (boutique.echecs.com) ----------
+P_COMMANDE = "Boutique · suivi de commande"
+INFO_BOUTIQUE = " · proposition, à valider · envoyé par la boutique"
+
+def suivi(etape):   # les étapes de la commande : commandée, expédiée, livrée ; les étapes passées en jaune
+    noms = ["Commandée", "Expédiée", "Livrée"]
+    cell = lambda i, n: (f'<td width="33%" align="center" valign="top" style="padding:0 4px">'
+                         f'<div style="width:34px;height:34px;margin:0 auto;border-radius:50%;background:{C["jaune"] if i <= etape else C["fond"]};'
+                         f'font:bold 15px/34px {SANS};color:{C["nuit"] if i <= etape else C["gris"]};text-align:center">{"&#10003;" if i < etape else i + 1}</div>'
+                         f'<div style="margin-top:8px;font-family:{SANS};font-weight:{800 if i == min(etape, 2) else 600};font-size:13px;color:{C["texte"] if i <= etape else C["gris"]}">{n}</div></td>')
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:6px 0 24px"><tr>'
+            + "".join(cell(i, n) for i, n in enumerate(noms)) + '</tr></table>')
+
+def article_commande(n=1):   # une ligne de produit : vignette, nom, quantité, prix
+    return (f'<!-- PRODUIT {n} : une ligne par produit -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 10px"><tr>'
+            f'<td width="72" valign="middle"><img src="[URL_IMAGE_ARTICLE_COMMANDE_{n}]" width="64" alt="" style="display:block;width:64px;height:auto;border:1px solid #e4e1d8;border-radius:8px"></td>'
+            f'<td valign="middle" style="padding-left:12px;font:{GRAS} 15px/1.35 {SERIF};color:{C["texte"]}">[NOM_ARTICLE_{n}]<div style="margin-top:2px;font:13px {SANS};color:{C["gris"]}">Quantité : [QUANTITE_ARTICLE_{n}]</div></td>'
+            f'<td align="right" valign="middle" style="font:bold 15px {SANS};color:{C["texte"]};white-space:nowrap">[PRIX_ARTICLE_{n}]</td></tr></table>')
+
+mail(id="51-commande-confirmee", cat=P_COMMANDE, marketing=False, quand="Dès la commande payée sur la boutique" + INFO_BOUTIQUE,
+     objet="Commande n° [NUMERO_COMMANDE] confirmée, merci !", pre="Nous préparons votre colis. Livraison prévue autour du [DATE_LIVRAISON_ESTIMEE].", sur="Votre commande", titre="Merci pour | votre commande !",
+     corps=[suivi(0),
+            para("Bonjour [PRENOM_CLIENT], votre commande <b>n° [NUMERO_COMMANDE]</b> est bien enregistrée. Nous la préparons, et vous recevrez un e-mail dès son expédition."),
+            article_commande(1), article_commande(2),
+            recu([("Sous-total", "[SOUS_TOTAL]"), ("Livraison ([MODE_LIVRAISON])", "[FRAIS_PORT]")], "Total TTC", "[TOTAL]"),
+            infos([("Livraison à", "[ADRESSE_LIVRAISON]"), ("Livraison prévue", "[DATE_LIVRAISON_ESTIMEE]"), ("Paiement", "[MODE_PAIEMENT]")]),
+            bouton("Voir ma commande", "[LIEN_COMMANDE]"),
+            para(petit("Votre facture est disponible dans votre compte, rubrique « Mes commandes »."))],
+     sign="Merci de votre confiance,<br><b>La boutique Europe Échecs</b>")
+mail(id="52-commande-expediee", cat=P_COMMANDE, marketing=False, quand="Quand le colis est remis au transporteur, avec le numéro de suivi" + INFO_BOUTIQUE,
+     objet="Votre commande n° [NUMERO_COMMANDE] est en route", pre="Colis remis à [TRANSPORTEUR] : suivez-le avec le numéro [NUMERO_SUIVI].", sur="Votre commande", titre="Votre colis | est en route !",
+     corps=[suivi(1),
+            para("Bonjour [PRENOM_CLIENT], bonne nouvelle : votre commande <b>n° [NUMERO_COMMANDE]</b> vient de partir."),
+            infos([("Transporteur", "[TRANSPORTEUR]"), ("N° de suivi", "[NUMERO_SUIVI]"), ("Livraison prévue", "[DATE_LIVRAISON_ESTIMEE]")]),
+            bouton("Suivre mon colis", "[LIEN_SUIVI]"),
+            article_commande(1), article_commande(2)],
+     sign="À très bientôt,<br><b>La boutique Europe Échecs</b>")
+mail(id="53-commande-livree", cat=P_COMMANDE, marketing=False, quand="Quand le transporteur signale la livraison (ou 3 jours après l'expédition si le transporteur ne le signale pas)" + INFO_BOUTIQUE,
+     objet="Votre commande n° [NUMERO_COMMANDE] est arrivée", pre="Tout est en ordre ? Un souci avec votre colis : nous sommes là pour vous aider.", sur="Votre commande", titre="Votre colis | est arrivé.",
+     corps=[suivi(3),
+            para("Bonjour [PRENOM_CLIENT], votre commande <b>n° [NUMERO_COMMANDE]</b> a été livrée. Nous espérons qu'elle vous plaira !"),
+            encadre("<b>Vous avez choisi un livre ?</b> Beaucoup de nos auteurs sont aussi en vidéo sur Europe Échecs, chaque semaine. Toutes les vidéos sont incluses dans le Pack Intégral."),
+            bouton("Voir les vidéos", L("VIDEOS")),
+            para(petit('Un article manquant ou abîmé ? Écrivez-nous depuis <a href="[LIEN_AIDE]" style="color:#6b6b66">la page d\'aide</a> en indiquant votre numéro de commande.'))],
+     sign="Bonne lecture et bonnes parties,<br><b>La boutique Europe Échecs</b>")
+mail(id="54-avis-produit", cat=P_COMMANDE, quand="10 jours après la livraison, une seule fois par commande, s'il accepte les e-mails d'information" + INFO_BOUTIQUE,
+     objet="[NOM_ARTICLE_1] : qu'en pensez-vous ?", pre="Votre avis aide les autres joueurs à choisir. Une note suffit, un commentaire si vous voulez.", sur="Votre avis", titre="Votre avis | compte !",
+     corps=[para("Bonjour [PRENOM_CLIENT], vous avez reçu votre commande il y a une dizaine de jours. Que pensez-vous de cet article ?"),
+            article_commande(1),
+            '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 22px"><tr>' + "".join(
+                f'<td style="padding:0 3px"><a href="[LIEN_AVIS_PRODUIT]?note={n}" style="display:block;width:46px;height:46px;border-radius:10px;background:{C["fond"]};font:30px/46px {SANS};color:{C["jaune"]};text-align:center;text-decoration:none">&#9733;</a></td>' for n in range(1, 6)) + '</tr></table>',
+            para(petit("Touchez une étoile pour donner votre note : une page s'ouvre pour ajouter un commentaire si vous le souhaitez."))],
+     sign="Merci pour votre aide,<br><b>La boutique Europe Échecs</b>")
+mail(id="55-remboursement", cat=P_COMMANDE, marketing=False, quand="Quand un remboursement (total ou partiel) ou une annulation est validé" + INFO_BOUTIQUE,
+     objet="Remboursement de votre commande n° [NUMERO_COMMANDE]", pre="[MONTANT_REMBOURSE] remboursés sur votre [MODE_PAIEMENT]. Ils apparaîtront sous quelques jours.", sur="Votre commande", titre="Votre remboursement | est en cours.",
+     corps=[para("Bonjour [PRENOM_CLIENT], nous avons procédé au remboursement de votre commande <b>n° [NUMERO_COMMANDE]</b>."),
+            recu([("Article(s)", "[ARTICLES_REMBOURSES]"), ("Moyen de paiement", "[MODE_PAIEMENT]")], "Remboursé", "[MONTANT_REMBOURSE]"),
+            para("Le délai d'apparition sur votre compte dépend de votre banque, en général quelques jours ouvrés."),
+            bouton("Voir ma commande", "[LIEN_COMMANDE]")],
+     sign="La boutique Europe Échecs")
+mail(id="56-retour-en-stock", cat=P_COMMANDE, quand="Quand un produit épuisé revient en stock, à ceux qui ont demandé à être prévenus (une seule fois)" + INFO_BOUTIQUE,
+     objet="[NOM_ARTICLE_1] est de retour en stock", pre="Vous avez demandé à être prévenu : il est de nouveau disponible sur la boutique.", sur="La boutique", titre="De retour | en stock !",
+     corps=[para("Bonjour, vous nous aviez demandé de vous prévenir : <b>[NOM_ARTICLE_1]</b> est de nouveau disponible."),
+            '<a href="[LIEN_PRODUIT_1]"><img src="[URL_IMAGE_PRODUIT_STOCK]" width="260" alt="[NOM_ARTICLE_1]" style="display:block;width:260px;max-width:100%;height:auto;border:0;margin:0 auto 22px"></a>',
+            bouton("Voir le produit", "[LIEN_PRODUIT_1]")],
+     sign="La boutique Europe Échecs")
+mail(id="57-panier-boutique", cat=P_COMMANDE, quand="2 heures après un panier laissé sur la boutique par un client connecté, une seule fois par panier" + INFO_BOUTIQUE,
+     objet="Vous avez oublié quelque chose", pre="[NOM_ARTICLE_1] vous attend dans votre panier.", sur="Votre panier", titre="Votre panier | vous attend.",
+     corps=[para("Bonjour [PRENOM_CLIENT], vous avez laissé des articles dans votre panier. Nous les gardons pour vous :"),
+            article_commande(1),
+            bouton("Retrouver mon panier", "[LIEN_PANIER_BOUTIQUE]"),
+            para(petit('Une question sur un produit ? <a href="[LIEN_AIDE]" style="color:#6b6b66">La page d\'aide</a> est là pour vous.'))],
+     sign="La boutique Europe Échecs")
+
+EXEMPLES.update({"PRENOM_CLIENT": "Léa", "URL_IMAGE_ARTICLE_COMMANDE_1": "img/cadeau-1.jpg", "NOM_ARTICLE_1": "Pack Steinitz (2 tomes)", "QUANTITE_ARTICLE_1": "1",
+    "URL_IMAGE_ARTICLE_COMMANDE_2": "img/cadeau-3.jpg", "NOM_ARTICLE_2": "Sweat-shirt Europe Échecs", "QUANTITE_ARTICLE_2": "1",
+    "URL_IMAGE_PRODUIT_STOCK": "img/cadeau-1.jpg", "TRANSPORTEUR": "Colissimo", "MODE_LIVRAISON": "Colissimo", "MODE_PAIEMENT": "carte bancaire",
+    "ADRESSE_LIVRAISON": "12 rue des Échecs, 75011 Paris", "ARTICLES_REMBOURSES": "Sweat-shirt Europe Échecs"})
+# Gabarits d'affichage (largeur réelle, aucune valeur inventée) : prix, dates et numéro de suivi restent à remplir
+EXEMPLES.update({k: "XX,XX €" for k in ("PRIX_ARTICLE_1", "PRIX_ARTICLE_2", "SOUS_TOTAL", "FRAIS_PORT", "TOTAL", "MONTANT_REMBOURSE")})
+EXEMPLES.update({"DATE_LIVRAISON_ESTIMEE": "JJ/MM/AAAA", "NUMERO_SUIVI": "XXXXXXXXXXXXX"})
+
 # Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
 from PIL import Image as _I
 for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant"), (4, "p-minute-finale")):
@@ -543,9 +625,9 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
-LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo"}
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo", P_COMMANDE: "logo-jaune"}
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]
 # Identité visuelle : damier sous l'en-tête, pièce en filigrane par rubrique, pied marine
 DAMIER = PIED_NUIT = True
 PIECE_RUBRIQUE = {"Compte": "K", "Découverte": "N", "Abonnement": "Q", "Nouvelles formules": "Q", "Revue": "R", "Cadeaux": "B",
-                  P_PAIEMENT: "R", P_FIDELITE: "K", P_GRATUITS: "N", P_NEWS: "B", P_BOUTIQUE: "P", P_TEMPS: "N", P_RDV: "R", P_CHIFFRES: "K", P_FIDELE: "Q"}
+                  P_PAIEMENT: "R", P_FIDELITE: "K", P_GRATUITS: "N", P_NEWS: "B", P_BOUTIQUE: "P", P_TEMPS: "N", P_RDV: "R", P_CHIFFRES: "K", P_FIDELE: "Q", P_COMMANDE: "P"}

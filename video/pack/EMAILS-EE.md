@@ -252,6 +252,18 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `48-anniversaire-abonnement.html` | Au 1er anniversaire d'un abonnement (puis chaque année), 30 jours avant l'échéance pour les formules de 1 an · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Un an avec vous, [PSEUDO] : merci ! | [NB_PARTIES_AN] parties, [NB_VIDEOS_AN] vidéos et [NB_EXERCICES_AN] exercices en un an. | Information (désinscription possible) |
 | `50-revue-papier-vers-web.html` | Abonnés à la revue papier sans abonnement web, 2 mois après le début de l'abonnement, une seule fois · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Votre revue, aussi en ligne et en vidéo | Les parties de la revue à rejouer coup par coup, plus de 4 vidéos par semaine et la zone de jeu premium. | Information (désinscription possible) |
 
+### Boutique · suivi de commande
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `51-commande-confirmee.html` | Dès la commande payée sur la boutique · proposition, à valider · envoyé par la boutique | Commande n° [NUMERO_COMMANDE] confirmée, merci ! | Nous préparons votre colis. Livraison prévue autour du [DATE_LIVRAISON_ESTIMEE]. | Compte (toujours envoyé) |
+| `52-commande-expediee.html` | Quand le colis est remis au transporteur, avec le numéro de suivi · proposition, à valider · envoyé par la boutique | Votre commande n° [NUMERO_COMMANDE] est en route | Colis remis à [TRANSPORTEUR] : suivez-le avec le numéro [NUMERO_SUIVI]. | Compte (toujours envoyé) |
+| `53-commande-livree.html` | Quand le transporteur signale la livraison (ou 3 jours après l'expédition si le transporteur ne le signale pas) · proposition, à valider · envoyé par la boutique | Votre commande n° [NUMERO_COMMANDE] est arrivée | Tout est en ordre ? Un souci avec votre colis : nous sommes là pour vous aider. | Compte (toujours envoyé) |
+| `54-avis-produit.html` | 10 jours après la livraison, une seule fois par commande, s'il accepte les e-mails d'information · proposition, à valider · envoyé par la boutique | [NOM_ARTICLE_1] : qu’en pensez-vous ? | Votre avis aide les autres joueurs à choisir. Une note suffit, un commentaire si vous voulez. | Information (désinscription possible) |
+| `55-remboursement.html` | Quand un remboursement (total ou partiel) ou une annulation est validé · proposition, à valider · envoyé par la boutique | Remboursement de votre commande n° [NUMERO_COMMANDE] | [MONTANT_REMBOURSE] remboursés sur votre [MODE_PAIEMENT]. Ils apparaîtront sous quelques jours. | Compte (toujours envoyé) |
+| `56-retour-en-stock.html` | Quand un produit épuisé revient en stock, à ceux qui ont demandé à être prévenus (une seule fois) · proposition, à valider · envoyé par la boutique | [NOM_ARTICLE_1] est de retour en stock | Vous avez demandé à être prévenu : il est de nouveau disponible sur la boutique. | Information (désinscription possible) |
+| `57-panier-boutique.html` | 2 heures après un panier laissé sur la boutique par un client connecté, une seule fois par panier · proposition, à valider · envoyé par la boutique | Vous avez oublié quelque chose | [NOM_ARTICLE_1] vous attend dans votre panier. | Information (désinscription possible) |
+
 ## Variables
 
 La liste complète est générée dans `build/_emails-ee_variables.txt`.
