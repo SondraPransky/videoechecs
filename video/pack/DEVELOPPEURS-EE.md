@@ -83,14 +83,13 @@ Ajouter `utm_source=email&utm_medium=email&utm_campaign=ee-<nom du fichier>`. Ce
 Chaque semaine, passer la miniature de chaque vidéo (1280 × 720 ou 1000 × 563) dans le script, puis l'héberger :
 `python3 miniature-mail.py video-1.jpg video-1-mail.jpg` (Python 3 et Pillow). L'image est ramenée à 1072 × 603 px, avec le bouton lecture au centre.
 
-## 4 bis. E-mails envoyés depuis Mailjet (33 à 43)
+## 4 bis. E-mails envoyés depuis Mailjet (33, 34, 38 à 43)
 
-Newsletter (33), promo boutique (34), Black Friday (35 à 37), partie du jour d'un grand événement (38), Noël (39 à 41),
+Newsletter (33), promo boutique (34), partie du jour d'un grand événement (38), Noël (39 à 41),
 nouveau numéro de la revue (42) et problème de la semaine (43) ne partent pas du site mais de Mailjet. Fichiers prêts à coller : `emails-ee/mailjet/`.
 Liens utiles relevés sur le site le 24 novembre 2026 : guide cadeaux (`https://www.europe-echecs.com/art/quel-cadeau-offrir-a-un-joueur-d-echecs-le-guide-2026-8904.html`),
 packs cadeaux (`https://boutique.echecs.com/15-packs-cadeaux`), Pack Steinitz (`https://boutique.echecs.com/histoire/1144-pack-steinitz.html`),
 revue papier + Pack Jeu+ (`https://boutique.echecs.com/pack-jeu/1341-revue-papier-pack-jeu-plus-france-1-an.html`), sweat-shirts (`https://boutique.echecs.com/25-sweats`).
-Black Friday (35 à 37) : exclure de 36 et 37 ceux qui ont déjà acheté pendant l'opération.
 
 1. Mailjet → Modèles → Créer un modèle → **Coder votre propre modèle (HTML)**, puis coller le fichier.
 2. Remplacer `[URL_IMAGES]` (logo) par l'adresse où est hébergé `emails-ee/img/`, comme pour les autres e-mails.

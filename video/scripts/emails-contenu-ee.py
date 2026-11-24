@@ -367,12 +367,6 @@ def image(src, alt="", lien=None):
     i = f'<img src="{src}" width="536" alt="{alt}" style="display:block;width:100%;height:auto;border:0;border-radius:12px">'
     return f'<div style="margin:0 0 22px">{f"<a href=\"{lien}\">{i}</a>" if lien else i}</div>'
 
-def rayon(n, rubrique):   # une offre du Black Friday : rayon, offre, lien
-    return (f'<!-- OFFRE {n} -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border:1px solid #e4e1d8;border-radius:12px">'
-            f'<tr><td style="padding:14px 18px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]}">{rubrique}</div>'
-            f'<div style="margin-top:4px;font:{GRAS} 18px/1.3 {SERIF};color:{C["texte"]}">[OFFRE_{n}]</div>'
-            f'<div style="margin-top:8px"><a href="[LIEN_OFFRE_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">J\'en profite&nbsp;&rarr;</a></div></td></tr></table>')
-
 def idee(n):   # une idée cadeau : visuel à gauche, profil, produit, prix et lien à droite
     return (f'<!-- IDÉE CADEAU {n} -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 14px;border:1px solid #e4e1d8;border-radius:12px;background:#ffffff"><tr>'
             f'<td width="128" valign="middle" style="padding:12px 0 12px 12px"><a href="[LIEN_PRODUIT_{n}]"><img src="[URL_IMAGE_PRODUIT_{n}]" width="116" alt="" style="display:block;width:116px;height:auto;border:0"></a></td>'
@@ -383,25 +377,6 @@ def idee(n):   # une idée cadeau : visuel à gauche, profil, produit, prix et l
 
 CARTE_CADEAU = encadre("<b>La carte cadeau Europe Échecs</b><br>Pack Jeu+ ou Pack Intégral à offrir : la carte cadeau au format PDF est prête à imprimer ou à envoyer dès la commande. "
                        "La personne qui la reçoit active son code sur europe-echecs.com/activer-mon-code-cadeau.")
-
-# Black Friday : 3 e-mails (lancement, milieu, dernier jour) ; on sort de la séquence dès qu'on a acheté
-mail(id="35-black-friday-lancement", cat=P_TEMPS, mailjet=True, quand="Black Friday, le premier jour (vendredi 27 novembre 2026), le matin, à tous les comptes qui acceptent les e-mails d'information" + INFO_MJ,
-     objet="Le Black Friday commence chez Europe Échecs", pre="Livres, échiquiers, abonnements et vêtements : nos offres jusqu'au [DATE_FIN_OFFRE].", sur="Black Friday · jusqu'au [DATE_FIN_OFFRE]", titre="Le Black Friday | commence.",
-     corps=[image("[URL_IMAGE_BLACK_FRIDAY]", "Black Friday chez Europe Échecs", "[LIEN_BLACK_FRIDAY]"),
-            para("Bonjour, nos offres du Black Friday sont en ligne jusqu'au <b>[DATE_FIN_OFFRE]</b>. Un rayon par envie :"),
-            rayon(1, "Abonnements"), rayon(2, "Livres"), rayon(3, "Échiquiers et matériel"), rayon(4, "Vêtements"),
-            bouton("Voir toutes les offres", "[LIEN_BLACK_FRIDAY]"),
-            para(petit("Conditions de chaque offre sur la boutique et sur la page des abonnements."))])
-mail(id="36-black-friday-rappel", cat=P_TEMPS, mailjet=True, quand="Black Friday, 2 jours après le lancement, sauf à ceux qui ont déjà acheté" + INFO_MJ,
-     objet="Black Friday : les offres les plus demandées", pre="[OFFRE_1], [OFFRE_2] et les autres : il reste [NB_JOURS_RESTANTS] jours.", sur="Black Friday · encore [NB_JOURS_RESTANTS] jours", titre="Les plus demandées | depuis vendredi.",
-     corps=[para("Bonjour, voici les offres qui ont le plus de succès depuis vendredi. Elles restent valables jusqu'au <b>[DATE_FIN_OFFRE]</b>."),
-            rayon(1, "N° 1 des ventes"), rayon(2, "N° 2 des ventes"), rayon(3, "N° 3 des ventes"),
-            bouton("Voir toutes les offres", "[LIEN_BLACK_FRIDAY]")])
-mail(id="37-black-friday-dernier-jour", cat=P_TEMPS, mailjet=True, quand="Black Friday, le dernier jour, le matin, sauf à ceux qui ont déjà acheté" + INFO_MJ,
-     objet="Dernier jour du Black Friday", pre="Nos offres s'arrêtent ce soir à [HEURE_FIN] : livres, échiquiers, abonnements et vêtements.", sur="Black Friday · dernier jour", titre="Dernier jour, | jusqu'à [HEURE_FIN].",
-     corps=[para("Bonjour, c'est le dernier jour : nos offres du Black Friday s'arrêtent ce soir à <b>[HEURE_FIN]</b>. Un abonnement, un livre ou un échiquier à offrir pour Noël ? C'est le moment."),
-            rayon(1, "Abonnements"), rayon(2, "Livres"), rayon(3, "Échiquiers et matériel"), rayon(4, "Vêtements"),
-            bouton("J'en profite avant ce soir", "[LIEN_BLACK_FRIDAY]")])
 
 # Grand événement en direct
 mail(id="38-evenement-partie-du-jour", cat=P_TEMPS, mailjet=True, quand="Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie »)" + INFO_MJ,
@@ -457,7 +432,6 @@ for _src, _dst in (("assets/captures/ee/revue-779-couv.png", "revue-779-couv.png
                    ("assets/captures/ee/boutique/cadeau-pack-steinitz.jpg", "cadeau-1.jpg"), ("assets/captures/ee/boutique/cadeau-revue-pack-jeu.jpg", "cadeau-2.jpg"), ("assets/captures/ee/boutique/cadeau-sweat-shirts.jpg", "cadeau-3.jpg")):
     _im = _I.open(ICI / _src).convert("RGB"); _im.thumbnail((1100, 1100)); _im.save(APER / f"img/{_dst.replace('.png', '.jpg')}", quality=86)
 EXEMPLES.update({
-    "URL_IMAGE_BLACK_FRIDAY": "img/article-black-friday.jpg", "DATE_FIN_OFFRE": "[DATE_FIN_OFFRE]", "HEURE_FIN": "[HEURE_FIN]", "NB_JOURS_RESTANTS": "[NB_JOURS_RESTANTS]",
     "EVENEMENT": "Championnat du monde", "URL_IMAGE_PARTIE": "img/article-gukesh-sindarov.jpg",
     "URL_COUVERTURE": "img/revue-779-couv.jpg", "NUMERO_REVUE": "779",
     "ACCROCHE_NUMERO": "Étienne Bacrot et Sophie Milliet, seize titres de champion de France à eux deux, commentent leurs parties.",
@@ -467,7 +441,7 @@ EXEMPLES.update({
     "URL_IMAGE_PRODUIT_2": "img/cadeau-2.jpg", "PROFIL_2": "Pour un joueur de club", "PRODUIT_2": "La revue papier et le Pack Jeu+, pour 1 an",
     "URL_IMAGE_PRODUIT_3": "img/cadeau-3.jpg", "PROFIL_3": "Pour tous les fans", "PRODUIT_3": "Les sweat-shirts Europe Échecs",
     "URL_IMAGE_POSITION": "img/probleme-exemple.jpg", "NIVEAU_PROBLEME": "facile", "CONSIGNE": "Les Blancs jouent et font mat en un coup.", "CONSIGNE_COURTE": "les Blancs matent en un coup"})
-for _k in ("NUMERO_PARTIE", "RESULTAT_PARTIE", "SCORE", "PROCHAINE_PARTIE", "RESUME_PARTIE", "DATE_LIMITE_LIVRAISON", "CONDITIONS_LIVRAISON") + tuple(f"OFFRE_{i}" for i in (1, 2, 3, 4)) + tuple(f"PRIX_PRODUIT_{i}" for i in (1, 2, 3)):
+for _k in ("NUMERO_PARTIE", "RESULTAT_PARTIE", "SCORE", "PROCHAINE_PARTIE", "RESUME_PARTIE", "DATE_LIMITE_LIVRAISON", "CONDITIONS_LIVRAISON") + tuple(f"PRIX_PRODUIT_{i}" for i in (1, 2, 3)):
     EXEMPLES[_k] = "[" + _k + "]"   # aucun résultat, prix ni offre inventés
 
 # ---------- 10. Propositions : vos chiffres, satisfaction et fidélité (envoyés par le site) ----------
