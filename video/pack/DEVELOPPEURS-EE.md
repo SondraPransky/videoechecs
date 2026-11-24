@@ -102,18 +102,32 @@ revue papier + Pack Jeu+ (`https://boutique.echecs.com/pack-jeu/1341-revue-papie
    La désinscription utilise la balise Mailjet `[[UNSUB_LINK_FR]]` : vérifier sur un envoi de test qu'elle est bien remplacée.
 6. Objet et pré-en-tête : à saisir dans Mailjet à chaque envoi (exemples dans `EMAILS-EE.md`).
 
-## 4 ter. E-mails 44 à 50 (envoyés par le site) : données nécessaires
+## 4 ter. E-mails 44 à 50 (envoyés par le site) : données à créer
 
 Bilan du mois (44), cap franchi (45), panier abandonné (46), satisfaction à 30 jours (47), anniversaire (48), votre année (49), revue papier vers le web (50).
-Ils demandent des données du site : nombre de parties, variation et record Elo, exercices réussis, vidéos vues, panier en cours, abonnés à la revue papier sans abonnement web.
-À vérifier avec l'équipe technique avant de les écrire dans le site. 47 : chaque note (0 à 10) est un lien `[LIEN_AVIS]?note=N` qui enregistre la note puis ouvre une page de commentaire.
+Les données ci-dessous sont à créer côté site si elles n'existent pas encore (par compte, sauf mention contraire).
+
+| Donnée | Variable | E-mails |
+|---|---|---|
+| Parties jouées sur le mois / sur l'année | `[NB_PARTIES]` / `[NB_PARTIES_AN]` | 44 / 48, 49 |
+| Variation Elo sur le mois, Elo actuel, meilleur Elo de l'année | `[VARIATION_ELO]`, `[ELO_ACTUEL]`, `[ELO_MAX]` | 44, 45, 49 |
+| Exercices tactiques réussis sur le mois / sur l'année | `[NB_EXERCICES]` / `[NB_EXERCICES_AN]` | 44 / 48, 49 |
+| Vidéos vues sur l'année | `[NB_VIDEOS_AN]` | 48 |
+| Plus belle victoire (victoire contre l'adversaire le mieux classé) | `[MEILLEURE_VICTOIRE]` | 44, 49 |
+| Cadence la plus jouée, mois le plus actif | `[CADENCE_PREFEREE]`, `[MOIS_ACTIF]` | 49 |
+| Caps : 100ᵉ partie (puis 500, 1000), nouveau record Elo, record du mode challenge | `[CAP_FRANCHI]`, `[DETAIL_CAP]`, `[RECORD]`, `[DATE_CAP]` | 45 (un e-mail par semaine au plus) |
+| Panier en cours : formule choisie, prix, date de sortie de la page de paiement, lien pour reprendre | `[SERVICE]`, `[PRIX]`, `[LIEN_PANIER]` | 46 |
+| Note de satisfaction (0 à 10) et commentaire : chaque note est un lien `[LIEN_AVIS]?note=N` qui l'enregistre puis ouvre une page de commentaire | `[LIEN_AVIS]` | 47 |
+| Date de début d'abonnement (anniversaire) | `[DATE_FIN]`, `[SERVICE]` | 48 |
+| Abonnés à la revue papier sans abonnement web, date de début de l'abonnement revue | (segment) | 50 |
+| Page à partager « Mon année » | `[LIEN_PARTAGE_ANNEE]` | 49 |
 
 ## 5. Points à trancher avant la mise en service
 
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?
 - **01** : version avec activation. Sans activation, retirer le bouton et la ligne du code ; connexion par un fournisseur externe : ajouter « Vous avez décidé de vous connecter avec votre compte [FOURNISSEUR]. Vous pouvez aussi vous connecter avec votre pseudo et un mot de passe. »
 - **Tarif pack de la revue** (+ 60 € / + 50 €, 14, 15, 30) : à confirmer pour les formules au mois.
-- **22** : à décider. **28** : jour d'envoi à fixer. **02** : comment le membre d'une offre multicompte choisit son mot de passe.
+- **22** : à décider. **44 à 50** : données à créer (section 4 ter). **28** : jour d'envoi à fixer. **02** : comment le membre d'une offre multicompte choisit son mot de passe.
 - **Tarifs** : écrits en clair dans les e-mails (relevés le 23 novembre 2026, tableau dans `EMAILS-EE.md`). Si un prix change, prévenir pour mettre les e-mails à jour.
 
 ## 6. Liste de contrôle avant la mise en service

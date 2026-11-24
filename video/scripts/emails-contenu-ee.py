@@ -445,9 +445,9 @@ for _k in ("NUMERO_PARTIE", "RESULTAT_PARTIE", "SCORE", "PROCHAINE_PARTIE", "RES
     EXEMPLES[_k] = "[" + _k + "]"   # aucun résultat, prix ni offre inventés
 
 # ---------- 10. Propositions : vos chiffres, satisfaction et fidélité (envoyés par le site) ----------
-# Ils demandent des données du site (parties, Elo, exercices, panier) : à confirmer avec l'équipe technique.
+# Ils demandent des données du site (parties, Elo, exercices, panier) : à créer si elles n'existent pas encore (liste dans DEVELOPPEURS-EE.md).
 P_CHIFFRES, P_FIDELE = "Propositions · vos chiffres", "Propositions · satisfaction et fidélité"
-INFO_DONNEES = " · proposition, à valider · données du site à confirmer"
+INFO_DONNEES = " · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md)"
 
 mail(id="44-votre-mois", cat=P_CHIFFRES, quand="Le 1er de chaque mois, aux comptes qui ont joué au moins une partie dans le mois, s'ils acceptent les e-mails d'information" + INFO_DONNEES,
      objet="Votre mois de [MOIS_BILAN] sur Europe Échecs", pre="[NB_PARTIES] parties, [VARIATION_ELO] points Elo et [NB_EXERCICES] exercices réussis.", sur="Votre bilan · [MOIS_BILAN]", titre="Votre mois | en chiffres.",
@@ -462,7 +462,7 @@ mail(id="45-cap-franchi", cat=P_CHIFFRES, quand="Quand un joueur franchit un cap
             infos([("Votre record", "[RECORD]"), ("Le jour", "[DATE_CAP]")]),
             bouton("Viser le cap suivant", L("ZONE_DE_JEU"))])
 
-mail(id="46-panier-abandonne", cat=P_FIDELE, quand="1 heure après avoir quitté la page de paiement d'un abonnement sans payer, une seule fois par semaine (à vérifier : faisable techniquement)" + INFO_DONNEES,
+mail(id="46-panier-abandonne", cat=P_FIDELE, quand="1 heure après avoir quitté la page de paiement d'un abonnement sans payer, une seule fois par semaine" + INFO_DONNEES,
      objet="Votre [SERVICE] vous attend", pre="Il ne reste qu'une étape pour retrouver vos vidéos, leçons et entraînements.", sur="Votre commande", titre="Il ne reste | qu'une étape.",
      corps=[para("Bonjour [PSEUDO], vous avez commencé à souscrire au <b>[SERVICE]</b> sans aller jusqu'au paiement. Votre sélection est gardée :"),
             infos([("Formule", "[SERVICE]"), ("Prix", "[PRIX]")]),
