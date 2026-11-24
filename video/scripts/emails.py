@@ -311,6 +311,14 @@ for e in E:
     # version pour la page de validation des e-mails (polices en ligne, exemples, ligne de boîte de réception)
     hb = h.replace("{IMG}", "img").replace("{FONTS}", FONTS_WEB).replace('<body style="margin:0;padding:0;background:#f1f0ea">', '<body style="margin:0;padding:0;background:#f1f0ea">' + boite, 1)
     (ART / f"{e['id']}.html").write_text(teinte(exemple(hb, e.get("exemples"))))
+    if e.get("mailjet"):   # version à coller dans Mailjet (« Coder votre propre modèle ») : textes d'exemple déjà remplis, à remplacer ;
+        # images et liens restent à remplir ([URL_…], [LIEN_…]) ; désinscription par la balise Mailjet
+        ex = {k: v for k, v in {**EXEMPLES, **e.get("exemples", {})}.items() if not k.startswith(("URL_IMAGE", "LIEN_"))}
+        hm = re.sub(r"\[([A-Z_0-9]+)\]", lambda m: ex.get(m.group(1), m.group(0)), h)
+        hm = re.sub(r'<a href="\[LIEN_PREFERENCES\]"[^>]*>[^<]*</a> · ', "", hm).replace("[LIEN_DESINSCRIPTION]", "[[UNSUB_LINK_FR]]")
+        hm = hm[:hm.index("<body")] + typo(hm[hm.index("<body"):])
+        (OUT / "mailjet").mkdir(exist_ok=True)
+        (OUT / "mailjet" / f"{e['id']}.html").write_text(teinte(hm).replace("{IMG}", "[URL_IMAGES]").replace("{FONTS}", FONTS_WEB))
 print(len(E), "e-mails ·", len(VARS), "variables")
 
 # Catalogue pour pack/EMAILS.md (section générée)

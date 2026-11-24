@@ -83,6 +83,21 @@ Ajouter `utm_source=email&utm_medium=email&utm_campaign=ee-<nom du fichier>`. Ce
 Chaque semaine, passer la miniature de chaque vidéo (1280 × 720 ou 1000 × 563) dans le script, puis l'héberger :
 `python3 miniature-mail.py video-1.jpg video-1-mail.jpg` (Python 3 et Pillow). L'image est ramenée à 1072 × 603 px, avec le bouton lecture au centre.
 
+## 4 bis. Newsletter (33) et promo boutique (34) : envoyées depuis Mailjet
+
+Ces deux e-mails ne partent pas du site mais de Mailjet, comme aujourd'hui. Fichiers prêts à coller : `emails-ee/mailjet/`.
+
+1. Mailjet → Modèles → Créer un modèle → **Coder votre propre modèle (HTML)**, puis coller le fichier.
+2. Remplacer `[URL_IMAGES]` (logo) par l'adresse où est hébergé `emails-ee/img/`, comme pour les autres e-mails.
+3. Chaque envoi : remplacer les textes d'exemple (newsletter du 23 novembre, promo sweat-shirts du 4 novembre), puis
+   `[URL_IMAGE_ARTICLE_n]` / `[URL_IMAGE_ENCART]` / `[URL_IMAGE_PRODUIT]` par l'adresse de l'image chargée dans Mailjet (550 px de large minimum, idéalement 1100 px),
+   et `[LIEN_ARTICLE_n]` / `[LIEN_ENCART]` / `[LIEN_PRODUIT]` par les liens.
+4. Newsletter : un article à la une, puis autant d'articles que nécessaire. Chaque bloc est repéré par un commentaire
+   `<!-- ARTICLE n -->` : le dupliquer ou le supprimer. Un seul encart boutique au plus (`<!-- ENCART BOUTIQUE -->`), facultatif.
+5. Pied : `[LIEN_ZONE_DE_JEU]`, `[LIEN_VIDEOS]`, `[LIEN_REVUE]`, `[LIEN_AIDE]` à remplacer une fois pour toutes par les adresses du site.
+   La désinscription utilise la balise Mailjet `[[UNSUB_LINK_FR]]` : vérifier sur un envoi de test qu'elle est bien remplacée.
+6. Objet et pré-en-tête : à saisir dans Mailjet à chaque envoi (exemples dans `EMAILS-EE.md`).
+
 ## 5. Points à trancher avant la mise en service
 
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?

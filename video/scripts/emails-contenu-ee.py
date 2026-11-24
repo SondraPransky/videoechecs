@@ -304,7 +304,7 @@ mail(id="28-videos-de-la-semaine", cat=P_GRATUITS, quand="Chaque semaine, après
 P_NEWS, P_BOUTIQUE = "Newsletter", "Boutique"
 
 def article(n, une=False):   # un article : image cliquable, titre, chapô, lien ; l'article à la une est plus grand
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 {24 if une else 18}px;border:1px solid #e4e1d8;border-radius:12px;overflow:hidden">'
+    return (f'<!-- ARTICLE {n} : bloc à dupliquer ou à supprimer -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 {24 if une else 18}px;border:1px solid #e4e1d8;border-radius:12px;overflow:hidden">'
             f'<tr><td><a href="[LIEN_ARTICLE_{n}]"><img src="[URL_IMAGE_ARTICLE_{n}]" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
             f'<tr><td style="padding:{"18px 20px 22px" if une else "14px 18px 18px"}">' + (f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]};margin:0 0 6px">À la une</div>' if une else "")
             + f'<div style="font:{GRAS} {24 if une else 19}px/1.25 {SERIF};color:{C["texte"]}"><a href="[LIEN_ARTICLE_{n}]" style="color:{C["texte"]};text-decoration:none">[TITRE_ARTICLE_{n}]</a></div>'
@@ -312,20 +312,20 @@ def article(n, une=False):   # un article : image cliquable, titre, chapô, lien
             f'<div style="margin-top:12px"><a href="[LIEN_ARTICLE_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">Lire l\'article&nbsp;&rarr;</a></div></td></tr></table>')
 
 def encart_boutique():   # l'encart commercial glissé dans la newsletter : fond jaune, image, texte court, bouton
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;background:{C["jaune"]};border-radius:12px;overflow:hidden">'
+    return ('<!-- ENCART BOUTIQUE : facultatif, un seul par newsletter -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;background:{C["jaune"]};border-radius:12px;overflow:hidden">'
             f'<tr><td><a href="[LIEN_ENCART]"><img src="[URL_IMAGE_ENCART]" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
             f'<tr><td style="padding:16px 20px 20px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["nuit"]}">La boutique</div>'
             f'<div style="margin-top:6px;font:{GRAS} 19px/1.25 {SERIF};color:{C["nuit"]}">[TITRE_ENCART]</div>'
             f'<div style="margin-top:8px;font:15px/1.55 {SANS};color:{C["nuit"]}">[TEXTE_ENCART]</div>'
             f'<div style="margin-top:14px"><a href="[LIEN_ENCART]" style="display:inline-block;background:{C["nuit"]};color:#ffffff;font:bold 15px {SANS};text-decoration:none;padding:11px 20px;border-radius:999px">[BOUTON_ENCART]&nbsp;&rarr;</a></div></td></tr></table>')
 
-mail(id="33-newsletter", cat=P_NEWS, quand="Chaque semaine (aujourd'hui le lundi en fin d'après-midi), à tous les comptes qui acceptent les e-mails d'information. Un article à la une, puis autant d'articles que nécessaire, et au plus un encart boutique",
+mail(id="33-newsletter", cat=P_NEWS, mailjet=True, quand="Chaque semaine (aujourd'hui le lundi en fin d'après-midi), à tous les comptes qui acceptent les e-mails d'information. Un article à la une, puis autant d'articles que nécessaire, et au plus un encart boutique",
      objet="[OBJET_NEWSLETTER]", pre="[PRE_EN_TETE_NEWSLETTER]", sur="La newsletter · [DATE_ENVOI]", titre="Les actualités | à ne pas rater.",
      corps=[article(1, une=True), article(2), encart_boutique(), article(3), article(4), article(5),
             bouton("Toute l'actualité", "https://www.europe-echecs.com")],
      sign="Bonne lecture,<br><b>La rédaction d'Europe Échecs</b>")
 
-mail(id="34-promo-boutique", cat=P_BOUTIQUE, quand="Opération commerciale de la boutique (un produit ou une gamme), à tous les comptes qui acceptent les e-mails d'information",
+mail(id="34-promo-boutique", cat=P_BOUTIQUE, mailjet=True, quand="Opération commerciale de la boutique (un produit ou une gamme), à tous les comptes qui acceptent les e-mails d'information",
      objet="[OBJET_PROMO]", pre="[PRE_EN_TETE_PROMO]", sur="La boutique Europe Échecs", titre="[TITRE_PROMO_1] | [TITRE_PROMO_2]",
      corps=['<a href="[LIEN_PRODUIT]"><img src="[URL_IMAGE_PRODUIT]" width="536" alt="[ALT_IMAGE_PRODUIT]" style="display:block;width:100%;height:auto;border:0;border-radius:12px;margin:0 0 22px"></a>',
             para("[TEXTE_PROMO]"),
