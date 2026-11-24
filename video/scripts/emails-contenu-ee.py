@@ -375,14 +375,6 @@ def idee(n):   # une idée cadeau : visuel à gauche, profil, produit, prix et l
             f'<div style="margin-top:4px;font:15px/1.5 {SANS};color:{C["gris"]}">[PRIX_PRODUIT_{n}]</div>'
             f'<div style="margin-top:8px"><a href="[LIEN_PRODUIT_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">Voir&nbsp;&rarr;</a></div></td></tr></table>')
 
-def tableau_score():   # tableau d'affichage d'un match : deux joueurs, deux scores, la partie au centre
-    joueur = lambda n: (f'<td width="40%" align="center" valign="middle" style="padding:18px 6px">'
-                        f'<div style="font:{GRAS} 18px/1.2 {SERIF};color:#ffffff">[JOUEUR_{n}]</div>'
-                        f'<div style="margin-top:8px;font:{GRAS} 40px/1 {SERIF};color:{C["jaune"]}">[POINTS_{n}]</div></td>')
-    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;background:{C["nuit"]};border-radius:14px"><tr>'
-            + joueur(1) + f'<td width="20%" align="center" valign="middle" style="font-family:{SANS};font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9fb3c8;line-height:1.5">Partie<br><span style="font:{GRAS} 22px/1.2 {SERIF};letter-spacing:0;color:#ffffff">[NUMERO_PARTIE]</span></td>'
-            + joueur(2) + '</tr></table>')
-
 def visuel_carte_cadeau(pack="Pack Intégral"):   # la carte cadeau dessinée : marine, logo jaune, code en pointillés
     return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:6px 0 22px"><tr><td align="center">'
             f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="340" style="width:100%;max-width:340px;background:{C["nuit"]};border-radius:16px;box-shadow:0 10px 26px rgba(2,38,61,.28)"><tr>'
@@ -409,17 +401,6 @@ def bandeau_annee():   # ouverture du bilan annuel : l'année en très grand sur
 
 CARTE_CADEAU = encadre("<b>La carte cadeau Europe Échecs</b><br>Pack Jeu+ ou Pack Intégral à offrir : la carte cadeau au format PDF est prête à imprimer ou à envoyer dès la commande. "
                        "La personne qui la reçoit active son code sur europe-echecs.com/activer-mon-code-cadeau.")
-
-# Grand événement en direct
-mail(id="38-evenement-partie-du-jour", cat=P_TEMPS, mailjet=True, quand="Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie »)" + INFO_MJ,
-     objet="[EVENEMENT], partie [NUMERO_PARTIE] : [RESULTAT_PARTIE]", pre="[JOUEUR_1] [POINTS_1], [JOUEUR_2] [POINTS_2]. Rejouez la partie commentée, et rendez-vous [PROCHAINE_PARTIE] pour la suivante.", sur="[EVENEMENT]", titre="Partie [NUMERO_PARTIE] : | [RESULTAT_PARTIE].",
-     corps=[image("[URL_IMAGE_PARTIE]", "", "[LIEN_ANALYSE_PARTIE]"),
-            tableau_score(),
-            para("[RESUME_PARTIE]"),
-            para(petit("Prochaine partie : <b>[PROCHAINE_PARTIE]</b>")),
-            bouton("Rejouer la partie commentée", "[LIEN_ANALYSE_PARTIE]"),
-            para('<a href="[LIEN_DIRECT]" style="color:#1f6fc0;font-weight:700">Suivre la prochaine partie en direct</a>')],
-     sign="À demain sur Europe Échecs,<br><b>La rédaction d'Europe Échecs</b>")
 
 # Noël
 mail(id="39-noel-idees-cadeaux", cat=P_TEMPS, mailjet=True, quand="Début décembre, à tous les comptes qui acceptent les e-mails d'information" + INFO_MJ,
@@ -467,7 +448,6 @@ for _src, _dst in (("assets/captures/ee/revue-779-couv.png", "revue-779-couv.png
                    ("assets/captures/ee/boutique/cadeau-pack-steinitz.jpg", "cadeau-1.jpg"), ("assets/captures/ee/boutique/cadeau-revue-pack-jeu.jpg", "cadeau-2.jpg"), ("assets/captures/ee/boutique/cadeau-sweat-shirts.jpg", "cadeau-3.jpg")):
     _im = _I.open(ICI / _src).convert("RGB"); _im.thumbnail((1100, 1100)); _im.save(APER / f"img/{_dst.replace('.png', '.jpg')}", quality=86)
 EXEMPLES.update({
-    "EVENEMENT": "Championnat du monde", "JOUEUR_1": "Gukesh", "JOUEUR_2": "Sindarov", "POINTS_1": "–", "POINTS_2": "–", "NUMERO_PARTIE": "1", "URL_IMAGE_PARTIE": "img/article-gukesh-sindarov.jpg",
     "URL_COUVERTURE": "img/revue-779-couv.jpg", "NUMERO_REVUE": "779",
     "ACCROCHE_NUMERO": "Étienne Bacrot et Sophie Milliet, seize titres de champion de France à eux deux, commentent leurs parties.",
     "SOMMAIRE_1": "<b>Le grand dossier</b> : Bacrot et Milliet reviennent sur leur nouveau sacre", "SOMMAIRE_2": "<b>Les analyses</b> de Wesley So, Vasyl Ivanchuk et Susan Polgar",
@@ -476,7 +456,7 @@ EXEMPLES.update({
     "URL_IMAGE_PRODUIT_2": "img/cadeau-2.jpg", "PROFIL_2": "Pour un joueur de club", "PRODUIT_2": "La revue papier et le Pack Jeu+, pour 1 an",
     "URL_IMAGE_PRODUIT_3": "img/cadeau-3.jpg", "PROFIL_3": "Pour tous les fans", "PRODUIT_3": "Les sweat-shirts Europe Échecs",
     "URL_IMAGE_POSITION": "img/probleme-exemple.jpg", "NIVEAU_PROBLEME": "facile", "CONSIGNE": "Les Blancs jouent et font mat en un coup.", "CONSIGNE_COURTE": "les Blancs matent en un coup"})
-for _k in ("RESULTAT_PARTIE", "JJ", "HEURE_LIMITE", "PROCHAINE_PARTIE", "RESUME_PARTIE", "DATE_LIMITE_LIVRAISON", "CONDITIONS_LIVRAISON") + tuple(f"PRIX_PRODUIT_{i}" for i in (1, 2, 3)):
+for _k in ("JJ", "HEURE_LIMITE", "DATE_LIMITE_LIVRAISON", "CONDITIONS_LIVRAISON") + tuple(f"PRIX_PRODUIT_{i}" for i in (1, 2, 3)):
     EXEMPLES[_k] = "[" + _k + "]"   # aucun résultat, prix ni offre inventés
 
 # ---------- 10. Propositions : vos chiffres, satisfaction et fidélité (envoyés par le site) ----------
