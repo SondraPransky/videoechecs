@@ -664,18 +664,10 @@ mail(id="63-choisir-ses-emails", cat=P_PONTS, quand="J+2 après la création d'u
             sujet("📖", "La revue", "Le sommaire de chaque nouveau numéro", "revue"),
             sujet("🛍️", "La boutique", "Livres, échiquiers et offres du moment", "boutique"),
             para(petit("Vous pourrez changer d'avis à tout moment dans « Mon compte ». Les e-mails liés à votre compte et à vos commandes sont toujours envoyés."))])
-mail(id="64-debutant-vers-academie", cat=P_PONTS, quand="Comptes gratuits débutants (classement de départ ou moins de [SEUIL_ELO] Elo) après leurs 10 premières parties, une seule fois" + INFO_PROPOSITION,
-     objet="Apprendre les échecs pas à pas, avec l'Académie", pre="Des leçons claires, du premier coup aux premiers tournois. Les 6 premières leçons sont offertes.", sur="Progresser", titre="Apprenez | pas à pas.",
-     corps=[para("Bonjour [PSEUDO], vous avez joué vos 10 premières parties sur Europe Échecs. Bravo ! Pour progresser plus vite, l'<b>Académie echecs.com</b>, notre école en ligne, vous guide leçon après leçon :"),
-            etapes([("Initiation", "L'échiquier, l'échec et mat, le roque, les principes d'ouverture : des bases solides."),
-                    ("Objectif 1400", "Créer et parer une menace, la règle du carré, les pièges d'ouverture."),
-                    ("Et ensuite", "Objectif 1600, 1800 et 2000 et plus, avec des exercices et des quiz à chaque leçon.")]),
-            bouton("Essayer les 6 leçons offertes", "[LIEN_ACADEMIE]"),
-            para(petit("L'Académie echecs.com fait partie du même groupe qu'Europe Échecs."))])
 
 _I.open(ICI / "assets/captures/ee/hd/auth-quenehen.jpg").convert("RGB").resize((200, 200)).save(APER / "img/auteur-exemple.jpg", quality=88)
 EXEMPLES.update({"AUTEUR_LIVRE": "Marc Quenehen", "TITRE_AUTEUR": "Auteur", "URL_PHOTO_AUTEUR": "img/auteur-exemple.jpg", "SERIE_AUTEUR": "La Minute Finale", "JOUR_SERIE_AUTEUR": "vendredi",
-    "TITRE_VIDEO_1": "Minute Stratégie #282", "TITRE_VIDEO_2": "Coup de Légende #148", "TITRE_VIDEO_3": "Calcul Gagnant #147", "TITRE_VIDEO_4": "Minute Finale #222", "SEUIL_ELO": "1200"})
+    "TITRE_VIDEO_1": "Minute Stratégie #282", "TITRE_VIDEO_2": "Coup de Légende #148", "TITRE_VIDEO_3": "Calcul Gagnant #147", "TITRE_VIDEO_4": "Minute Finale #222"})
 
 # Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
 from PIL import Image as _I
