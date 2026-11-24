@@ -208,6 +208,18 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `27-gratuit-inactif-45j.html` | Comptes gratuits, 45 jours sans connexion, dernière relance (ensuite, plus d'e-mails d'information) · proposition, à valider | On continue à vous écrire, [PSEUDO] ? | Dites-nous si nos e-mails vous intéressent encore. Sinon, nous arrêtons de vous écrire. | Information (désinscription possible) |
 | `28-videos-de-la-semaine.html` | Chaque semaine, après la Minute Finale du vendredi (jour et heure à fixer), à tous les comptes qui l'acceptent · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | Stratégie, légende, calcul et finale : vos quatre rendez-vous de la semaine, à voir quand vous voulez. | Information (désinscription possible) |
 
+### Newsletter
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `33-newsletter.html` | Chaque semaine (aujourd'hui le lundi en fin d'après-midi), à tous les comptes qui acceptent les e-mails d'information. Un article à la une, puis autant d'articles que nécessaire, et au plus un encart boutique | [OBJET_NEWSLETTER] | [PRE_EN_TETE_NEWSLETTER] | Information (désinscription possible) |
+
+### Boutique
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `34-promo-boutique.html` | Opération commerciale de la boutique (un produit ou une gamme), à tous les comptes qui acceptent les e-mails d'information | [OBJET_PROMO] | [PRE_EN_TETE_PROMO] | Information (désinscription possible) |
+
 ## Variables
 
 La liste complète est générée dans `build/_emails-ee_variables.txt`.

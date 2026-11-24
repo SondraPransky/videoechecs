@@ -300,6 +300,64 @@ mail(id="28-videos-de-la-semaine", cat=P_GRATUITS, quand="Chaque semaine, après
             bouton("Voir toutes les vidéos", L("VIDEOS")),
             para(petit("Toutes les vidéos sont incluses dans le Pack Intégral."))])
 
+# ---------- 8. Newsletter et boutique (e-mails envoyés aujourd'hui depuis Mailjet, remis au design de la série) ----------
+P_NEWS, P_BOUTIQUE = "Newsletter", "Boutique"
+
+def article(n, une=False):   # un article : image cliquable, titre, chapô, lien ; l'article à la une est plus grand
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 {24 if une else 18}px;border:1px solid #e4e1d8;border-radius:12px;overflow:hidden">'
+            f'<tr><td><a href="[LIEN_ARTICLE_{n}]"><img src="[URL_IMAGE_ARTICLE_{n}]" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
+            f'<tr><td style="padding:{"18px 20px 22px" if une else "14px 18px 18px"}">' + (f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]};margin:0 0 6px">À la une</div>' if une else "")
+            + f'<div style="font:{GRAS} {24 if une else 19}px/1.25 {SERIF};color:{C["texte"]}"><a href="[LIEN_ARTICLE_{n}]" style="color:{C["texte"]};text-decoration:none">[TITRE_ARTICLE_{n}]</a></div>'
+            f'<div style="margin-top:8px;font:{16 if une else 15}px/1.55 {SANS};color:{C["gris"]}">[CHAPO_ARTICLE_{n}]</div>'
+            f'<div style="margin-top:12px"><a href="[LIEN_ARTICLE_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">Lire l\'article&nbsp;&rarr;</a></div></td></tr></table>')
+
+def encart_boutique():   # l'encart commercial glissé dans la newsletter : fond jaune, image, texte court, bouton
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;background:{C["jaune"]};border-radius:12px;overflow:hidden">'
+            f'<tr><td><a href="[LIEN_ENCART]"><img src="[URL_IMAGE_ENCART]" width="536" alt="" style="display:block;width:100%;height:auto;border:0"></a></td></tr>'
+            f'<tr><td style="padding:16px 20px 20px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["nuit"]}">La boutique</div>'
+            f'<div style="margin-top:6px;font:{GRAS} 19px/1.25 {SERIF};color:{C["nuit"]}">[TITRE_ENCART]</div>'
+            f'<div style="margin-top:8px;font:15px/1.55 {SANS};color:{C["nuit"]}">[TEXTE_ENCART]</div>'
+            f'<div style="margin-top:14px"><a href="[LIEN_ENCART]" style="display:inline-block;background:{C["nuit"]};color:#ffffff;font:bold 15px {SANS};text-decoration:none;padding:11px 20px;border-radius:999px">[BOUTON_ENCART]&nbsp;&rarr;</a></div></td></tr></table>')
+
+mail(id="33-newsletter", cat=P_NEWS, quand="Chaque semaine (aujourd'hui le lundi en fin d'après-midi), à tous les comptes qui acceptent les e-mails d'information. Un article à la une, puis autant d'articles que nécessaire, et au plus un encart boutique",
+     objet="[OBJET_NEWSLETTER]", pre="[PRE_EN_TETE_NEWSLETTER]", sur="La newsletter · [DATE_ENVOI]", titre="Les actualités | à ne pas rater.",
+     corps=[article(1, une=True), article(2), encart_boutique(), article(3), article(4), article(5),
+            bouton("Toute l'actualité", "https://www.europe-echecs.com")],
+     sign="Bonne lecture,<br><b>La rédaction d'Europe Échecs</b>")
+
+mail(id="34-promo-boutique", cat=P_BOUTIQUE, quand="Opération commerciale de la boutique (un produit ou une gamme), à tous les comptes qui acceptent les e-mails d'information",
+     objet="[OBJET_PROMO]", pre="[PRE_EN_TETE_PROMO]", sur="La boutique Europe Échecs", titre="[TITRE_PROMO_1] | [TITRE_PROMO_2]",
+     corps=['<a href="[LIEN_PRODUIT]"><img src="[URL_IMAGE_PRODUIT]" width="536" alt="[ALT_IMAGE_PRODUIT]" style="display:block;width:100%;height:auto;border:0;border-radius:12px;margin:0 0 22px"></a>',
+            para("[TEXTE_PROMO]"),
+            liste(["[ARGUMENT_1]", "[ARGUMENT_2]", "[ARGUMENT_3]", "[ARGUMENT_4]"]),
+            bouton("[BOUTON_PROMO]", "[LIEN_PRODUIT]"),
+            para(petit("[CONDITIONS_PROMO]"))],
+     sign="À bientôt sur la boutique,<br><b>L'équipe d'Europe Échecs</b>")
+
+from PIL import Image as _I
+# Exemples : la newsletter du 23 novembre 2026 et l'e-mail sweat-shirts du 4 novembre 2026 (textes et images d'origine)
+for _f in ("article-gukesh-sindarov", "article-firouzja", "article-black-friday", "article-carlsen", "article-maurizzi", "article-eingorn", "promo-sweat-shirts"):
+    _im = _I.open(ICI / f"assets/captures/ee/newsletter/{_f}.jpg").convert("RGB"); _im.thumbnail((1100, 1100)); _im.save(APER / f"img/{_f}.jpg", quality=86)
+EXEMPLES.update({
+    "OBJET_NEWSLETTER": "J-1 avant le choc entre Gukesh et Sindarov !", "PRE_EN_TETE_NEWSLETTER": "Gukesh peut-il faire mentir les pronostics ? Et Firouzja gagne le Total Chess 2026.",
+    "URL_IMAGE_ARTICLE_1": "img/article-gukesh-sindarov.jpg", "TITRE_ARTICLE_1": "Gukesh peut-il faire mentir les pronostics ?",
+    "CHAPO_ARTICLE_1": "Le 24 novembre, à Genève, le champion du monde commencera la défense de son titre contre Javokhir Sindarov. Tous deux auront 20 ans au début du match : jamais deux joueurs aussi jeunes ne s'étaient affrontés pour la couronne mondiale ! Le match sera diffusé en direct sur Europe Échecs.",
+    "URL_IMAGE_ARTICLE_2": "img/article-firouzja.jpg", "TITRE_ARTICLE_2": "Alireza Firouzja gagne le Total Chess 2026 devant Giri et Caruana",
+    "CHAPO_ARTICLE_2": "Battu à l'aller par Anish Giri, le Français a remporté la manche retour vendredi 20 novembre à Budapest, puis obtenu la nulle avec les Noirs dans l'armageddon.",
+    "URL_IMAGE_ENCART": "img/article-black-friday.jpg", "TITRE_ENCART": "Le Black Friday arrive vendredi !",
+    "TEXTE_ENCART": "Livres, échiquiers, abonnements, vêtements : rendez-vous dès vendredi 27 novembre pour découvrir nos offres spéciales.", "BOUTON_ENCART": "Voir la boutique",
+    "URL_IMAGE_ARTICLE_3": "img/article-carlsen.jpg", "TITRE_ARTICLE_3": "Magnus Carlsen en 11 coups d'éclat et polémiques",
+    "CHAPO_ARTICLE_3": "Trois forfaits en deux jours au Total Chess, une saisine de la commission d'éthique de la FIDE : retour sur onze épisodes où le numéro un mondial a fait parler de lui.",
+    "URL_IMAGE_ARTICLE_4": "img/article-maurizzi.jpg", "TITRE_ARTICLE_4": "« Ils me craignent peut-être un peu plus ! » Interview de Marc'Andria Maurizzi",
+    "CHAPO_ARTICLE_4": "29 points Elo gagnés en deux tournois et le cap des 2650 franchi : il raconte à Jean-Michel Péchiné comment il a revu sa préparation, avec les 2700 en ligne de mire.",
+    "URL_IMAGE_ARTICLE_5": "img/article-eingorn.jpg", "TITRE_ARTICLE_5": "Hommage à Viacheslav Eingorn",
+    "CHAPO_ARTICLE_5": "Le grand maître d'Odessa aurait eu 70 ans ce 23 novembre. Georges Bertola lui rend hommage et nous invite à rejouer sa victoire contre Efim Geller, commentée par Eingorn lui-même.",
+    "OBJET_PROMO": "Faites échec et mat au froid !", "PRE_EN_TETE_PROMO": "−10 % sur les sweat-shirts Europe Échecs : capuche, coton écologique et logo brodé.",
+    "TITRE_PROMO_1": "Faites échec et mat", "TITRE_PROMO_2": "au froid !", "URL_IMAGE_PRODUIT": "img/promo-sweat-shirts.jpg", "ALT_IMAGE_PRODUIT": "−10 % sur les sweat-shirts Europe Échecs",
+    "TEXTE_PROMO": "L'automne s'installe : les sweat-shirts Europe Échecs sont conçus pour vous garder au chaud tout en affichant votre passion pour le jeu. Pour aller au club, jouer un tournoi ou rester devant l'échiquier, c'est le moment de vous équiper !",
+    "ARGUMENT_1": "<b>Capuche</b> et grande poche ventrale", "ARGUMENT_2": "<b>85 % de coton</b> écologique", "ARGUMENT_3": "<b>Logo Europe Échecs</b> brodé", "ARGUMENT_4": "<b>Plusieurs coloris</b> disponibles",
+    "BOUTON_PROMO": "Profiter de −10 %", "LIEN_PRODUIT": "https://boutique.echecs.com/25-sweats", "CONDITIONS_PROMO": "−10 % sur les sweat-shirts, en ce moment sur la boutique Europe Échecs."})
+
 # Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
 from PIL import Image as _I
 for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant"), (4, "p-minute-finale")):
@@ -323,5 +381,5 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
-LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune"}
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune"}
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]
