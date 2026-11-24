@@ -83,9 +83,14 @@ Ajouter `utm_source=email&utm_medium=email&utm_campaign=ee-<nom du fichier>`. Ce
 Chaque semaine, passer la miniature de chaque vidéo (1280 × 720 ou 1000 × 563) dans le script, puis l'héberger :
 `python3 miniature-mail.py video-1.jpg video-1-mail.jpg` (Python 3 et Pillow). L'image est ramenée à 1072 × 603 px, avec le bouton lecture au centre.
 
-## 4 bis. Newsletter (33) et promo boutique (34) : envoyées depuis Mailjet
+## 4 bis. E-mails envoyés depuis Mailjet (33 à 43)
 
-Ces deux e-mails ne partent pas du site mais de Mailjet, comme aujourd'hui. Fichiers prêts à coller : `emails-ee/mailjet/`.
+Newsletter (33), promo boutique (34), Black Friday (35 à 37), partie du jour d'un grand événement (38), Noël (39 à 41),
+nouveau numéro de la revue (42) et problème de la semaine (43) ne partent pas du site mais de Mailjet. Fichiers prêts à coller : `emails-ee/mailjet/`.
+Liens utiles relevés sur le site le 24 novembre 2026 : guide cadeaux (`https://www.europe-echecs.com/art/quel-cadeau-offrir-a-un-joueur-d-echecs-le-guide-2026-8904.html`),
+packs cadeaux (`https://boutique.echecs.com/15-packs-cadeaux`), Pack Steinitz (`https://boutique.echecs.com/histoire/1144-pack-steinitz.html`),
+revue papier + Pack Jeu+ (`https://boutique.echecs.com/pack-jeu/1341-revue-papier-pack-jeu-plus-france-1-an.html`), sweat-shirts (`https://boutique.echecs.com/25-sweats`).
+Black Friday (35 à 37) : exclure de 36 et 37 ceux qui ont déjà acheté pendant l'opération.
 
 1. Mailjet → Modèles → Créer un modèle → **Coder votre propre modèle (HTML)**, puis coller le fichier.
 2. Remplacer `[URL_IMAGES]` (logo) par l'adresse où est hébergé `emails-ee/img/`, comme pour les autres e-mails.
@@ -97,6 +102,12 @@ Ces deux e-mails ne partent pas du site mais de Mailjet, comme aujourd'hui. Fich
 5. Pied : `[LIEN_ZONE_DE_JEU]`, `[LIEN_VIDEOS]`, `[LIEN_REVUE]`, `[LIEN_AIDE]` à remplacer une fois pour toutes par les adresses du site.
    La désinscription utilise la balise Mailjet `[[UNSUB_LINK_FR]]` : vérifier sur un envoi de test qu'elle est bien remplacée.
 6. Objet et pré-en-tête : à saisir dans Mailjet à chaque envoi (exemples dans `EMAILS-EE.md`).
+
+## 4 ter. E-mails 44 à 50 (envoyés par le site) : données nécessaires
+
+Bilan du mois (44), cap franchi (45), panier abandonné (46), satisfaction à 30 jours (47), anniversaire (48), votre année (49), revue papier vers le web (50).
+Ils demandent des données du site : nombre de parties, variation et record Elo, exercices réussis, vidéos vues, panier en cours, abonnés à la revue papier sans abonnement web.
+À vérifier avec l'équipe technique avant de les écrire dans le site. 47 : chaque note (0 à 10) est un lien `[LIEN_AVIS]?note=N` qui enregistre la note puis ouvre une page de commentaire.
 
 ## 5. Points à trancher avant la mise en service
 

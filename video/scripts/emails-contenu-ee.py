@@ -358,6 +358,177 @@ EXEMPLES.update({
     "ARGUMENT_1": "<b>Capuche</b> et grande poche ventrale", "ARGUMENT_2": "<b>85 % de coton</b> écologique", "ARGUMENT_3": "<b>Logo Europe Échecs</b> brodé", "ARGUMENT_4": "<b>Plusieurs coloris</b> disponibles",
     "BOUTON_PROMO": "Profiter de −10 %", "LIEN_PRODUIT": "https://boutique.echecs.com/25-sweats", "CONDITIONS_PROMO": "−10 % sur les sweat-shirts, en ce moment sur la boutique Europe Échecs."})
 
+# ---------- 9. Propositions : temps forts et rendez-vous réguliers (envoyés depuis Mailjet) ----------
+# Prix, remises, dates et résultats restent des variables : rien n'est inventé.
+P_TEMPS, P_RDV = "Propositions · temps forts", "Propositions · rendez-vous réguliers"
+INFO_MJ = " · proposition, à valider · Mailjet"
+
+def image(src, alt="", lien=None):
+    i = f'<img src="{src}" width="536" alt="{alt}" style="display:block;width:100%;height:auto;border:0;border-radius:12px">'
+    return f'<div style="margin:0 0 22px">{f"<a href=\"{lien}\">{i}</a>" if lien else i}</div>'
+
+def rayon(n, rubrique):   # une offre du Black Friday : rayon, offre, lien
+    return (f'<!-- OFFRE {n} -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 12px;border:1px solid #e4e1d8;border-radius:12px">'
+            f'<tr><td style="padding:14px 18px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]}">{rubrique}</div>'
+            f'<div style="margin-top:4px;font:{GRAS} 18px/1.3 {SERIF};color:{C["texte"]}">[OFFRE_{n}]</div>'
+            f'<div style="margin-top:8px"><a href="[LIEN_OFFRE_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">J\'en profite&nbsp;&rarr;</a></div></td></tr></table>')
+
+def idee(n):   # une idée cadeau : visuel à gauche, profil, produit, prix et lien à droite
+    return (f'<!-- IDÉE CADEAU {n} -->' f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 14px;border:1px solid #e4e1d8;border-radius:12px;background:#ffffff"><tr>'
+            f'<td width="128" valign="middle" style="padding:12px 0 12px 12px"><a href="[LIEN_PRODUIT_{n}]"><img src="[URL_IMAGE_PRODUIT_{n}]" width="116" alt="" style="display:block;width:116px;height:auto;border:0"></a></td>'
+            f'<td valign="middle" style="padding:12px 16px"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]}">[PROFIL_{n}]</div>'
+            f'<div style="margin-top:4px;font:{GRAS} 17px/1.3 {SERIF};color:{C["texte"]}">[PRODUIT_{n}]</div>'
+            f'<div style="margin-top:4px;font:15px/1.5 {SANS};color:{C["gris"]}">[PRIX_PRODUIT_{n}]</div>'
+            f'<div style="margin-top:8px"><a href="[LIEN_PRODUIT_{n}]" style="font:bold 15px {SANS};color:#1f6fc0;text-decoration:none">Voir&nbsp;&rarr;</a></div></td></tr></table>')
+
+CARTE_CADEAU = encadre("<b>La carte cadeau Europe Échecs</b><br>Pack Jeu+ ou Pack Intégral à offrir : la carte cadeau au format PDF est prête à imprimer ou à envoyer dès la commande. "
+                       "La personne qui la reçoit active son code sur europe-echecs.com/activer-mon-code-cadeau.")
+
+# Black Friday : 3 e-mails (lancement, milieu, dernier jour) ; on sort de la séquence dès qu'on a acheté
+mail(id="35-black-friday-lancement", cat=P_TEMPS, mailjet=True, quand="Black Friday, le premier jour (vendredi 27 novembre 2026), le matin, à tous les comptes qui acceptent les e-mails d'information" + INFO_MJ,
+     objet="Le Black Friday commence chez Europe Échecs", pre="Livres, échiquiers, abonnements et vêtements : nos offres jusqu'au [DATE_FIN_OFFRE].", sur="Black Friday · jusqu'au [DATE_FIN_OFFRE]", titre="Le Black Friday | commence.",
+     corps=[image("[URL_IMAGE_BLACK_FRIDAY]", "Black Friday chez Europe Échecs", "[LIEN_BLACK_FRIDAY]"),
+            para("Bonjour, nos offres du Black Friday sont en ligne jusqu'au <b>[DATE_FIN_OFFRE]</b>. Un rayon par envie :"),
+            rayon(1, "Abonnements"), rayon(2, "Livres"), rayon(3, "Échiquiers et matériel"), rayon(4, "Vêtements"),
+            bouton("Voir toutes les offres", "[LIEN_BLACK_FRIDAY]"),
+            para(petit("Conditions de chaque offre sur la boutique et sur la page des abonnements."))])
+mail(id="36-black-friday-rappel", cat=P_TEMPS, mailjet=True, quand="Black Friday, 2 jours après le lancement, sauf à ceux qui ont déjà acheté" + INFO_MJ,
+     objet="Black Friday : les offres les plus demandées", pre="[OFFRE_1], [OFFRE_2] et les autres : il reste [NB_JOURS_RESTANTS] jours.", sur="Black Friday · encore [NB_JOURS_RESTANTS] jours", titre="Les plus demandées | depuis vendredi.",
+     corps=[para("Bonjour, voici les offres qui ont le plus de succès depuis vendredi. Elles restent valables jusqu'au <b>[DATE_FIN_OFFRE]</b>."),
+            rayon(1, "N° 1 des ventes"), rayon(2, "N° 2 des ventes"), rayon(3, "N° 3 des ventes"),
+            bouton("Voir toutes les offres", "[LIEN_BLACK_FRIDAY]")])
+mail(id="37-black-friday-dernier-jour", cat=P_TEMPS, mailjet=True, quand="Black Friday, le dernier jour, le matin, sauf à ceux qui ont déjà acheté" + INFO_MJ,
+     objet="Dernier jour du Black Friday", pre="Nos offres s'arrêtent ce soir à [HEURE_FIN] : livres, échiquiers, abonnements et vêtements.", sur="Black Friday · dernier jour", titre="Dernier jour, | jusqu'à [HEURE_FIN].",
+     corps=[para("Bonjour, c'est le dernier jour : nos offres du Black Friday s'arrêtent ce soir à <b>[HEURE_FIN]</b>. Un abonnement, un livre ou un échiquier à offrir pour Noël ? C'est le moment."),
+            rayon(1, "Abonnements"), rayon(2, "Livres"), rayon(3, "Échiquiers et matériel"), rayon(4, "Vêtements"),
+            bouton("J'en profite avant ce soir", "[LIEN_BLACK_FRIDAY]")])
+
+# Grand événement en direct
+mail(id="38-evenement-partie-du-jour", cat=P_TEMPS, mailjet=True, quand="Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie »)" + INFO_MJ,
+     objet="[EVENEMENT], partie [NUMERO_PARTIE] : [RESULTAT_PARTIE]", pre="Le score est de [SCORE]. Rejouez la partie commentée, et rendez-vous [PROCHAINE_PARTIE] pour la suivante.", sur="[EVENEMENT]", titre="Partie [NUMERO_PARTIE] : | [RESULTAT_PARTIE].",
+     corps=[image("[URL_IMAGE_PARTIE]", "", "[LIEN_ANALYSE_PARTIE]"),
+            infos([("Score", "[SCORE]"), ("Prochaine partie", "[PROCHAINE_PARTIE]")]),
+            para("[RESUME_PARTIE]"),
+            bouton("Rejouer la partie commentée", "[LIEN_ANALYSE_PARTIE]"),
+            para('<a href="[LIEN_DIRECT]" style="color:#1f6fc0;font-weight:700">Suivre la prochaine partie en direct</a>')],
+     sign="À demain sur Europe Échecs,<br><b>La rédaction d'Europe Échecs</b>")
+
+# Noël
+mail(id="39-noel-idees-cadeaux", cat=P_TEMPS, mailjet=True, quand="Début décembre, à tous les comptes qui acceptent les e-mails d'information" + INFO_MJ,
+     objet="Vos idées cadeaux échecs pour Noël", pre="Pour un passionné d'histoire, un joueur de club ou un fan : livres, revue, abonnements, vêtements et cartes cadeaux.", sur="Noël · idées cadeaux", titre="Des cadeaux | pour joueurs d'échecs.",
+     corps=[para("Bonjour, vous cherchez un cadeau pour un joueur d'échecs ? Voici quelques idées, selon ce qu'il aime."),
+            idee(1), idee(2), idee(3),
+            CARTE_CADEAU,
+            bouton("Voir toutes les idées cadeaux", "[LIEN_NOEL]")])
+mail(id="40-noel-derniere-livraison", cat=P_TEMPS, mailjet=True, quand="Le dernier jour de commande pour une livraison avant Noël (date à fixer avec la boutique), sauf à ceux qui ont commandé dans la semaine" + INFO_MJ,
+     objet="Commandez aujourd'hui pour être livré avant Noël", pre="Dernier jour pour recevoir livres et échiquiers avant le 25 décembre. Ensuite, il reste la carte cadeau.", sur="Noël · dernier jour de livraison", titre="Livré avant Noël : | commandez aujourd'hui.",
+     corps=[para("Bonjour, pour recevoir votre commande avant le 25 décembre, passez-la avant ce soir, <b>[DATE_LIMITE_LIVRAISON]</b>."),
+            infos([("Dernière commande", "[DATE_LIMITE_LIVRAISON]"), ("Livraison", "[CONDITIONS_LIVRAISON]")]),
+            bouton("Voir les idées cadeaux", "[LIEN_NOEL]"),
+            para(petit("Passé cette date, la carte cadeau Pack Jeu+ ou Pack Intégral reste possible jusqu'au dernier moment : elle arrive en PDF, sans livraison."))])
+mail(id="41-noel-carte-cadeau", cat=P_TEMPS, mailjet=True, quand="Du 22 au 24 décembre, une seule fois, sauf à ceux qui ont acheté une carte cadeau" + INFO_MJ,
+     objet="Un cadeau d'échecs, même le 24 décembre", pre="La carte cadeau Europe Échecs arrive en PDF : prête à imprimer ou à envoyer, sans attendre la livraison.", sur="Noël · cadeau de dernière minute", titre="Trop tard pour la livraison ? | La carte cadeau.",
+     corps=[para("Bonjour, il est trop tard pour une livraison avant Noël, mais pas pour faire plaisir à un joueur d'échecs."),
+            liste(["<b>Choisissez</b> le Pack Jeu+ ou le Pack Intégral", "<b>Téléchargez</b> la carte cadeau en PDF dans votre compte", "<b>Imprimez-la ou envoyez-la</b> : le code s'active sur europe-echecs.com/activer-mon-code-cadeau"]),
+            bouton("Offrir une carte cadeau", "[LIEN_CARTE_CADEAU]"),
+            para(petit(f'Le contenu de chaque Pack est détaillé sur notre <a href="{TARIFS}" style="color:#6b6b66">page des tarifs</a>.'))])
+
+# Rendez-vous réguliers
+def couverture():   # couverture de la revue et sommaire, côte à côte
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px"><tr>'
+            f'<td width="150" valign="top" style="padding-right:18px"><a href="[LIEN_REVUE_EN_LIGNE]"><img src="[URL_COUVERTURE]" width="150" alt="Couverture du numéro [NUMERO_REVUE]" style="display:block;width:150px;height:auto;border:0;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.18)"></a></td>'
+            f'<td valign="top"><div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:{C["em"]}">Au sommaire</div>'
+            + "".join(f'<div style="margin-top:10px;font:15px/1.45 {SANS};color:{C["texte"]}">[SOMMAIRE_{i}]</div>' for i in (1, 2, 3, 4)) + '</td></tr></table>')
+mail(id="42-revue-nouveau-numero", cat=P_RDV, mailjet=True, quand="À la sortie de chaque numéro de la revue, aux abonnés qui ont la revue en ligne (Pack Intégral) ou papier" + INFO_MJ,
+     objet="Le numéro [NUMERO_REVUE] de la revue est en ligne", pre="[ACCROCHE_NUMERO]", sur="La revue · numéro [NUMERO_REVUE]", titre="Le nouveau numéro | est en ligne.",
+     corps=[para("Bonjour, le numéro <b>[NUMERO_REVUE]</b> de la revue Europe Échecs vous attend. [ACCROCHE_NUMERO]"),
+            couverture(),
+            bouton("Lire le numéro", "[LIEN_REVUE_EN_LIGNE]"),
+            para(petit("Les parties de la revue sont à rejouer en ligne, coup par coup."))],
+     sign="Bonne lecture,<br><b>La rédaction d'Europe Échecs</b>")
+mail(id="43-probleme-de-la-semaine", cat=P_RDV, mailjet=True, quand="Chaque semaine (jour à fixer, pas le même que la newsletter), aux comptes gratuits qui acceptent les e-mails d'information. Varier les niveaux d'une semaine à l'autre" + INFO_MJ,
+     objet="Le problème de la semaine : [CONSIGNE_COURTE]", pre="Niveau [NIVEAU_PROBLEME]. Trouvez le coup, puis vérifiez la solution sur Europe Échecs.", sur="Le problème de la semaine", titre="À vous | de jouer !",
+     corps=[image("[URL_IMAGE_POSITION]", "La position du problème de la semaine", "[LIEN_SOLUTION]"),
+            infos([("Niveau", "[NIVEAU_PROBLEME]"), ("Consigne", "[CONSIGNE]")]),
+            bouton("Voir la solution", "[LIEN_SOLUTION]"),
+            para(petit("Envie d'autres exercices ? Le Pack Jeu+ ouvre la zone d'entraînement tactique en illimité, avec un mode challenge pour battre votre record."))])
+
+for _src, _dst in (("assets/captures/ee/revue-779-couv.png", "revue-779-couv.png"), ("build/pack/images/00-emails/email-puzzle-1080x1080.jpg", "probleme-exemple.jpg"),
+                   ("assets/captures/ee/boutique/cadeau-pack-steinitz.jpg", "cadeau-1.jpg"), ("assets/captures/ee/boutique/cadeau-revue-pack-jeu.jpg", "cadeau-2.jpg"), ("assets/captures/ee/boutique/cadeau-sweat-shirts.jpg", "cadeau-3.jpg")):
+    _im = _I.open(ICI / _src).convert("RGB"); _im.thumbnail((1100, 1100)); _im.save(APER / f"img/{_dst.replace('.png', '.jpg')}", quality=86)
+EXEMPLES.update({
+    "URL_IMAGE_BLACK_FRIDAY": "img/article-black-friday.jpg", "DATE_FIN_OFFRE": "[DATE_FIN_OFFRE]", "HEURE_FIN": "[HEURE_FIN]", "NB_JOURS_RESTANTS": "[NB_JOURS_RESTANTS]",
+    "EVENEMENT": "Championnat du monde", "URL_IMAGE_PARTIE": "img/article-gukesh-sindarov.jpg",
+    "URL_COUVERTURE": "img/revue-779-couv.jpg", "NUMERO_REVUE": "779",
+    "ACCROCHE_NUMERO": "Étienne Bacrot et Sophie Milliet, seize titres de champion de France à eux deux, commentent leurs parties.",
+    "SOMMAIRE_1": "<b>Le grand dossier</b> : Bacrot et Milliet reviennent sur leur nouveau sacre", "SOMMAIRE_2": "<b>Les analyses</b> de Wesley So, Vasyl Ivanchuk et Susan Polgar",
+    "SOMMAIRE_3": "<b>Loïc Travadon et Marie Sebag</b>", "SOMMAIRE_4": "<b>Le cahier pédagogique</b> pour progresser",
+    "URL_IMAGE_PRODUIT_1": "img/cadeau-1.jpg", "PROFIL_1": "Pour un passionné d'histoire", "PRODUIT_1": "Le Pack Steinitz : les deux tomes de Georges Bertola",
+    "URL_IMAGE_PRODUIT_2": "img/cadeau-2.jpg", "PROFIL_2": "Pour un joueur de club", "PRODUIT_2": "La revue papier et le Pack Jeu+, pour 1 an",
+    "URL_IMAGE_PRODUIT_3": "img/cadeau-3.jpg", "PROFIL_3": "Pour tous les fans", "PRODUIT_3": "Les sweat-shirts Europe Échecs",
+    "URL_IMAGE_POSITION": "img/probleme-exemple.jpg", "NIVEAU_PROBLEME": "facile", "CONSIGNE": "Les Blancs jouent et font mat en un coup.", "CONSIGNE_COURTE": "les Blancs matent en un coup"})
+for _k in ("NUMERO_PARTIE", "RESULTAT_PARTIE", "SCORE", "PROCHAINE_PARTIE", "RESUME_PARTIE", "DATE_LIMITE_LIVRAISON", "CONDITIONS_LIVRAISON") + tuple(f"OFFRE_{i}" for i in (1, 2, 3, 4)) + tuple(f"PRIX_PRODUIT_{i}" for i in (1, 2, 3)):
+    EXEMPLES[_k] = "[" + _k + "]"   # aucun résultat, prix ni offre inventés
+
+# ---------- 10. Propositions : vos chiffres, satisfaction et fidélité (envoyés par le site) ----------
+# Ils demandent des données du site (parties, Elo, exercices, panier) : à confirmer avec l'équipe technique.
+P_CHIFFRES, P_FIDELE = "Propositions · vos chiffres", "Propositions · satisfaction et fidélité"
+INFO_DONNEES = " · proposition, à valider · données du site à confirmer"
+
+mail(id="44-votre-mois", cat=P_CHIFFRES, quand="Le 1er de chaque mois, aux comptes qui ont joué au moins une partie dans le mois, s'ils acceptent les e-mails d'information" + INFO_DONNEES,
+     objet="Votre mois de [MOIS_BILAN] sur Europe Échecs", pre="[NB_PARTIES] parties, [VARIATION_ELO] points Elo et [NB_EXERCICES] exercices réussis.", sur="Votre bilan · [MOIS_BILAN]", titre="Votre mois | en chiffres.",
+     corps=[para("Bonjour [PSEUDO], voici votre mois de <b>[MOIS_BILAN]</b> sur Europe Échecs."),
+            tuiles([("[NB_PARTIES]", "parties jouées"), ("[VARIATION_ELO]", "points Elo"), ("[NB_EXERCICES]", "exercices réussis")]),
+            nouveautes("Votre meilleur moment", [("Plus belle victoire", "[MEILLEURE_VICTOIRE]"), ("Classement actuel", "[ELO_ACTUEL]")]),
+            bouton("Jouer une partie", L("ZONE_DE_JEU")),
+            para(petit("Pour recevoir ou non ce bilan, gérez vos e-mails dans « Mon compte »."))])
+mail(id="45-cap-franchi", cat=P_CHIFFRES, quand="Quand un joueur franchit un cap : 100ᵉ partie, nouveau record Elo, record battu en mode challenge (un seul e-mail par semaine au plus)" + INFO_DONNEES,
+     objet="Bravo [PSEUDO] : [CAP_FRANCHI]", pre="[DETAIL_CAP]. On continue sur cette lancée ?", sur="Bravo !", titre="[CAP_FRANCHI] !",
+     corps=[para("Bonjour [PSEUDO], <b>[DETAIL_CAP]</b>. Félicitations !"),
+            infos([("Votre record", "[RECORD]"), ("Le jour", "[DATE_CAP]")]),
+            bouton("Viser le cap suivant", L("ZONE_DE_JEU"))])
+
+mail(id="46-panier-abandonne", cat=P_FIDELE, quand="1 heure après avoir quitté la page de paiement d'un abonnement sans payer, une seule fois par semaine (à vérifier : faisable techniquement)" + INFO_DONNEES,
+     objet="Votre [SERVICE] vous attend", pre="Il ne reste qu'une étape pour retrouver vos vidéos, leçons et entraînements.", sur="Votre commande", titre="Il ne reste | qu'une étape.",
+     corps=[para("Bonjour [PSEUDO], vous avez commencé à souscrire au <b>[SERVICE]</b> sans aller jusqu'au paiement. Votre sélection est gardée :"),
+            infos([("Formule", "[SERVICE]"), ("Prix", "[PRIX]")]),
+            bouton("Terminer ma commande", "[LIEN_PANIER]"),
+            para(petit("Une question avant de vous décider ? Notre page d'aide répond aux plus fréquentes, et le support est joignable depuis votre compte."))])
+mail(id="47-satisfaction-30j", cat=P_FIDELE, quand="30 jours après le début d'un abonnement payant, une seule fois" + INFO_DONNEES,
+     objet="Un mois sur Europe Échecs : votre avis ?", pre="Une question, un clic : vous recommanderiez Europe Échecs à un ami ?", sur="Votre avis", titre="Votre avis | nous aide.",
+     corps=[para("Bonjour [PSEUDO], cela fait un mois que vous êtes abonné au <b>[SERVICE]</b>. Une seule question :"),
+            para("<b>Recommanderiez-vous Europe Échecs à un ami joueur d'échecs ?</b>"),
+            '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:6px 0 10px"><tr>' + "".join(
+                f'<td align="center" style="padding:0 2px"><a href="[LIEN_AVIS]?note={n}" style="display:block;padding:10px 0;border-radius:8px;background:{C["fond"]};font:bold 15px {SANS};color:{C["texte"]};text-decoration:none">{n}</a></td>' for n in range(11)) + '</tr></table>',
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 20px"><tr><td style="font:12px {SANS};color:{C["gris"]}">Pas du tout</td><td align="right" style="font:12px {SANS};color:{C["gris"]}">Oui, sans hésiter</td></tr></table>',
+            para(petit("Un clic suffit. Si vous voulez en dire plus, une page s'ouvre pour laisser un commentaire."))])
+mail(id="48-anniversaire-abonnement", cat=P_FIDELE, quand="Au 1er anniversaire d'un abonnement (puis chaque année), 30 jours avant l'échéance pour les formules de 1 an" + INFO_DONNEES,
+     objet="Un an avec vous, [PSEUDO] : merci !", pre="[NB_PARTIES_AN] parties, [NB_VIDEOS_AN] vidéos et [NB_EXERCICES_AN] exercices en un an.", sur="Votre anniversaire", titre="Un an | ensemble.",
+     corps=[para("Bonjour [PSEUDO], vous êtes abonné au <b>[SERVICE]</b> depuis un an. Merci de votre fidélité ! Votre année en chiffres :"),
+            tuiles([("[NB_PARTIES_AN]", "parties jouées"), ("[NB_VIDEOS_AN]", "vidéos vues"), ("[NB_EXERCICES_AN]", "exercices réussis")]),
+            bouton("Continuer à progresser", L("ZONE_DE_JEU")),
+            para(petit("Votre abonnement arrive à échéance le [DATE_FIN] : vous recevrez un rappel avant cette date."))],
+     sign="Merci de votre confiance,<br><b>L'équipe d'Europe Échecs</b>")
+mail(id="49-votre-annee", cat=P_CHIFFRES, quand="Début janvier, aux comptes qui ont joué dans l'année, s'ils acceptent les e-mails d'information" + INFO_DONNEES,
+     objet="Votre année [ANNEE] sur Europe Échecs", pre="[NB_PARTIES_AN] parties, votre meilleur Elo à [ELO_MAX] et votre plus belle victoire.", sur="Votre année [ANNEE]", titre="Votre année | [ANNEE].",
+     corps=[para("Bonjour [PSEUDO], voici votre année <b>[ANNEE]</b> sur Europe Échecs."),
+            tuiles([("[NB_PARTIES_AN]", "parties jouées"), ("[ELO_MAX]", "meilleur Elo"), ("[NB_EXERCICES_AN]", "exercices réussis")]),
+            nouveautes("Vos moments forts", [("Plus belle victoire", "[MEILLEURE_VICTOIRE]"), ("Cadence préférée", "[CADENCE_PREFEREE]"), ("Mois le plus actif", "[MOIS_ACTIF]")]),
+            bouton("Partager mon année", "[LIEN_PARTAGE_ANNEE]"),
+            para('<a href="' + L("ZONE_DE_JEU") + '" style="color:#1f6fc0;font-weight:700">Commencer [ANNEE_SUIVANTE] par une partie</a>')])
+mail(id="50-revue-papier-vers-web", cat=P_FIDELE, quand="Abonnés à la revue papier sans abonnement web, 2 mois après le début de l'abonnement, une seule fois" + INFO_DONNEES,
+     objet="Votre revue, aussi en ligne et en vidéo", pre="Les parties de la revue à rejouer coup par coup, plus de 4 vidéos par semaine et la zone de jeu premium.", sur="Pack Intégral", titre="Votre revue, | en ligne aussi.",
+     corps=[para("Bonjour [PSEUDO], vous recevez la revue Europe Échecs chez vous. Le Pack Intégral la prolonge sur le site :"),
+            INTEGRAL,
+            bouton("Découvrir le Pack Intégral", L("ABONNEMENTS")),
+            para(petit(f'Toutes nos formules sont sur <a href="{TARIFS}" style="color:#6b6b66">la page des tarifs</a>.'))])
+
+EXEMPLES.update({"MOIS_BILAN": "novembre", "ANNEE": "2026", "ANNEE_SUIVANTE": "2027", "PRIX": "11,90 € par mois"})
+# Chiffres d'un joueur fictif (LéaDame), pour l'aperçu seulement : ce sont des données personnelles, pas des chiffres d'Europe Échecs
+EXEMPLES.update({"NB_PARTIES": "42", "VARIATION_ELO": "+38", "NB_EXERCICES": "156", "MEILLEURE_VICTOIRE": "contre un joueur à 1720", "ELO_ACTUEL": "1612",
+    "CAP_FRANCHI": "votre 100ᵉ partie", "DETAIL_CAP": "vous venez de jouer votre 100ᵉ partie sur Europe Échecs", "RECORD": "1612 Elo", "DATE_CAP": "24 novembre",
+    "NB_PARTIES_AN": "318", "NB_VIDEOS_AN": "64", "NB_EXERCICES_AN": "1 240", "ELO_MAX": "1648", "CADENCE_PREFEREE": "blitz 5 min", "MOIS_ACTIF": "mars"})
+
 # Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
 from PIL import Image as _I
 for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant"), (4, "p-minute-finale")):
@@ -381,5 +552,5 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
-LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune"}
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo"}
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]

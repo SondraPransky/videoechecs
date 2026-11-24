@@ -220,6 +220,42 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 |---|---|---|---|---|
 | `34-promo-boutique.html` | Opération commerciale de la boutique (un produit ou une gamme), à tous les comptes qui acceptent les e-mails d'information | [OBJET_PROMO] | [PRE_EN_TETE_PROMO] | Information (désinscription possible) |
 
+### Propositions · temps forts
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `35-black-friday-lancement.html` | Black Friday, le premier jour (vendredi 27 novembre 2026), le matin, à tous les comptes qui acceptent les e-mails d'information · proposition, à valider · Mailjet | Le Black Friday commence chez Europe Échecs | Livres, échiquiers, abonnements et vêtements : nos offres jusqu’au [DATE_FIN_OFFRE]. | Information (désinscription possible) |
+| `36-black-friday-rappel.html` | Black Friday, 2 jours après le lancement, sauf à ceux qui ont déjà acheté · proposition, à valider · Mailjet | Black Friday : les offres les plus demandées | [OFFRE_1], [OFFRE_2] et les autres : il reste [NB_JOURS_RESTANTS] jours. | Information (désinscription possible) |
+| `37-black-friday-dernier-jour.html` | Black Friday, le dernier jour, le matin, sauf à ceux qui ont déjà acheté · proposition, à valider · Mailjet | Dernier jour du Black Friday | Nos offres s’arrêtent ce soir à [HEURE_FIN] : livres, échiquiers, abonnements et vêtements. | Information (désinscription possible) |
+| `38-evenement-partie-du-jour.html` | Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie ») · proposition, à valider · Mailjet | [EVENEMENT], partie [NUMERO_PARTIE] : [RESULTAT_PARTIE] | Le score est de [SCORE]. Rejouez la partie commentée, et rendez-vous [PROCHAINE_PARTIE] pour la suivante. | Information (désinscription possible) |
+| `39-noel-idees-cadeaux.html` | Début décembre, à tous les comptes qui acceptent les e-mails d'information · proposition, à valider · Mailjet | Vos idées cadeaux échecs pour Noël | Pour un passionné d’histoire, un joueur de club ou un fan : livres, revue, abonnements, vêtements et cartes cadeaux. | Information (désinscription possible) |
+| `40-noel-derniere-livraison.html` | Le dernier jour de commande pour une livraison avant Noël (date à fixer avec la boutique), sauf à ceux qui ont commandé dans la semaine · proposition, à valider · Mailjet | Commandez aujourd’hui pour être livré avant Noël | Dernier jour pour recevoir livres et échiquiers avant le 25 décembre. Ensuite, il reste la carte cadeau. | Information (désinscription possible) |
+| `41-noel-carte-cadeau.html` | Du 22 au 24 décembre, une seule fois, sauf à ceux qui ont acheté une carte cadeau · proposition, à valider · Mailjet | Un cadeau d’échecs, même le 24 décembre | La carte cadeau Europe Échecs arrive en PDF : prête à imprimer ou à envoyer, sans attendre la livraison. | Information (désinscription possible) |
+
+### Propositions · rendez-vous réguliers
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `42-revue-nouveau-numero.html` | À la sortie de chaque numéro de la revue, aux abonnés qui ont la revue en ligne (Pack Intégral) ou papier · proposition, à valider · Mailjet | Le numéro [NUMERO_REVUE] de la revue est en ligne | [ACCROCHE_NUMERO] | Information (désinscription possible) |
+| `43-probleme-de-la-semaine.html` | Chaque semaine (jour à fixer, pas le même que la newsletter), aux comptes gratuits qui acceptent les e-mails d'information. Varier les niveaux d'une semaine à l'autre · proposition, à valider · Mailjet | Le problème de la semaine : [CONSIGNE_COURTE] | Niveau [NIVEAU_PROBLEME]. Trouvez le coup, puis vérifiez la solution sur Europe Échecs. | Information (désinscription possible) |
+
+### Propositions · vos chiffres
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `44-votre-mois.html` | Le 1er de chaque mois, aux comptes qui ont joué au moins une partie dans le mois, s'ils acceptent les e-mails d'information · proposition, à valider · données du site à confirmer | Votre mois de [MOIS_BILAN] sur Europe Échecs | [NB_PARTIES] parties, [VARIATION_ELO] points Elo et [NB_EXERCICES] exercices réussis. | Information (désinscription possible) |
+| `45-cap-franchi.html` | Quand un joueur franchit un cap : 100ᵉ partie, nouveau record Elo, record battu en mode challenge (un seul e-mail par semaine au plus) · proposition, à valider · données du site à confirmer | Bravo [PSEUDO] : [CAP_FRANCHI] | [DETAIL_CAP]. On continue sur cette lancée ? | Information (désinscription possible) |
+| `49-votre-annee.html` | Début janvier, aux comptes qui ont joué dans l'année, s'ils acceptent les e-mails d'information · proposition, à valider · données du site à confirmer | Votre année [ANNEE] sur Europe Échecs | [NB_PARTIES_AN] parties, votre meilleur Elo à [ELO_MAX] et votre plus belle victoire. | Information (désinscription possible) |
+
+### Propositions · satisfaction et fidélité
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `46-panier-abandonne.html` | 1 heure après avoir quitté la page de paiement d'un abonnement sans payer, une seule fois par semaine (à vérifier : faisable techniquement) · proposition, à valider · données du site à confirmer | Votre [SERVICE] vous attend | Il ne reste qu’une étape pour retrouver vos vidéos, leçons et entraînements. | Information (désinscription possible) |
+| `47-satisfaction-30j.html` | 30 jours après le début d'un abonnement payant, une seule fois · proposition, à valider · données du site à confirmer | Un mois sur Europe Échecs : votre avis ? | Une question, un clic : vous recommanderiez Europe Échecs à un ami ? | Information (désinscription possible) |
+| `48-anniversaire-abonnement.html` | Au 1er anniversaire d'un abonnement (puis chaque année), 30 jours avant l'échéance pour les formules de 1 an · proposition, à valider · données du site à confirmer | Un an avec vous, [PSEUDO] : merci ! | [NB_PARTIES_AN] parties, [NB_VIDEOS_AN] vidéos et [NB_EXERCICES_AN] exercices en un an. | Information (désinscription possible) |
+| `50-revue-papier-vers-web.html` | Abonnés à la revue papier sans abonnement web, 2 mois après le début de l'abonnement, une seule fois · proposition, à valider · données du site à confirmer | Votre revue, aussi en ligne et en vidéo | Les parties de la revue à rejouer coup par coup, plus de 4 vidéos par semaine et la zone de jeu premium. | Information (désinscription possible) |
+
 ## Variables
 
 La liste complète est générée dans `build/_emails-ee_variables.txt`.
