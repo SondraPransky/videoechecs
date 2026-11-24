@@ -11,11 +11,12 @@ FFMPEG=$(python3 -c 'import imageio_ffmpeg as f;print(f.get_ffmpeg_exe())')
 M=validation/campagne-2000/media
 ENC=(-c:v libx264 -preset medium -crf 23 -pix_fmt yuv420p -r 30 -c:a aac -b:a 160k -movflags +faststart)
 declare -A NOM=([7]=lecons-1800 [8]=cap-des-2000 [9]=grands-maitres [10]=tournoi-decortique)
-declare -A TITRE=([7]="Ton prochain palier :|l'Objectif 1800." [8]="Passe le cap|des 2000 !" [9]="Des Grands Maîtres|à tes côtés." [10]="Ton dernier tournoi,|décortiqué.")
+# Titres courts : ils doivent tenir à côté du logo dans les cadres 4:5 et carré
+declare -A TITRE=([7]="Cap sur|l'Objectif 1800." [8]="Passe le cap|des 2000 !" [9]="Avec des|Grands Maîtres." [10]="Ton tournoi,|décortiqué.")
 LISTE=("$@"); [ ${#LISTE[@]} -gt 0 ] || LISTE=(7 8 9 10)
 for k in "${LISTE[@]}"; do
   n=${NOM[$k]}; src=build/echecs-academie-accroche-$k.mp4; c=build/_cadres/campagne-$k
-  bash build.sh --edition "accroche-$k"
+  [ "${CADRES_SEULS:-0}" = 1 ] && [ -f "$src" ] || bash build.sh --edition "accroche-$k"   # CADRES_SEULS=1 : refait seulement les formats à partir de la vidéo déjà rendue
   mkdir -p "$c"
   node scripts/social.mjs "$c" --cadres "${TITRE[$k]}" >/dev/null
   "$FFMPEG" -y -loglevel error -i "$src" "${ENC[@]}" "$M/$n-16x9.mp4"
