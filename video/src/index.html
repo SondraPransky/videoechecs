@@ -845,10 +845,22 @@ for (let i = 0; i < 42; i++) {
   makeBoard(d, pl);
   $("#minis").appendChild(d);
 }
-const b6 = makeBoard($("#b6"), { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
+// Campagne « Jusqu'à 2000 et plus » (accroche-6 à 10) : un exercice de joueur de club, pas un mat en 1 de débutant
+const CLUB6 = /accroche-([6-9]|1\d)\b/.test(location.search);
+const b6 = makeBoard($("#b6"), CLUB6 ? CLUB_POS : { g1: "wK", d1: "wR", f2: "wP", g2: "wP", h2: "wP", g8: "bK", f7: "bP", g7: "bP", h7: "bP", b2: "bQ", a7: "bP" });
 coords($("#b6"));
-const a6 = arrow($("#b6"), "d1", "d8");
-const h6 = highlight($("#b6"), "d8");
+const a6 = CLUB6 ? arrow($("#b6"), "d3", "h7") : arrow($("#b6"), "d1", "d8");
+const h6 = highlight($("#b6"), CLUB6 ? "h7" : "d8");
+if (CLUB6) {
+  $("#ex1400 .lchip").textContent = "Objectif 1600"; $("#ex1400 .lchip").style.background = "#93b9e2";
+  $("#ex1400 .ltitle").textContent = "Les Blancs jouent et gagnent. Quel coup ?";
+  $("#res6 span").innerHTML = '1.<img class="fig" src="../assets/pieces/wB.png">xh7+ ! — le sacrifice grec';
+  $("#qz1600 .lchip").textContent = "Objectif 1800";
+  $("#qz1600 .ltitle").textContent = "Défense de Vancura : où place-t-on la Tour ?";
+  $("#qa").firstChild.textContent = "A · Sur la sixième rangée";
+  $$("#qz1600 .qx")[0].textContent = "B · Derrière le pion";
+  $$("#qz1600 .qx")[1].textContent = "C · Sur la huitième rangée";
+}
 
 // S7 : classement
 const LB = [["1", "Camille R.", "#93b9e2", "5"], ["2", "Hugo M.", "#fae361", "4½"], ["3", "Toi", "#6bdc7d", "4½", 1], ["4", "Inès B.", "#ff8fa0", "4"], ["5", "Théo L.", "#c9d1dc", "3½"]];
@@ -1382,7 +1394,8 @@ scene("s6", ({ st, from, at, dur }) => {
   at(["#ex1400", "#qz1600"], .9, { rotateY: -2, duration: dur - .9, ease: "sine.inOut" });
   at(a6.line, 1.0, { strokeDashoffset: 0, duration: .35, ease: "power2.out" });
   from(a6.head, 1.3, { opacity: 0 }, { opacity: 1, duration: .1 });
-  at(b6.d1, 1.45, { top: "0%", duration: .3, ease: "power3.inOut" });
+  if (CLUB6) { at(b6.d3, 1.45, { ...sqPos("h7"), duration: .35, ease: "power3.inOut" }); at(b6.h7, 1.7, { opacity: 0, scale: .4, duration: .2 }); }
+  else at(b6.d1, 1.45, { top: "0%", duration: .3, ease: "power3.inOut" });
   at(a6.g, 1.5, { opacity: 0, duration: .2 });
   at(h6, 1.7, { opacity: 1, duration: .2 });
   from("#res6", 1.75, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .35, ease: "back.out(2)" });
