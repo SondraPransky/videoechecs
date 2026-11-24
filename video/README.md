@@ -119,7 +119,9 @@ Les cadres des formats 9:16, 4:5 et 1:1 se font avec `node scripts/social.mjs DO
 
 - `validation/encarts.html` : les encarts publicitaires du site (visiteurs sans compte, comptes gratuits), dans les 4 emplacements
   (Smartphone 1000×391, Desktop 960×250, Header small 960×150, Carré 1000×1000) et d'autres formats, avec avis de l'équipe.
-- `validation/campagne-2000.html` : la campagne « Jusqu'à 2000 et plus » (encarts C01 à C08, posts 90 à 97, vidéo).
+- `validation/campagne-2000.html` : la campagne « Jusqu'à 2000 et plus » (encarts C01 à C08, posts 90 à 97, vidéos).
+  Une vidéo par thème : `accroche-6` (plafond à 1700), puis `accroche-7` à `10` (leçons Objectif 1800, cap des 2000, Grands Maîtres,
+  tournoi décortiqué), rendues en 4 formats par `bash scripts/campagne-2000.sh [7 8 9 10]`.
 - Images des encarts : `validation/encarts/img/`. Changer le numéro `v` d'une fiche la fait repasser en « à revoir ».
 
 ## Skills marketing

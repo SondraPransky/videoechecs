@@ -111,8 +111,22 @@ Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne au
 **Des leçons pour les joueurs de club** (`97-lecons-1800/`)
 > Triangulation, défense de Vancura, initiative… L'Académie, ce sont aussi des leçons pour les joueurs de club, niveau 1800, avec vidéos, exercices et quiz. 👉 echecs.com/academie
 
-**Vidéo** (`accroche-6`)
+**Vidéo : Tu plafonnes à 1700 ?** (`accroche-6`)
 > Tu plafonnes à 1700 depuis des mois ? Triangulation, défense de Vancura, initiative, masterclasses de Grands Maîtres : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
+
+**Vidéo : Ton prochain palier, l'Objectif 1800** (`accroche-7`, fichiers `lecons-1800-*`)
+> Ton prochain palier : l'Objectif 1800 ? Triangulation, défense de Vancura, initiative… Des leçons pour les joueurs de club, avec vidéos, exercices et quiz. 👉 echecs.com/academie
+
+**Vidéo : Passe le cap des 2000** (`accroche-8`, fichiers `cap-des-2000-*`)
+> Et si tu passais le cap des 2000 ? Leçons Objectif 1800, exercices à ton niveau et ta courbe Elo pour mesurer tes progrès : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
+
+**Vidéo : Des Grands Maîtres à tes côtés** (`accroche-9`, fichiers `grands-maitres-*`)
+> Et si des Grands Maîtres t'aidaient à progresser ? Gata Kamsky, Fabien Libiszewski et nos coachs en masterclass, en direct et en replay, et tout le catalogue vidéo Europe Échecs inclus. 👉 echecs.com/academie
+
+**Vidéo : Ton dernier tournoi, décortiqué** (`accroche-10`, fichiers `tournoi-decortique-*`)
+> Tu perds en tournoi sans savoir pourquoi ? Importe tes parties en PGN, analyse-les coup par coup et partage-les avec les membres. Puis entraîne-toi avec +2 000 exercices. 👉 echecs.com/academie
+
+Toutes ces vidéos se rendent avec `bash scripts/campagne-2000.sh` (sans voix off, en 16:9, 9:16, 4:5 et 1:1).
 
 ---
 

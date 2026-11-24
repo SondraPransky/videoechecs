@@ -254,6 +254,11 @@ body { font-family: "Manrope", sans-serif; color: var(--ink); -webkit-font-smoot
 .hk-bar { position: relative; height: 26px; margin-top: 40px; border-radius: 13px; background: #2a3442; overflow: hidden; }
 .hk-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 40%; border-radius: 13px; background: linear-gradient(90deg, #93b9e2, #fae361); }
 .hk-vids { display: flex; gap: 14px; margin-top: 22px; }
+.hk-gm { display: flex; gap: 18px; margin-top: 22px; }
+.hk-gmc { flex: 1; border-radius: 18px; overflow: hidden; background: #1b2430; }
+.hk-gmc img { width: 100%; height: 190px; object-fit: cover; object-position: 50% 20%; display: block; }
+.hk-gmc b { display: block; padding: 12px 16px 0; font: 800 18px/1 "Manrope"; letter-spacing: .12em; color: #fae361; }
+.hk-gmc span { display: block; padding: 6px 16px 14px; font: 700 24px/1.1 "Manrope"; color: #f4f1ea; }
 .hk-vids div { position: relative; flex: 1; }
 .hk-vids img { width: 100%; height: 112px; object-fit: cover; border-radius: 12px; display: block; }
 .hk-vids span { position: absolute; left: 50%; top: 56px; width: 44px; height: 44px; margin: -22px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; }
@@ -552,7 +557,7 @@ html.v #grain { width: 100%; height: 100%; }
   <section class="scene" id="club">
     <div style="position:absolute;left:150px;top:96px">
       <div class="kicker cl-k">Objectifs 1600 et 1800</div>
-      <div class="h2" style="margin-top:26px"><span class="line"><span class="cl-w">Des leçons</span></span><span class="line"><span class="cl-w em">de joueur de club.</span></span></div>
+      <div class="h2" style="margin-top:26px"><span class="line"><span class="cl-w">Des leçons</span></span><span class="line"><span class="cl-w em">pour les joueurs de club.</span></span></div>
     </div>
     <div id="clgrid" style="position:absolute;left:150px;top:420px;width:1620px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px"></div>
     <div class="pose" id="pcl" data-pose="reflexion" style="left:1500px;top:40px;width:300px;height:367px"></div>
@@ -753,7 +758,7 @@ function splitChars(el) {
 // Campagne « Jusqu'à 2000 et plus » (accroche-6) : une position de joueur de club, le sacrifice du Fou en h7
 const CLUB_POS = { g1: "wK", f1: "wR", d1: "wQ", f3: "wN", d3: "wB", c1: "wB", e5: "wP", d4: "wP", f2: "wP", g2: "wP", h2: "wP", a2: "wP", b2: "wP",
   g8: "bK", f8: "bR", d8: "bQ", b7: "bB", d7: "bN", f7: "bP", g7: "bP", h7: "bP", e6: "bP", d5: "bP", a7: "bP", b6: "bP" };
-const b1 = makeBoard($("#b1"), /accroche-6/.test(location.search) ? CLUB_POS : START);
+const b1 = makeBoard($("#b1"), /accroche-([6-9]|1\d)\b/.test(location.search) ? CLUB_POS : START);   // campagne « Jusqu'à 2000 et plus » : accroche-6 à 10
 
 // S2
 const stops = ["Initiation", "Objectif 1400", "Objectif 1600", "Objectif 1800", "2000 et +"];
@@ -966,7 +971,7 @@ if (S.s8) {
 } else tl.set("#progress", { opacity: 0 }, 0);  // pas de barre de progression dans la boucle
 
 // ===== Accroches (éditions accroche-1 à 5) : une question, puis la réponse
-const HOOK = +((new URLSearchParams(location.search).get("edition") || "").match(/accroche-(\d)/) || [0, 1])[1];
+const HOOK = +((new URLSearchParams(location.search).get("edition") || "").match(/accroche-(\d+)/) || [0, 1])[1];
 const ACCROCHES = {
   1: { t: "Tu enchaînes les parties,", e: "mais ton classement ne bouge pas ?", pose: "gratte-tete", vis: "elo" },
   2: { t: "Tu joues beaucoup,", e: "mais tu n'as pas l'impression de progresser ?", pose: "course", vis: "parties" },
@@ -974,15 +979,22 @@ const ACCROCHES = {
   4: { t: "Tu regardes des vidéos d'échecs,", e: "mais tu ne progresses pas ?", pose: "menton", vis: "videos" },
   5: { t: "Tu veux progresser aux échecs,", e: "mais tu ne sais pas par où commencer ?", pose: "haussement", vis: "commencer" },
   6: { t: "Tu plafonnes à 1700", e: "depuis des mois ?", pose: "menton", vis: "plafond" },   // campagne « Jusqu'à 2000 et plus » : les joueurs confirmés
+  // Campagne « Jusqu'à 2000 et plus », une vidéo par thème (avis de Samuel) : leçons Objectif 1800, cap des 2000, Grands Maîtres, tournoi décortiqué
+  7: { t: "Ton prochain palier :", e: "l'Objectif 1800 ?", pose: "reflexion", vis: "palier", elo: [1640, 1700], bar: [20, 70], tag: "Prochain palier : 1800" },
+  8: { t: "Et si tu passais", e: "le cap des 2000 ?", pose: "idee", vis: "cap", elo: [1890, 1960], bar: [45, 90], tag: "2000 et plus en vue" },
+  9: { t: "Et si des Grands Maîtres", e: "t'aidaient à progresser ?", pose: "prof", vis: "gmi" },
+  10: { t: "Tu perds en tournoi", e: "sans savoir pourquoi ?", pose: "loupe", vis: "parties" },
 };
 window.ACCROCHES = ACCROCHES;
 const ACC = ACCROCHES[HOOK] || ACCROCHES[1];
 $("#hk-t").textContent = ACC.t; $("#hk-e").textContent = ACC.e.replace(/ ([?!])/g, "\u00a0$1");
 $("#phk").dataset.pose = ACC.pose + "-miroir"; $("#phk").innerHTML = window.MASCOT_POSES[ACC.pose + "-miroir"];   // tournée vers le visuel
 $("#sol-t").innerHTML = HOOK % 2 ? 'Nous avons <span class="e">la solution\u00a0!</span>' : 'Nous avons <span class="e">pensé à toi\u00a0!</span>';
-if (HOOK === 6) $("#sol-s").innerHTML = "On t'emmène <b>jusqu'à 2000 et plus</b>.";
+const SOL_S = { 6: "On t'emmène <b>jusqu'à 2000 et plus</b>.", 7: "Les leçons <b>Objectif 1800</b> t'attendent.", 8: "On t'emmène <b>jusqu'à 2000 et plus</b>.",
+  9: "Des <b>Maîtres et Grands Maîtres</b> à tes côtés.", 10: "Ton dernier tournoi, <b>décortiqué coup par coup</b>." };
+if (SOL_S[HOOK]) $("#sol-s").innerHTML = SOL_S[HOOK];
 // Campagne « Jusqu'à 2000 et plus » (accroche-6) : la suite de la vidéo parle aux joueurs de club
-const CLUB = HOOK === 6;
+const CLUB = HOOK >= 6;
 if (CLUB) {
   $$(".s1-w")[0].textContent = "Passe un cap,"; $$(".s1-w")[1].textContent = "vise les 2000.";
   $(".s1-l").innerHTML = "De l'Objectif 1600 à <b style=\"color:var(--yellow)\">2000 et plus.</b>";
@@ -991,8 +1003,12 @@ if (CLUB) {
   $("#elov").textContent = "1650"; $("#eloup").textContent = "▲ +430";
   [...$$("#elosvg .gt")].forEach((g, i) => { g.textContent = ["2100", "1900", "1700"][i]; });
   $("#eloMk").insertAdjacentHTML("beforebegin", '<line x1="0" x2="690" y1="95" y2="95" stroke="#fae361" stroke-width="3" stroke-dasharray="12 10" opacity=".8"/><text x="0" y="83" fill="#fae361" style="font:800 24px Manrope">2000</text>');
+  if (HOOK === 9) { $(".s4-w").closest(".h2").style.fontSize = "70px"; $$(".s4-w")[0].textContent = "Des Grands Maîtres"; $$(".s4-w")[1].innerHTML = 'à tes <span class="em">côtés.</span>'; }
 }
+const elo2 = e => `<small>Ton classement Elo</small><div class="big" id="hk-elo">${String(e).replace(/(\d)(\d{3})$/, "$1 $2")}</div><div class="hk-bar"><i id="hk-bar"></i></div><span class="tag" style="background:rgba(250,227,97,.16);color:#fae361">${ACC.tag}</span>`;
 $("#hk-vis").innerHTML = {
+  palier: elo2(ACC.elo?.[0]), cap: elo2(ACC.elo?.[0]),
+  gmi: `<small>Masterclass · en direct</small><div class="hk-gm">${[["auth-kamsky", "GMI", "Gata Kamsky"], ["auth-libiszewski", "GMI", "Fabien Libiszewski"]].map(([f, ti, n]) => `<div class="hk-gmc"><img src="../assets/captures/ee/hd/${f}.jpg"><b>${ti}</b><span>${n}</span></div>`).join("")}</div><span class="tag" style="background:rgba(255,90,106,.16);color:var(--red)">● En direct</span>`,
   elo: `<small>Ton classement Elo</small><div class="big" id="hk-elo">1 201</div><span class="tag">± 0 en 3 mois</span>
     <svg class="flat" viewBox="0 0 600 200"><path d="M0,100 L60,92 L110,108 L170,96 L230,104 L290,94 L350,110 L410,98 L470,104 L530,96 L600,102" fill="none" stroke="#93b9e2" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" id="hk-line"/><path d="M0,100 L600,100" stroke="rgba(255,90,106,.5)" stroke-width="3" stroke-dasharray="10 10"/></svg>`,
   parties: `<small>Parties jouées ce mois-ci</small><div class="big" id="hk-n">0</div><div class="hk-games">${["0-1", "1-0", "0-1", "½", "0-1", "1-0", "0-1", "0-1"].map(r => `<div class="hk-g"><b>${r}</b></div>`).join("")}</div>`,
@@ -1024,6 +1040,14 @@ scene("hook", ({ st, from, at, lines, dur }) => {
     const v = { n: 0 };
     st.to(v, { n: 247, duration: 2.2, ease: "power1.in", onUpdate: () => { $("#hk-n").textContent = Math.round(v.n); } }, .7);
     [0, 1, 2, 3, 4, 5].forEach(k => sfx(st, "pop", .75 + k * .36, { p: .9 + k * .05, g: .3 }));
+  } else if (ACC.vis === "palier" || ACC.vis === "cap") {
+    st.fromTo("#hk-bar", { width: ACC.bar[0] + "%" }, { width: ACC.bar[1] + "%", duration: 2, ease: "power2.out" }, .8);
+    const v = { e: ACC.elo[0] };
+    st.to(v, { e: ACC.elo[1], duration: 2, ease: "power2.out", onUpdate: () => { $("#hk-elo").textContent = "1 " + String(Math.round(v.e) - 1000).padStart(3, "0"); } }, .8);
+    sfx(st, "tick", 1.1, { g: .3 }); sfx(st, "tick", 1.6, { g: .3, p: 1.1 }); sfx(st, "ding", 2.6, { g: .35, p: 1.2 });
+  } else if (ACC.vis === "gmi") {
+    from(".hk-gmc", .7, { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .45, stagger: .25, ease: "back.out(1.8)" });
+    sfx(st, "pop", .8, { g: .4 }); sfx(st, "pop", 1.05, { p: 1.1, g: .4 }); sfx(st, "notif", 1.6);
   } else if (ACC.vis === "objectif") {
     st.fromTo("#hk-bar", { width: "8%" }, { width: "62%", duration: 2, ease: "power2.out" }, .8);
     const v = { e: 1600 };

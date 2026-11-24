@@ -51,6 +51,11 @@ EDITIONS = {
     **{f"accroche-{k}": ["hook", "sol", "s3", "prog", "s4", "forum", "s8"] for k in range(1, 6)},
     # Campagne « Jusqu'à 2000 et plus » : la question aux joueurs confirmés, puis le parcours jusqu'à 2000, les GMI, la revue
     "accroche-6": ["hook", "sol", "s1", "club", "s4", "prog", "s8"],
+    # Une vidéo par thème de la campagne (avis de Samuel)
+    "accroche-7": ["hook", "sol", "club", "prog", "s6", "s8"],     # leçons Objectif 1800
+    "accroche-8": ["hook", "sol", "prog", "s1", "s6", "s8"],       # passe le cap des 2000
+    "accroche-9": ["hook", "sol", "s4", "videos", "s8"],           # des Grands Maîtres à tes côtés
+    "accroche-10": ["hook", "sol", "s5", "s6", "s8"],              # ton tournoi décortiqué
 }
 music_only = "--music-only" in sys.argv
 edition = sys.argv[sys.argv.index("--edition") + 1] if "--edition" in sys.argv else "long"
