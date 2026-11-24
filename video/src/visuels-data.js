@@ -111,14 +111,14 @@ window.VISUELS = [
 
   // ---- Campagne « Jusqu'à 2000 et plus » : l'Académie n'est pas que pour débuter
   { id: "90-jusqu-a-2000", tpl: "chiffre", theme: "nuit", k: "Joueurs de club", n: "2000<b>&#8239;</b>+", t: "On t'y emmène.", e: "Pas à pas.", s: "L'Académie, de l'initiation aux joueurs confirmés.", pose: "drapeau" },
-  { id: "91-pas-que-pour-debuter", tpl: "accroche", theme: "soleil", k: "Joueurs confirmés", t: "Pas seulement", e: "pour débuter.", s: "Ouvertures, plans, finales : jusqu'à 2000 et plus.", shot: "masterclasses", pose: "idee" },
-  { id: "92-joueur-de-club", tpl: "accroche", theme: "rose", k: "Joueurs de club", t: "Joueur de club ?", e: "L'Académie aussi.", s: "Des leçons au niveau des tournois.", shot: "exercices", pose: "reflexion" },
+  { id: "91-pas-que-pour-debuter", tpl: "accroche", theme: "soleil", k: "Joueurs confirmés", t: "Pas seulement", e: "pour débuter.", s: "Nous t'accompagnons jusqu'à 2000+ !", shot: "masterclasses", pose: "idee" },
+  { id: "92-joueur-de-club", tpl: "accroche", theme: "rose", k: "Joueurs de club", t: "Tu joues en club ?", e: "Rejoins l'Académie !", s: "Ton club en ligne ouvert 24 h sur 24 !", shot: "exercices", pose: "reflexion" },
   { id: "93-cap-des-2000", tpl: "mascotte", theme: "ciel", k: "Joueurs de club", t: "Fais sauter", e: "le cap des 2000 !", pose: "hourra" },
-  { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1600", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Ta réponse en commentaire.", pos: FOUH7, pose: "menton" },
+  { id: "94-probleme-fou-h7", tpl: "puzzle", theme: "nuit", k: "Problème · Objectif 1600", t: "Les Blancs jouent", e: "et gagnent.", s: "Un grand classique des attaques sur le Roque. Donne ta réponse en commentaire !", pos: FOUH7, pose: "menton" },
   { id: "95-solution-fou-h7", tpl: "puzzle", theme: "menthe", k: "La solution", t: "1.Fxh7+ !", e: "le sacrifice grec.", s: "Après 1…Rxh7 2.Cg5+, la Dame arrive en h5.", pos: FOUH7_OK, hl: ["d3", "h7"], arrow: ["d3", "h7"], pose: "hourra" },
 
   { id: "96-plafond-1700", btn: "Je passe un cap", tpl: "chiffre", theme: "rose", k: "Joueurs de club", n: "1700", t: "depuis des mois ?", e: "On débloque ça.", s: "Leçons Objectif 1800 et masterclasses de Grands Maîtres.", pose: "menton" },
-  { id: "97-lecons-1800", btn: "Je passe un cap", tpl: "event", theme: "nuit", k: "Objectif 1800", t: "Des leçons", e: "de joueur de club.", facts: ["La triangulation", "La défense de Vancura", "L’initiative"], pose: "reflexion" },
+  { id: "97-lecons-1800", btn: "Je passe un cap", tpl: "event", theme: "nuit", k: "Objectif 1800", t: "Des leçons", e: "pour les joueurs de club.", facts: ["La triangulation", "La défense de Vancura", "L’initiative"], pose: "reflexion" },
 
   // ---- Identité de profil (formats propres)
   { id: "id-avatar-nuit", tpl: "id-avatar", theme: "nuit", only: [["avatar-1080x1080", 1080, 1080, "Photo de profil (tous réseaux)"]] },

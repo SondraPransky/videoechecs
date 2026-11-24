@@ -90,26 +90,26 @@ Le message : l'Académie n'est pas réservée aux débutants. Elle accompagne au
 
 **Pas seulement pour débuter** (`91-pas-que-pour-debuter/`)
 > Tu crois que l'Académie, c'est pour les débutants ? 🤔
-> Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de Grands Maîtres : de quoi progresser jusqu'à 2000 et plus.
+> Ouvertures, plans de milieu de jeu, finales techniques, masterclasses de Grands Maîtres : nous t'accompagnons jusqu'à 2000+ !
 
-**Joueur de club ?** (`92-joueur-de-club/`)
-> Joueur de club ? L'Académie aussi. 🏆
-> Des leçons au niveau des tournois, des exercices classés jusqu'au niveau 2000 et plus, et un tournoi en ligne chaque semaine pour mettre tout ça en pratique.
+**Tu joues en club ?** (`92-joueur-de-club/`)
+> Tu joues en club ? Rejoins l'Académie ! 🏆
+> Ton club en ligne ouvert 24 h sur 24 : des exercices classés jusqu'au niveau 2000 et plus, et un tournoi en ligne chaque semaine pour mettre tout ça en pratique.
 
 **Le cap des 2000** (`93-cap-des-2000/`)
 > Fais sauter le cap des 2000. 📈
 > Chaque module validé te rapproche du suivant, et ta courbe Elo le montre.
 
 **Problème, puis solution le lendemain** (`94-probleme-fou-h7/`, puis `95-solution-fou-h7/`)
-> Objectif 1600 : les Blancs jouent et gagnent. Tu vois le coup ? Réponse en commentaire 👇
+> Objectif 1600 : les Blancs jouent et gagnent. Tu vois le coup ? Donne ta réponse en commentaire 👇
 
 > Solution : 1.Fxh7+ ! Rxh7 2.Cg5+ et la Dame arrive en h5. C'est le sacrifice grec, un grand classique des attaques sur le Roque. On le travaille dans l'Académie, avec beaucoup d'autres.
 
 **1700 depuis des mois ?** (`96-plafond-1700/`)
 > 1700 depuis des mois ? 😤 Leçons Objectif 1800, masterclasses de Grands Maîtres, exercices : on débloque ça ensemble. 👉 echecs.com/academie
 
-**Des leçons de joueur de club** (`97-lecons-1800/`)
-> Triangulation, défense de Vancura, initiative… L'Académie, ce sont aussi des leçons de joueur de club, niveau 1800, avec vidéos, exercices et quiz. 👉 echecs.com/academie
+**Des leçons pour les joueurs de club** (`97-lecons-1800/`)
+> Triangulation, défense de Vancura, initiative… L'Académie, ce sont aussi des leçons pour les joueurs de club, niveau 1800, avec vidéos, exercices et quiz. 👉 echecs.com/academie
 
 **Vidéo** (`accroche-6`)
 > Tu plafonnes à 1700 depuis des mois ? Triangulation, défense de Vancura, initiative, masterclasses de Grands Maîtres : on t'emmène jusqu'à 2000 et plus. 👉 echecs.com/academie
