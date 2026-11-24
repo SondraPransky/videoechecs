@@ -38,7 +38,8 @@ IMG = {
     "oups": PACK / "images/37-oups/37-oups-lien-1200x630.jpg",
     "puzzle": PACK / "images/14-probleme-mat-en-1/14-probleme-mat-en-1-lien-1200x630.jpg",
 }
-if PROFIL == "ee": IMG = {"logo": IMG["logo"], **{f"logo-{c}": ICI.parent / f"assets/brand/europe-echecs/logo-europe-echecs-{c}.png" for c in ("blanc", "jaune")}}   # série Europe Échecs : sans les visuels du pack Académie
+if PROFIL == "ee": IMG = {"logo": IMG["logo"], **{f"logo-{c}": ICI.parent / f"assets/brand/europe-echecs/logo-europe-echecs-{c}.png" for c in ("blanc", "jaune")},
+                       "damier": ICI.parent / "assets/brand/europe-echecs/email/damier.png", **{f"piece-{p}": ICI.parent / f"assets/brand/europe-echecs/email/piece-{p}.png" for p in "KQRBNP"}}   # série Europe Échecs : sans les visuels du pack Académie
 BANDEAUX = [] if PROFIL == "ee" else sorted(f.name[6:-13] for f in (PACK / "images/00-emails").glob("email-*-1200x480.jpg"))
 for b in BANDEAUX: IMG["b-" + b] = PACK / f"images/00-emails/email-{b}-1200x480.jpg"
 from PIL import Image
@@ -203,6 +204,9 @@ MENTION = "echecs.com · Europe Échecs · [ADRESSE_POSTALE]"
 PIED_COMPTE = "Cet e-mail concerne ton compte : il est envoyé même si tu as refusé les e-mails d'information."
 SUIS = "Suis-nous"
 TITRE_SUR_NUIT = False   # True : surtitre et titre dans un bandeau sur le fond nuit de l'en-tête (série ee)
+PIECE_RUBRIQUE = {}   # série ee : une pièce en filigrane à droite du titre, selon la rubrique (K, Q, R, B, N, P)
+DAMIER = False        # série ee : bande en damier jaune et marine sous l'en-tête, à la place du filet jaune
+PIED_NUIT = False     # série ee : pied de page sur fond marine, avec le logo blanc
 REMAP = {}   # teintes propres à une série : chaque couleur de base remplacée partout (styles et mode sombre), voir emails-contenu-ee.py
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
@@ -222,10 +226,15 @@ def page(e):
     entete = ENTETE.replace("{IMG}/logo.png", "{IMG}/" + e.get("logo", "logo") + ".png")   # logo décliné par e-mail (série ee)
     if TITRE_SUR_NUIT:   # le titre passe dans l'en-tête, en blanc, la suite et le surtitre dans le bleu clair de la série
         t_nuit = t1.strip() + (f' <span style="font-family:{SERIF};{TITRE_SUITE};color:{C["clair"]}">{t2.strip()}</span>' if t2 else "")
-        bandeau = (f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:4px 32px 30px">'
-                   f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C["clair"]};margin:0 0 12px">&mdash;&nbsp;{e["sur"]}</div>'
-                   f'<h1 style="margin:0;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:#ffffff">{t_nuit}</h1></td></tr>'
-                   f'<tr><td height="4" style="height:4px;background:{C["clair"]};font-size:0;line-height:0">&nbsp;</td></tr>')
+        texte = (f'<div style="font-family:{SANS};font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:{C["clair"]};margin:0 0 12px">&mdash;&nbsp;{e["sur"]}</div>'
+                 f'<h1 style="margin:0;font-family:{SERIF};font-weight:{GRAS};font-size:26px;line-height:1.2;color:#ffffff">{t_nuit}</h1>')
+        piece = PIECE_RUBRIQUE.get(e.get("cat"))
+        if piece:   # la pièce en filigrane, posée sur le damier
+            texte = (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="bottom" style="padding:0 0 30px">{texte}</td>'
+                     f'<td width="78" valign="bottom" align="right" style="padding:0 0 0 12px"><img src="{{IMG}}/piece-{piece}.png" width="70" alt="" style="display:block;width:70px;height:auto;border:0"></td></tr></table>')
+        bandeau = (f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:4px 32px {0 if piece else 30}px">{texte}</td></tr>'
+                   + (f'<tr><td style="background:{C["nuit"]};font-size:0;line-height:0"><img src="{{IMG}}/damier.png" width="600" alt="" style="display:block;width:100%;height:auto;border:0"></td></tr>' if DAMIER
+                      else f'<tr><td height="4" style="height:4px;background:{C["clair"]};font-size:0;line-height:0">&nbsp;</td></tr>'))
         sur = h1 = ""
     return f'''<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting">
@@ -242,12 +251,22 @@ def page(e):
 {corps}
 <p style="margin:26px 0 0;font:16px/1.6 {SANS};color:{C['texte']}">{e.get('sign', SIGNATURE)}</p>
 </td></tr>
-<tr><td class="m-pad" style="padding:22px 32px 6px;border-top:1px solid {C['filet']};font-family:{SANS};font-weight:700;font-size:14px;color:{C['texte']}">
-{"&nbsp;· ".join(f'<a href="{l}" style="color:{C['texte']};text-decoration:none">{t}</a>' for t, l in LIENS_PIED)}</td></tr>
+{pied_liens(e)}
 {f'<tr><td class="m-pad" style="padding:4px 32px 0;font-family:{SANS};font-size:12px;color:{C["gris"]}">' + SUIS + ' : ' + " · ".join(f'<a href="{l}" style="color:{C["gris"]}">{t}</a>' for t, l in RESEAUX) + '</td></tr>' if RESEAUX else ""}
-<tr><td class="m-pad" style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C['gris']}">{pied}<br>{MENTION}</td></tr>
+{pied_mention(pied)}
 </table></td></tr></table></body></html>'''
 
+def pied_liens(e):
+    if PIED_NUIT:   # logo blanc, puis les liens du site en blanc, sur la marine de l'en-tête
+        return (f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:26px 32px 8px"><img src="{{IMG}}/logo-blanc.png" width="112" alt="Europe Échecs" style="display:block;width:112px;height:auto;border:0"></td></tr>'
+                f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:10px 32px 4px;font-family:{SANS};font-weight:700;font-size:14px;color:#ffffff">'
+                + "&nbsp;· ".join(f'<a href="{l}" style="color:#ffffff;text-decoration:none">{t}</a>' for t, l in LIENS_PIED) + '</td></tr>')
+    return (f'<tr><td class="m-pad" style="padding:22px 32px 6px;border-top:1px solid {C["filet"]};font-family:{SANS};font-weight:700;font-size:14px;color:{C["texte"]}">'
+            + "&nbsp;· ".join(f'<a href="{l}" style="color:{C["texte"]};text-decoration:none">{t}</a>' for t, l in LIENS_PIED) + '</td></tr>')
+def pied_mention(pied):
+    if PIED_NUIT:
+        return f'<tr><td class="m-pad" style="background:{C["nuit"]};padding:12px 32px 28px;font:12px/1.6 {SANS};color:#a9bccd">{pied.replace("color:#6b6b66", "color:#d6e2ee")}<br>{MENTION}</td></tr>'
+    return f'<tr><td class="m-pad" style="padding:12px 32px 26px;font:12px/1.6 {SANS};color:{C["gris"]}">{pied}<br>{MENTION}</td></tr>'
 L = lambda nom: f"[LIEN_{nom}]"
 E = []
 def mail(**k): E.append(k)

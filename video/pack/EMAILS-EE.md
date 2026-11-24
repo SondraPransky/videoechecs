@@ -59,7 +59,7 @@ Réponses de l'équipe (23 novembre 2026), confirmées par Raph :
 - **Contact de la revue (16, 30)** : le support, par la page d'aide.
 - **Éditeur (pied de page)** : IDEAL SAS, 114 quai Louis Blériot, 75016 Paris.
 - **Vidéos de la semaine (28)** : lundi La Minute Stratégie, mardi Coup de Légende, mercredi Calcul Gagnant, vendredi La Minute Finale ;
-  le dimanche, une ou deux vidéos par mois (les semaines concernées, ajouter une 5e carte identique). Jour d'envoi à fixer.
+  le dimanche, une ou deux vidéos par mois (les semaines concernées, ajouter une 5e carte identique). Envoi le dimanche après-midi.
 - **Pack Jeu+ → Pack Intégral (22)** : pas en place aujourd'hui ; proposition à décider.
 - **Reconquête (21)** : pas d'offre de retour pour l'instant ; l'encadré est retiré.
 - **Abonnement expiré** : nouvel e-mail 32 à J+1 après la fin d'un abonnement de 1 ou 2 ans (avant la reconquête à J+30).
@@ -206,7 +206,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `25-gratuit-inactif-7j.html` | Comptes gratuits, 7 jours sans connexion, une seule fois par période d'inactivité · proposition, à valider | [PSEUDO], une partie sur Europe Échecs ? | Choisissez votre cadence et la force de votre adversaire : la partie commence en un clic. | Information (désinscription possible) |
 | `26-gratuit-inactif-21j.html` | Comptes gratuits, 21 jours sans connexion, une seule fois · proposition, à valider | Ce qui s’est passé sur Europe Échecs ces 3 semaines | [NOUVEAUTE_1], et ce qui vous attend sur la zone de jeu. | Information (désinscription possible) |
 | `27-gratuit-inactif-45j.html` | Comptes gratuits, 45 jours sans connexion, dernière relance (ensuite, plus d'e-mails d'information) · proposition, à valider | On continue à vous écrire, [PSEUDO] ? | Dites-nous si nos e-mails vous intéressent encore. Sinon, nous arrêtons de vous écrire. | Information (désinscription possible) |
-| `28-videos-de-la-semaine.html` | Chaque semaine, après la Minute Finale du vendredi (jour et heure à fixer), à tous les comptes qui l'acceptent · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | Stratégie, légende, calcul et finale : vos quatre rendez-vous de la semaine, à voir quand vous voulez. | Information (désinscription possible) |
+| `28-videos-de-la-semaine.html` | Chaque dimanche après-midi (bilan de la semaine : lundi, mardi, mercredi, vendredi, et le dimanche quand il y a une vidéo), à tous les comptes qui l'acceptent · proposition, à valider | Les vidéos de la semaine sur Europe Échecs | Stratégie, légende, calcul et finale : vos quatre rendez-vous de la semaine, à voir quand vous voulez. | Information (désinscription possible) |
 
 ### Newsletter
 
@@ -224,7 +224,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
-| `38-evenement-partie-du-jour.html` | Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie ») · proposition, à valider · Mailjet | [EVENEMENT], partie [NUMERO_PARTIE] : [RESULTAT_PARTIE] | Le score est de [SCORE]. Rejouez la partie commentée, et rendez-vous [PROCHAINE_PARTIE] pour la suivante. | Information (désinscription possible) |
+| `38-evenement-partie-du-jour.html` | Pendant un grand événement diffusé en direct (ex. le championnat du monde), le soir de chaque partie, à ceux qui s'y inscrivent (case « Recevoir le résumé de chaque partie ») · proposition, à valider · Mailjet | [EVENEMENT], partie [NUMERO_PARTIE] : [RESULTAT_PARTIE] | [JOUEUR_1] [POINTS_1], [JOUEUR_2] [POINTS_2]. Rejouez la partie commentée, et rendez-vous [PROCHAINE_PARTIE] pour la suivante. | Information (désinscription possible) |
 | `39-noel-idees-cadeaux.html` | Début décembre, à tous les comptes qui acceptent les e-mails d'information · proposition, à valider · Mailjet | Vos idées cadeaux échecs pour Noël | Pour un passionné d’histoire, un joueur de club ou un fan : livres, revue, abonnements, vêtements et cartes cadeaux. | Information (désinscription possible) |
 | `40-noel-derniere-livraison.html` | Le dernier jour de commande pour une livraison avant Noël (date à fixer avec la boutique), sauf à ceux qui ont commandé dans la semaine · proposition, à valider · Mailjet | Commandez aujourd’hui pour être livré avant Noël | Dernier jour pour recevoir livres et échiquiers avant le 25 décembre. Ensuite, il reste la carte cadeau. | Information (désinscription possible) |
 | `41-noel-carte-cadeau.html` | Du 22 au 24 décembre, une seule fois, sauf à ceux qui ont acheté une carte cadeau · proposition, à valider · Mailjet | Un cadeau d’échecs, même le 24 décembre | La carte cadeau Europe Échecs arrive en PDF : prête à imprimer ou à envoyer, sans attendre la livraison. | Information (désinscription possible) |
@@ -241,7 +241,7 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `44-votre-mois.html` | Le 1er de chaque mois, aux comptes qui ont joué au moins une partie dans le mois, s'ils acceptent les e-mails d'information · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Votre mois de [MOIS_BILAN] sur Europe Échecs | [NB_PARTIES] parties, [VARIATION_ELO] points Elo et [NB_EXERCICES] exercices réussis. | Information (désinscription possible) |
-| `45-cap-franchi.html` | Quand un joueur franchit un cap : 100ᵉ partie, nouveau record Elo, record battu en mode challenge (un seul e-mail par semaine au plus) · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Bravo [PSEUDO] : [CAP_FRANCHI] | [DETAIL_CAP]. On continue sur cette lancée ? | Information (désinscription possible) |
+| `45-cap-franchi.html` | Quand un joueur franchit un cap : 100ᵉ partie, nouveau record Elo, record battu en mode challenge (un seul e-mail par semaine au plus) · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Bravo [PSEUDO] : [CAP_FRANCHI] | Félicitations, [DETAIL_CAP]. On continue sur cette lancée ? | Information (désinscription possible) |
 | `49-votre-annee.html` | Début janvier, aux comptes qui ont joué dans l'année, s'ils acceptent les e-mails d'information · proposition, à valider · données à créer côté site (voir DEVELOPPEURS-EE.md) | Votre année [ANNEE] sur Europe Échecs | [NB_PARTIES_AN] parties, votre meilleur Elo à [ELO_MAX] et votre plus belle victoire. | Information (désinscription possible) |
 
 ### Propositions · satisfaction et fidélité
