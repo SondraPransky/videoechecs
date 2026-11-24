@@ -264,6 +264,23 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | `56-retour-en-stock.html` | Quand un produit épuisé revient en stock, à ceux qui ont demandé à être prévenus (une seule fois) · proposition, à valider · envoyé par la boutique | [NOM_ARTICLE_1] est de retour en stock | Vous avez demandé à être prévenu : il est de nouveau disponible sur la boutique. | Information (désinscription possible) |
 | `57-panier-boutique.html` | 2 heures après un panier laissé sur la boutique par un client connecté, une seule fois par panier · proposition, à valider · envoyé par la boutique | Vous avez oublié quelque chose | [NOM_ARTICLE_1] vous attend dans votre panier. | Information (désinscription possible) |
 
+### Propositions · bien démarrer
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `58-premiers-pas-tactique.html` | J+1 après la souscription d'un Pack Jeu+ ou d'un Pack Intégral, sauf s'il a déjà résolu un exercice · proposition, à valider | Votre premier défi tactique vous attend | Des milliers d’exercices en illimité et un mode challenge : battez votre premier record aujourd’hui. | Information (désinscription possible) |
+| `59-premiers-pas-videos.html` | J+3 après la souscription d'un Pack Intégral, sauf s'il a déjà regardé une vidéo · proposition, à valider | Vos 4 rendez-vous vidéo de la semaine | Stratégie le lundi, légendes le mardi, calcul le mercredi, finales le vendredi : tout est dans votre Pack Intégral. | Information (désinscription possible) |
+| `60-premiers-pas-revue.html` | J+7 après la souscription d'un Pack Intégral, sauf s'il a déjà ouvert la revue en ligne · proposition, à valider | Votre revue Europe Échecs est aussi en ligne | Le dernier numéro est inclus dans votre Pack Intégral, avec ses parties à rejouer coup par coup. | Information (désinscription possible) |
+| `61-abonne-inactif.html` | Abonnés payants sans aucune vidéo, exercice ni partie depuis 21 jours, une seule fois par période d'inactivité · proposition, à valider | Ce que vous avez manqué ces 3 semaines | De nouvelles vidéos et de nouveaux exercices vous attendent dans votre [SERVICE]. | Information (désinscription possible) |
+
+### Propositions · d'un produit à l'autre
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `62-livre-auteur-en-video.html` | 15 jours après la livraison d'un livre dont l'auteur a des vidéos sur Europe Échecs, à ceux qui n'ont pas le Pack Intégral · proposition, à valider | [AUTEUR_LIVRE] vous attend aussi en vidéo | L’auteur de votre livre présente [SERIE_AUTEUR] chaque semaine sur Europe Échecs. | Information (désinscription possible) |
+| `63-choisir-ses-emails.html` | J+2 après la création d'un compte, une seule fois (et lien permanent dans le pied des e-mails d'information) · proposition, à valider | Choisissez ce que vous voulez recevoir | Actualités, vidéos, problème de la semaine, boutique : cochez ce qui vous intéresse, rien de plus. | Information (désinscription possible) |
+| `64-debutant-vers-academie.html` | Comptes gratuits débutants (classement de départ ou moins de [SEUIL_ELO] Elo) après leurs 10 premières parties, une seule fois · proposition, à valider | Apprendre les échecs pas à pas, avec l’Académie | Des leçons claires, du premier coup aux premiers tournois. Les 6 premières leçons sont offertes. | Information (désinscription possible) |
+
 ## Variables
 
 La liste complète est générée dans `build/_emails-ee_variables.txt`.

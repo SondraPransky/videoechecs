@@ -602,6 +602,81 @@ EXEMPLES.update({"PRENOM_CLIENT": "Léa", "URL_IMAGE_ARTICLE_COMMANDE_1": "img/c
 EXEMPLES.update({k: "XX,XX €" for k in ("PRIX_ARTICLE_1", "PRIX_ARTICLE_2", "SOUS_TOTAL", "FRAIS_PORT", "TOTAL", "MONTANT_REMBOURSE")})
 EXEMPLES.update({"DATE_LIVRAISON_ESTIMEE": "JJ/MM/AAAA", "NUMERO_SUIVI": "XXXXXXXXXXXXX"})
 
+# ---------- 12. Propositions : bien démarrer, ne pas décrocher, d'un produit à l'autre ----------
+P_DEMARRER, P_PONTS = "Propositions · bien démarrer", "Propositions · d'un produit à l'autre"
+
+def etapes(items):   # étapes numérotées : pastille jaune, titre, texte
+    return ('<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:6px 0 22px">' + "".join(
+        f'<tr><td width="52" valign="top" style="padding:0 0 18px"><div style="width:38px;height:38px;border-radius:50%;background:{C["jaune"]};font:{GRAS} 18px/38px {SERIF};color:{C["nuit"]};text-align:center">{i}</div></td>'
+        f'<td valign="top" style="padding:2px 0 18px"><div style="font:{GRAS} 17px/1.3 {SERIF};color:{C["texte"]}">{titre}</div><div style="margin-top:4px;font:15px/1.5 {SANS};color:{C["gris"]}">{texte}</div></td></tr>'
+        for i, (titre, texte) in enumerate(items, 1)) + '</table>')
+
+def sujet(icone, titre, texte, cle):   # une case à cocher du centre de préférences
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 10px;border:1px solid #e4e1d8;border-radius:12px"><tr>'
+            f'<td width="44" align="center" valign="middle" style="padding:14px 0 14px 14px;font-size:24px;line-height:1">{icone}</td>'
+            f'<td valign="middle" style="padding:14px 12px"><div style="font:{GRAS} 16px/1.3 {SERIF};color:{C["texte"]}">{titre}</div><div style="margin-top:2px;font:14px/1.4 {SANS};color:{C["gris"]}">{texte}</div></td>'
+            f'<td width="96" align="right" valign="middle" style="padding:14px 14px 14px 0"><a href="[LIEN_PREFERENCES]?sujet={cle}" style="display:inline-block;padding:8px 14px;border-radius:999px;background:{C["fond"]};font:bold 14px {SANS};color:{C["nuit"]};text-decoration:none;white-space:nowrap">Je veux</a></td></tr></table>')
+
+# Premiers pas des nouveaux abonnés : 3 e-mails, on sort de la série dès qu'on a utilisé le service présenté
+mail(id="58-premiers-pas-tactique", cat=P_DEMARRER, quand="J+1 après la souscription d'un Pack Jeu+ ou d'un Pack Intégral, sauf s'il a déjà résolu un exercice" + INFO_PROPOSITION,
+     objet="Votre premier défi tactique vous attend", pre="Des milliers d'exercices en illimité et un mode challenge : battez votre premier record aujourd'hui.", sur="Bien démarrer · 1/3", titre="Votre premier | défi tactique.",
+     corps=[para("Bonjour [PSEUDO], votre <b>[SERVICE]</b> vous ouvre la zone d'entraînement tactique en illimité. Le meilleur moyen de commencer :"),
+            etapes([("Ouvrez la zone d'entraînement", "Les exercices sont en illimité avec votre Pack : résolvez-en autant que vous voulez."),
+                    ("Lancez le mode challenge", "Enchaînez les exercices et visez le meilleur score."),
+                    ("Battez votre record", "Revenez demain pour faire mieux : quelques minutes par jour suffisent pour progresser.")]),
+            bouton("Résoudre mon premier exercice", "https://www.europe-echecs.com/exercice-tactique")])
+mail(id="59-premiers-pas-videos", cat=P_DEMARRER, quand="J+3 après la souscription d'un Pack Intégral, sauf s'il a déjà regardé une vidéo" + INFO_PROPOSITION,
+     objet="Vos 4 rendez-vous vidéo de la semaine", pre="Stratégie le lundi, légendes le mardi, calcul le mercredi, finales le vendredi : tout est dans votre Pack Intégral.", sur="Bien démarrer · 2/3", titre="Vos rendez-vous | vidéo.",
+     corps=[para("Bonjour [PSEUDO], chaque semaine, plus de 4 nouvelles vidéos vous attendent avec votre <b>Pack Intégral</b>. Voici les dernières :"),
+            video_semaine(1, "La Minute Stratégie", "Lundi"), video_semaine(2, "Coup de Légende", "Mardi"),
+            bouton("Voir toutes les vidéos", L("VIDEOS")),
+            para(petit("Calcul Gagnant le mercredi et La Minute Finale le vendredi complètent la semaine. Toutes les anciennes vidéos restent disponibles à la demande."))])
+mail(id="60-premiers-pas-revue", cat=P_DEMARRER, quand="J+7 après la souscription d'un Pack Intégral, sauf s'il a déjà ouvert la revue en ligne" + INFO_PROPOSITION,
+     objet="Votre revue Europe Échecs est aussi en ligne", pre="Le dernier numéro est inclus dans votre Pack Intégral, avec ses parties à rejouer coup par coup.", sur="Bien démarrer · 3/3", titre="Votre revue, | en ligne.",
+     corps=[para("Bonjour [PSEUDO], le saviez-vous ? La revue Europe Échecs est incluse dans votre <b>Pack Intégral</b>. Voici le numéro du mois :"),
+            couverture(),
+            bouton("Lire la revue", "[LIEN_REVUE_EN_LIGNE]"),
+            para(petit("Les parties commentées sont à rejouer en ligne, coup par coup, sur l'échiquier."))],
+     sign="Bonne lecture,<br><b>L'équipe d'Europe Échecs</b>")
+
+# Abonné payant qui décroche
+mail(id="61-abonne-inactif", cat=P_DEMARRER, quand="Abonnés payants sans aucune vidéo, exercice ni partie depuis 21 jours, une seule fois par période d'inactivité" + INFO_PROPOSITION,
+     objet="Ce que vous avez manqué ces 3 semaines", pre="De nouvelles vidéos et de nouveaux exercices vous attendent dans votre [SERVICE].", sur="Votre abonnement", titre="Ça vous attend | depuis 3 semaines.",
+     corps=[para("Bonjour [PSEUDO], depuis votre dernière visite, votre <b>[SERVICE]</b> s'est enrichi. Quelques minutes suffisent pour reprendre :"),
+            video_semaine(3, "Calcul Gagnant", "Mercredi"), video_semaine(4, "La Minute Finale", "Vendredi"),
+            bouton("Reprendre là où j'en étais", L("VIDEOS")),
+            para(petit("Envie de jouer plutôt ? Une partie vous attend dans la zone de jeu, à la cadence de votre choix."))])
+
+# D'un produit à l'autre
+mail(id="62-livre-auteur-en-video", cat=P_PONTS, quand="15 jours après la livraison d'un livre dont l'auteur a des vidéos sur Europe Échecs, à ceux qui n'ont pas le Pack Intégral" + INFO_PROPOSITION,
+     objet="[AUTEUR_LIVRE] vous attend aussi en vidéo", pre="L'auteur de votre livre présente [SERIE_AUTEUR] chaque semaine sur Europe Échecs.", sur="De la page à l'écran", titre="Votre auteur, | en vidéo.",
+     corps=[para("Bonjour [PRENOM_CLIENT], vous lisez le livre de <b>[AUTEUR_LIVRE]</b> ? Il vous donne aussi rendez-vous chaque semaine sur Europe Échecs, en vidéo :"),
+            coach("[AUTEUR_LIVRE]", "[TITRE_AUTEUR]", "[URL_PHOTO_AUTEUR]", "[SERIE_AUTEUR] chaque [JOUR_SERIE_AUTEUR]"),
+            video_semaine(4, "La Minute Finale", "Vendredi"),
+            bouton("Découvrir le Pack Intégral", L("ABONNEMENTS")),
+            para(petit("Toutes ses vidéos, et celles de nos autres auteurs, sont incluses dans le Pack Intégral."))])
+mail(id="63-choisir-ses-emails", cat=P_PONTS, quand="J+2 après la création d'un compte, une seule fois (et lien permanent dans le pied des e-mails d'information)" + INFO_PROPOSITION,
+     objet="Choisissez ce que vous voulez recevoir", pre="Actualités, vidéos, problème de la semaine, boutique : cochez ce qui vous intéresse, rien de plus.", sur="Vos e-mails", titre="À vous | de choisir.",
+     corps=[para("Bonjour [PSEUDO], pour ne recevoir que ce qui vous intéresse, choisissez vos sujets :"),
+            sujet("📰", "L'actualité des échecs", "La newsletter : tournois, interviews, analyses", "actualites"),
+            sujet("🎬", "Les vidéos de la semaine", "Le dimanche, le récapitulatif des nouvelles vidéos", "videos"),
+            sujet("♟️", "Le problème de la semaine", "Une position à résoudre, la solution en un clic", "probleme"),
+            sujet("📖", "La revue", "Le sommaire de chaque nouveau numéro", "revue"),
+            sujet("🛍️", "La boutique", "Livres, échiquiers et offres du moment", "boutique"),
+            para(petit("Vous pourrez changer d'avis à tout moment dans « Mon compte ». Les e-mails liés à votre compte et à vos commandes sont toujours envoyés."))])
+mail(id="64-debutant-vers-academie", cat=P_PONTS, quand="Comptes gratuits débutants (classement de départ ou moins de [SEUIL_ELO] Elo) après leurs 10 premières parties, une seule fois" + INFO_PROPOSITION,
+     objet="Apprendre les échecs pas à pas, avec l'Académie", pre="Des leçons claires, du premier coup aux premiers tournois. Les 6 premières leçons sont offertes.", sur="Progresser", titre="Apprenez | pas à pas.",
+     corps=[para("Bonjour [PSEUDO], vous avez joué vos 10 premières parties sur Europe Échecs. Bravo ! Pour progresser plus vite, l'<b>Académie echecs.com</b>, notre école en ligne, vous guide leçon après leçon :"),
+            etapes([("Initiation", "L'échiquier, l'échec et mat, le roque, les principes d'ouverture : des bases solides."),
+                    ("Objectif 1400", "Créer et parer une menace, la règle du carré, les pièges d'ouverture."),
+                    ("Et ensuite", "Objectif 1600, 1800 et 2000 et plus, avec des exercices et des quiz à chaque leçon.")]),
+            bouton("Essayer les 6 leçons offertes", "[LIEN_ACADEMIE]"),
+            para(petit("L'Académie echecs.com fait partie du même groupe qu'Europe Échecs."))])
+
+_I.open(ICI / "assets/captures/ee/hd/auth-quenehen.jpg").convert("RGB").resize((200, 200)).save(APER / "img/auteur-exemple.jpg", quality=88)
+EXEMPLES.update({"AUTEUR_LIVRE": "Marc Quenehen", "TITRE_AUTEUR": "Auteur", "URL_PHOTO_AUTEUR": "img/auteur-exemple.jpg", "SERIE_AUTEUR": "La Minute Finale", "JOUR_SERIE_AUTEUR": "vendredi",
+    "TITRE_VIDEO_1": "Minute Stratégie #282", "TITRE_VIDEO_2": "Coup de Légende #148", "TITRE_VIDEO_3": "Calcul Gagnant #147", "TITRE_VIDEO_4": "Minute Finale #222", "SEUIL_ELO": "1200"})
+
 # Exemples des aperçus : vraies séries et vrais auteurs du catalogue vidéo ; jours, titres et prix restent à fournir
 from PIL import Image as _I
 for _n, _f in ((1, "p-minute-strategie"), (2, "p-coup-de-legende"), (3, "p-calcul-gagnant"), (4, "p-minute-finale")):
@@ -625,9 +700,9 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
-LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo", P_COMMANDE: "logo-jaune"}
+LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo", P_COMMANDE: "logo-jaune", P_DEMARRER: "logo-blanc", P_PONTS: "logo-jaune"}
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]
 # Identité visuelle : damier sous l'en-tête, pièce en filigrane par rubrique, pied marine
 DAMIER = PIED_NUIT = True
 PIECE_RUBRIQUE = {"Compte": "K", "Découverte": "N", "Abonnement": "Q", "Nouvelles formules": "Q", "Revue": "R", "Cadeaux": "B",
-                  P_PAIEMENT: "R", P_FIDELITE: "K", P_GRATUITS: "N", P_NEWS: "B", P_BOUTIQUE: "P", P_TEMPS: "N", P_RDV: "R", P_CHIFFRES: "K", P_FIDELE: "Q", P_COMMANDE: "P"}
+                  P_PAIEMENT: "R", P_FIDELITE: "K", P_GRATUITS: "N", P_NEWS: "B", P_BOUTIQUE: "P", P_TEMPS: "N", P_RDV: "R", P_CHIFFRES: "K", P_FIDELE: "Q", P_COMMANDE: "P", P_DEMARRER: "N", P_PONTS: "B"}
