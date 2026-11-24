@@ -388,7 +388,7 @@ const FAM = {
         <div style="width:${sw}px;flex:none;position:relative;background:${t.panel}">${trapu ? `<div style="height:${r(H * .19)}px;display:flex;align-items:center;padding-left:${r(H * .07)}px">${logo(t, H * .075, "", true)}</div>${scene(c, t, sw, H - r(H * .19))}` : scene(c, t, sw, H)}</div>
         <div data-fit data-min="${r(H * .1)}" style="flex:1;min-width:0;padding:${r(H * .1)}px ${r(H * .12)}px;display:flex;flex-direction:column;justify-content:center;gap:${r(H * .065)}px;overflow:hidden">
           <div class="t" style="font-size:${fsT}px;line-height:1.08;font-weight:700;letter-spacing:-.01em">${titre(c, "<br>")}</div>
-          ${large && H >= 200 && c.sub ? `<div style="font-size:${r(H * .08)}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
+          ${large && H >= 200 && c.sub ? `<div style="font-size:${r(H * (c.sub.length > 70 ? .068 : .08))}px;line-height:1.3;color:${t.sub}">${T(c.sub)}</div>` : ""}
           <div style="display:flex;align-items:center;gap:${r(H * .08)}px;margin-top:${r(H * .02)}px">${btn(t, (f.w < 700 && c.cta.length > 16) || (trapu && c.cta.length > 16) || c.cta.length > 24 ? (c.ctas || c.cta) : c.cta, r(H * .2), r(H * .08))}${prixChip(c, t, r(H * .085), large && !trapu)}${large && !trapu && c.cta.length <= 20 ? logo(t, H * .11, "margin-left:auto") : ""}</div>
         </div></div>`, r(H * .05));
     }
