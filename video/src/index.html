@@ -856,10 +856,15 @@ if (CLUB6) {
   $("#ex1400 .ltitle").textContent = "Les Blancs jouent et annulent. Quel coup ?";
   $("#res6 span").innerHTML = '1.<img class="fig" src="../assets/pieces/wR.png">b8+ ! — et …<img class="fig" src="../assets/pieces/bR.png">xb8 est pat';
   $("#qz1600 .lchip").textContent = "Objectif 1800";
-  $("#qz1600 .ltitle").textContent = "Défense de Vancura : où place-t-on la Tour ?";
-  $("#qa").firstChild.textContent = "A · Sur la sixième rangée";
-  $$("#qz1600 .qx")[0].textContent = "B · Derrière le pion";
-  $$("#qz1600 .qx")[1].textContent = "C · Sur la huitième rangée";
+  // Un quiz différent selon la vidéo, pour ne pas répéter la même leçon (quiz 82 et 85 de l'Académie) :
+  // la triangulation, sauf dans l'accroche 8 qui la montre déjà sur l'échiquier (défense de Vancura)
+  const Q6 = /accroche-8(?!\d)/.test(location.search)
+    ? ["Défense de Vancura : où place-t-on la Tour ?", "Sur la sixième rangée", "Derrière le pion", "Sur la huitième rangée"]
+    : ["Triangulation, trait aux Noirs : que se passe-t-il ?", "Zugzwang : ils perdent", "C'est nulle", "Les Noirs sont pat"];
+  $("#qz1600 .ltitle").textContent = Q6[0];
+  $("#qa").firstChild.textContent = "A · " + Q6[1];
+  $$("#qz1600 .qx")[0].textContent = "B · " + Q6[2];
+  $$("#qz1600 .qx")[1].textContent = "C · " + Q6[3];
 }
 
 // S7 : classement
@@ -1011,7 +1016,7 @@ if (CLUB) {
   $$(".s1-w")[0].textContent = "Passe un cap,"; $$(".s1-w")[1].textContent = "vise les 2000.";
   $(".s1-l").innerHTML = "De l'Objectif 1800 à <b style=\"color:var(--yellow)\">2000 et plus.</b>";
   $(".pg-k").textContent = "2000 et plus"; $$(".pg-w")[0].textContent = "Passe la barre"; $$(".pg-w")[1].textContent = "des 2000.";
-  $("#vcard .lchip").textContent = "Objectif 1800"; $("#vcard .lchip").style.background = "#fae361"; $("#vcard .ltype").textContent = "Finales de Tours"; $("#vcard .ltitle").textContent = "La défense de Vancura";
+  $("#vcard .lchip").textContent = "Objectif 1800"; $("#vcard .lchip").style.background = "#fae361"; $("#vcard .ltype").textContent = "Stratégie"; $("#vcard .ltitle").textContent = "L’initiative";
   $("#elov").textContent = "1650"; $("#eloup").textContent = "▲ +430";
   [...$$("#elosvg .gt")].forEach((g, i) => { g.textContent = ["2100", "1900", "1700"][i]; });
   $("#eloMk").insertAdjacentHTML("beforebegin", '<line x1="0" x2="690" y1="95" y2="95" stroke="#fae361" stroke-width="3" stroke-dasharray="12 10" opacity=".8"/><text x="0" y="83" fill="#fae361" style="font:800 24px Manrope">2000</text>');
