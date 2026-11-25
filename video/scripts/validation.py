@@ -47,6 +47,7 @@ def etiquette(f):
 def media(files, kind):
     out = []
     for f in files:
+        if not f.exists(): print("absent du pack, fiche gardée telle que publiée :", f.relative_to(PACK)); continue
         m = vid(f) if kind == "video" else img(f); m["label"] = etiquette(f); out.append(m)
     return out
 def item(id_, titre, sous, files, kind):
