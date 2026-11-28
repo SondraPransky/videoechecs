@@ -61,10 +61,10 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > Nos coachs : portrait de Marc Quenehen, entraîneur.
 
 **`19-coach-fabien-libiszewski/`**
-> Nos coachs : portrait de Fabien Libiszewski, Grand Maître. En masterclass sur echecs.com.
+> Nos coachs : portrait de Fabien Libiszewski, grand maître. En masterclass sur echecs.com.
 
 **`20-coach-gata-kamsky/`**
-> Nos coachs : portrait de Gata Kamsky, Grand Maître. En masterclass sur echecs.com.
+> Nos coachs : portrait de Gata Kamsky, grand maître. En masterclass sur echecs.com.
 
 **`21-humeur-serie/`**
 > echecs.com — Ta série : « 7 jours de suite. Ne lâche rien ! » La mascotte jaune d'echecs.com coche les jours d'une série.
@@ -176,6 +176,30 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 
 **`64-quiz-karpov/`**
 > echecs.com — Quiz · Culture échecs : Qui succède à Bobby Fischer comme champion du monde en 1975 ? A : Garry Kasparov. B : Anatoli Karpov. C : Boris Spassky. Réponds en commentaire : A, B ou C ? La mascotte jaune d'echecs.com porte une toque de diplômé.
+
+**`90-jusqu-a-2000/`**
+> echecs.com : « 2000 + On t'y emmène. Pas à pas. » L'Académie, de l'initiation aux joueurs confirmés. La mascotte jaune d'echecs.com plante un drapeau.
+
+**`91-pas-que-pour-debuter/`**
+> echecs.com — Joueurs confirmés : « Pas seulement pour débuter. » Nous t'accompagnons jusqu'à 2000+ ! Capture de l'Académie : une masterclass en direct : échiquier, caméra du coach et nombre de spectateurs. La mascotte jaune d'echecs.com a une idée.
+
+**`92-joueur-de-club/`**
+> echecs.com — Joueurs de club : « Tu joues en club ? Rejoins l'Académie ! » Ton club en ligne ouvert 24 h sur 24 ! Capture de l'Académie : une carte d'exercice « mat en 1 » et une carte de quiz. La mascotte jaune d'echecs.com réfléchit.
+
+**`93-cap-des-2000/`**
+> echecs.com — Joueurs de club : « Fais sauter le cap des 2000 ! » La mascotte jaune d'echecs.com lève les bras de joie.
+
+**`94-probleme-fou-h7/`**
+> Problème du jour : « Les Blancs jouent et gagnent. » Un grand classique des attaques sur le Roque. Donne ta réponse en commentaire ! Échiquier : Roi blanc g1, Tour blanche d1, pions blancs f2, g2, h2 ; Roi noir g8, Dame noire b2, pions noirs a7, f7, g7, h7.
+
+**`95-solution-fou-h7/`**
+> Solution du problème du jour : 1.♗ xh7+ !, le sacrifice grec. Après 1…♔ xh7 2.♘ g5+, la Dame arrive en h5. Échiquier : la Tour blanche monte de d1 à d8 et fait mat, le Roi noir en g8 étant bloqué par ses pions f7, g7 et h7.
+
+**`96-plafond-1700/`**
+> echecs.com : « 1700 depuis des mois ? On débloque ça. » Leçons Objectif 1800 et masterclasses de Grands Maîtres. La mascotte jaune d'echecs.com est là.
+
+**`97-lecons-1800/`**
+> Tournois en ligne echecs.com : « Des leçons pour les joueurs de club. » La triangulation, La défense de Vancura, L’initiative. La mascotte jaune d'echecs.com réfléchit.
 
 **`65-academie-echiquier-et-cases/`**
 > echecs.com — Quiz · Initiation : Combien de cases y a-t-il sur un échiquier ? A : 64. B : 100. C : 36. D : 72. Question tirée de la leçon « Échiquier et cases » de l'Académie.
@@ -492,7 +516,7 @@ LinkedIn, « Texte alternatif » sur l'image. Le même texte vaut pour tous les 
 > « Tu as l'impression de stagner depuis quelque temps ? » La mascotte jaune d'echecs.com, perplexe, à côté d'une barre de progression bloquée à 40 % de janvier à juin.
 
 **`pub-3-2-reponse`**
-> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et Grands Maîtres, en direct et en replay.
+> Le déclic : « Pour passer un cap, apprends des meilleurs. » Illustration : les cartes des coachs en masterclass en direct : Fabien Libiszewski, Gata Kamsky, Sylvain Ravot et Marc Quenehen. Maîtres et grands maîtres, en direct et en replay.
 
 **`pub-3-3-final`**
 > Logo echecs.com, « L'Académie » et bouton « Commencer maintenant ».
