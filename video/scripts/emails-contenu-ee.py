@@ -153,7 +153,7 @@ mail(id="14-pack-progresser-expire", cat="Nouvelles formules", quand="À l'éch�
      corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Progresser est arrivé à échéance. Elle laisse la place à deux nouvelles offres, conçues à partir des réponses des joueurs que nous avons interrogés."),
             para("Pour continuer à vivre votre passion sur Europe Échecs, choisissez :"),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
+            encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et avec un Pack de 1 ou 2 ans, ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d'un abonnement Pack Jeu",
@@ -161,7 +161,7 @@ mail(id="15-pack-jeu-expire", cat="Nouvelles formules", quand="À l'échéance d
      corps=[para("Bonjour [PSEUDO], votre abonnement au Pack Jeu est arrivé à échéance. Elle laisse la place à deux nouvelles offres, conçues à partir des réponses des joueurs que nous avons interrogés."),
             para("Pour continuer à vivre votre passion sur Europe Échecs, choisissez :"),
             JEU_PLUS, INTEGRAL,
-            encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
+            encadre("<b>Nouveau :</b> payez au mois, sans engagement, dès 4,90 €. Et avec un Pack de 1 ou 2 ans, ajoutez la revue papier pour 60 € (Pack Jeu+) ou 50 € (Pack Intégral), au lieu de 79,95 € seule."),
             bouton("Choisir ma formule", L("ABONNEMENTS"))],
      sign="Merci de votre fidélité !<br><b>L'équipe d'Europe Échecs</b>")
 
@@ -185,7 +185,8 @@ mail(id="29-abonnement-echeance-relance-2", cat="Abonnement", quand="2e relance 
 mail(id="30-revue-echeance-relance-2", cat="Revue", quand="2e relance le 8 du mois qui suit la 1re (16, le 25), avant la fin d'un abonnement à la revue papier, si rien n'est renouvelé (modèle relance2ee, réécrit)",
      objet="Votre revue Europe Échecs pour 50 € de plus", pre="Ajoutée à un Pack Intégral, la revue papier coûte 50 € au lieu de 79,95 €, avec la revue en ligne en prime.", sur="La revue", titre="La revue, | et bien plus.",
      corps=[para("Bonjour [PSEUDO], votre dernier numéro de la revue <i>Europe Échecs</i> arrive en <b>[ECHEANCE]</b>. Avant de vous réabonner, comparez :"),
-            infos([("La revue seule", "79,95 €"), ("Avec un Pack Jeu+", "39,90 € + 60 €"), ("Avec un Pack Intégral", "99,90 € + 50 €")]),
+            infos([("La revue seule", "79,95 €"), ("Avec un Pack Jeu+ 1 an", "39,90 € + 60 €"), ("Avec un Pack Intégral 1 an", "99,90 € + 50 €")]),
+            para(petit("Le tarif revue + Pack est réservé aux formules de 1 ou 2 ans : il n'existe pas avec le paiement au mois.")),
             para("Avec le Pack Intégral, vous recevez la revue papier et vous profitez aussi de la revue en ligne, des vidéos à la demande et des leçons."),
             bouton("Choisir ma formule", TARIFS),
             para(petit("Vous préférez la revue seule ? <a href=\"" + TARIFS_REVUE + "\" style=\"color:#6b6b66\">Réabonnez-vous ici</a>. Si ce message a croisé votre règlement, merci de ne pas en tenir compte."))],

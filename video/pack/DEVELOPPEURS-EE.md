@@ -138,7 +138,7 @@ avis 10 jours après la livraison (54), remboursement (55), retour en stock (56)
 
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?
 - **01** : version avec activation. Sans activation, retirer le bouton et la ligne du code ; connexion par un fournisseur externe : ajouter « Vous avez décidé de vous connecter avec votre compte [FOURNISSEUR]. Vous pouvez aussi vous connecter avec votre pseudo et un mot de passe. »
-- **Tarif pack de la revue** (+ 60 € / + 50 €, 14, 15, 30) : à confirmer pour les formules au mois.
+- **Tarif pack de la revue** (+ 60 € / + 50 €, 14, 15, 30) : réservé aux formules de 1 ou 2 ans, pas possible au mois (confirmé).
 - **22** : à décider. **44 à 50** : données à créer (section 4 ter). **02** : comment le membre d'une offre multicompte choisit son mot de passe.
 - **Tarifs** : écrits en clair dans les e-mails (relevés le 23 novembre 2026, tableau dans `EMAILS-EE.md`). Si un prix change, prévenir pour mettre les e-mails à jour.
 
