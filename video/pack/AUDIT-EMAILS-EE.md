@@ -120,7 +120,8 @@ modules de la boutique (54, 56, 57) et page de préférences à créer (63).
 3. **Diagrammes générés.** Pour 79 (coup joué), 81 (partie terminée), 43 (problème) et 45 (cap franchi), une image de l'échiquier générée par le site
    avec la vraie position, plutôt qu'une image générique. C'est le visuel le plus « échecs » possible, et il est différent à chaque envoi.
 
-Je peux faire les maquettes des trois sur 3 ou 4 e-mails chacune, pour comparer côte à côte.
+**Maquettes** (actuel à gauche, puis la piste, sur 4 ou 5 e-mails chacune) : https://claude.ai/artifact/CRtoDDQT44ftdMP9tSZkeD — générées par `scripts/maquettes-ee.py`.
+Recommandation : compact + diagramme pour le jeu en différé et les tournois, Revue pour l'éditorial, gabarit actuel pour tout le reste.
 
 ## 6. Plan sur 90 jours (AARRR)
 
