@@ -6,8 +6,8 @@ Ce document dit ce que l'équipe technique doit brancher. Il va avec le kit `kit
 ```
 kit-developpeurs-ee/
   DEVELOPPEURS-EE.md   ce document
-  EMAILS-EE.md         catalogue des 32 e-mails : quand les envoyer, objet, pré-en-tête, tarifs, règles, décisions
-  emails-ee/           32 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
+  EMAILS-EE.md         catalogue des 117 e-mails : quand les envoyer, objet, pré-en-tête, tarifs, règles, décisions
+  emails-ee/           117 e-mails en HTML, prêts à intégrer (une variable = [NOM_EN_MAJUSCULES])
   emails-ee/img/       les 3 logos utilisés par les e-mails, à héberger
   emails-ee/apercus/   aperçus remplis avec des exemples (téléphone, ordinateur, mode sombre) : le rendu attendu
   miniature-mail.py    prépare la miniature d'une vidéo pour l'e-mail 28 (1072 × 603, bouton lecture incrusté)
@@ -15,7 +15,7 @@ kit-developpeurs-ee/
 ```
 
 Priorités : **(1) avant la mise en service**, (2) au lancement des nouvelles formules, (3) dans le mois qui suit.
-Les e-mails 01 à 17, 29 et 30 remplacent des modèles existants du site (correspondance dans `EMAILS-EE.md`) ; 18 à 28, 31 et 32 sont nouveaux.
+Les e-mails 01 à 17, 29, 30 et 65 à 122 remplacent des modèles existants du site (correspondance dans `EMAILS-EE.md`) ; les autres sont nouveaux.
 
 ## 1. Intégration
 
@@ -134,12 +134,27 @@ avis 10 jours après la livraison (54), remboursement (55), retour en stock (56)
   `[LIEN_SUIVI]` = `{followup}`, `[LIEN_COMMANDE]` = `{history_url}`. Les modèles correspondants : `order_conf`, `shipped`, `refund`, `order_canceled`.
 - 54 (avis) et 57 (panier) demandent un module d'avis et un module de relance de panier ; 56 un module d'alerte de retour en stock (« Prévenez-moi »).
 
+## 4 quinquies. Tous les autres modèles du site (65 à 122)
+
+Réécriture des 94 modèles relevés le 25 novembre 2026 qui n'avaient pas encore leur version : compte, multicompte, newsletter, jeu en différé, tournois,
+événements et masterclasses, fair-play, communauté, support, PrediChess, parrainage. **On garde le déclencheur actuel du site** et on remplace seulement le HTML ;
+correspondance modèle par modèle dans `EMAILS-EE.md`. Les doublons du site sont regroupés : une seule version, une variable dit le cas.
+
+- `[REPONSE]` (75) : « a accepté » ou « a décliné ». `[REPONSE_HORAIRE_COURTE]` / `[REPONSE_HORAIRE]` (92) : accepté / refusé / retiré, et la phrase du modèle d'origine.
+- `[CONCLUSION]` (104) et `[CONSTAT]` (105) : la phrase du cas (infraction confirmée, non confirmée, doute, message de l'équipe) ; `[ETAT_BONUS]` (119, 120) : avec ou sans palier atteint.
+- Lignes à dupliquer : `<!-- COUPS -->` (79), `<!-- COMPTE -->` (69), `<!-- PARTIE -->` (107), `<!-- ACTIONS -->` (104, 105, à retirer s'il n'y a pas d'action).
+- **Horaires en heure de Paris** (et non plus GMT) dans tous les e-mails de tournoi.
+- 117 (invitation de parrainage) part vers une personne **sans compte** : son pied dit « … car [EMAIL_PARRAIN] vous a invité » (champ `pourquoi`), avec le lien de désinscription.
+- 108 : la réponse passe par l'e-mail, comme aujourd'hui ; à revoir (l'adresse de l'expéditeur est dévoilée au destinataire).
+
 ## 5. Points à trancher avant la mise en service
 
 - **Mot de passe** : choisi par l'utilisateur à la création, il n'est plus dans aucun e-mail. À confirmer pour le 02 : comment le membre d'une offre multicompte choisit-il le sien ?
 - **01** : version avec activation. Sans activation, retirer le bouton et la ligne du code ; connexion par un fournisseur externe : ajouter « Vous avez décidé de vous connecter avec votre compte [FOURNISSEUR]. Vous pouvez aussi vous connecter avec votre pseudo et un mot de passe. »
 - **Tarif pack de la revue** (+ 60 € / + 50 €, 14, 15, 30) : réservé aux formules de 1 ou 2 ans, pas possible au mois (confirmé).
 - **22** : à décider. **44 à 50** : données à créer (section 4 ter). **02** : comment le membre d'une offre multicompte choisit son mot de passe.
+- **Parrainage (117)** : « période d'essai doublée » et « abonnement au Jeu en Direct » viennent du modèle actuel ; à confirmer avec les formules actuelles (aucune période d'essai n'apparaît ailleurs).
+- **Fréquence de la newsletter (77)** : le modèle disait « du 1er au 5 du mois » ; écrit « chaque semaine », comme le 33.
 - **Tarifs** : écrits en clair dans les e-mails (relevés le 23 novembre 2026, tableau dans `EMAILS-EE.md`). Si un prix change, prévenir pour mettre les e-mails à jour.
 
 ## 6. Liste de contrôle avant la mise en service

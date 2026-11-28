@@ -210,7 +210,7 @@ PIED_NUIT = False     # série ee : pied de page sur fond marine, avec le logo b
 REMAP = {}   # teintes propres à une série : chaque couleur de base remplacée partout (styles et mode sombre), voir emails-contenu-ee.py
 DOC = ICI / "pack/EMAILS.md"
 def page(e):
-    pied = (POURQUOI + " "
+    pied = (e.get("pourquoi", POURQUOI) + " "
             + ('<a href="[LIEN_PREFERENCES]" style="color:#6b6b66">Gérer mes e&#8209;mails</a> · <a href="[LIEN_DESINSCRIPTION]" style="color:#6b6b66">Se désinscrire</a>' if e.get("marketing", True)
                else PIED_COMPTE))
     hero = f'<tr><td><img src="{{IMG}}/{e["img"]}.jpg" width="600" alt="{html.escape(e.get("alt", ""))}" style="display:block;width:100%;height:auto;border:0"></td></tr>' if e.get("img") else ""

@@ -47,6 +47,34 @@ aucun prix, délai, service ou chiffre qui ne figure pas dans les sources. Les f
 | 16 Échéance de la revue papier, 1re relance | `relance1ee` | — |
 | 30 Échéance de la revue papier, 2e relance | `relance2ee`, réécrit : nouvel angle (tarif pack avec un Pack) | — |
 | 17 Carte cadeau | `gift_code` | 52 (partiel) |
+| 65 Bienvenue (compte créé par le joueur) | `account_welcome` | — |
+| 66 Suppression demandée · 67 annulée | `deletion_request`, `deletion_request_cancel` | — |
+| 68 Compte inactif depuis 6 mois | `suppr_compte_avert1` | — |
+| 69 Liste de vos comptes | `renvoicomptesreset` | — |
+| 70 Connexion externe dissociée | `account_provider_dissociated` | — |
+| 71 Préférences de données à confirmer | `consent_update_required` | — |
+| 72 Limite appliquée · 73 levée | `account_limitation_applied`, `account_limitation_revoked` | — |
+| 74 Multicompte : invitation · 75 réponse · 76 compte détaché | `multiaccount_join_invite`, `multiaccount_join_invite_answer`, `multiaccount_detached` | — |
+| 77 Inscription à la newsletter · 78 à reconfirmer | `newsletter_confirm`, `newsletter_consent_update_required_fr` | — |
+| 79 à 85 Jeu en différé (coup joué, partie commencée, terminée, invitation, tournoi commencé, terminé, annulé) | `jeudiffcoupjoue`, `jeudiffpartiedebut`, `jeudiffpartietermine`, `jeudifftourninvit`, `jeudifftourndebut`, `jeudifftournfin`, `jeudifftournannul` | — |
+| 86 à 90 Tournois (invitation, en ligne, début, nouvelle ronde, rappel) | `tourn_invitation`, `tourn_created`, `tourn_start`, `tourn_startround`, `tourn_match_reminder` | — |
+| 91 Horaire proposé · 92 réponse (acceptée, refusée, retirée) | `tourn_proposreceived` · `tourn_proposaccepted`, `tourn_proposdenied`, `tourn_proposdeleted` (3 en 1) | — |
+| 93 Partie reprogrammée · 94 ronde décalée | `tourn_match_reprog` · `tourn_round_shifted`, `tourn_roundend_updat` (2 en 1) | — |
+| 95 Appariement manuel · 96 tournoi terminé · 97 instructions | `tourn_round_manualpairingrequired`, `tourn_end` (objet corrigé), `tourn_instructions` (raccourci) | — |
+| 98 à 100 Événement : en attente, validé, refusé | `event_waiting`, `event_confirm` (sans l'ancienne branche Zoom), `event_reject` | — |
+| 101 Cours · 102 masterclass · 103 invitation masterclass | `course_confirmation`, `masterclass_confirm`, `masterclass_invit` | — |
+| 104 Fair-play : suite d'un signalement | les 5 `fairplaycase_*_to_reporter` (5 en 1) | — |
+| 105 Fair-play : décision sur un adversaire | les 3 `fairplaycase_*_to_third_party_player` (3 en 1) | — |
+| 106 Fair-play : avertissement | `fairplaycase_violation_to_suspect` | — |
+| 107 Problème traité | `problem_solved`, `problem_solved_user` (identiques, 2 en 1) | — |
+| 108 Message d'un joueur · 109 commentaire non publié | `contactjoueursmsg`, `refuscommentaire` | — |
+| 110 Battle commence · 111 terminée | `puzzlesbattledebut`, `puzzlesbattlefin` | — |
+| 112 Demande enregistrée · 113 réponse · 114 message de l'équipe | `supportdemenreg`, `supportdemchgetat`, `support_mail_direct` et `mail_direct` (2 en 1) | — |
+| 115 PrediChess 1er · 116 top 4 et top 20 | `predichess_prize_first` · `predichess_prize_top4`, `predichess_prize_top20` (2 en 1) | — |
+| 117 Parrainage : invitation et rappel | `sponsorship_invitation`, `sponsorship_remind_invitation` (identiques, 2 en 1) | — |
+| 118 à 122 Parrainage : ami inscrit, validé, abonné, relancez, adresse en erreur | `sponsorship_create_account`, `sponsorship_activate_account` (+ `_level_up`), `sponsorship_activate_subscription` (+ `_level_up`), `sponsorship_remind_sponsor_activation`, `sponsorship_email_error` | — |
+
+Non repris : `ccas_tournament_soon` (série CCAS), `questionnaire_satisfaction_fr` (remplacé par le 47), `cmdsent` (couvert par le 52), `welcome_subscription` envoyait le mot de passe en clair (supprimé dans le 07).
 
 ## Décisions et points à suivre
 
@@ -213,6 +241,8 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 | Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
 |---|---|---|---|---|
 | `33-newsletter.html` | Chaque semaine (aujourd'hui le lundi en fin d'après-midi), à tous les comptes qui acceptent les e-mails d'information. Un article à la une, puis autant d'articles que nécessaire, et au plus un encart boutique | [OBJET_NEWSLETTER] | [PRE_EN_TETE_NEWSLETTER] | Information (désinscription possible) |
+| `77-newsletter-inscription.html` | À l'inscription à la newsletter (newsletter_confirm) · modèle actuel du site | Vous êtes inscrit à la newsletter Europe Échecs | Les actualités des échecs à ne pas rater, chaque semaine. | Compte (toujours envoyé) |
+| `78-newsletter-confirmer.html` | Pour mettre la liste de diffusion à jour : abonnés à la newsletter à reconfirmer (newsletter_consent_update_required_fr) · modèle actuel du site | Newsletter Europe Échecs : confirmez votre inscription | Un clic pour continuer à la recevoir. Sans réponse de votre part, vous ne la recevrez plus. | Compte (toujours envoyé) |
 
 ### Boutique
 
@@ -279,6 +309,107 @@ pas de 24 si le code a servi ; 28 remplace les relances 25 et 26 pour un compte 
 |---|---|---|---|---|
 | `62-livre-auteur-en-video.html` | 15 jours après la livraison d'un livre dont l'auteur a des vidéos sur Europe Échecs, à ceux qui n'ont pas le Pack Intégral · proposition, à valider | [AUTEUR_LIVRE] vous attend aussi en vidéo | L’auteur de votre livre présente [SERIE_AUTEUR] chaque semaine sur Europe Échecs. | Information (désinscription possible) |
 | `63-choisir-ses-emails.html` | J+2 après la création d'un compte, une seule fois (et lien permanent dans le pied des e-mails d'information) · proposition, à valider | Choisissez ce que vous voulez recevoir | Actualités, vidéos, problème de la semaine, boutique : cochez ce qui vous intéresse, rien de plus. | Information (désinscription possible) |
+
+### Compte · suite
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `65-bienvenue-compte.html` | Après l'activation d'un compte créé par le joueur (account_welcome). Si connexion par un fournisseur externe, ajouter la phrase [PHRASE_FOURNISSEUR] · modèle actuel du site | Bienvenue sur Europe Échecs ! | Votre compte est prêt : jouez, entraînez-vous, et découvrez nos vidéos, notre revue et nos livres. | Compte (toujours envoyé) |
+| `66-suppression-demandee.html` | À la demande de suppression d'un compte (deletion_request) · modèle actuel du site | Demande de suppression de votre compte | Vous avez jusqu’au [DATE_ANNULATION] pour l’annuler depuis « Mon compte ». | Compte (toujours envoyé) |
+| `67-suppression-annulee.html` | Quand le joueur annule sa demande de suppression (deletion_request_cancel) · modèle actuel du site | Votre compte est conservé | La demande de suppression du compte [PSEUDO] est annulée. | Compte (toujours envoyé) |
+| `68-compte-inactif-6-mois.html` | Compte inutilisé depuis 6 mois, avant sa suppression (suppr_compte_avert1) · modèle actuel du site | Votre compte [PSEUDO] va être supprimé le [DATE_SUPPRESSION] | Il n’a pas été utilisé depuis 6 mois. Pour le garder, il suffit de vous reconnecter ou de renouveler votre abonnement. | Compte (toujours envoyé) |
+| `69-liste-des-comptes.html` | Quand un joueur demande la liste de ses comptes, depuis l'oubli de mot de passe (renvoicomptesreset) · modèle actuel du site | Vos comptes sur Europe Échecs | Voici les comptes liés à votre adresse. Choisissez celui dont vous voulez changer le mot de passe. | Compte (toujours envoyé) |
+| `70-connexion-externe-dissociee.html` | Quand le joueur dissocie son compte d'un fournisseur externe (account_provider_dissociated) · modèle actuel du site | Votre compte n’est plus lié à [FOURNISSEUR] | Désormais, connectez-vous avec votre pseudo et votre mot de passe. | Compte (toujours envoyé) |
+| `71-consentement-a-jour.html` | Quand les choix du joueur sur ses données personnelles doivent être mis à jour (consent_update_required) · modèle actuel du site | Une mise à jour de vos préférences est nécessaire | Une minute pour confirmer vos choix sur l’utilisation de vos données, et continuer à utiliser votre compte. | Compte (toujours envoyé) |
+| `72-compte-limite.html` | Quand une limite est appliquée à un compte sur la zone de jeu (account_limitation_applied) · modèle actuel du site | Une limite a été appliquée à votre compte | Limite : [LIMITE]. Durée : [DUREE_LIMITE]. | Compte (toujours envoyé) |
+| `73-limite-levee.html` | Quand la limite est levée (account_limitation_revoked) · modèle actuel du site | La limite sur votre compte est levée | Vous retrouvez l’accès complet à la zone de jeu. | Compte (toujours envoyé) |
+| `74-multicompte-invitation.html` | Quand un gestionnaire invite un compte existant dans son offre multicompte (multiaccount_join_invite) · modèle actuel du site | [GESTIONNAIRE] vous invite à rejoindre son offre multicompte | En acceptant, vous profitez de tous les services de son abonnement. Invitation valable [JOURS_VALIDITE] jours. | Compte (toujours envoyé) |
+| `75-multicompte-reponse.html` | Au gestionnaire, quand l'invité accepte ou décline (multiaccount_join_invite_answer). [REPONSE] : « a accepté » ou « a décliné » · modèle actuel du site | Offre multicompte : [INVITE] [REPONSE] votre invitation | Retrouvez la gestion de votre offre multicompte dans « Mon compte ». | Compte (toujours envoyé) |
+| `76-multicompte-detache.html` | Quand le gestionnaire détache un compte de son offre (multiaccount_detached) · modèle actuel du site | Votre compte ne fait plus partie de l’offre de [GESTIONNAIRE] | Les services de cette offre ne sont plus accessibles. Votre compte reste ouvert. | Compte (toujours envoyé) |
+
+### Jeu en différé
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `79-differe-coup-joue.html` | À chaque coup de l'adversaire dans une partie en différé (jeudiffcoupjoue) · modèle actuel du site | [ADVERSAIRE] a joué : à vous ! | Votre partie commencée le [DATE_DEBUT] continue. Voyez la nouvelle position et jouez votre coup. | Compte (toujours envoyé) |
+| `80-differe-partie-commencee.html` | Au début d'une partie en différé (jeudiffpartiedebut) · modèle actuel du site | Partie en différé commencée contre [ADVERSAIRE] | [BLANCS] contre [NOIRS], commencée le [DATE_DEBUT]. | Compte (toujours envoyé) |
+| `81-differe-partie-terminee.html` | À la fin d'une partie en différé (jeudiffpartietermine) · modèle actuel du site | Partie en différé terminée contre [ADVERSAIRE] : [RESULTAT] | [BLANCS] – [NOIRS], [RESULTAT] ([RAISON_FIN]). | Compte (toujours envoyé) |
+| `82-differe-invitation-tournoi.html` | Invitation à un tournoi privé en différé (jeudifftourninvit) · modèle actuel du site | [ORGANISATEUR] vous invite à un tournoi en différé | [CADENCE], [NB_JOUEURS_MAX] joueurs. Inscrivez-vous depuis la fiche du tournoi. | Compte (toujours envoyé) |
+| `83-differe-tournoi-commence.html` | Au démarrage d'un tournoi en différé (jeudifftourndebut) · modèle actuel du site | Le tournoi en différé n° [ID_TOURNOI] commence | Ses parties sont ajoutées à vos parties en cours. | Compte (toujours envoyé) |
+| `84-differe-tournoi-termine.html` | À la fin d'un tournoi en différé (jeudifftournfin) · modèle actuel du site | Le tournoi en différé n° [ID_TOURNOI] est terminé | Appariements, scores et parties : tout est sur la fiche du tournoi. | Compte (toujours envoyé) |
+| `85-differe-tournoi-annule.html` | Quand un tournoi en différé est annulé faute de participants (jeudifftournannul) · modèle actuel du site | Le tournoi en différé n° [ID_TOURNOI] est annulé | Il n’a pas réuni assez de participants. D’autres tournois vous attendent. | Compte (toujours envoyé) |
+
+### Tournois en direct
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `86-tournoi-invitation.html` | Invitation à un tournoi en direct (tourn_invitation) · modèle actuel du site | [ORGANISATEUR] vous invite à son tournoi | Découvrez le programme et donnez votre réponse en un clic. | Compte (toujours envoyé) |
+| `87-tournoi-en-ligne.html` | Quand un tournoi est mis en ligne : aux participants ; variante organisateur dans le guide (tourn_created) · modèle actuel du site | Tournoi [NOM_TOURNOI] : votre participation est enregistrée | Début le [DATE_DEBUT_TOURNOI]. Toutes les infos sont sur la fiche du tournoi. | Compte (toujours envoyé) |
+| `88-tournoi-demarre-bientot.html` | Avant le début d'un tournoi (tourn_start) · modèle actuel du site | Tournoi [NOM_TOURNOI] : début le [DATE_DEBUT_TOURNOI] | Connectez-vous quelques minutes avant pour être prêt. | Compte (toujours envoyé) |
+| `89-tournoi-nouvelle-ronde.html` | Au début de chaque ronde (tourn_startround) · modèle actuel du site | Tournoi [NOM_TOURNOI] : la ronde [RONDE] commence | Elle dure jusqu’au [DATE_FIN_RONDE]. Votre appariement et votre horaire sont sur la fiche. | Compte (toujours envoyé) |
+| `90-tournoi-rappel-partie.html` | Rappel avant une partie de tournoi (tourn_match_reminder) · modèle actuel du site | Rappel : votre partie de la ronde [RONDE], le [DATE_PARTIE] | Connectez-vous 5 à 10 minutes avant, par sécurité. | Compte (toujours envoyé) |
+| `91-tournoi-horaire-propose.html` | Quand l'adversaire propose un autre horaire (tourn_proposreceived) · modèle actuel du site | Ronde [RONDE] : votre adversaire propose un autre horaire | Acceptez, refusez ou proposez un autre horaire depuis la fiche du tournoi. | Compte (toujours envoyé) |
+| `92-tournoi-horaire-reponse.html` | Réponse de l'adversaire à une proposition d'horaire : acceptée, refusée ou retirée (tourn_proposaccepted, tourn_proposdenied, tourn_proposdeleted). [REPONSE_HORAIRE] selon le cas · modèle actuel du site | Ronde [RONDE] : horaire [REPONSE_HORAIRE_COURTE] | [REPONSE_HORAIRE] | Compte (toujours envoyé) |
+| `93-tournoi-partie-reprogrammee.html` | Quand une partie est reprogrammée pour raison technique (tourn_match_reprog) · modèle actuel du site | Ronde [RONDE] : votre partie est reprogrammée | Nouvel horaire : [NOUVEL_HORAIRE] au lieu de [ANCIEN_HORAIRE]. | Compte (toujours envoyé) |
+| `94-tournoi-ronde-retardee.html` | Quand une ronde démarre ou finit en retard (tourn_round_shifted, tourn_roundend_updat) · modèle actuel du site | Ronde [RONDE] : nouvel horaire de fin | La ronde se termine le [NOUVELLE_FIN] au lieu du [FIN_PREVUE]. | Compte (toujours envoyé) |
+| `95-tournoi-appariement-manuel.html` | À l'organisateur, quand l'appariement automatique est impossible (tourn_round_manualpairingrequired) · modèle actuel du site | Ronde [RONDE] : appariement manuel nécessaire | Les règles d’appariement ne peuvent pas être respectées automatiquement. Votre intervention est nécessaire. | Compte (toujours envoyé) |
+| `96-tournoi-termine.html` | À la fin d'un tournoi en direct (tourn_end) · modèle actuel du site | Tournoi [NOM_TOURNOI] : les résultats | Classement, parties et résultats : tout est sur la fiche du tournoi. | Compte (toujours envoyé) |
+| `97-tournoi-instructions.html` | Quelques heures avant un événement-tournoi d'Europe Échecs (tourn_instructions) · modèle actuel du site | [NOM_EVENEMENT] : les instructions | Le [DATE_EVENEMENT], heure de Paris. Tout ce qu’il faut savoir pour bien jouer. | Compte (toujours envoyé) |
+
+### Événements et masterclasses
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `100-evenement-refuse.html` | Inscription à un événement refusée (event_reject) · modèle actuel du site | [NOM_EVENEMENT] : votre inscription n’a pas pu être validée | Contactez-nous pour en savoir plus. | Compte (toujours envoyé) |
+| `101-cours-inscription.html` | Inscription à un cours ou un stage (course_confirmation) · modèle actuel du site | Inscription confirmée : [NOM_COURS] | Votre réservation est confirmée. Nous revenons vers vous très vite avec les détails pratiques. | Compte (toujours envoyé) |
+| `102-masterclass-inscription.html` | Inscription à une masterclass (masterclass_confirm) · modèle actuel du site | Masterclass « [TITRE_MASTERCLASS] » : vous êtes inscrit | Retrouvez la page de la masterclass pour la date et le lien. | Compte (toujours envoyé) |
+| `103-masterclass-invitation.html` | Invitation gratuite à une masterclass, avec un code (masterclass_invit) · modèle actuel du site | Votre invitation à la masterclass « [TITRE_MASTERCLASS] » | Votre place est offerte : 3 étapes pour l’activer avec votre code. | Compte (toujours envoyé) |
+| `98-evenement-en-attente.html` | Inscription à un événement en attente de validation (event_waiting) · modèle actuel du site | [NOM_EVENEMENT] : inscription reçue | Vous recevrez un e-mail dès sa validation par les organisateurs. | Compte (toujours envoyé) |
+| `99-evenement-valide.html` | Inscription à un événement validée (event_confirm) · modèle actuel du site | [NOM_EVENEMENT] : votre inscription est validée | Vous recevrez les instructions du tournoi quelques heures avant l’événement. | Compte (toujours envoyé) |
+
+### Fair-play
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `104-fairplay-suite-signalement.html` | À l'auteur d'un signalement, une fois le dossier examiné. [CONCLUSION] selon le cas : infraction confirmée, non confirmée, doute, ou message de l'équipe (les 5 modèles fairplaycase_*_to_reporter) · modèle actuel du site | Votre signalement de [SUSPECT] a été examiné | Merci de votre vigilance. Voici notre conclusion. | Compte (toujours envoyé) |
+| `105-fairplay-adversaire.html` | Aux adversaires d'un joueur sanctionné ou en doute (les 3 modèles fairplaycase_*_to_third_party_player) · modèle actuel du site | Fair-play : une décision concerne un de vos adversaires | [SUSPECT] : [CONSTAT]. Vos parties et votre Elo ont pu être corrigés. | Compte (toujours envoyé) |
+| `106-fairplay-avertissement.html` | Au joueur concerné par une infraction (fairplaycase_violation_to_suspect) · modèle actuel du site | Fair-play : à propos de votre compte | Une activité récente pose question. Consultez la page de votre dossier. | Compte (toujours envoyé) |
+| `107-probleme-traite.html` | Après le traitement d'un problème sur une ou plusieurs parties (problem_solved et problem_solved_user, identiques) · modèle actuel du site | Un problème sur vos parties a été traité | [PROBLEME] : voici la solution adoptée. | Compte (toujours envoyé) |
+
+### Communauté
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `108-message-d-un-joueur.html` | Quand un joueur écrit à un autre depuis le site (contactjoueursmsg) · modèle actuel du site | [EXPEDITEUR_PSEUDO] vous a envoyé un message | « [DEBUT_MESSAGE] » | Compte (toujours envoyé) |
+| `109-commentaire-non-valide.html` | Quand un commentaire d'article n'est pas validé (refuscommentaire) · modèle actuel du site | Votre commentaire n’a pas été publié | Sur l’article « [TITRE_ARTICLE] ». La charte de publication est en bas de chaque article. | Compte (toujours envoyé) |
+| `110-battle-commence.html` | Au début d'une battle de puzzles (puzzlesbattledebut) · modèle actuel du site | Battle de puzzles n° [ID_BATTLE] : c’est parti ! | [JOUEUR_1] contre [JOUEUR_2]. À vous de jouer ! | Compte (toujours envoyé) |
+| `111-battle-terminee.html` | À la fin d'une battle de puzzles (puzzlesbattlefin) · modèle actuel du site | Battle de puzzles n° [ID_BATTLE] : le résultat | [JOUEUR_1] contre [JOUEUR_2] : découvrez qui l’emporte. | Compte (toujours envoyé) |
+
+### Support
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `112-support-demande-recue.html` | À l'enregistrement d'une demande de support (supportdemenreg) · modèle actuel du site | Votre demande est bien enregistrée | Nous vous écrivons à chaque étape. Suivez-la et répondez depuis le lien. | Compte (toujours envoyé) |
+| `113-support-reponse.html` | Quand le support a répondu (supportdemchgetat) · modèle actuel du site | Réponse à votre demande : [OBJET_DEMANDE] | Notre équipe a examiné votre demande. Lisez la réponse et poursuivez l’échange. | Compte (toujours envoyé) |
+| `114-message-de-l-equipe.html` | Message libre d'un administrateur (support_mail_direct ; mail_direct a le même usage) · modèle actuel du site | [TITRE_MESSAGE] | Un message de l’équipe d’Europe Échecs. | Compte (toujours envoyé) |
+
+### PrediChess
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `115-predichess-premier.html` | Au 1er du classement PrediChess d'un événement (predichess_prize_first) · modèle actuel du site | PrediChess [EVENEMENT] : vous avez gagné ! | 1re place : un sweat Europe Échecs vous attend. Il nous faut votre adresse, votre taille et votre couleur. | Compte (toujours envoyé) |
+| `116-predichess-classement.html` | Aux joueurs du top 4 (3 mois) et du top 20 (1 mois) PrediChess (predichess_prize_top4, predichess_prize_top20) · modèle actuel du site | PrediChess [EVENEMENT] : vous êtes dans le top [RANG] ! | Vous gagnez [DUREE_OFFERTE] de Pack Intégral. Activez-le avec votre code cadeau. | Compte (toujours envoyé) |
+
+### Parrainage
+
+| Fichier | Quand l'envoyer | Objet | Pré-en-tête | Type |
+|---|---|---|---|---|
+| `117-parrainage-invitation.html` | Invitation envoyée par un parrain à un ami, puis rappel (sponsorship_invitation et sponsorship_remind_invitation, identiques) · modèle actuel du site | [PRENOM_OU_EMAIL_PARRAIN] vous invite à jouer aux échecs | Créez votre compte gratuit et défiez des joueurs du monde entier. Votre période d’essai est doublée. | Information (désinscription possible) |
+| `118-parrainage-ami-inscrit.html` | Au parrain, quand un ami invité crée son compte (sponsorship_create_account) · modèle actuel du site | Votre ami a créé son compte | Encore [NB_PARTIES_PARRAINAGE] parties jouées par lui, et votre parrainage est validé. | Compte (toujours envoyé) |
+| `119-parrainage-valide.html` | Au parrain, quand un parrainage est validé ; avec bonus débloqué si un palier est atteint (sponsorship_activate_account et _level_up) · modèle actuel du site | Parrainage validé : merci ! | Le parrainage de [EMAIL_FILLEUL] est validé. [ETAT_BONUS] | Compte (toujours envoyé) |
+| `120-parrainage-ami-abonne.html` | Au parrain, quand un filleul s'abonne ; avec bonus si un palier est atteint (sponsorship_activate_subscription et _level_up) · modèle actuel du site | Votre ami s’est abonné ! | [EMAIL_FILLEUL] vient de s’abonner. [ETAT_BONUS] | Compte (toujours envoyé) |
+| `121-parrainage-relancez.html` | Au parrain dont des invités n'ont pas activé leur compte (sponsorship_remind_sponsor_activation) · modèle actuel du site | Vos amis n’ont pas encore activé leur compte | Relancez-les : chaque parrainage validé prolonge votre abonnement. | Information (désinscription possible) |
+| `122-parrainage-adresse-erreur.html` | Quand l'invitation n'a pas pu être envoyée (sponsorship_email_error) · modèle actuel du site | Votre invitation n’a pas pu être envoyée à [EMAIL_FILLEUL] | Vérifiez l’adresse dans « Mes parrainages » et corrigez-la si besoin. | Compte (toujours envoyé) |
 
 ## Variables
 

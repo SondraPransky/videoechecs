@@ -27,7 +27,7 @@ if PROFIL == "ccas":   # page des bénéficiaires des Activités Sociales de l'�
 if PROFIL == "ee":   # site europe-echecs.com
     page = (page.replace("<title>E-mails de l’Académie</title>", "<title>E-mails Europe Échecs</title>")
                 .replace("<h1>Les e-mails de <em>l’Académie</em></h1>", "<h1>Les e-mails <em>Europe Échecs</em></h1>")
-                .replace("envoyés aux membres, de la création du compte à la fin d’abonnement", "d’europe-echecs.com (compte, abonnements, nouvelles formules, revue papier, cartes cadeaux), réécrits à partir des modèles actuels du site")
+                .replace("envoyés aux membres, de la création du compte à la fin d’abonnement", "d’europe-echecs.com (compte, abonnements, revue, boutique, jeu, tournois, événements, parrainage…), réécrits à partir des modèles actuels du site, plus les nouveaux")
                 .replace("Léa, 18 nov., Gata Kamsky", "LéaDame, Pack Intégral, commande n° 245871 ; les prix et montants restent en variables, aucun tarif n’est inventé"))
 (OUT / "index.html").write_text(page)
 VERS = json.loads((ICI / "pack/validation-versions.json").read_text())
@@ -36,11 +36,11 @@ sections, cat = [], None
 for l in DOC.read_text().splitlines():
     if l.startswith("### "):
         cat = l[4:].strip(); sections.append({"id": re.sub(r"[^a-z0-9]+", "-", cat.lower().translate(str.maketrans("éèêàâçôîû", "eeeaacoiu"))).strip("-"), "titre": cat, "items": []}); continue
-    m = re.match(r"\| `([0-9]{2}-[^`]+)\.html` \| (.*?) \| (.*?) \| (.*?) \| (.*?) \|$", l)
+    m = re.match(r"\| `([0-9]{2,3}-[^`]+)\.html` \| (.*?) \| (.*?) \| (.*?) \| (.*?) \|$", l)
     if not m or not sections: continue
     fid, quand, objet, pre, typ = m.groups()
     src = f"emails/{fid}.html"
-    sections[-1]["items"].append({"id": PRE + fid, "titre": f"{fid[:2]} · {objet}", "sous": f"{quand} · {typ}",
+    sections[-1]["items"].append({"id": PRE + fid, "titre": f"{fid.split('-')[0]} · {objet}", "sous": f"{quand} · {typ}",
         "pre": pre, "v": VERS.get(PRE + fid, 1),
         "medias": [{"type": "html", "src": src, "w": 375, "label": "Téléphone"}, {"type": "html", "src": src, "w": 320, "label": "Petit téléphone"},
                    {"type": "html", "src": src, "w": 768, "label": "Tablette"}, {"type": "html", "src": src, "w": 1280, "label": "Ordinateur"}]})

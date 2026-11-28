@@ -692,10 +692,13 @@ EXEMPLES.update({"PSEUDO": "LéaDame", "CODE_ACTIVATION": "7Q4K-29", "MOT_DE_PAS
     "DATE_FIN": "18/12/2026", "NUMERO_COMMANDE": "245871", "PRODUIT": "Pack Jeu+", "QUANTITE": "1", "ECHEANCE": "janvier 2027", "NUMERO_ABONNE": "10427",
     "PRODUIT_CADEAU": "Pack Intégral", "CODE_CADEAU": "K7P2-9QX4", "EMAIL_CONTACT": "[EMAIL_CONTACT]"})
 
+exec((ICI / "scripts/emails-contenu-ee-site.py").read_text())   # tous les autres modèles actuels du site (65 à 122)
 # Logo décliné par rubrique (forme officielle, couleur seule changée) : on reconnaît le type d'e-mail d'un coup d'œil
 LOGO_RUBRIQUE = {"Compte": "logo-blanc", "Découverte": "logo-jaune", "Abonnement": "logo", "Nouvelles formules": "logo-jaune", "Revue": "logo-blanc", "Cadeaux": "logo-jaune", P_PAIEMENT: "logo", P_FIDELITE: "logo-jaune", P_GRATUITS: "logo-jaune", P_NEWS: "logo-blanc", P_BOUTIQUE: "logo-jaune", P_TEMPS: "logo-jaune", P_RDV: "logo-blanc", P_CHIFFRES: "logo", P_FIDELE: "logo", P_COMMANDE: "logo-jaune", P_DEMARRER: "logo-blanc", P_PONTS: "logo-jaune"}
+LOGO_RUBRIQUE.update(LOGO_SITE)
 for e in E: e["logo"] = LOGO_RUBRIQUE[e["cat"]]
 # Identité visuelle : damier sous l'en-tête, pièce en filigrane par rubrique, pied marine
 DAMIER = PIED_NUIT = True
 PIECE_RUBRIQUE = {"Compte": "K", "Découverte": "N", "Abonnement": "Q", "Nouvelles formules": "Q", "Revue": "R", "Cadeaux": "B",
                   P_PAIEMENT: "R", P_FIDELITE: "K", P_GRATUITS: "N", P_NEWS: "B", P_BOUTIQUE: "P", P_TEMPS: "N", P_RDV: "R", P_CHIFFRES: "K", P_FIDELE: "Q", P_COMMANDE: "P", P_DEMARRER: "N", P_PONTS: "B"}
+PIECE_RUBRIQUE.update(PIECE_SITE)
