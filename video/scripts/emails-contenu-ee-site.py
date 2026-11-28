@@ -320,7 +320,7 @@ mail(id="117-parrainage-invitation", cat=S_PARRAIN, quand="Invitation envoyée p
             para(petit('Jouez aussi sur mobile : <a href="[LIEN_APP_IOS]" style="color:#6b6b66">iPhone</a> · <a href="[LIEN_APP_ANDROID]" style="color:#6b6b66">Android</a>.'))],
      sign="Soyez le bienvenu !<br><b>L'équipe d'Europe Échecs</b>")
 mail(id="118-parrainage-ami-inscrit", cat=S_PARRAIN, marketing=False, quand="Au parrain, quand un ami invité crée son compte (sponsorship_create_account)" + INFO_SITE,
-     objet="Votre ami a créé son compte", pre="Encore [NB_PARTIES_PARRAINAGE] parties jouées par lui, et votre parrainage est validé.", sur="Parrainage", titre="Votre ami | vous a rejoint !",
+     objet="Votre ami a créé son compte", pre="Après [NB_PARTIES_PARRAINAGE] parties jouées, votre parrainage sera validé.", sur="Parrainage", titre="Votre ami | vous a rejoint !",
      corps=[para("Bonne nouvelle : votre ami <b>[EMAIL_FILLEUL]</b> a créé son compte. Pour que votre parrainage soit validé, il doit jouer au moins [NB_PARTIES_PARRAINAGE] parties. Encouragez-le !"),
             bouton("Mes parrainages", "[LIEN_PARRAINAGES]")])
 mail(id="119-parrainage-valide", cat=S_PARRAIN, marketing=False, quand="Au parrain, quand un parrainage est validé ; avec bonus débloqué si un palier est atteint (sponsorship_activate_account et _level_up)" + INFO_SITE,

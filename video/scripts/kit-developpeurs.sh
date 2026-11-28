@@ -11,7 +11,7 @@ if [ "${1:-}" = ee ]; then
   node scripts/emails-apercus.mjs ee >/dev/null
   rm -rf build/kit-developpeurs-ee build/kit-developpeurs-ee.zip
   E=build/kit-developpeurs-ee; mkdir -p "$E/marque"
-  cp pack/DEVELOPPEURS-EE.md pack/EMAILS-EE.md scripts/miniature-mail.py "$E/"
+  cp pack/DEVELOPPEURS-EE.md pack/EMAILS-EE.md pack/AUDIT-EMAILS-EE.md scripts/miniature-mail.py "$E/"
   cp -r build/pack/emails-ee "$E/emails-ee"
   cp ../assets/brand/europe-echecs/logo-europe-echecs-*.png ../assets/brand/europe-echecs/ee-favicon-72.png "$E/marque/"
   (cd build && zip -qr kit-developpeurs-ee.zip kit-developpeurs-ee)

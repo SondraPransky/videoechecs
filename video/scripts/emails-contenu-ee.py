@@ -76,7 +76,7 @@ mail(id="03-mot-de-passe", cat="Compte", marketing=False, quand="Sur demande de 
 mail(id="04-suppression-compte", cat="Compte", marketing=False, quand="Après la suppression du compte (modèle deletion_request_perform)",
      objet="Suppression de votre compte Europe Échecs", pre="Votre compte [PSEUDO] et ses données ont été supprimés, comme vous l'avez demandé.", sur="Votre compte", titre="Votre compte | est supprimé.",
      corps=[para("Votre compte <b>[PSEUDO]</b> a bien été supprimé, ainsi que les données qui lui sont associées."),
-            infos([("Date", "[DATE_SUPPRESSION]"), ("Heure", "[HEURE_SUPPRESSION] (GMT)")])],
+            infos([("Date", "[DATE_SUPPRESSION]"), ("Heure", "[HEURE_SUPPRESSION] (heure de Paris)")])],
      sign="Cordialement,<br><b>L'équipe d'Europe Échecs</b>")
 
 # ---------- 2. Découverte ----------
@@ -352,7 +352,7 @@ EXEMPLES.update({
     "URL_IMAGE_ARTICLE_4": "img/article-maurizzi.jpg", "TITRE_ARTICLE_4": "« Ils me craignent peut-être un peu plus ! » Interview de Marc'Andria Maurizzi",
     "CHAPO_ARTICLE_4": "29 points Elo gagnés en deux tournois et le cap des 2650 franchi : il raconte à Jean-Michel Péchiné comment il a revu sa préparation, avec les 2700 en ligne de mire.",
     "URL_IMAGE_ARTICLE_5": "img/article-eingorn.jpg", "TITRE_ARTICLE_5": "Hommage à Viacheslav Eingorn",
-    "CHAPO_ARTICLE_5": "Le grand maître d'Odessa aurait eu 70 ans ce 23 novembre. Georges Bertola lui rend hommage et nous invite à rejouer sa victoire contre Efim Geller, commentée par Eingorn lui-même.",
+    "CHAPO_ARTICLE_5": "Le Grand Maître d'Odessa aurait eu 70 ans ce 23 novembre. Georges Bertola lui rend hommage et nous invite à rejouer sa victoire contre Efim Geller, commentée par Eingorn lui-même.",
     "OBJET_PROMO": "Faites échec et mat au froid !", "PRE_EN_TETE_PROMO": "−10 % sur les sweat-shirts Europe Échecs : capuche, coton écologique et logo brodé.",
     "TITRE_PROMO_1": "Faites échec et mat", "TITRE_PROMO_2": "au froid !", "URL_IMAGE_PRODUIT": "img/promo-sweat-shirts.jpg", "ALT_IMAGE_PRODUIT": "−10 % sur les sweat-shirts Europe Échecs",
     "TEXTE_PROMO": "L'automne s'installe : les sweat-shirts Europe Échecs sont conçus pour vous garder au chaud tout en affichant votre passion pour le jeu. Pour aller au club, jouer un tournoi ou rester devant l'échiquier, c'est le moment de vous équiper !",
